@@ -1,8 +1,6 @@
 'use strict';
 
-const path = require('path');
 const batfish = require('..');
+const batfishConfig = require('./batfish-config');
 
-batfish.serveStatic({
-  directory: path.join(__dirname, 'site')
-});
+batfish.serveStatic(batfishConfig);

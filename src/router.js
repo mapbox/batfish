@@ -3,18 +3,18 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const batfishContext = require('batfish/context');
+const findMatchingRoute = require('./find-matching-route');
 const hijackLink = require('./hijack-links');
 
 class Router extends React.PureComponent {
   static propTypes = {
-    startingRoute: PropTypes.string,
+    startingRoute: PropTypes.string.isRequired,
     startingComponent: PropTypes.func
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      path: this.props.startingRoute || '/',
       pageComponent: this.props.startingComponent
     };
   }
@@ -47,7 +47,7 @@ class Router extends React.PureComponent {
   }
 
   changePage = (nextLocation, options = {}) => {
-    const matchingRoute = this.findMatchingRoute(nextLocation.pathname);
+    const matchingRoute = findMatchingRoute(nextLocation.pathname);
     const nextUrl = [
       nextLocation.origin,
       matchingRoute.path,
@@ -59,19 +59,9 @@ class Router extends React.PureComponent {
         window.history.pushState({}, null, nextUrl);
       }
       this.setState({
-        path: matchingRoute.path,
         pageComponent: routeModule.component
       });
     });
-  };
-
-  findMatchingRoute = path => {
-    for (let i = 0, l = batfishContext.routesData.length; i < l; i++) {
-      const route = batfishContext.routesData[i];
-      if (route.pathRegExp.test(path)) {
-        return route;
-      }
-    }
   };
 
   pathIsRoute = path => {

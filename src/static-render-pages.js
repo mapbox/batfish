@@ -14,6 +14,7 @@ const pify = require('pify');
 const mkdirp = require('mkdirp');
 const path = require('path');
 const batfishContext = require('batfish/context');
+const Wrapper = require('batfish/wrapper');
 const PageTemplate = require('./page-template');
 
 const assets = JSON.parse(
@@ -35,7 +36,9 @@ function staticRenderPages(options) {
   const renderPage = routeData => {
     return routeData.getModule().then(pageModule => {
       const pageContent = ReactDOMServer.renderToString(
-        <pageModule.component />
+        <Wrapper>
+          <pageModule.component />
+        </Wrapper>
       );
       const reactDocument = (
         <PageTemplate
