@@ -14,11 +14,9 @@ function linkToLocation(input) {
     link = document.createElement('a');
     link.href = input;
   }
-  let pathname = link.pathname;
-  if (!/\/$/.test(pathname)) pathname += '/';
 
   return {
-    pathname,
+    pathname: link.pathname,
     hash: link.hash,
     search: link.search
   };

@@ -26,7 +26,9 @@ class Router extends React.PureComponent {
 
   componentDidMount() {
     initializeScrollRestoration();
-    scrollToFragment();
+    if (process.env.DEV_SERVER) {
+      scrollToFragment();
+    }
     // Expose batfish.routeTo for programmatic route changes/
     global.batfish = global.batfish || {};
     global.batfish.routeTo = this.routeTo;

@@ -13,5 +13,8 @@ module.exports = {
       );
       return { posts };
     }
-  }
+  },
+  externalStylesheets: [
+    'https://api.mapbox.com/mapbox-assembly/v0.13.0/assembly.min.css'
+  ]
 };

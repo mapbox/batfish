@@ -8,10 +8,6 @@ class PageShell extends React.Component {
     return (
       <div>
         <Helmet>
-          <link
-            rel="stylesheet"
-            href="https://api.mapbox.com/mapbox-assembly/v0.13.0/assembly.min.css"
-          />
           <script
             async
             defer

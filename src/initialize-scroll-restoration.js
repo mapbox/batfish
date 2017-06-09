@@ -15,7 +15,7 @@ const SYNC_SCROLL_ATTEMPT_LIMIT = 5;
 function initializeScrollRestoration() {
   // cf. https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration
   if ('scrollRestoration' in window.history) {
-    window.history.scrollRestoration = 'manual';
+    window.history.scrollRestoration = 'auto';
   }
 
   // Scroll positions are saved into the history entry's state; then when that
@@ -76,9 +76,9 @@ function initializeScrollRestoration() {
   const debouncedSyncScroll = debounce(syncScroll, SYNC_SCROLL_DEBOUNCE, true);
 
   const onPop = event => {
-    const x = (event.state && event.state.scroll && event.state.scroll.x) || 0;
-    const y = (event.state && event.state.scroll && event.state.scroll.y) || 0;
-    debouncedSyncScroll(x, y);
+    const savedScroll = event.state && event.state.scroll;
+    if (!savedScroll) return;
+    debouncedSyncScroll(savedScroll.x, savedScroll.y);
   };
 
   onPop(window.location);
