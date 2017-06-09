@@ -1,0 +1,3 @@
+{
+  extends: "../conf/eslint-browser.json"
+}
