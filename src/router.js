@@ -5,67 +5,79 @@ const PropTypes = require('prop-types');
 const batfishContext = require('batfish/context');
 const findMatchingRoute = require('./find-matching-route');
 const hijackLink = require('./hijack-links');
+const scrollToFragment = require('./scroll-to-fragment');
+const linkToLocation = require('./link-to-location');
+const createScrollRestorer = require('./create-scroll-restorer');
 
 class Router extends React.PureComponent {
   static propTypes = {
-    startingRoute: PropTypes.string.isRequired,
-    startingComponent: PropTypes.func
+    startingPath: PropTypes.string.isRequired,
+    startingComponent: PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = {
+      path: this.props.startingPath,
       pageComponent: this.props.startingComponent
     };
   }
 
   componentDidMount() {
-    if (!this.state.pageComponent) {
-      this.changePage(window.location);
+    // cf. https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
     }
+    createScrollRestorer();
+
+    scrollToFragment();
 
     window.addEventListener('popstate', () => {
       this.changePage(document.location);
     });
 
-    hijackLink((link, event) => {
-      let path = link.pathname;
-      if (!/\/$/.test(path)) path += '/';
-      if (!this.pathIsRoute(path)) {
-        return window.location.assign(link);
-      }
+    hijackLink(this.routeTo);
 
-      event.preventDefault();
-      const linkLocation = {
-        origin: link.origin,
-        pathname: path,
-        hash: link.hash,
-        search: link.search
-      };
-      this.changePage(linkLocation, { pushState: true });
-    });
+    global.batfish = global.batfish || {};
+    global.batfish.routeTo = this.routeTo;
   }
 
-  changePage = (nextLocation, options = {}) => {
+  routeTo = input => {
+    const targetLocation = linkToLocation(input);
+    if (!this.pathIsRoute(targetLocation.pathname)) {
+      return window.location.assign(input);
+    }
+    this.changePage(targetLocation, { pushState: true }, () => {
+      window.scrollTo(0, 0);
+    });
+  };
+
+  changePage = (nextLocation, options = {}, callback) => {
     const matchingRoute = findMatchingRoute(nextLocation.pathname);
     const nextUrl = [
-      nextLocation.origin,
       matchingRoute.path,
       nextLocation.hash,
       nextLocation.search
     ].join('');
-    matchingRoute.getModule().then(routeModule => {
+    matchingRoute.getPage().then(Page => {
       if (options.pushState) {
         window.history.pushState({}, null, nextUrl);
       }
-      this.setState({
-        pageComponent: routeModule.component
-      });
+      this.setState(
+        {
+          path: matchingRoute.path,
+          pageComponent: Page
+        },
+        () => {
+          if (callback) callback();
+          scrollToFragment();
+        }
+      );
     });
   };
 
   pathIsRoute = path => {
-    return batfishContext.routesData.some(route => {
+    return batfishContext.routes.some(route => {
       return route.path.replace(/\/$/, '') === path.replace(/\/$/, '');
     });
   };
@@ -73,13 +85,13 @@ class Router extends React.PureComponent {
   render() {
     if (!this.state.pageComponent) return null;
 
-    let location = typeof window !== 'undefined'
+    const location = typeof window !== 'undefined'
       ? document.location
-      : {
-          pathname: this.state.pathname
-        };
+      : { pathname: this.state.pathname };
 
-    return React.createElement(this.state.pageComponent, { location });
+    const pageData = batfishContext.pageData[this.state.path];
+
+    return <this.state.pageComponent location={location} {...pageData.data} />;
   }
 }
 

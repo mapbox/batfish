@@ -1,3 +1,9 @@
+/*---
+title: Security
+description: blah blah blah
+---*/
+'use strict';
+
 const React = require('react');
 const PageShell = require('../../components/page-shell');
 
@@ -11,6 +17,4 @@ class Security extends React.Component {
   }
 }
 
-module.exports = {
-  component: Security
-};
+module.exports = Security;

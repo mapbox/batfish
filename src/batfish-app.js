@@ -6,9 +6,9 @@ const Wrapper = require('batfish/wrapper');
 const Router = require('./router');
 const findMatchingRoute = require('./find-matching-route');
 
-const startingRoute = window.location.pathname;
-const matchingRoute = findMatchingRoute(startingRoute);
-matchingRoute.getModule().then(startingRouteModule => {
+const startingPath = window.location.pathname;
+const matchingRoute = findMatchingRoute(startingPath);
+matchingRoute.getPage().then(Page => {
   class App extends React.PureComponent {
     shouldComponentUpdate() {
       return false;
@@ -17,10 +17,7 @@ matchingRoute.getModule().then(startingRouteModule => {
     render() {
       return (
         <Wrapper>
-          <Router
-            startingRoute={startingRoute}
-            startingComponent={startingRouteModule.component}
-          />
+          <Router startingPath={startingPath} startingComponent={Page} />
         </Wrapper>
       );
     }

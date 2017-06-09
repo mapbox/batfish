@@ -40,6 +40,7 @@ function hijackLinks(options, callback) {
     if (/mailto:/.test(link.getAttribute('href'))) return;
     if (window.location.host !== link.host) return;
 
+    event.preventDefault();
     callback(link, event);
   });
 }

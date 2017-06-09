@@ -9,6 +9,7 @@
 
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
+const Helmet = require('react-helmet').Helmet;
 const fs = require('fs');
 const pify = require('pify');
 const mkdirp = require('mkdirp');
@@ -34,18 +35,29 @@ const manifestJs = fs.readFileSync(
  */
 function staticRenderPages(options) {
   const renderPage = routeData => {
-    return routeData.getModule().then(pageModule => {
+    return routeData.getPage().then(Page => {
       const pageContent = ReactDOMServer.renderToString(
         <Wrapper>
-          <pageModule.component />
+          <Page />
         </Wrapper>
       );
+      const head = Helmet.rewind();
       const reactDocument = (
         <PageTemplate
           rawAppHtml={pageContent}
+          htmlAttributes={head.htmlAttributes.toComponent()}
+          bodyAttributes={head.bodyAttributes.toComponent()}
+          appendToHead={[
+            head.title.toString(),
+            head.base.toString(),
+            head.meta.toString(),
+            head.link.toString(),
+            head.script.toString(),
+            head.style.toString()
+          ]}
           appendToBody={[
-            // The Webpack manifest is inlined because it is quite small
-            `<script>${manifestJs}</script>`,
+            // The Webpack manifest is inlined because it is very small.
+            `<script>${manifestJs.replace(/\/\/#.*?map$/, '')}</script>`,
             `<script src="${assets.vendor.js}"></script>`,
             `<script src="${assets.app.js}"></script>`
           ]}
@@ -70,7 +82,7 @@ function staticRenderPages(options) {
     });
   };
 
-  return Promise.all(batfishContext.routesData.map(writePage));
+  return Promise.all(batfishContext.routes.map(writePage));
 }
 
 module.exports = staticRenderPages;
