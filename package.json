@@ -4,9 +4,12 @@
   "version": "0.0.0",
   "description": "The React-powered static-site generator you didn't know you wanted",
   "main": "index.js",
+  "bin": {
+    "batfish": "bin/batfish.js"
+  },
   "scripts": {
     "link": "eslint .",
-    "format": "prettier --single-quote --write '{lib,src,test}/**/*.js'",
+    "format": "prettier --single-quote --write '{lib,src,bin,test}/**/*.js'",
     "test-jest": "jest",
     "pretest": "npm run lint",
     "test": "jest --runInBand"
@@ -22,7 +25,7 @@
   },
   "homepage": "https://github.com/mapbox/batfish#readme",
   "lint-staged": {
-    "{lib,src,test}/**/*.js": [
+    "{lib,src,bin,test}/**/*.js": [
       "prettier --single-quote --write",
       "git add"
     ]
@@ -75,12 +78,11 @@
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
     "get-port": "^3.1.0",
-    "get-value": "^2.0.6",
     "globby": "^6.1.0",
     "gray-matter": "^2.1.1",
     "html-webpack-plugin": "^2.28.0",
     "lodash": "^4.17.4",
-    "loud-rejection": "^1.6.0",
+    "meow": "^3.7.0",
     "mkdirp": "^0.5.1",
     "pify": "^3.0.0",
     "postcss": "^6.0.1",

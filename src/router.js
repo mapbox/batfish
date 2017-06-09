@@ -2,49 +2,51 @@
 
 const React = require('react');
 const PropTypes = require('prop-types');
-const batfishContext = require('batfish/context');
 const findMatchingRoute = require('./find-matching-route');
 const hijackLink = require('./hijack-links');
 const scrollToFragment = require('./scroll-to-fragment');
 const linkToLocation = require('./link-to-location');
-const createScrollRestorer = require('./create-scroll-restorer');
+const initializeScrollRestoration = require('./initialize-scroll-restoration');
 
 class Router extends React.PureComponent {
   static propTypes = {
     startingPath: PropTypes.string.isRequired,
-    startingComponent: PropTypes.func.isRequired
+    startingComponent: PropTypes.func.isRequired,
+    startingData: PropTypes.object.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = {
       path: this.props.startingPath,
-      pageComponent: this.props.startingComponent
+      pageComponent: this.props.startingComponent,
+      pagesData: this.props.startingData
     };
   }
 
   componentDidMount() {
-    // cf. https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
-    }
-    createScrollRestorer();
-
+    initializeScrollRestoration();
     scrollToFragment();
-
+    // Expose batfish.routeTo for programmatic route changes/
+    global.batfish = global.batfish || {};
+    global.batfish.routeTo = this.routeTo;
     window.addEventListener('popstate', () => {
       this.changePage(document.location);
     });
 
     hijackLink(this.routeTo);
-
-    global.batfish = global.batfish || {};
-    global.batfish.routeTo = this.routeTo;
   }
 
+  /**
+   * Converts input to a location object.
+   * If it matches a route, go there dynamically and scroll to the top of the viewport.
+   * If it doesn't match a route, go there non-dynamically.
+   *
+   * @param {HTMLAnchorElement | string} input - See docs for linkToLocation.
+   */
   routeTo = input => {
     const targetLocation = linkToLocation(input);
-    if (!this.pathIsRoute(targetLocation.pathname)) {
+    if (findMatchingRoute(targetLocation.pathname) === undefined) {
       return window.location.assign(input);
     }
     this.changePage(targetLocation, { pushState: true }, () => {
@@ -52,6 +54,11 @@ class Router extends React.PureComponent {
     });
   };
 
+  // To change the page, we need to
+  // - Get the patching page module, which is an async Webpack bundle.
+  // - Use pushState to change the URL and add a new history entry.
+  // - Change the stats of this component to render the new page.
+  // - Scroll to the fragment if there is one.
   changePage = (nextLocation, options = {}, callback) => {
     const matchingRoute = findMatchingRoute(nextLocation.pathname);
     const nextUrl = [
@@ -59,26 +66,21 @@ class Router extends React.PureComponent {
       nextLocation.hash,
       nextLocation.search
     ].join('');
-    matchingRoute.getPage().then(Page => {
+    matchingRoute.getPage().then(pageModule => {
       if (options.pushState) {
         window.history.pushState({}, null, nextUrl);
       }
       this.setState(
         {
           path: matchingRoute.path,
-          pageComponent: Page
+          pageComponent: pageModule.component,
+          pagesData: pageModule.data
         },
         () => {
           if (callback) callback();
           scrollToFragment();
         }
       );
-    });
-  };
-
-  pathIsRoute = path => {
-    return batfishContext.routes.some(route => {
-      return route.path.replace(/\/$/, '') === path.replace(/\/$/, '');
     });
   };
 
@@ -89,9 +91,9 @@ class Router extends React.PureComponent {
       ? document.location
       : { pathname: this.state.pathname };
 
-    const pageData = batfishContext.pageData[this.state.path];
-
-    return <this.state.pageComponent location={location} {...pageData.data} />;
+    return (
+      <this.state.pageComponent location={location} {...this.state.pagesData} />
+    );
   }
 }
 

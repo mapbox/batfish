@@ -3,7 +3,10 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 
-class WwwTemplate extends React.Component {
+/**
+ * This component is used by static-render-pages to create an HTML document.
+ */
+class StaticHtmlPage extends React.Component {
   static propTypes = {
     htmlAttributes: PropTypes.object,
     bodyAttributes: PropTypes.object,
@@ -61,4 +64,4 @@ class WwwTemplate extends React.Component {
   }
 }
 
-module.exports = WwwTemplate;
+module.exports = StaticHtmlPage;

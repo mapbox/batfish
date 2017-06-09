@@ -12,6 +12,14 @@ function getClosestLink(node, root) {
   return node;
 }
 
+/**
+ * Hijack clicks on links.
+ *
+ * @param {Object} [options]
+ * @param {Element} [options.root=document.documentElement] - Only hijack links that are children of this element.
+ * @param {Function} callback - Invoked whenever a qualifying link is clicked. Pssed two arguments:
+ *   the link Element that was clicked, and the Event.
+ */
 function hijackLinks(options, callback) {
   if (typeof options === 'function') {
     callback = options;
