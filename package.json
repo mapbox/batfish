@@ -73,7 +73,7 @@
     "csso": "^3.1.1",
     "date-time": "^2.0.0",
     "debounce": "^1.0.2",
-    "del": "^2.2.2",
+    "del": "^3.0.0",
     "es6-promise": "^4.1.0",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
