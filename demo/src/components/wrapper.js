@@ -2,6 +2,8 @@
 
 const React = require('react');
 
+require('../test.css');
+
 class Wrapper extends React.Component {
   componentDidMount() {
     console.log('mounted');

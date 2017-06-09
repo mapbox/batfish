@@ -17,22 +17,17 @@ const batfishContext = require('batfish/context');
 const Wrapper = require('batfish/wrapper');
 const StaticHtmlPage = require('./static-html-page');
 const Router = require('./router');
-
-const assets = JSON.parse(
-  fs.readFileSync(path.join(__dirname, 'assets.json'), 'utf8')
-);
-const manifestJs = fs.readFileSync(
-  path.join(__dirname, path.basename(assets.manifest.js)),
-  'utf8'
-);
+const constants = require('../lib/constants');
 
 /**
  * Statically render pages as HTML.
  *
  * @param {BatfishConfig} batfishConfig
+ * @param {Object} assets - JSON output by Webpack that locates assets.
+ * @param {string} manifestJs - JS output by Webpack that locates chunks.
  * @return {Promise<void>} - Resolves when all HTML pages have been rendered and written.
  */
-function staticRenderPages(batfishConfig) {
+function staticRenderPages(batfishConfig, assets, manifestJs) {
   const renderPage = route => {
     return route.getPage().then(pageModule => {
       // We render the page content separately from the StaticHtmlPage, because the page
@@ -47,6 +42,9 @@ function staticRenderPages(batfishConfig) {
           />
         </Wrapper>
       );
+
+      const cssUrl = assets.app.css;
+      const loadCssScript = `document.addEventListener('DOMContentLoaded',function(){var s=document.createElement('link');s.rel='stylesheet';s.href='${cssUrl}';document.head.insertBefore(s, document.getElementById('loadCss')); });`;
       const head = Helmet.rewind();
       const reactDocument = (
         <StaticHtmlPage
@@ -59,7 +57,9 @@ function staticRenderPages(batfishConfig) {
             head.meta.toString(),
             head.link.toString(),
             head.script.toString(),
-            head.style.toString()
+            head.style.toString(),
+            constants.INLINE_CSS_MARKER,
+            `<script id="loadCss">${loadCssScript}</script>`
           ]}
           appendToBody={[
             // The Webpack manifest is inlined because it is very small.
