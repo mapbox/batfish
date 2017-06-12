@@ -35,9 +35,10 @@ ${chalk.bold('Shared options')}
 
 ${chalk.bold(`${chalk.magenta('start')} options`)}
   -p, --port       Server port. Default: 8080.
+  --production     Build as though for production.
 
 ${chalk.bold(`${chalk.magenta('build')} options`)}
-  --production     Build for production.
+  -d, --debug      Build for debugging, not for production.
 
 ${chalk.bold(`${chalk.magenta('serve-static')} options`)}
   -p, --port       Server port. Default: 8080.
@@ -57,7 +58,8 @@ const cli = meow(
     alias: {
       c: 'config',
       V: 'verbose',
-      p: 'port'
+      p: 'port',
+      d: 'debug'
     },
     default: {
       config: 'batfish.config.js'
@@ -85,6 +87,20 @@ try {
     )} Could not load configuration module from ${chalk.underline(configPath)}`
   );
   cli.showHelp();
+}
+
+if (cli.flags.production) {
+  config = Object.assign({}, config, { production: cli.flags.production });
+}
+
+if (cli.flags.debug) {
+  config = Object.assign({}, config, { production: !cli.flags.debug });
+}
+if (cli.flags.port) {
+  config = Object.assign({}, config, { port: cli.flags.port });
+}
+if (cli.flags.verbose) {
+  config = Object.assign({}, config, { verbose: cli.flags.verbose });
 }
 
 const executeCommand = commands[command];
