@@ -78,12 +78,14 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
     return renderPage(route).then(html => {
       // Write every page as an index.html file in the directory corresponding
       // to its route's path.
-      const directory = path.join(batfishConfig.outputDirectory, route.path);
-      const indexFile = path.join(
+      const baseRelativePath = route.path === batfishConfig.siteBasePath
+        ? '/'
+        : route.path.slice(batfishConfig.siteBasePath.length);
+      const directory = path.join(
         batfishConfig.outputDirectory,
-        route.path,
-        'index.html'
+        baseRelativePath
       );
+      const indexFile = path.join(directory, 'index.html');
       return pify(mkdirp)(directory).then(() =>
         pify(fs.writeFile)(indexFile, html)
       );

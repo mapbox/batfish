@@ -6,6 +6,8 @@ module.exports = {
   pagesDirectory: path.join(__dirname, 'src/pages'),
   outputDirectory: path.join(__dirname, 'site'),
   wrapperPath: path.join(__dirname, './src/components/wrapper.js'),
+  siteOrigin: 'https://www.mapbox.com',
+  siteBasePath: '/demo',
   data: {
     cta: 'Buy now!'
   },

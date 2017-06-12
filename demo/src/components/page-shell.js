@@ -2,6 +2,7 @@
 
 const React = require('react');
 const Helmet = require('react-helmet').Helmet;
+const prefixUrl = require('batfish/prefix-url');
 
 class PageShell extends React.Component {
   render() {
@@ -18,13 +19,28 @@ class PageShell extends React.Component {
           {this.props.children}
 
           <div className="mt72 p24 bg-gray-faint">
-            <a className="link inline-block mr24" href="/">home</a>
-            <a className="link inline-block mr24" href="/about">about</a>
-            <a className="link inline-block mr24" href="/about/security">
+            <a className="link inline-block mr24" href={prefixUrl('/')}>home</a>
+            <a className="link inline-block mr24" href={prefixUrl('/about')}>
+              about
+            </a>
+            <a
+              className="link inline-block mr24"
+              href={prefixUrl('/about/security')}
+            >
               about/security
             </a>
-            <a className="link inline-block mr24" href="/posts/one">one</a>
-            <a className="link inline-block mr24" href="/posts/two">two</a>
+            <a
+              className="link inline-block mr24"
+              href={prefixUrl('/posts/one')}
+            >
+              one
+            </a>
+            <a
+              className="link inline-block mr24"
+              href={prefixUrl('/posts/two')}
+            >
+              two
+            </a>
           </div>
         </div>
       </div>
