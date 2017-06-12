@@ -12,7 +12,7 @@ class Router extends React.PureComponent {
   static propTypes = {
     startingPath: PropTypes.string.isRequired,
     startingComponent: PropTypes.func.isRequired,
-    startingData: PropTypes.object.isRequired
+    startingProps: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -20,7 +20,7 @@ class Router extends React.PureComponent {
     this.state = {
       path: this.props.startingPath,
       pageComponent: this.props.startingComponent,
-      pagesData: this.props.startingData
+      pageProps: this.props.startingProps
     };
   }
 
@@ -76,7 +76,7 @@ class Router extends React.PureComponent {
         {
           path: matchingRoute.path,
           pageComponent: pageModule.component,
-          pagesData: pageModule.data
+          pageProps: pageModule.props
         },
         () => {
           if (callback) callback();
@@ -94,7 +94,7 @@ class Router extends React.PureComponent {
       : { pathname: this.state.pathname };
 
     return (
-      <this.state.pageComponent location={location} {...this.state.pagesData} />
+      <this.state.pageComponent location={location} {...this.state.pageProps} />
     );
   }
 }

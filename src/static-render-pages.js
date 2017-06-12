@@ -38,7 +38,7 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
           <Router
             startingPath={route.path}
             startingComponent={pageModule.component}
-            startingData={pageModule.data}
+            startingProps={pageModule.props}
           />
         </Wrapper>
       );

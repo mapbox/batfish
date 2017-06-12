@@ -22,7 +22,7 @@ matchingRoute.getPage().then(pageModule => {
           <Router
             startingPath={startingPath}
             startingComponent={pageModule.component}
-            startingData={pageModule.data}
+            startingProps={pageModule.props}
           />
         </Wrapper>
       );

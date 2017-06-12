@@ -1,6 +1,9 @@
 /*---
 title: Home away from home
 description: Everything you ever wanted
+siteData:
+  - cta
+  - posts
 ---*/
 'use strict';
 
@@ -14,6 +17,9 @@ class Home extends React.Component {
         <div>
           {this.props.title}
         </div>
+        <div>
+          {this.props.siteData.cta}
+        </div>
         <div className="mt24">
           {this.props.description}
         </div>
@@ -21,7 +27,7 @@ class Home extends React.Component {
           <div className="txt-bold txt-l mb12">
             Posts
           </div>
-          {this.props.posts.map(post => {
+          {this.props.siteData.posts.map(post => {
             return (
               <div key={post.path} className="mt6">
                 <a href={post.path} className="link">
