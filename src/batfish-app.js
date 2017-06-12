@@ -9,7 +9,7 @@ const findMatchingRoute = require('./find-matching-route');
 // Get the current page and render it, wrapped in the user's Wrapper component.
 
 const startingPath = window.location.pathname;
-const matchingRoute = findMatchingRoute(startingPath);
+const matchingRoute = findMatchingRoute(startingPath, { notFound: true });
 matchingRoute.getPage().then(pageModule => {
   class App extends React.PureComponent {
     shouldComponentUpdate() {
