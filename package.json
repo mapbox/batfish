@@ -90,6 +90,7 @@
     "pify": "^3.0.0",
     "postcss": "^6.0.1",
     "postcss-loader": "^2.0.5",
+    "postcss-url": "^7.0.0",
     "postcss-values-parser": "^1.2.2",
     "prop-types": "^15.5.10",
     "style-loader": "^0.18.2",
