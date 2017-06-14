@@ -6,7 +6,7 @@ const findMatchingRoute = require('./find-matching-route');
 const hijackLink = require('./hijack-links');
 const scrollToFragment = require('./scroll-to-fragment');
 const linkToLocation = require('./link-to-location');
-const initializeScrollRestoration = require('./initialize-scroll-restoration');
+const scrollRestoration = require('./scroll-restoration');
 
 class Router extends React.PureComponent {
   static propTypes = {
@@ -25,7 +25,7 @@ class Router extends React.PureComponent {
   }
 
   componentDidMount() {
-    initializeScrollRestoration();
+    scrollRestoration.start();
     if (process.env.DEV_SERVER) {
       scrollToFragment();
     }

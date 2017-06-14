@@ -3,19 +3,22 @@
 const xtend = require('xtend');
 const debounce = require('debounce');
 
-const CAPTURE_SCROLL_DEBOUNCE = 50;
-const SYNC_SCROLL_DEBOUNCE = 100;
-const SYNC_SCROLL_ATTEMPT_LIMIT = 5;
+let removeListenerFunctions;
 
-/**
- * Scroll restoration means that when you dynamically move around in history
- * your past scroll positions are remembered and restored, mimicking the
- * standard behavior of regular page loads.
- */
-function initializeScrollRestoration() {
+function end() {
+  removeListenerFunctions.forEach(fn => fn());
+}
+
+function start(options = {}) {
+  options = xtend({
+    captureScrollDebounce: 50,
+    syncScrollDebounce: 100,
+    syncScrollAttempts: 5
+  });
+
   // cf. https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration
   if ('scrollRestoration' in window.history) {
-    window.history.scrollRestoration = 'auto';
+    window.history.scrollRestoration = 'manual';
   }
 
   // Scroll positions are saved into the history entry's state; then when that
@@ -25,7 +28,7 @@ function initializeScrollRestoration() {
   let scrollData = {
     x: 0,
     y: 0,
-    attemptsRemaining: SYNC_SCROLL_ATTEMPT_LIMIT
+    attemptsRemaining: options.syncScrollAttempts
   };
 
   if (typeof window.requestAnimationFrame === undefined) return;
@@ -65,15 +68,19 @@ function initializeScrollRestoration() {
   };
 
   const syncScroll = (x, y) => {
-    scrollData = { x, y, attemptsRemaining: SYNC_SCROLL_ATTEMPT_LIMIT };
+    scrollData = { x, y, attemptsRemaining: options.syncScrollAttempts };
     trySyncingScroll();
   };
 
   const debouncedCaptureScroll = debounce(
     captureScroll,
-    CAPTURE_SCROLL_DEBOUNCE
+    options.captureScrollDebounce
   );
-  const debouncedSyncScroll = debounce(syncScroll, SYNC_SCROLL_DEBOUNCE, true);
+  const debouncedSyncScroll = debounce(
+    syncScroll,
+    options.syncScrollDebounce,
+    true
+  );
 
   const onPop = event => {
     const savedScroll = event.state && event.state.scroll;
@@ -83,8 +90,16 @@ function initializeScrollRestoration() {
 
   onPop(window.location);
   window.addEventListener('scroll', debouncedCaptureScroll, { passive: true });
-
   window.addEventListener('popstate', onPop);
+  removeListenerFunctions = [
+    window.removeEventListener('scroll', debouncedCaptureScroll, {
+      passive: true
+    }),
+    window.removeEventListener('popstate', onPop)
+  ];
 }
 
-module.exports = initializeScrollRestoration;
+module.exports = {
+  start,
+  end
+};
