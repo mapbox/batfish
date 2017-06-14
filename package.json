@@ -83,6 +83,7 @@
     "got": "^7.0.0",
     "gray-matter": "^2.1.1",
     "html-webpack-plugin": "^2.28.0",
+    "json-loader": "^0.5.4",
     "lodash": "^4.17.4",
     "meow": "^3.7.0",
     "mkdirp": "^0.5.1",

@@ -86,7 +86,7 @@ try {
       'Error:'
     )} Could not load configuration module from ${chalk.underline(configPath)}`
   );
-  cli.showHelp();
+  throw error;
 }
 
 if (cli.flags.production) {
