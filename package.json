@@ -8,7 +8,7 @@
     "batfish": "bin/batfish.js"
   },
   "scripts": {
-    "link": "eslint .",
+    "lint": "eslint .",
     "format": "prettier --single-quote --write '{lib,src,bin,test}/**/*.js'",
     "test-jest": "jest",
     "pretest": "npm run lint",
@@ -110,7 +110,7 @@
     "babel-eslint": "^7.2.3",
     "enzyme": "^2.8.2",
     "enzyme-to-json": "^1.5.1",
-    "eslint": "^3.19.0",
+    "eslint": "^4.0.0",
     "eslint-plugin-filenames": "^1.2.0",
     "eslint-plugin-node": "^5.0.0",
     "eslint-plugin-prettier": "^2.1.1",
