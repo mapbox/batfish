@@ -6,7 +6,7 @@ description: blah blah blah
 
 const React = require('react');
 const PageShell = require('../../components/page-shell');
-const prefixUrl = require('batfish/prefix-url');
+const routeTo = require('batfish/route-to');
 
 class About extends React.Component {
   render() {
@@ -16,7 +16,7 @@ class About extends React.Component {
 
         <button
           className="btn"
-          onClick={() => global.batfish.routeTo(prefixUrl('/about/security/'))}
+          onClick={() => routeTo.prefixed('about/security/')}
         >
           Read about security
         </button>

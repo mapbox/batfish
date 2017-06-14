@@ -7,6 +7,7 @@ const hijackLink = require('./hijack-links');
 const scrollToFragment = require('./scroll-to-fragment');
 const linkToLocation = require('./link-to-location');
 const scrollRestoration = require('./scroll-restoration');
+const routeTo = require('./route-to');
 
 class Router extends React.PureComponent {
   static propTypes = {
@@ -29,9 +30,8 @@ class Router extends React.PureComponent {
     if (process.env.DEV_SERVER) {
       scrollToFragment();
     }
-    // Expose batfish.routeTo for programmatic route changes/
-    global.batfish = global.batfish || {};
-    global.batfish.routeTo = this.routeTo;
+
+    routeTo.onRouteTo(this.routeTo);
     window.addEventListener('popstate', () => {
       this.changePage(document.location);
     });
