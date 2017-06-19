@@ -60,9 +60,6 @@ const cli = meow(
       V: 'verbose',
       p: 'port',
       d: 'debug'
-    },
-    default: {
-      config: 'batfish.config.js'
     }
   }
 );
@@ -73,20 +70,32 @@ if (command === undefined || commands[command] === undefined) {
   cli.showHelp();
 }
 
-const configPath = path.isAbsolute(cli.flags.config)
-  ? cli.flags.config
-  : path.join(process.cwd(), cli.flags.config);
+const isDefaultConfigPath = cli.flags.config === undefined;
+let configPath;
+if (cli.flags.config) {
+  configPath = path.isAbsolute(cli.flags.config)
+    ? cli.flags.config
+    : path.join(process.cwd(), cli.flags.config);
+} else {
+  configPath = path.join(process.cwd(), 'batfish.config.js');
+}
 
 let config;
-try {
-  config = require(configPath);
-} catch (error) {
-  timelog(
-    `${chalk.red.bold(
-      'Error:'
-    )} Could not load configuration module from ${chalk.underline(configPath)}`
-  );
-  throw error;
+if (configPath) {
+  try {
+    config = require(configPath)();
+  } catch (error) {
+    if (!isDefaultConfigPath) {
+      timelog(
+        `${chalk.red.bold(
+          'Error:'
+        )} Could not load configuration module from ${chalk.underline(
+          configPath
+        )}`
+      );
+      throw error;
+    }
+  }
 }
 
 if (cli.flags.production) {
@@ -104,4 +113,4 @@ if (cli.flags.verbose) {
 }
 
 const executeCommand = commands[command];
-executeCommand(config);
+executeCommand(config, configPath);
