@@ -113,4 +113,4 @@ if (cli.flags.verbose) {
 }
 
 const executeCommand = commands[command];
-executeCommand(config, configPath);
+executeCommand(config, path.dirname(configPath));

@@ -2,5 +2,5 @@ node_modules
 *.log
 .DS_Store
 babel-cache
-site
-tmp
+_site
+_tmp

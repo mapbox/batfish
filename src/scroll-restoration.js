@@ -21,19 +21,15 @@ function start(options = {}) {
     window.history.scrollRestoration = 'manual';
   }
 
+  if (typeof window.requestAnimationFrame === undefined) return;
+
   // Scroll positions are saved into the history entry's state; then when that
   // the history changes (the popstate event), we try restoring any saved
   // scroll position.
 
-  let scrollData = {
-    x: 0,
-    y: 0,
-    attemptsRemaining: options.syncScrollAttempts
-  };
+  let attemptsRemaining = options.syncScrollAttempts;
 
-  if (typeof window.requestAnimationFrame === undefined) return;
-
-  const captureScroll = () => {
+  const captureScroll = debounce(() => {
     window.requestAnimationFrame(() => {
       const x = window.pageXOffset;
       const y = window.pageYOffset;
@@ -49,53 +45,42 @@ function start(options = {}) {
         window.history.replaceState(nextHistoryState, null, window.location);
       }
     });
-  };
+  }, options.captureScrollDebounce);
 
-  const trySyncingScroll = () => {
-    window.requestAnimationFrame(() => {
-      if (scrollData.attemptsRemaining < 1) return;
-      const { pageXOffset, pageYOffset } = window;
-      if (
-        scrollData.y < window.document.body.scrollHeight &&
-        (scrollData.x !== pageXOffset || scrollData.y !== pageYOffset)
-      ) {
-        window.scrollTo(scrollData.x, scrollData.y);
-      } else {
-        scrollData.attemptsRemaining -= 1;
-        trySyncingScroll();
-      }
-    });
-  };
-
-  const syncScroll = (x, y) => {
-    scrollData = { x, y, attemptsRemaining: options.syncScrollAttempts };
-    trySyncingScroll();
-  };
-
-  const debouncedCaptureScroll = debounce(
-    captureScroll,
-    options.captureScrollDebounce
-  );
-  const debouncedSyncScroll = debounce(
-    syncScroll,
+  const syncScroll = debounce(
+    input => {
+      if (!input || !input.state || !input.state.scroll) return;
+      const scrollState = input.state.scroll;
+      window.requestAnimationFrame(() => {
+        const savedX = scrollState.x;
+        const savedY = scrollState.y;
+        if (attemptsRemaining < 1) return;
+        const { pageXOffset, pageYOffset } = window;
+        if (
+          savedY < window.document.body.scrollHeight &&
+          (savedX !== pageXOffset || savedY !== pageYOffset)
+        ) {
+          window.scrollTo(savedX, savedY);
+        } else {
+          attemptsRemaining -= 1;
+          syncScroll();
+        }
+      });
+    },
     options.syncScrollDebounce,
     true
   );
 
-  const onPop = event => {
-    const savedScroll = event.state && event.state.scroll;
-    if (!savedScroll) return;
-    debouncedSyncScroll(savedScroll.x, savedScroll.y);
-  };
+  syncScroll(window.history);
+  window.addEventListener('scroll', captureScroll, { passive: true });
+  window.addEventListener('popstate', syncScroll);
 
-  onPop(window.location);
-  window.addEventListener('scroll', debouncedCaptureScroll, { passive: true });
-  window.addEventListener('popstate', onPop);
   removeListenerFunctions = [
-    window.removeEventListener('scroll', debouncedCaptureScroll, {
-      passive: true
-    }),
-    window.removeEventListener('popstate', onPop)
+    () =>
+      window.removeEventListener('scroll', captureScroll, {
+        passive: true
+      }),
+    () => window.removeEventListener('popstate', syncScroll)
   ];
 }
 

@@ -31,11 +31,117 @@ Batfish aims to provide *the essentials* for creating a static website with the 
 
 ## Usage
 
-1. Create a configuration module (there are a couple of required options).
-1. Create some pages as React components and/or super-powered Markdown documents.
+1. Create a [configuration](#configuration) module (oh don't, if you want to rely on defaults).
+1. Create some [pages](#pages) as React components and/or super-powered Markdown documents.
 1. Start the development server, or build a static site.
 
+## API
+
+### CLI
+
+The CLI has three commands:
+
+- `start`: Start a development server.
+- `build`: Build the static site.
+- `serve-static`: Serve the static site.
+
+All will look for your configuration module in the current working directory or where you specify with the `--config` option.
+
+For more details, run `batfish --help`.
+
+### Node API
+
+The Node API exposes three functions:
+
+- `start(batfishConfig?: Object, projectDirectory?: string): void`: Start a development server.
+- `build(batfishConfig?: Object, projectDirectory?: string): Promise<void>`: Build the static site.
+  Returns a Promise that resolves when the build is complete.
+- `serveStatic(batfishConfig?: Object, projectDirectory?: string): void`: Serve the static site.
+
+In all of the above, the `projectDirectory` argument is used to determine configuration defaults if you have not provided certain options (e.g. [`pagesDirectory`](#pagesdirectory), [`outputDirectory`](#outputdirectory)).
+It defaults to the current working directory.
+
 ## Details
+
+### Pages
+
+The structure of your [`pagesDirectory`](#pagesdirectory) determines the URLs of your site.
+JS and Markdown files map directly to distinct URLs.
+So `src/pages/industries/real-estate.js` corresponds to the URL `/industries/real-estate/`.
+
+When a page is rendered, it is passed the following props:
+
+- `location`: The browser's current [Location](https://developer.mozilla.org/en-US/docs/Web/API/Location).
+- `frontMatter`: The page's parsed front matter (minus any `siteData` array)
+- `siteData`: Any site-wide data that the page has selected for injection.
+
+#### Injecting data
+
+You can store data in JSON, anywhere in your project, then specify which specific data to inject into any given page.
+
+To specify data, use the [`data`](#data) and [`dataSelectors`](#dataselectors) options in your configuration.
+
+To select data for a page, then, provide `siteData` front matter that is a [sequence](http://www.yaml.org/spec/1.2/spec.html#style/block/sequence) of strings, each representing one of the following:
+
+- A key in the `data` object. In this case, the entire value will be injected.
+- A key in the `dataSelectors` object. In this case, the return value from that selector will be injected.
+
+Example:
+
+```jsx
+// batfish.config.js
+module.exports = () => {
+  return {
+    /* ... */
+    data: {
+      cta: 'Buy now!',
+      siteTitle: 'Place to buy things'
+    },
+    dataSelectors: {
+      posts: data => {
+        return data.pages.filter(pagesData => /\/posts\//.test(pagesData.path));
+      },
+      things: data => { /* ... */ }
+    }
+  };
+};
+
+// Page
+/*---
+siteData:
+  - cta
+  - posts
+---*/
+const React  = require('react');
+class MyPage extends React.PureComponent {
+  render() {
+    return (
+      <div>
+        <h1>Page!</h1>
+        <p>Here is our call to action: {this.props.siteData.cta}</p>
+        <h2>Posts</h2>
+        {this.props.siteData.posts.map(post => {
+          return (
+            <div key={post.path}>
+              <a href={post.path}>{post.data.title}</a>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+}
+```
+
+#### JS pages
+
+JS pages must export a single React component (either `module.exports` (Node.js modules) or `export default` (ES2015 modules)).
+
+JS pages can include front matter within block comments, delimited by `/*---` and `---*/` (see example above).
+
+#### Markdown pages
+
+**Work in progress!**
 
 ### Configuration
 
@@ -158,3 +264,38 @@ Whether or not to build for production (e.g. minimize files, trim React).
 
 Preferred port for development servers.
 If the specified port is unavailable, another port is used.
+
+### Routing
+
+#### Prefixing URLs
+
+During Webpack compilation, Batfish exposes the module `batfish/prefix-url`.
+Use this to prefix your URLs according to the [`siteBasePath`](#sitebasepath) and [`siteOrigin`](#siteorigin) you specified in your b, ensuring that they point to the right place both during development and in production.
+
+```js
+// Let's imagine:
+// - siteBasePath === '/about/jobs/'
+// - siteOrigin === 'https://mydomain.com'
+const prefixUrl = require('batfish/prefix-url');
+
+// The function prefixes a URL with siteBasePath
+prefixUrl('engineer') // -> '/about/jobs/engineer'
+
+// You can also prefix an absolute path, if you've provided siteOrigin
+prefixUrl.absolute('engineer') // -> 'https://mydomain.com/about/jobs/engineer'
+```
+
+
+#### Links
+
+You can use regular `<a>` elements throughout your site.
+When the user clicks a link, Batfish checks to see if the link's `href` refers to a page it knows about.
+If so, client-side routing is used.
+If not, the link behaves normally.
+
+#### Dynamically changing pages
+
+During Webpack compilation, Batfish exposes the module `batfish/route-to`.
+Use this to dynamically change pages.
+If the URL argument matches a page Batfish knows about, client-side routing is used.
+If not, [`Location.assign`](https://developer.mozilla.org/en-US/docs/Web/API/Location/assign) is used, and the page transitions normally.

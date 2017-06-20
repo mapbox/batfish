@@ -15,13 +15,13 @@ class Home extends React.Component {
     return (
       <PageShell>
         <div>
-          {this.props.title}
+          {this.props.frontMatter.title}
         </div>
         <div>
           {this.props.siteData.cta}
         </div>
         <div className="mt24">
-          {this.props.description}
+          {this.props.frontMatter.description}
         </div>
         <div className="mt24">
           <div className="txt-bold txt-l mb12">
