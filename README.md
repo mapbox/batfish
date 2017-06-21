@@ -249,7 +249,7 @@ The object received as an argument contains the following:
 
 ### babelExclude
 
-`WebpackCondition` - Optional. Default: `/node_modules/`.
+`WebpackCondition` - Optional. Default: `/node_modules/`
 
 Any [valid Webpack Condition](https://webpack.js.org/configuration/module/#condition) will work here.
 
@@ -261,6 +261,22 @@ You'll need to use this if, for example, you use a library that includes ES2015 
 
 An array of URLs to external stylesheets that you want to include in your site.
 These stylesheets need to be publicly available at the designated URL so Batfish can download them and work them into the CSS optimizations.
+
+### autoprefixerBrowsers
+
+`Array<string>` - Optional. Default: `['last 4 versions', 'not ie < 10']`
+
+All of the CSS you load via Webpack is run through [Autoprefixer](https://github.com/postcss/autoprefixer).
+Use a [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support with vendor prefixes.
+
+### postcssPlugins
+
+`Array<Function>` - Optional.
+
+All of the CSS you load via Webpack is run through [PostCSS](http://postcss.org/), so you can apply any [PostCSS plugins](https://github.com/postcss/postcss/blob/master/docs/plugins.md) to it.
+By default, only [Autoprefixer](https://github.com/postcss/autoprefixer) is applied.
+
+This value is passed directly to [postcss-loader](https://github.com/postcss/postcss-loader#plugins).
 
 ### production
 
