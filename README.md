@@ -59,9 +59,7 @@ The Node API exposes three functions:
 In all of the above, the `projectDirectory` argument is used to determine configuration defaults if you have not provided certain options (e.g. [`pagesDirectory`](#pagesdirectory), [`outputDirectory`](#outputdirectory)).
 It defaults to the current working directory.
 
-## Details
-
-### Pages
+## Pages
 
 The structure of your [`pagesDirectory`](#pagesdirectory) determines the URLs of your site.
 JS and Markdown files map directly to distinct URLs.
@@ -73,7 +71,7 @@ When a page is rendered, it is passed the following props:
 - `frontMatter`: The page's parsed front matter (minus any `siteData` array)
 - `siteData`: Any site-wide data that the page has selected for injection.
 
-#### Injecting data
+### Injecting data
 
 You can store data in JSON, anywhere in your project, then specify which specific data to inject into any given page.
 
@@ -131,17 +129,17 @@ class MyPage extends React.PureComponent {
 }
 ```
 
-#### JS pages
+### JS pages
 
 JS pages must export a single React component (either `module.exports` (Node.js modules) or `export default` (ES2015 modules)).
 
 JS pages can include front matter within block comments, delimited by `/*---` and `---*/` (see example above).
 
-#### Markdown pages
+### Markdown pages
 
 **Work in progress!**
 
-### Configuration
+## Configuration
 
 To use the Batfish CLI, your configuration file should be a Node module that exports a function returning a configuration object.
 
@@ -160,47 +158,47 @@ You can specify an alternate location.
 - the directory of your configuration module, if one is provided; or
 - the current working directory, if no configuration module is provided.
 
-#### pagesDirectory
+### pagesDirectory
 
 `string` - Optional. Default: project directory + `src/pages/`
 
 Absolute path to your project's directory of pages.
 
 
-#### outputDirectory
+### outputDirectory
 
 `string` - Optional. Default: project directory + `_site`
 
 Absolute path to a directory where site files should be written.
 **You probably want to `.gitignore` this directory.**
 
-#### siteBasePath
+### siteBasePath
 
 `string` - Optional. Default: `'/'`
 
 Root-relative path to the base directory on the domain where the site will be deployed.
 Used by `prefixUrl` and `prefixAbsoluteUrl`.
 
-#### siteOrigin
+### siteOrigin
 
 `string` - Optional.
 
 Origin where the site will be deployed.
 *Required if you want to use `prefixAbsoluteUrl`.*
 
-#### wrapperPath
+### wrapperPath
 
 `string` - Optional.
 
 Absolute path to a module exporting a React component that will wrap all of your pages.
 
-#### notFoundPath
+### notFoundPath
 
 `string` - Optional. Default: pages directory + `404.js`
 
 Absolute path to your 404 page.
 
-#### temporaryDirectory
+### temporaryDirectory
 
 `string` - Optional. Default: project directory + `_tmp`
 
@@ -208,13 +206,13 @@ Absolute path to a directory where Batfish will write temporary files.
 It must be within the project directory.
 **You probably want to `.gitignore` this directory.**
 
-#### data
+### data
 
 `Object` - Optional.
 
 An object of data the can be selected for injection into pages.
 
-#### dataSelectors
+### dataSelectors
 
 `{ [string]: (Object) => any }` - Optional.
 
@@ -229,43 +227,43 @@ The object received as an argument contains the following:
   - `data`: Parsed front matter from the page's file.
   - `filePath`: Absolute path to the page's file.
 
-#### webpackLoaders
+### webpackLoaders
 
 `Array<Object>` - Additional loader configuration to pass to Webpack during both Webpack builds (client bundling and HTML generating).
   Each object should be a [Webpack Rule](https://webpack.js.org/configuration/module/#rule).
 
-#### webpackPlugins
+### webpackPlugins
 
 `Array<Object>` - Additional plugin configuration to pass to Webpack during the client bundling task.
 
-#### vendorModules
+### vendorModules
 
 `Array<string>` - Identifiers of npm modules that you want to be added to the vendor bundle.
   The purpose of the vendor bundle is to deliberately group dependencies that change relatively infrequently — so this bundle will stay cached for longer than the others.
 
-#### externalStylesheets
+### externalStylesheets
 
 `Array<string>` - Optional.
 
 An array of URLs to external stylesheets that you want to include in your site.
 These stylesheets need to be publicly available at the designated URL so Batfish can download them and work them into the CSS optimizations.
 
-#### production
+### production
 
 `boolean` - Optional. Default: `false` for `start`, `true` for `build`
 
 Whether or not to build for production (e.g. minimize files, trim React).
 
-#### port
+### port
 
 `number` - Optional. Default: `8080`
 
 Preferred port for development servers.
 If the specified port is unavailable, another port is used.
 
-### Routing
+## Routing
 
-#### Prefixing URLs
+### Prefixing URLs
 
 During Webpack compilation, Batfish exposes the module `batfish/prefix-url`.
 Use this to prefix your URLs according to the [`siteBasePath`](#sitebasepath) and [`siteOrigin`](#siteorigin) you specified in your b, ensuring that they point to the right place both during development and in production.
@@ -283,15 +281,14 @@ prefixUrl('engineer') // -> '/about/jobs/engineer'
 prefixUrl.absolute('engineer') // -> 'https://mydomain.com/about/jobs/engineer'
 ```
 
-
-#### Links
+### Links
 
 You can use regular `<a>` elements throughout your site.
 When the user clicks a link, Batfish checks to see if the link's `href` refers to a page it knows about.
 If so, client-side routing is used.
 If not, the link behaves normally.
 
-#### Dynamically changing pages
+### Dynamically changing pages
 
 During Webpack compilation, Batfish exposes the module `batfish/route-to`.
 Use this to dynamically change pages.
@@ -313,3 +310,8 @@ routeTo.prefixed('writer');
 // Regular link behavior is used, since this is not a page Batfish made
 routeTo('/about/money');
 ```
+
+## Document `<head>`
+
+Batfish has a [peer dependency](https://nodejs.org/en/blog/npm/peer-dependencies/) on [react-helmet](https://github.com/nfl/react-helmet).
+Use react-helmet to add things your document `<head>`.
