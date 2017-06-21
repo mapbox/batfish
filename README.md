@@ -233,6 +233,11 @@ The object received as an argument contains the following:
   - `data`: Parsed front matter from the page's file.
   - `filePath`: Absolute path to the page's file.
 
+### vendorModules
+
+`Array<string>` - Identifiers of npm modules that you want to be added to the vendor bundle.
+  The purpose of the vendor bundle is to deliberately group dependencies that change relatively infrequently — so this bundle will stay cached for longer than the others.
+
 ### webpackLoaders
 
 `Array<Object>` - Additional loader configuration to pass to Webpack during both Webpack builds (client bundling and HTML generating).
@@ -242,10 +247,13 @@ The object received as an argument contains the following:
 
 `Array<Object>` - Additional plugin configuration to pass to Webpack during the client bundling task.
 
-### vendorModules
+### babelExclude
 
-`Array<string>` - Identifiers of npm modules that you want to be added to the vendor bundle.
-  The purpose of the vendor bundle is to deliberately group dependencies that change relatively infrequently — so this bundle will stay cached for longer than the others.
+`WebpackCondition` - Optional. Default: `/node_modules/`.
+
+Any [valid Webpack Condition](https://webpack.js.org/configuration/module/#condition) will work here.
+
+You'll need to use this if, for example, you use a library that includes ES2015 but is not compiled for publication (e.g. any of the [promise-fun](https://github.com/sindresorhus/promise-fun) modules).
 
 ### externalStylesheets
 
