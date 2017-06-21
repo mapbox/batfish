@@ -71,6 +71,22 @@ When a page is rendered, it is passed the following props:
 - `frontMatter`: The page's parsed front matter (minus any `siteData` array)
 - `siteData`: Any site-wide data that the page has selected for injection.
 
+### JS pages
+
+JS pages must export a single React component (either `module.exports` (Node.js modules) or `export default` (ES2015 modules)).
+
+JS pages can include front matter within block comments, delimited by `/*---` and `---*/` (see example above).
+
+### Markdown pages
+
+**Work in progress!**
+
+### Non-page files with in the pages directory
+
+Sometimes you need to put an asset at a specific URL.
+A `favicon.ico` in the root directory, for example; or a special image for social media `<meta>` tags.
+For this reason, any non-page files within the pages directory are copied directly into the same location during the static build.
+
 ### Injecting data
 
 You can store data in JSON, anywhere in your project, then specify which specific data to inject into any given page.
@@ -128,16 +144,6 @@ class MyPage extends React.PureComponent {
   }
 }
 ```
-
-### JS pages
-
-JS pages must export a single React component (either `module.exports` (Node.js modules) or `export default` (ES2015 modules)).
-
-JS pages can include front matter within block comments, delimited by `/*---` and `---*/` (see example above).
-
-### Markdown pages
-
-**Work in progress!**
 
 ### Draft pages
 
