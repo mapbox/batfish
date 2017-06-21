@@ -375,3 +375,15 @@ routeTo('/about/money');
 
 Batfish has a [peer dependency](https://nodejs.org/en/blog/npm/peer-dependencies/) on [react-helmet](https://github.com/nfl/react-helmet).
 Use react-helmet to add things your document `<head>`.
+
+## Development server
+
+The development server (for `start` and `serve-static` commands) is a [Browsersync](https://www.browsersync.io/) server, for easy cross-device testing.
+
+Usually when you change a file, Webpack will recompile and the browser will automatically refresh.
+However, **the browser will not automatically refresh for the following changes**:
+
+- Adding or removing a page.
+- Changing a page's front matter.
+
+When you do one of these things, restart the server to see your change.
