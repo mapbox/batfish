@@ -7,7 +7,6 @@ siteData:
 ---*/
 'use strict';
 
-const text = require('./test.txt');
 const React = require('react');
 const PageShell = require('../components/page-shell');
 
@@ -15,15 +14,14 @@ class Home extends React.Component {
   render() {
     return (
       <PageShell>
-        {text}
         <div>
-          {this.props.title}
+          {this.props.frontMatter.title}
         </div>
         <div>
           {this.props.siteData.cta}
         </div>
         <div className="mt24">
-          {this.props.description}
+          {this.props.frontMatter.description}
         </div>
         <div className="mt24">
           <div className="txt-bold txt-l mb12">
