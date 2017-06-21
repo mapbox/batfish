@@ -139,6 +139,12 @@ JS pages can include front matter within block comments, delimited by `/*---` an
 
 **Work in progress!**
 
+### Draft pages
+
+Any page with `published: false` in its front matter will be considered a draft page.
+
+Draft pages are built during development but are *not* included in [production](#production) builds.
+
 ## Configuration
 
 To use the Batfish CLI, your configuration file should be a Node module that exports a function returning a configuration object.
