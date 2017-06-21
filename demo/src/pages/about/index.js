@@ -7,11 +7,13 @@ description: blah blah blah
 const React = require('react');
 const PageShell = require('../../components/page-shell');
 const routeTo = require('batfish/route-to');
+const AboutCss = require('./about.css');
 
 class About extends React.Component {
   render() {
     return (
       <PageShell>
+        <AboutCss />
         about
 
         <button

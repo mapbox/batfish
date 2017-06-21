@@ -145,6 +145,30 @@ Any page with `published: false` in its front matter will be considered a draft 
 
 Draft pages are built during development but are *not* included in [production](#production) builds.
 
+### Page-specific CSS
+
+By default, all CSS you include with Webpack (via `require` or `import`) will be bundled together.
+During the static build, each page has the CSS relevant to it injected inline, and the complete stylesheet is loaded lazily, after the rest of the page is rendered.
+Sometimes, however, you want to include CSS that will *never* be used on other pages, so you don't want it to be included in the complete stylesheet.
+
+To do that, create CSS files *within the [`pagesDirectory`](#pagesdirectory) (preferably adjacent to the page that uses them).
+Import a page-specific CSS from the page that will use it.
+It exports a React component that you should render in your page. For example:
+
+```jsx
+const AboutCss = require('./about.css');
+class AboutPage extends React.PureComponent {
+  render() {
+    return (
+      <PageShell>
+        <AboutCss />
+      {/* The rest of the page content */}
+      </PageShell>
+    );
+  }
+}
+```
+
 ## Configuration
 
 To use the Batfish CLI, your configuration file should be a Node module that exports a function returning a configuration object.

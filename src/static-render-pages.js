@@ -57,9 +57,11 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
             head.meta.toString(),
             head.link.toString(),
             head.script.toString(),
-            head.style.toString(),
             constants.INLINE_CSS_MARKER,
-            `<script id="loadCss">${loadCssScript}</script>`
+            `<script id="loadCss">${loadCssScript}</script>`,
+            // This comes after the inlined and dynamically loaded CSS
+            // so it will override regular stylesheets
+            head.style.toString()
           ]}
           appendToBody={[
             // The Webpack manifest is inlined because it is very small.
