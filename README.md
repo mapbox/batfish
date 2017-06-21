@@ -26,8 +26,6 @@ Batfish aims to provide *the essentials* for creating a static website with the 
 - **Minimal configuration.**
   So far there are no required options!
 - **Open to extension and composition with other tools.**
-  You should be able to build *on top of* Batfish, extending the Webpack and Babel configurations, adding your own loaders for alternate file types, etc.
-  You don't need to do this through a specialized system of plugins or anything like that: you just use Batfish as one part of your larger build system.
 
 ## Usage
 
@@ -299,3 +297,19 @@ During Webpack compilation, Batfish exposes the module `batfish/route-to`.
 Use this to dynamically change pages.
 If the URL argument matches a page Batfish knows about, client-side routing is used.
 If not, [`Location.assign`](https://developer.mozilla.org/en-US/docs/Web/API/Location/assign) is used, and the page transitions normally.
+
+```js
+// Let's imagine:
+// - siteBasePath === '/about/jobs/'
+// - /about/jobs/writer/ is a page you made
+const routeTo = require('batfish/route-to');
+
+// Client-side routing is used
+routeTo('/about/jobs/writer/');
+
+// Automatically prefix the URL with siteBasePath
+routeTo.prefixed('writer');
+
+// Regular link behavior is used, since this is not a page Batfish made
+routeTo('/about/money');
+```
