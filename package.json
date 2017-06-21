@@ -54,7 +54,9 @@
     "testRegex": ".*\\.jest\\.js$"
   },
   "dependencies": {
+    "@mapbox/babel-plugin-transform-md-react": "^0.1.0",
     "@mapbox/css-sieve": "^0.1.1",
+    "@mapbox/md-react-transformer-loader": "^0.2.0",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^7.1.1",
     "babel-loader": "^7.0.0",
