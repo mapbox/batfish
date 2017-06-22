@@ -5,6 +5,7 @@ description: blah blah blah
 'use strict';
 
 const React = require('react');
+const md = require('batfish/md');
 const PageShell = require('../../components/page-shell');
 
 class One extends React.Component {
@@ -13,15 +14,18 @@ class One extends React.Component {
       <PageShell>
         <div className="prose">
           <h1 id="lorem"><a href="#lorem">lorem one</a></h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          {md`
+            ## {{ this.props.frontMatter.title }}
+
+            **Lorem ipsum dolor sit amet, consectetur adipisicing elit,** sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            aliquip ex ea commodo {{<span className="color-pink">consequat</span>}}.
+
+            Duis aute irure dolor in
             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+            culpa qui officia deserunt mollit anim id est laborum.`}
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim

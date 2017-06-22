@@ -79,7 +79,24 @@ JS pages can include front matter within block comments, delimited by `/*---` an
 
 ### Markdown pages
 
-**Work in progress!**
+Markdown pages can include front matter, delimited by `---` and `---`, as is the norm.
+
+These files are interpreted as [jsxtreme-markdown](https://github.com/mapbox/jsxtreme-markdown), so ** the Markdown text can include interpolated JS expressions and JSX elements!**
+They are transformed into React components.
+
+All the props for the page (`frontMatter`, `siteData`, etc.) are available on `props`, e.g. `props.frontMatter.title`.
+
+In jsxtreme-markdown components, you can specify modules to import and use within the interpolated code.
+By default, the following modules are specified (they are documented below):
+
+- `const prefixUrl = require('batfish/prefix-url');`
+- `const routeTo = require('batfish/route-to');`
+
+This means that these modules can be used with no additional configuration.
+
+```md
+Learn more about [security]({{prefixUrl('/about/security')}}).
+```
 
 ### Non-page files with in the pages directory
 
@@ -320,6 +337,42 @@ Whether or not to build for production (e.g. minimize files, trim React).
 
 Preferred port for development servers.
 If the specified port is unavailable, another port is used.
+
+## Markdown within JS
+
+You can use [jsxtreme-markdown](https://github.com/mapbox/jsxtreme-markdown) within JS, as well as in `.md` page files.
+It is compiled by Babel, so will not affect your browser bundle.
+
+To do so, Batfish exposes [babel-plugin-transform-jsxtreme-markdown](https://github.com/mapbox/babel-plugin-transform-jsxtreme-markdown) as `batfish/md`.
+The value of this (fake) module is a [template literal tag](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals).
+Any template literal will this tag will be compiled as Markdown (with interpolated JS expression and JSX elements) at compile time.
+
+```jsx
+const React = require('react');
+const md = require('batfish/md');
+
+class MyPage extends React.Component {
+  render() {
+    const text = md`
+      # A title
+
+      This is a paragraph. Receives interpolated props, like this one:
+      {{this.props.location}}.
+
+      You can use interpolated {{<span className="foo">JSX elements</span>}},
+      also.
+    `;
+
+    return (
+      <div>
+        {/* some fancy stuff */}
+        {text}
+      {/* some more fancy stuff */}
+      </div>
+    );
+  }
+}
+```
 
 ## Routing
 

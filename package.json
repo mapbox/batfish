@@ -54,7 +54,7 @@
     "testRegex": ".*\\.jest\\.js$"
   },
   "dependencies": {
-    "@mapbox/babel-plugin-transform-md-react": "^0.1.0",
+    "@mapbox/babel-plugin-transform-jsxtreme-markdown": "^0.2.0",
     "@mapbox/css-sieve": "^0.1.1",
     "@mapbox/jsxtreme-markdown-loader": "^0.3.0",
     "assets-webpack-plugin": "^3.5.1",
