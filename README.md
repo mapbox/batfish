@@ -81,7 +81,7 @@ JS pages can include front matter within block comments, delimited by `/*---` an
 
 Markdown pages can include front matter, delimited by `---` and `---`, as is the norm.
 
-These files are interpreted as [jsxtreme-markdown](https://github.com/mapbox/jsxtreme-markdown), so ** the Markdown text can include interpolated JS expressions and JSX elements!**
+These files are interpreted as [jsxtreme-markdown](https://github.com/mapbox/jsxtreme-markdown), so **the Markdown text can include interpolated JS expressions and JSX elements!**
 They are transformed into React components.
 
 All the props for the page (`frontMatter`, `siteData`, etc.) are available on `props`, e.g. `props.frontMatter.title`.
