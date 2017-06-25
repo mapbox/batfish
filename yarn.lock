@@ -37,6 +37,10 @@
     strip-indent "^2.0.0"
     unified "^6.1.5"
 
+"@mapbox/link-hijacker@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@mapbox/link-hijacker/-/link-hijacker-0.1.0.tgz#693c316fb180104ad6c8b44a8d0a34097d9cb737"
+
 "@mapbox/postcss-html-filter@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@mapbox/postcss-html-filter/-/postcss-html-filter-0.2.0.tgz#35a048acf9f2297555e003e7ff0ef83a6bd678f4"

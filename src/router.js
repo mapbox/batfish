@@ -2,8 +2,8 @@
 
 const React = require('react');
 const PropTypes = require('prop-types');
+const linkHijacker = require('@mapbox/link-hijacker');
 const findMatchingRoute = require('./find-matching-route');
-const hijackLink = require('./hijack-links');
 const scrollToFragment = require('./scroll-to-fragment');
 const linkToLocation = require('./link-to-location');
 const scrollRestoration = require('./scroll-restoration');
@@ -36,7 +36,7 @@ class Router extends React.PureComponent {
       this.changePage(document.location);
     });
 
-    hijackLink(this.routeTo);
+    linkHijacker.hijack(this.routeTo);
   }
 
   /**
