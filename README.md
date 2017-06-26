@@ -325,6 +325,12 @@ By default, only [Autoprefixer](https://github.com/postcss/autoprefixer) is appl
 
 This value is passed directly to [postcss-loader](https://github.com/postcss/postcss-loader#plugins).
 
+### fileLoaderExtensions
+
+`Array<string>` - Options. Default: `['jpeg', 'jpg', 'png', 'gif', 'webp', 'mp4', 'webm', 'woff', 'woff2']`
+
+An array of extensions for files that you would like to Webpack's [file-loader](https://github.com/webpack-contrib/file-loader).
+
 ### production
 
 `boolean` - Optional. Default: `false` for `start`, `true` for `build`
