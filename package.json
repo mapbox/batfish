@@ -97,6 +97,7 @@
     "postcss-url": "^7.0.0",
     "postcss-values-parser": "^1.2.2",
     "prop-types": "^15.5.10",
+    "sitemap-static": "^0.4.2",
     "style-loader": "^0.18.2",
     "uglify-js": "^3.0.15",
     "webpack": "^2.6.1",
