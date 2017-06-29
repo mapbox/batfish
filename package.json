@@ -1,7 +1,7 @@
 {
   "name": "@mapbox/batfish",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "The React-powered static-site generator you didn't know you wanted",
   "main": "index.js",
   "bin": {
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "format": "prettier --single-quote --write '{,lib/**/,src/**/,bin/**/,test/**/}*.js'",
+    "format": "prettier --single-quote --write '{lib,src,bin,test}/**/*.js'",
     "test-jest": "jest",
     "pretest": "npm run lint",
     "test": "echo \"No tests yet\""
@@ -25,8 +25,7 @@
   },
   "homepage": "https://github.com/mapbox/batfish#readme",
   "lint-staged": {
-    "{,lib/**/,src/**/,bin/**/,test/**/}*.js": [
-      "eslint",
+    "{lib,src,bin,test}/**/*.js": [
       "prettier --single-quote --write",
       "git add"
     ]
@@ -47,7 +46,11 @@
       "text",
       "html"
     ],
-    "resetMocks": true
+    "resetMocks": true,
+    "roots": [
+      "./test"
+    ],
+    "testRegex": ".*\\.jest\\.js$"
   },
   "dependencies": {
     "@mapbox/babel-plugin-transform-jsxtreme-markdown": "^0.2.0",
@@ -116,9 +119,9 @@
     "eslint-plugin-node": "^5.0.0",
     "eslint-plugin-prettier": "^2.1.1",
     "eslint-plugin-react": "^7.0.1",
-    "husky": "^0.14.1",
+    "husky": "^0.13.4",
     "jest": "^20.0.4",
-    "lint-staged": "^4.0.0",
+    "lint-staged": "^3.6.0",
     "prettier": "^1.4.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

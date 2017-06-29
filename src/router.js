@@ -89,10 +89,9 @@ class Router extends React.PureComponent {
   render() {
     if (!this.state.pageComponent) return null;
 
-    const location =
-      typeof window !== 'undefined'
-        ? document.location
-        : { pathname: this.state.pathname };
+    const location = typeof window !== 'undefined'
+      ? document.location
+      : { pathname: this.state.pathname };
 
     return (
       <this.state.pageComponent location={location} {...this.state.pageProps} />
