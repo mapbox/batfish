@@ -192,6 +192,14 @@ class AboutPage extends React.PureComponent {
 }
 ```
 
+### Routing within a page
+
+If you'd like to use a different client-side routing library *inside a page*, like [React Router](https://reacttraining.com/react-router/) or [nanorouter](https://github.com/yoshuawuyts/nanorouter), add `internalRoutes: true` to the page's front matter.
+
+By specifying that the page has internal routes, any URLs that *start with* the page's path will be considered matches.
+If the page is `pages/animals.js`, for example, then `/animals/` will match as usual, but `/animals/tiger/` and `/animals/zebra/` will *also* match.
+The client-side router within the page can determine what to do with the rest of the URL.
+
 ## Configuration
 
 To use the Batfish CLI, your configuration file should be a Node module that exports a function returning a configuration object.

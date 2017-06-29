@@ -36,7 +36,9 @@ class Router extends React.PureComponent {
       this.changePage(document.location);
     });
 
-    linkHijacker.hijack(this.routeTo);
+    linkHijacker.hijack({
+      skipFilter: link => link.hasAttribute('data-no-hijack')
+    }, this.routeTo);
   }
 
   /**
@@ -64,7 +66,7 @@ class Router extends React.PureComponent {
   changePage = (nextLocation, options = {}, callback) => {
     const matchingRoute = findMatchingRoute(nextLocation.pathname);
     const nextUrl = [
-      matchingRoute.path,
+      nextLocation.pathname,
       nextLocation.hash,
       nextLocation.search
     ].join('');

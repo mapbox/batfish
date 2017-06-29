@@ -3,7 +3,11 @@
 const batfishContext = require('batfish/context');
 
 const pathRegExps = batfishContext.routes.reduce((result, route) => {
-  result[route.path] = new RegExp(`^${route.path.replace(/\//g, '[/]')}?$`);
+  const ender = route.internalRouting
+    ? '(/.+)?$'
+    : '$';
+  // ? because the last slash is optional
+  result[route.path] = new RegExp(`^${route.path.replace(/\//g, '[/]')}?${ender}`);
   return result;
 }, {});
 
