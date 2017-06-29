@@ -12,9 +12,7 @@
     "format": "prettier --single-quote --write '{lib,src,bin,test}/**/*.js'",
     "test-jest": "jest",
     "pretest": "npm run lint",
-    "test": "echo \"No tests yet\"",
-    "demo": "bin/batfish.js -c demo/batfish.config.js",
-    "demo-validate-html": "vnu-validate-html demo/_site/**/*.html"
+    "test": "echo \"No tests yet\""
   },
   "repository": {
     "type": "git",
@@ -104,7 +102,6 @@
     "webpack": "^2.6.1",
     "webpack-chunk-hash": "^0.4.0",
     "webpack-merge": "^4.1.0",
-    "webpack-node-externals": "^1.6.0",
     "xtend": "^4.0.1"
   },
   "peerDependencies": {

@@ -446,3 +446,26 @@ However, **the browser will not automatically refresh for the following changes*
 - Changing a page's front matter.
 
 When you do one of these things, restart the server to see your change.
+
+## Example sites
+
+Each subdirectory in `examples/` is an example site, illustrating some subset of Batfish's features.
+
+### Running examples
+
+You can use the Batfish CLI directly to run the demos: it lives in `bin/batfish.js`.
+You'll need to make sure you either run the command from the example's directory or else use the `--config` argument, so Batfish can find the example's configuration.
+
+Examples:
+
+```
+# From project root directory
+bin/batfish.js --config examples/initial-experiments/batfish.config.js start
+
+# From examples/initial-experiments/
+../../bin/batfish.js build && ../../bin/batfish.js serve-static
+```
+
+### Creating a new example
+
+Create a new directory in `examples/` ... and go from there!
