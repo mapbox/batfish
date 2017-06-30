@@ -291,16 +291,24 @@ The object received as an argument contains the following:
 ### vendorModules
 
 `Array<string>` - Identifiers of npm modules that you want to be added to the vendor bundle.
-  The purpose of the vendor bundle is to deliberately group dependencies that change relatively infrequently — so this bundle will stay cached for longer than the others.
+The purpose of the vendor bundle is to deliberately group dependencies that change relatively infrequently — so this bundle will stay cached for longer than the others.
 
 ### webpackLoaders
 
 `Array<Object>` - Additional loader configuration to pass to Webpack during both Webpack builds (client bundling and HTML generating).
-  Each object should be a [Webpack Rule](https://webpack.js.org/configuration/module/#rule).
+Each object should be a [Webpack Rule](https://webpack.js.org/configuration/module/#rule).
+
+**Warning:** You may need remove the extensions for files your new loader(s) handles from [`fileLoaderExtensions`](#fileloaderextensions).
 
 ### webpackPlugins
 
 `Array<Object>` - Additional plugin configuration to pass to Webpack during the client bundling task.
+
+### babelPlugins
+
+`Array` - Additional plugin configuration to pass to Babel during both Webpack builds (client bundling and HTML generating).
+**You should `require()` your plugins instead of referencing them as strings.**
+Otherwise, Babel might end up looking in the wrong place for the npm package.
 
 ### babelExclude
 
@@ -461,7 +469,12 @@ Each subdirectory in `examples/` is an example site, illustrating some subset of
 
 ### Running examples
 
-You can use the Batfish CLI directly to run the demos: it lives in `bin/batfish.js`.
+- `cd` into the example's directory.
+- `yarn install` (or `npm install`) to get any dependencies of that example.
+- `npm run batfish -- start` (or `build` or `serve-static`).
+
+`npm run batfish` is just a shortcut script that examples should include.
+You can also use the Batfish CLI directly to run the examples: it lives in `bin/batfish.js`.
 You'll need to make sure you either run the command from the example's directory or else use the `--config` argument, so Batfish can find the example's configuration.
 
 Examples:
@@ -476,4 +489,19 @@ bin/batfish.js --config examples/initial-experiments/batfish.config.js start
 
 ### Creating a new example
 
-Create a new directory in `examples/` ... and go from there!
+Create a new directory in `examples/`.
+Add the following `package.json`:
+
+```json
+{
+  "private": true,
+  "scripts": {
+    "batfish": "../../bin/batfish.js"
+  },
+  "dependencies": {}
+}
+```
+
+Install dependencies as needed.
+
+Create a configuration file and some pages ... and go from there!

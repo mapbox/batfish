@@ -36,9 +36,12 @@ class Router extends React.PureComponent {
       this.changePage(document.location);
     });
 
-    linkHijacker.hijack({
-      skipFilter: link => link.hasAttribute('data-no-hijack')
-    }, this.routeTo);
+    linkHijacker.hijack(
+      {
+        skipFilter: link => link.hasAttribute('data-no-hijack')
+      },
+      this.routeTo
+    );
   }
 
   /**
@@ -77,7 +80,7 @@ class Router extends React.PureComponent {
       this.setState(
         {
           path: matchingRoute.path,
-          pageComponent: pageModule.component,
+          pageComponent: pageModule.component.default || pageModule.component,
           pageProps: pageModule.props
         },
         () => {

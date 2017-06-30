@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "scripts": {
+    "batfish": "../../bin/batfish.js"
+  },
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-router-dom": "^4.1.1"
+  }
+}
