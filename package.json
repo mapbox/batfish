@@ -9,7 +9,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "format": "prettier --single-quote --write '{lib,src,bin,test}/**/*.js'",
+    "format": "prettier --single-quote --write '{,lib/**/,src/**/,bin/**/,test/**/}*.js'",
     "test-jest": "jest",
     "pretest": "npm run lint",
     "test": "echo \"No tests yet\""
@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/mapbox/batfish#readme",
   "lint-staged": {
-    "{lib,src,bin,test}/**/*.js": [
+    "{,lib/**/,src/**/,bin/**/,test/**/}*.js": [
+      "eslint",
       "prettier --single-quote --write",
       "git add"
     ]
