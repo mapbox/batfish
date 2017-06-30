@@ -8,6 +8,7 @@
     "batfish": "bin/batfish.js"
   },
   "scripts": {
+    "precommit": "lint-staged",
     "lint": "eslint .",
     "format": "prettier --single-quote --write '{,lib/**/,src/**/,bin/**/,test/**/}*.js'",
     "test-jest": "jest",
