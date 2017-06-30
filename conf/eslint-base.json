@@ -11,8 +11,7 @@
     }
   },
   "plugins": [
-    "filenames",
-    "prettier"
+    "filenames"
   ],
   "rules": {
     "no-bitwise": ["error"],
@@ -25,10 +24,6 @@
     "strict": ["off"],
     "valid-typeof": ["error"],
 
-    "filenames/match-regex": ["error", "^[a-z-\\.]+?$"],
-
-    "prettier/prettier": ["error", {
-      "singleQuote": true
-    }]
+    "filenames/match-regex": ["error", "^[a-z-\\.]+?$"]
   }
 }
