@@ -37,7 +37,9 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
         <Wrapper>
           <Router
             startingPath={route.path}
-            startingComponent={pageModule.component}
+            startingComponent={
+              pageModule.component.default || pageModule.component
+            }
             startingProps={pageModule.props}
           />
         </Wrapper>
@@ -89,9 +91,9 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
         baseRelativePath
       );
       const indexFile = path.join(directory, 'index.html');
-      return pify(mkdirp)(directory).then(() =>
-        pify(fs.writeFile)(indexFile, html)
-      );
+      return pify(mkdirp)(directory).then(() => {
+        return pify(fs.writeFile)(indexFile, html);
+      });
     });
   };
 

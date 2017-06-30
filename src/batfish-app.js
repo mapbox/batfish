@@ -21,7 +21,9 @@ matchingRoute.getPage().then(pageModule => {
         <Wrapper>
           <Router
             startingPath={startingPath}
-            startingComponent={pageModule.component}
+            startingComponent={
+              pageModule.component.default || pageModule.component
+            }
             startingProps={pageModule.props}
           />
         </Wrapper>
