@@ -28,6 +28,10 @@ class Router extends React.PureComponent {
   componentDidMount() {
     scrollRestoration.start();
     scrollRestoration.restoreScroll();
+
+    // Only on the dev server do we need to scroll to fragments on the initial
+    // load. With static HTML pages, the browser should take care of this
+    // for us.
     if (process.env.DEV_SERVER) {
       scrollToFragment();
     }
@@ -65,10 +69,10 @@ class Router extends React.PureComponent {
   };
 
   // To change the page, we need to
-  // - Get the patching page module, which is an async Webpack bundle.
+  // - Get the matching page module, which is an async Webpack bundle.
   // - Use pushState to change the URL and add a new history entry.
-  // - Change the stats of this component to render the new page.
-  // - Scroll to the fragment if there is one.
+  // - Change the state of this component to render the new page.
+  // - Adjust scroll position on the new page.
   changePage = (nextLocation, options = {}, callback) => {
     const matchingRoute = findMatchingRoute(nextLocation.pathname);
     const nextUrl = [
@@ -80,24 +84,21 @@ class Router extends React.PureComponent {
       if (options.pushState) {
         window.history.pushState({}, null, nextUrl);
       }
-      this.setState(
-        {
-          path: matchingRoute.path,
-          pageComponent: pageModule.component.default || pageModule.component,
-          pageProps: pageModule.props
-        },
-        () => {
-          if (options.scrollToTop) {
-            return window.scrollTo(0, 0);
-          }
-          if (scrollRestoration.getSavedScroll()) {
-            scrollRestoration.restoreScroll();
-          } else {
-            scrollToFragment();
-          }
-          if (callback) callback();
+      const nextState = {
+        path: matchingRoute.path,
+        pageComponent: pageModule.component.default || pageModule.component,
+        pageProps: pageModule.props
+      };
+      this.setState(nextState, () => {
+        if (options.scrollToTop) {
+          window.scrollTo(0, 0);
+        } else if (scrollRestoration.getSavedScroll()) {
+          scrollRestoration.restoreScroll();
+        } else {
+          scrollToFragment();
         }
-      );
+        if (callback) callback();
+      });
     });
   };
 

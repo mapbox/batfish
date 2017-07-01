@@ -6,6 +6,7 @@ const Wrapper = require('batfish/wrapper');
 const Router = require('./router');
 const findMatchingRoute = require('./find-matching-route');
 
+// The initialization of any Batfish.
 // Get the current page and render it, wrapped in the user's Wrapper component.
 
 const startingPath = window.location.pathname;
@@ -32,9 +33,13 @@ matchingRoute.getPage().then(pageModule => {
   }
 
   let container = document.getElementById('batfish-content');
+  // On the development server, this container element will not yet exist.
+  // In the static HTML build, though, it will.
   if (!container) {
     container = document.createElement('div');
+    container.id = 'batfish-content';
     document.body.appendChild(container);
   }
+
   ReactDOM.render(<App />, container);
 });

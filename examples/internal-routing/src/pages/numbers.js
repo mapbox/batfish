@@ -17,7 +17,17 @@ class ShownNumber extends React.PureComponent {
 }
 
 class Numbers extends React.PureComponent {
+  state = {
+    mounted: false
+  };
+
+  componentDidMount() {
+    this.setState({ mounted: true });
+  }
+
   render() {
+    if (!this.state.mounted) return null;
+
     const numberLinks = [];
     for (let i = 0; i < 11; i++) {
       numberLinks.push(

@@ -17,7 +17,17 @@ class ShownLetter extends React.PureComponent {
 }
 
 class Letters extends React.PureComponent {
+  state = {
+    mounted: false
+  };
+
+  componentDidMount() {
+    this.setState({ mounted: true });
+  }
+
   render() {
+    if (!this.state.mounted) return null;
+
     const letterLinks = [];
     for (let i = 65; i < 75; i++) {
       const letter = String.fromCharCode(i);

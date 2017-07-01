@@ -1,10 +1,10 @@
 'use strict';
 
 /**
- * Convert a link, anchor node or URL, to a location object.
+ * Convert a link (HTMLAnchorElement or URL) to an abbreviated Location object.
  *
  * @param {HTMLAnchorElement | string} input - Either an anchor node or a URL.
- * @return {Objecct}
+ * @return {Object} - An abbreviated Location object.
  */
 function linkToLocation(input) {
   let link = input;
@@ -17,9 +17,9 @@ function linkToLocation(input) {
 
     link = document.createElement('a');
     link.href = input;
-    // IE doesn't populate all link properties when setting .href with a relative URL,
-    // however .href will return an absolute URL which then can be used on itself
-    // to populate these additional fields.
+    // IE doesn't populate all link properties when setting href with a
+    // relative URL. However, href will return an absolute URL which then can
+    // be used on itself to populate these additional fields.
     // https://stackoverflow.com/a/13405933/2284669
     if (location.host === '') {
       location.href = location.href;

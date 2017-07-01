@@ -2,9 +2,8 @@
 
 // **WARNING**
 // This file gets compiled by Webpack before it is executed.
-// So when it is executed, the __dirname will be /assets/ within the outputDirectory.
-// All `require` calls will have already been resolved; but for any other fs
-// activity, this file location must be taken into acconut.
+// So when it is executed, the __dirname will be {outputDirectory}/assets/.
+// For any other fs activity, this file location must be taken into acconut.
 
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
@@ -33,6 +32,7 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
       // We render the page content separately from the StaticHtmlPage, because the page
       // content is what will be re-rendered when the bundled JS loads so it must
       // match exactly what batfish-app.js renders (or you get React checksum errors).
+      // The rest of StaticHtmlPage will never be re-rendered by React.
       const pageContent = ReactDOMServer.renderToString(
         <Wrapper>
           <Router
@@ -46,6 +46,8 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
       );
 
       const cssUrl = assets.app.css;
+      // Load the full stylesheet lazily, after DOMContentLoaded. The page will
+      // still render quickly because it will have its own CSS injected inline.
       const loadCssScript = `document.addEventListener('DOMContentLoaded',function(){var s=document.createElement('link');s.rel='stylesheet';s.href='${cssUrl}';document.head.insertBefore(s, document.getElementById('loadCss')); });`;
       const head = Helmet.rewind();
       const reactDocument = (

@@ -5,6 +5,14 @@ import _ from 'lodash';
 
 class Home extends React.PureComponent {
   render() {
+    const nestedNumber = {
+      foo: {
+        bar: {
+          baz: 3
+        }
+      }
+    };
+
     return (
       <div>
         <h1>Testing optimization loaders and plugins</h1>
@@ -14,7 +22,7 @@ class Home extends React.PureComponent {
         </div>
 
         <div style={{ marginTop: 30 }}>
-          Random number: {_.random(0, 100)}
+          The nested number: {_.get(nestedNumber, 'foo.bar.baz')}
         </div>
       </div>
     );

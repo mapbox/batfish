@@ -24,14 +24,12 @@ class Home extends React.Component {
           {this.props.frontMatter.description}
         </div>
         <div className="mt24">
-          <div className="txt-bold txt-l mb12">
-            Posts
-          </div>
+          <div className="txt-bold txt-l mb12">Posts</div>
           {this.props.siteData.posts.map(post => {
             return (
               <div key={post.path} className="mt6">
                 <a href={post.path} className="link">
-                  {post.data.title}
+                  {post.frontMatter.title}
                 </a>
               </div>
             );

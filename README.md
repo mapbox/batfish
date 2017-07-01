@@ -285,8 +285,8 @@ The object received as an argument contains the following:
 - `pages`: An array of objects for pages.
   Each page object includes the following:
   - `path`: The page's URL path.
-  - `data`: Parsed front matter from the page's file.
   - `filePath`: Absolute path to the page's file.
+  - `frontMatter`: Parsed front matter from the page's file.  
 
 ### vendorModules
 
@@ -422,6 +422,8 @@ You can use regular `<a>` elements throughout your site.
 When the user clicks a link, Batfish checks to see if the link's `href` refers to a page it knows about.
 If so, client-side routing is used.
 If not, the link behaves normally.
+
+**If you would like to use an `<a>` that doesn't get hijacked** (e.g. for your own internal routing within a page), you can give it the attribute `data-no-hijack`.
 
 ### Dynamically changing pages
 
