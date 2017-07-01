@@ -27,12 +27,14 @@ class Router extends React.PureComponent {
 
   componentDidMount() {
     scrollRestoration.start();
+    scrollRestoration.restoreScroll();
     if (process.env.DEV_SERVER) {
       scrollToFragment();
     }
 
     routeTo.onRouteTo(this.routeTo);
-    window.addEventListener('popstate', () => {
+    window.addEventListener('popstate', event => {
+      event.preventDefault();
       this.changePage(document.location);
     });
 
@@ -56,8 +58,9 @@ class Router extends React.PureComponent {
     if (findMatchingRoute(targetLocation.pathname) === undefined) {
       return window.location.assign(input);
     }
-    this.changePage(targetLocation, { pushState: true }, () => {
-      window.scrollTo(0, 0);
+    this.changePage(targetLocation, {
+      pushState: true,
+      scrollToTop: true
     });
   };
 
@@ -84,8 +87,15 @@ class Router extends React.PureComponent {
           pageProps: pageModule.props
         },
         () => {
+          if (options.scrollToTop) {
+            return window.scrollTo(0, 0);
+          }
+          if (scrollRestoration.getSavedScroll()) {
+            scrollRestoration.restoreScroll();
+          } else {
+            scrollToFragment();
+          }
           if (callback) callback();
-          scrollToFragment();
         }
       );
     });
