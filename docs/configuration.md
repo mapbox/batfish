@@ -17,6 +17,8 @@ You can specify an alternate location.
 - the directory of your configuration module, if one is provided; or
 - the current working directory, if no configuration module is provided.
 
+## Configuration properties
+
 <!-- toc -->
 
 - [pagesDirectory](#pagesdirectory)
@@ -42,47 +44,47 @@ You can specify an alternate location.
 
 <!-- tocstop -->
 
-## pagesDirectory
+### pagesDirectory
 
 `string` - Optional. Default: project directory + `src/pages/`
 
 Absolute path to your project's directory of pages.
 
 
-## outputDirectory
+### outputDirectory
 
 `string` - Optional. Default: project directory + `_site`
 
 Absolute path to a directory where site files should be written.
 **You probably want to `.gitignore` this directory.**
 
-## siteBasePath
+### siteBasePath
 
 `string` - Optional. Default: `'/'`
 
 Root-relative path to the base directory on the domain where the site will be deployed.
 Used by `prefixUrl` and `prefixAbsoluteUrl`.
 
-## siteOrigin
+### siteOrigin
 
 `string` - Optional.
 
 Origin where the site will be deployed.
 *Required if you want to use `prefixAbsoluteUrl`.*
 
-## wrapperPath
+### wrapperPath
 
 `string` - Optional.
 
 Absolute path to a module exporting a React component that will wrap all of your pages.
 
-## notFoundPath
+### notFoundPath
 
 `string` - Optional. Default: pages directory + `404.js`
 
 Absolute path to your 404 page.
 
-## temporaryDirectory
+### temporaryDirectory
 
 `string` - Optional. Default: project directory + `_tmp`
 
@@ -90,13 +92,13 @@ Absolute path to a directory where Batfish will write temporary files.
 It must be within the project directory.
 **You probably want to `.gitignore` this directory.**
 
-## data
+### data
 
 `Object` - Optional.
 
 An object of data the can be selected for injection into pages.
 
-## dataSelectors
+### dataSelectors
 
 `{ [string]: (Object) => any }` - Optional.
 
@@ -111,29 +113,29 @@ The object received as an argument contains the following:
   - `filePath`: Absolute path to the page's file.
   - `frontMatter`: Parsed front matter from the page's file.  
 
-## vendorModules
+### vendorModules
 
 `Array<string>` - Identifiers of npm modules that you want to be added to the vendor bundle.
 The purpose of the vendor bundle is to deliberately group dependencies that change relatively infrequently — so this bundle will stay cached for longer than the others.
 
-## webpackLoaders
+### webpackLoaders
 
 `Array<Object>` - Additional loader configuration to pass to Webpack during both Webpack builds (client bundling and HTML generating).
 Each object should be a [Webpack Rule](https://webpack.js.org/configuration/module/#rule).
 
 **Warning:** You may need remove the extensions for files your new loader(s) handles from [`fileLoaderExtensions`](#fileloaderextensions).
 
-## webpackPlugins
+### webpackPlugins
 
 `Array<Object>` - Additional plugin configuration to pass to Webpack during the client bundling task.
 
-## babelPlugins
+### babelPlugins
 
 `Array` - Additional plugin configuration to pass to Babel during both Webpack builds (client bundling and HTML generating).
 **You should `require()` your plugins instead of referencing them as strings.**
 Otherwise, Babel might end up looking in the wrong place for the npm package.
 
-## babelExclude
+### babelExclude
 
 `WebpackCondition` - Optional. Default: `/node_modules/`
 
@@ -141,21 +143,21 @@ Any [valid Webpack Condition](https://webpack.js.org/configuration/module/#condi
 
 You'll need to use this if, for example, you use a library that includes ES2015 but is not compiled for publication (e.g. any of the [promise-fun](https://github.com/sindresorhus/promise-fun) modules).
 
-## externalStylesheets
+### externalStylesheets
 
 `Array<string>` - Optional.
 
 An array of URLs to external stylesheets that you want to include in your site.
 These stylesheets need to be publicly available at the designated URL so Batfish can download them and work them into the CSS optimizations.
 
-## autoprefixerBrowsers
+### autoprefixerBrowsers
 
 `Array<string>` - Optional. Default: `['last 4 versions', 'not ie < 10']`
 
 All of the CSS you load via Webpack is run through [Autoprefixer](https://github.com/postcss/autoprefixer).
 Use a [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support with vendor prefixes.
 
-## postcssPlugins
+### postcssPlugins
 
 `Array<Function>` - Optional.
 
@@ -164,19 +166,19 @@ By default, only [Autoprefixer](https://github.com/postcss/autoprefixer) is appl
 
 This value is passed directly to [postcss-loader](https://github.com/postcss/postcss-loader#plugins).
 
-## fileLoaderExtensions
+### fileLoaderExtensions
 
 `Array<string>` - Options. Default: `['jpeg', 'jpg', 'png', 'gif', 'webp', 'mp4', 'webm', 'woff', 'woff2']`
 
 An array of extensions for files that you would like to Webpack's [file-loader](https://github.com/webpack-contrib/file-loader).
 
-## production
+### production
 
 `boolean` - Optional. Default: `false` for `start`, `true` for `build`
 
 Whether or not to build for production (e.g. minimize files, trim React).
 
-## port
+### port
 
 `number` - Optional. Default: `8080`
 
