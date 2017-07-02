@@ -3574,9 +3574,11 @@ isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
 
-isemail@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/isemail/-/isemail-2.2.1.tgz#0353d3d9a62951080c262c2aa0a42b8ea8e9e2a6"
+isemail@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/isemail/-/isemail-3.0.0.tgz#c89a46bb7a3361e1759f8028f9082488ecce3dff"
+  dependencies:
+    punycode "2.x.x"
 
 isexe@^2.0.0:
   version "2.0.0"
@@ -4081,12 +4083,13 @@ line-column@^1.0.2:
     isarray "^1.0.0"
     isobject "^2.0.0"
 
-link-check@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/link-check/-/link-check-4.0.3.tgz#c274b3d88c9180f47aeda3480369c519e6b711f1"
+link-check@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/link-check/-/link-check-4.1.0.tgz#a7a2fd7fc825b2ef9a926814cfbfd46602f4a222"
   dependencies:
     is-relative-url "^2.0.0"
-    isemail "^2.2.1"
+    isemail "^3.0.0"
+    ms "^2.0.0"
     request "^2.81.0"
 
 lint-staged@^4.0.0:
@@ -4722,7 +4725,7 @@ ms@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-1.0.0.tgz#59adcd22edc543f7b5381862d31387b1f4bc9473"
 
-ms@2.0.0:
+ms@2.0.0, ms@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
@@ -5704,6 +5707,10 @@ punycode@1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
 
+punycode@2.x.x:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.0.tgz#5f863edc89b96db09074bad7947bf09056ca4e7d"
+
 punycode@^1.2.4, punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
@@ -5960,12 +5967,12 @@ remark-cli@^3.0.1:
     remark "^7.0.0"
     unified-args "^3.0.0"
 
-remark-lint-no-dead-links@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/remark-lint-no-dead-links/-/remark-lint-no-dead-links-0.1.0.tgz#8dbd869f72b2b5074a3343167f4eccc304d89d66"
+remark-lint-no-dead-urls@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/remark-lint-no-dead-urls/-/remark-lint-no-dead-urls-0.2.0.tgz#83652356567d70432505b06dad4a34944978c888"
   dependencies:
     is-relative-url "^2.0.0"
-    link-check "^4.0.3"
+    link-check "^4.1.0"
     unified-lint-rule "^1.0.1"
     unist-util-visit "^1.1.3"
 
