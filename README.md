@@ -1,23 +1,22 @@
-# batfish
+# Batfish
 
-The React-powered static-site generator you didn't know you wanted.
+A minimalistic static-site generator powered by React and Webpack.
+
+🚧🚧  **WORK IN PROGRESS!** 🚧🚧
 
 ![The batfish](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Longnose_batfish.jpg/320px-Longnose_batfish.jpg)
 
-🚧🚧  WORK IN PROGRESS! 🚧🚧
-
 ## Goals
 
-A minimalistic, React-powered static-site generator.
-Batfish aims to provide *the essentials* for creating a static website with the following key features:
+Batfish provides *the essentials* for building excellent static websites with React and Webpack.
 
 - **(Universal) React.**
   Use React components as the building blocks for pages.
-  "Universal" means the components are rendered into HTML pages for the static build, and then mounted in the browser for interactivity.
+  "Universal" means the components are rendered into HTML pages at build time, and then mounted in the browser for interactivity at run time.
 - **Super-powered Markdown pages.**
-  Write Markdown pages that are even more powerful than [Jekyll's](https://jekyllrb.com/), with interpolated JS expressions and JSX elements.
+Markdown pages that are even more powerful than [Jekyll's](https://jekyllrb.com/) with interpolated JS expressions and JSX elements.
 - **Client-side routing with key features and minimal overhead.**
-  There is no need for a big router library, but there *is* a need for often-overlooked features like automatic link hijacking and scroll restoration.
+  There is often no need for a big router library, but there *is* a need for often-overlooked features like automatic link hijacking and scroll restoration.
 - **Optimizations you don't need to think about.**
   JS bundles split up by page and loaded on demand.
   Essential CSS injected into static HTML.
@@ -25,13 +24,16 @@ Batfish aims to provide *the essentials* for creating a static website with the 
   And so on.
 - **Minimal configuration.**
   So far there are no required options!
-- **Open to extension and composition with other tools.**
+- **Minimal (period).**
+  Batfish does not aim to be an ecosystem unto itself.
+  Instead, we've kept the codebase small and extracted any generalizable functionality into independent npm packages, like [jsxtreme-markdown], [link-hijacker], and [scroll-restorer].
 
 ## Usage
 
-1. Create a [configuration](#configuration) module (oh don't, if you want to rely on defaults).
-1. Create some [pages](#pages) as React components and/or super-powered Markdown documents.
-1. Start the development server, or build a static site.
+1. Create a [configuration] module (or don't, if you want to rely on defaults).
+1. Create some [pages] as React components and/or Markdown documents.
+1. Start the development server, or build a static site and start the static-site server.
+1. At some point, build your static site and deploy it.
 
 ## API
 
@@ -352,6 +354,8 @@ Install dependencies as needed.
 
 Create a configuration file and some pages ... and go from there!
 
+[configuration]: #configuration
+[pages]: #pages
 [`pagesDirectory`]: docs/configuration.md#pagesdirectory
 [`outputDirectory`]: docs/configuration.md#outputdirectory
 [`data`]: docs/configuration.md#data
@@ -359,3 +363,6 @@ Create a configuration file and some pages ... and go from there!
 [`siteBasePath`]: docs/configuration.md#sitebasepath
 [`siteOrigin`]: docs/configuration.md#siteorigin
 [`production`]: docs/configuration.md#production
+[jsxtreme-markdown]: https://github.com/mapbox/jsxtreme-markdown
+[link-hijacker]: https://github.com/mapbox/link-hijacker
+[scroll-restorer]: https://github.com/mapbox/scroll-restorer
