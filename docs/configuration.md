@@ -39,6 +39,7 @@ You can specify an alternate location.
 - [autoprefixerBrowsers](#autoprefixerbrowsers)
 - [postcssPlugins](#postcssplugins)
 - [fileLoaderExtensions](#fileloaderextensions)
+- [jsxtremeMarkdownOptions](#jsxtrememarkdownoptions)
 - [production](#production)
 - [port](#port)
 
@@ -171,6 +172,14 @@ This value is passed directly to [postcss-loader](https://github.com/postcss/pos
 `Array<string>` - Options. Default: `['jpeg', 'jpg', 'png', 'gif', 'webp', 'mp4', 'webm', 'woff', 'woff2']`
 
 An array of extensions for files that you would like to Webpack's [file-loader](https://github.com/webpack-contrib/file-loader).
+
+### jsxtremeMarkdownOptions
+
+`Object` - Optional.
+
+Provide any of the following [jsxtreme-markdown] options (please read about them in [jsxtreme-markdown] docs): `delimiters`, `escapeDelimiter`, `remarkPlugins`, `rehypePlugins`, `wrapper`, `modules`, `name`, `template`.
+
+**To add syntax highlighting to your Markdown pages, you'll probably want to use `remarkPlugins` or `rehypePlugins`.**
 
 ### production
 
