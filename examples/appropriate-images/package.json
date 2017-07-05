@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "scripts": {
+    "batfish": "npm run build-images && ../../bin/batfish.js",
+    "build-images": "node build-images.js"
+  },
+  "dependencies": {
+    "@mapbox/appropriate-images": "^0.2.0",
+    "@mapbox/react-simple-surveyor": "^0.1.1",
+    "@mapbox/svg-react-transformer-loader": "^0.1.2"
+  }
+}

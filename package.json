@@ -112,6 +112,7 @@
     "prop-types": "^15.5.10",
     "remark-lint-no-dead-urls": "^0.2.0",
     "sitemap-static": "^0.4.2",
+    "slugg": "^1.2.1",
     "style-loader": "^0.18.2",
     "uglify-js": "^3.0.15",
     "webpack": "^2.6.1",
