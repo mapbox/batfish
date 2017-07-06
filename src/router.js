@@ -3,10 +3,10 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const linkHijacker = require('@mapbox/link-hijacker');
+const scrollRestorer = require('@mapbox/scroll-restorer');
 const findMatchingRoute = require('./find-matching-route');
 const scrollToFragment = require('./scroll-to-fragment');
 const linkToLocation = require('./link-to-location');
-const scrollRestoration = require('./scroll-restoration');
 const routeTo = require('./route-to');
 
 class Router extends React.PureComponent {
@@ -26,8 +26,8 @@ class Router extends React.PureComponent {
   }
 
   componentDidMount() {
-    scrollRestoration.start();
-    scrollRestoration.restoreScroll();
+    scrollRestorer.start({ autoRestore: false });
+    scrollRestorer.restoreScroll();
 
     // Only on the dev server do we need to scroll to fragments on the initial
     // load. With static HTML pages, the browser should take care of this
@@ -92,8 +92,8 @@ class Router extends React.PureComponent {
       this.setState(nextState, () => {
         if (options.scrollToTop) {
           window.scrollTo(0, 0);
-        } else if (scrollRestoration.getSavedScroll()) {
-          scrollRestoration.restoreScroll();
+        } else if (scrollRestorer.getSavedScroll()) {
+          scrollRestorer.restoreScroll();
         } else {
           scrollToFragment();
         }

@@ -50,6 +50,13 @@
     postcss-discard-empty "^2.1.0"
     postcss-discard-unused "^2.2.3"
 
+"@mapbox/scroll-restorer@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@mapbox/scroll-restorer/-/scroll-restorer-0.1.0.tgz#78412dba58a58f2a2ca187c891894a096c6d158d"
+  dependencies:
+    debounce "^1.0.2"
+    xtend "^4.0.1"
+
 "@mapbox/vnu-validate-html@^0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@mapbox/vnu-validate-html/-/vnu-validate-html-0.1.0.tgz#d6edad89473dd73550987ae7de47a2d68d1f1321"
