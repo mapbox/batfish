@@ -30,12 +30,12 @@
   },
   "homepage": "https://github.com/mapbox/batfish#readme",
   "lint-staged": {
-    "{,lib/**/,src/**/,bin/**/,test/**/}*.js": [
+    "**/*.js": [
       "eslint",
       "prettier --single-quote --write",
       "git add"
     ],
-    "*.md": [
+    "README.md": [
       "npm run lint-md-partial"
     ],
     "docs/*.md": [
