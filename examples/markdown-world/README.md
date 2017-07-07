@@ -9,14 +9,14 @@ A place for all things centered around Markdown usage.
 - [x] Markdown within JS pages
 - [ ] Remark plugins (soon)
 - [ ] Rehype plugins (soon)
-- [x] Unpublished pages
+- [ ] Unpublished pages with 404.js (soon)
 - [x] Page using `this.props.frontMatter`
 - [x] Page-specific CSS
 - [ ] Non-default `batfishConfig.pagesDirectory`
 - [ ] Non-default `batfishConfig.outputDirectory`
 - [ ] `batfishConfig.siteBasePath`
 - [ ] `batfishConfig.siteOrigin`
-- [x] Non-default `batfishConfig.wrapperPath`
+- [ ] Non-default `batfishConfig.wrapperPath`
 - [ ] Non-default `batfishConfig.notFoundPath`
 - [ ] Non-default `batfishConfig.temporaryDirectory`
 - [ ] `batfishConfig.data`, selectively injected into pages
@@ -29,7 +29,10 @@ A place for all things centered around Markdown usage.
 - [x] `batfishConfig.externalStylesheets`
 - [ ] `batfishConfig.fileLoaderExtensions`
 - [ ] `batfishConfig.port`
-- [ ] `batfish/prefix-url`
+- [ ] `batfish/prefix-url` (soon)
 - [ ] `batfish/route-to`
 - [ ] hijacked links
 - [ ] [react-helmet](https://github.com/nfl/react-helmet) usage
+
+### Notes
+- 404 must be a JavaScript file

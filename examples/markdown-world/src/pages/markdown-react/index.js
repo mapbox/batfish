@@ -17,7 +17,7 @@ class MarkdownReactPage extends React.Component {
         <div className="my120 px36">
           <span className="uniqueText">So unique. Much wow.</span>
         </div>
-        <div>
+        <div className="prose my30 px30">
           {md`
           ***inline Markdown starts now!***
 
