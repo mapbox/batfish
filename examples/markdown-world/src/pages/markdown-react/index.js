@@ -24,7 +24,10 @@ class MarkdownReactPage extends React.Component {
           <span className="uniqueText">So unique. Much wow.</span>
         </div>
         <div className="my120 px36">
-          <a className="link inline-block px36" href={prefixUrl('/hidden')}>
+          <a
+            className="link inline-block px36"
+            href={prefixUrl('/markdown-react/hidden')}
+          >
             Hidden
           </a>
         </div>
