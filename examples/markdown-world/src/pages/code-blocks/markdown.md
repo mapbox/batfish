@@ -71,5 +71,4 @@ _italic text_
 | Row3 | Row3 |
 | Row4 | Row4 |
 
-
 ```

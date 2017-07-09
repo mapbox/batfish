@@ -17,7 +17,9 @@ class MarkdownReactPage extends React.Component {
           title="Hidden React"
           description="Here to hide a React file"
         />
-        <h1>This page should be seen in development but not production!</h1>
+        <div className="my120 px36">
+          <h1>This page should be seen in development but not production!</h1>
+        </div>
       </PageShell>
     );
   }

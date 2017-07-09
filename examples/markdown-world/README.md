@@ -36,8 +36,8 @@ A place for all things centered around Markdown usage.
 
 ### Notes
 - 404 must be a JavaScript file
-- `published: false` React pages go to 404 on development, but not on production
-- `published: false` Markdown pages don't go to 404 page on `serve-static`, but show on development
-
+- nonexistent pages that aren't draft pages go to 404 on development, but no production
+- `published: false` pages don't go to 404 page on `serve-static`
 - if index pages are Markdown files, React components will need to be in /components
 - if index pages are React JavaScript files, do the unique layout and content all in one
+- assembly.css and some Markdown features don't align as expected
