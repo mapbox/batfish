@@ -3,7 +3,7 @@ title: 2017
 left: "Hello"
 right: "World!"
 description: Here to show off layout 1 for 2017
-wrapper: "../../../../components/md-layout-one.js"
+wrapper: "../../../../components/layout-one.js"
 ---
 
 # Hipster Ipsum 2017

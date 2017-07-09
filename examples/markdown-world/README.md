@@ -9,7 +9,7 @@ A place for all things centered around Markdown usage.
 - [x] Markdown within JS pages
 - [ ] Remark plugins (soon)
 - [ ] Rehype plugins (soon)
-- [ ] Unpublished pages with 404.js (soon)
+- [x] Unpublished pages
 - [x] Page using `this.props.frontMatter`
 - [x] Page-specific CSS
 - [ ] Non-default `batfishConfig.pagesDirectory`
@@ -28,11 +28,16 @@ A place for all things centered around Markdown usage.
 - [ ] `batfishConfig.babelExclude`, maybe using a [promise-fun](https://github.com/sindresorhus/promise-fun) module, which requires compilation
 - [x] `batfishConfig.externalStylesheets`
 - [ ] `batfishConfig.fileLoaderExtensions`
-- [ ] `batfishConfig.port`
-- [ ] `batfish/prefix-url` (soon)
-- [ ] `batfish/route-to`
+- [x] `batfishConfig.port`
+- [x] `batfish/prefix-url`
+- [ ] `batfish/route-to` (soon)
 - [ ] hijacked links
 - [ ] [react-helmet](https://github.com/nfl/react-helmet) usage
 
 ### Notes
 - 404 must be a JavaScript file
+- `published: false` React pages go to 404 on development, but not on production
+- `published: false` Markdown pages don't go to 404 page on `serve-static`, but show on development
+
+- if index pages are Markdown files, React components will need to be in /components
+- if index pages are React JavaScript files, do the unique layout and content all in one

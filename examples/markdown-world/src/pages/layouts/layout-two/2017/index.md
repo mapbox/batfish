@@ -7,7 +7,7 @@ middle:
 - "Markdown"
 right: "World!"
 description: Here to show off layout 2 for 2017
-wrapper: "../../../../components/md-layout-two.js"
+wrapper: "../../../../components/layout-two.js"
 ---
 
 # Hipster Ipsum 2017

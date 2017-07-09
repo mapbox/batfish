@@ -1,8 +1,14 @@
+/*---
+title: Markdown + React
+description: Here to show off Markdown with React
+---*/
+
 'use strict';
 const React = require('react');
 const md = require('batfish/md');
 const PageShell = require('../../components/page-shell');
 const PageHero = require('../../components/page-hero');
+const prefixUrl = require('batfish/prefix-url');
 const MarkdownReactCSS = require('./styles.css');
 class MarkdownReactPage extends React.Component {
   render() {
@@ -16,6 +22,11 @@ class MarkdownReactPage extends React.Component {
         />
         <div className="my120 px36">
           <span className="uniqueText">So unique. Much wow.</span>
+        </div>
+        <div className="my120 px36">
+          <a className="link inline-block px36" href={prefixUrl('/hidden')}>
+            Hidden
+          </a>
         </div>
         <div className="prose my30 px30">
           {md`
@@ -48,7 +59,9 @@ class MarkdownReactPage extends React.Component {
 
 
           **bold text**
+
           __bold text__
+
           * Unordered list
           + Unordered list
           - Unordered list
@@ -61,7 +74,9 @@ class MarkdownReactPage extends React.Component {
 
 
           *italic text*
+
           _italic text_
+
           - [x] Checked box
           - [ ] Unchecked box
 
@@ -71,7 +86,7 @@ class MarkdownReactPage extends React.Component {
 
           > Blockquotes
           >> Nested blockquotes
-          >>> More Nested blockquotes
+          >>> More nested blockquotes
 
 
           | Column1 | Column2 |

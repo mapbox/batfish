@@ -1,17 +1,15 @@
 ---
-title: Layout 2
+title: 2018
 published: false
 left: "Hello"
-middle:
-- "Beautiful"
-- "Mapbox"
-- "Markdown"
 right: "World!"
-description: Here to show off layout 2 for 2018
-wrapper: "../../../../components/md-layout-two.js"
+description: Here to hide layout 1 for 2018
+wrapper: "../../../../components/layout-one.js"
 ---
 
-# Hipster Ipsum 2018
+# This page should be seen in development but not production!
+
+### Hipster Ipsum 2018
 
 Tacos paleo green juice banh mi, fashion axe microdosing bespoke franzen subway tile ugh. Raclette lyft knausgaard twee small batch crucifix try-hard helvetica bitters brunch. Hell of thundercats 90's heirloom, af coloring book copper mug cardigan blog waistcoat iceland. Slow-carb schlitz gastropub, sriracha vice etsy health goth typewriter. Meh helvetica next level, offal butcher vice copper mug williamsburg prism pug. Pabst truffaut etsy dreamcatcher keffiyeh, salvia poke. Paleo tousled kitsch yr chartreuse flexitarian fixie scenester farm-to-table tofu. Slow-carb tacos adaptogen hammock artisan tousled. Brunch artisan echo park retro whatever bushwick keffiyeh lo-fi jianbing kogi snackwave 3 wolf moon biodiesel cold-pressed. Taiyaki raw denim lyft banjo kinfolk. Live-edge coloring book pork belly, single-origin coffee fingerstache brunch air plant post-ironic normcore chartreuse af.
 

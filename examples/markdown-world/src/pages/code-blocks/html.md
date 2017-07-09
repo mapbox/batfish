@@ -27,6 +27,7 @@ wrapper: "../../components/md-wrapper.js"
     <li>Ordered list</li>
   </ol>
   <p><strong>bold text</strong></p>
+  <p><strong>bold text</strong></p>
   <ul>
     <li>Unordered list</li>
   </ul>
@@ -57,6 +58,7 @@ wrapper: "../../components/md-wrapper.js"
     </li>
   </ul>
   <p><em>italic text</em></p>
+  <p><em>italic text</em></p>
   <ul>
     <li class="task-list-item">
       <input type="checkbox" disabled="" value="on"> Checked box
@@ -71,7 +73,7 @@ wrapper: "../../components/md-wrapper.js"
     <blockquote>
       <p>Nested blockquotes</p>
       <blockquote>
-        <p>More Nested blockquotes</p>
+        <p>More nested blockquotes</p>
       </blockquote>
     </blockquote>
   </blockquote>

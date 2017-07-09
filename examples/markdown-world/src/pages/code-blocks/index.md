@@ -3,12 +3,12 @@ title: Code Blocks
 description: Here to show off HTML and Markdown related plugins
 wrapper: "../../components/md-wrapper.js"
 ---
-
-- [HTML](/code-blocks/html)
+- [HTML Plugins]({{prefixUrl('/code-blocks/html')}})
   - Rehype
-- [Markdown](/code-blocks/markdown)
+- [Markdown Plugins]({{prefixUrl('/code-blocks/markdown')}})
   - Remark
 - rehype-highlight-code-block + mapbox-highlighter
+
 
 # h1
 ## h2
@@ -37,20 +37,26 @@ Horizontal Rule
 
 
 **bold text**
+
 __bold text__
+
+
 * Unordered list
 + Unordered list
 - Unordered list
- * Unordered sub-list
- + Unordered sub-list
- - Unordered sub-list
-   * Unordered sub-sub-list
-   + Unordered sub-sub-list
-   - Unordered sub-sub-list
+  * Unordered sub-list
+  + Unordered sub-list
+  - Unordered sub-list
+    * Unordered sub-sub-list
+    + Unordered sub-sub-list
+    - Unordered sub-sub-list
 
 
 *italic text*
+
 _italic text_
+
+
 - [x] Checked box
 - [ ] Unchecked box
 
@@ -60,7 +66,7 @@ _italic text_
 
 > Blockquotes
 >> Nested blockquotes
->>> More Nested blockquotes
+>>> More nested blockquotes
 
 
 | Column1 | Column2 |

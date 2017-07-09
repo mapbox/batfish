@@ -12,7 +12,7 @@ class NotFound extends React.Component {
           title="404"
           description="#sorrynotsorry."
         />
-        <div>Ack, you seem lost.</div>
+        <div className="my120 px36">Ack, you seem lost.</div>
       </PageShell>
     );
   }

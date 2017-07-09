@@ -33,20 +33,26 @@ Horizontal Rule
 
 
 **bold text**
+
 __bold text__
+
+
 * Unordered list
 + Unordered list
 - Unordered list
- * Unordered sub-list
- + Unordered sub-list
- - Unordered sub-list
-   * Unordered sub-sub-list
-   + Unordered sub-sub-list
-   - Unordered sub-sub-list
+  * Unordered sub-list
+  + Unordered sub-list
+  - Unordered sub-list
+    * Unordered sub-sub-list
+    + Unordered sub-sub-list
+    - Unordered sub-sub-list
 
 
 *italic text*
+
 _italic text_
+
+
 - [x] Checked box
 - [ ] Unchecked box
 
@@ -56,7 +62,7 @@ _italic text_
 
 > Blockquotes
 >> Nested blockquotes
->>> More Nested blockquotes
+>>> More nested blockquotes
 
 
 | Column1 | Column2 |
