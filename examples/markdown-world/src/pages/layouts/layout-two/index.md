@@ -7,9 +7,9 @@ middle:
 - "Markdown"
 right: "World!"
 description: Here to show off layout 2
-wrapper: "../../../components/md-layout-two.js"
+wrapper: "../../../components/layout-two.js"
 ---
 
-- [2016](/layouts/layout-two/2016)
-- [2017](/layouts/layout-two/2017)
-- [2018](/layouts/layout-two/2018)
+- [2016]({{prefixUrl('/layouts/layout-two/2016')}})
+- [2017]({{prefixUrl('/layouts/layout-two/2017')}})
+- [hidden]({{prefixUrl('/layouts/layout-two/hidden')}})

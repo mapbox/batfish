@@ -2,7 +2,7 @@
 const React = require('react');
 const PageShell = require('./page-shell');
 const PageHero = require('./page-hero');
-class MdWrapper extends React.Component {
+class LayoutTwo extends React.Component {
   render() {
     return (
       <PageShell>
@@ -36,4 +36,4 @@ class MdWrapper extends React.Component {
     );
   }
 }
-module.exports = MdWrapper;
+module.exports = LayoutTwo;
