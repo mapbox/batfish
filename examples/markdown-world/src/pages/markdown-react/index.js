@@ -65,20 +65,22 @@ class MarkdownReactPage extends React.Component {
 
           __bold text__
 
+
           * Unordered list
           + Unordered list
           - Unordered list
-           * Unordered sub-list
-           + Unordered sub-list
-           - Unordered sub-list
-             * Unordered sub-sub-list
-             + Unordered sub-sub-list
-             - Unordered sub-sub-list
+            * Unordered sub-list
+            + Unordered sub-list
+            - Unordered sub-list
+              * Unordered sub-sub-list
+              + Unordered sub-sub-list
+              - Unordered sub-sub-list
 
 
           *italic text*
 
           _italic text_
+
 
           - [x] Checked box
           - [ ] Unchecked box
