@@ -9,11 +9,19 @@ const md = require('batfish/md');
 const PageShell = require('../../components/page-shell');
 const PageHero = require('../../components/page-hero');
 const prefixUrl = require('batfish/prefix-url');
+const Helmet = require('react-helmet').Helmet;
 const MarkdownReactCSS = require('./styles.css');
 class MarkdownReactPage extends React.Component {
   render() {
     return (
       <PageShell>
+        <Helmet>
+          <script
+            async
+            defer
+            src="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css"
+          />
+        </Helmet>
         <MarkdownReactCSS />
         <PageHero
           bgColor="purple-light"
@@ -24,12 +32,13 @@ class MarkdownReactPage extends React.Component {
           <span className="uniqueText">So unique. Much wow.</span>
         </div>
         <div className="my120 px36">
-          <a
-            className="link inline-block px36"
-            href={prefixUrl('/markdown-react/hidden')}
-          >
+          <a className="link" href={prefixUrl('/markdown-react/hidden')}>
             Hidden
           </a>
+          <p>
+            FYI: This page uses page-specific CSS, react-helmet, and inline
+            Markdown.
+          </p>
         </div>
         <div className="prose my30 px30">
           {md`
