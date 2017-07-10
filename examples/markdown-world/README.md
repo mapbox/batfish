@@ -10,6 +10,7 @@ A place for all things centered around Markdown usage.
 - [ ] Remark plugins (soon)
 - [ ] Rehype plugins (soon)
 - [x] Unpublished pages
+- [-] 404
 - [x] Page using `this.props.frontMatter`
 - [x] Page-specific CSS
 - [ ] Non-default `batfishConfig.pagesDirectory`
@@ -32,12 +33,10 @@ A place for all things centered around Markdown usage.
 - [x] `batfish/prefix-url`
 - [ ] `batfish/route-to` (soon)
 - [ ] hijacked links
-- [ ] [react-helmet](https://github.com/nfl/react-helmet) usage
+- [x] [react-helmet](https://github.com/nfl/react-helmet) usage
 
 ### Notes
 - 404 must be a JavaScript file
-- nonexistent pages that aren't draft pages go to 404 on development, but no production
-- `published: false` pages don't go to 404 page on `serve-static`
-- if index pages are Markdown files, React components will need to be in /components
+- if index pages are Markdown files, React components will need to be in `/components`
 - if index pages are React JavaScript files, do the unique layout and content all in one
 - assembly.css and some Markdown features don't align as expected
