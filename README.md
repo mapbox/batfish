@@ -164,11 +164,17 @@ class MyPage extends React.PureComponent {
 }
 ```
 
+### Path not found: 404
+
+It is optional to create a 404 page. If you want to create your own, add a `404.js` to `/pages`.
+
+In development, you can expect to test and see your 404 page by entering an invalid path. Locally if you run `serve-static`, expect to see `Cannot GET /yourInvalidPathHere`. In [`production`], your 404 page will need to be handled and rendered by the server.
+
 ### Draft pages
 
 Any page with `published: false` in its front matter will be considered a draft page.
 
-Draft pages are built during development but are *not* included in [`production`] builds.
+In development, draft pages are built and visible. However, in [`production`], these pages are **not** included in builds and should be handled with a 404 by the server.
 
 ### Page-specific CSS
 
