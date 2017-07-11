@@ -3,12 +3,9 @@ title: Code Blocks
 description: Here to show off HTML and Markdown related plugins
 wrapper: "../../components/md-wrapper.js"
 ---
-- [HTML Plugins]({{prefixUrl('/code-blocks/html')}})
-  - Rehype
-- [Markdown Plugins]({{prefixUrl('/code-blocks/markdown')}})
-  - Remark
-- rehype-highlight-code-block + mapbox-highlighter
 
+- [HTML]({{prefixUrl('/code-blocks/html')}})
+- [Markdown]({{prefixUrl('/code-blocks/markdown')}})
 
 # h1
 ## h2

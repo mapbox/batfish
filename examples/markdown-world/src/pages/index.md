@@ -1,6 +1,6 @@
 ---
-title: This is Markdown World
-description: A place to showoff examples related to markdown and Batfish
+title: "This is Markdown World"
+description: "A place to showoff examples related to markdown and Batfish"
 wrapper: "../components/md-wrapper.js"
 ---
 
