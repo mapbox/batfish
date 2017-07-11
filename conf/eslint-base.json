@@ -24,6 +24,6 @@
     "strict": ["off"],
     "valid-typeof": ["error"],
 
-    "filenames/match-regex": ["error", "^[a-z-\\.]+?$"]
+    "filenames/match-regex": ["error", "^[0-9a-z-\\.]+?$"]
   }
 }
