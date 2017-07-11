@@ -164,11 +164,17 @@ class MyPage extends React.PureComponent {
 }
 ```
 
+### Path not found: 404
+
+Note that adding the `notFoundPath` property is optional in your `batfish.config.js`. By default, it looks for a `404.js` in your directory. If you provide `notFoundPath` a valid string path, the 404s will point to this absolute path.
+
+In development, you can expect to test and see your 404 page by entering an invalid path. Locally if you run `serve-static`, expect to see `Cannot GET /yourInvalidPathHere`. In [`production`], your 404 page will need to be handled and rendered by the server.
+
 ### Draft pages
 
 Any page with `published: false` in its front matter will be considered a draft page.
 
-Draft pages are built during development but are *not* included in [`production`] builds.
+In development, draft pages are built and visible. However, in [`production`], these pages are **not** included in builds and should be handled with a 404 by the server.
 
 ### Page-specific CSS
 
