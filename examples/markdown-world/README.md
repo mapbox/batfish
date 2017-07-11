@@ -7,8 +7,8 @@ A place for all things centered around Markdown usage.
 - [x] Markdown pages
 - [x] Markdown pages with layouts
 - [x] Markdown within JS pages
-- [-] Remark plugins
-- [-] Rehype plugins
+- [x] Remark plugins
+- [x] Rehype plugins
 - [x] Unpublished pages
 - [x] Page using `this.props.frontMatter`
 - [x] Page-specific CSS
@@ -17,7 +17,7 @@ A place for all things centered around Markdown usage.
 - [ ] `batfishConfig.siteBasePath`
 - [ ] `batfishConfig.siteOrigin`
 - [ ] Non-default `batfishConfig.wrapperPath`
-- [ ] Non-default `batfishConfig.notFoundPath`
+- [x] Non-default `batfishConfig.notFoundPath`
 - [ ] Non-default `batfishConfig.temporaryDirectory`
 - [ ] `batfishConfig.data`, selectively injected into pages
 - [ ] `batfishConfig.dataSelectors`, selectively injected into pages
