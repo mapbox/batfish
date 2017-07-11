@@ -166,7 +166,7 @@ class MyPage extends React.PureComponent {
 
 ### Path not found: 404
 
-It is optional to create a 404 page. If you want to create your own, add a `404.js` to `/pages`.
+Note that adding the `notFoundPath` property is optional in your `batfish.config.js`. By default, it looks for a `404.js` in your directory. If you provide `notFoundPath` a valid string path, the 404s will point to this absolute path.
 
 In development, you can expect to test and see your 404 page by entering an invalid path. Locally if you run `serve-static`, expect to see `Cannot GET /yourInvalidPathHere`. In [`production`], your 404 page will need to be handled and rendered by the server.
 
