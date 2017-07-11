@@ -16,11 +16,9 @@ class MarkdownReactPage extends React.Component {
     return (
       <PageShell>
         <Helmet>
-          <script
-            async
-            defer
-            src="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css"
-          />
+          <script>
+            {console.log('YO')}
+          </script>
         </Helmet>
         <MarkdownReactCSS />
         <PageHero
@@ -31,21 +29,42 @@ class MarkdownReactPage extends React.Component {
         <div className="my120 px36">
           <span className="uniqueText">So unique. Much wow.</span>
         </div>
-        <div className="my120 px36">
-          <a className="link" href={prefixUrl('/markdown-react/hidden')}>
-            <p>Hidden</p>
-          </a>
-          <a className="link" href={prefixUrl('/markdown-react/trickster')}>
-            <p>Trickster</p>
-          </a>
+        <div className="my120 px36 prose">
+          <ul>
+            <li>
+              <a className="link" href={prefixUrl('/markdown-react/hidden')}>
+                Hidden
+              </a>
+            </li>
+            <li>
+              <a className="link" href={prefixUrl('/markdown-react/trickster')}>
+                Trickster
+              </a>
+            </li>
+            <li>
+              <a
+                className="link"
+                href={prefixUrl('/markdown-react/plugins-md')}
+              >
+                Plugins on Markdown
+              </a>
+            </li>
+            <li>
+              <a
+                className="link"
+                href={prefixUrl('/markdown-react/plugins-js')}
+              >
+                Plugins on React
+              </a>
+            </li>
+          </ul>
           <p>
-            FYI: This page uses page-specific CSS, react-helmet, and inline
-            Markdown.
+            FYI: This page uses page-specific CSS, react-helmet in the console,
+            and inline Markdown.
           </p>
         </div>
         <div className="prose my30 px30">
           {md`
-          ***inline Markdown starts now!***
 
           # h1
           ## h2
