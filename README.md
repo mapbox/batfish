@@ -176,7 +176,7 @@ By default, all CSS you include with Webpack (via `require` or `import`) will be
 During the static build, each page has the CSS relevant to it injected inline, and the complete stylesheet is loaded lazily, after the rest of the page is rendered.
 Sometimes, however, you want to include CSS that will *never* be used on other pages, so you don't want it to be included in the complete stylesheet.
 
-To do that, create CSS files *within the [`pagesDirectory`] — preferably adjacent to the page that uses them.
+To do that, create CSS files within the [`pagesDirectory`] — preferably adjacent to the page that uses them.
 Import a page-specific CSS from the page that will use it.
 It exports a React component that you should render in your page. For example:
 
@@ -247,7 +247,7 @@ class MyPage extends React.Component {
 ### Prefixing URLs
 
 During Webpack compilation, Batfish exposes the module `batfish/prefix-url`.
-Use this to prefix your URLs according to the [`siteBasePath`] and [`siteOrigin`] you specified in your b, ensuring that they point to the right place both during development and in production.
+Use this to prefix your URLs according to the [`siteBasePath`] and [`siteOrigin`] you specified in your configuration, ensuring that they point to the right place both during development and in production.
 
 ```js
 // Let's imagine:
