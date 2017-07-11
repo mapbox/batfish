@@ -7,10 +7,9 @@ A place for all things centered around Markdown usage.
 - [x] Markdown pages
 - [x] Markdown pages with layouts
 - [x] Markdown within JS pages
-- [ ] Remark plugins (soon)
-- [ ] Rehype plugins (soon)
+- [-] Remark plugins
+- [-] Rehype plugins
 - [x] Unpublished pages
-- [-] 404
 - [x] Page using `this.props.frontMatter`
 - [x] Page-specific CSS
 - [ ] Non-default `batfishConfig.pagesDirectory`
@@ -31,7 +30,7 @@ A place for all things centered around Markdown usage.
 - [ ] `batfishConfig.fileLoaderExtensions`
 - [x] `batfishConfig.port`
 - [x] `batfish/prefix-url`
-- [ ] `batfish/route-to` (soon)
+- [x] `batfish/route-to`
 - [ ] hijacked links
 - [x] [react-helmet](https://github.com/nfl/react-helmet) usage
 
@@ -40,3 +39,4 @@ A place for all things centered around Markdown usage.
 - if index pages are Markdown files, React components will need to be in `/components`
 - if index pages are React JavaScript files, do the unique layout and content all in one
 - assembly.css and some Markdown features don't align as expected
+- expect to not use back button after dynamic routing with `batfish/route-to`

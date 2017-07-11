@@ -33,7 +33,10 @@ class MarkdownReactPage extends React.Component {
         </div>
         <div className="my120 px36">
           <a className="link" href={prefixUrl('/markdown-react/hidden')}>
-            Hidden
+            <p>Hidden</p>
+          </a>
+          <a className="link" href={prefixUrl('/markdown-react/trickster')}>
+            <p>Trickster</p>
           </a>
           <p>
             FYI: This page uses page-specific CSS, react-helmet, and inline

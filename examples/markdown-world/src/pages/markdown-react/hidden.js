@@ -8,7 +8,7 @@ published: false
 const React = require('react');
 const PageShell = require('../../components/page-shell');
 const PageHero = require('../../components/page-hero');
-class MarkdownReactPage extends React.Component {
+class HiddenPage extends React.Component {
   render() {
     return (
       <PageShell>
@@ -24,4 +24,4 @@ class MarkdownReactPage extends React.Component {
     );
   }
 }
-module.exports = MarkdownReactPage;
+module.exports = HiddenPage;
