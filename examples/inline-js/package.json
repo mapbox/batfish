@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "batfish": "../../bin/batfish.js"
+  },
+  "dependencies": {
+    "raw-loader": "^0.5.1"
+  }
+}
