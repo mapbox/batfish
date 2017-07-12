@@ -15,3 +15,9 @@ wrapper: "../../components/md-wrapper.js"
 <pre><code class="language-js">var name = "World";
 console.log("Hello, " + name + "!");
 </code></pre>
+
+
+```js
+var name = "World";
+console.log("Hello, " + name + "!");
+```

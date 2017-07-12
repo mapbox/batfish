@@ -19,10 +19,15 @@ class PluginsPage extends React.Component {
       :rocket: :dog: :cat: :+1:`;
 
     const plainCodeText = md`
-    ### remark-emoji
+    ### rehype-highlight
 
     <pre><code class="language-js">var name = "World";
-    console.log("Hello, " + name + "!")</code></pre>`;
+    console.log("Hello, " + name + "!")</code></pre>
+
+    \`\`\`js
+    var name = "World";
+    console.log("Hello, " + name + "!");
+    \`\`\``;
 
     return (
       <PageShell>

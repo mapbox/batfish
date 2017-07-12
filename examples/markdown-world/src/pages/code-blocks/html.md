@@ -4,7 +4,7 @@ description: Here to show off HTML plugins
 wrapper: "../../components/md-wrapper.js"
 ---
 
-```
+```html
 
 <div>
   <h1>h1</h1>

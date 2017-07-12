@@ -38,7 +38,7 @@ class MarkdownReactPage extends React.Component {
             </li>
             <li>
               <a className="link" href={prefixUrl('/markdown-react/trickster')}>
-                Trickster
+                Trickster route-to Home
               </a>
             </li>
             <li>

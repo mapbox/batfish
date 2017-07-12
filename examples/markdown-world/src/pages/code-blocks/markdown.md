@@ -4,7 +4,7 @@ description: Here to show off Markdown plugins
 wrapper: "../../components/md-wrapper.js"
 ---
 
-```
+```md
 
 # h1
 ## h2
