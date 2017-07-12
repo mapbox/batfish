@@ -1,0 +1,11 @@
+body,
+#batfish-content,
+.page-wrapper {
+  height: 100vh;
+}
+
+.sidebar {
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 270px;
+}
