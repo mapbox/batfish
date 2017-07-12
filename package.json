@@ -1,7 +1,6 @@
 {
   "name": "@mapbox/batfish",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The React-powered static-site generator you didn't know you wanted",
   "main": "index.js",
   "bin": {
