@@ -8,10 +8,6 @@ module.exports = () => {
     jsxtremeMarkdownOptions: {
       remarkPlugins: [require('remark-emoji')],
       rehypePlugins: [require('rehype-highlight')]
-    },
-    data: {
-      cta: 'Demonstrate examples related to Markdown!',
-      siteTitle: 'Markdown World'
     }
   };
 };

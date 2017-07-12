@@ -1,6 +1,6 @@
 ---
-title: Layouts
-description: Here to show off Markdown page layouts
+title: Markdown Layouts
+description: Here to show Markdown page layouts
 wrapper: "../../components/md-wrapper.js"
 ---
 

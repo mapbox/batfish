@@ -6,10 +6,9 @@ middle:
 - "Mapbox"
 - "Markdown"
 right: "World!"
-description: Here to show off layout 2
+description: Here to show Markdown layout 2
 wrapper: "../../../components/layout-two.js"
 ---
 
-- [2016]({{prefixUrl('/layouts/layout-two/2016')}})
-- [2017]({{prefixUrl('/layouts/layout-two/2017')}})
-- [hidden]({{prefixUrl('/layouts/layout-two/hidden')}})
+- [Published Markdown Page]({{prefixUrl('/layouts/layout-two/published')}})
+- [Unpublished Markdown Page]({{prefixUrl('/layouts/layout-two/unpublished')}})

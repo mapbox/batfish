@@ -1,6 +1,6 @@
 /*---
 title: Markdown + React
-description: Here to show off Markdown with React
+description: Here to show Markdown with a React page
 ---*/
 
 'use strict';
@@ -10,7 +10,7 @@ const PageShell = require('../../components/page-shell');
 const PageHero = require('../../components/page-hero');
 const prefixUrl = require('batfish/prefix-url');
 const Helmet = require('react-helmet').Helmet;
-const MarkdownReactCSS = require('./styles.css');
+const MarkdownReactCSS = require('./unique.css');
 class MarkdownReactPage extends React.Component {
   render() {
     return (
@@ -24,114 +24,39 @@ class MarkdownReactPage extends React.Component {
         <PageHero
           bgColor="purple-light"
           title="Markdown + React"
-          description="Here to show off Markdown with React"
+          description="Here to show Markdown with a React page"
         />
-        <div className="my120 px36">
-          <span className="uniqueText">So unique. Much wow.</span>
-        </div>
-        <div className="my120 px36 prose">
+        <div className="my36 px36 prose">
           <ul>
             <li>
-              <a className="link" href={prefixUrl('/markdown-react/hidden')}>
-                Hidden
-              </a>
-            </li>
-            <li>
-              <a className="link" href={prefixUrl('/markdown-react/trickster')}>
-                Trickster route-to Home
+              <a className="link" href={prefixUrl('/markdown-react/plugins')}>
+                Remark and Rehype Plugins
               </a>
             </li>
             <li>
               <a
                 className="link"
-                href={prefixUrl('/markdown-react/plugins-md')}
+                href={prefixUrl('/markdown-react/unpublished')}
               >
-                Plugins on Markdown
+                Unpublished React Page
               </a>
             </li>
             <li>
               <a
                 className="link"
-                href={prefixUrl('/markdown-react/plugins-js')}
+                href={prefixUrl('/markdown-react/route-to-home')}
               >
-                Plugins on React
+                Route to Home
               </a>
             </li>
           </ul>
-          <p>
-            FYI: This page uses page-specific CSS, react-helmet in the console,
-            and inline Markdown.
-          </p>
         </div>
-        <div className="prose my30 px30">
-          {md`
-
-          # h1
-          ## h2
-          ### h3
-          #### h4
-          ##### h5
-          ###### h6
-
-
-          ___
-
-          Horizontal Rule
-
-          ---
-
-          Horizontal Rule
-
-          ***
-
-          ***bold and italic text***
-          1. Ordered list
-          2. Ordered list
-          3. Ordered list
-          4. Ordered list
-          5. Ordered list
-
-
-          **bold text**
-
-          __bold text__
-
-
-          * Unordered list
-          + Unordered list
-          - Unordered list
-            * Unordered sub-list
-            + Unordered sub-list
-            - Unordered sub-list
-              * Unordered sub-sub-list
-              + Unordered sub-sub-list
-              - Unordered sub-sub-list
-
-
-          *italic text*
-
-          _italic text_
-
-
-          - [x] Checked box
-          - [ ] Unchecked box
-
-
-          ~~strikethrough text~~
-
-
-          > Blockquotes
-          >> Nested blockquotes
-          >>> More nested blockquotes
-
-
-          | Column1 | Column2 |
-          | ---- | ---- |
-          | Row2 | Row2 |
-          | Row3 | Row3 |
-          | Row4 | Row4 |
-
-          `}
+        <div className="my60 px36">
+          <span className="uniqueText">Here's page-specific CSS</span>
+        </div>
+        <div className="my36 px36 prose">
+          {md`#### Here's JSX Markdown`}
+          <p>react-helmet is demonstrated in the console</p>
         </div>
       </PageShell>
     );

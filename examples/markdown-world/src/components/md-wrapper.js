@@ -11,7 +11,7 @@ class MdWrapper extends React.Component {
           title={this.props.frontMatter.title}
           description={this.props.frontMatter.description}
         />
-        <div className="prose my36 px36">
+        <div className="my36 px36 prose">
           {this.props.children}
         </div>
       </PageShell>

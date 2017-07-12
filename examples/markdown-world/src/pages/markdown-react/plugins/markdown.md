@@ -1,7 +1,7 @@
 ---
-title: Plugins on a Markdown page
-description: Here to show off rehype and remark plugins in a Markdown page
-wrapper: "../../components/md-wrapper.js"
+title: Plugins in Markdown
+description: Here to show rehype and remark plugins in Markdown
+wrapper: "../../../components/md-wrapper.js"
 ---
 
 ### remark-emoji
@@ -15,7 +15,6 @@ wrapper: "../../components/md-wrapper.js"
 <pre><code class="language-js">var name = "World";
 console.log("Hello, " + name + "!");
 </code></pre>
-
 
 ```js
 var name = "World";

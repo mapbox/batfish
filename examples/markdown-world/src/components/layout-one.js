@@ -20,7 +20,7 @@ class LayoutOne extends React.Component {
             {this.props.frontMatter.right}
           </div>
         </div>
-        <div className="prose my36 px36">
+        <div className="my36 px36 prose">
           {this.props.children}
         </div>
       </PageShell>

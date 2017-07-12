@@ -20,7 +20,7 @@ class LayoutTwo extends React.Component {
             {this.props.frontMatter.middle.map((item, index) => {
               return (
                 <p key={item + index}>
-                  {item + ' ' + index}
+                  {item}
                 </p>
               );
             })}

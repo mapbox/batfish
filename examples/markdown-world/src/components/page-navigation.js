@@ -10,9 +10,9 @@ class PageNavigation extends React.Component {
         </a>
         <a
           className="link color-white inline-block mr24"
-          href={prefixUrl('/code-blocks')}
+          href={prefixUrl('/sample')}
         >
-          Code Blocks
+          Sample
         </a>
         <a
           className="link color-white inline-block mr24"
