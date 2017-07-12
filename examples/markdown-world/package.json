@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "scripts": {
+    "batfish": "../../bin/batfish.js"
+  },
+  "dependencies": {
+    "rehype-highlight": "^2.0.1",
+    "remark-emoji": "^2.0.0"
+  }
+}
