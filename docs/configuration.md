@@ -40,6 +40,7 @@ You can specify an alternate location.
 - [postcssPlugins](#postcssplugins)
 - [fileLoaderExtensions](#fileloaderextensions)
 - [jsxtremeMarkdownOptions](#jsxtrememarkdownoptions)
+- [inlineJs](#inlinejs)
 - [production](#production)
 - [port](#port)
 
@@ -78,6 +79,7 @@ Origin where the site will be deployed.
 `string` - Optional.
 
 Absolute path to a module exporting a React component that will wrap all of your pages.
+The component can be exported with `module.exports`, `export default`, or `export { Wrapper }`.
 
 ### notFoundPath
 
@@ -138,7 +140,7 @@ Otherwise, Babel might end up looking in the wrong place for the npm package.
 
 ### babelExclude
 
-`WebpackCondition` - Optional. Default: `/node_modules/`
+`WebpackCondition` - Optional. Default: `/node_modules\/!(@mapbox\/batfish\/)/`
 
 Any [valid Webpack Condition](https://webpack.js.org/configuration/module/#condition) will work here.
 
@@ -155,7 +157,7 @@ These stylesheets need to be publicly available at the designated URL so Batfish
 
 `Array<string>` - Optional. Default: `['last 4 versions', 'not ie < 10']`
 
-All of the CSS you load via Webpack is run through [Autoprefixer](https://github.com/postcss/autoprefixer).
+All of the CSS you load via Webpack is run through [Autoprefixer].
 Use a [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support with vendor prefixes.
 
 ### postcssPlugins
@@ -163,7 +165,7 @@ Use a [Browserslist](https://github.com/ai/browserslist) value to specify which 
 `Array<Function>` - Optional.
 
 All of the CSS you load via Webpack is run through [PostCSS](http://postcss.org/), so you can apply any [PostCSS plugins](https://github.com/postcss/postcss/blob/master/docs/plugins.md) to it.
-By default, only [Autoprefixer](https://github.com/postcss/autoprefixer) is applied.
+By default, only [Autoprefixer] is applied.
 
 This value is passed directly to [postcss-loader](https://github.com/postcss/postcss-loader#plugins).
 
@@ -181,6 +183,20 @@ Provide any of the following [jsxtreme-markdown] options (please read about them
 
 **To add syntax highlighting to your Markdown pages, you'll probably want to use `remarkPlugins` or `rehypePlugins`.**
 
+### inlineJs
+
+`Array<Object>` - Optional.
+
+If you want to inline JS into static HTML before the Webpack bundle, this is the best way to do it.
+
+On the development server, they will be added at the beginning of the Webpack bundle for debugging (sourcemaps should be available).
+For the static build, they will be injected directly into the `<head>`.
+
+Each item is an object with the following properties:
+
+- **filename** `string` - Absolute path to the JS file.
+- **uglify** `boolean` - Default: `true`. Whether or not to process the file with [UglifyJs] before inserting into the `<head>` during the static build.
+
 ### production
 
 `boolean` - Optional. Default: `false` for `start`, `true` for `build`
@@ -193,3 +209,6 @@ Whether or not to build for production (e.g. minimize files, trim React).
 
 Preferred port for development servers.
 If the specified port is unavailable, another port is used.
+
+[UglifyJs]: https://github.com/mishoo/UglifyJS2
+[Autoprefixer]: https://github.com/postcss/autoprefixer

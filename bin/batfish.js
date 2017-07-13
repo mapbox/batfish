@@ -93,8 +93,8 @@ if (configPath) {
           configPath
         )}`
       );
-      throw error;
     }
+    throw error;
   }
 }
 
