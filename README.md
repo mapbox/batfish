@@ -106,6 +106,10 @@ Sometimes you need to put an asset at a specific URL.
 A `favicon.ico` in the root directory, for example; or a special image for social media `<meta>` tags.
 For this reason, any non-page files within the pages directory are copied directly into the same location during the static build.
 
+*When you access these files from pages, though, you need to use root-relative or absolute URLs.*
+That is, within `src/pages/foo/bar.js` you cannot access `src/pages/foo/bar.jpg` as `bar.jpg`: you need to use `/foo/bar.jpg`.
+(You may want to [prefix the URLs](#prefixing-urls)).
+
 ### Injecting data
 
 You can store data in JSON, anywhere in your project, then specify which specific data to inject into any given page.

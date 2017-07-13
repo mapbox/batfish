@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "scripts": {
+    "batfish": "../../bin/batfish.js"
+  },
+  "dependencies": {}
+}

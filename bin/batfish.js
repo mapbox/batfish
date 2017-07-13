@@ -4,6 +4,7 @@
 const meow = require('meow');
 const chalk = require('chalk');
 const path = require('path');
+const fs = require('fs');
 const timelog = require('../lib/timelog');
 const start = require('../lib/start');
 const build = require('../lib/build');
@@ -83,7 +84,9 @@ if (cli.flags.config) {
 let config;
 if (configPath) {
   try {
-    config = require(configPath)();
+    if (fs.existsSync(configPath)) {
+      config = require(configPath)();
+    }
   } catch (error) {
     if (!isDefaultConfigPath) {
       timelog(

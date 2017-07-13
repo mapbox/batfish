@@ -22,6 +22,7 @@ You can specify an alternate location.
 <!-- toc -->
 
 - [pagesDirectory](#pagesdirectory)
+- [staticDirectory](#staticdirectory)
 - [outputDirectory](#outputdirectory)
 - [siteBasePath](#sitebasepath)
 - [siteOrigin](#siteorigin)
@@ -52,10 +53,16 @@ You can specify an alternate location.
 
 Absolute path to your project's directory of pages.
 
+### staticDirectory
+
+`string` - Optional. Default: project directory + `static/`
+
+Absolute path to your project's directory of static assets.
+The contents of this directory will be copied exactly, without additional processing, into the `/static/` path in your website.
 
 ### outputDirectory
 
-`string` - Optional. Default: project directory + `_site`
+`string` - Optional. Default: project directory + `_site/`
 
 Absolute path to a directory where site files should be written.
 **You probably want to `.gitignore` this directory.**

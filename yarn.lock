@@ -1638,7 +1638,7 @@ cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
     parse-json "^2.2.0"
     require-from-string "^1.1.0"
 
-cp-file@^4.2.0:
+cp-file@^4.1.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/cp-file/-/cp-file-4.2.0.tgz#715361663b71ede0b6dddbc3c80e2ba02e725ec3"
   dependencies:
@@ -1647,6 +1647,15 @@ cp-file@^4.2.0:
     nested-error-stacks "^2.0.0"
     pify "^2.3.0"
     safe-buffer "^5.0.1"
+
+cpy@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/cpy/-/cpy-5.0.0.tgz#80870985b8f508b518c5782fa7ca38965cf17d5a"
+  dependencies:
+    arrify "^1.0.1"
+    cp-file "^4.1.0"
+    globby "^6.0.0"
+    nested-error-stacks "^2.0.0"
 
 create-ecdh@^4.0.0:
   version "4.0.0"
@@ -2931,7 +2940,7 @@ globby@^5.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-globby@^6.1.0:
+globby@^6.0.0, globby@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/globby/-/globby-6.1.0.tgz#f5a6d70e8395e21c858fb0489d64df02424d506c"
   dependencies:
