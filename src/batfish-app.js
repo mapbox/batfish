@@ -2,9 +2,10 @@
 
 const React = require('react');
 const ReactDOM = require('react-dom');
-const Wrapper = require('batfish/wrapper');
 const Router = require('./router');
 const findMatchingRoute = require('./find-matching-route');
+let Wrapper = require('batfish/wrapper');
+Wrapper = Wrapper.default || Wrapper.Wrapper || Wrapper;
 
 // The initialization of any Batfish.
 // Get the current page and render it, wrapped in the user's Wrapper component.

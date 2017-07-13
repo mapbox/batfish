@@ -12,6 +12,7 @@ const fs = require('fs');
 const pify = require('pify');
 const mkdirp = require('mkdirp');
 const path = require('path');
+const UglifyJs = require('uglify-js');
 const batfishContext = require('batfish/context');
 const Wrapper = require('batfish/wrapper');
 const StaticHtmlPage = require('./static-html-page');
@@ -28,6 +29,20 @@ const constants = require('../lib/constants');
  */
 function staticRenderPages(batfishConfig, assets, manifestJs) {
   const renderPage = route => {
+    let inlineJs;
+    if (batfishConfig.production && batfishConfig.inlineJs) {
+      inlineJs = batfishConfig.inlineJs
+        .map(jsData => {
+          let code = fs.readFileSync(jsData.filename, 'utf8');
+          if (jsData.uglify !== false) {
+            const uglified = UglifyJs.minify(code);
+            if (uglified.error) throw uglified.error;
+            code = uglified.code;
+          }
+          return `<script>${code}</script>`;
+        })
+        .join('\n');
+    }
     return route.getPage().then(pageModule => {
       // We render the page content separately from the StaticHtmlPage, because the page
       // content is what will be re-rendered when the bundled JS loads so it must
@@ -60,6 +75,7 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
             head.base.toString(),
             head.meta.toString(),
             head.link.toString(),
+            inlineJs,
             head.script.toString(),
             constants.INLINE_CSS_MARKER,
             `<script id="loadCss">${loadCssScript}</script>`,

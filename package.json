@@ -114,7 +114,7 @@
     "sitemap-static": "^0.4.2",
     "slugg": "^1.2.1",
     "style-loader": "^0.18.2",
-    "uglify-js": "^3.0.15",
+    "uglify-js": "^3.0.24",
     "webpack": "^3.2.0",
     "webpack-chunk-hash": "^0.4.0",
     "webpack-merge": "^4.1.0",
