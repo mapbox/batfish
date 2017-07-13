@@ -6,7 +6,7 @@ let delayed;
 let onRouteTo;
 
 function routeTo(url) {
-  if (!routeTo) {
+  if (!onRouteTo) {
     delayed = url;
     return;
   }
