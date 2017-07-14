@@ -8,7 +8,7 @@ module.exports = () => {
 };
 ```
 
-(This format mirrors Webpack's configuration setup, which allows for unlimited extensibility.)
+(This format mirrors Webpack's configuration setup, which allows for unlimited flexibility and extensibility.)
 
 By default, the Batfish CLI looks for a `batfish.config.js` file in the current working directory.
 You can specify an alternate location.

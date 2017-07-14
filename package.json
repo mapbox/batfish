@@ -11,7 +11,7 @@
     "lint-js": "eslint .",
     "format": "prettier --single-quote --write '{,lib/**/,src/**/,bin/**/,test/**/}*.js'",
     "test-jest": "jest",
-    "toc": "markdown-toc -i docs/*.md",
+    "toc": "markdown-toc -i README.md && markdown-toc -i docs/*.md",
     "lint-md-partial": "remark --frail --quiet --no-stdout --use 'validate-links=repository:\"mapbox/batfish\"' --use remark-lint-no-dead-urls",
     "lint-md": "npm run lint-md-partial -- docs/*.md *.md",
     "lint": "npm run lint-js && npm run lint-md",
@@ -34,10 +34,7 @@
       "prettier --single-quote --write",
       "git add"
     ],
-    "README.md": [
-      "npm run lint-md-partial"
-    ],
-    "docs/*.md": [
+    "{docs/*.md,README.md}": [
       "npm run lint-md-partial",
       "markdown-toc -i",
       "git add"
