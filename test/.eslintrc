@@ -1,0 +1,6 @@
+{
+  extends: "../conf/eslint-node.json",
+  "env": {
+    "jest": true
+  }
+}
