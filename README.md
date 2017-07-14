@@ -11,8 +11,8 @@ A minimalistic static-site generator powered by React and Webpack.
 Batfish provides *the essentials* for building excellent static websites with React and Webpack.
 
 - **(Universal) React.**
-  Use React components as the building blocks for pages.
-  "Universal" means the components are rendered into HTML pages at build time, and then mounted in the browser for interactivity at run time.
+  Use React components as the building blocks for your pages.
+  Your React code is "universal" because the components are rendered into HTML pages at build time and then mounted in the browser for interactivity at run time.
 - **Super-powered Markdown pages.**
 Markdown pages that are even more powerful than [Jekyll's](https://jekyllrb.com/) with interpolated JS expressions and JSX elements.
 - **Client-side routing with key features and minimal overhead.**
@@ -23,21 +23,25 @@ Markdown pages that are even more powerful than [Jekyll's](https://jekyllrb.com/
   Hashed asset filenames for long-term caching.
   And so on.
 - **Minimal configuration.**
-  So far there are no required options!
-- **Minimal (period).**
+  Though almost every user will want to set a couple of configuration properties, you might not need more than that — and none are required.
+- **Minimal.**
   Batfish does not aim to be an ecosystem unto itself.
   Instead, we've kept the codebase small and extracted any generalizable functionality into independent npm packages, like [jsxtreme-markdown], [link-hijacker], and [scroll-restorer].
+  You can use these packages outside of Batfish — they are not coupled to Batfish conventions or configuration.
 
 ## Usage
 
-1. Create a [configuration] module (or don't, if you want to rely on defaults).
+1. Create a [configuration] module.
 1. Create some [pages] as React components and/or Markdown documents.
-1. Start the development server, or build a static site and start the static-site server.
+1. Start the development server and work on your pages.
 1. At some point, build your static site and deploy it.
+
+Have a look at [`examples/basic/`](examples/basic) for a simple example project.
 
 <!-- toc -->
 
 - [API](#api)
+- [Configuration](#configuration)
   * [CLI](#cli)
   * [Node API](#node-api)
 - [Pages](#pages)
@@ -46,26 +50,20 @@ Markdown pages that are even more powerful than [Jekyll's](https://jekyllrb.com/
     + [Markdown page wrapper components](#markdown-page-wrapper-components)
     + [Import JS modules into jsxtreme-markdown](#import-js-modules-into-jsxtreme-markdown)
   * [Non-page files with in the pages directory](#non-page-files-with-in-the-pages-directory)
-  * [Injecting data](#injecting-data)
   * [Path not found: 404](#path-not-found-404)
-  * [Draft pages](#draft-pages)
-  * [Page-specific CSS](#page-specific-css)
-  * [Routing within a page](#routing-within-a-page)
-- [Configuration](#configuration)
-- [Markdown within JS](#markdown-within-js)
 - [Routing](#routing)
-  * [Prefixing URLs](#prefixing-urls)
   * [Links](#links)
-  * [Dynamically changing pages](#dynamically-changing-pages)
+  * [Prefixing URLs](#prefixing-urls)
 - [Document ``](#document-)
 - [Development server](#development-server)
-- [Example sites](#example-sites)
-  * [Running examples](#running-examples)
-  * [Creating a new example](#creating-a-new-example)
 
 <!-- tocstop -->
 
 ## API
+
+## Configuration
+
+See [`docs/configuration.md`](docs/configuration.md) to learn about all the ways you can configure Batfish.
 
 ### CLI
 
@@ -222,64 +220,6 @@ For this reason, any non-page files within the [`pagesDirectory`] are copied dir
 That is, within `src/pages/foo/bar.js` you cannot access `src/pages/foo/bar.jpg` as `bar.jpg`: you need to use `/foo/bar.jpg`.
 (You may want to [prefix the URLs](#prefixing-urls)).
 
-### Injecting data
-
-You can store data in JSON or JS, anywhere in your project, then specify which specific data to inject into any given page.
-
-To register data and data selectors, use the [`data`] and [`dataSelectors`] options in your configuration.
-
-To select data to be injected into a page, then, provide `siteData` front matter that is a [sequence](http://www.yaml.org/spec/1.2/spec.html#style/block/sequence) of strings, each representing one of the following:
-
-- A key in the `data` object. In this case, the entire value will be injected.
-- A key in the `dataSelectors` object. In this case, the return value from that selector will be injected.
-
-Example:
-
-```jsx
-// batfish.config.js
-module.exports = () => {
-  return {
-    /* ... */
-    data: {
-      cta: 'Buy now!',
-      siteTitle: 'Place to buy things'
-    },
-    dataSelectors: {
-      posts: data => {
-        return data.pages.filter(pagesData => /\/posts\//.test(pagesData.path));
-      },
-      things: data => { /* ... */ }
-    }
-  };
-};
-
-// Page
-/*---
-siteData:
-  - cta
-  - posts
----*/
-const React  = require('react');
-class MyPage extends React.PureComponent {
-  render() {
-    return (
-      <div>
-        <h1>Page!</h1>
-        <p>Here is our call to action: {this.props.siteData.cta}</p>
-        <h2>Posts</h2>
-        {this.props.siteData.posts.map(post => {
-          return (
-            <div key={post.path}>
-              <a href={post.path}>{post.data.title}</a>
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-}
-```
-
 ### Path not found: 404
 
 Note that adding the [`notFoundPath`] property is optional in your `batfish.config.js`.
@@ -290,89 +230,18 @@ In development, you can expect to see your 404 page by entering an invalid path.
 When you build for [`production`], though, your 404 page will need to be handled and rendered by the server.
 (If you run your [`production`] build locally with `serve-static`, expect to see `Cannot GET /yourInvalidPathHere`.)
 
-### Draft pages
-
-Any page with the front matter `published: false` will be considered a draft page.
-
-In development, draft pages are built and visible.
-However, in [`production`] builds these pages are **not** included and should be handled with a 404 by the server.
-
-### Page-specific CSS
-
-By default, all CSS you include with Webpack (via `require` or `import`) will be bundled together.
-**During the static build, each page has the CSS relevant to it injected inline, and the complete stylesheet is loaded lazily, after the rest of the page is rendered.**
-This optimization ensures that the loading of an external stylesheet does not block rendering, and your page content is visible as quickly as possible.
-
-Sometimes, however, you want to include CSS that will *never* be used on other pages, so you don't want it to be included in the complete stylesheet.
-
-To do that, create CSS files within the [`pagesDirectory`] — preferably adjacent to the page that uses them.
-Import a page-specific CSS from the page that will use it: expect a React component that you can render in your page.
-
-Example:
-
-```jsx
-const AboutCss = require('./about.css');
-class AboutPage extends React.PureComponent {
-  render() {
-    return (
-      <PageShell>
-        <AboutCss />
-        {/* The rest of the page content */}
-      </PageShell>
-    );
-  }
-}
-```
-
-### Routing within a page
-
-If you'd like to use a different client-side routing library *within a page*, like [React Router](https://reacttraining.com/react-router/) or [nanorouter](https://github.com/yoshuawuyts/nanorouter), add `internalRoutes: true` to the page's front matter.
-
-By specifying that the page has internal routes, any URLs that *start with* the page's path will be considered matches.
-If the page is `pages/animals.js`, for example, then `/animals/` will match as usual, but `/animals/tiger/` and `/animals/zebra/` will *also* match.
-The client-side router you use within the page can determine what to do with the rest of the URL.
-
-## Configuration
-
-See [`docs/configuration.md`](docs/configuration.md).
-
-## Markdown within JS
-
-You can use [jsxtreme-markdown](https://github.com/mapbox/jsxtreme-markdown) within JS, as well as in `.md` page files.
-It is compiled by Babel, so will your browser bundle will not need to include a Markdown parser.
-
-Batfish exposes [babel-plugin-transform-jsxtreme-markdown] as `batfish/md`.
-The value of this (fake) module is a [template literal tag](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals).
-Any template literal with this tag will be compiled as Markdown (jsxtreme-markdown, with interpolated JS expression and JSX elements) at compile time.
-
-```jsx
-const React = require('react');
-const md = require('batfish/md');
-
-class MyPage extends React.Component {
-  render() {
-    const text = md`
-      # A title
-
-      This is a paragraph. Receives interpolated props, like this one:
-      {{this.props.location}}.
-
-      You can use interpolated {{<span className="foo">JSX elements</span>}},
-      also.
-    `;
-
-    return (
-      <div>
-        {/* some fancy stuff */}
-        {text}
-      {/* some more fancy stuff */}
-      </div>
-    );
-  }
-}
-```
-
 ## Routing
+
+### Links
+
+**You can use regular `<a>` elements throughout your site.**
+When the user clicks a link, Batfish checks to see if the link's `href` refers to a page it knows about.
+If so, client-side routing is used.
+If not, the link behaves normally.
+
+If you would like to use an `<a>` without this hijacking (e.g. for your own internal routing within a page), you can give it the attribute `data-no-hijack`.
+
+This is all accomplished with [link-hijacker].
 
 ### Prefixing URLs
 
@@ -393,40 +262,6 @@ prefixUrl('engineer') // -> '/about/jobs/engineer'
 prefixUrl.absolute('engineer') // -> 'https://mydomain.com/about/jobs/engineer'
 ```
 
-### Links
-
-**You can use regular `<a>` elements throughout your site.**
-When the user clicks a link, Batfish checks to see if the link's `href` refers to a page it knows about.
-If so, client-side routing is used.
-If not, the link behaves normally.
-
-If you would like to use an `<a>` without this hijacking (e.g. for your own internal routing within a page), you can give it the attribute `data-no-hijack`.
-
-This is all accomplished with [link-hijacker].
-
-### Dynamically changing pages
-
-During Webpack compilation, Batfish exposes the module `batfish/route-to`.
-Use this to dynamically change pages.
-If the URL argument matches a page Batfish knows about, client-side routing is used.
-If not, [`Location.assign`](https://developer.mozilla.org/en-US/docs/Web/API/Location/assign) is used, and the page transitions normally.
-
-```js
-// Let's imagine:
-// - siteBasePath === '/about/jobs/'
-// - /about/jobs/writer/ is a page you made
-const routeTo = require('batfish/route-to');
-
-// Client-side routing is used
-routeTo('/about/jobs/writer/');
-
-// Automatically prefix the URL with siteBasePath
-routeTo.prefixed('writer');
-
-// Regular link behavior is used, since this is not a page Batfish made
-routeTo('/about/money');
-```
-
 ## Document `<head>`
 
 **Use [react-helmet] to add things your document `<head>`.**
@@ -444,49 +279,6 @@ However, **the browser will not automatically refresh for the following changes*
 - Changing a page's front matter.
 
 When you do one of these things, restart the server to see your change.
-
-## Example sites
-
-Each subdirectory in `examples/` is an example site, illustrating some subset of Batfish's features.
-
-### Running examples
-
-- `cd` into the example's directory.
-- npm install` (or `yarn install`) to get any dependencies of that example.
-- `npm run batfish -- start` (or `build` or `serve-static`).
-
-`npm run batfish` is just a shortcut script that examples should include.
-You can also use the Batfish CLI directly to run the examples: it lives in `bin/batfish.js`.
-You'll need to make sure you either run the command from the example's directory or else use the `--config` argument, so Batfish can find the example's configuration.
-
-Examples:
-
-```
-# From project root directory
-bin/batfish.js --config examples/initial-experiments/batfish.config.js start
-
-# From examples/initial-experiments/
-../../bin/batfish.js build && ../../bin/batfish.js serve-static
-```
-
-### Creating a new example
-
-Create a new directory in `examples/`.
-Add the following `package.json`:
-
-```json
-{
-  "private": true,
-  "scripts": {
-    "batfish": "../../bin/batfish.js"
-  },
-  "dependencies": {}
-}
-```
-
-Install dependencies as needed.
-
-Create a configuration file and some pages ... and go from there!
 
 [configuration]: #configuration
 [pages]: #pages
