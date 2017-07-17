@@ -15,7 +15,7 @@
     "lint-md": "npm run lint-md-partial -- docs/*.md *.md",
     "lint": "npm run lint-js && npm run lint-md",
     "pretest": "npm run lint",
-    "test": "echo \"No tests yet\""
+    "test": "jest"
   },
   "repository": {
     "type": "git",
