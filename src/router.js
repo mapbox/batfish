@@ -9,6 +9,16 @@ const scrollToFragment = require('./scroll-to-fragment');
 const linkToLocation = require('./link-to-location');
 const routeTo = require('./route-to');
 
+function getContextLocation() {
+  let tidyPath = window.location.pathname;
+  if (!/\/$/.test(tidyPath)) tidyPath += '/';
+  return {
+    pathname: tidyPath,
+    hash: window.location.hash,
+    search: window.location.search
+  };
+}
+
 class Router extends React.PureComponent {
   static propTypes = {
     startingPath: PropTypes.string.isRequired,
@@ -16,13 +26,28 @@ class Router extends React.PureComponent {
     startingProps: PropTypes.object.isRequired
   };
 
+  static childContextTypes = {
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+      hash: PropTypes.string,
+      search: PropTypes.string
+    }).isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       path: this.props.startingPath,
       pageComponent: this.props.startingComponent,
-      pageProps: this.props.startingProps
+      pageProps: this.props.startingProps,
+      location: {
+        pathname: this.props.startingPath
+      }
     };
+  }
+
+  getChildContext() {
+    return { location: this.state.location };
   }
 
   componentDidMount() {
@@ -48,6 +73,10 @@ class Router extends React.PureComponent {
       },
       this.routeTo
     );
+
+    this.setState({
+      location: getContextLocation()
+    });
   }
 
   /**
@@ -87,7 +116,8 @@ class Router extends React.PureComponent {
       const nextState = {
         path: matchingRoute.path,
         pageComponent: pageModule.component.default || pageModule.component,
-        pageProps: pageModule.props
+        pageProps: pageModule.props,
+        location: getContextLocation()
       };
       this.setState(nextState, () => {
         if (options.scrollToTop) {
@@ -105,13 +135,11 @@ class Router extends React.PureComponent {
   render() {
     if (!this.state.pageComponent) return null;
 
-    const location =
-      typeof window !== 'undefined'
-        ? document.location
-        : { pathname: this.state.pathname };
-
     return (
-      <this.state.pageComponent location={location} {...this.state.pageProps} />
+      <this.state.pageComponent
+        location={this.state.location}
+        {...this.state.pageProps}
+      />
     );
   }
 }
