@@ -5,3 +5,4 @@ babel-cache
 _site
 _tmp
 **/yarn.lock
+coverage

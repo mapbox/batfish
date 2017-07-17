@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validateConfig defaults 1`] = `
+Object {
+  "autoprefixerBrowsers": Array [
+    "last 4 versions",
+    "not ie < 10",
+  ],
+  "babelExclude": /node_modules\\\\/!\\(@mapbox\\\\/batfish\\\\/\\)/,
+  "externalStylesheets": Array [],
+  "fileLoaderExtensions": Array [
+    "jpeg",
+    "jpg",
+    "png",
+    "gif",
+    "webp",
+    "mp4",
+    "webm",
+    "woff",
+    "woff2",
+  ],
+  "jsxtremeMarkdownOptions": Object {},
+  "notFoundPath": "/my-project/src/pages/404.js",
+  "outputDirectory": "/my-project/_site",
+  "pagesDirectory": "/my-project/src/pages",
+  "port": 8080,
+  "production": false,
+  "siteBasePath": "",
+  "staticDirectory": "/my-project/src/static",
+  "temporaryDirectory": "/my-project/_tmp",
+  "verbose": false,
+  "wrapperPath": "/Users/davidclark/dev/mapbox/batfish/src/empty-wrapper.js",
+}
+`;

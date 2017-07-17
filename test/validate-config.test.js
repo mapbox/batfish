@@ -1,11 +1,37 @@
 'use strict';
 
+const mkdirp = require('mkdirp');
+const del = require('del');
+const path = require('path');
 const validateConfig = require('../lib/validate-config');
+
+jest.mock('mkdirp', () => {
+  return {
+    sync: jest.fn()
+  };
+});
+
+jest.mock('del', () => {
+  return {
+    sync: jest.fn()
+  };
+});
 
 describe('validateConfig', () => {
   const projectDirectory = '/my-project';
   test('defaults', () => {
     expect(validateConfig(undefined, projectDirectory)).toMatchSnapshot();
+  });
+
+  test('temporaryDirectory is created and cleared', () => {
+    const result = validateConfig(undefined, projectDirectory);
+    expect(mkdirp.sync).toHaveBeenCalledTimes(1);
+    expect(mkdirp.sync).toHaveBeenCalledWith(result.temporaryDirectory);
+    expect(del.sync).toHaveBeenCalledTimes(1);
+    expect(del.sync).toHaveBeenCalledWith(
+      path.join(result.temporaryDirectory, '{*.*,.*}'),
+      { force: true }
+    );
   });
 
   test('non-absolute pagesDirectory fails', () => {
@@ -31,7 +57,7 @@ describe('validateConfig', () => {
       wrapperPath: '../some/directory.wrapper.js'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      'wrapperPath is required and must be an absolute path'
+      'wrapperPath must be an absolute path'
     );
   });
 
@@ -40,7 +66,7 @@ describe('validateConfig', () => {
       temporaryDirectory: '../some/directory'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      'temporaryDirectory is required and must be an absolute path'
+      'temporaryDirectory must be an absolute path'
     );
   });
 
@@ -72,7 +98,7 @@ describe('validateConfig', () => {
         },
         projectDirectory
       ).siteBasePath
-    ).toBe('about/team');
+    ).toBe('/about/team');
 
     expect(
       validateConfig(
@@ -81,7 +107,36 @@ describe('validateConfig', () => {
         },
         projectDirectory
       ).siteBasePath
-    ).toBe('about/team');
+    ).toBe('/about/team');
+
+    expect(
+      validateConfig(
+        {
+          siteBasePath: '/'
+        },
+        projectDirectory
+      ).siteBasePath
+    ).toBe('/');
+  });
+
+  test('processed siteBasePath always starts with a slash', () => {
+    expect(
+      validateConfig(
+        {
+          siteBasePath: 'about/team/'
+        },
+        projectDirectory
+      ).siteBasePath
+    ).toBe('/about/team');
+
+    expect(
+      validateConfig(
+        {
+          siteBasePath: '/about/team'
+        },
+        projectDirectory
+      ).siteBasePath
+    ).toBe('/about/team');
 
     expect(
       validateConfig(
