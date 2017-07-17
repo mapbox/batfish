@@ -24,7 +24,7 @@ A minimalistic static-site generator powered by React and Webpack.
 -   [Routing](#routing)
     -   [Links](#links)
     -   [Prefixing URLs](#prefixing-urls)
--   [Using CSS](#using-css)
+-   [CSS](#css)
 -   [Document &lt;head>](#document-head)
 -   [Development server](#development-server)
 -   [Advanced usage](#advanced-usage)
@@ -265,9 +265,19 @@ prefixUrl('engineer') // -> '/about/jobs/engineer'
 prefixUrl.absolute('engineer') // -> 'https://mydomain.com/about/jobs/engineer'
 ```
 
-## Using CSS
+## CSS
 
-WRITE SOMETHING.
+You can import CSS via `import` or `require` statements.
+Webpack will bundle all the imported CSS together.
+
+**During the static build, each page has its relevant CSS injected inline, and the complete stylesheet is loaded lazily, after the rest of the page is rendered.**
+This optimization ensures that the loading of an external stylesheet does not block rendering, and your page content is visible as quickly as possible.
+(This is accomplished with [postcss-html-filter].)
+
+You can also include stylesheets referenced by URL using the [`externalStylesheets`] configuration option.
+
+When necessary, you can include page-specific CSS without adding it to the sitewide stylesheet.
+Instructions for this can be found in ["Page-specific CSS"].
 
 ## Document `<head>`
 
@@ -326,3 +336,9 @@ Additional documentation can be found in [`docs/advanced-usage.md`](docs/advance
 [react-helmet]: https://github.com/nfl/react-helmet
 
 [browsersync]: https://www.browsersync.io/
+
+[postcss-html-filter]: https://github.com/mapbox/postcss-html-filter
+
+[`externalstylesheets`]: docs/configuration.md#externalstylesheets
+
+["page-specific css"]: docs/advanced-usage.md#page-specific-css

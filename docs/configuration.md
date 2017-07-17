@@ -20,29 +20,78 @@ You can specify an alternate location.
 
 ## Table of contents
 
--   [pagesDirectory](#pagesdirectory)
--   [staticDirectory](#staticdirectory)
--   [outputDirectory](#outputdirectory)
--   [siteBasePath](#sitebasepath)
--   [siteOrigin](#siteorigin)
--   [wrapperPath](#wrapperpath)
--   [notFoundPath](#notfoundpath)
--   [temporaryDirectory](#temporarydirectory)
--   [data](#data)
--   [dataSelectors](#dataselectors)
--   [vendorModules](#vendormodules)
--   [webpackLoaders](#webpackloaders)
--   [webpackPlugins](#webpackplugins)
--   [babelPlugins](#babelplugins)
--   [babelExclude](#babelexclude)
--   [externalStylesheets](#externalstylesheets)
--   [autoprefixerBrowsers](#autoprefixerbrowsers)
--   [postcssPlugins](#postcssplugins)
--   [fileLoaderExtensions](#fileloaderextensions)
--   [jsxtremeMarkdownOptions](#jsxtrememarkdownoptions)
--   [inlineJs](#inlinejs)
--   [production](#production)
--   [port](#port)
+-   [Basic options](#basic-options)
+    -   [siteBasePath](#sitebasepath)
+    -   [siteOrigin](#siteorigin)
+    -   [wrapperPath](#wrapperpath)
+    -   [notFoundPath](#notfoundpath)
+    -   [externalStylesheets](#externalstylesheets)
+    -   [autoprefixerBrowsers](#autoprefixerbrowsers)
+    -   [pagesDirectory](#pagesdirectory)
+    -   [staticDirectory](#staticdirectory)
+    -   [outputDirectory](#outputdirectory)
+    -   [temporaryDirectory](#temporarydirectory)
+-   [Advanced options](#advanced-options)
+    -   [data](#data)
+    -   [dataSelectors](#dataselectors)
+    -   [vendorModules](#vendormodules)
+    -   [webpackLoaders](#webpackloaders)
+    -   [webpackPlugins](#webpackplugins)
+    -   [babelPlugins](#babelplugins)
+    -   [babelExclude](#babelexclude)
+    -   [postcssPlugins](#postcssplugins)
+    -   [fileLoaderExtensions](#fileloaderextensions)
+    -   [jsxtremeMarkdownOptions](#jsxtrememarkdownoptions)
+    -   [inlineJs](#inlinejs)
+    -   [production](#production)
+    -   [port](#port)
+
+## Basic options
+
+### siteBasePath
+
+`string` - Optional. Default: `'/'`
+
+**You probably want to set this one.**
+
+Root-relative path to the base directory on the domain where the site will be deployed.
+Used by `prefixUrl` and `prefixAbsoluteUrl`.
+
+### siteOrigin
+
+`string` - Optional.
+
+**You probably want to set this one.**
+
+Origin where the site will be deployed.
+_Required if you want to use `prefixAbsoluteUrl`._
+
+### wrapperPath
+
+`string` - Optional.
+
+Absolute path to a module exporting a React component that will wrap all of your pages.
+The component can be exported with `module.exports`, `export default`, or `export { Wrapper }`.
+
+### notFoundPath
+
+`string` - Optional. Default: pages directory + `404.js`
+
+Absolute path to your 404 page.
+
+### externalStylesheets
+
+`Array<string>` - Optional.
+
+An array of URLs to external stylesheets that you want to include in your site.
+These stylesheets need to be publicly available at the designated URL so Batfish can download them and work them into the CSS optimizations.
+
+### autoprefixerBrowsers
+
+`Array<string>` - Optional. Default: `['last 4 versions', 'not ie < 10']`
+
+All of the CSS you load via Webpack is run through [Autoprefixer].
+Use a [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support with vendor prefixes.
 
 ### pagesDirectory
 
@@ -64,33 +113,6 @@ The contents of this directory will be copied exactly, without additional proces
 Absolute path to a directory where site files should be written.
 **You probably want to `.gitignore` this directory.**
 
-### siteBasePath
-
-`string` - Optional. Default: `'/'`
-
-Root-relative path to the base directory on the domain where the site will be deployed.
-Used by `prefixUrl` and `prefixAbsoluteUrl`.
-
-### siteOrigin
-
-`string` - Optional.
-
-Origin where the site will be deployed.
-_Required if you want to use `prefixAbsoluteUrl`._
-
-### wrapperPath
-
-`string` - Optional.
-
-Absolute path to a module exporting a React component that will wrap all of your pages.
-The component can be exported with `module.exports`, `export default`, or `export { Wrapper }`.
-
-### notFoundPath
-
-`string` - Optional. Default: pages directory + `404.js`
-
-Absolute path to your 404 page.
-
 ### temporaryDirectory
 
 `string` - Optional. Default: project directory + `_tmp`
@@ -98,6 +120,8 @@ Absolute path to your 404 page.
 Absolute path to a directory where Batfish will write temporary files.
 It must be within the project directory.
 **You probably want to `.gitignore` this directory.**
+
+## Advanced options
 
 ### data
 
@@ -150,20 +174,6 @@ Otherwise, Babel might end up looking in the wrong place for the npm package.
 Any [valid Webpack Condition](https://webpack.js.org/configuration/module/#condition) will work here.
 
 You'll need to use this if, for example, you use a library that includes ES2015 but is not compiled for publication (e.g. any of the [promise-fun](https://github.com/sindresorhus/promise-fun) modules).
-
-### externalStylesheets
-
-`Array<string>` - Optional.
-
-An array of URLs to external stylesheets that you want to include in your site.
-These stylesheets need to be publicly available at the designated URL so Batfish can download them and work them into the CSS optimizations.
-
-### autoprefixerBrowsers
-
-`Array<string>` - Optional. Default: `['last 4 versions', 'not ie < 10']`
-
-All of the CSS you load via Webpack is run through [Autoprefixer].
-Use a [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support with vendor prefixes.
 
 ### postcssPlugins
 

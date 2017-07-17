@@ -82,11 +82,7 @@ class MyPage extends React.PureComponent {
 
 ## Page-specific CSS
 
-By default, all CSS you include with Webpack (via `require` or `import`) will be bundled together.
-**During the static build, each page has the CSS relevant to it injected inline, and the complete stylesheet is loaded lazily, after the rest of the page is rendered.**
-This optimization ensures that the loading of an external stylesheet does not block rendering, and your page content is visible as quickly as possible.
-
-Sometimes, however, you want to include CSS that will _never_ be used on other pages, so you don't want it to be included in the complete stylesheet.
+Sometimes you want to include CSS that will _never_ be used on other pages, so you don't want it to be included in the complete stylesheet.
 
 To do that, create CSS files within the [`pagesDirectory`] — preferably adjacent to the page that uses them.
 Import a page-specific CSS from the page that will use it: expect a React component that you can render in your page.
@@ -106,6 +102,8 @@ class AboutPage extends React.PureComponent {
   }
 }
 ```
+
+[Read more about using CSS.](../README.md#css)
 
 ## Routing within a page
 
