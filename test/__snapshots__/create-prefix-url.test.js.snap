@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createPrefixUrl generation works with siteBasePath and siteOrigin 1`] = `
+"
+    function prefixUrl(url) {
+      if (!/^\\\\//.test(url)) url = '/' + url;
+      return '/foo' + url;
+    }
+    prefixUrl.absolute = url => {
+      return 'https://www.test.com' + '/foo' + url;
+    };
+    module.exports = prefixUrl;
+  "
+`;
+
+exports[`createPrefixUrl generation works without siteBasePath or siteOrigin 1`] = `
+"
+    function prefixUrl(url) {
+      if (!/^\\\\//.test(url)) url = '/' + url;
+      return '' + url;
+    }
+    prefixUrl.absolute = url => {
+      return '' + '' + url;
+    };
+    module.exports = prefixUrl;
+  "
+`;
