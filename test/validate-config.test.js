@@ -20,7 +20,13 @@ jest.mock('del', () => {
 describe('validateConfig', () => {
   const projectDirectory = '/my-project';
   test('defaults', () => {
-    expect(validateConfig(undefined, projectDirectory)).toMatchSnapshot();
+    const config = validateConfig(undefined, projectDirectory);
+    // Make wrapperPath a relative path, not absolute
+    config.wrapperPath = path.relative(
+      path.dirname(path.join(__dirname, '../lib/validate-config')),
+      config.wrapperPath
+    );
+    expect(config).toMatchSnapshot();
   });
 
   test('temporaryDirectory is created and cleared', () => {

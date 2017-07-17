@@ -29,6 +29,6 @@ Object {
   "staticDirectory": "/my-project/src/static",
   "temporaryDirectory": "/my-project/_tmp",
   "verbose": false,
-  "wrapperPath": "/Users/davidclark/dev/mapbox/batfish/src/empty-wrapper.js",
+  "wrapperPath": "../src/empty-wrapper.js",
 }
 `;
