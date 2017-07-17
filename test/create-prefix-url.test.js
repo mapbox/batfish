@@ -5,6 +5,7 @@ const path = require('path');
 const mkdirp = require('mkdirp');
 const del = require('del');
 const pify = require('pify');
+const tempy = require('tempy');
 const createPrefixUrl = require('../lib/create-prefix-url');
 
 describe('createPrefixUrl generation', () => {
@@ -48,8 +49,7 @@ describe('createPrefixUrl generation', () => {
 });
 
 describe('createPrefixUrl generated module without siteBasePath and siteOrigin', () => {
-  // Replace with tempy
-  const tmp = path.join(__dirname, '../test-tmp');
+  const tmp = tempy.directory();
   const config = {
     temporaryDirectory: tmp
   };
@@ -76,11 +76,14 @@ describe('createPrefixUrl generated module without siteBasePath and siteOrigin',
   test('prefixUrl with starting slash', () => {
     expect(prefixUrl('/foo')).toBe('/foo');
   });
+
+  test('prefixUrl.absolute throws', () => {
+    expect(() => prefixUrl.absolute('/foo')).toThrow();
+  });
 });
 
 describe('createPrefixUrl generated module with siteBasePath and siteOrigin', () => {
-  // Replace with tempy
-  const tmp = path.join(__dirname, 'tmp');
+  const tmp = tempy.directory();
   const config = {
     temporaryDirectory: tmp,
     siteBasePath: '/foo/bar',
@@ -108,5 +111,13 @@ describe('createPrefixUrl generated module with siteBasePath and siteOrigin', ()
 
   test('prefixUrl with starting slash', () => {
     expect(prefixUrl('/baz')).toBe('/foo/bar/baz');
+  });
+
+  test('prefixUrl.absolute with starting slash', () => {
+    expect(prefixUrl.absolute('/baz')).toBe('https://www.test.com/foo/bar/baz');
+  });
+
+  test('prefixUrl.absolute without starting slash', () => {
+    expect(prefixUrl.absolute('baz')).toBe('https://www.test.com/foo/bar/baz');
   });
 });

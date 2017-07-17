@@ -7,7 +7,13 @@ exports[`createPrefixUrl generation works with siteBasePath and siteOrigin 1`] =
       return '/foo' + url;
     }
     prefixUrl.absolute = url => {
-      return 'https://www.test.com' + '/foo' + url;
+      if (false) {
+        throw new Error('siteOrigin is not specified. Unable to prefix with absolute path.');
+      }
+      if (!/^\\\\//.test(url)) url = '/' + url;
+      return 'https://www.test.com' +
+        '/foo' +
+        url;
     };
     module.exports = prefixUrl;
   "
@@ -20,7 +26,13 @@ exports[`createPrefixUrl generation works without siteBasePath or siteOrigin 1`]
       return '' + url;
     }
     prefixUrl.absolute = url => {
-      return '' + '' + url;
+      if (true) {
+        throw new Error('siteOrigin is not specified. Unable to prefix with absolute path.');
+      }
+      if (!/^\\\\//.test(url)) url = '/' + url;
+      return 'undefined' +
+        '' +
+        url;
     };
     module.exports = prefixUrl;
   "

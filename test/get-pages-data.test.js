@@ -5,9 +5,10 @@ const getPagesData = require('../lib/get-pages-data');
 const validateConfig = require('../lib/validate-config');
 
 describe('getPagesData', () => {
+  const fixtureDir = path.join(__dirname, 'fixtures/get-pages-data');
   test('registers home page', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data')
+      pagesDirectory: fixtureDir
     });
     return getPagesData(config).then(result => {
       expect(result['/']).not.toBeUndefined();
@@ -17,7 +18,7 @@ describe('getPagesData', () => {
 
   test('registers JS index page', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data')
+      pagesDirectory: fixtureDir
     });
     return getPagesData(config).then(result => {
       expect(result['/about/']).not.toBeUndefined();
@@ -29,7 +30,7 @@ describe('getPagesData', () => {
 
   test('registers JS non-index page', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data')
+      pagesDirectory: fixtureDir
     });
     return getPagesData(config).then(result => {
       expect(result['/work/animals/horses/ed/']).not.toBeUndefined();
@@ -41,7 +42,7 @@ describe('getPagesData', () => {
 
   test('registers Markdown index page', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data')
+      pagesDirectory: fixtureDir
     });
     return getPagesData(config).then(result => {
       expect(result['/about/team/']).not.toBeUndefined();
@@ -53,7 +54,7 @@ describe('getPagesData', () => {
 
   test('registers Markdown non-index page', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data')
+      pagesDirectory: fixtureDir
     });
     return getPagesData(config).then(result => {
       expect(result['/about/security/']).not.toBeUndefined();
@@ -65,7 +66,7 @@ describe('getPagesData', () => {
 
   test('registers JS index page with siteBasePath', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data'),
+      pagesDirectory: fixtureDir,
       siteBasePath: 'foo'
     });
     return getPagesData(config).then(result => {
@@ -78,7 +79,7 @@ describe('getPagesData', () => {
 
   test('registers JS non-index page with siteBasePath', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data'),
+      pagesDirectory: fixtureDir,
       siteBasePath: '/foo'
     });
     return getPagesData(config).then(result => {
@@ -91,7 +92,7 @@ describe('getPagesData', () => {
 
   test('registers Markdown index page with siteBasePath', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data'),
+      pagesDirectory: fixtureDir,
       siteBasePath: '/foo/'
     });
     return getPagesData(config).then(result => {
@@ -104,7 +105,7 @@ describe('getPagesData', () => {
 
   test('registers Markdown non-index page with siteBasePath', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data'),
+      pagesDirectory: fixtureDir,
       siteBasePath: 'foo'
     });
     return getPagesData(config).then(result => {
@@ -117,7 +118,7 @@ describe('getPagesData', () => {
 
   test('does not duplicate slash on homepage when siteBasePath === /', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data'),
+      pagesDirectory: fixtureDir,
       siteBasePath: '/'
     });
     return getPagesData(config).then(result => {
@@ -128,7 +129,7 @@ describe('getPagesData', () => {
 
   test('does not register files that are not JS or Markdown', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data')
+      pagesDirectory: fixtureDir
     });
     return getPagesData(config).then(result => {
       expect(result['/about/style/']).toBeUndefined();
@@ -137,7 +138,7 @@ describe('getPagesData', () => {
 
   test('registers JS front matter', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data')
+      pagesDirectory: fixtureDir
     });
     return getPagesData(config).then(result => {
       expect(result['/work/animals/horses/ed/'].frontMatter).toEqual({
@@ -148,7 +149,7 @@ describe('getPagesData', () => {
 
   test('registers Markdown front matter', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data')
+      pagesDirectory: fixtureDir
     });
     return getPagesData(config).then(result => {
       expect(result['/about/team/'].frontMatter).toEqual({
@@ -159,7 +160,7 @@ describe('getPagesData', () => {
 
   test('includes draft page in development mode', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data'),
+      pagesDirectory: fixtureDir,
       production: false
     });
     return getPagesData(config).then(result => {
@@ -169,7 +170,7 @@ describe('getPagesData', () => {
 
   test('does not include draft page in production mode', () => {
     const config = validateConfig({
-      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data'),
+      pagesDirectory: fixtureDir,
       production: true
     });
     return getPagesData(config).then(result => {

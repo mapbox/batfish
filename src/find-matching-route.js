@@ -22,7 +22,7 @@ function createPathRegExps(routes) {
 }
 
 let pathRegExpsCache;
-let urlPathsCache;
+let urlPathsCache = {};
 
 /**
  * Find the route data that matches a URL path.

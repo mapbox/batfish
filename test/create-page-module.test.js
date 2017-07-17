@@ -4,11 +4,15 @@ const del = require('del');
 const pify = require('pify');
 const path = require('path');
 const mkdirp = require('mkdirp');
+const tempy = require('tempy');
 const createPageModule = require('../lib/create-page-module');
 
 describe('createPageModule', () => {
-  // Replace with tempy
-  const tmp = path.join(__dirname, '../test-tmp');
+  const tmp = tempy.directory();
+  const pageComponentPath = path.join(
+    __dirname,
+    './fixtures/create-page-module/page-component-module.js'
+  );
 
   const createAndReadPageModule = options => {
     return pify(mkdirp)(tmp)
@@ -23,17 +27,14 @@ describe('createPageModule', () => {
   };
 
   afterEach(() => {
-    return del(path.join(tmp, '*.*'), { force: true });
+    return del(tmp, { force: true });
   });
 
   test('home without any front matter or site data', () => {
     const options = {
       pageData: {
         path: '/',
-        filePath: path.join(
-          __dirname,
-          './fixtures/create-page-module/page-component-module.js'
-        )
+        filePath: pageComponentPath
       },
       batfishConfig: {
         temporaryDirectory: '/tmp'
@@ -57,10 +58,7 @@ describe('createPageModule', () => {
     const options = {
       pageData: {
         path: '/foo',
-        filePath: path.join(
-          __dirname,
-          './fixtures/create-page-module/page-component-module.js'
-        ),
+        filePath: pageComponentPath,
         frontMatter: {
           title: 'Pigman',
           siteData: ['fizz', 'plop']
@@ -98,10 +96,7 @@ describe('createPageModule', () => {
     const options = {
       pageData: {
         path: '/foop',
-        filePath: path.join(
-          __dirname,
-          './fixtures/create-page-module/page-component-module.js'
-        ),
+        filePath: pageComponentPath,
         frontMatter: {
           siteData: ['fizz', 'plop']
         }
@@ -145,10 +140,7 @@ describe('createPageModule', () => {
     const options = {
       pageData: {
         path: '/foop',
-        filePath: path.join(
-          __dirname,
-          './fixtures/create-page-module/page-component-module.js'
-        ),
+        filePath: pageComponentPath,
         frontMatter: {
           siteData: ['flip']
         }
