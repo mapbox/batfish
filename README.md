@@ -6,58 +6,60 @@ A minimalistic static-site generator powered by React and Webpack.
 
 ![The batfish](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Longnose_batfish.jpg/320px-Longnose_batfish.jpg)
 
+## Table of contents
+
+-   [Goals](#goals)
+-   [Usage](#usage)
+-   [API](#api)
+-   [Configuration](#configuration)
+    -   [CLI](#cli)
+    -   [Node API](#node-api)
+-   [Pages](#pages)
+    -   [JS pages](#js-pages)
+    -   [Markdown pages](#markdown-pages)
+        -   [Markdown page wrapper components](#markdown-page-wrapper-components)
+        -   [Import JS modules into jsxtreme-markdown](#import-js-modules-into-jsxtreme-markdown)
+    -   [Non-page files with in the pages directory](#non-page-files-with-in-the-pages-directory)
+    -   [Path not found: 404](#path-not-found-404)
+-   [Routing](#routing)
+    -   [Links](#links)
+    -   [Prefixing URLs](#prefixing-urls)
+-   [Using CSS](#using-css)
+-   [Document &lt;head>](#document-head)
+-   [Development server](#development-server)
+-   [Advanced usage](#advanced-usage)
+
 ## Goals
 
-Batfish provides *the essentials* for building excellent static websites with React and Webpack.
+Batfish provides _the essentials_ for building excellent static websites with React and Webpack.
 
-- **(Universal) React.**
-  Use React components as the building blocks for your pages.
-  Your React code is "universal" because the components are rendered into HTML pages at build time and then mounted in the browser for interactivity at run time.
-- **Super-powered Markdown pages.**
-Markdown pages that are even more powerful than [Jekyll's](https://jekyllrb.com/) with interpolated JS expressions and JSX elements.
-- **Client-side routing with key features and minimal overhead.**
-  There is often no need for a big router library, but there *is* a need for often-overlooked features like automatic link hijacking and scroll restoration.
-- **Essential optimizations.**
-  JS bundles split up by page and loaded on demand.
-  Essential CSS injected into static HTML.
-  Hashed asset filenames for long-term caching.
-  And so on.
-- **Minimal configuration.**
-  Though almost every user will want to set a couple of configuration properties, you might not need more than that — and none are required.
-- **Minimal.**
-  Batfish does not aim to be an ecosystem unto itself.
-  Instead, we've kept the codebase small and extracted any generalizable functionality into independent npm packages, like [jsxtreme-markdown], [link-hijacker], and [scroll-restorer].
-  You can use these packages outside of Batfish — they are not coupled to Batfish conventions or configuration.
+-   **(Universal) React.**
+    Use React components as the building blocks for your pages.
+    Your React code is "universal" because the components are rendered into HTML pages at build time and then mounted in the browser for interactivity at run time.
+-   **Super-powered Markdown pages.**
+    Markdown pages that are even more powerful than [Jekyll's](https://jekyllrb.com/) with interpolated JS expressions and JSX elements.
+-   **Client-side routing with key features and minimal overhead.**
+    There is often no need for a big router library, but there _is_ a need for often-overlooked features like automatic link hijacking and scroll restoration.
+-   **Essential optimizations.**
+    JS bundles split up by page and loaded on demand.
+    Essential CSS injected into static HTML.
+    Hashed asset filenames for long-term caching.
+    And so on.
+-   **Minimal configuration.**
+    Though almost every user will want to set a couple of configuration properties, you might not need more than that — and none are required.
+-   **Minimal.**
+    Batfish does not aim to be an ecosystem unto itself.
+    Instead, we've kept the codebase small and extracted any generalizable functionality into independent npm packages, like [jsxtreme-markdown], [link-hijacker], and [scroll-restorer].
+    You can use these packages outside of Batfish — they are not coupled to Batfish conventions or configuration.
 
 ## Usage
 
-1. Create a [configuration] module.
-1. Create some [pages] as React components and/or Markdown documents.
-1. Start the development server and work on your pages.
-1. At some point, build your static site and deploy it.
+1.  Create a [configuration] module.
+2.  Create some [pages] as React components and/or Markdown documents.
+3.  Start the development server and work on your pages.
+4.  At some point, build your static site and deploy it.
 
 Have a look at [`examples/basic/`](examples/basic) for a simple example project.
-
-<!-- toc -->
-
-- [API](#api)
-- [Configuration](#configuration)
-  * [CLI](#cli)
-  * [Node API](#node-api)
-- [Pages](#pages)
-  * [JS pages](#js-pages)
-  * [Markdown pages](#markdown-pages)
-    + [Markdown page wrapper components](#markdown-page-wrapper-components)
-    + [Import JS modules into jsxtreme-markdown](#import-js-modules-into-jsxtreme-markdown)
-  * [Non-page files with in the pages directory](#non-page-files-with-in-the-pages-directory)
-  * [Path not found: 404](#path-not-found-404)
-- [Routing](#routing)
-  * [Links](#links)
-  * [Prefixing URLs](#prefixing-urls)
-- [Document ``](#document-)
-- [Development server](#development-server)
-
-<!-- tocstop -->
 
 ## API
 
@@ -69,9 +71,9 @@ See [`docs/configuration.md`](docs/configuration.md) to learn about all the ways
 
 The CLI has three commands:
 
-- `start`: Start a development server.
-- `build`: Build the static site.
-- `serve-static`: Serve the static site.
+-   `start`: Start a development server.
+-   `build`: Build the static site.
+-   `serve-static`: Serve the static site.
 
 All commands will look for your configuration module in the current working directory or where you point with the `--config` option.
 
@@ -81,10 +83,10 @@ For more details, run `batfish --help`.
 
 The Node API exposes three functions:
 
-- `start(batfishConfig?: Object, projectDirectory?: string): void`: Start a development server.
-- `build(batfishConfig?: Object, projectDirectory?: string): Promise<void>`: Build the static site.
-  Returns a Promise that resolves when the build is complete.
-- `serveStatic(batfishConfig?: Object, projectDirectory?: string): void`: Serve the static site.
+-   `start(batfishConfig?: Object, projectDirectory?: string): void`: Start a development server.
+-   `build(batfishConfig?: Object, projectDirectory?: string): Promise<void>`: Build the static site.
+    Returns a Promise that resolves when the build is complete.
+-   `serveStatic(batfishConfig?: Object, projectDirectory?: string): void`: Serve the static site.
 
 In all of the above, the `projectDirectory` argument is used to determine configuration defaults if you have not provided certain options (e.g. [`pagesDirectory`], [`outputDirectory`]).
 It defaults to the current working directory.
@@ -97,9 +99,9 @@ So `src/pages/industries/real-estate.js` corresponds to the URL `/industries/rea
 
 When a page is rendered, its component is passed the following props:
 
-- `location`: The browser's current [Location](https://developer.mozilla.org/en-US/docs/Web/API/Location).
-- `frontMatter`: The page's parsed front matter (minus any `siteData` array)
-- `siteData`: Any site-wide data that the page has selected for injection.
+-   `location`: The browser's current [Location](https://developer.mozilla.org/en-US/docs/Web/API/Location).
+-   `frontMatter`: The page's parsed front matter (minus any `siteData` array)
+-   `siteData`: Any site-wide data that the page has selected for injection.
 
 ### JS pages
 
@@ -193,8 +195,8 @@ List lines of `import` or `require` statements that define variables you can use
 
 By default, the following lines are specified:
 
-- `import prefixUrl from 'batfish/prefix-url'`: See [Prefixing URLs].
-- `import routeTo from 'batfish/route-to')`: See [Dynamically changing pages].
+-   `import prefixUrl from 'batfish/prefix-url'`: See [Prefixing URLs].
+-   `import routeTo from 'batfish/route-to')`: See [Dynamically changing pages].
 
 This means that these functions can be used with no additional configuration.
 Import your own modules and do more things.
@@ -218,7 +220,7 @@ Sometimes you need to put an asset at a specific URL.
 You may want a `favicon.ico` in the root directory, for example; or a special image for social media `<meta>` tags on a page.
 For this reason, **any non-page files within the [`pagesDirectory`] are copied directly into the same location during the static build.**
 
-*When you access these files from pages, though, you need to use root-relative or absolute URLs.*
+_When you access these files from pages, though, you need to use root-relative or absolute URLs._
 That is, within `src/pages/foo/bar.js` you cannot access `src/pages/foo/bar.jpg` as `bar.jpg`: you need to use `/foo/bar.jpg`.
 You may want to [prefix the URLs](#prefixing-urls), also.
 
@@ -280,8 +282,8 @@ The development server (for `start` and `serve-static` commands) is a [Browsersy
 Usually when you change a file, Webpack will recompile and the browser will automatically refresh.
 However, **the browser will not automatically refresh for the following changes**:
 
-- Adding or removing a page.
-- Changing a page's front matter.
+-   Adding or removing a page.
+-   Changing a page's front matter.
 
 When you do one of these things, restart the server to see your change.
 
@@ -290,20 +292,37 @@ When you do one of these things, restart the server to see your change.
 Additional documentation can be found in [`docs/advanced-usage.md`](docs/advanced-usage.md).
 
 [configuration]: #configuration
+
 [pages]: #pages
-[Prefixing URLs]: #prefixing-urls
-[Dynamically changing pages]: #dynamically-changing-pages
-[`pagesDirectory`]: docs/configuration.md#pagesdirectory
-[`outputDirectory`]: docs/configuration.md#outputdirectory
-[`notFoundPath`]: docs/configuration.md#notfoundpath
+
+[prefixing urls]: #prefixing-urls
+
+[dynamically changing pages]: docs/advanced-usage.md#dynamically-changing-pages
+
+[`pagesdirectory`]: docs/configuration.md#pagesdirectory
+
+[`outputdirectory`]: docs/configuration.md#outputdirectory
+
+[`notfoundpath`]: docs/configuration.md#notfoundpath
+
 [`data`]: docs/configuration.md#data
-[`dataSelectors`]: docs/configuration.md#dataselectors
-[`siteBasePath`]: docs/configuration.md#sitebasepath
-[`siteOrigin`]: docs/configuration.md#siteorigin
+
+[`dataselectors`]: docs/configuration.md#dataselectors
+
+[`sitebasepath`]: docs/configuration.md#sitebasepath
+
+[`siteorigin`]: docs/configuration.md#siteorigin
+
 [`production`]: docs/configuration.md#production
+
 [jsxtreme-markdown]: https://github.com/mapbox/jsxtreme-markdown
+
 [link-hijacker]: https://github.com/mapbox/link-hijacker
+
 [scroll-restorer]: https://github.com/mapbox/scroll-restorer
+
 [babel-plugin-transform-jsxtreme-markdown]: https://github.com/mapbox/babel-plugin-transform-jsxtreme-markdown
+
 [react-helmet]: https://github.com/nfl/react-helmet
-[Browsersync]: https://www.browsersync.io/
+
+[browsersync]: https://www.browsersync.io/

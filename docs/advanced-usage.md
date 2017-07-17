@@ -1,6 +1,13 @@
 # Advanced Usage
 
-<!-- toc -->
+## Table of contents
+
+-   [Draft pages](#draft-pages)
+-   [Injecting data](#injecting-data)
+-   [Page-specific CSS](#page-specific-css)
+-   [Routing within a page](#routing-within-a-page)
+-   [Markdown within JS](#markdown-within-js)
+-   [Dynamically changing pages](#dynamically-changing-pages)
 
 ## Draft pages
 
@@ -14,7 +21,7 @@ However, in [`production`] builds these pages are **not** included and should be
 Most of the time, you should store data as JSON or JS and `import` or `require` it.
 Nothing special.
 
-If, however, you are dealing with lots of data; that data is used across a number of pages; and each of those pages does not need *all* of the data — then you may not want to write *all* that data into your JS bundles.
+If, however, you are dealing with lots of data; that data is used across a number of pages; and each of those pages does not need _all_ of the data — then you may not want to write _all_ that data into your JS bundles.
 You may want to control which parts of it get written to which bundles.
 
 You can store data in JSON or JS, anywhere in your project, then specify which data to inject into any given page.
@@ -23,8 +30,8 @@ To register data and data selectors, use the [`data`] and [`dataSelectors`] opti
 
 To select data to be injected into a page, then, provide `siteData` front matter that is a [sequence](http://www.yaml.org/spec/1.2/spec.html#style/block/sequence) of strings, each representing one of the following:
 
-- A key in the `data` object. In this case, the entire value will be injected.
-- A key in the `dataSelectors` object. In this case, the return value from that selector will be injected.
+-   A key in the `data` object. In this case, the entire value will be injected.
+-   A key in the `dataSelectors` object. In this case, the return value from that selector will be injected.
 
 Example:
 
@@ -73,13 +80,13 @@ class MyPage extends React.PureComponent {
 }
 ```
 
-### Page-specific CSS
+## Page-specific CSS
 
 By default, all CSS you include with Webpack (via `require` or `import`) will be bundled together.
 **During the static build, each page has the CSS relevant to it injected inline, and the complete stylesheet is loaded lazily, after the rest of the page is rendered.**
 This optimization ensures that the loading of an external stylesheet does not block rendering, and your page content is visible as quickly as possible.
 
-Sometimes, however, you want to include CSS that will *never* be used on other pages, so you don't want it to be included in the complete stylesheet.
+Sometimes, however, you want to include CSS that will _never_ be used on other pages, so you don't want it to be included in the complete stylesheet.
 
 To do that, create CSS files within the [`pagesDirectory`] — preferably adjacent to the page that uses them.
 Import a page-specific CSS from the page that will use it: expect a React component that you can render in your page.
@@ -100,12 +107,12 @@ class AboutPage extends React.PureComponent {
 }
 ```
 
-### Routing within a page
+## Routing within a page
 
-If you'd like to use a different client-side routing library *within a page*, like [React Router](https://reacttraining.com/react-router/) or [nanorouter](https://github.com/yoshuawuyts/nanorouter), add `internalRoutes: true` to the page's front matter.
+If you'd like to use a different client-side routing library _within a page_, like [React Router](https://reacttraining.com/react-router/) or [nanorouter](https://github.com/yoshuawuyts/nanorouter), add `internalRoutes: true` to the page's front matter.
 
-By specifying that the page has internal routes, any URLs that *start with* the page's path will be considered matches.
-If the page is `pages/animals.js`, for example, then `/animals/` will match as usual, but `/animals/tiger/` and `/animals/zebra/` will *also* match.
+By specifying that the page has internal routes, any URLs that _start with_ the page's path will be considered matches.
+If the page is `pages/animals.js`, for example, then `/animals/` will match as usual, but `/animals/tiger/` and `/animals/zebra/` will _also_ match.
 The client-side router you use within the page can determine what to do with the rest of the URL.
 
 ## Markdown within JS
@@ -144,7 +151,7 @@ class MyPage extends React.Component {
 }
 ```
 
-### Dynamically changing pages
+## Dynamically changing pages
 
 During Webpack compilation, Batfish exposes the module `batfish/route-to`.
 Use this to dynamically change pages.
