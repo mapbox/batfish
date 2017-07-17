@@ -189,12 +189,14 @@ I love shopping for cleaning supplies ...
 #### Import JS modules into jsxtreme-markdown
 
 In jsxtreme-markdown components, you can specify JS modules to import and use within the interpolated code using `modules` front matter.
-By default, the following modules are specified:
+List lines of `import` or `require` statements that define variables you can use in your interpolated JS and JSX.
+
+By default, the following lines are specified:
 
 - `import prefixUrl from 'batfish/prefix-url'`: See [Prefixing URLs].
 - `import routeTo from 'batfish/route-to')`: See [Dynamically changing pages].
 
-This means that these modules can be used with no additional configuration.
+This means that these functions can be used with no additional configuration.
 Import your own modules and do more things.
 
 Example:
@@ -213,18 +215,17 @@ Today is {{myDateFormatter('2015-08-21')}}
 ### Non-page files with in the pages directory
 
 Sometimes you need to put an asset at a specific URL.
-A `favicon.ico` in the root directory, for example; or a special image for social media `<meta>` tags on a page.
-For this reason, any non-page files within the [`pagesDirectory`] are copied directly into the same location during the static build.
+You may want a `favicon.ico` in the root directory, for example; or a special image for social media `<meta>` tags on a page.
+For this reason, **any non-page files within the [`pagesDirectory`] are copied directly into the same location during the static build.**
 
 *When you access these files from pages, though, you need to use root-relative or absolute URLs.*
 That is, within `src/pages/foo/bar.js` you cannot access `src/pages/foo/bar.jpg` as `bar.jpg`: you need to use `/foo/bar.jpg`.
-(You may want to [prefix the URLs](#prefixing-urls)).
+You may want to [prefix the URLs](#prefixing-urls), also.
 
 ### Path not found: 404
 
-Note that adding the [`notFoundPath`] property is optional in your `batfish.config.js`.
-By default, it looks for a `404.js` in your directory.
-If you provide [`notFoundPath`] a valid string path, the 404s will point to this absolute path.
+By default, Batfish looks for a `404.js` in your [`pagesDirectory`].
+If you provide the config option [`notFoundPath`], the 404s will instead render the component this points to.
 
 In development, you can expect to see your 404 page by entering an invalid path.
 When you build for [`production`], though, your 404 page will need to be handled and rendered by the server.
@@ -262,6 +263,10 @@ prefixUrl('engineer') // -> '/about/jobs/engineer'
 prefixUrl.absolute('engineer') // -> 'https://mydomain.com/about/jobs/engineer'
 ```
 
+## Using CSS
+
+WRITE SOMETHING.
+
 ## Document `<head>`
 
 **Use [react-helmet] to add things your document `<head>`.**
@@ -279,6 +284,10 @@ However, **the browser will not automatically refresh for the following changes*
 - Changing a page's front matter.
 
 When you do one of these things, restart the server to see your change.
+
+## Advanced usage
+
+Additional documentation can be found in [`docs/advanced-usage.md`](docs/advanced-usage.md).
 
 [configuration]: #configuration
 [pages]: #pages

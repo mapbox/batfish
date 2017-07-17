@@ -11,7 +11,13 @@ However, in [`production`] builds these pages are **not** included and should be
 
 ## Injecting data
 
-You can store data in JSON or JS, anywhere in your project, then specify which specific data to inject into any given page.
+Most of the time, you should store data as JSON or JS and `import` or `require` it.
+Nothing special.
+
+If, however, you are dealing with lots of data; that data is used across a number of pages; and each of those pages does not need *all* of the data — then you may not want to write *all* that data into your JS bundles.
+You may want to control which parts of it get written to which bundles.
+
+You can store data in JSON or JS, anywhere in your project, then specify which data to inject into any given page.
 
 To register data and data selectors, use the [`data`] and [`dataSelectors`] options in your configuration.
 
