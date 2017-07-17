@@ -29,6 +29,24 @@ describe('validateConfig', () => {
     expect(config).toMatchSnapshot();
   });
 
+  test('invalid configuration properties fails', () => {
+    const invalidPropertyConfig = {
+      port: 8080,
+      fakePort: 1337
+    };
+    expect(() => validateConfig(invalidPropertyConfig)).toThrow(
+      'fakePort is an invalid config property'
+    );
+    const invalidPropertiesConfig = {
+      fakeProduction: true,
+      fakePort: 1337,
+      fakeExternalStylesheets: null
+    };
+    expect(() => validateConfig(invalidPropertiesConfig)).toThrow(
+      'fakeProduction, fakePort, fakeExternalStylesheets are invalid config properties'
+    );
+  });
+
   test('temporaryDirectory is created and cleared', () => {
     const result = validateConfig(undefined, projectDirectory);
     expect(mkdirp.sync).toHaveBeenCalledTimes(1);
