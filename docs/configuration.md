@@ -55,7 +55,7 @@ You can specify an alternate location.
 **You probably want to set this one.**
 
 Root-relative path to the base directory on the domain where the site will be deployed.
-Used by `prefixUrl` and `prefixAbsoluteUrl`.
+Used by `prefixUrl` and `prefixUrl.absolute` (see ["Prefixing URLs"]).
 
 ### siteOrigin
 
@@ -64,7 +64,10 @@ Used by `prefixUrl` and `prefixAbsoluteUrl`.
 **You probably want to set this one.**
 
 Origin where the site will be deployed.
-_Required if you want to use `prefixAbsoluteUrl`._
+
+_Required if you want to use `prefixUrl.absolute`_ (see ["Prefixing URLs"]).
+
+Also, _required if you want a sitemap_.
 
 ### wrapperPath
 
@@ -228,3 +231,5 @@ If the specified port is unavailable, another port is used.
 [uglifyjs]: https://github.com/mishoo/UglifyJS2
 
 [autoprefixer]: https://github.com/postcss/autoprefixer
+
+["prefixing urls"]: ../README.md#prefixing-urls
