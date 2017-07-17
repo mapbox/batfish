@@ -87,7 +87,7 @@
     "debounce": "^1.0.2",
     "del": "^3.0.0",
     "es6-promise": "^4.1.0",
-    "extract-text-webpack-plugin": "^3.0.0",
+    "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
     "get-port": "^3.1.0",
     "globby": "^6.1.0",
@@ -111,7 +111,7 @@
     "slugg": "^1.2.1",
     "style-loader": "^0.18.2",
     "uglify-js": "^3.0.24",
-    "webpack": "^3.2.0",
+    "webpack": "^2.2.0",
     "webpack-chunk-hash": "^0.4.0",
     "webpack-merge": "^4.1.0",
     "xtend": "^4.0.1"
