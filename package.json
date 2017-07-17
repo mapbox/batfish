@@ -15,7 +15,7 @@
     "lint-md": "npm run lint-md-partial -- docs/*.md *.md",
     "lint": "npm run lint-js && npm run lint-md",
     "pretest": "npm run lint",
-    "test": "echo \"No tests yet\""
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -49,16 +49,14 @@
   },
   "jest": {
     "coverageReporters": [
-      "json",
-      "lcov",
       "text",
       "html"
     ],
-    "resetMocks": true,
     "roots": [
       "./test"
     ],
-    "testRegex": ".*\\.jest\\.js$"
+    "testEnvironment": "node",
+    "clearMocks": true
   },
   "dependencies": {
     "@mapbox/babel-plugin-transform-jsxtreme-markdown": "^0.2.0",
@@ -110,6 +108,7 @@
     "sitemap-static": "^0.4.2",
     "slugg": "^1.2.1",
     "style-loader": "^0.18.2",
+    "tempy": "^0.1.0",
     "uglify-js": "^3.0.24",
     "webpack": "^2.2.0",
     "webpack-chunk-hash": "^0.4.0",
