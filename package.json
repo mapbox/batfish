@@ -11,8 +11,7 @@
     "lint-js": "eslint .",
     "format": "prettier --single-quote --write '{,lib/**/,src/**/,bin/**/,test/**/}*.js'",
     "test-jest": "jest",
-    "toc": "markdown-toc -i docs/*.md",
-    "lint-md-partial": "remark --frail --quiet --no-stdout --use 'validate-links=repository:\"mapbox/batfish\"' --use remark-lint-no-dead-urls",
+    "lint-md-partial": "remark --frail --quiet --no-stdout --use 'validate-links=repository:\"mapbox/batfish\"' --use remark-lint-no-dead-urls --use remark-toc=tight:true --output --",
     "lint-md": "npm run lint-md-partial -- docs/*.md *.md",
     "lint": "npm run lint-js && npm run lint-md",
     "pretest": "npm run lint",
@@ -34,12 +33,8 @@
       "prettier --single-quote --write",
       "git add"
     ],
-    "README.md": [
-      "npm run lint-md-partial"
-    ],
-    "docs/*.md": [
+    "{docs/*.md,README.md}": [
       "npm run lint-md-partial",
-      "markdown-toc -i",
       "git add"
     ]
   },
@@ -111,6 +106,7 @@
     "postcss-values-parser": "^1.2.2",
     "prop-types": "^15.5.10",
     "remark-lint-no-dead-urls": "^0.2.0",
+    "remark-toc": "^4.0.1",
     "sitemap-static": "^0.4.2",
     "slugg": "^1.2.1",
     "style-loader": "^0.18.2",
@@ -137,7 +133,6 @@
     "husky": "^0.14.1",
     "jest": "^20.0.4",
     "lint-staged": "^4.0.0",
-    "markdown-toc": "^1.1.0",
     "prettier": "^1.5.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

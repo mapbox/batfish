@@ -8,44 +8,90 @@ module.exports = () => {
 };
 ```
 
-(This format mirrors Webpack's configuration setup, which allows for unlimited extensibility.)
+(This format mirrors Webpack's configuration setup, which allows for unlimited flexibility and extensibility.)
 
 By default, the Batfish CLI looks for a `batfish.config.js` file in the current working directory.
 You can specify an alternate location.
 
 **Below, "project directory" means either**:
-- the directory of your configuration module, if one is provided; or
-- the current working directory, if no configuration module is provided.
 
-## Configuration properties
+-   the directory of your configuration module, if one is provided; or
+-   the current working directory, if no configuration module is provided.
 
-<!-- toc -->
+## Table of contents
 
-- [pagesDirectory](#pagesdirectory)
-- [staticDirectory](#staticdirectory)
-- [outputDirectory](#outputdirectory)
-- [siteBasePath](#sitebasepath)
-- [siteOrigin](#siteorigin)
-- [wrapperPath](#wrapperpath)
-- [notFoundPath](#notfoundpath)
-- [temporaryDirectory](#temporarydirectory)
-- [data](#data)
-- [dataSelectors](#dataselectors)
-- [vendorModules](#vendormodules)
-- [webpackLoaders](#webpackloaders)
-- [webpackPlugins](#webpackplugins)
-- [babelPlugins](#babelplugins)
-- [babelExclude](#babelexclude)
-- [externalStylesheets](#externalstylesheets)
-- [autoprefixerBrowsers](#autoprefixerbrowsers)
-- [postcssPlugins](#postcssplugins)
-- [fileLoaderExtensions](#fileloaderextensions)
-- [jsxtremeMarkdownOptions](#jsxtrememarkdownoptions)
-- [inlineJs](#inlinejs)
-- [production](#production)
-- [port](#port)
+-   [Basic options](#basic-options)
+    -   [siteBasePath](#sitebasepath)
+    -   [siteOrigin](#siteorigin)
+    -   [wrapperPath](#wrapperpath)
+    -   [notFoundPath](#notfoundpath)
+    -   [externalStylesheets](#externalstylesheets)
+    -   [autoprefixerBrowsers](#autoprefixerbrowsers)
+    -   [pagesDirectory](#pagesdirectory)
+    -   [staticDirectory](#staticdirectory)
+    -   [outputDirectory](#outputdirectory)
+    -   [temporaryDirectory](#temporarydirectory)
+-   [Advanced options](#advanced-options)
+    -   [data](#data)
+    -   [dataSelectors](#dataselectors)
+    -   [vendorModules](#vendormodules)
+    -   [webpackLoaders](#webpackloaders)
+    -   [webpackPlugins](#webpackplugins)
+    -   [babelPlugins](#babelplugins)
+    -   [babelExclude](#babelexclude)
+    -   [postcssPlugins](#postcssplugins)
+    -   [fileLoaderExtensions](#fileloaderextensions)
+    -   [jsxtremeMarkdownOptions](#jsxtrememarkdownoptions)
+    -   [inlineJs](#inlinejs)
+    -   [production](#production)
+    -   [port](#port)
 
-<!-- tocstop -->
+## Basic options
+
+### siteBasePath
+
+`string` - Optional. Default: `'/'`
+
+**You probably want to set this one.**
+
+Root-relative path to the base directory on the domain where the site will be deployed.
+Used by `prefixUrl` and `prefixAbsoluteUrl`.
+
+### siteOrigin
+
+`string` - Optional.
+
+**You probably want to set this one.**
+
+Origin where the site will be deployed.
+_Required if you want to use `prefixAbsoluteUrl`._
+
+### wrapperPath
+
+`string` - Optional.
+
+Absolute path to a module exporting a React component that will wrap all of your pages.
+The component can be exported with `module.exports`, `export default`, or `export { Wrapper }`.
+
+### notFoundPath
+
+`string` - Optional. Default: pages directory + `404.js`
+
+Absolute path to your 404 page.
+
+### externalStylesheets
+
+`Array<string>` - Optional.
+
+An array of URLs to external stylesheets that you want to include in your site.
+These stylesheets need to be publicly available at the designated URL so Batfish can download them and work them into the CSS optimizations.
+
+### autoprefixerBrowsers
+
+`Array<string>` - Optional. Default: `['last 4 versions', 'not ie < 10']`
+
+All of the CSS you load via Webpack is run through [Autoprefixer].
+Use a [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support with vendor prefixes.
 
 ### pagesDirectory
 
@@ -67,33 +113,6 @@ The contents of this directory will be copied exactly, without additional proces
 Absolute path to a directory where site files should be written.
 **You probably want to `.gitignore` this directory.**
 
-### siteBasePath
-
-`string` - Optional. Default: `'/'`
-
-Root-relative path to the base directory on the domain where the site will be deployed.
-Used by `prefixUrl` and `prefixAbsoluteUrl`.
-
-### siteOrigin
-
-`string` - Optional.
-
-Origin where the site will be deployed.
-*Required if you want to use `prefixAbsoluteUrl`.*
-
-### wrapperPath
-
-`string` - Optional.
-
-Absolute path to a module exporting a React component that will wrap all of your pages.
-The component can be exported with `module.exports`, `export default`, or `export { Wrapper }`.
-
-### notFoundPath
-
-`string` - Optional. Default: pages directory + `404.js`
-
-Absolute path to your 404 page.
-
 ### temporaryDirectory
 
 `string` - Optional. Default: project directory + `_tmp`
@@ -101,6 +120,8 @@ Absolute path to your 404 page.
 Absolute path to a directory where Batfish will write temporary files.
 It must be within the project directory.
 **You probably want to `.gitignore` this directory.**
+
+## Advanced options
 
 ### data
 
@@ -116,12 +137,13 @@ An object of selector functions for selecting processing data before it is injec
 Keys are selector names and values are functions that accept an object representing all the site's data and return a value.
 
 The object received as an argument contains the following:
-- All of the data you provided in the `data` configuration property.
-- `pages`: An array of objects for pages.
-  Each page object includes the following:
-  - `path`: The page's URL path.
-  - `filePath`: Absolute path to the page's file.
-  - `frontMatter`: Parsed front matter from the page's file.  
+
+-   All of the data you provided in the `data` configuration property.
+-   `pages`: An array of objects for pages.
+    Each page object includes the following:
+    -   `path`: The page's URL path.
+    -   `filePath`: Absolute path to the page's file.
+    -   `frontMatter`: Parsed front matter from the page's file.  
 
 ### vendorModules
 
@@ -152,20 +174,6 @@ Otherwise, Babel might end up looking in the wrong place for the npm package.
 Any [valid Webpack Condition](https://webpack.js.org/configuration/module/#condition) will work here.
 
 You'll need to use this if, for example, you use a library that includes ES2015 but is not compiled for publication (e.g. any of the [promise-fun](https://github.com/sindresorhus/promise-fun) modules).
-
-### externalStylesheets
-
-`Array<string>` - Optional.
-
-An array of URLs to external stylesheets that you want to include in your site.
-These stylesheets need to be publicly available at the designated URL so Batfish can download them and work them into the CSS optimizations.
-
-### autoprefixerBrowsers
-
-`Array<string>` - Optional. Default: `['last 4 versions', 'not ie < 10']`
-
-All of the CSS you load via Webpack is run through [Autoprefixer].
-Use a [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support with vendor prefixes.
 
 ### postcssPlugins
 
@@ -201,8 +209,8 @@ For the static build, they will be injected directly into the `<head>`.
 
 Each item is an object with the following properties:
 
-- **filename** `string` - Absolute path to the JS file.
-- **uglify** `boolean` - Default: `true`. Whether or not to process the file with [UglifyJs] before inserting into the `<head>` during the static build.
+-   **filename** `string` - Absolute path to the JS file.
+-   **uglify** `boolean` - Default: `true`. Whether or not to process the file with [UglifyJs] before inserting into the `<head>` during the static build.
 
 ### production
 
@@ -217,5 +225,6 @@ Whether or not to build for production (e.g. minimize files, trim React).
 Preferred port for development servers.
 If the specified port is unavailable, another port is used.
 
-[UglifyJs]: https://github.com/mishoo/UglifyJS2
-[Autoprefixer]: https://github.com/postcss/autoprefixer
+[uglifyjs]: https://github.com/mishoo/UglifyJS2
+
+[autoprefixer]: https://github.com/postcss/autoprefixer
