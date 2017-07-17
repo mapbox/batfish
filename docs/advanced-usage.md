@@ -8,6 +8,7 @@
 -   [Routing within a page](#routing-within-a-page)
 -   [Markdown within JS](#markdown-within-js)
 -   [Dynamically changing pages](#dynamically-changing-pages)
+-   [withLocation](#withlocation)
 
 ## Draft pages
 
@@ -170,4 +171,30 @@ routeTo.prefixed('writer');
 
 // Regular link behavior is used, since this is not a page Batfish made
 routeTo('/about/money');
+```
+
+## withLocation
+
+During Webpack compilation, Batfish exposes the module `batfish/with-location`.
+This module exports a higher-order component that you can use to inject an abbreviated [Location](https://developer.mozilla.org/en-US/docs/Web/API/Location) object into the props of your component, containing `pathname`, `hash`, and `search`.
+
+On the initial page load, the value will only include `pathname`.
+As soon as your component mounts, however, it will pick up `hash` and `search`, as well.
+
+```jsx
+const withLocation = require('batfish/with-location');
+
+class MyPage extends React.Component {
+  render() {
+    return (
+      <div>
+        <div>pathname: {this.props.location.pathname}</div>
+        <div>hash: {this.props.location.hash}</div>
+        <div>search: {this.props.location.search}</div>
+      </div>
+    )
+  }
+}
+
+module.exports = withLocation(MyPage);
 ```

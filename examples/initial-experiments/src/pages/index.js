@@ -8,12 +8,14 @@ siteData:
 'use strict';
 
 const React = require('react');
+const withLocation = require('batfish/with-location');
 const PageShell = require('../components/page-shell');
 
 class Home extends React.Component {
   render() {
     return (
       <PageShell>
+        {JSON.stringify(this.props.location)}
         <div>
           {this.props.frontMatter.title}
         </div>
@@ -40,4 +42,4 @@ class Home extends React.Component {
   }
 }
 
-module.exports = Home;
+module.exports = withLocation(Home);
