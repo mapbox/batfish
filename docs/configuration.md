@@ -189,9 +189,12 @@ This value is passed directly to [postcss-loader](https://github.com/postcss/pos
 
 ### fileLoaderExtensions
 
-`Array<string>` - Options. Default: `['jpeg', 'jpg', 'png', 'gif', 'webp', 'mp4', 'webm', 'woff', 'woff2']`
+`Array<string> | Function` - Options. Default: `['jpeg', 'jpg', 'png', 'gif', 'webp', 'mp4', 'webm', 'woff', 'woff2']`
 
 An array of extensions for files that you would like to Webpack's [file-loader](https://github.com/webpack-contrib/file-loader).
+
+If a function is provided, it will receive the default array as an argument and should return a new array.
+A transform function is probably preferable if you only need to add or remove an item or two from the default array.
 
 ### jsxtremeMarkdownOptions
 

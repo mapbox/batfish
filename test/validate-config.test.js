@@ -171,4 +171,12 @@ describe('validateConfig', () => {
       ).siteBasePath
     ).toBe('/');
   });
+
+  test('fileLoaderExtensions transform function', () => {
+    expect(
+      validateConfig({
+        fileLoaderExtensions: defaults => defaults.concat('svg')
+      }).fileLoaderExtensions
+    ).toMatchSnapshot();
+  });
 });
