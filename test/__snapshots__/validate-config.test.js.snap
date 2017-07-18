@@ -32,3 +32,18 @@ Object {
   "wrapperPath": "../src/empty-wrapper.js",
 }
 `;
+
+exports[`validateConfig fileLoaderExtensions transform function 1`] = `
+Array [
+  "jpeg",
+  "jpg",
+  "png",
+  "gif",
+  "webp",
+  "mp4",
+  "webm",
+  "woff",
+  "woff2",
+  "svg",
+]
+`;
