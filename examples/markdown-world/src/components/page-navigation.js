@@ -1,6 +1,6 @@
 'use strict';
 const React = require('react');
-const prefixUrl = require('batfish/prefix-url');
+const prefixUrl = require('@mapbox/batfish/prefix-url');
 class PageNavigation extends React.Component {
   render() {
     return (

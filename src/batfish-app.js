@@ -4,7 +4,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const Router = require('./router');
 const findMatchingRoute = require('./find-matching-route');
-let Wrapper = require('batfish/wrapper');
+let Wrapper = require('batfish-internal/wrapper');
 Wrapper = Wrapper.default || Wrapper.Wrapper || Wrapper;
 
 // The initialization of any Batfish.

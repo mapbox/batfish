@@ -6,7 +6,7 @@ description: blah blah blah
 
 const React = require('react');
 const PageShell = require('../../components/page-shell');
-const routeTo = require('batfish/route-to');
+const routeTo = require('@mapbox/batfish/route-to');
 const AboutCss = require('./about.css');
 
 class About extends React.Component {
@@ -15,7 +15,6 @@ class About extends React.Component {
       <PageShell>
         <AboutCss />
         about
-
         <button
           className="btn"
           onClick={() => routeTo.prefixed('about/security/')}

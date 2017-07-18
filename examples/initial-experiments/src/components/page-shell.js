@@ -2,7 +2,7 @@
 
 const React = require('react');
 const Helmet = require('react-helmet').Helmet;
-const prefixUrl = require('batfish/prefix-url');
+const prefixUrl = require('@mapbox/batfish/prefix-url');
 
 class PageShell extends React.Component {
   render() {
@@ -19,7 +19,9 @@ class PageShell extends React.Component {
           {this.props.children}
 
           <div className="mt72 p24 bg-gray-faint">
-            <a className="link inline-block mr24" href={prefixUrl('/')}>home</a>
+            <a className="link inline-block mr24" href={prefixUrl('/')}>
+              home
+            </a>
             <a className="link inline-block mr24" href={prefixUrl('/about')}>
               about
             </a>
