@@ -2,11 +2,11 @@
 
 exports[`validateConfig defaults 1`] = `
 Object {
-  "autoprefixerBrowsers": Array [
-    "last 4 versions",
-    "not ie < 10",
-  ],
   "babelExclude": /node_modules\\\\/!\\(@mapbox\\\\/batfish\\\\/\\)/,
+  "browserslist": Array [
+    "> 5%",
+    "last 2 versions",
+  ],
   "externalStylesheets": Array [],
   "fileLoaderExtensions": Array [
     "jpeg",
@@ -24,6 +24,9 @@ Object {
   "outputDirectory": "/my-project/_site",
   "pagesDirectory": "/my-project/src/pages",
   "port": 8080,
+  "postcssPlugins": Array [
+    [Function],
+  ],
   "production": false,
   "siteBasePath": "",
   "staticDirectory": "/my-project/src/static",
