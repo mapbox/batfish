@@ -1,6 +1,6 @@
 'use strict';
 
-const batfishContext = require('batfish/context');
+const batfishContext = require('batfish-internal/context');
 
 /**
  * Returns an array of regular expressions that are used to check whether a URL path

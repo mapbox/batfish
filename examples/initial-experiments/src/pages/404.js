@@ -2,14 +2,16 @@
 'use strict';
 
 const React = require('react');
-const prefixUrl = require('batfish/prefix-url');
+const prefixUrl = require('@mapbox/batfish/prefix-url');
 
 class NotFound extends React.PureComponent {
   render() {
     return (
       <div>
         Oops, this is not a page.{' '}
-        <a href={prefixUrl('/')} className="link">Go home.</a>
+        <a href={prefixUrl('/')} className="link">
+          Go home.
+        </a>
       </div>
     );
   }

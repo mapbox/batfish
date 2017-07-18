@@ -1,6 +1,6 @@
 'use strict';
 
-const prefixUrl = require('batfish/prefix-url');
+const prefixUrl = require('@mapbox/batfish/prefix-url');
 
 let delayed;
 let onRouteTo;
@@ -19,7 +19,7 @@ routeTo.prefixed = url => {
 
 // Used by the Router to provide the function that actually does the routing.
 // This slight awkwardness is just to enable the user to
-// `require('batfish/route-to')`.
+// `require('@mapbox/batfish/route-to')`.
 routeTo.onRouteTo = fn => {
   onRouteTo = fn;
   if (delayed) onRouteTo(delayed);
