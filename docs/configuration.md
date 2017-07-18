@@ -26,7 +26,7 @@ You can specify an alternate location.
     -   [wrapperPath](#wrapperpath)
     -   [notFoundPath](#notfoundpath)
     -   [externalStylesheets](#externalstylesheets)
-    -   [autoprefixerBrowsers](#autoprefixerbrowsers)
+    -   [browserslist](#browserslist)
     -   [pagesDirectory](#pagesdirectory)
     -   [staticDirectory](#staticdirectory)
     -   [outputDirectory](#outputdirectory)
@@ -89,12 +89,13 @@ Absolute path to your 404 page.
 An array of URLs to external stylesheets that you want to include in your site.
 These stylesheets need to be publicly available at the designated URL so Batfish can download them and work them into the CSS optimizations.
 
-### autoprefixerBrowsers
+### browserslist
 
-`Array<string>` - Optional. Default: `['last 4 versions', 'not ie < 10']`
+`Array<string>` - Optional. Default: `['> 5%', 'last 2 versions']`
 
-All of the CSS you load via Webpack is run through [Autoprefixer].
-Use a [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support with vendor prefixes.
+A [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support.
+
+This option is used to process your CSS through [Autoprefixer].
 
 ### pagesDirectory
 
@@ -180,10 +181,13 @@ You'll need to use this if, for example, you use a library that includes ES2015 
 
 ### postcssPlugins
 
-`Array<Function>` - Optional.
+`Array<Function> | Function` - Optional. Default: Autoprefixer only.
 
 All of the CSS you load via Webpack is run through [PostCSS](http://postcss.org/), so you can apply any [PostCSS plugins](https://github.com/postcss/postcss/blob/master/docs/plugins.md) to it.
 By default, only [Autoprefixer] is applied.
+
+If a function is provided, it will receive the default array as an argument and should return a new array.
+A transform function is probably preferable if you only need to add or remove an item or two from the default array.
 
 This value is passed directly to [postcss-loader](https://github.com/postcss/postcss-loader#plugins).
 
