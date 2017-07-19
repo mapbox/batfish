@@ -4,7 +4,6 @@
 
 -   [Draft pages](#draft-pages)
 -   [Injecting data](#injecting-data)
--   [Page-specific CSS](#page-specific-css)
 -   [Routing within a page](#routing-within-a-page)
 -   [Markdown within JS](#markdown-within-js)
 -   [Dynamically changing pages](#dynamically-changing-pages)
@@ -80,31 +79,6 @@ class MyPage extends React.PureComponent {
   }
 }
 ```
-
-## Page-specific CSS
-
-Sometimes you want to include CSS that will _never_ be used on other pages, so you don't want it to be included in the complete stylesheet.
-
-To do that, create CSS files within the [`pagesDirectory`] — preferably adjacent to the page that uses them.
-Import a page-specific CSS from the page that will use it: expect a React component that you can render in your page.
-
-Example:
-
-```jsx
-const AboutCss = require('./about.css');
-class AboutPage extends React.PureComponent {
-  render() {
-    return (
-      <PageShell>
-        <AboutCss />
-        {/* The rest of the page content */}
-      </PageShell>
-    );
-  }
-}
-```
-
-[Read more about using CSS.](../README.md#css)
 
 ## Routing within a page
 
