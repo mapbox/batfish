@@ -6,6 +6,13 @@
   "bin": {
     "batfish": "bin/batfish.js"
   },
+  "files": [
+    "bin",
+    "conf",
+    "docs",
+    "lib",
+    "src"
+  ],
   "scripts": {
     "precommit": "lint-staged",
     "lint-js": "eslint .",
@@ -15,7 +22,9 @@
     "lint-md": "npm run lint-md-partial -- docs/*.md *.md",
     "lint": "npm run lint-js && npm run lint-md",
     "pretest": "npm run lint",
-    "test": "jest"
+    "test": "jest",
+    "build-modules": "rm -rf modules && cd src && babel prefix-url.js route-to.js with-location.js --out-dir ../modules && cd -",
+    "prepublishOnly": "npm run build-modules"
   },
   "repository": {
     "type": "git",
@@ -123,6 +132,7 @@
   },
   "devDependencies": {
     "@mapbox/vnu-validate-html": "^0.1.0",
+    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "enzyme": "^2.8.2",
     "enzyme-to-json": "^1.5.1",

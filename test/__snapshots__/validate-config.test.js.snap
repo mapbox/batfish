@@ -7,6 +7,8 @@ Object {
     "> 5%",
     "last 2 versions",
   ],
+  "clearOutputDirectory": true,
+  "developmentDevtool": "cheap-module-source-map",
   "externalStylesheets": Array [],
   "fileLoaderExtensions": Array [
     "jpeg",
@@ -28,6 +30,7 @@ Object {
     [Function],
   ],
   "production": false,
+  "productionDevtool": false,
   "siteBasePath": "",
   "staticDirectory": "/my-project/src/static",
   "temporaryDirectory": "/my-project/_tmp",

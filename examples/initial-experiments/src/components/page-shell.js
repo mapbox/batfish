@@ -2,7 +2,7 @@
 
 const React = require('react');
 const Helmet = require('react-helmet').Helmet;
-const prefixUrl = require('@mapbox/batfish/prefix-url');
+const prefixUrl = require('@mapbox/batfish/modules/prefix-url');
 
 class PageShell extends React.Component {
   render() {

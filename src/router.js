@@ -4,10 +4,17 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const linkHijacker = require('@mapbox/link-hijacker');
 const scrollRestorer = require('@mapbox/scroll-restorer');
+const batfishContext = require('batfish-internal/context');
+const routeTo = require('@mapbox/batfish/modules/route-to');
+const prefixUrl = require('@mapbox/batfish/modules/prefix-url');
 const findMatchingRoute = require('./find-matching-route');
 const scrollToFragment = require('./scroll-to-fragment');
 const linkToLocation = require('./link-to-location');
-const routeTo = require('./route-to');
+
+prefixUrl._configure(
+  batfishContext.selectedConfig.siteBasePath,
+  batfishContext.selectedConfig.siteOrigin
+);
 
 function getContextLocation() {
   let tidyPath = window.location.pathname;
@@ -61,7 +68,7 @@ class Router extends React.PureComponent {
       scrollToFragment();
     }
 
-    routeTo.onRouteTo(this.routeTo);
+    routeTo._onRouteTo(this.routeTo);
     window.addEventListener('popstate', event => {
       event.preventDefault();
       this.changePage(document.location);
