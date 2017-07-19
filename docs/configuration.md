@@ -46,6 +46,7 @@ You can specify an alternate location.
     -   [production](#production)
     -   [developmentDevtool](#developmentdevtool)
     -   [productionDevtool](#productiondevtool)
+    -   [clearOutputDirectory](#clearoutputdirectory)
     -   [port](#port)
 
 ## Basic options
@@ -244,6 +245,13 @@ The Webpack docs explain the benefits and drawbacks of each.
 A [Webpack devtool value](https://webpack.js.org/configuration/devtool/#devtool).
 The Webpack docs explain the benefits and drawbacks of each.
 
+### clearOutputDirectory
+
+`boolean` - Optional. Default: `true`.
+
+By default, the [`outputDirectory`] will be cleared before `start` and `build` execute.
+Set this to `false` to leave the [`outputDirectory`] as it is and only add files to it.
+
 ### port
 
 `number` - Optional. Default: `8080`
@@ -256,3 +264,5 @@ If the specified port is unavailable, another port is used.
 [autoprefixer]: https://github.com/postcss/autoprefixer
 
 ["prefixing urls"]: ../README.md#prefixing-urls
+
+[`outputdirectory`]: #outputdirectory
