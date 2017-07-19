@@ -23,7 +23,7 @@ blogPosts:
 'use strict';
 
 const React = require('react');
-const BlogPageCSS = require('./blog.css');
+require('./blog.css');
 
 class BlogPage extends React.Component {
   renderBlogPost(blogPost, index) {
@@ -61,7 +61,6 @@ class BlogPage extends React.Component {
   render() {
     return (
       <div className="prose">
-        <BlogPageCSS />
         <p>
           The following blog posts are defined as front matter directly in this{' '}
           <code>.js</code> file.

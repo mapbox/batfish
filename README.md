@@ -276,9 +276,6 @@ This optimization ensures that the loading of an external stylesheet does not bl
 
 You can also include stylesheets referenced by URL using the [`externalStylesheets`] configuration option.
 
-When necessary, you can include page-specific CSS without adding it to the sitewide stylesheet.
-Instructions for this can be found in ["Page-specific CSS"].
-
 ## Document `<head>`
 
 **Use [react-helmet] to add things your document `<head>`.**
@@ -340,5 +337,3 @@ Additional documentation can be found in [`docs/advanced-usage.md`](docs/advance
 [postcss-html-filter]: https://github.com/mapbox/postcss-html-filter
 
 [`externalstylesheets`]: docs/configuration.md#externalstylesheets
-
-["page-specific css"]: docs/advanced-usage.md#page-specific-css

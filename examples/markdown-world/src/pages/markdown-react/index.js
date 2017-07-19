@@ -10,7 +10,7 @@ const PageShell = require('../../components/page-shell');
 const PageHero = require('../../components/page-hero');
 const prefixUrl = require('@mapbox/batfish/prefix-url');
 const Helmet = require('react-helmet').Helmet;
-const MarkdownReactCSS = require('./unique.css');
+require('./unique.css');
 class MarkdownReactPage extends React.Component {
   render() {
     return (
@@ -20,7 +20,6 @@ class MarkdownReactPage extends React.Component {
             {console.log('YO')}
           </script>
         </Helmet>
-        <MarkdownReactCSS />
         <PageHero
           bgColor="purple-light"
           title="Markdown + React"
