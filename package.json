@@ -97,7 +97,6 @@
     "lodash": "^4.17.4",
     "meow": "^3.7.0",
     "mkdirp": "^0.5.1",
-    "optimize-js": "^1.0.3",
     "pify": "^3.0.0",
     "postcss": "^6.0.1",
     "postcss-loader": "^2.0.5",
@@ -110,10 +109,11 @@
     "slugg": "^1.2.1",
     "style-loader": "^0.18.2",
     "tempy": "^0.1.0",
-    "uglify-js": "^3.0.24",
+    "uglify-js": "^2.8.29",
     "webpack": "^2.2.0",
     "webpack-chunk-hash": "^0.4.0",
     "webpack-merge": "^4.1.0",
+    "webpack-parallel-uglify-plugin": "^0.4.2",
     "xtend": "^4.0.1"
   },
   "peerDependencies": {

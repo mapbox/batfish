@@ -36,7 +36,7 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
         .map(jsData => {
           let code = fs.readFileSync(jsData.filename, 'utf8');
           if (jsData.uglify !== false) {
-            const uglified = UglifyJs.minify(code);
+            const uglified = UglifyJs.minify(code, { fromString: true });
             if (uglified.error) throw uglified.error;
             code = uglified.code;
           }
