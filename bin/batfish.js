@@ -37,9 +37,11 @@ ${chalk.bold('Shared options')}
 ${chalk.bold(`${chalk.magenta('start')} options`)}
   -p, --port       Server port. Default: 8080.
   --production     Build as though for production.
+  --no-clear       Do not clear the destination directory.
 
 ${chalk.bold(`${chalk.magenta('build')} options`)}
   -d, --debug      Build for debugging, not for production.
+  --no-clear       Do not clear the destination directory.
 
 ${chalk.bold(`${chalk.magenta('serve-static')} options`)}
   -p, --port       Server port. Default: 8080.
@@ -104,7 +106,6 @@ if (configPath) {
 if (cli.flags.production) {
   config = Object.assign({}, config, { production: cli.flags.production });
 }
-
 if (cli.flags.debug) {
   config = Object.assign({}, config, { production: !cli.flags.debug });
 }
@@ -113,6 +114,9 @@ if (cli.flags.port) {
 }
 if (cli.flags.verbose) {
   config = Object.assign({}, config, { verbose: cli.flags.verbose });
+}
+if (cli.flags.clear === false) {
+  config = Object.assign({}, config, { clearOutputDirectory: false });
 }
 
 const executeCommand = commands[command];
