@@ -44,6 +44,8 @@ You can specify an alternate location.
     -   [jsxtremeMarkdownOptions](#jsxtrememarkdownoptions)
     -   [inlineJs](#inlinejs)
     -   [production](#production)
+    -   [developmentDevtool](#developmentdevtool)
+    -   [productionDevtool](#productiondevtool)
     -   [port](#port)
 
 ## Basic options
@@ -227,6 +229,20 @@ Each item is an object with the following properties:
 `boolean` - Optional. Default: `false` for `start`, `true` for `build`
 
 Whether or not to build for production (e.g. minimize files, trim React).
+
+### developmentDevtool
+
+`string | false` - Optional. Default: `'cheap-module-source-map'`
+
+A [Webpack devtool value](https://webpack.js.org/configuration/devtool/#devtool).
+The Webpack docs explain the benefits and drawbacks of each.
+
+### productionDevtool
+
+`string | false` - Optional. Default: `false`
+
+A [Webpack devtool value](https://webpack.js.org/configuration/devtool/#devtool).
+The Webpack docs explain the benefits and drawbacks of each.
 
 ### port
 
