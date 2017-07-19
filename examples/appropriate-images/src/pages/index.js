@@ -1,9 +1,6 @@
-'use strict';
-
-const React = require('react');
-const AppropriateImage = require('../components/appropriate-image');
-
-class Home extends React.PureComponent {
+import React from 'react';
+import AppropriateImage from '../components/appropriate-image';
+export default class Home extends React.PureComponent {
   render() {
     return (
       <div>
@@ -12,5 +9,3 @@ class Home extends React.PureComponent {
     );
   }
 }
-
-module.exports = Home;
