@@ -1,8 +1,5 @@
-'use strict';
-
-const React = require('react');
-
-class Wrapper extends React.PureComponent {
+import React from 'react';
+export default class Wrapper extends React.PureComponent {
   render() {
     return (
       <div>
@@ -22,5 +19,3 @@ class Wrapper extends React.PureComponent {
     );
   }
 }
-
-module.exports = Wrapper;
