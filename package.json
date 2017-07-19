@@ -11,7 +11,8 @@
     "conf",
     "docs",
     "lib",
-    "src"
+    "src",
+    "modules"
   ],
   "scripts": {
     "precommit": "lint-staged",
