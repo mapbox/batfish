@@ -195,8 +195,8 @@ List lines of `import` or `require` statements that define variables you can use
 
 By default, the following lines are specified:
 
--   `import prefixUrl from '@mapbox/batfish/prefix-url'`: See [Prefixing URLs].
--   `import routeTo from '@mapbox/batfish/route-to')`: See [Dynamically changing pages].
+-   `import prefixUrl from '@mapbox/batfish/modules/prefix-url'`: See [Prefixing URLs].
+-   `import routeTo from '@mapbox/batfish/modules/route-to')`: See [Dynamically changing pages].
 
 This means that these functions can be used with no additional configuration.
 Import your own modules and do more things.
@@ -248,7 +248,7 @@ This is all accomplished with [link-hijacker].
 
 ### Prefixing URLs
 
-During Webpack compilation, Batfish exposes the module `@mapbox/batfish/prefix-url`.
+Batfish exposes the module `@mapbox/batfish/modules/prefix-url`.
 
 Use this to prefix your URLs according to the [`siteBasePath`] and [`siteOrigin`] you specified in your configuration, ensuring that they point to the right place both during development and in production.
 
@@ -256,7 +256,7 @@ Use this to prefix your URLs according to the [`siteBasePath`] and [`siteOrigin`
 // Let's imagine:
 // - siteBasePath === '/about/jobs/'
 // - siteOrigin === 'https://mydomain.com'
-const prefixUrl = require('@mapbox/batfish/prefix-url');
+const prefixUrl = require('@mapbox/batfish/modules/prefix-url');
 
 // The function prefixes a URL with siteBasePath
 prefixUrl('engineer') // -> '/about/jobs/engineer'

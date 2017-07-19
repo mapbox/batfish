@@ -126,7 +126,7 @@ class MyPage extends React.Component {
 
 ## Dynamically changing pages
 
-During Webpack compilation, Batfish exposes the module `@mapbox/batfish/route-to`.
+Batfish exposes the module `@mapbox/batfish/modules/route-to`.
 Use this to dynamically change pages.
 If the URL argument matches a page Batfish knows about, client-side routing is used.
 If not, [`Location.assign`](https://developer.mozilla.org/en-US/docs/Web/API/Location/assign) is used, and the page transitions normally.
@@ -135,7 +135,7 @@ If not, [`Location.assign`](https://developer.mozilla.org/en-US/docs/Web/API/Loc
 // Let's imagine:
 // - siteBasePath === '/about/jobs/'
 // - /about/jobs/writer/ is a page you made
-const routeTo = require('@mapbox/batfish/route-to');
+const routeTo = require('@mapbox/batfish/modules/route-to');
 
 // Client-side routing is used
 routeTo('/about/jobs/writer/');
@@ -149,14 +149,14 @@ routeTo('/about/money');
 
 ## withLocation
 
-During Webpack compilation, Batfish exposes the module `@mapbox/batfish/with-location`.
+Batfish exposes the module `@mapbox/batfish/modules/with-location`.
 This module exports a higher-order component that you can use to inject an abbreviated [Location](https://developer.mozilla.org/en-US/docs/Web/API/Location) object into the props of your component, containing `pathname`, `hash`, and `search`.
 
 On the initial page load, the value will only include `pathname`.
 As soon as your component mounts, however, it will pick up `hash` and `search`, as well.
 
 ```jsx
-const withLocation = require('@mapbox/batfish/with-location');
+const withLocation = require('@mapbox/batfish/modules/with-location');
 
 class MyPage extends React.Component {
   render() {

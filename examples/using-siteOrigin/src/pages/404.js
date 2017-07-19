@@ -1,7 +1,7 @@
 'use strict';
 
 const React = require('react');
-const prefixUrl = require('@mapbox/batfish/prefix-url');
+const prefixUrl = require('@mapbox/batfish/modules/prefix-url');
 
 class NotFound extends React.PureComponent {
   render() {

@@ -6,7 +6,7 @@ description: blah blah blah
 
 const React = require('react');
 const PageShell = require('../../components/page-shell');
-const routeTo = require('@mapbox/batfish/route-to');
+const routeTo = require('@mapbox/batfish/modules/route-to');
 
 class About extends React.Component {
   render() {

@@ -8,7 +8,7 @@ siteData:
 'use strict';
 
 const React = require('react');
-const withLocation = require('@mapbox/batfish/with-location');
+const withLocation = require('@mapbox/batfish/modules/with-location');
 const PageShell = require('../components/page-shell');
 
 class Home extends React.Component {
