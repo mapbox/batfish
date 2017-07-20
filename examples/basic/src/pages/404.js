@@ -4,9 +4,9 @@ description: This is a basic Batfish example
 published: true
 summary: This page was not found
 ---*/
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PageShell from '../components/page-shell';
-export default class NotFound extends React.PureComponent {
+export default class NotFound extends PureComponent {
   render() {
     return (
       <PageShell title="404" description="This is a basic Batfish example">

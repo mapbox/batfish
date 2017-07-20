@@ -4,9 +4,9 @@ description: This is a basic Batfish example
 published: true
 summary: This is the home page
 ---*/
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PageShell from '../components/page-shell';
-export default class Home extends React.PureComponent {
+export default class Home extends PureComponent {
   render() {
     return (
       <PageShell
