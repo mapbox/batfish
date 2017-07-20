@@ -5,6 +5,8 @@ description: blah blah blah
 import React from 'react';
 import { PageShell } from '../../components/page-shell';
 import { routeToPrefixed } from '@mapbox/batfish/modules/route-to';
+import { sharedImport } from '../../components/shared-import';
+sharedImport();
 
 class About extends React.Component {
   render() {

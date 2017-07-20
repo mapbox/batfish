@@ -8,6 +8,8 @@ siteData:
 import React from 'react';
 import { withLocation } from '@mapbox/batfish/modules/with-location';
 import { PageShell } from '../components/page-shell';
+import { uniqueImport } from '../components/unique-import';
+uniqueImport();
 
 class Home extends React.Component {
   render() {
