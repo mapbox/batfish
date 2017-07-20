@@ -1,5 +1,5 @@
 const React = require('react');
-const prefixUrl = require('@mapbox/batfish/modules/prefix-url');
+const prefixUrl = require('@mapbox/batfish/modules/prefix-url').prefixUrl;
 class PageNavigation extends React.Component {
   render() {
     return (

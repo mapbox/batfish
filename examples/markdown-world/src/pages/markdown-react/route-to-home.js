@@ -7,7 +7,7 @@ const React = require('react');
 const md = require('batfish/md');
 const PageShell = require('../../components/page-shell');
 const PageHero = require('../../components/page-hero');
-const routeTo = require('@mapbox/batfish/modules/route-to');
+const routeTo = require('@mapbox/batfish/modules/route-to').routeTo;
 class RouteToHomePage extends React.Component {
   render() {
     return (
