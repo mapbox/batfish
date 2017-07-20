@@ -3,7 +3,6 @@ title: Route To Home
 description: Here to show rerouting with route-to
 ---*/
 
-'use strict';
 const React = require('react');
 const md = require('batfish/md');
 const PageShell = require('../../components/page-shell');

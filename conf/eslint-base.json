@@ -14,15 +14,8 @@
     "filenames"
   ],
   "rules": {
-    "no-bitwise": ["error"],
+    "strict": ["error", "global"],
     "no-console": ["off"],
-    "no-redeclare": ["error"],
-    "no-undef": ["error"],
-    "no-underscore-dangle": ["off"],
-    "no-unused-vars": ["error"],
-    "no-use-before-define": ["off"],
-    "strict": ["off"],
-    "valid-typeof": ["error"],
 
     "filenames/match-regex": ["error", "^[0-9a-z-\\.]+?$"]
   }

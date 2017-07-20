@@ -3,7 +3,6 @@ title: title: Plugins in React
 description: Here to show rehype and remark plugins in React
 ---*/
 
-'use strict';
 const React = require('react');
 const md = require('batfish/md');
 const PageShell = require('../../../components/page-shell');

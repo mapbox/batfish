@@ -1,12 +1,10 @@
-'use strict';
-
 /**
  * Convert a link (HTMLAnchorElement or URL) to an abbreviated Location object.
  *
  * @param {HTMLAnchorElement | string} input - Either an anchor node or a URL.
  * @return {Object} - An abbreviated Location object.
  */
-function linkToLocation(input) {
+export function linkToLocation(input) {
   let link = input;
   // Take advantage of the browser's built-in URL parsing by creating
   // an anchor and then reading its properties.
@@ -32,5 +30,3 @@ function linkToLocation(input) {
     search: link.search
   };
 }
-
-module.exports = linkToLocation;

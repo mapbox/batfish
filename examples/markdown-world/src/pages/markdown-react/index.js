@@ -3,7 +3,6 @@ title: Markdown + React
 description: Here to show Markdown with a React page
 ---*/
 
-'use strict';
 const React = require('react');
 const md = require('batfish/md');
 const PageShell = require('../../components/page-shell');

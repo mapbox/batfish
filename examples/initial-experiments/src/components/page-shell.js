@@ -1,8 +1,6 @@
-'use strict';
-
-const React = require('react');
-const Helmet = require('react-helmet').Helmet;
-const prefixUrl = require('@mapbox/batfish/modules/prefix-url');
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import { prefixUrl } from '@mapbox/batfish/modules/prefix-url';
 
 class PageShell extends React.Component {
   render() {
@@ -50,4 +48,4 @@ class PageShell extends React.Component {
   }
 }
 
-module.exports = PageShell;
+export { PageShell };

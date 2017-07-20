@@ -1,6 +1,4 @@
-'use strict';
-
-const batfishContext = require('batfish-internal/context');
+import { batfishContext } from 'batfish-internal/context';
 
 /**
  * Returns an array of regular expressions that are used to check whether a URL path
@@ -35,7 +33,7 @@ let urlPathsCache = {};
  * @return {?Object} - The matching route, or `undefined` or a not-found route
  *   if no matching route exists.
  */
-function findMatchingRoute(urlPath, options = {}) {
+export function findMatchingRoute(urlPath, options = {}) {
   const useCache = options.useCache === undefined ? true : options.useCache;
 
   if (useCache && urlPathsCache[urlPath]) {
@@ -71,5 +69,3 @@ function findMatchingRoute(urlPath, options = {}) {
   urlPathsCache[urlPath] = result;
   return result;
 }
-
-module.exports = findMatchingRoute;

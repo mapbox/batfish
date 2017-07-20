@@ -77,13 +77,14 @@ Also, _required if you want a sitemap_.
 `string` - Optional.
 
 Absolute path to a module exporting a React component that will wrap all of your pages.
-The component can be exported with `module.exports`, `export default`, or `export { Wrapper }`.
+The component must be exported with `export default = YourWrapperComponent` or `module.exports = YourWrapperComponent`.
 
 ### notFoundPath
 
 `string` - Optional. Default: pages directory + `404.js`
 
 Absolute path to your 404 page.
+Like other pages, the component must be exported with `export default = YourComponent` or `module.exports = YourComponent`.
 
 ### externalStylesheets
 

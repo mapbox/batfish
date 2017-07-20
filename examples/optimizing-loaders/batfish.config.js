@@ -1,5 +1,3 @@
-'use strict';
-
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = () => {
@@ -22,11 +20,7 @@ module.exports = () => {
         ]
       }
     ],
-    webpackPlugins: [
-      new LodashModuleReplacementPlugin({ paths: true })
-    ],
-    babelPlugins: [
-      require('babel-plugin-lodash')
-    ]
+    webpackPlugins: [new LodashModuleReplacementPlugin({ paths: true })],
+    babelPlugins: [require('babel-plugin-lodash')]
   };
 };

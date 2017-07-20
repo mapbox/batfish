@@ -1,4 +1,3 @@
-'use strict';
 const React = require('react');
 const PageNavigation = require('./page-navigation');
 class PageShell extends React.Component {

@@ -20,8 +20,6 @@ blogPosts:
     content: Hi! This is my very first blog post.
 ---*/
 
-'use strict';
-
 const React = require('react');
 require('./blog.css');
 

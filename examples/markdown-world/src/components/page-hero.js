@@ -1,4 +1,3 @@
-'use strict';
 const React = require('react');
 class PageHero extends React.Component {
   render() {

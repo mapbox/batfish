@@ -2,11 +2,9 @@
 title: About
 description: blah blah blah
 ---*/
-'use strict';
-
-const React = require('react');
-const PageShell = require('../../components/page-shell');
-const routeTo = require('@mapbox/batfish/modules/route-to');
+import React from 'react';
+import { PageShell } from '../../components/page-shell';
+import { routeToPrefixed } from '@mapbox/batfish/modules/route-to';
 
 class About extends React.Component {
   render() {
@@ -15,7 +13,7 @@ class About extends React.Component {
         about
         <button
           className="btn"
-          onClick={() => routeTo.prefixed('about/security/')}
+          onClick={() => routeToPrefixed('about/security/')}
         >
           Read about security
         </button>
@@ -24,4 +22,4 @@ class About extends React.Component {
   }
 }
 
-module.exports = About;
+export default About;

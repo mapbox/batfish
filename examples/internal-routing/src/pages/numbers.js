@@ -1,7 +1,6 @@
 /*---
 internalRouting: true
 ---*/
-'use strict';
 
 const React = require('react');
 const ReactRouter = require('react-router-dom');
@@ -17,9 +16,12 @@ class ShownNumber extends React.PureComponent {
 }
 
 class Numbers extends React.PureComponent {
-  state = {
-    mounted: false
-  };
+  constructor() {
+    super();
+    this.state = {
+      mounted: false
+    };
+  }
 
   componentDidMount() {
     this.setState({ mounted: true });

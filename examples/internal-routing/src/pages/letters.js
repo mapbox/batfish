@@ -1,7 +1,6 @@
 /*---
 internalRouting: true
 ---*/
-'use strict';
 
 const React = require('react');
 const ReactRouter = require('react-router-dom');
@@ -17,9 +16,12 @@ class ShownLetter extends React.PureComponent {
 }
 
 class Letters extends React.PureComponent {
-  state = {
-    mounted: false
-  };
+  constructor() {
+    super();
+    this.state = {
+      mounted: false
+    };
+  }
 
   componentDidMount() {
     this.setState({ mounted: true });

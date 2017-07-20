@@ -4,7 +4,6 @@ description: Here to demostrate an unpublished React page
 published: false
 ---*/
 
-'use strict';
 const React = require('react');
 const md = require('batfish/md');
 const PageShell = require('../../components/page-shell');

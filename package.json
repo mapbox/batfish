@@ -52,9 +52,6 @@
     "presets": [
       "es2015",
       "react"
-    ],
-    "plugins": [
-      "transform-class-properties"
     ]
   },
   "jest": {
@@ -78,7 +75,6 @@
     "autoprefixer": "^7.1.1",
     "babel-loader": "^7.0.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-react-jsx-self": "^6.22.0",
     "babel-plugin-transform-react-jsx-source": "^6.22.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.6",

@@ -1,25 +1,19 @@
-'use strict';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const React = require('react');
-const PropTypes = require('prop-types');
-
-function withLocation(Component) {
-  class WithLocation extends React.Component {
-    static contextTypes = {
-      location: PropTypes.shape({
-        pathname: PropTypes.string.isRequired,
-        hash: PropTypes.string,
-        search: PropTypes.string
-      }).isRequired
-    };
-
-    render() {
-      return <Component location={this.context.location} {...this.props} />;
-    }
+export function withLocation(Component) {
+  function WithLocation(props, context) {
+    return <Component location={context.location} {...props} />;
   }
+
+  WithLocation.contextTypes = {
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+      hash: PropTypes.string,
+      search: PropTypes.string
+    }).isRequired
+  };
 
   WithLocation.WrapperComponent = Component;
   return WithLocation;
 }
-
-module.exports = withLocation;

@@ -3,7 +3,6 @@ title: Remark and Rehype Plugins
 description: Here to show the same Remark and Rehype plugins in Markdown and React examples
 ---*/
 
-'use strict';
 const React = require('react');
 const md = require('batfish/md');
 const PageShell = require('../../../components/page-shell');

@@ -1,6 +1,6 @@
 'use strict';
 
-const prefixUrl = require('../src/prefix-url');
+const prefixUrl = require('../src/prefix-url').prefixUrl;
 
 describe('prefixUrl', () => {
   beforeEach(() => {

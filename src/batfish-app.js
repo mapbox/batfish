@@ -1,11 +1,8 @@
-'use strict';
-
-const React = require('react');
-const ReactDOM = require('react-dom');
-const Router = require('./router');
-const findMatchingRoute = require('./find-matching-route');
-let Wrapper = require('batfish-internal/wrapper');
-Wrapper = Wrapper.default || Wrapper.Wrapper || Wrapper;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Router } from './router';
+import { findMatchingRoute } from './find-matching-route';
+import Wrapper from 'batfish-internal/wrapper';
 
 // The initialization of any Batfish.
 // Get the current page and render it, wrapped in the user's Wrapper component.

@@ -1,5 +1,3 @@
-'use strict';
-
 const createAppropriateImage = require('./create-appropriate-image');
 const imageConfig = require('../img/image-config');
 
