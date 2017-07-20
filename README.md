@@ -105,7 +105,7 @@ When a page is rendered, its component is passed the following props:
 
 ### JS pages
 
-JS pages must export a single React component (either `module.exports` (Node.js modules) or `export default` (ES2015 modules)).
+JS pages must export a single React component, with either `export default` (ES2015 modules) or `module.exports` (Node.js modules).
 
 JS pages can include front matter within block comments, delimited by `/*---` and `---*/`.
 

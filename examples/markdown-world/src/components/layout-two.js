@@ -1,4 +1,3 @@
-'use strict';
 const React = require('react');
 const PageShell = require('./page-shell');
 const PageHero = require('./page-hero');

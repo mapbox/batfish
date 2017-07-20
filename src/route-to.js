@@ -1,6 +1,4 @@
-'use strict';
-
-const prefixUrl = require('@mapbox/batfish/modules/prefix-url');
+import { prefixUrl } from '@mapbox/batfish/modules/prefix-url';
 
 let delayed;
 let onRouteTo;
@@ -13,9 +11,9 @@ function routeTo(url) {
   onRouteTo(url);
 }
 
-routeTo.prefixed = url => {
+function routeToPrefixed(url) {
   routeTo(prefixUrl(url));
-};
+}
 
 // Used by the Router to provide the function that actually does the routing.
 // This slight awkwardness is just to enable the user to
@@ -25,4 +23,4 @@ routeTo._onRouteTo = fn => {
   if (delayed) onRouteTo(delayed);
 };
 
-module.exports = routeTo;
+export { routeTo, routeToPrefixed };

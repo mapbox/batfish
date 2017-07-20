@@ -1,15 +1,13 @@
-'use strict';
-
-const React = require('react');
-const PropTypes = require('prop-types');
-const linkHijacker = require('@mapbox/link-hijacker');
-const scrollRestorer = require('@mapbox/scroll-restorer');
-const batfishContext = require('batfish-internal/context');
-const routeTo = require('@mapbox/batfish/modules/route-to');
-const prefixUrl = require('@mapbox/batfish/modules/prefix-url');
-const findMatchingRoute = require('./find-matching-route');
-const scrollToFragment = require('./scroll-to-fragment');
-const linkToLocation = require('./link-to-location');
+import React from 'react';
+import PropTypes from 'prop-types';
+import linkHijacker from '@mapbox/link-hijacker';
+import scrollRestorer from '@mapbox/scroll-restorer';
+import { batfishContext } from 'batfish-internal/context';
+import { routeTo } from '@mapbox/batfish/modules/route-to';
+import { prefixUrl } from '@mapbox/batfish/modules/prefix-url';
+import { findMatchingRoute } from './find-matching-route';
+import { scrollToFragment } from './scroll-to-fragment';
+import { linkToLocation } from './link-to-location';
 
 prefixUrl._configure(
   batfishContext.selectedConfig.siteBasePath,
@@ -27,22 +25,10 @@ function getContextLocation() {
 }
 
 class Router extends React.PureComponent {
-  static propTypes = {
-    startingPath: PropTypes.string.isRequired,
-    startingComponent: PropTypes.func.isRequired,
-    startingProps: PropTypes.object.isRequired
-  };
-
-  static childContextTypes = {
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-      hash: PropTypes.string,
-      search: PropTypes.string
-    }).isRequired
-  };
-
   constructor(props) {
     super(props);
+    this.routeTo = this.routeTo.bind(this);
+    this.changePage = this.changePage.bind(this);
     this.state = {
       path: this.props.startingPath,
       pageComponent: this.props.startingComponent,
@@ -93,7 +79,7 @@ class Router extends React.PureComponent {
    *
    * @param {HTMLAnchorElement | string} input - See docs for linkToLocation.
    */
-  routeTo = input => {
+  routeTo(input) {
     const targetLocation = linkToLocation(input);
     if (findMatchingRoute(targetLocation.pathname) === undefined) {
       return window.location.assign(input);
@@ -102,14 +88,14 @@ class Router extends React.PureComponent {
       pushState: true,
       scrollToTop: true
     });
-  };
+  }
 
   // To change the page, we need to
   // - Get the matching page module, which is an async Webpack bundle.
   // - Use pushState to change the URL and add a new history entry.
   // - Change the state of this component to render the new page.
   // - Adjust scroll position on the new page.
-  changePage = (nextLocation, options = {}, callback) => {
+  changePage(nextLocation, options = {}, callback) {
     const matchingRoute = findMatchingRoute(nextLocation.pathname);
     const nextUrl = [
       nextLocation.pathname,
@@ -137,7 +123,7 @@ class Router extends React.PureComponent {
         if (callback) callback();
       });
     });
-  };
+  }
 
   render() {
     if (!this.state.pageComponent) return null;
@@ -151,4 +137,18 @@ class Router extends React.PureComponent {
   }
 }
 
-module.exports = Router;
+Router.propTypes = {
+  startingPath: PropTypes.string.isRequired,
+  startingComponent: PropTypes.func.isRequired,
+  startingProps: PropTypes.object.isRequired
+};
+
+Router.childContextTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+    hash: PropTypes.string,
+    search: PropTypes.string
+  }).isRequired
+};
+
+export { Router };

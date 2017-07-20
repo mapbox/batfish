@@ -1,24 +1,21 @@
-'use strict';
-
 // **WARNING**
 // This file gets compiled by Webpack before it is executed.
 // So when it is executed, the __dirname will be {outputDirectory}/assets/.
 // For any other fs activity, this file location must be taken into acconut.
 
-const React = require('react');
-const ReactDOMServer = require('react-dom/server');
-const Helmet = require('react-helmet').Helmet;
-const fs = require('fs');
-const pify = require('pify');
-const mkdirp = require('mkdirp');
-const path = require('path');
-const UglifyJs = require('uglify-js');
-const batfishContext = require('batfish-internal/context');
-let Wrapper = require('batfish-internal/wrapper');
-Wrapper = Wrapper.default || Wrapper.Wrapper || Wrapper;
-const StaticHtmlPage = require('./static-html-page');
-const Router = require('./router');
-const constants = require('../lib/constants');
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { Helmet } from 'react-helmet';
+import fs from 'fs';
+import pify from 'pify';
+import mkdirp from 'mkdirp';
+import path from 'path';
+import UglifyJs from 'uglify-js';
+import { batfishContext } from 'batfish-internal/context';
+import Wrapper from 'batfish-internal/wrapper';
+import { StaticHtmlPage } from './static-html-page';
+import { Router } from './router';
+import constants from '../lib/constants';
 
 /**
  * Statically render pages as HTML.
@@ -119,4 +116,4 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
   return Promise.all(batfishContext.routes.map(writePage));
 }
 
-module.exports = staticRenderPages;
+export default staticRenderPages;

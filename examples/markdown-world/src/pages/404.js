@@ -3,7 +3,7 @@
 title: 404
 description: Here to show a custom 404 page
 ---*/
-'use strict';
+
 const React = require('react');
 const md = require('batfish/md');
 const PageShell = require('../components/page-shell');

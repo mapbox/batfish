@@ -1,8 +1,5 @@
-/* eslint-disable filenames/match-regex */
-'use strict';
-
-const React = require('react');
-const prefixUrl = require('@mapbox/batfish/modules/prefix-url');
+import React from 'react';
+import { prefixUrl } from '@mapbox/batfish/modules/prefix-url';
 
 class NotFound extends React.PureComponent {
   render() {
@@ -17,4 +14,4 @@ class NotFound extends React.PureComponent {
   }
 }
 
-module.exports = NotFound;
+export default NotFound;

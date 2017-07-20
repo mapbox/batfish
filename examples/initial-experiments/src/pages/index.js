@@ -5,11 +5,9 @@ siteData:
   - cta
   - posts
 ---*/
-'use strict';
-
-const React = require('react');
-const withLocation = require('@mapbox/batfish/modules/with-location');
-const PageShell = require('../components/page-shell');
+import React from 'react';
+import { withLocation } from '@mapbox/batfish/modules/with-location';
+import { PageShell } from '../components/page-shell';
 
 class Home extends React.Component {
   render() {
@@ -42,4 +40,4 @@ class Home extends React.Component {
   }
 }
 
-module.exports = withLocation(Home);
+export default withLocation(Home);

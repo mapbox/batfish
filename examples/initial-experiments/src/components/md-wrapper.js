@@ -1,7 +1,5 @@
-'use strict';
-
-const React = require('react');
-const PageShell = require('./page-shell');
+import React from 'react';
+import { PageShell } from './page-shell';
 
 class MdWrapper extends React.Component {
   render() {
@@ -15,4 +13,4 @@ class MdWrapper extends React.Component {
   }
 }
 
-module.exports = MdWrapper;
+export default MdWrapper;

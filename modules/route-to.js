@@ -1,6 +1,11 @@
 'use strict';
 
-var prefixUrl = require('@mapbox/batfish/modules/prefix-url');
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.routeToPrefixed = exports.routeTo = undefined;
+
+var _prefixUrl = require('@mapbox/batfish/modules/prefix-url');
 
 var delayed = void 0;
 var onRouteTo = void 0;
@@ -13,9 +18,9 @@ function routeTo(url) {
   onRouteTo(url);
 }
 
-routeTo.prefixed = function(url) {
-  routeTo(prefixUrl(url));
-};
+function routeToPrefixed(url) {
+  routeTo((0, _prefixUrl.prefixUrl)(url));
+}
 
 // Used by the Router to provide the function that actually does the routing.
 // This slight awkwardness is just to enable the user to
@@ -25,4 +30,5 @@ routeTo._onRouteTo = function(fn) {
   if (delayed) onRouteTo(delayed);
 };
 
-module.exports = routeTo;
+exports.routeTo = routeTo;
+exports.routeToPrefixed = routeToPrefixed;

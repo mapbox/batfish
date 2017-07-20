@@ -1,5 +1,3 @@
-'use strict';
-
 const React = require('react');
 const PropTypes = require('prop-types');
 const survey = require('@mapbox/react-simple-surveyor');

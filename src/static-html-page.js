@@ -1,19 +1,10 @@
-'use strict';
-
-const React = require('react');
-const PropTypes = require('prop-types');
+import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * This component is used by static-render-pages to create an HTML document.
  */
 class StaticHtmlPage extends React.Component {
-  static propTypes = {
-    htmlAttributes: PropTypes.object,
-    bodyAttributes: PropTypes.object,
-    appendToHead: PropTypes.arrayOf(PropTypes.string),
-    appendToBody: PropTypes.arrayOf(PropTypes.string)
-  };
-
   // This should never be updated by React
   shouldComponentUpdate() {
     return false;
@@ -68,4 +59,11 @@ class StaticHtmlPage extends React.Component {
   }
 }
 
-module.exports = StaticHtmlPage;
+StaticHtmlPage.propTypes = {
+  htmlAttributes: PropTypes.object,
+  bodyAttributes: PropTypes.object,
+  appendToHead: PropTypes.arrayOf(PropTypes.string),
+  appendToBody: PropTypes.arrayOf(PropTypes.string)
+};
+
+export { StaticHtmlPage };

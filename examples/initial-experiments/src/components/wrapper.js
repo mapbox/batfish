@@ -1,8 +1,5 @@
-'use strict';
-
-const React = require('react');
-
-require('../test.css');
+import React from 'react';
+import '../test.css';
 
 class Wrapper extends React.Component {
   componentDidMount() {
@@ -22,4 +19,4 @@ class Wrapper extends React.Component {
   }
 }
 
-module.exports = Wrapper;
+export default Wrapper;

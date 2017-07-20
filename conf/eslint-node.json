@@ -9,7 +9,6 @@
     "node"
   ],
   "rules": {
-    "strict": ["error", "global"],
     "node/no-unsupported-features": ["error", {"version": 4}],
     "node/no-missing-require": ["error"]
   }

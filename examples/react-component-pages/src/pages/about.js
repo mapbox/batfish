@@ -1,5 +1,3 @@
-'use strict';
-
 const React = require('react');
 
 class AboutPage extends React.Component {

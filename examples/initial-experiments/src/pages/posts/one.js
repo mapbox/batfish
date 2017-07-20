@@ -2,18 +2,18 @@
 title: OneOneOne
 description: blah blah blah
 ---*/
-'use strict';
-
-const React = require('react');
-const md = require('batfish/md');
-const PageShell = require('../../components/page-shell');
+import React from 'react';
+import md from 'batfish/md';
+import { PageShell } from '../../components/page-shell';
 
 class One extends React.Component {
   render() {
     return (
       <PageShell>
         <div className="prose">
-          <h1 id="lorem"><a href="#lorem">lorem one</a></h1>
+          <h1 id="lorem">
+            <a href="#lorem">lorem one</a>
+          </h1>
           {md`
             ## {{ this.props.frontMatter.title }}
 
@@ -35,7 +35,9 @@ class One extends React.Component {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
-          <h2 id="ipsum"><a href="#ipsum">ipsum one</a></h2>
+          <h2 id="ipsum">
+            <a href="#ipsum">ipsum one</a>
+          </h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -54,7 +56,9 @@ class One extends React.Component {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
-          <h2 id="dolor"><a href="#dolor">dolor one</a></h2>
+          <h2 id="dolor">
+            <a href="#dolor">dolor one</a>
+          </h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -73,7 +77,9 @@ class One extends React.Component {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
-          <h2 id="aliqua"><a href="#aliqua">aliqua one</a></h2>
+          <h2 id="aliqua">
+            <a href="#aliqua">aliqua one</a>
+          </h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -83,7 +89,9 @@ class One extends React.Component {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
-          <h2 id="temper"><a href="#temper">temper one</a></h2>
+          <h2 id="temper">
+            <a href="#temper">temper one</a>
+          </h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -108,4 +116,4 @@ class One extends React.Component {
   }
 }
 
-module.exports = One;
+export default One;
