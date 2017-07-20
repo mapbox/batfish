@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { default as prefixUrl } from '@mapbox/batfish/modules/prefix-url';
+import { prefixUrlAbsolute } from '@mapbox/batfish/modules/prefix-url';
 import '../wrapper.css';
 
 export default class Wrapper extends Component {
@@ -13,17 +13,17 @@ export default class Wrapper extends Component {
           <nav className="nav mb12">
             <ul>
               <li className="nav__item">
-                <a className="link" href={prefixUrl.absolute('/')}>
+                <a className="link" href={prefixUrlAbsolute('/')}>
                   Home
                 </a>
               </li>
               <li className="nav__item">
-                <a className="link" href={prefixUrl.absolute('/page-a')}>
+                <a className="link" href={prefixUrlAbsolute('/page-a')}>
                   Page A
                 </a>
               </li>
               <li className="nav__item">
-                <a className="link" href={prefixUrl.absolute('/page-b')}>
+                <a className="link" href={prefixUrlAbsolute('/page-b')}>
                   Page B
                 </a>
               </li>
@@ -31,7 +31,7 @@ export default class Wrapper extends Component {
           </nav>
           <p className="txt-s mb6">
             The links above are absolute URLs, created using{' '}
-            <code>prefixUrl.absolute</code>.
+            <code>prefixUrlAbsolute</code>.
           </p>
           <p className="txt-s">Neat!</p>
         </div>
