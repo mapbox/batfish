@@ -3,6 +3,8 @@ title: Post number 3
 description: blah blah blah
 published: false
 wrapper: "../../components/md-wrapper.js"
+modules:
+  - "import { sharedImport } from '../../components/shared-import';"
 ---
 
 # This is post number 3
