@@ -1,9 +1,6 @@
-'use strict';
-
-const React = require('react');
-const prefixUrl = require('@mapbox/batfish/modules/prefix-url');
-
-class NotFound extends React.PureComponent {
+import React, { PureComponent } from 'react';
+import { default as prefixUrl } from '@mapbox/batfish/modules/prefix-url';
+export default class NotFound extends PureComponent {
   render() {
     return (
       <div>
@@ -15,5 +12,3 @@ class NotFound extends React.PureComponent {
     );
   }
 }
-
-module.exports = NotFound;

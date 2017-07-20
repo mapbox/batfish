@@ -1,9 +1,6 @@
-'use strict';
-
-import React from 'react';
+import React, { PureComponent } from 'react';
 import _ from 'lodash';
-
-class Home extends React.PureComponent {
+export default class Home extends PureComponent {
   render() {
     const nestedNumber = {
       foo: {
@@ -28,5 +25,3 @@ class Home extends React.PureComponent {
     );
   }
 }
-
-export default Home;
