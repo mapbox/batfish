@@ -47,6 +47,8 @@ You can specify an alternate location.
     -   [developmentDevtool](#developmentdevtool)
     -   [productionDevtool](#productiondevtool)
     -   [clearOutputDirectory](#clearoutputdirectory)
+    -   [webpackConfigClientTransform](#webpackconfigclienttransform)
+    -   [webpackConfigStaticTransform](#webpackconfigstatictransform)
     -   [port](#port)
 
 ## Basic options
@@ -252,6 +254,22 @@ The Webpack docs explain the benefits and drawbacks of each.
 
 By default, the [`outputDirectory`] will be cleared before `start` and `build` execute.
 Set this to `false` to leave the [`outputDirectory`] as it is and only add files to it.
+
+### webpackConfigClientTransform
+
+`Function` - Optional.
+
+The Webpack config for client-side bundles will be passed through this function before it's used.
+**Only use this option if you know what you're doing!**
+You need to be careful not to change configuration that Batfish relies on.
+
+### webpackConfigStaticTransform
+
+`Function` - Optional.
+
+The Webpack config for static, server-side bundling will be passed through this function before it's used.
+**Only use this option if you know what you're doing!**
+You need to be careful not to change configuration that Batfish relies on.
 
 ### port
 
