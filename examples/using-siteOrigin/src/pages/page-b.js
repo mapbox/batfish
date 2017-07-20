@@ -1,11 +1,6 @@
-'use strict';
-
-const React = require('react');
-
-class PageB extends React.Component {
+import React, { Component } from 'react';
+export default class PageB extends Component {
   render() {
     return <div>I am Page B.</div>;
   }
 }
-
-module.exports = PageB;

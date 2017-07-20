@@ -1,11 +1,8 @@
-'use strict';
+import React, { Component } from 'react';
+import { default as prefixUrl } from '@mapbox/batfish/modules/prefix-url';
+import '../wrapper.css';
 
-const React = require('react');
-const prefixUrl = require('@mapbox/batfish/modules/prefix-url');
-
-require('../wrapper.css');
-
-class Wrapper extends React.Component {
+export default class Wrapper extends Component {
   render() {
     return (
       <div className="page-wrapper flex-parent flex-parent--stretch-cross hfull p24">
@@ -45,5 +42,3 @@ class Wrapper extends React.Component {
     );
   }
 }
-
-module.exports = Wrapper;
