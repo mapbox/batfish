@@ -24,7 +24,7 @@
     "lint": "npm run lint-js && npm run lint-md",
     "pretest": "npm run lint",
     "test": "jest",
-    "build-modules": "rm -rf modules && cd src && babel prefix-url.js route-to.js with-location.js --out-dir ../modules && cd -",
+    "build-modules": "rm -rf modules && babel src/public --out-dir modules",
     "prepublishOnly": "npm run build-modules"
   },
   "repository": {

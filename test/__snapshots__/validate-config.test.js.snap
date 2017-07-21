@@ -8,7 +8,7 @@ Object {
     "last 2 versions",
   ],
   "clearOutputDirectory": true,
-  "developmentDevtool": "cheap-module-source-map",
+  "developmentDevtool": "source-map",
   "externalStylesheets": Array [],
   "fileLoaderExtensions": Array [
     "jpeg",

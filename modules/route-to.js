@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', {
 });
 exports.routeToPrefixed = exports.routeTo = undefined;
 
-var _prefixUrl = require('@mapbox/batfish/modules/prefix-url');
+var _prefixUrl = require('./prefix-url');
 
 var delayed = void 0;
 var onRouteTo = void 0;

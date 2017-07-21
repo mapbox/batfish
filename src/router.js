@@ -8,6 +8,10 @@ import { prefixUrl } from '@mapbox/batfish/modules/prefix-url';
 import { findMatchingRoute } from './find-matching-route';
 import { scrollToFragment } from './scroll-to-fragment';
 import { linkToLocation } from './link-to-location';
+import {
+  _invokeRouteChangeStartCallbacks,
+  _invokeRouteChangeEndCallbacks
+} from '@mapbox/batfish/modules/route-change-listeners';
 
 prefixUrl._configure(
   batfishContext.selectedConfig.siteBasePath,
@@ -102,27 +106,39 @@ class Router extends React.PureComponent {
       nextLocation.hash,
       nextLocation.search
     ].join('');
-    matchingRoute.getPage().then(pageModule => {
-      if (options.pushState) {
-        window.history.pushState({}, null, nextUrl);
-      }
-      const nextState = {
-        path: matchingRoute.path,
-        pageComponent: pageModule.component.default || pageModule.component,
-        pageProps: pageModule.props,
-        location: getContextLocation()
-      };
-      this.setState(nextState, () => {
-        if (options.scrollToTop) {
-          window.scrollTo(0, 0);
-        } else if (scrollRestorer.getSavedScroll()) {
-          scrollRestorer.restoreScroll();
-        } else {
-          scrollToFragment();
+    let routeChangeCallbacks = [Promise.resolve()];
+    routeChangeCallbacks = routeChangeCallbacks.concat(
+      _invokeRouteChangeStartCallbacks(nextLocation.pathname)
+    );
+    matchingRoute
+      .getPage()
+      .then(pageModule => {
+        routeChangeCallbacks = routeChangeCallbacks.concat(
+          _invokeRouteChangeEndCallbacks(nextLocation.pathname)
+        );
+        return Promise.all(routeChangeCallbacks).then(() => pageModule);
+      })
+      .then(pageModule => {
+        if (options.pushState) {
+          window.history.pushState({}, null, nextUrl);
         }
-        if (callback) callback();
+        const nextState = {
+          path: matchingRoute.path,
+          pageComponent: pageModule.component.default || pageModule.component,
+          pageProps: pageModule.props,
+          location: getContextLocation()
+        };
+        this.setState(nextState, () => {
+          if (options.scrollToTop) {
+            window.scrollTo(0, 0);
+          } else if (scrollRestorer.getSavedScroll()) {
+            scrollRestorer.restoreScroll();
+          } else {
+            scrollToFragment();
+          }
+          if (callback) callback();
+        });
       });
-    });
   }
 
   render() {

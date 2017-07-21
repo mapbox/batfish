@@ -1,6 +1,7 @@
 'use strict';
 
-const prefixUrl = require('../src/prefix-url').prefixUrl;
+const prefixUrl = require('../src/public/prefix-url').prefixUrl;
+const prefixUrlAbsolute = require('../src/public/prefix-url').prefixUrlAbsolute;
 
 describe('prefixUrl', () => {
   beforeEach(() => {
@@ -19,8 +20,8 @@ describe('prefixUrl', () => {
     expect(prefixUrl('/foo')).toBe('/foo');
   });
 
-  test('prefixUrl.absolute throws', () => {
-    expect(() => prefixUrl.absolute('/foo')).toThrow();
+  test('prefixUrlAbsolute throws', () => {
+    expect(() => prefixUrlAbsolute('/foo')).toThrow();
   });
 });
 
@@ -41,11 +42,11 @@ describe('createPrefixUrl generated module with siteBasePath and siteOrigin', ()
     expect(prefixUrl('/baz')).toBe('/foo/bar/baz');
   });
 
-  test('prefixUrl.absolute with starting slash', () => {
-    expect(prefixUrl.absolute('/baz')).toBe('https://www.test.com/foo/bar/baz');
+  test('prefixUrlAbsolute with starting slash', () => {
+    expect(prefixUrlAbsolute('/baz')).toBe('https://www.test.com/foo/bar/baz');
   });
 
-  test('prefixUrl.absolute without starting slash', () => {
-    expect(prefixUrl.absolute('baz')).toBe('https://www.test.com/foo/bar/baz');
+  test('prefixUrlAbsolute without starting slash', () => {
+    expect(prefixUrlAbsolute('baz')).toBe('https://www.test.com/foo/bar/baz');
   });
 });
