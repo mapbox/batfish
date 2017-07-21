@@ -8,6 +8,11 @@
 -   [Markdown within JS](#markdown-within-js)
 -   [Dynamically changing pages](#dynamically-changing-pages)
 -   [withLocation](#withlocation)
+-   [Route change listeners](#route-change-listeners)
+    -   [addRouteChangeStartListener](#addroutechangestartlistener)
+    -   [removeRouteChangeStartListener](#removeroutechangestartlistener)
+    -   [addRouteChangeEndListener](#addroutechangeendlistener)
+    -   [removeRouteChangeEndListener](#removeroutechangeendlistener)
 
 ## Draft pages
 
@@ -172,3 +177,65 @@ class MyPage extends React.Component {
 
 module.exports = withLocation(MyPage);
 ```
+
+## Route change listeners
+
+Batfish exposes a few functions that allow you to do things when client-side route changes occur.
+
+All the following functions are named exports of `@mapbox/batfish/modules/route-change-listeners`;
+
+### `addRouteChangeStartListener`
+
+```js
+import { addRouteChangeStartListener } from '@mapbox/batfish/modules/route-change-listeners';
+const remove = addRouteChangeStartListener(pathname, callback);
+```
+
+`pathname`: `string`. Optional.
+If provided, only route changes going to this pathname will invoke the `callback`.
+Otherwise, all route changes will invoke the `callback`.
+
+`callback`: `Function`. Receives the incoming pathname as an argument.
+**This function will be invoked immediately _before_ the incoming page chunk starts downloading.**
+If you return a `Promise` from your callback, you can use this to delay rendering of the next page (if, for example, you want to show a loading spinner for some period of time, or load some data before switching pages).
+
+The return value is a function that will remove this particular listener.
+
+### `removeRouteChangeStartListener`
+
+```js
+import { removeRouteChangeStartListener } from '@mapbox/batfish/modules/route-change-listeners';
+removeRouteChangeStartListener(pathname, callback);
+```
+
+`pathname`: `string`. Optional.
+If provided, only the `callback` for this pathname will be removed.
+Otherwise, the `callback` for all paths will be removed.
+
+### `addRouteChangeEndListener`
+
+```js
+import { addRouteChangeEndListener } from '@mapbox/batfish/modules/route-change-listeners';
+const remove = addRouteChangeEndListener(pathname, callback);
+```
+
+`pathname`: `string`. Optional.
+If provided, only route changes going to this pathname will invoke the `callback`.
+Otherwise, all route changes will invoke the `callback`.
+
+`callback`: `Function`. Receives the incoming pathname as an argument.
+**This function will be invoked immediately _after_ the incoming page chunk finishes downloading.**
+If you return a `Promise` from your callback, you can use this to delay rendering of the next page (if, for example, you want to show a loading spinner for some period of time, or load some data before switching pages).
+
+The return value is a function that will remove this particular listener.
+
+### `removeRouteChangeEndListener`
+
+```js
+import { removeRouteChangeEndListener } from '@mapbox/batfish/modules/route-change-listeners';
+removeRouteChangeEndListener(pathname, callback);
+```
+
+`pathname`: `string`. Optional.
+If provided, only the `callback` for this pathname will be removed.
+Otherwise, the `callback` for all paths will be removed.

@@ -1,4 +1,4 @@
-import { prefixUrl } from '@mapbox/batfish/modules/prefix-url';
+import { prefixUrl } from './prefix-url';
 
 let delayed;
 let onRouteTo;

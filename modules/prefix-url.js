@@ -21,6 +21,10 @@ function prefixUrlAbsolute(url) {
   return siteOrigin + siteBasePath + url;
 }
 
+function isUrlPrefixed(url) {
+  return url.indexOf(siteBasePath) === 0;
+}
+
 prefixUrl._configure = function(a, b) {
   siteBasePath = a || '';
   siteOrigin = b;
@@ -28,3 +32,4 @@ prefixUrl._configure = function(a, b) {
 
 exports.prefixUrl = prefixUrl;
 exports.prefixUrlAbsolute = prefixUrlAbsolute;
+exports.isUrlPrefixed = isUrlPrefixed;
