@@ -90,6 +90,7 @@
     "csso": "^3.1.1",
     "date-time": "^2.0.0",
     "debounce": "^1.0.2",
+    "dedent": "^0.7.0",
     "del": "^3.0.0",
     "es6-promise": "^4.1.0",
     "extract-text-webpack-plugin": "^2.1.2",
@@ -120,6 +121,7 @@
     "webpack-chunk-hash": "^0.4.0",
     "webpack-merge": "^4.1.0",
     "webpack-parallel-uglify-plugin": "^0.4.2",
+    "worker-farm": "^1.4.1",
     "xtend": "^4.0.1"
   },
   "peerDependencies": {
