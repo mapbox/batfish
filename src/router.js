@@ -106,17 +106,11 @@ class Router extends React.PureComponent {
       nextLocation.hash,
       nextLocation.search
     ].join('');
-    let routeChangeCallbacks = [Promise.resolve()];
-    routeChangeCallbacks = routeChangeCallbacks.concat(
-      _invokeRouteChangeStartCallbacks(nextLocation.pathname)
-    );
+    const startChange = _invokeRouteChangeStartCallbacks(nextLocation.pathname);
     matchingRoute
       .getPage()
       .then(pageModule => {
-        routeChangeCallbacks = routeChangeCallbacks.concat(
-          _invokeRouteChangeEndCallbacks(nextLocation.pathname)
-        );
-        return Promise.all(routeChangeCallbacks).then(() => pageModule);
+        return startChange.then(() => pageModule);
       })
       .then(pageModule => {
         if (options.pushState) {
@@ -137,6 +131,7 @@ class Router extends React.PureComponent {
             scrollToFragment();
           }
           if (callback) callback();
+          _invokeRouteChangeEndCallbacks(nextLocation.pathname);
         });
       });
   }

@@ -6,17 +6,17 @@ import {
 import '../test.css';
 
 addRouteChangeStartListener(() => {
-  console.log('starting route change');
-});
-
-addRouteChangeEndListener(() => {
+  console.log('starting the route change');
   return new Promise(resolve => {
-    console.log('starting the end of the route change');
     setTimeout(() => {
-      console.log('ending the end of the route change');
+      console.log('ending the start of the route change');
       resolve();
     }, 500);
   });
+});
+
+addRouteChangeEndListener(() => {
+  console.log('ending the route change');
 });
 
 class Wrapper extends React.Component {

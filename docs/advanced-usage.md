@@ -197,9 +197,10 @@ Otherwise, all route changes will invoke the `callback`.
 
 `callback`: `Function`. Receives the incoming pathname as an argument.
 **This function will be invoked immediately _before_ the incoming page chunk starts downloading.**
-If you return a `Promise` from your callback, you can use this to delay rendering of the next page (if, for example, you want to show a loading spinner for some period of time, or load some data before switching pages).
+If you return a `Promise` from your callback, **you can use this to delay rendering of the next page** (if, for example, you want to show a loading spinner for some period of time, or load some data before switching pages).
+After the page chunk finishes downloading, the next page will not be rendered until your return `Promise` has resolved.
 
-The return value is a function that will remove this particular listener.
+`addRouteChangeStartListener` returns a function that will remove this particular listener.
 
 ### `removeRouteChangeStartListener`
 
@@ -224,10 +225,11 @@ If provided, only route changes going to this pathname will invoke the `callback
 Otherwise, all route changes will invoke the `callback`.
 
 `callback`: `Function`. Receives the incoming pathname as an argument.
-**This function will be invoked immediately _after_ the incoming page chunk finishes downloading.**
-If you return a `Promise` from your callback, you can use this to delay rendering of the next page (if, for example, you want to show a loading spinner for some period of time, or load some data before switching pages).
+**This function will be invoked immediately _after_ the incoming page renders.**
+The page chunk will have downloaded, your start-listener callbacks will have been invoked, the URL will have been changed, and the page will have rendered.
+What you return from your `callback` will have no affect on page rendering.
 
-The return value is a function that will remove this particular listener.
+`addRouteChangeEndListener` returns a function that will remove this particular listener.
 
 ### `removeRouteChangeEndListener`
 
