@@ -6,3 +6,4 @@ _site
 _tmp
 **/yarn.lock
 coverage
+modules
