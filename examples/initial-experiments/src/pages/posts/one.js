@@ -3,7 +3,7 @@ title: OneOneOne
 description: blah blah blah
 ---*/
 import React from 'react';
-import md from 'batfish/md';
+import md from '@mapbox/batfish/modules/md';
 import { PageShell } from '../../components/page-shell';
 import { sharedImport } from '../../components/shared-import';
 sharedImport();

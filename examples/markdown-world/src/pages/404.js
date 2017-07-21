@@ -5,7 +5,7 @@ description: Here to show a custom 404 page
 ---*/
 
 const React = require('react');
-const md = require('batfish/md');
+const md = require('@mapbox/batfish/modules/md');
 const PageShell = require('../components/page-shell');
 const PageHero = require('../components/page-hero');
 class NotFoundPage extends React.Component {

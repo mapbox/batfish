@@ -4,7 +4,7 @@ description: Here to show rerouting with route-to
 ---*/
 
 const React = require('react');
-const md = require('batfish/md');
+const md = require('@mapbox/batfish/modules/md');
 const PageShell = require('../../components/page-shell');
 const PageHero = require('../../components/page-hero');
 const routeTo = require('@mapbox/batfish/modules/route-to').routeTo;

@@ -5,7 +5,7 @@ published: false
 ---*/
 
 const React = require('react');
-const md = require('batfish/md');
+const md = require('@mapbox/batfish/modules/md');
 const PageShell = require('../../components/page-shell');
 const PageHero = require('../../components/page-hero');
 class UnpublishedPage extends React.Component {

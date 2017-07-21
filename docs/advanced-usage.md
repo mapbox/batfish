@@ -98,13 +98,13 @@ The client-side router you use within the page can determine what to do with the
 You can use [jsxtreme-markdown](https://github.com/mapbox/jsxtreme-markdown) within JS, as well as in `.md` page files.
 It is compiled by Babel, so will your browser bundle will not need to include a Markdown parser.
 
-Batfish exposes [babel-plugin-transform-jsxtreme-markdown] as `batfish/md`.
+Batfish exposes [babel-plugin-transform-jsxtreme-markdown] as `@mapbox/batfish/modules/md`.
 The value of this (fake) module is a [template literal tag](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals).
 Any template literal with this tag will be compiled as Markdown (jsxtreme-markdown, with interpolated JS expression and JSX elements) at compile time.
 
 ```jsx
 const React = require('react');
-const md = require('batfish/md');
+const md = require('@mapbox/batfish/modules/md');
 
 class MyPage extends React.Component {
   render() {

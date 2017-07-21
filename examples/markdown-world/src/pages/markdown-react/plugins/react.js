@@ -1,10 +1,10 @@
 /*---
-title: title: Plugins in React
+title: Plugins in React
 description: Here to show rehype and remark plugins in React
 ---*/
 
 const React = require('react');
-const md = require('batfish/md');
+const md = require('@mapbox/batfish/modules/md');
 const PageShell = require('../../../components/page-shell');
 const PageHero = require('../../../components/page-hero');
 class PluginsPage extends React.Component {

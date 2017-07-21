@@ -4,7 +4,7 @@ description: Here to show Markdown with a React page
 ---*/
 
 const React = require('react');
-const md = require('batfish/md');
+const md = require('@mapbox/batfish/modules/md');
 const PageShell = require('../../components/page-shell');
 const PageHero = require('../../components/page-hero');
 const prefixUrl = require('@mapbox/batfish/modules/prefix-url').prefixUrl;
