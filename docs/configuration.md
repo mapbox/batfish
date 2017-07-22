@@ -32,12 +32,12 @@ You can specify an alternate location.
     -   [outputDirectory](#outputdirectory)
     -   [temporaryDirectory](#temporarydirectory)
 -   [Advanced options](#advanced-options)
-    -   [data](#data)
     -   [dataSelectors](#dataselectors)
     -   [vendorModules](#vendormodules)
     -   [webpackLoaders](#webpackloaders)
     -   [webpackPlugins](#webpackplugins)
     -   [babelPlugins](#babelplugins)
+    -   [babelPresets](#babelpresets)
     -   [babelExclude](#babelexclude)
     -   [postcssPlugins](#postcssplugins)
     -   [fileLoaderExtensions](#fileloaderextensions)
@@ -133,12 +133,6 @@ It must be within the project directory.
 
 ## Advanced options
 
-### data
-
-`Object` - Optional.
-
-An object of data the can be selected for injection into pages.
-
 ### dataSelectors
 
 `{ [string]: (Object) => any }` - Optional.
@@ -146,14 +140,16 @@ An object of data the can be selected for injection into pages.
 An object of selector functions for selecting processing data before it is injected into the page.
 Keys are selector names and values are functions that accept an object representing all the site's data and return a value.
 
-The object received as an argument contains the following:
+The object received as an argument contains the following properties:
 
--   All of the data you provided in the `data` configuration property.
 -   `pages`: An array of objects for pages.
     Each page object includes the following:
     -   `path`: The page's URL path.
     -   `filePath`: Absolute path to the page's file.
     -   `frontMatter`: Parsed front matter from the page's file.  
+
+The return values of `dataSelectors` can be used in pages by adding an `injectedData` list in the front matter that includes the name of a data selector.
+See ["Injecting data"].
 
 ### vendorModules
 
@@ -173,8 +169,14 @@ Each object should be a [Webpack Rule](https://webpack.js.org/configuration/modu
 
 ### babelPlugins
 
-`Array` - Additional plugin configuration to pass to Babel during both Webpack builds (client bundling and HTML generating).
+`Array` - Additional plugins to pass to Babel during both Webpack builds (client bundling and HTML generating).
 **You should `require()` your plugins instead of referencing them as strings.**
+Otherwise, Babel might end up looking in the wrong place for the npm package.
+
+### babelPresets
+
+`Array` - Additional presets to pass to Babel during both Webpack builds (client bundling and HTML generating).
+**You should `require()` your presets instead of referencing them as strings.**
 Otherwise, Babel might end up looking in the wrong place for the npm package.
 
 ### babelExclude
@@ -285,3 +287,5 @@ If the specified port is unavailable, another port is used.
 ["prefixing urls"]: ../README.md#prefixing-urls
 
 [`outputdirectory`]: #outputdirectory
+
+["injecting data"]: ./advanced-usage.md#injecting-data

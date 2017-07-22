@@ -118,7 +118,7 @@ class Router extends React.PureComponent {
         }
         const nextState = {
           path: matchingRoute.path,
-          pageComponent: pageModule.component.default || pageModule.component,
+          pageComponent: pageModule.component,
           pageProps: pageModule.props,
           location: getContextLocation()
         };

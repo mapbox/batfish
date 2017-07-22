@@ -1,4 +1,5 @@
 const path = require('path');
+const bigData = require('./data/big-data.json');
 
 module.exports = () => {
   return {
@@ -8,12 +9,15 @@ module.exports = () => {
     externalStylesheets: [
       'https://api.mapbox.com/mapbox-assembly/v0.13.0/assembly.min.css'
     ],
-    data: {
-      cta: 'Buy now!'
-    },
     dataSelectors: {
       posts: data => {
         return data.pages.filter(pagesData => /\/posts\//.test(pagesData.path));
+      },
+      horseNames: () => {
+        return bigData.horseNames;
+      },
+      pigNames: () => {
+        return bigData.pigNames;
       }
     }
   };

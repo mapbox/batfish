@@ -312,8 +312,6 @@ Additional documentation can be found in [`docs/advanced-usage.md`](docs/advance
 
 [`notfoundpath`]: docs/configuration.md#notfoundpath
 
-[`data`]: docs/configuration.md#data
-
 [`dataselectors`]: docs/configuration.md#dataselectors
 
 [`sitebasepath`]: docs/configuration.md#sitebasepath

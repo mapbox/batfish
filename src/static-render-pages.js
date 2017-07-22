@@ -50,9 +50,7 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
         <Wrapper>
           <Router
             startingPath={route.path}
-            startingComponent={
-              pageModule.component.default || pageModule.component
-            }
+            startingComponent={pageModule.component}
             startingProps={pageModule.props}
           />
         </Wrapper>

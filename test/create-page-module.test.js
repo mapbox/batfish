@@ -61,15 +61,15 @@ describe('createPageModule', () => {
         filePath: pageComponentPath,
         frontMatter: {
           title: 'Pigman',
-          siteData: ['fizz', 'plop']
+          injectedData: ['fizz', 'plop']
         }
       },
-      siteData: {
-        fizz: 77,
-        plop: 44
-      },
       batfishConfig: {
-        temporaryDirectory: '/tmp'
+        temporaryDirectory: '/tmp',
+        dataSelectors: {
+          fizz: () => 77,
+          plop: () => 44
+        }
       }
     };
 
@@ -83,7 +83,7 @@ describe('createPageModule', () => {
           frontMatter: {
             title: 'Pigman'
           },
-          siteData: {
+          injectedData: {
             fizz: 77,
             plop: 44
           }
@@ -98,7 +98,7 @@ describe('createPageModule', () => {
         path: '/foop',
         filePath: pageComponentPath,
         frontMatter: {
-          siteData: ['fizz', 'plop']
+          injectedData: ['fizz', 'plop']
         }
       },
       siteData: {},
@@ -119,7 +119,7 @@ describe('createPageModule', () => {
         },
         props: {
           frontMatter: {},
-          siteData: {
+          injectedData: {
             fizz: 33,
             plop: 99
           }
@@ -142,7 +142,7 @@ describe('createPageModule', () => {
         path: '/foop',
         filePath: pageComponentPath,
         frontMatter: {
-          siteData: ['flip']
+          injectedData: ['flip']
         }
       },
       siteData: {},
@@ -163,9 +163,7 @@ describe('createPageModule', () => {
         throw new Error('should have errored');
       },
       error => {
-        expect(error.message).toBe(
-          'There is no data or data selector named "flip"'
-        );
+        expect(error.message).toBe('There is no data selector named "flip"');
       }
     );
   });
