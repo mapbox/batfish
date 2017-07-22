@@ -1,5 +1,7 @@
 # Batfish
 
+[![Build Status](https://travis-ci.org/mapbox/batfish.svg?branch=master)](https://travis-ci.org/mapbox/batfish)
+
 A minimalistic static-site generator powered by React and Webpack.
 
 🚧🚧  **WORK IN PROGRESS!** 🚧🚧
