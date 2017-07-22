@@ -23,60 +23,65 @@ However, in [`production`] builds these pages are **not** included and should be
 
 ## Injecting data
 
-Most of the time, you should store data as JSON or JS and `import` or `require` it.
+Most of the time, you should store data as JSON or JS and `import` or `require` it as needed.
 Nothing special.
 
-If, however, you are dealing with lots of data; that data is used across a number of pages; and each of those pages does not need _all_ of the data — then you may not want to write _all_ that data into your JS bundles.
+If, however, you are dealing with _lots_ of data; that data is used across a number of pages; and each of those pages does not need _all_ of the data — then you may not want to write _all_ that data into your JS bundles.
 You may want to control which parts of it get written to which bundles.
 
-You can store data in JSON or JS, anywhere in your project, then specify which data to inject into any given page.
+You can do this with [`dataSelectors`].
+Store data in JSON or JS, anywhere in your project, then specify which data to inject into any given page with [`dataSelectors`] in your configuration.
+[`dataSelectors`] also have access to build-time data, like the front matter of all the pages being compiled.
 
-To register data and data selectors, use the [`data`] and [`dataSelectors`] options in your configuration.
-
-To select data to be injected into a page, then, provide `siteData` front matter that is a [sequence](http://www.yaml.org/spec/1.2/spec.html#style/block/sequence) of strings, each representing one of the following:
-
--   A key in the `data` object. In this case, the entire value will be injected.
--   A key in the `dataSelectors` object. In this case, the return value from that selector will be injected.
+Then, to select data to be injected into a specific page, provide `injectedData` front matter that is a [sequence](http://www.yaml.org/spec/1.2/spec.html#style/block/sequence) of strings, each representing a key in the `dataSelectors` object in your configuration.
+The return value from that data selector function will be injected into the page.
 
 Example:
 
 ```jsx
 // batfish.config.js
+const myBigData = require('path/to/my/big-data.json');
+
 module.exports = () => {
   return {
     /* ... */
-    data: {
-      cta: 'Buy now!',
-      siteTitle: 'Place to buy things'
-    },
     dataSelectors: {
       posts: data => {
         return data.pages.filter(pagesData => /\/posts\//.test(pagesData.path));
       },
-      things: data => { /* ... */ }
+      desserts: () => {
+        return myBigData.recipes.desserts;
+      }
     }
   };
 };
 
 // Page
 /*---
-siteData:
-  - cta
+injectedData:
   - posts
+  - desserts
 ---*/
-const React  = require('react');
-class MyPage extends React.PureComponent {
+import React from 'react';
+import { DessertDisplay } from 'path/to/dessert-display';
+
+export default class MyPage extends React.PureComponent {
   render() {
     return (
       <div>
         <h1>Page!</h1>
-        <p>Here is our call to action: {this.props.siteData.cta}</p>
         <h2>Posts</h2>
-        {this.props.siteData.posts.map(post => {
+        {this.props.injectedData.posts.map(post => {
           return (
             <div key={post.path}>
-              <a href={post.path}>{post.data.title}</a>
+              <a href={post.path}>{post.frontMatter.title}</a>
             </div>
+          );
+        })}
+        <h2>Desserts</h2>
+        {this.props.injectedData.desserts.map(dessert => {
+          return (
+            <DessertDisplay key={dessert.id} {...dessert} />
           );
         })}
       </div>

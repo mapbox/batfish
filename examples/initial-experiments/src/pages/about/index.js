@@ -1,6 +1,8 @@
 /*---
 title: About
 description: blah blah blah
+injectedData:
+  - pigNames
 ---*/
 import React from 'react';
 import { PageShell } from '../../components/page-shell';
@@ -19,6 +21,9 @@ class About extends React.Component {
         >
           Read about security
         </button>
+        <div className="mt24">
+          Pig names: {this.props.injectedData.pigNames.join(', ')}
+        </div>
       </PageShell>
     );
   }
