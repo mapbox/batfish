@@ -37,9 +37,9 @@
     strip-indent "^2.0.0"
     unified "^6.1.5"
 
-"@mapbox/link-hijacker@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@mapbox/link-hijacker/-/link-hijacker-0.3.0.tgz#c7c5c7884db5fa03b1b46ec01fc7c6a02bdeece2"
+"@mapbox/link-hijacker@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@mapbox/link-hijacker/-/link-hijacker-0.3.1.tgz#62043d53de5bddb8f3a1d9a07514693af58b91e2"
 
 "@mapbox/postcss-html-filter@^0.2.0":
   version "0.2.0"
