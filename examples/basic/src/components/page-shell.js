@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import '../style.css';
-
-export default class PageShell extends React.PureComponent {
+export default class PageShell extends PureComponent {
   render() {
     return (
       <div>
@@ -13,12 +11,13 @@ export default class PageShell extends React.PureComponent {
           </title>
           <meta name="description" content={this.props.description} />
         </Helmet>
-        {this.props.children}
+        <div className=" px30 py120">
+          {this.props.children}
+        </div>
       </div>
     );
   }
 }
-
 PageShell.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
