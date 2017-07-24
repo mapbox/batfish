@@ -11,7 +11,9 @@ export default class PageShell extends PureComponent {
           </title>
           <meta name="description" content={this.props.description} />
         </Helmet>
-        {this.props.children}
+        <div className=" px30 py120">
+          {this.props.children}
+        </div>
       </div>
     );
   }
