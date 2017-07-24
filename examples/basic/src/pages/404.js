@@ -1,18 +1,15 @@
 /*---
-title: Home
+title: 404
 description: This is a basic Batfish example
 published: true
-summary: This is the home page
+summary: This page was not found
 ---*/
 import React from 'react';
 import PageShell from '../components/page-shell';
-export default class Home extends React.PureComponent {
+export default class NotFound extends React.PureComponent {
   render() {
     return (
-      <PageShell
-        title={this.props.frontMatter.title}
-        description={this.props.frontMatter.description}
-      >
+      <PageShell title="404" description="This is a basic Batfish example">
         <h1 className="customHeading">
           {this.props.frontMatter.title}
         </h1>
