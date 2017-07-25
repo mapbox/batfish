@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import linkHijacker from '@mapbox/link-hijacker';
 import scrollRestorer from '@mapbox/scroll-restorer';
+import linkToLocation from '@mapbox/link-to-location';
 import { batfishContext } from 'batfish-internal/context';
 import { routeTo } from '@mapbox/batfish/modules/route-to';
 import { prefixUrl } from '@mapbox/batfish/modules/prefix-url';
 import { findMatchingRoute } from './find-matching-route';
 import { scrollToFragment } from './scroll-to-fragment';
-import { linkToLocation } from './link-to-location';
 import {
   _invokeRouteChangeStartCallbacks,
   _invokeRouteChangeEndCallbacks
