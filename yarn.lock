@@ -41,6 +41,10 @@
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@mapbox/link-hijacker/-/link-hijacker-0.3.1.tgz#62043d53de5bddb8f3a1d9a07514693af58b91e2"
 
+"@mapbox/link-to-location@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@mapbox/link-to-location/-/link-to-location-0.1.0.tgz#b18c5e9c8b48b9821947445f2bf0e5ba147a4a78"
+
 "@mapbox/postcss-html-filter@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@mapbox/postcss-html-filter/-/postcss-html-filter-0.2.0.tgz#35a048acf9f2297555e003e7ff0ef83a6bd678f4"
