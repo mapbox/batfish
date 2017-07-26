@@ -162,9 +162,6 @@ routeTo('/about/money');
 Batfish exposes the module `@mapbox/batfish/modules/with-location`.
 This module exports a higher-order component that you can use to inject an abbreviated [Location](https://developer.mozilla.org/en-US/docs/Web/API/Location) object into the props of your component, containing `pathname`, `hash`, and `search`.
 
-On the initial page load, the value will only include `pathname`.
-As soon as your component mounts, however, it will pick up `hash` and `search`, as well.
-
 ```jsx
 const withLocation = require('@mapbox/batfish/modules/with-location');
 

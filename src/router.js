@@ -33,13 +33,18 @@ class Router extends React.PureComponent {
     super(props);
     this.routeTo = this.routeTo.bind(this);
     this.changePage = this.changePage.bind(this);
+    const location = {
+      pathname: this.props.startingPath
+    };
+    if (typeof window !== 'undefined') {
+      location.search = window.location.search;
+      location.hash = window.location.hash;
+    }
     this.state = {
       path: this.props.startingPath,
       pageComponent: this.props.startingComponent,
       pageProps: this.props.startingProps,
-      location: {
-        pathname: this.props.startingPath
-      }
+      location
     };
   }
 
@@ -90,7 +95,9 @@ class Router extends React.PureComponent {
     }
     this.changePage(targetLocation, {
       pushState: true,
-      scrollToTop: true
+      scrollToTop:
+        window.location.pathname !== targetLocation.pathname ||
+        !targetLocation.hash
     });
   }
 

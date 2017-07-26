@@ -12,6 +12,9 @@ import { uniqueImport } from '../components/unique-import';
 uniqueImport();
 
 class Home extends React.Component {
+  componentWillMount() {
+    console.log(JSON.stringify(this.props.location));
+  }
   render() {
     return (
       <PageShell>
