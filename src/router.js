@@ -95,7 +95,9 @@ class Router extends React.PureComponent {
     }
     this.changePage(targetLocation, {
       pushState: true,
-      scrollToTop: true
+      scrollToTop:
+        window.location.pathname !== targetLocation.pathname ||
+        !targetLocation.hash
     });
   }
 
