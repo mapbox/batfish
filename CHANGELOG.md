@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+-   Use ES2015 named imports for default `modules` in `jsxtreme-markdown` documents.
+
 ## 0.5.0
 
 -   Changed `batfish/md` path, for Babel-compiled Markdown in JS pages, to `@mapbox/batfish/modules/md`.
