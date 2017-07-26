@@ -2,7 +2,9 @@
 
 ## Head
 
--   Use ES2015 named imports for default `modules` in `jsxtreme-markdown` documents.
+-   [Fixed] Links with fragment identifiers.
+    Only scroll to the top of the page after the URL changes if the location's pathname changes and if there is no fragment identifier in the URL.
+-   [Fixed] Use ES2015 named imports for default `modules` in `jsxtreme-markdown` documents.
 
 ## 0.5.0
 
