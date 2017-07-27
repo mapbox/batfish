@@ -19,6 +19,7 @@ module.exports = () => {
       pigNames: () => {
         return bigData.pigNames;
       }
-    }
+    },
+    webpackStaticIgnore: [/problem\.js$/]
   };
 };

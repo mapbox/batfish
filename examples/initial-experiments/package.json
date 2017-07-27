@@ -3,5 +3,7 @@
   "scripts": {
     "batfish": "../../bin/batfish.js"
   },
-  "dependencies": {}
+  "dependencies": {
+    "source-map-support": "^0.4.15"
+  }
 }
