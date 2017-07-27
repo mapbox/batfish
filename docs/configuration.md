@@ -36,6 +36,7 @@ You can specify an alternate location.
     -   [vendorModules](#vendormodules)
     -   [webpackLoaders](#webpackloaders)
     -   [webpackPlugins](#webpackplugins)
+    -   [webpackStaticIgnore](#webpackstaticignore)
     -   [babelPlugins](#babelplugins)
     -   [babelPresets](#babelpresets)
     -   [babelExclude](#babelexclude)
@@ -166,6 +167,13 @@ Each object should be a [Webpack Rule](https://webpack.js.org/configuration/modu
 ### webpackPlugins
 
 `Array<Object>` - Additional plugin configuration to pass to Webpack during the client bundling task.
+
+### webpackStaticIgnore
+
+A [Webpack Condition](https://webpack.js.org/configuration/module/#condition) - Any modules matching this description will be ignored (with the [ignore-loader](https://github.com/cherrry/ignore-loader)) during the static Webpack build.
+**Any dependencies that cannot execute in Node (e.g. because they reference `window` or `document`) should be targeted by this option.**
+You may need to other precautions, as well.
+But most of the time, this will help you use browser-only libraries without breaking your static build.
 
 ### babelPlugins
 

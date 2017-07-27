@@ -3,6 +3,7 @@
 // So when it is executed, the __dirname will be {outputDirectory}/assets/.
 // For any other fs activity, this file location must be taken into acconut.
 
+import 'source-map-support/register';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Helmet } from 'react-helmet';

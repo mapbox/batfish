@@ -11,6 +11,8 @@ import { PageShell } from '../components/page-shell';
 import { uniqueImport } from '../components/unique-import';
 uniqueImport();
 
+import '../problem';
+
 class Home extends React.Component {
   componentWillMount() {
     console.log(JSON.stringify(this.props.location));
