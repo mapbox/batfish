@@ -8,6 +8,7 @@ import ReactDOMServer from 'react-dom/server';
 import { Helmet } from 'react-helmet';
 import fs from 'fs';
 import pify from 'pify';
+import chalk from 'chalk';
 import mkdirp from 'mkdirp';
 import path from 'path';
 import UglifyJs from 'uglify-js';
@@ -16,6 +17,7 @@ import Wrapper from 'batfish-internal/wrapper';
 import { StaticHtmlPage } from './static-html-page';
 import { Router } from './router';
 import constants from '../lib/constants';
+import timelog from '../lib/timelog';
 
 /**
  * Statically render pages as HTML.
@@ -46,15 +48,21 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
       // content is what will be re-rendered when the bundled JS loads so it must
       // match exactly what batfish-app.js renders (or you get React checksum errors).
       // The rest of StaticHtmlPage will never be re-rendered by React.
-      const pageContent = ReactDOMServer.renderToString(
-        <Wrapper>
-          <Router
-            startingPath={route.path}
-            startingComponent={pageModule.component}
-            startingProps={pageModule.props}
-          />
-        </Wrapper>
-      );
+      let pageContent;
+      try {
+        pageContent = ReactDOMServer.renderToString(
+          <Wrapper>
+            <Router
+              startingPath={route.path}
+              startingComponent={pageModule.component}
+              startingProps={pageModule.props}
+            />
+          </Wrapper>
+        );
+      } catch (renderError) {
+        timelog(chalk.red.bold(`Error rendering page ${route.path}`));
+        throw renderError;
+      }
 
       const cssUrl = assets.app.css;
       // Load the full stylesheet lazily, after DOMContentLoaded. The page will
