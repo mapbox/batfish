@@ -208,7 +208,7 @@ Example:
 ```markdown
 ---
 prependJs:
-  - `import { myDateFormatter } from './path/to/my-date-formatter';
+  - "import { myDateFormatter } from './path/to/my-date-formatter';"
 ---
 
 Learn more about [security]({{prefixUrl('/about/security')}}).
