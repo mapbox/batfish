@@ -4,6 +4,6 @@ node_modules
 babel-cache
 _batfish_site
 _batfish_tmp
-**/yarn.lock
+**/package-lock.json
 coverage
 modules

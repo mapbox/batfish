@@ -3,7 +3,7 @@ title: Markdown Page
 description: This is a basic Batfish example
 published: true
 summary: This is a Markdown page
-modules:
+prependJs:
   - import PageShell from '../components/page-shell';
 ---
 {{<PageShell
