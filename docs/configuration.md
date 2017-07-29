@@ -24,7 +24,6 @@ You can specify an alternate location.
     -   [siteBasePath](#sitebasepath)
     -   [siteOrigin](#siteorigin)
     -   [wrapperPath](#wrapperpath)
-    -   [notFoundPath](#notfoundpath)
     -   [externalStylesheets](#externalstylesheets)
     -   [browserslist](#browserslist)
     -   [pagesDirectory](#pagesdirectory)
@@ -81,13 +80,6 @@ Also, _required if you want a sitemap_.
 
 Absolute path to a module exporting a React component that will wrap all of your pages.
 The component must be exported with `export default = YourWrapperComponent` or `module.exports = YourWrapperComponent`.
-
-### notFoundPath
-
-`string` - Optional. Default: pages directory + `404.js`
-
-Absolute path to your 404 page.
-Like other pages, the component must be exported with `export default = YourComponent` or `module.exports = YourComponent`.
 
 ### externalStylesheets
 

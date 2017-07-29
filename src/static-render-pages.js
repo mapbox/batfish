@@ -104,7 +104,16 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
   const writePage = route => {
     return renderPage(route).then(html => {
       // Write every page as an index.html file in the directory corresponding
-      // to its route's path.
+      // to its route's path. Except the 404 page.
+      if (route.is404) {
+        return pify(mkdirp)(batfishConfig.outputDirectory).then(() => {
+          return pify(fs.writeFile)(
+            path.join(batfishConfig.outputDirectory, '404.html'),
+            html
+          );
+        });
+      }
+
       const baseRelativePath =
         route.path === batfishConfig.siteBasePath
           ? '/'

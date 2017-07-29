@@ -2,6 +2,10 @@
 
 ## Head
 
+-   [Breaking change] Removed `notFoundPath` option.
+    Instead, 404 pages always live as `404.(js|md)` in the `pagesDirectory`.
+-   [Breaking change] 404 pages are no longer `index.html` files inside directories, e.g. `404/index.html`.
+    They are just HTML pages, e.g. `404.html`.
 -   [Breaking change] Changed default `outputDirectory` from `_site` to `_batfish_site`.
 -   [Breaking change] Changed default `temporaryDirectory` from `_tmp` to `_batfish_tmp`.
 
