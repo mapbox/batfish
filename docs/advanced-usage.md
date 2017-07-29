@@ -38,7 +38,7 @@ The return value from that data selector function will be injected into the page
 
 Example:
 
-```jsx
+```js
 // batfish.config.js
 const myBigData = require('path/to/my/big-data.json');
 
@@ -107,7 +107,7 @@ Batfish exposes [babel-plugin-transform-jsxtreme-markdown] as `@mapbox/batfish/m
 The value of this (fake) module is a [template literal tag](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals).
 Any template literal with this tag will be compiled as Markdown (jsxtreme-markdown, with interpolated JS expression and JSX elements) at compile time.
 
-```jsx
+```js
 const React = require('react');
 const md = require('@mapbox/batfish/modules/md');
 
@@ -162,7 +162,7 @@ routeTo('/about/money');
 Batfish exposes the module `@mapbox/batfish/modules/with-location`.
 This module exports a higher-order component that you can use to inject an abbreviated [Location](https://developer.mozilla.org/en-US/docs/Web/API/Location) object into the props of your component, containing `pathname`, `hash`, and `search`.
 
-```jsx
+```js
 const withLocation = require('@mapbox/batfish/modules/with-location');
 
 class MyPage extends React.Component {

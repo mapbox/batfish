@@ -113,7 +113,7 @@ JS pages can include front matter within block comments, delimited by `/*---` an
 
 Here's an example:
 
-```jsx
+```js
 /*---
 title: Power tie catalog
 ---*/
@@ -149,7 +149,7 @@ Because it will receive the page's front matter as `this.props.frontMatter`, you
 
 Example:
 
-```jsx
+```js
 // blog-post-wrapper.js
 import React from react';
 import { MyPageShell } from './my-page-shell';
