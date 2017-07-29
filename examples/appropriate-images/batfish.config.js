@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = () => {
   return {
-    wrapperPath: path.join(__dirname, './src/components/wrapper.js'),
+    applicationWrapperPath: path.join(__dirname, './src/components/wrapper.js'),
     siteOrigin: 'https://www.mapbox.com',
     webpackLoaders: [
       {

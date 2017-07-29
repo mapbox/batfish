@@ -21,10 +21,10 @@ describe('validateConfig', () => {
   const projectDirectory = '/my-project';
   test('defaults', () => {
     const config = validateConfig(undefined, projectDirectory);
-    // Make wrapperPath a relative path, not absolute
-    config.wrapperPath = path.relative(
+    // Make applicationWrapperPath a relative path, not absolute
+    config.applicationWrapperPath = path.relative(
       path.dirname(path.join(__dirname, '../lib/validate-config')),
-      config.wrapperPath
+      config.applicationWrapperPath
     );
     expect(config).toMatchSnapshot();
   });
@@ -76,12 +76,12 @@ describe('validateConfig', () => {
     );
   });
 
-  test('non-absolute wrapperPath fails', () => {
+  test('non-absolute applicationWrapperPath fails', () => {
     const config = {
-      wrapperPath: '../some/directory.wrapper.js'
+      applicationWrapperPath: '../some/directory.wrapper.js'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      'wrapperPath must be an absolute path'
+      'applicationWrapperPath must be an absolute path'
     );
   });
 

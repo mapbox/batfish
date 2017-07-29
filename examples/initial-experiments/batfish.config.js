@@ -3,7 +3,7 @@ const bigData = require('./data/big-data.json');
 
 module.exports = () => {
   return {
-    wrapperPath: path.join(__dirname, './src/components/wrapper.js'),
+    applicationWrapperPath: path.join(__dirname, './src/components/wrapper.js'),
     siteOrigin: 'https://www.mapbox.com',
     siteBasePath: '/demo',
     externalStylesheets: [

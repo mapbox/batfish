@@ -23,7 +23,7 @@ You can specify an alternate location.
 -   [Basic options](#basic-options)
     -   [siteBasePath](#sitebasepath)
     -   [siteOrigin](#siteorigin)
-    -   [wrapperPath](#wrapperpath)
+    -   [applicationWrapperPath](#applicationwrapperpath)
     -   [externalStylesheets](#externalstylesheets)
     -   [browserslist](#browserslist)
     -   [pagesDirectory](#pagesdirectory)
@@ -74,12 +74,14 @@ _Required if you want to use `prefixUrl.absolute`_ (see ["Prefixing URLs"]).
 
 Also, _required if you want a sitemap_.
 
-### wrapperPath
+### applicationWrapperPath
 
 `string` - Optional.
 
-Absolute path to a module exporting a React component that will wrap all of your pages.
+Absolute path to a module exporting a React component that will wrap your React application.
 The component must be exported with `export default = YourWrapperComponent` or `module.exports = YourWrapperComponent`.
+
+This component will mount only once, wrapping Batfish's `Router` component, which in turn wraps your pages.
 
 ### externalStylesheets
 

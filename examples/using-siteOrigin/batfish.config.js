@@ -6,6 +6,6 @@ module.exports = () => {
       'https://api.mapbox.com/mapbox-assembly/v0.13.0/assembly.min.css'
     ],
     siteOrigin: '//localhost:8080',
-    wrapperPath: path.join(__dirname, './src/components/wrapper.js')
+    applicationWrapperPath: path.join(__dirname, './src/components/wrapper.js')
   };
 };

@@ -5,6 +5,6 @@ module.exports = () => {
     externalStylesheets: [
       'https://api.mapbox.com/mapbox-assembly/v0.13.0/assembly.min.css'
     ],
-    wrapperPath: path.join(__dirname, './src/components/wrapper.js')
+    applicationWrapperPath: path.join(__dirname, './src/components/wrapper.js')
   };
 };
