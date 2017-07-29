@@ -9,6 +9,7 @@
     They are just HTML pages, e.g. `404.html`.
 -   [Breaking change] Changed default `outputDirectory` from `_site` to `_batfish_site`.
 -   [Breaking change] Changed default `temporaryDirectory` from `_tmp` to `_batfish_tmp`.
+-   [Breaking change] Upgrade jsxtreme-markdown, which changed `modules` front matter property in Markdown pages to `prependJs`.
 
 ## 0.6.0
 

@@ -207,7 +207,7 @@ Example:
 
 ```md
 ---
-modules:
+prependJs:
   - `import { myDateFormatter } from './path/to/my-date-formatter';
 ---
 
