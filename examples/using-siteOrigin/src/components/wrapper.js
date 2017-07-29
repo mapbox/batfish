@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { prefixUrlAbsolute } from '@mapbox/batfish/modules/prefix-url';
-import '../wrapper.css';
 
 export default class Wrapper extends Component {
   render() {

@@ -21,7 +21,6 @@ blogPosts:
 ---*/
 
 const React = require('react');
-require('./blog.css');
 
 class BlogPage extends React.Component {
   renderBlogPost(blogPost, index) {

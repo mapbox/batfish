@@ -9,7 +9,7 @@ const PageShell = require('../../components/page-shell');
 const PageHero = require('../../components/page-hero');
 const prefixUrl = require('@mapbox/batfish/modules/prefix-url').prefixUrl;
 const Helmet = require('react-helmet').Helmet;
-require('./unique.css');
+
 class MarkdownReactPage extends React.Component {
   render() {
     return (

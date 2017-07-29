@@ -10,7 +10,6 @@ Object {
   ],
   "clearOutputDirectory": true,
   "developmentDevtool": "source-map",
-  "externalStylesheets": Array [],
   "fileLoaderExtensions": Array [
     "jpeg",
     "jpg",
@@ -33,6 +32,7 @@ Object {
   "productionDevtool": false,
   "siteBasePath": "",
   "staticDirectory": "/my-project/src/static",
+  "stylesheets": Array [],
   "temporaryDirectory": "/my-project/_batfish_tmp",
   "verbose": false,
 }

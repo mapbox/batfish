@@ -29,14 +29,5 @@ matchingRoute.getPage().then(pageModule => {
     }
   }
 
-  let container = document.getElementById('batfish-content');
-  // On the development server, this container element will not yet exist.
-  // In the static HTML build, though, it will.
-  if (!container) {
-    container = document.createElement('div');
-    container.id = 'batfish-content';
-    document.body.appendChild(container);
-  }
-
-  ReactDOM.render(<App />, container);
+  ReactDOM.render(<App />, document.getElementById('batfish-content'));
 });
