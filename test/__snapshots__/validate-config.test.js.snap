@@ -23,7 +23,7 @@ Object {
   ],
   "jsxtremeMarkdownOptions": Object {},
   "notFoundPath": "/my-project/src/pages/404.js",
-  "outputDirectory": "/my-project/_site",
+  "outputDirectory": "/my-project/_batfish_site",
   "pagesDirectory": "/my-project/src/pages",
   "port": 8080,
   "postcssPlugins": Array [
@@ -33,7 +33,7 @@ Object {
   "productionDevtool": false,
   "siteBasePath": "",
   "staticDirectory": "/my-project/src/static",
-  "temporaryDirectory": "/my-project/_tmp",
+  "temporaryDirectory": "/my-project/_batfish_tmp",
   "verbose": false,
   "wrapperPath": "../src/empty-wrapper.js",
 }
