@@ -192,7 +192,7 @@ I love shopping for cleaning supplies ...
 
 #### Import JS modules into jsxtreme-markdown
 
-In jsxtreme-markdown components, you can specify JS modules to import and use within the interpolated code using `modules` front matter.
+In jsxtreme-markdown components, you can specify JS modules to import and use within the interpolated code using `prependJs` front matter.
 List lines of `import` or `require` statements that define variables you can use in your interpolated JS and JSX.
 
 By default, the following lines are specified:
@@ -205,7 +205,7 @@ Import your own modules and do more things.
 
 Example:
 
-```md
+```markdown
 ---
 prependJs:
   - `import { myDateFormatter } from './path/to/my-date-formatter';
