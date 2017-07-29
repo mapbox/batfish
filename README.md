@@ -151,7 +151,7 @@ Example:
 
 ```js
 // blog-post-wrapper.js
-import React from react';
+import React from 'react';
 import { MyPageShell } from './my-page-shell';
 
 export default class BlogPostWrapper extends React.PureComponent {
