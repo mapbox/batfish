@@ -14,7 +14,7 @@ import mkdirp from 'mkdirp';
 import path from 'path';
 import UglifyJs from 'uglify-js';
 import { batfishContext } from 'batfish-internal/context';
-import Wrapper from 'batfish-internal/wrapper';
+import ApplicationWrapper from 'batfish-internal/application-wrapper';
 import { StaticHtmlPage } from './static-html-page';
 import { Router } from './router';
 import constants from '../lib/constants';
@@ -52,13 +52,13 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
       let pageContent;
       try {
         pageContent = ReactDOMServer.renderToString(
-          <Wrapper>
+          <ApplicationWrapper>
             <Router
               startingPath={route.path}
               startingComponent={pageModule.component}
               startingProps={pageModule.props}
             />
-          </Wrapper>
+          </ApplicationWrapper>
         );
       } catch (renderError) {
         timelog(chalk.red.bold(`Error rendering page ${route.path}`));

@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from './router';
 import { findMatchingRoute } from './find-matching-route';
-import Wrapper from 'batfish-internal/wrapper';
+import ApplicationWrapper from 'batfish-internal/application-wrapper';
 
 // The initialization of any Batfish.
-// Get the current page and render it, wrapped in the user's Wrapper component.
+// Get the current page and render it, wrapped in the user's ApplicationWrapper
+// component.
 
 const startingPath = window.location.pathname;
 const matchingRoute = findMatchingRoute(startingPath, { notFound: true });
@@ -17,13 +18,13 @@ matchingRoute.getPage().then(pageModule => {
 
     render() {
       return (
-        <Wrapper>
+        <ApplicationWrapper>
           <Router
             startingPath={startingPath}
             startingComponent={pageModule.component}
             startingProps={pageModule.props}
           />
-        </Wrapper>
+        </ApplicationWrapper>
       );
     }
   }
