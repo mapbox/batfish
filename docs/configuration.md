@@ -119,14 +119,14 @@ The contents of this directory will be copied exactly, without additional proces
 
 ### outputDirectory
 
-`string` - Optional. Default: project directory + `_site/`
+`string` - Optional. Default: project directory + `_batfish_site/`
 
 Absolute path to a directory where site files should be written.
 **You probably want to `.gitignore` this directory.**
 
 ### temporaryDirectory
 
-`string` - Optional. Default: project directory + `_tmp`
+`string` - Optional. Default: project directory + `_batfish_tmp`
 
 Absolute path to a directory where Batfish will write temporary files.
 It must be within the project directory.

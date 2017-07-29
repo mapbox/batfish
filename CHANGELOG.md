@@ -1,5 +1,10 @@
 # Changelog
 
+## Head
+
+-   [Breaking change] Changed default `outputDirectory` from `_site` to `_batfish_site`.
+-   [Breaking change] Changed default `temporaryDirectory` from `_tmp` to `_batfish_tmp`.
+
 ## 0.6.0
 
 -   [Addition] `webpackStaticIgnore` configuration option.
