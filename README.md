@@ -228,8 +228,7 @@ You may want to [prefix the URLs](#prefixing-urls), also.
 
 ### Path not found: 404
 
-By default, Batfish looks for a `404.js` in your [`pagesDirectory`].
-If you provide the config option [`notFoundPath`], the 404s will instead render the component this points to.
+Create a custom 404 pages by adding `404.js` (or `404.md`) to the root of your [`pagesDirectory`].
 
 In development, you can expect to see your 404 page by entering an invalid path.
 When you build for [`production`], though, your 404 page will need to be handled and rendered by the server.
@@ -311,8 +310,6 @@ Additional documentation can be found in [`docs/advanced-usage.md`](docs/advance
 [`pagesdirectory`]: docs/configuration.md#pagesdirectory
 
 [`outputdirectory`]: docs/configuration.md#outputdirectory
-
-[`notfoundpath`]: docs/configuration.md#notfoundpath
 
 [`dataselectors`]: docs/configuration.md#dataselectors
 
