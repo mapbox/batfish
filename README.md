@@ -173,7 +173,7 @@ export default class BlogPostWrapper extends React.PureComponent {
 }
 ```
 
-```md
+```markdown
 ---
 wrapper: '../path/to/blog-post-wrapper'
 title: Today I cleaned my refrigerator
