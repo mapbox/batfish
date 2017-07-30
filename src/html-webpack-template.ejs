@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello Batfish</title>
+    <% if (htmlWebpackPlugin.options.cssBasename) { %>
     <link rel="stylesheet" href="<%= webpackConfig.output.publicPath %><%= htmlWebpackPlugin.options.cssBasename %>" />
+    <% } %>
   </head>
   <body>
     <div id="batfish-content"></div>
