@@ -268,14 +268,17 @@ prefixUrl.absolute('engineer') // -> 'https://mydomain.com/about/jobs/engineer'
 
 ## CSS
 
-You can import CSS via `import` or `require` statements.
-Webpack will bundle all the imported CSS together.
+Add stylesheets to your site with the [`stylesheets`] configuration option.
+List all your stylesheets, URLs or filepaths, in the order you'd like, and Batfish will concatenate them together and add them to the build.
+You can also pass them through whatever [PostCSS] plugins you'd like.
 
 **During the static build, each page has its relevant CSS injected inline, and the complete stylesheet is loaded lazily, after the rest of the page is rendered.**
 This optimization ensures that the loading of an external stylesheet does not block rendering, and your page content is visible as quickly as possible.
 (This is accomplished with [postcss-html-filter].)
 
-You can also include stylesheets referenced by URL using the [`externalStylesheets`] configuration option.
+_Why not use a Webpack loader and allow `import` or `require` for CSS?_
+We've found that getting CSS to load in the way we want it to (for both the development server and the static build) has been messy, buggy, and slow enough via existing Webpack patterns that we decided to step outside of Webpack for this part of the build.
+However, you can add more Webpack loaders and plugins to accomplish this in your preferred way, if you'd like, using the [`webpackLoaders`] and [`webpackPlugins`] configuration options.
 
 ## Document `<head>`
 
@@ -319,6 +322,12 @@ Additional documentation can be found in [`docs/advanced-usage.md`](docs/advance
 
 [`production`]: docs/configuration.md#production
 
+[`stylesheets`]: docs/configuration.md#stylesheets
+
+[`webpackloaders`]: docs/configuration.md#webpackloaders
+
+[`webpackplugins`]: docs/configuration.md#webpackplugins
+
 [jsxtreme-markdown]: https://github.com/mapbox/jsxtreme-markdown
 
 [link-hijacker]: https://github.com/mapbox/link-hijacker
@@ -333,4 +342,4 @@ Additional documentation can be found in [`docs/advanced-usage.md`](docs/advance
 
 [postcss-html-filter]: https://github.com/mapbox/postcss-html-filter
 
-[`externalstylesheets`]: docs/configuration.md#externalstylesheets
+[postcss]: http://postcss.org/

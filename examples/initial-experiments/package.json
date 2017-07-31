@@ -4,6 +4,6 @@
     "batfish": "../../bin/batfish.js"
   },
   "dependencies": {
-    "source-map-support": "^0.4.15"
+    "source-map": "^0.5.6"
   }
 }

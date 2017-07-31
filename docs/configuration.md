@@ -24,7 +24,7 @@ You can specify an alternate location.
     -   [siteBasePath](#sitebasepath)
     -   [siteOrigin](#siteorigin)
     -   [applicationWrapperPath](#applicationwrapperpath)
-    -   [externalStylesheets](#externalstylesheets)
+    -   [stylesheets](#stylesheets)
     -   [browserslist](#browserslist)
     -   [pagesDirectory](#pagesdirectory)
     -   [staticDirectory](#staticdirectory)
@@ -83,12 +83,17 @@ The component must be exported with `export default = YourWrapperComponent` or `
 
 This component will mount only once, wrapping Batfish's `Router` component, which in turn wraps your pages.
 
-### externalStylesheets
+### stylesheets
 
 `Array<string>` - Optional.
 
-An array of URLs to external stylesheets that you want to include in your site.
-These stylesheets need to be publicly available at the designated URL so Batfish can download them and work them into the CSS optimizations.
+An array of **URLs, filenames, or globs** pointing to stylesheets that you want to include in your site.
+
+If an item is a URL, it must start with `http(s)` and must be publicly available, so Batfish can download it and work it into the CSS optimizations.
+If using filenames and globs, provide absolute paths.
+
+If you need to control the order of your stylesheets, avoid globs.
+Batfish cannot guarantee the order in which files matching your glob will be concatenated.
 
 ### browserslist
 
@@ -193,13 +198,11 @@ You'll need to use this if, for example, you use a library that includes ES2015 
 
 `Array<Function> | Function` - Optional. Default: Autoprefixer only.
 
-All of the CSS you load via Webpack is run through [PostCSS](http://postcss.org/), so you can apply any [PostCSS plugins](https://github.com/postcss/postcss/blob/master/docs/plugins.md) to it.
+All of the CSS you load via [`stylesheets`] is run through [PostCSS](http://postcss.org/), so you can apply any [PostCSS plugins](https://github.com/postcss/postcss/blob/master/docs/plugins.md) to it.
 By default, only [Autoprefixer] is applied.
 
 If a function is provided, it will receive the default array as an argument and should return a new array.
 A transform function is probably preferable if you only need to add or remove an item or two from the default array.
-
-This value is passed directly to [postcss-loader](https://github.com/postcss/postcss-loader#plugins).
 
 ### fileLoaderExtensions
 
@@ -289,5 +292,7 @@ If the specified port is unavailable, another port is used.
 ["prefixing urls"]: ../README.md#prefixing-urls
 
 [`outputdirectory`]: #outputdirectory
+
+[`stylesheets`]: #stylesheets
 
 ["injecting data"]: ./advanced-usage.md#injecting-data

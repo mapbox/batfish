@@ -2,7 +2,10 @@
 
 ## Head
 
--   [Breaking change] Changed `wrapperPath` option to `applicationWrapperPath`.
+-   [Breaking change] Renamed `externalStylesheets` option to `stylesheets`.
+-   [Breaking change] CSS is no longer `import`ed or `require`d via Webpack.
+    All stylesheets should be listed in the `stylesheets` configuration array.
+-   [Breaking change] Renamed `wrapperPath` option to `applicationWrapperPath`.
 -   [Breaking change] Removed `notFoundPath` option.
     Instead, 404 pages always live as `404.(js|md)` in the `pagesDirectory`.
 -   [Breaking change] 404 pages are no longer `index.html` files inside directories, e.g. `404/index.html`.

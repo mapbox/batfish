@@ -26,9 +26,10 @@ import timelog from '../lib/timelog';
  * @param {BatfishConfig} batfishConfig
  * @param {Object} assets - JSON output by Webpack that locates assets.
  * @param {string} manifestJs - JS output by Webpack that locates chunks.
+ * @param {string} [cssUrl] - URL to load the CSS file from.
  * @return {Promise<void>} - Resolves when all HTML pages have been rendered and written.
  */
-function staticRenderPages(batfishConfig, assets, manifestJs) {
+function staticRenderPages(batfishConfig, assets, manifestJs, cssUrl) {
   const renderPage = route => {
     let inlineJs;
     if (batfishConfig.production && batfishConfig.inlineJs) {
@@ -65,10 +66,13 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
         throw renderError;
       }
 
-      const cssUrl = assets.app.css;
       // Load the full stylesheet lazily, after DOMContentLoaded. The page will
       // still render quickly because it will have its own CSS injected inline.
-      const loadCssScript = `document.addEventListener('DOMContentLoaded',function(){var s=document.createElement('link');s.rel='stylesheet';s.href='${cssUrl}';document.head.insertBefore(s, document.getElementById('loadCss')); });`;
+      let loadCssScript = '';
+      if (cssUrl) {
+        const loadCssJs = `document.addEventListener('DOMContentLoaded',function(){var s=document.createElement('link');s.rel='stylesheet';s.href='${cssUrl}';document.head.insertBefore(s, document.getElementById('loadCss')); });`;
+        loadCssScript = `<script id="loadCss">${loadCssJs}</script>`;
+      }
       const head = Helmet.rewind();
       const reactDocument = (
         <StaticHtmlPage
@@ -83,7 +87,7 @@ function staticRenderPages(batfishConfig, assets, manifestJs) {
             inlineJs,
             head.script.toString(),
             constants.INLINE_CSS_MARKER,
-            `<script id="loadCss">${loadCssScript}</script>`,
+            loadCssScript,
             // This comes after the inlined and dynamically loaded CSS
             // so it will override regular stylesheets
             head.style.toString()

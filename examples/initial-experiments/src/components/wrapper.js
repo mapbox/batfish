@@ -3,7 +3,6 @@ import {
   addRouteChangeStartListener,
   addRouteChangeEndListener
 } from '@mapbox/batfish/modules/route-change-listeners';
-import '../test.css';
 
 addRouteChangeStartListener(() => {
   console.log('starting the route change');

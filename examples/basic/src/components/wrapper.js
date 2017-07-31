@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import '../style.css';
+
 export default class Wrapper extends PureComponent {
   render() {
     return (

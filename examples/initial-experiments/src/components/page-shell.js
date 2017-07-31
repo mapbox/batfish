@@ -13,10 +13,10 @@ class PageShell extends React.Component {
             src="https://api.mapbox.com/mapbox-assembly/v0.13.0/assembly.js"
           />
         </Helmet>
-        <div className="wmax480 mx-auto mt72">
+        <div className="wmax600 mx-auto mt60">
           {this.props.children}
 
-          <div className="mt72 p24 bg-gray-faint">
+          <div className="mt60 px24 py24 bg-gray-faint">
             <a className="link inline-block mr24" href={prefixUrl('/')}>
               home
             </a>
