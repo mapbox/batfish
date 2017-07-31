@@ -87,7 +87,7 @@ This component will mount only once, wrapping Batfish's `Router` component, whic
 
 `Array<string>` - Optional.
 
-An array of **URLs, filenames, or globs** pointing stylesheets that you want to include in your site.
+An array of **URLs, filenames, or globs** pointing to stylesheets that you want to include in your site.
 
 If an item is a URL, it must start with `http(s)` and must be publicly available, so Batfish can download it and work it into the CSS optimizations.
 If using filenames and globs, provide absolute paths.
