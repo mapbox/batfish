@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 0.7.0
 
 -   [Breaking change] Renamed `externalStylesheets` option to `stylesheets`.
 -   [Breaking change] CSS is no longer `import`ed or `require`d via Webpack.
