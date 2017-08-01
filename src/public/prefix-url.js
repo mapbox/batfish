@@ -8,9 +8,12 @@ function prefixUrl(url) {
 
 function prefixUrlAbsolute(url) {
   if (!siteOrigin) {
-    throw new Error(
-      'siteOrigin is not specified. Unable to prefix with absolute path.'
-    );
+    if (process.env.NODE_ENV !== 'production') {
+      throw new Error(
+        'The siteOrigin property is not specified in your Batfish configuration. Unable to prefix with absolute path.'
+      );
+    }
+    return url;
   }
   if (!/^\//.test(url)) url = '/' + url;
   return siteOrigin + siteBasePath + url;
