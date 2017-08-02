@@ -12,6 +12,7 @@ A minimalistic static-site generator powered by React and Webpack.
 
 -   [Goals](#goals)
 -   [Usage](#usage)
+-   [Requirements](#requirements)
 -   [API](#api)
 -   [Configuration](#configuration)
     -   [CLI](#cli)
@@ -62,6 +63,13 @@ Batfish provides _the essentials_ for building excellent static websites with Re
 4.  At some point, build your static site and deploy it.
 
 Have a look at [`examples/basic/`](examples/basic) for a simple example project.
+
+## Requirements
+
+-   You'll need Node >=4.
+-   The client-side code has been tested down to IE11.
+    To support IE11, **a Promise polyfill is included by default.**
+    If you would like to provide your own Promise polyfill, set the [`includePromisePolyfill`] option to `false`.
 
 ## API
 
@@ -326,6 +334,8 @@ Additional documentation can be found in [`docs/advanced-usage.md`](docs/advance
 [`production`]: docs/configuration.md#production
 
 [`stylesheets`]: docs/configuration.md#stylesheets
+
+[`includepromisepolyfill`]: docs/configuration.md#includepromisepolyfill
 
 [`webpackloaders`]: docs/configuration.md#webpackloaders
 
