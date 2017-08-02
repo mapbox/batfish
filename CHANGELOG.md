@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 0.8.0
 
 -   [Addition] `includePromisePolyfill` configuration option.
 -   [Fix] Batfish will inject its specified version of `es6-promise` even if something about your dependency resolution ends up putting an older version of that polyfill at `node_modules/es6-promise`.
