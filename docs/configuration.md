@@ -50,6 +50,7 @@ You can specify an alternate location.
     -   [webpackConfigClientTransform](#webpackconfigclienttransform)
     -   [webpackConfigStaticTransform](#webpackconfigstatictransform)
     -   [port](#port)
+    -   [verbose](#verbose)
 
 ## Basic options
 
@@ -284,6 +285,12 @@ You need to be careful not to change configuration that Batfish relies on.
 
 Preferred port for development servers.
 If the specified port is unavailable, another port is used.
+
+### verbose
+
+`boolean` - Optiona. Default: `false`
+
+If `true`, more information will be logged to the console.
 
 [uglifyjs]: https://github.com/mishoo/UglifyJS2
 
