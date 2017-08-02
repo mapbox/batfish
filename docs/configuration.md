@@ -218,9 +218,16 @@ A transform function is probably preferable if you only need to add or remove an
 
 `Object` - Optional.
 
-Provide any of the following [jsxtreme-markdown] options (please read about them in [jsxtreme-markdown] docs): `delimiters`, `escapeDelimiter`, `remarkPlugins`, `rehypePlugins`, `wrapper`, `modules`, `name`, `template`.
+Markdown pages are passed through [jsxtreme-markdown-loader](https://github.com/mapbox/jsxtreme-markdown-loader), which runs the Markdown through [`jsxtremeMarkdown.toComponentModule`].
+This option is passed directly to [`jsxtremeMarkdown.toComponentModule`].
 
-**To add syntax highlighting to your Markdown pages, you'll probably want to use `remarkPlugins` or `rehypePlugins`.**
+Please read the documentation for [`jsxtremeMarkdown.toComponentModule`'s `options`](https://github.com/mapbox/jsxtreme-markdown#options-1) for complete details.
+But here are some of the options you are more likely to want to use with Batfish:
+
+-   `remarkPlugins` and `rehypePlugins` allow you provide [remark](https://github.com/wooorm/remark) and [rehype](https://github.com/wooorm/rehype) plugins, which get applied as your Markdown is converted to a React component.
+    There are a wide variety of plugins, from header slug insertions to Markdown syntax extensions to code block syntax highlighting and so on.
+-   `prependJs` allows you to prepend JS to _every_ Markdown page in your site.
+    For example, if you have a utility function that you want to make available to every Markdown page, you can use this option to `import` it.
 
 ### inlineJs
 
@@ -303,3 +310,5 @@ If `true`, more information will be logged to the console.
 [`stylesheets`]: #stylesheets
 
 ["injecting data"]: ./advanced-usage.md#injecting-data
+
+[`jsxtrememarkdown.tocomponentmodule`]: https://github.com/mapbox/jsxtreme-markdown#tocomponentmodule
