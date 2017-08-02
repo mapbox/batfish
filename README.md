@@ -81,6 +81,9 @@ All commands will look for your configuration module in the current working dire
 
 For more details, run `batfish --help`.
 
+**You should not install the Batfish CLI globally.**
+Install Batfish as an npm dependency and use the CLI via npm `"scripts"`, npx, or `node_modules/.bin/batfish`.
+
 ### Node API
 
 The Node API exposes three functions:
