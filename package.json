@@ -152,5 +152,8 @@
     "remark-cli": "^4.0.0",
     "remark-validate-links": "^6.1.0"
   },
-  "optionalDependencies": {}
+  "optionalDependencies": {},
+  "engines": {
+    "node": ">=4"
+  }
 }
