@@ -42,6 +42,7 @@ You can specify an alternate location.
     -   [postcssPlugins](#postcssplugins)
     -   [fileLoaderExtensions](#fileloaderextensions)
     -   [jsxtremeMarkdownOptions](#jsxtrememarkdownoptions)
+    -   [includePromisePolyfill](#includepromisepolyfill)
     -   [inlineJs](#inlinejs)
     -   [production](#production)
     -   [developmentDevtool](#developmentdevtool)
@@ -220,6 +221,15 @@ A transform function is probably preferable if you only need to add or remove an
 Provide any of the following [jsxtreme-markdown] options (please read about them in [jsxtreme-markdown] docs): `delimiters`, `escapeDelimiter`, `remarkPlugins`, `rehypePlugins`, `wrapper`, `modules`, `name`, `template`.
 
 **To add syntax highlighting to your Markdown pages, you'll probably want to use `remarkPlugins` or `rehypePlugins`.**
+
+### includePromisePolyfill
+
+`boolean` - Optional. Default: `true`
+
+Webpack and Batfish both rely on Promises, so if you want to support IE11 you'll need a Promise polyfill.
+
+By default, [es6-promise](https://github.com/stefanpenner/es6-promise)'s auto-polyfill is inserted at the beginning of the vendor bundle.
+**If you'd like to use your own Promise polyfill, you should set this option to `false`** (e.g. if [core-js](https://github.com/zloirock/core-js) is throwing in polyfills via some Babel tool or other).
 
 ### inlineJs
 
