@@ -42,6 +42,7 @@ You can specify an alternate location.
     -   [postcssPlugins](#postcssplugins)
     -   [fileLoaderExtensions](#fileloaderextensions)
     -   [jsxtremeMarkdownOptions](#jsxtrememarkdownoptions)
+    -   [includePromisePolyfill](#includepromisepolyfill)
     -   [inlineJs](#inlinejs)
     -   [production](#production)
     -   [developmentDevtool](#developmentdevtool)
@@ -228,6 +229,15 @@ But here are some of the options you are more likely to want to use with Batfish
     There are a wide variety of plugins, from header slug insertions to Markdown syntax extensions to code block syntax highlighting and so on.
 -   `prependJs` allows you to prepend JS to _every_ Markdown page in your site.
     For example, if you have a utility function that you want to make available to every Markdown page, you can use this option to `import` it.
+
+### includePromisePolyfill
+
+`boolean` - Optional. Default: `true`
+
+Webpack and Batfish both rely on Promises, so if you want to support IE11 you'll need a Promise polyfill.
+
+By default, [es6-promise](https://github.com/stefanpenner/es6-promise)'s auto-polyfill is inserted at the beginning of the vendor bundle.
+**If you'd like to use your own Promise polyfill, you should set this option to `false`** (e.g. if [core-js](https://github.com/zloirock/core-js) is throwing in polyfills via some Babel tool or other).
 
 ### inlineJs
 
