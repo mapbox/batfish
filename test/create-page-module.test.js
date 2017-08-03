@@ -14,10 +14,10 @@ describe('createPageModule', () => {
     './fixtures/create-page-module/page-component-module.js'
   );
 
-  const createAndReadPageModule = options => {
+  const createAndReadPageModule = (batfishConfig, pageData) => {
     return pify(mkdirp)(tmp)
       .then(() => {
-        return createPageModule(options);
+        return createPageModule(batfishConfig, pageData);
       })
       .then(filePath => {
         // Because this uses require, we need to avoid the require cache by
@@ -30,50 +30,39 @@ describe('createPageModule', () => {
     return del(tmp, { force: true });
   });
 
-  test('home without any front matter or site data', () => {
-    const options = {
-      pageData: {
+  test('home without any front matter', () => {
+    return createAndReadPageModule(
+      {
+        temporaryDirectory: '/tmp'
+      },
+      {
         path: '/',
         filePath: pageComponentPath
-      },
-      batfishConfig: {
-        temporaryDirectory: '/tmp'
       }
-    };
-
-    return createAndReadPageModule(options).then(result => {
+    ).then(result => {
       expect(result).toEqual({
         component: {
           // Export of page-component-module.js
           pageComponent: true
         },
-        props: {
-          frontMatter: {}
-        }
+        props: {}
       });
     });
   });
 
-  test('non-home with front matter and site data references', () => {
-    const options = {
-      pageData: {
+  test('non-home with front matter', () => {
+    return createAndReadPageModule(
+      {
+        temporaryDirectory: '/tmp'
+      },
+      {
         path: '/foo',
         filePath: pageComponentPath,
         frontMatter: {
-          title: 'Pigman',
-          injectedData: ['fizz', 'plop']
-        }
-      },
-      batfishConfig: {
-        temporaryDirectory: '/tmp',
-        dataSelectors: {
-          fizz: () => 77,
-          plop: () => 44
+          title: 'Pigman'
         }
       }
-    };
-
-    return createAndReadPageModule(options).then(result => {
+    ).then(result => {
       expect(result).toEqual({
         component: {
           // Export of page-component-module.js
@@ -82,89 +71,9 @@ describe('createPageModule', () => {
         props: {
           frontMatter: {
             title: 'Pigman'
-          },
-          injectedData: {
-            fizz: 77,
-            plop: 44
           }
         }
       });
     });
-  });
-
-  test('dataSelectors', () => {
-    const options = {
-      pageData: {
-        path: '/foop',
-        filePath: pageComponentPath,
-        frontMatter: {
-          injectedData: ['fizz', 'plop']
-        }
-      },
-      siteData: {},
-      batfishConfig: {
-        temporaryDirectory: '/tmp',
-        dataSelectors: {
-          fizz: jest.fn(() => 33),
-          plop: jest.fn(() => 99)
-        }
-      }
-    };
-
-    return createAndReadPageModule(options).then(result => {
-      expect(result).toEqual({
-        component: {
-          // Export of page-component-module.js
-          pageComponent: true
-        },
-        props: {
-          frontMatter: {},
-          injectedData: {
-            fizz: 33,
-            plop: 99
-          }
-        }
-      });
-      expect(options.batfishConfig.dataSelectors.fizz).toHaveBeenCalledTimes(1);
-      expect(options.batfishConfig.dataSelectors.fizz).toHaveBeenCalledWith(
-        options.siteData
-      );
-      expect(options.batfishConfig.dataSelectors.plop).toHaveBeenCalledTimes(1);
-      expect(options.batfishConfig.dataSelectors.plop).toHaveBeenCalledWith(
-        options.siteData
-      );
-    });
-  });
-
-  test('error on non-existent data identifier', () => {
-    const options = {
-      pageData: {
-        path: '/foop',
-        filePath: pageComponentPath,
-        frontMatter: {
-          injectedData: ['flip']
-        }
-      },
-      siteData: {},
-      batfishConfig: {
-        temporaryDirectory: '/tmp',
-        siteData: {
-          foo: 33
-        },
-        dataSelectors: {
-          fizz: jest.fn(() => 33),
-          plop: jest.fn(() => 99)
-        }
-      }
-    };
-
-    return createAndReadPageModule(options).then(
-      () => {
-        throw new Error('should have errored');
-      },
-      error => {
-        expect(error.message).toBe('There is no data selector named "flip"');
-      }
-    );
   });
 });

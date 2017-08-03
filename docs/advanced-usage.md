@@ -34,8 +34,8 @@ You can do this with [`dataSelectors`].
 Store data in JSON or JS, anywhere in your project, then specify which data to inject into any given page with [`dataSelectors`] in your configuration.
 [`dataSelectors`] also have access to build-time data, like the front matter of all the pages being compiled.
 
-Then, to select data to be injected into a specific page, provide `injectedData` front matter that is a [sequence](http://www.yaml.org/spec/1.2/spec.html#style/block/sequence) of strings, each representing a key in the `dataSelectors` object in your configuration.
-The return value from that data selector function will be injected into the page.
+Each data selector creates a module that can be `import`ed to inject that the return value into a component or page.
+The return value of the data selector is the default export of the module available at `@mapbox/batfish/data/[selector-name-kebab-cased]`.
 
 Example:
 
@@ -50,7 +50,7 @@ module.exports = () => {
       posts: data => {
         return data.pages.filter(pagesData => /\/posts\//.test(pagesData.path));
       },
-      desserts: () => {
+      fancyDesserts: () => {
         return myBigData.recipes.desserts;
       }
     }
@@ -58,13 +58,10 @@ module.exports = () => {
 };
 
 // Page
-/*---
-injectedData:
-  - posts
-  - desserts
----*/
 import React from 'react';
 import { DessertDisplay } from 'path/to/dessert-display';
+import posts from '@mapbox/batfish/data/posts';
+import fancyDesserts from '@mapbox/batfish/data/fancy-desserts';
 
 export default class MyPage extends React.PureComponent {
   render() {
@@ -72,7 +69,7 @@ export default class MyPage extends React.PureComponent {
       <div>
         <h1>Page!</h1>
         <h2>Posts</h2>
-        {this.props.injectedData.posts.map(post => {
+        {posts.map(post => {
           return (
             <div key={post.path}>
               <a href={post.path}>{post.frontMatter.title}</a>
@@ -80,7 +77,7 @@ export default class MyPage extends React.PureComponent {
           );
         })}
         <h2>Desserts</h2>
-        {this.props.injectedData.desserts.map(dessert => {
+        {fancyDesserts.map(dessert => {
           return (
             <DessertDisplay key={dessert.id} {...dessert} />
           );

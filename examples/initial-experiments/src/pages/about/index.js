@@ -1,13 +1,12 @@
 /*---
 title: About
 description: blah blah blah
-injectedData:
-  - pigNames
 ---*/
 import React from 'react';
 import { PageShell } from '../../components/page-shell';
 import { routeToPrefixed } from '@mapbox/batfish/modules/route-to';
 import { sharedImport } from '../../components/shared-import';
+import pigNames from '@mapbox/batfish/data/pig-names';
 sharedImport();
 
 class About extends React.Component {
@@ -21,9 +20,7 @@ class About extends React.Component {
         >
           Read about security
         </button>
-        <div className="mt24">
-          Pig names: {this.props.injectedData.pigNames.join(', ')}
-        </div>
+        <div className="mt24">Pig names: {pigNames.join(', ')}</div>
       </PageShell>
     );
   }
