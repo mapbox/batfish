@@ -1,9 +1,10 @@
 # Changelog
 
-## Head
+## 0.9.0
 
 -   [Breaking change] Revised `dataSelectors` system.
-    Values returned by `dataSelectors` can now be used by `import`ing modules from `@mapbox/batfish/data/[kebab-case-data-selector-name]`, instead of using the special `injectedData` front matter property.
+    Values returned by `dataSelectors` can now be used by `import`ing modules from `@mapbox/batfish/data/[data-selector-name]`, instead of using the special `injectedData` front matter property.
+    For example, the return value from the `dataSelectors.watchOutForBees` is available with `import beeData from '@mapbox/batfish/data/watch-out-for-bees';`.
 
 ## 0.8.0
 
