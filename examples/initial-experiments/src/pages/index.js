@@ -1,12 +1,11 @@
 /*---
 title: Home away from home
 description: Everything you ever wanted
-injectedData:
-  - posts
-  - horseNames
 ---*/
 import React from 'react';
 import { withLocation } from '@mapbox/batfish/modules/with-location';
+import posts from '@mapbox/batfish/data/posts';
+import horseNames from '@mapbox/batfish/data/horse-names';
 import { PageShell } from '../components/page-shell';
 import { uniqueImport } from '../components/unique-import';
 uniqueImport();
@@ -29,7 +28,7 @@ class Home extends React.Component {
         </div>
         <div className="mt24">
           <div className="txt-bold txt-l mb12">Posts</div>
-          {this.props.injectedData.posts.map(post => {
+          {posts.map(post => {
             return (
               <div key={post.path} className="mt6">
                 <a href={post.path} className="link">
@@ -40,7 +39,7 @@ class Home extends React.Component {
           })}
         </div>
         <div className="mt24">
-          Horse names: {this.props.injectedData.horseNames.join(', ')}
+          Horse names: {horseNames.join(', ')}
         </div>
       </PageShell>
     );

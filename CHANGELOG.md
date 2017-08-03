@@ -1,5 +1,10 @@
 # Changelog
 
+## Head
+
+-   [Breaking change] Revised `dataSelectors` system.
+    Values returned by `dataSelectors` can now be used by `import`ing modules from `@mapbox/batfish/data/[kebab-case-data-selector-name]`, instead of using the special `injectedData` front matter property.
+
 ## 0.8.0
 
 -   [Addition] `includePromisePolyfill` configuration option.

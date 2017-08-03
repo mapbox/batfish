@@ -140,7 +140,7 @@ It must be within the project directory.
 `{ [string]: (Object) => any }` - Optional.
 
 An object of selector functions for selecting processing data before it is injected into the page.
-Keys are selector names and values are functions that accept an object representing all the site's data and return a value.
+Keys are selector names and values are functions that accept an object of build-time data and return a value that can be stringified into JSON.
 
 The object received as an argument contains the following properties:
 
@@ -150,7 +150,8 @@ The object received as an argument contains the following properties:
     -   `filePath`: Absolute path to the page's file.
     -   `frontMatter`: Parsed front matter from the page's file.  
 
-The return values of `dataSelectors` can be used in pages by adding an `injectedData` list in the front matter that includes the name of a data selector.
+The return values of `dataSelectors` _must be stringifiable as JSON_.
+These values can be used in your components pages by `import`ing modules from `@mapbox/batfish/data/*`.
 See ["Injecting data"].
 
 ### vendorModules
