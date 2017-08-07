@@ -109,7 +109,7 @@
     "mkdirp": "^0.5.1",
     "pify": "^3.0.0",
     "postcss": "^6.0.1",
-    "postcss-url": "^7.0.0",
+    "postcss-url": "^7.1.1",
     "postcss-values-parser": "^1.2.2",
     "prop-types": "^15.5.10",
     "remark-lint-no-dead-urls": "^0.2.0",

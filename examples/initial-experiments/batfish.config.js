@@ -8,7 +8,7 @@ module.exports = () => {
     siteBasePath: '/demo',
     stylesheets: [
       'https://api.mapbox.com/mapbox-assembly/v0.16.0/assembly.min.css',
-      path.join(__dirname, './src/*.css')
+      path.join(__dirname, './src/**/*.css')
     ],
     dataSelectors: {
       posts: data => {

@@ -287,6 +287,8 @@ You can also pass them through whatever [PostCSS] plugins you'd like.
 This optimization ensures that the loading of an external stylesheet does not block rendering, and your page content is visible as quickly as possible.
 (This is accomplished with [postcss-html-filter].)
 
+`url()`s referenced in your stylesheets will be hashed and copied to Batfish's [`outputDirectory`].
+
 _Why not use a Webpack loader and allow `import` or `require` for CSS?_
 We've found that getting CSS to load in the way we want it to (for both the development server and the static build) has been messy, buggy, and slow enough via existing Webpack patterns that we decided to step outside of Webpack for this part of the build.
 However, you can add more Webpack loaders and plugins to accomplish this in your preferred way, if you'd like, using the [`webpackLoaders`] and [`webpackPlugins`] configuration options.
