@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 0.9.1
 
 -   [Fix] Assets referenced by `url()` in CSS you include with the `stylesheets` option are copied into the `outputDirectory`.
 
