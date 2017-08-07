@@ -1,4 +1,10 @@
 /* foo */
+@font-face {
+  font-family: calligraffiti;
+  src: url(./fonts/calligraffiti.woff);
+}
+
 body {
-  background: lightblue;
+  background-color: lightblue;
+  font-family: calligraffiti;
 }

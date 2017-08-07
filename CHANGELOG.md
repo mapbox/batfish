@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+-   [Fix] Assets referenced by `url()` in CSS you include with the `stylesheets` option are copied into the `outputDirectory`.
+
 ## 0.9.0
 
 -   [Breaking change] Revised `dataSelectors` system.

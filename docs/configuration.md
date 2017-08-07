@@ -97,6 +97,8 @@ If using filenames and globs, provide absolute paths.
 If you need to control the order of your stylesheets, avoid globs.
 Batfish cannot guarantee the order in which files matching your glob will be concatenated.
 
+`url()`s referenced in your stylesheets will be hashed and copied to Batfish's [`outputDirectory`].
+
 ### browserslist
 
 `Array<string>` - Optional. Default: `['> 5%', 'last 2 versions']`
