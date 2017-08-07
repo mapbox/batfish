@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+-   [Fix] Fix the url-referenced assets in CSS are copied and rebased for the static build.
+
 ## 0.9.1
 
 -   [Fix] Assets referenced by `url()` in CSS you include with the `stylesheets` option are copied into the `outputDirectory`.
