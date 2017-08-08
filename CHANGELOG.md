@@ -3,6 +3,7 @@
 ## Head
 
 -   [Fix] Fix the url-referenced assets in CSS are copied and rebased for the static build.
+-   [Fix] Ensure that the user's versions of react, react-dom, and react-helmet are used.
 
 ## 0.9.1
 

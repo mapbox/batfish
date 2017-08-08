@@ -114,6 +114,7 @@
     "prop-types": "^15.5.10",
     "remark-lint-no-dead-urls": "^0.2.0",
     "remark-toc": "^4.0.1",
+    "resolve-from": "^3.0.0",
     "sitemap-static": "^0.4.2",
     "slugg": "^1.2.1",
     "source-map-support": "^0.4.15",
