@@ -38,7 +38,7 @@ class Home extends React.Component {
             );
           })}
         </div>
-        <div className="mt24">
+        <div className="mt24" style={{ fontFamily: 'Source Sans Pro' }}>
           Horse names: {horseNames.join(', ')}
         </div>
       </PageShell>

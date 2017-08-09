@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+-   [Fix] Do not rebase URLs in CSS that have protocols.
+
 ## 0.9.2
 
 -   [Fix] Fix the url-referenced assets in CSS are copied and rebased for the static build.
