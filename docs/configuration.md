@@ -57,7 +57,8 @@ You can specify an alternate location.
 
 ### siteBasePath
 
-`string` - Optional. Default: `'/'`
+Type: `string`.
+Default: `'/'`
 
 **You probably want to set this one.**
 
@@ -66,7 +67,7 @@ Used by `prefixUrl` and `prefixUrl.absolute` (see ["Prefixing URLs"]).
 
 ### siteOrigin
 
-`string` - Optional.
+Type: `string`.
 
 **You probably want to set this one.**
 
@@ -78,7 +79,7 @@ Also, _required if you want a sitemap_.
 
 ### applicationWrapperPath
 
-`string` - Optional.
+Type: `string`.
 
 Absolute path to a module exporting a React component that will wrap your React application.
 The component must be exported with `export default = YourWrapperComponent` or `module.exports = YourWrapperComponent`.
@@ -87,7 +88,7 @@ This component will mount only once, wrapping Batfish's `Router` component, whic
 
 ### stylesheets
 
-`Array<string>` - Optional.
+Type: `Array<string>`.
 
 An array of **URLs, filenames, or globs** pointing to stylesheets that you want to include in your site.
 
@@ -101,7 +102,8 @@ Batfish cannot guarantee the order in which files matching your glob will be con
 
 ### browserslist
 
-`Array<string>` - Optional. Default: `['> 5%', 'last 2 versions']`
+Type: `Array<string>`.
+Default: `['> 5%', 'last 2 versions']`
 
 A [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support.
 
@@ -109,27 +111,31 @@ This option is used to process your CSS through [Autoprefixer].
 
 ### pagesDirectory
 
-`string` - Optional. Default: project directory + `src/pages/`
+Type: `string`.
+Default: project directory + `src/pages/`
 
 Absolute path to your project's directory of pages.
 
 ### staticDirectory
 
-`string` - Optional. Default: project directory + `static/`
+Type: `string`.
+Default: project directory + `static/`
 
 Absolute path to your project's directory of static assets.
 The contents of this directory will be copied exactly, without additional processing, into the `/static/` path in your website.
 
 ### outputDirectory
 
-`string` - Optional. Default: project directory + `_batfish_site/`
+Type: `string`.
+Default: project directory + `_batfish_site/`
 
 Absolute path to a directory where site files should be written.
 **You probably want to `.gitignore` this directory.**
 
 ### temporaryDirectory
 
-`string` - Optional. Default: project directory + `_batfish_tmp`
+Type: `string`.
+Default: project directory + `_batfish_tmp`
 
 Absolute path to a directory where Batfish will write temporary files.
 It must be within the project directory.
@@ -139,7 +145,7 @@ It must be within the project directory.
 
 ### dataSelectors
 
-`{ [string]: (Object) => any }` - Optional.
+Type: `{ [string]: (Object) => any }`.
 
 An object of selector functions for selecting processing data before it is injected into the page.
 Keys are selector names and values are functions that accept an object of build-time data and return a value that can be stringified into JSON.
@@ -158,19 +164,19 @@ See ["Injecting data"].
 
 ### vendorModules
 
-`Array<string>` - Identifiers of npm modules that you want to be added to the vendor bundle.
+Type: `Array<string>` of npm modules that you want to be added to the vendor bundle.
 The purpose of the vendor bundle is to deliberately group dependencies that change relatively infrequently — so this bundle will stay cached for longer than the others.
 
 ### webpackLoaders
 
-`Array<Object>` - Additional loader configuration to pass to Webpack during both Webpack builds (client bundling and HTML generating).
+Type: `Array<Object>` loader configuration to pass to Webpack during both Webpack builds (client bundling and HTML generating).
 Each object should be a [Webpack Rule](https://webpack.js.org/configuration/module/#rule).
 
 **Warning:** You may need remove the extensions for files your new loader(s) handles from [`fileLoaderExtensions`](#fileloaderextensions).
 
 ### webpackPlugins
 
-`Array<Object>` - Additional plugin configuration to pass to Webpack during the client bundling task.
+Type: `Array<Object>` plugin configuration to pass to Webpack during the client bundling task.
 
 ### webpackStaticIgnore
 
@@ -181,19 +187,20 @@ But most of the time, this will help you use browser-only libraries without brea
 
 ### babelPlugins
 
-`Array` - Additional plugins to pass to Babel during both Webpack builds (client bundling and HTML generating).
+Type: `Array` plugins to pass to Babel during both Webpack builds (client bundling and HTML generating).
 **You should `require()` your plugins instead of referencing them as strings.**
 Otherwise, Babel might end up looking in the wrong place for the npm package.
 
 ### babelPresets
 
-`Array` - Additional presets to pass to Babel during both Webpack builds (client bundling and HTML generating).
+Type: `Array` presets to pass to Babel during both Webpack builds (client bundling and HTML generating).
 **You should `require()` your presets instead of referencing them as strings.**
 Otherwise, Babel might end up looking in the wrong place for the npm package.
 
 ### babelExclude
 
-`WebpackCondition` - Optional. Default: `/node_modules\/!(@mapbox\/batfish\/)/`
+Type: `WebpackCondition`.
+Default: `/node_modules\/!(@mapbox\/batfish\/)/`
 
 Any [valid Webpack Condition](https://webpack.js.org/configuration/module/#condition) will work here.
 
@@ -201,7 +208,8 @@ You'll need to use this if, for example, you use a library that includes ES2015 
 
 ### postcssPlugins
 
-`Array<Function> | Function` - Optional. Default: Autoprefixer only.
+Type: `Array<Function> | Function`.
+Default: Autoprefixer only.
 
 All of the CSS you load via [`stylesheets`] is run through [PostCSS](http://postcss.org/), so you can apply any [PostCSS plugins](https://github.com/postcss/postcss/blob/master/docs/plugins.md) to it.
 By default, only [Autoprefixer] is applied.
@@ -211,7 +219,8 @@ A transform function is probably preferable if you only need to add or remove an
 
 ### fileLoaderExtensions
 
-`Array<string> | Function` - Options. Default: `['jpeg', 'jpg', 'png', 'gif', 'webp', 'mp4', 'webm', 'woff', 'woff2']`
+Type: `Array<string> | Function`.
+Default: `['jpeg', 'jpg', 'png', 'gif', 'webp', 'mp4', 'webm', 'woff', 'woff2']`
 
 An array of extensions for files that you would like to Webpack's [file-loader](https://github.com/webpack-contrib/file-loader).
 
@@ -220,7 +229,7 @@ A transform function is probably preferable if you only need to add or remove an
 
 ### jsxtremeMarkdownOptions
 
-`Object` - Optional.
+Type: `Object`.
 
 Markdown pages are passed through [jsxtreme-markdown-loader](https://github.com/mapbox/jsxtreme-markdown-loader), which runs the Markdown through [`jsxtremeMarkdown.toComponentModule`].
 This option is passed directly to [`jsxtremeMarkdown.toComponentModule`].
@@ -235,7 +244,8 @@ But here are some of the options you are more likely to want to use with Batfish
 
 ### includePromisePolyfill
 
-`boolean` - Optional. Default: `true`
+Type: `boolean`.
+Default: `true`
 
 Webpack and Batfish both rely on Promises, so if you want to support IE11 you'll need a Promise polyfill.
 
@@ -244,7 +254,7 @@ By default, [es6-promise](https://github.com/stefanpenner/es6-promise)'s auto-po
 
 ### inlineJs
 
-`Array<Object>` - Optional.
+Type: `Array<Object>`.
 
 If you want to inline JS into static HTML before the Webpack bundle, this is the best way to do it.
 
@@ -253,39 +263,43 @@ For the static build, they will be injected directly into the `<head>`.
 
 Each item is an object with the following properties:
 
--   **filename** `string` - Absolute path to the JS file.
--   **uglify** `boolean` - Default: `true`. Whether or not to process the file with [UglifyJs] before inserting into the `<head>` during the static build.
+Type: -   **filename** `string` path to the JS file.
+Type: -   **uglify** `boolean`: `true`. Whether or not to process the file with [UglifyJs] before inserting into the `<head>` during the static build.
 
 ### production
 
-`boolean` - Optional. Default: `false` for `start`, `true` for `build`
+Type: `boolean`.
+Default: `false` for `start`, `true` for `build`
 
 Whether or not to build for production (e.g. minimize files, trim React).
 
 ### developmentDevtool
 
-`string | false` - Optional. Default: `'cheap-module-source-map'`
+Type: `string | false`.
+Default: `'cheap-module-source-map'`
 
 A [Webpack devtool value](https://webpack.js.org/configuration/devtool/#devtool).
 The Webpack docs explain the benefits and drawbacks of each.
 
 ### productionDevtool
 
-`string | false` - Optional. Default: `false`
+Type: `string | false`.
+Default: `false`
 
 A [Webpack devtool value](https://webpack.js.org/configuration/devtool/#devtool).
 The Webpack docs explain the benefits and drawbacks of each.
 
 ### clearOutputDirectory
 
-`boolean` - Optional. Default: `true`.
+Type: `boolean`.
+Default: `true`.
 
 By default, the [`outputDirectory`] will be cleared before `start` and `build` execute.
 Set this to `false` to leave the [`outputDirectory`] as it is and only add files to it.
 
 ### webpackConfigClientTransform
 
-`Function` - Optional.
+Type: `Function`.
 
 The Webpack config for client-side bundles will be passed through this function before it's used.
 **Only use this option if you know what you're doing!**
@@ -293,7 +307,7 @@ You need to be careful not to change configuration that Batfish relies on.
 
 ### webpackConfigStaticTransform
 
-`Function` - Optional.
+Type: `Function`.
 
 The Webpack config for static, server-side bundling will be passed through this function before it's used.
 **Only use this option if you know what you're doing!**
@@ -301,14 +315,16 @@ You need to be careful not to change configuration that Batfish relies on.
 
 ### port
 
-`number` - Optional. Default: `8080`
+Type: `number`.
+Default: `8080`
 
 Preferred port for development servers.
 If the specified port is unavailable, another port is used.
 
 ### verbose
 
-`boolean` - Optiona. Default: `false`
+Type: `boolean`.
+Default: `false`
 
 If `true`, more information will be logged to the console.
 

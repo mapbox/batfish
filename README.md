@@ -22,12 +22,14 @@ A minimalistic static-site generator powered by React and Webpack.
     -   [Markdown pages](#markdown-pages)
         -   [Markdown page wrapper components](#markdown-page-wrapper-components)
         -   [Import JS modules into jsxtreme-markdown](#import-js-modules-into-jsxtreme-markdown)
-    -   [Non-page files with in the pages directory](#non-page-files-with-in-the-pages-directory)
+    -   [Non-page files within the pages directory](#non-page-files-within-the-pages-directory)
     -   [Path not found: 404](#path-not-found-404)
 -   [Routing](#routing)
     -   [Links](#links)
     -   [Prefixing URLs](#prefixing-urls)
 -   [CSS](#css)
+    -   [Why not use a Webpack loader and allow import or require for CSS?](#why-not-use-a-webpack-loader-and-allow-import-or-require-for-css)
+    -   [Why not use a CSS-in-JS system?](#why-not-use-a-css-in-js-system)
 -   [Document &lt;head>](#document-head)
 -   [Development server](#development-server)
 -   [Advanced usage](#advanced-usage)
@@ -37,22 +39,23 @@ A minimalistic static-site generator powered by React and Webpack.
 Batfish provides _the essentials_ for building excellent static websites with React and Webpack.
 
 -   **(Universal) React.**
-    Use React components as the building blocks for your pages.
-    Your React code is "universal" because the components are rendered into HTML pages at build time and then mounted in the browser for interactivity at run time.
+    Use React components as your building blocks.
+    Your components are rendered into HTML pages at build time and then mounted in the browser for interactivity at run time.
 -   **Super-powered Markdown pages.**
-    Markdown pages that are even more powerful than [Jekyll's](https://jekyllrb.com/) with interpolated JS expressions and JSX elements.
+    Batfish supports [jsxtreme-markdown] pages, which allow for interpolated JS expressions and JSX elements.
 -   **Client-side routing with key features and minimal overhead.**
-    There is often no need for a big router library, but there _is_ a need for often-overlooked features like automatic link hijacking and scroll restoration.
+    There is often no need for a big router library, but there _is_ a need for often-overlooked features like automatic link hijacking (via [link-hijacker]) and scroll restoration (via [scroll-restorer]).
 -   **Essential optimizations.**
-    JS bundles split up by page and loaded on demand.
-    Essential CSS injected into static HTML.
+    JS bundles split by page and loaded on demand.
     Hashed asset filenames for long-term caching.
+    Essential CSS injected into static HTML (via [postcss-html-filter]).
     And so on.
 -   **Minimal configuration.**
     Though almost every user will want to set a couple of configuration properties, you might not need more than that — and none are required.
 -   **Minimal.**
     Batfish does not aim to be an ecosystem unto itself.
-    Instead, we've kept the codebase small and extracted any generalizable functionality into independent npm packages, like [jsxtreme-markdown], [link-hijacker], and [scroll-restorer].
+    Instead, we've kept the codebase small, a relatively thin wrapper over the underlying tools, like React, Webpack, and Babel.
+    We've also tried to abstract generalizable functionality into independent npm packages, like [jsxtreme-markdown], [link-hijacker], and [scroll-restorer].
     You can use these packages outside of Batfish — they are not coupled to Batfish conventions or configuration.
 
 ## Usage
@@ -74,6 +77,21 @@ Have a look at [`examples/basic/`](examples/basic) for a simple example project.
 ## API
 
 ## Configuration
+
+By default, all Batfish CLI commands look for `batfish.config.js` at the root of your project.
+It should export a function that returns your configuration object.
+
+For example:
+
+```js
+module.exports = () => {
+  return {
+    siteBasePath: '/my/site/base/path',
+    siteOrigin: 'https://www.mydomain.com'
+    // Add more configuration options here ...
+  };
+}
+```
 
 See [`docs/configuration.md`](docs/configuration.md) to learn about all the ways you can configure Batfish.
 
@@ -107,14 +125,16 @@ It defaults to the current working directory.
 ## Pages
 
 **The structure of your [`pagesDirectory`] determines the URLs of your site.**
-JS and Markdown files map directly to distinct URLs.
+JS and Markdown files map directly to corresponding URLs.
 So `src/pages/industries/real-estate.js` corresponds to the URL `/industries/real-estate/`.
 
 When a page is rendered, its component is passed the following props:
 
 -   `location`: The browser's current [Location](https://developer.mozilla.org/en-US/docs/Web/API/Location).
+    (During the static build, this will only include the `pathname` property.)
 -   `frontMatter`: The page's parsed front matter (minus any `siteData` array)
 -   `siteData`: Any site-wide data that the page has selected for injection.
+    See ["Injecting data"].
 
 ### JS pages
 
@@ -144,18 +164,32 @@ export default class PowerTiePage extends React.PureComponent {
 
 ### Markdown pages
 
-Markdown pages can include front matter, delimited by `---` and `---`, as is the norm.
+Markdown pages can include front matter delimited by `---` and `---`.
 
-These files are interpreted as [jsxtreme-markdown](https://github.com/mapbox/jsxtreme-markdown), so **the Markdown text can include interpolated JS expressions and JSX elements!**
+These files are interpreted as [jsxtreme-markdown], so **the Markdown text can include interpolated JS expressions and JSX elements!**
 They are transformed into React components.
 
 All the props for the page (`frontMatter`, `siteData`, etc.) are available on `props`, e.g. `props.frontMatter.title`.
 
+For example:
+
+```md
+---
+title: Power tie catalog
+---
+
+# {{ props.frontMatter.title }}
+
+Content forthcoming ...
+```
+
+If you haven't seen [jsxtreme-markdown] before, [try it out online](https://mapbox.github.io/jsxtreme-markdown/).
+
 #### Markdown page wrapper components
 
-You'll probably want to specify a wrapper component for each of your Markdown pages.
-(Unless you have a single site-wide wrapper that works for all pages.)
-It should be a React component that accepts the page's props and renders the Markdown content as `{this.props.children}`.
+You need a wrapper component for each of your Markdown pages.
+You can specify a single site-wide default wrapper, and also wrappers for specific Markdown pages.
+The wrapper component should be a React component (the default export of its module) which accepts the page's props and renders the Markdown content as `{this.props.children}`.
 Because it will receive the page's front matter as `this.props.frontMatter`, you can use front matter to fill out different parts of the wrapper (just like a Jekyll layout).
 
 Example:
@@ -203,15 +237,15 @@ I love shopping for cleaning supplies ...
 
 #### Import JS modules into jsxtreme-markdown
 
-In jsxtreme-markdown components, you can specify JS modules to import and use within the interpolated code using `prependJs` front matter.
+In jsxtreme-markdown components, you can specify JS modules to import and use within the interpolated code using [`prependJs` front matter](https://github.com/mapbox/jsxtreme-markdown/tree/master/packages/jsxtreme-markdown#prependjs).
 List lines of `import` or `require` statements that define variables you can use in your interpolated JS and JSX.
 
-By default, the following lines are specified:
+By default, the following lines are always specified:
 
 -   `import prefixUrl from '@mapbox/batfish/modules/prefix-url'`: See [Prefixing URLs].
 -   `import routeTo from '@mapbox/batfish/modules/route-to')`: See [Dynamically changing pages].
 
-This means that these functions can be used with no additional configuration.
+This means that those functions can be used with no additional configuration.
 Import your own modules and do more things.
 
 Example:
@@ -227,7 +261,7 @@ Learn more about [security]({{prefixUrl('/about/security')}}).
 Today is {{myDateFormatter('2015-08-21')}}
 ```
 
-### Non-page files with in the pages directory
+### Non-page files within the pages directory
 
 Sometimes you need to put an asset at a specific URL.
 You may want a `favicon.ico` in the root directory, for example; or a special image for social media `<meta>` tags on a page.
@@ -281,7 +315,7 @@ prefixUrl.absolute('engineer') // -> 'https://mydomain.com/about/jobs/engineer'
 
 Add stylesheets to your site with the [`stylesheets`] configuration option.
 List all your stylesheets, URLs or filepaths, in the order you'd like, and Batfish will concatenate them together and add them to the build.
-You can also pass them through whatever [PostCSS] plugins you'd like.
+You can also pass them through whatever [PostCSS] plugins you'd like, with the [`postcssPlugins`] configuration option.
 
 **During the static build, each page has its relevant CSS injected inline, and the complete stylesheet is loaded lazily, after the rest of the page is rendered.**
 This optimization ensures that the loading of an external stylesheet does not block rendering, and your page content is visible as quickly as possible.
@@ -289,9 +323,17 @@ This optimization ensures that the loading of an external stylesheet does not bl
 
 `url()`s referenced in your stylesheets will be hashed and copied to Batfish's [`outputDirectory`].
 
-_Why not use a Webpack loader and allow `import` or `require` for CSS?_
-We've found that getting CSS to load in the way we want it to (for both the development server and the static build) has been messy, buggy, and slow enough via existing Webpack patterns that we decided to step outside of Webpack for this part of the build.
+### Why not use a Webpack loader and allow `import` or `require` for CSS?
+
+We've found that getting CSS to load in the way we want it to (for both the development server and the static build) has been messy, buggy, and slow via existing Webpack patterns; so we decided to step outside of Webpack for this part of the build.
 However, you can add more Webpack loaders and plugins to accomplish this in your preferred way, if you'd like, using the [`webpackLoaders`] and [`webpackPlugins`] configuration options.
+
+### Why not use a CSS-in-JS system?
+
+You can use one if you'd like!
+Just include whatever tools and plugins you need.
+
+We've found that we can accomplish what we need to implement better optimizations by sticking with old fashioned CSS, so Batfish includes a system to optimize that use case.
 
 ## Document `<head>`
 
@@ -358,3 +400,7 @@ Additional documentation can be found in [`docs/advanced-usage.md`](docs/advance
 [postcss-html-filter]: https://github.com/mapbox/postcss-html-filter
 
 [postcss]: http://postcss.org/
+
+["injecting data"]: docs/advanced-usage.md#injecting-data
+
+[`postcssplugins`]: docs/configuration.md#postcssplugins
