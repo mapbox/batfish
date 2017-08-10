@@ -33,6 +33,7 @@ A minimalistic static-site generator powered by React and Webpack.
 -   [Document &lt;head>](#document-head)
 -   [Development server](#development-server)
 -   [Advanced usage](#advanced-usage)
+-   [Comparison to other React-powered static-site generators](#comparison-to-other-react-powered-static-site-generators)
 
 ## Goals
 
@@ -356,6 +357,22 @@ When you do one of these things, restart the server to see your change.
 ## Advanced usage
 
 Additional documentation can be found in [`docs/advanced-usage.md`](docs/advanced-usage.md).
+
+## Comparison to other React-powered static-site generators
+
+We built Batfish by systematically addressing a set of problems we've had while building websites with React components.
+We focused first on the problems themselves, trying to develop effective and minimalistic solutions.
+Sometimes this meant we used a popular tool, like Webpack.
+Other times we sidestepped a popular tool, like React Router, and opted to build something more fitted to our needs.
+
+As a result, Batfish is smaller and less ambitious than projects like [Gatsby](https://www.gatsbyjs.org/) and [Next.js](https://github.com/zeit/next.js/).
+It's a thinner wrapper over the underlying tools, not an ecosystem of its own — more of a gateway into existing ecosystems.
+Batfish also includes some features that we considered important but are overlooked by similar projects, like powerful Markdown integration and link hijacking.
+(Though we tried to build such features in such a way that they could be re-used in other contexts, like your Gatsby site.)
+
+Since we use Batfish for vital projects, we prioritize the needs of end-users (website visitors) and the stability, simplicity, and clarity of the system.
+
+Please let us know what you think!
 
 [configuration]: #configuration
 
