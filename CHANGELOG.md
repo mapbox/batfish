@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.9.3
+## 0.9.4
 
 -   [Fix] Do not rebase URLs in CSS that have protocols.
 
