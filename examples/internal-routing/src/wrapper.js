@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-export default class Wrapper extends PureComponent {
+import React from 'react';
+export default class Wrapper extends React.PureComponent {
   render() {
     return (
       <div>

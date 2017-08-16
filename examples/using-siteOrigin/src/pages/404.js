@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { prefixUrl } from '@mapbox/batfish/modules/prefix-url';
-export default class NotFound extends PureComponent {
+export default class NotFound extends React.PureComponent {
   render() {
     return (
       <div>

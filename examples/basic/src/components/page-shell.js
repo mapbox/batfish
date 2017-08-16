@@ -1,25 +1,33 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-export default class PageShell extends PureComponent {
+
+export default class PageShell extends React.Component {
   render() {
+    const { props } = this;
     return (
       <div>
         <Helmet>
+          <html lang="en" />
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>
-            {this.props.title} | Batfish
+            {props.frontMatter.title} | Batfish
           </title>
-          <meta name="description" content={this.props.description} />
+          <meta name="description" content={props.frontMatter.description} />
         </Helmet>
-        <div className=" px30 py120">
-          {this.props.children}
+        <div className="px30 py30">
+          {props.children}
         </div>
       </div>
     );
   }
 }
+
 PageShell.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  frontMatter: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired
+  }).isRequired,
   children: PropTypes.node.isRequired
 };
