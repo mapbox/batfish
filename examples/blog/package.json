@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "batfish": "../../bin/batfish.js"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
