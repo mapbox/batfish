@@ -106,6 +106,7 @@
     "json-loader": "^0.5.4",
     "lodash": "^4.17.4",
     "meow": "^3.7.0",
+    "minimatch": "^3.0.4",
     "mkdirp": "^0.5.1",
     "pify": "^3.0.0",
     "postcss": "^6.0.9",

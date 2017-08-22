@@ -47,6 +47,7 @@ You can specify an alternate location.
     -   [developmentDevtool](#developmentdevtool)
     -   [productionDevtool](#productiondevtool)
     -   [clearOutputDirectory](#clearoutputdirectory)
+    -   [unprocessedPageFiles](#unprocessedpagefiles)
     -   [webpackConfigClientTransform](#webpackconfigclienttransform)
     -   [webpackConfigStaticTransform](#webpackconfigstatictransform)
     -   [port](#port)
@@ -288,6 +289,17 @@ Default: `true`.
 By default, the [`outputDirectory`] will be cleared before `start` and `build` execute.
 Set this to `false` to leave the [`outputDirectory`] as it is and only add files to it.
 
+### unprocessedPageFiles
+
+Type: `string | Array<string>`.
+
+An array of globs **relative to the [`pagesDirectory`]**.
+
+By default, all `.js` and `.md` files within the [`pagesDirectory`] are processed as pages, producing HTML files at their paths.
+If you would like instead to copy `.js` or `.md` files as static files, without creating corresponding HTML files, use this option.
+
+For example, if you have a `scripts/` directory and all the `.js` files within it are _not_ pages, but are static JavaScript files that you want to expose at `/scripts/*.js` URLs, you could set `unprocessedPageFiles` to `['scripts/**/*.js']`.
+
 ### webpackConfigClientTransform
 
 Type: `Function`.
@@ -326,6 +338,8 @@ If `true`, more information will be logged to the console.
 ["prefixing urls"]: ../README.md#prefixing-urls
 
 [`outputdirectory`]: #outputdirectory
+
+[`pagesdirectory`]: #pagesdirectory
 
 [`stylesheets`]: #stylesheets
 
