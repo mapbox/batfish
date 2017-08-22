@@ -27,7 +27,6 @@ You can specify an alternate location.
     -   [stylesheets](#stylesheets)
     -   [browserslist](#browserslist)
     -   [pagesDirectory](#pagesdirectory)
-    -   [staticDirectory](#staticdirectory)
     -   [outputDirectory](#outputdirectory)
     -   [temporaryDirectory](#temporarydirectory)
 -   [Advanced options](#advanced-options)
@@ -115,14 +114,6 @@ Type: `string`.
 Default: project directory + `src/pages/`
 
 Absolute path to your project's directory of pages.
-
-### staticDirectory
-
-Type: `string`.
-Default: project directory + `static/`
-
-Absolute path to your project's directory of static assets.
-The contents of this directory will be copied exactly, without additional processing, into the `/static/` path in your website.
 
 ### outputDirectory
 
