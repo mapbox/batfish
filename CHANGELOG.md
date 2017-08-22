@@ -3,6 +3,7 @@
 ## Head
 
 -   [Breaking change] `with-location` now provides the original component at WrappedComponent instead of WrapperComponent.
+-   [Fix] Update postcss-html-filter to fix bugs inlining CSS with certain pseudo selectors.
 
 ## 0.9.4
 
