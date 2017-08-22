@@ -14,6 +14,6 @@ export function withLocation(Component) {
     }).isRequired
   };
 
-  WithLocation.WrapperComponent = Component;
+  WithLocation.WrappedComponent = Component;
   return WithLocation;
 }

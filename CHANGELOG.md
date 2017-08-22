@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+-   [Breaking change] `with-location` now provides the original component at WrappedComponent instead of WrapperComponent.
+
 ## 0.9.4
 
 -   [Fix] Do not rebase URLs in CSS that have protocols.
