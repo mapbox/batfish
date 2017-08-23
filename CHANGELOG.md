@@ -2,6 +2,7 @@
 
 ## Head
 
+-   [Add] Improve `prefixUrl` to work with already-prefixed URLs and absolute URLs.
 -   [Breaking change] `with-location` now provides the original component at WrappedComponent instead of WrapperComponent.
 -   [Fix] Update postcss-html-filter to fix bugs inlining CSS with certain pseudo selectors.
 
