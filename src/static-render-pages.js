@@ -18,7 +18,7 @@ import ApplicationWrapper from 'batfish-internal/application-wrapper';
 import { StaticHtmlPage } from './static-html-page';
 import { Router } from './router';
 import constants from '../lib/constants';
-import timelog from '../lib/timelog';
+import batfishLog from '../lib/batfish-log';
 
 /**
  * Statically render pages as HTML.
@@ -62,7 +62,7 @@ function staticRenderPages(batfishConfig, assets, manifestJs, cssUrl) {
           </ApplicationWrapper>
         );
       } catch (renderError) {
-        timelog(chalk.red.bold(`Error rendering page ${route.path}`));
+        batfishLog.log(chalk.red.bold(`Error rendering page ${route.path}`));
         throw renderError;
       }
 

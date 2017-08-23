@@ -5,10 +5,11 @@ const meow = require('meow');
 const chalk = require('chalk');
 const path = require('path');
 const fs = require('fs');
-const timelog = require('../lib/timelog');
+const batfishLog = require('../lib/batfish-log');
 const start = require('../lib/start');
 const build = require('../lib/build');
 const serveStatic = require('../lib/serve-static');
+const loggableErrorMessage = require('../lib/loggable-error-message');
 
 const commands = {
   start,
@@ -69,7 +70,9 @@ const cli = meow(
 
 const command = cli.input[0];
 if (command === undefined || commands[command] === undefined) {
-  timelog(`${chalk.red.bold('Error:')} You must specify a valid command.`);
+  batfishLog.log(
+    `${chalk.red.bold('Error:')} You must specify a valid command.`
+  );
   cli.showHelp();
 }
 
@@ -100,7 +103,7 @@ if (configPath) {
     }
   } catch (error) {
     if (!isDefaultConfigPath) {
-      timelog(
+      batfishLog.log(
         `${chalk.red.bold(
           'Error:'
         )} Could not load configuration module from ${chalk.underline(
@@ -129,4 +132,15 @@ if (cli.flags.clear === false) {
 }
 
 const executeCommand = commands[command];
-executeCommand(config, path.dirname(configPath));
+const result = executeCommand(config, path.dirname(configPath));
+if (command === 'start') {
+  result.on('notification', batfishLog.log);
+  result.on('error', error => {
+    const message = loggableErrorMessage(error);
+    if (message) {
+      batfishLog.error(message);
+    } else {
+      throw error;
+    }
+  });
+}
