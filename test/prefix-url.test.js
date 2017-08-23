@@ -42,11 +42,27 @@ describe('createPrefixUrl generated module with siteBasePath and siteOrigin', ()
     expect(prefixUrl('/baz')).toBe('/foo/bar/baz');
   });
 
+  test('prefixUrl passed already-prefixed root-relative URL is ok', () => {
+    expect(prefixUrl('/foo/bar/baz')).toBe('/foo/bar/baz');
+  });
+
+  test('prefixUrl passed absolute URL returns it', () => {
+    expect(prefixUrl('https://www.foo.com/bar')).toBe(
+      'https://www.foo.com/bar'
+    );
+  });
+
   test('prefixUrlAbsolute with starting slash', () => {
     expect(prefixUrlAbsolute('/baz')).toBe('https://www.test.com/foo/bar/baz');
   });
 
   test('prefixUrlAbsolute without starting slash', () => {
     expect(prefixUrlAbsolute('baz')).toBe('https://www.test.com/foo/bar/baz');
+  });
+
+  test('prefixUrlAbsolute passed absolute URL returns it', () => {
+    expect(prefixUrlAbsolute('https://www.foo.com/bar')).toBe(
+      'https://www.foo.com/bar'
+    );
   });
 });
