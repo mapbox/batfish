@@ -4,6 +4,7 @@ const mkdirp = require('mkdirp');
 const del = require('del');
 const path = require('path');
 const validateConfig = require('../lib/validate-config');
+const errorTypes = require('../lib/error-types');
 
 jest.mock('mkdirp', () => {
   return {
@@ -35,7 +36,7 @@ describe('validateConfig', () => {
       fakePort: 1337
     };
     expect(() => validateConfig(invalidPropertyConfig)).toThrow(
-      'fakePort is an invalid config property'
+      errorTypes.ConfigValidationError
     );
     const invalidPropertiesConfig = {
       fakeProduction: true,
@@ -43,7 +44,7 @@ describe('validateConfig', () => {
       fakeExternalStylesheets: null
     };
     expect(() => validateConfig(invalidPropertiesConfig)).toThrow(
-      'fakeProduction, fakePort, fakeExternalStylesheets are invalid config properties'
+      errorTypes.ConfigValidationError
     );
   });
 
@@ -63,7 +64,7 @@ describe('validateConfig', () => {
       pagesDirectory: '../some/directory'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      'pagesDirectory must be an absolute path'
+      errorTypes.ConfigValidationError
     );
   });
 
@@ -72,7 +73,7 @@ describe('validateConfig', () => {
       outputDirectory: '../some/directory'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      'outputDirectory must be an absolute path'
+      errorTypes.ConfigValidationError
     );
   });
 
@@ -81,7 +82,7 @@ describe('validateConfig', () => {
       applicationWrapperPath: '../some/directory.wrapper.js'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      'applicationWrapperPath must be an absolute path'
+      errorTypes.ConfigValidationError
     );
   });
 
@@ -90,7 +91,7 @@ describe('validateConfig', () => {
       temporaryDirectory: '../some/directory'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      'temporaryDirectory must be an absolute path'
+      errorTypes.ConfigValidationError
     );
   });
 
