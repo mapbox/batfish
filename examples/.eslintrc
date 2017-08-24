@@ -1,3 +1,6 @@
 {
-  extends: "../conf/eslint-browser.json"
+  extends: "../conf/eslint-browser.json",
+  "rules": {
+    "no-console": "off"
+  }
 }
