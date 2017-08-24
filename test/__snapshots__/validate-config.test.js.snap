@@ -32,7 +32,6 @@ Object {
   "production": false,
   "productionDevtool": false,
   "siteBasePath": "",
-  "staticDirectory": "/my-project/src/static",
   "stylesheets": Array [],
   "temporaryDirectory": "/my-project/_batfish_tmp",
   "verbose": false,
