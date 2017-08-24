@@ -9,7 +9,6 @@ import ReactDOMServer from 'react-dom/server';
 import { Helmet } from 'react-helmet';
 import fs from 'fs';
 import pify from 'pify';
-import chalk from 'chalk';
 import mkdirp from 'mkdirp';
 import path from 'path';
 import UglifyJs from 'uglify-js';
@@ -18,7 +17,6 @@ import ApplicationWrapper from 'batfish-internal/application-wrapper';
 import { StaticHtmlPage } from './static-html-page';
 import { Router } from './router';
 import constants from '../lib/constants';
-import batfishLog from '../lib/batfish-log';
 
 /**
  * Statically render pages as HTML.
@@ -62,7 +60,6 @@ function staticRenderPages(batfishConfig, assets, manifestJs, cssUrl) {
           </ApplicationWrapper>
         );
       } catch (renderError) {
-        batfishLog.log(chalk.red.bold(`Error rendering page ${route.path}`));
         throw renderError;
       }
 

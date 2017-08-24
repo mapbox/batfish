@@ -15,7 +15,6 @@
   ],
   "rules": {
     "strict": ["error", "global"],
-    "no-console": ["off"],
 
     "filenames/match-regex": ["error", "^[0-9a-z-\\.]+?$"]
   }
