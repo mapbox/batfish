@@ -7,6 +7,7 @@
 -   **[Breaking change]** `with-location` now provides the original component at WrappedComponent instead of WrapperComponent.
 -   **[Breaking change]** change `data-no-hijack` attribute name to `data-batfish-no-hijack`.
     Also, this attribute now blocks link hijacking on the element itself _and all its children_.
+-   **[Breaking change]** (maybe maybe not) Links with fragment URLs (e.g. `href="#foo"`) are not hijacked, just left to their default behavior.    
 -   [Add] `hijackLinks` configuration option, defaulting to `true`.
 -   [Add] Improve `prefixUrl` to work with already-prefixed URLs and absolute URLs.
 -   [Add] Add `unprocessedPageFiles` option.
