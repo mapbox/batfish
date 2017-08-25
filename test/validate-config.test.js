@@ -3,6 +3,7 @@
 const mkdirp = require('mkdirp');
 const del = require('del');
 const path = require('path');
+const fs = require('fs');
 const validateConfig = require('../lib/validate-config');
 const errorTypes = require('../lib/error-types');
 
@@ -20,6 +21,18 @@ jest.mock('del', () => {
 
 describe('validateConfig', () => {
   const projectDirectory = '/my-project';
+
+  beforeAll(() => {
+    // Allow for the test projectDirectory to work when checking if files exist.
+    const realFsExistsSync = fs.existsSync;
+    fs.existsSync = input => {
+      if (input === `${projectDirectory}/src/pages`) {
+        return true;
+      }
+      return realFsExistsSync(input);
+    };
+  });
+
   test('defaults', () => {
     const config = validateConfig(undefined, projectDirectory);
     // Make applicationWrapperPath a relative path, not absolute
@@ -36,7 +49,7 @@ describe('validateConfig', () => {
       fakePort: 1337
     };
     expect(() => validateConfig(invalidPropertyConfig)).toThrow(
-      errorTypes.ConfigValidationError
+      errorTypes.ConfigValidationErrors
     );
     const invalidPropertiesConfig = {
       fakeProduction: true,
@@ -44,7 +57,7 @@ describe('validateConfig', () => {
       fakeExternalStylesheets: null
     };
     expect(() => validateConfig(invalidPropertiesConfig)).toThrow(
-      errorTypes.ConfigValidationError
+      errorTypes.ConfigValidationErrors
     );
   });
 
@@ -64,7 +77,7 @@ describe('validateConfig', () => {
       pagesDirectory: '../some/directory'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      errorTypes.ConfigValidationError
+      errorTypes.ConfigValidationErrors
     );
   });
 
@@ -73,7 +86,7 @@ describe('validateConfig', () => {
       outputDirectory: '../some/directory'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      errorTypes.ConfigValidationError
+      errorTypes.ConfigValidationErrors
     );
   });
 
@@ -82,7 +95,7 @@ describe('validateConfig', () => {
       applicationWrapperPath: '../some/directory.wrapper.js'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      errorTypes.ConfigValidationError
+      errorTypes.ConfigValidationErrors
     );
   });
 
@@ -91,7 +104,7 @@ describe('validateConfig', () => {
       temporaryDirectory: '../some/directory'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      errorTypes.ConfigValidationError
+      errorTypes.ConfigValidationErrors
     );
   });
 
@@ -175,9 +188,12 @@ describe('validateConfig', () => {
 
   test('fileLoaderExtensions transform function', () => {
     expect(
-      validateConfig({
-        fileLoaderExtensions: defaults => defaults.concat('svg')
-      }).fileLoaderExtensions
+      validateConfig(
+        {
+          fileLoaderExtensions: defaults => defaults.concat('svg')
+        },
+        projectDirectory
+      ).fileLoaderExtensions
     ).toMatchSnapshot();
   });
 });

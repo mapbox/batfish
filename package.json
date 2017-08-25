@@ -103,6 +103,7 @@
     "html-webpack-plugin": "^2.30.1",
     "ignore-loader": "^0.1.2",
     "indefinite": "^1.0.1",
+    "is-glob": "^4.0.0",
     "json-loader": "^0.5.4",
     "lodash": "^4.17.4",
     "meow": "^3.7.0",
