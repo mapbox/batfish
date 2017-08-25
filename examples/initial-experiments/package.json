@@ -1,7 +1,0 @@
-{
-  "private": true,
-  "scripts": {
-    "batfish": "../../bin/example-batfish"
-  },
-  "dependencies": {}
-}
