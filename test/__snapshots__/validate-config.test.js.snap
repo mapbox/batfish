@@ -21,6 +21,7 @@ Object {
     "woff",
     "woff2",
   ],
+  "hijackLinks": true,
   "includePromisePolyfill": true,
   "jsxtremeMarkdownOptions": Object {},
   "outputDirectory": "/my-project/_batfish_site",

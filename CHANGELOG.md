@@ -7,6 +7,7 @@
 -   **[Breaking change]** `with-location` now provides the original component at WrappedComponent instead of WrapperComponent.
 -   **[Breaking change]** change `data-no-hijack` attribute name to `data-batfish-no-hijack`.
     Also, this attribute now blocks link hijacking on the element itself _and all its children_.
+-   [Add] `hijackLinks` configuration option, defaulting to `true`.
 -   [Add] Improve `prefixUrl` to work with already-prefixed URLs and absolute URLs.
 -   [Add] Add `unprocessedPageFiles` option.
 -   [Fix] Update postcss-html-filter to fix bugs inlining CSS with certain pseudo selectors.
