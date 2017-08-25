@@ -59,7 +59,7 @@ You can specify an alternate location.
 ### siteBasePath
 
 Type: `string`.
-Default: `'/'`
+Default: `'/'`.
 
 **You probably want to set this one.**
 
@@ -96,7 +96,7 @@ An array of **URLs, filenames, or globs** pointing to stylesheets that you want 
 If an item is a URL, it must start with `http(s)` and must be publicly available, so Batfish can download it and work it into the CSS optimizations.
 If using filenames and globs, provide absolute paths.
 
-If you need to control the order of your stylesheets, avoid globs.
+_If you need to control the order of your stylesheets, avoid globs._
 Batfish cannot guarantee the order in which files matching your glob will be concatenated.
 
 `url()`s referenced in your stylesheets will be hashed and copied to Batfish's [`outputDirectory`].
@@ -104,7 +104,7 @@ Batfish cannot guarantee the order in which files matching your glob will be con
 ### browserslist
 
 Type: `Array<string>`.
-Default: `['> 5%', 'last 2 versions']`
+Default: `['> 5%', 'last 2 versions']`.
 
 A [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support.
 
@@ -113,14 +113,14 @@ This option is used to process your CSS through [Autoprefixer].
 ### pagesDirectory
 
 Type: `string`.
-Default: project directory + `src/pages/`
+Default: project directory + `src/pages/`.
 
 Absolute path to your project's directory of pages.
 
 ### outputDirectory
 
 Type: `string`.
-Default: project directory + `_batfish_site/`
+Default: project directory + `_batfish_site/`.
 
 Absolute path to a directory where site files should be written.
 **You probably want to `.gitignore` this directory.**
@@ -128,7 +128,7 @@ Absolute path to a directory where site files should be written.
 ### temporaryDirectory
 
 Type: `string`.
-Default: project directory + `_batfish_tmp`
+Default: project directory + `_batfish_tmp`.
 
 Absolute path to a directory where Batfish will write temporary files.
 It must be within the project directory.
@@ -157,12 +157,15 @@ See ["Injecting data"].
 
 ### vendorModules
 
-Type: `Array<string>` of npm modules that you want to be added to the vendor bundle.
+Type: `Array<string>`.
+
+Identifiers of npm modules that you want to be added to the vendor bundle.
 The purpose of the vendor bundle is to deliberately group dependencies that change relatively infrequently — so this bundle will stay cached for longer than the others.
 
 ### hijackLinks
 
-Type: `boolean`. Default `true`.
+Type: `boolean`.
+Default `true`.
 
 By default, links are hijacked (with [link-hijacker]) and checked against your site's routes.
 If the link targets one of your routes, it will make a client-side change, instead of functioning as a regular link (with a regular page load).
@@ -172,47 +175,57 @@ If you want to disable this link-hijacking altogether, handling it all yourself,
 
 ### webpackLoaders
 
-Type: `Array<Object>` loader configuration to pass to Webpack during both Webpack builds (client bundling and HTML generating).
+Type: `Array<Object>`.
+
+Additional loader configuration to pass to Webpack during both Webpack builds (client bundling and HTML generating).
 Each object should be a [Webpack Rule](https://webpack.js.org/configuration/module/#rule).
 
 **Warning:** You may need remove the extensions for files your new loader(s) handles from [`fileLoaderExtensions`](#fileloaderextensions).
 
 ### webpackPlugins
 
-Type: `Array<Object>` plugin configuration to pass to Webpack during the client bundling task.
+Type: `Array<Object>`.
+
+Additional plugin configuration to pass to Webpack during the client bundling task.
 
 ### webpackStaticIgnore
 
-A [Webpack Condition](https://webpack.js.org/configuration/module/#condition) - Any modules matching this description will be ignored (with the [ignore-loader](https://github.com/cherrry/ignore-loader)) during the static Webpack build.
+Type: [Webpack `Condition`].
+
+Any modules matching this description will be ignored (with the [ignore-loader](https://github.com/cherrry/ignore-loader)) during the static Webpack build.
 **Any dependencies that cannot execute in Node (e.g. because they reference `window` or `document`) should be targeted by this option.**
 You may need to other precautions, as well.
 But most of the time, this will help you use browser-only libraries without breaking your static build.
 
 ### babelPlugins
 
-Type: `Array` plugins to pass to Babel during both Webpack builds (client bundling and HTML generating).
+Type: `Array`.
+
+Additional plugins to pass to Babel during both Webpack builds (client bundling and HTML generating).
 **You should `require()` your plugins instead of referencing them as strings.**
 Otherwise, Babel might end up looking in the wrong place for the npm package.
 
 ### babelPresets
 
-Type: `Array` presets to pass to Babel during both Webpack builds (client bundling and HTML generating).
+Type: `Array`.
+
+Additional presets to pass to Babel during both Webpack builds (client bundling and HTML generating).
 **You should `require()` your presets instead of referencing them as strings.**
 Otherwise, Babel might end up looking in the wrong place for the npm package.
 
 ### babelExclude
 
-Type: `WebpackCondition`.
-Default: `/node_modules\/!(@mapbox\/batfish\/)/`
+Type: [Webpack `Condition`].
+Default: `/node_modules\/!(@mapbox\/batfish\/)/`.
 
-Any [valid Webpack Condition](https://webpack.js.org/configuration/module/#condition) will work here.
+Any valid [Webpack `Condition`] will work here.
 
 You'll need to use this if, for example, you use a library that includes ES2015 but is not compiled for publication (e.g. any of the [promise-fun](https://github.com/sindresorhus/promise-fun) modules).
 
 ### postcssPlugins
 
 Type: `Array<Function> | Function`.
-Default: Autoprefixer only.
+Default: [Autoprefixer].
 
 All of the CSS you load via [`stylesheets`] is run through [PostCSS](http://postcss.org/), so you can apply any [PostCSS plugins](https://github.com/postcss/postcss/blob/master/docs/plugins.md) to it.
 By default, only [Autoprefixer] is applied.
@@ -223,7 +236,7 @@ A transform function is probably preferable if you only need to add or remove an
 ### fileLoaderExtensions
 
 Type: `Array<string> | Function`.
-Default: `['jpeg', 'jpg', 'png', 'gif', 'webp', 'mp4', 'webm', 'woff', 'woff2']`
+Default: `['jpeg', 'jpg', 'png', 'gif', 'webp', 'mp4', 'webm', 'woff', 'woff2']`.
 
 An array of extensions for files that you would like to Webpack's [file-loader](https://github.com/webpack-contrib/file-loader).
 
@@ -248,7 +261,7 @@ But here are some of the options you are more likely to want to use with Batfish
 ### includePromisePolyfill
 
 Type: `boolean`.
-Default: `true`
+Default: `true`.
 
 Webpack and Batfish both rely on Promises, so if you want to support IE11 you'll need a Promise polyfill.
 
@@ -272,14 +285,14 @@ Type: -   **uglify** `boolean`: `true`. Whether or not to process the file with 
 ### production
 
 Type: `boolean`.
-Default: `false` for `start`, `true` for `build`
+Default: `false` for `start`, `true` for `build`.
 
 Whether or not to build for production (e.g. minimize files, trim React).
 
 ### developmentDevtool
 
 Type: `string | false`.
-Default: `'cheap-module-source-map'`
+Default: `'cheap-module-source-map'`.
 
 A [Webpack devtool value](https://webpack.js.org/configuration/devtool/#devtool).
 The Webpack docs explain the benefits and drawbacks of each.
@@ -287,7 +300,7 @@ The Webpack docs explain the benefits and drawbacks of each.
 ### productionDevtool
 
 Type: `string | false`.
-Default: `false`
+Default: `false`.
 
 A [Webpack devtool value](https://webpack.js.org/configuration/devtool/#devtool).
 The Webpack docs explain the benefits and drawbacks of each.
@@ -330,7 +343,7 @@ You need to be careful not to change configuration that Batfish relies on.
 ### port
 
 Type: `number`.
-Default: `8080`
+Default: `8080`.
 
 Preferred port for development servers.
 If the specified port is unavailable, another port is used.
@@ -338,7 +351,7 @@ If the specified port is unavailable, another port is used.
 ### verbose
 
 Type: `boolean`.
-Default: `false`
+Default: `false`.
 
 If `true`, more information will be logged to the console.
 
@@ -359,3 +372,5 @@ If `true`, more information will be logged to the console.
 [`jsxtrememarkdown.tocomponentmodule`]: https://github.com/mapbox/jsxtreme-markdown#tocomponentmodule
 
 [link-hijacker]: https://github.com/mapbox/link-hijacker
+
+[webpack `condition`]: https://webpack.js.org/configuration/module/#condition
