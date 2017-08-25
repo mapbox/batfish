@@ -95,10 +95,8 @@ if (configPath) {
     if (fs.existsSync(configPath)) {
       const configModule = require(configPath);
       if (typeof configModule !== 'function') {
-        timelog(
-          `${chalk.red.bold(
-            'Error:'
-          )} Your configuration module must export a function that returns an object.`
+        logCliError(
+          'Your configuration module must export a function that returns an object.'
         );
         process.exit(2);
       }
