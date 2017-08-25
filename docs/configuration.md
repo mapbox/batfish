@@ -32,6 +32,7 @@ You can specify an alternate location.
 -   [Advanced options](#advanced-options)
     -   [dataSelectors](#dataselectors)
     -   [vendorModules](#vendormodules)
+    -   [hijackLinks](#hijacklinks)
     -   [webpackLoaders](#webpackloaders)
     -   [webpackPlugins](#webpackplugins)
     -   [webpackStaticIgnore](#webpackstaticignore)
@@ -158,6 +159,16 @@ See ["Injecting data"].
 
 Type: `Array<string>` of npm modules that you want to be added to the vendor bundle.
 The purpose of the vendor bundle is to deliberately group dependencies that change relatively infrequently — so this bundle will stay cached for longer than the others.
+
+### hijackLinks
+
+Type: `boolean`. Default `true`.
+
+By default, links are hijacked (with [link-hijacker]) and checked against your site's routes.
+If the link targets one of your routes, it will make a client-side change, instead of functioning as a regular link (with a regular page load).
+You can prevent this behavior by adding `data-batfish-no-hijack` to the link itself or to any of its descendents.
+
+If you want to disable this link-hijacking altogether, handling it all yourself, you can set this option to `false`.
 
 ### webpackLoaders
 
@@ -346,3 +357,5 @@ If `true`, more information will be logged to the console.
 ["injecting data"]: ./advanced-usage.md#injecting-data
 
 [`jsxtrememarkdown.tocomponentmodule`]: https://github.com/mapbox/jsxtreme-markdown#tocomponentmodule
+
+[link-hijacker]: https://github.com/mapbox/link-hijacker

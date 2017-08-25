@@ -70,13 +70,15 @@ class Router extends React.PureComponent {
       this.changePage(document.location);
     });
 
-    linkHijacker.hijack(
-      {
-        skipFilter: link =>
-          querySelectorContainsNode('[data-batfish-no-hijack]', link)
-      },
-      this.routeTo
-    );
+    if (batfishContext.selectedConfig.hijackLinks) {
+      linkHijacker.hijack(
+        {
+          skipFilter: link =>
+            querySelectorContainsNode('[data-batfish-no-hijack]', link)
+        },
+        this.routeTo
+      );
+    }
 
     this.setState({
       location: getContextLocation()
