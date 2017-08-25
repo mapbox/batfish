@@ -291,7 +291,7 @@ Set this to `false` to leave the [`outputDirectory`] as it is and only add files
 
 ### unprocessedPageFiles
 
-Type: `string | Array<string>`.
+Type: `Array<string>`.
 
 An array of globs **relative to the [`pagesDirectory`]**.
 

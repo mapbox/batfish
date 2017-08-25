@@ -5,10 +5,12 @@ const meow = require('meow');
 const chalk = require('chalk');
 const path = require('path');
 const fs = require('fs');
-const timelog = require('../lib/timelog');
+const batfishLog = require('../lib/batfish-log');
 const start = require('../lib/start');
 const build = require('../lib/build');
 const serveStatic = require('../lib/serve-static');
+const getLoggableErrorMessage = require('../lib/get-loggable-error-message');
+const renderPrettyErrorStack = require('../lib/render-pretty-error-stack');
 
 const commands = {
   start,
@@ -67,9 +69,13 @@ const cli = meow(
   }
 );
 
+const logCliError = message => {
+  batfishLog.error(`${chalk.red.bold('CLI error:')} ${message}`);
+};
+
 const command = cli.input[0];
 if (command === undefined || commands[command] === undefined) {
-  timelog(`${chalk.red.bold('Error:')} You must specify a valid command.`);
+  logCliError('You must specify a valid command.');
   cli.showHelp();
 }
 
@@ -89,10 +95,8 @@ if (configPath) {
     if (fs.existsSync(configPath)) {
       const configModule = require(configPath);
       if (typeof configModule !== 'function') {
-        timelog(
-          `${chalk.red.bold(
-            'Error:'
-          )} Your configuration module must export a function that returns an object.`
+        logCliError(
+          'Your configuration module must export a function that returns an object.'
         );
         process.exit(2);
       }
@@ -100,10 +104,8 @@ if (configPath) {
     }
   } catch (error) {
     if (!isDefaultConfigPath) {
-      timelog(
-        `${chalk.red.bold(
-          'Error:'
-        )} Could not load configuration module from ${chalk.underline(
+      logCliError(
+        `Failed to load configuration module from ${chalk.underline(
           configPath
         )}`
       );
@@ -113,20 +115,30 @@ if (configPath) {
 }
 
 if (cli.flags.production) {
-  config = Object.assign({}, config, { production: cli.flags.production });
+  config.production = cli.flags.production;
 }
 if (cli.flags.debug) {
-  config = Object.assign({}, config, { production: !cli.flags.debug });
+  config.production = !cli.flags.debug;
 }
 if (cli.flags.port) {
-  config = Object.assign({}, config, { port: cli.flags.port });
+  config.port = cli.flags.port;
 }
 if (cli.flags.verbose) {
-  config = Object.assign({}, config, { verbose: cli.flags.verbose });
+  config.verbose = cli.flags.verbose;
 }
 if (cli.flags.clear === false) {
-  config = Object.assign({}, config, { clearOutputDirectory: false });
+  config.clearOutputDirectory = false;
 }
 
 const executeCommand = commands[command];
-executeCommand(config, path.dirname(configPath));
+const emitter = executeCommand(config, path.dirname(configPath));
+emitter.on('notification', batfishLog.log);
+emitter.on('error', error => {
+  const niceMessage = getLoggableErrorMessage(error);
+  if (niceMessage) {
+    batfishLog.error(niceMessage);
+  } else {
+    batfishLog.error(renderPrettyErrorStack(error));
+  }
+  process.exit(1);
+});

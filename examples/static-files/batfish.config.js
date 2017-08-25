@@ -1,5 +1,5 @@
 module.exports = () => {
   return {
-    unprocessedPageFiles: 'static/**/*.md'
+    unprocessedPageFiles: ['static/**/*.md']
   };
 };

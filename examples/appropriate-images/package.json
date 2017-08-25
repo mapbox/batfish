@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "batfish": "npm run build-images && ../../bin/batfish.js",
+    "batfish": "../../bin/batfish.js",
     "build-images": "node build-images.js"
   },
   "dependencies": {
