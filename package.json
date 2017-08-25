@@ -71,6 +71,7 @@
     "@mapbox/link-hijacker": "^0.3.2",
     "@mapbox/link-to-location": "^0.1.0",
     "@mapbox/postcss-html-filter": "^0.3.1",
+    "@mapbox/query-selector-contains-node": "^0.1.0",
     "@mapbox/scroll-restorer": "^0.1.0",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^7.1.1",

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import linkHijacker from '@mapbox/link-hijacker';
 import scrollRestorer from '@mapbox/scroll-restorer';
 import linkToLocation from '@mapbox/link-to-location';
+import querySelectorContainsNode from '@mapbox/query-selector-contains-node';
 import { batfishContext } from 'batfish-internal/context';
 import { routeTo } from '@mapbox/batfish/modules/route-to';
 import { prefixUrl } from '@mapbox/batfish/modules/prefix-url';
@@ -71,7 +72,8 @@ class Router extends React.PureComponent {
 
     linkHijacker.hijack(
       {
-        skipFilter: link => link.hasAttribute('data-no-hijack')
+        skipFilter: link =>
+          querySelectorContainsNode('[data-batfish-no-hijack]', link)
       },
       this.routeTo
     );

@@ -34,7 +34,7 @@ class Numbers extends React.PureComponent {
     for (let i = 0; i < 11; i++) {
       numberLinks.push(
         <li key={i}>
-          <ReactRouter.Link to={`/${i}`} data-no-hijack>
+          <ReactRouter.Link to={`/${i}`} data-batfish-no-hijack>
             Show {i}
           </ReactRouter.Link>
         </li>
