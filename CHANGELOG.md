@@ -2,8 +2,11 @@
 
 ## Head
 
--   [Add] Improve `prefixUrl` to work with already-prefixed URLs and absolute URLs.
+-   [Breaking change] Remove `staticDirectory` option.
+    The same effect can be accomplished by putting static files in the pages directory.
 -   [Breaking change] `with-location` now provides the original component at WrappedComponent instead of WrapperComponent.
+-   [Add] Improve `prefixUrl` to work with already-prefixed URLs and absolute URLs.
+-   [Add] Add `unprocessedPageFiles` option.
 -   [Fix] Update postcss-html-filter to fix bugs inlining CSS with certain pseudo selectors.
 
 ## 0.9.4

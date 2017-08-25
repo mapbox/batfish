@@ -87,7 +87,16 @@ let config;
 if (configPath) {
   try {
     if (fs.existsSync(configPath)) {
-      config = require(configPath)();
+      const configModule = require(configPath);
+      if (typeof configModule !== 'function') {
+        timelog(
+          `${chalk.red.bold(
+            'Error:'
+          )} Your configuration module must export a function that returns an object.`
+        );
+        process.exit(2);
+      }
+      config = configModule();
     }
   } catch (error) {
     if (!isDefaultConfigPath) {
