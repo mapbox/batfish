@@ -4,8 +4,8 @@ const mkdirp = require('mkdirp');
 const del = require('del');
 const path = require('path');
 const fs = require('fs');
-const validateConfig = require('../lib/validate-config');
-const errorTypes = require('../lib/error-types');
+const validateConfig = require('../src-node/validate-config');
+const errorTypes = require('../src-node/error-types');
 
 jest.mock('mkdirp', () => {
   return {
@@ -37,7 +37,7 @@ describe('validateConfig', () => {
     const config = validateConfig(undefined, projectDirectory);
     // Make applicationWrapperPath a relative path, not absolute
     config.applicationWrapperPath = path.relative(
-      path.dirname(path.join(__dirname, '../lib/validate-config')),
+      path.dirname(path.join(__dirname, '../src-node/validate-config')),
       config.applicationWrapperPath
     );
     expect(config).toMatchSnapshot();

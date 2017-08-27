@@ -70,7 +70,7 @@ Have a look at [`examples/basic/`](examples/basic) for a simple example project.
 
 ## Requirements
 
--   You'll need Node >=4.
+-   You'll need Node >=6.
 -   The client-side code has been tested down to IE11.
     To support IE11, **a Promise polyfill is included by default.**
     If you would like to provide your own Promise polyfill, set the [`includePromisePolyfill`] option to `false`.

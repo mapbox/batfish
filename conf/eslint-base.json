@@ -1,5 +1,6 @@
 {
   "extends": "eslint:recommended",
+  "parser": "babel-eslint",
   "env": {
     "browser": true,
     "node": true,
@@ -11,11 +12,14 @@
     }
   },
   "plugins": [
-    "filenames"
+    "filenames",
+    "flowtype"
   ],
   "rules": {
     "strict": ["error", "global"],
 
-    "filenames/match-regex": ["error", "^[0-9a-z-\\.]+?$"]
+    "filenames/match-regex": ["error", "^[0-9a-z-\\.]+?$"],
+
+    "flowtype/define-flow-type": ["error"]
   }
 }

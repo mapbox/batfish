@@ -1,1 +1,9 @@
-.gitignore
+babel-cache
+**/_batfish_site
+**/_batfish_tmp
+**/node_modules
+coverage
+modules
+dist
+flow-typed
+flow-coverage
