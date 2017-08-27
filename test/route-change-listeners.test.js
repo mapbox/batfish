@@ -1,6 +1,6 @@
 'use strict';
 
-const RouteChangeListeners = require('../src/public/route-change-listeners');
+const RouteChangeListeners = require('../src-webpack/public/route-change-listeners');
 
 describe('start change listeners', () => {
   test('no listeners', () => {

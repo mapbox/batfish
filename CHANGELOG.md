@@ -2,6 +2,7 @@
 
 ## Head
 
+-   **[Breaking change]** Require Node 6. (Drop support for Node 4.)
 -   **[Breaking change]** Remove `staticDirectory` option.
     The same effect can be accomplished by putting static files in the pages directory.
 -   **[Breaking change]** `with-location` now provides the original component at WrappedComponent instead of WrapperComponent.
@@ -11,6 +12,7 @@
 -   [Add] `hijackLinks` configuration option, defaulting to `true`.
 -   [Add] Improve `prefixUrl` to work with already-prefixed URLs and absolute URLs.
 -   [Add] Add `unprocessedPageFiles` option.
+-   [Add] Include `babel-plugin-transform-class-properties` by default.
 -   [Fix] Update postcss-html-filter to fix bugs inlining CSS with certain pseudo selectors.
 
 ## 0.9.4

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import Helmet from 'react-helmet';
 import { prefixUrl } from '@mapbox/batfish/modules/prefix-url';
 
 class PageShell extends React.Component {

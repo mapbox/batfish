@@ -7,3 +7,5 @@ _batfish_tmp
 **/package-lock.json
 coverage
 modules
+dist
+flow-coverage

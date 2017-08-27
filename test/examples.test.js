@@ -61,11 +61,11 @@ describe('examples', () => {
             }
             if (
               _.get(pkg, 'scripts.batfish', '').indexOf(
-                '../../bin/batfish.js'
+                '../../bin/example-batfish'
               ) === -1
             ) {
               throw new Error(
-                `Bad example "${example}": missing { "scripts": { "batfish": "../../bin/batfish.js" } } in package.json`
+                `Bad example "${example}": missing { "scripts": { "batfish": "../../bin/example-batfish" } } in package.json`
               );
             }
           },

@@ -1,6 +1,6 @@
 {
   "private": true,
   "scripts": {
-    "batfish": "../../bin/batfish.js"
+    "batfish": "../../bin/example-batfish"
   }
 }

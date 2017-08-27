@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Examples run this script instead of batfish.js to ensure that the dist/
+# directory is available before they run.
+
+cd "${0%/*}"
+npm run build
+cd - > /dev/null
+"${0%/*}"/batfish.js "$@"

@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "batfish": "../../bin/batfish.js"
+    "batfish": "../../bin/example-batfish"
   },
   "dependencies": {
     "rehype-highlight": "^2.0.1",

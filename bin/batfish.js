@@ -1,16 +1,18 @@
 #!/usr/bin/env node
+// @flow
 'use strict';
 
 const meow = require('meow');
 const chalk = require('chalk');
 const path = require('path');
 const fs = require('fs');
-const batfishLog = require('../lib/batfish-log');
-const start = require('../lib/start');
-const build = require('../lib/build');
-const serveStatic = require('../lib/serve-static');
-const getLoggableErrorMessage = require('../lib/get-loggable-error-message');
-const renderPrettyErrorStack = require('../lib/render-pretty-error-stack');
+const batfishLog = require('../dist/batfish-log');
+const start = require('../dist/start');
+const build = require('../dist/build');
+const serveStatic = require('../dist/serve-static');
+const getLoggableErrorMessage = require('../dist/get-loggable-error-message');
+const renderPrettyErrorStack = require('../dist/render-pretty-error-stack');
+const constants = require('../dist/constants');
 
 const commands = {
   start,
@@ -89,7 +91,7 @@ if (cli.flags.config) {
   configPath = path.join(process.cwd(), 'batfish.config.js');
 }
 
-let config;
+let config = {};
 if (configPath) {
   try {
     if (fs.existsSync(configPath)) {
@@ -132,8 +134,8 @@ if (cli.flags.clear === false) {
 
 const executeCommand = commands[command];
 const emitter = executeCommand(config, path.dirname(configPath));
-emitter.on('notification', batfishLog.log);
-emitter.on('error', error => {
+emitter.on(constants.EVENT_NOTIFICATION, batfishLog.log);
+emitter.on(constants.EVENT_ERROR, error => {
   const niceMessage = getLoggableErrorMessage(error);
   if (niceMessage) {
     batfishLog.error(niceMessage);
