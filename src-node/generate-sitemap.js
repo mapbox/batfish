@@ -4,6 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const sitemapStatic = require('sitemap-static');
+const joinUrlParts = require('./join-url-parts');
 
 // Build a sitemap cataloging the HTML files in the outputDirectory.
 function generateSitemap(batfishConfig: BatfishConfiguration): Promise<void> {
@@ -16,8 +17,11 @@ function generateSitemap(batfishConfig: BatfishConfiguration): Promise<void> {
 
     sitemapStatic(sitemapWriter, {
       findRoot: batfishConfig.outputDirectory,
-      prefix:
-        String(batfishConfig.siteOrigin) + String(batfishConfig.siteBasePath),
+      prefix: joinUrlParts(
+        String(batfishConfig.siteOrigin),
+        String(batfishConfig.siteBasePath),
+        ''
+      ),
       pretty: true
     });
   });

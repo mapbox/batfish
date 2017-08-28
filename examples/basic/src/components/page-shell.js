@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 export default class PageShell extends React.Component {
   render() {
     const { props } = this;
+    const title = `${props.frontMatter.title} | Basic`;
     return (
       <div>
         <Helmet>
@@ -12,7 +13,7 @@ export default class PageShell extends React.Component {
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>
-            {props.frontMatter.title} | Batfish
+            {title}
           </title>
           <meta name="description" content={props.frontMatter.description} />
         </Helmet>

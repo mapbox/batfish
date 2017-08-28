@@ -2,6 +2,7 @@ import React from 'react';
 import storiesData from '@mapbox/batfish/data/stories-data';
 import PageShell from './page-shell';
 import SidebarNavigation from './sidebar-navigation';
+import getLegibleDate from '../utilities/get-legible-date';
 
 const sidebarItems = storiesData.map(story => {
   return {
@@ -36,6 +37,9 @@ export default class StoryWrapper extends React.Component {
             {subtitleElement}
             <div className="prose">
               {props.children}
+            </div>
+            <div className="txt-s color-gray align-r mt12">
+              Posted {getLegibleDate(props.frontMatter.date)}
             </div>
           </div>
         </div>

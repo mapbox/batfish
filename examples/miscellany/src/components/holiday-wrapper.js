@@ -7,9 +7,7 @@ const sidebarItems = holidaysData.map(holiday => {
   return {
     content: (
       <div>
-        <div>
-          {holiday.frontMatter.title}
-        </div>
+        {holiday.frontMatter.title}
         <div className="txt-s pl12">
           ({holiday.frontMatter.date})
         </div>

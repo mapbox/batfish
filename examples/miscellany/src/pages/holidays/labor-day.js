@@ -8,19 +8,14 @@ month: 09
 import React from 'react';
 import md from '@mapbox/batfish/modules/md';
 import HolidayWrapper from '../../components/holiday-wrapper';
+import HolidayImage from '../../components/holiday-image';
 
 export default class LaborDay extends React.Component {
   render() {
     const { props } = this;
     return (
       <HolidayWrapper {...props}>
-        <div className="mb24">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/First_United_States_Labor_Day_Parade%2C_September_5%2C_1882_in_New_York_City.jpg/1600px-First_United_States_Labor_Day_Parade%2C_September_5%2C_1882_in_New_York_City.jpg"
-            style={{ maxWidth: '100%' }}
-            className="mb-3"
-          />
-        </div>
+        <HolidayImage src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/First_United_States_Labor_Day_Parade%2C_September_5%2C_1882_in_New_York_City.jpg/1600px-First_United_States_Labor_Day_Parade%2C_September_5%2C_1882_in_New_York_City.jpg" />
         {md`
           **Labor Day** in the United States is a public holiday celebrated on the first Monday in September. It honors the [American labor movement](https://en.wikipedia.org/wiki/Labor_history_of_the_United_States) and the contributions that workers have made to the strength, prosperity, laws and well-being of the country. It is the Monday of the long weekend known as **Labor Day** Weekend and it is considered the unofficial end of summer in the United States. The holiday is also a federal holiday.
 
