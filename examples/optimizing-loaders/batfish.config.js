@@ -20,7 +20,7 @@ module.exports = () => {
         ]
       }
     ],
-    webpackPlugins: [new LodashModuleReplacementPlugin({ paths: true })],
+    webpackPlugins: [new LodashModuleReplacementPlugin()],
     babelPlugins: [require('babel-plugin-lodash')]
   };
 };
