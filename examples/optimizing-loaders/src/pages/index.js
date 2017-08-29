@@ -1,25 +1,29 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import _ from 'lodash';
-export default class Home extends PureComponent {
+export default class Home extends React.PureComponent {
   render() {
     const nestedNumber = {
       foo: {
         bar: {
-          baz: 3
+          baz: 3,
+          bap: 4
         }
       }
     };
 
     return (
       <div>
-        <h1>Testing optimization loaders and plugins</h1>
+        <h1>Optimization loaders and plugins</h1>
 
         <div style={{ marginTop: 30 }}>
           <img src={require('../img/man-in-a-bottle.jpg')} />
         </div>
 
         <div style={{ marginTop: 30 }}>
-          The nested number: {_.get(nestedNumber, 'foo.bar.baz')}
+          The Lodash plugin works if the following does not say "3":{' '}
+          <code style={{ background: '#000', color: '#fff', padding: '1em' }}>
+            {_.get(nestedNumber, 'foo.bar.baz', '☉_☉')}
+          </code>
         </div>
       </div>
     );

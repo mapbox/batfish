@@ -1,4 +1,1 @@
----
----
-
 Just a homepage.

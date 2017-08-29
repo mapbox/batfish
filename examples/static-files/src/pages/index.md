@@ -5,3 +5,5 @@ Hippos:
 Hippolyte:
 
 ![hippolyte](./hippolyte.jpg)
+
+[Look at stars, instead!](/star)

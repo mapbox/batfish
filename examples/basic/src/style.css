@@ -1,5 +1,6 @@
 .customHeading {
-  color: blue;
   font-weight: bold;
-  text-decoration: underline;
+  padding-bottom: 12px;
+  font-size: 2em;
+  border-bottom: 1px solid #ccc;
 }

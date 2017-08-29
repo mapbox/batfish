@@ -1,1 +1,3 @@
-console.log('inline-me.js has been executed');
+/* eslint-disable no-unused-vars */
+alert('The inlined script executed.');
+window.specialText = 'circus pajamas';
