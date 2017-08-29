@@ -2,7 +2,6 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = () => {
   return {
-    siteOrigin: 'https://www.mapbox.com',
     fileLoaderExtensions: ['webp', 'mp4', 'webm', 'woff', 'woff2'],
     webpackLoaders: [
       {

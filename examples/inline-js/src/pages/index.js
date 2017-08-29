@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Helmet from 'react-helmet';
 
-export default class Home extends Component {
+export default class Home extends React.Component {
   render() {
     return (
       <div>
         <Helmet>
           <script>
-            {"console.log('the home page has rendered')"}
+            {"alert('The react-helmet script executed.')"}
           </script>
         </Helmet>
-        here's some regular content
+        If the inlined script has executed, the following text will recommend an
+        outfit for you: <strong>{global.specialText}</strong>
       </div>
     );
   }
