@@ -1,4 +1,4 @@
-# The custom-Webpack-and-Babel-stuff Batfish example
+# Custom Webpack and Babel stuff
 
 -   Uses [image-webpack-loader] to optimize images.
     To accomplish this, takes advantage of the [`fileLoaderExtensions`] and [`webpackLoaders`] configuration options.

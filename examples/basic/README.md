@@ -1,4 +1,4 @@
-# Basic Batfish example
+# Some Basic Batfish
 
 A typical basic Batfish setup.
 

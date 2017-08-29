@@ -1,4 +1,4 @@
-# inline-js Batfish example
+# Running JS in `<script>` tags
 
 -   Uses the [`inlineJs`] configuration property to inject inline JS into the built HTML page — independent of the Webpack bundles.
     This script executes _before_ the Webpack bundle, so it can establish global variables that the Webpack bundle relies on.

@@ -3,7 +3,5 @@
   "scripts": {
     "batfish": "../../bin/example-batfish"
   },
-  "dependencies": {
-    "raw-loader": "^0.5.1"
-  }
+  "dependencies": {}
 }
