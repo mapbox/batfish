@@ -13,6 +13,7 @@
 -   [Add] Improve `prefixUrl` to work with already-prefixed URLs and absolute URLs.
 -   [Add] Add `unprocessedPageFiles` option.
 -   [Add] Include `babel-plugin-transform-class-properties` by default.
+-   [Add] `start` now rebuilds when you change a page's front matter, create a new page, or delete a page.
 -   [Fix] Update postcss-html-filter to fix bugs inlining CSS with certain pseudo selectors.
 
 ## 0.9.4

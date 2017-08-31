@@ -24,10 +24,7 @@ const joinUrlParts = require('./join-url-parts');
 const errorTypes = require('./error-types');
 const wrapError = require('./wrap-error');
 const createWebpackStatsError = require('./create-webpack-stats-error');
-
-const webpackWatchOptions = {
-  ignored: /node_modules/
-};
+const writeContextModule = require('./write-context-module');
 
 function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
   rawConfig = rawConfig || {};
@@ -124,9 +121,7 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
       return;
     }
 
-    let lastHash;
-    let hasCompiled = false;
-    compiler.watch(webpackWatchOptions, (fatalError, stats) => {
+    const onCompilation = (fatalError, stats) => {
       // Don't do anything if the compilation is just repetition.
       // There's often a series of many compilations with the same output.
       if (stats.hash === lastHash) return;
@@ -163,7 +158,32 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
       }
       emitNotification('Webpack finished compiling.');
       server.reload();
-    });
+    };
+
+    // Watch pages separately, so we can rewrite the context module, which
+    // will capture changes to front matter, page additions and deletions.
+    const pageGlob = path.join(batfishConfig.pagesDirectory, './**/*.{js,md}');
+    const pageWatcher: EventEmitter = chokidar.watch(pageGlob);
+    const rebuildPages = () => {
+      writeContextModule(batfishConfig)
+        .then(() => {
+          compiler.run(onCompilation);
+        })
+        .catch(emitError);
+    };
+    pageWatcher.on('change', rebuildPages);
+    pageWatcher.on('unlink', rebuildPages);
+    pageWatcher.on('error', emitError);
+
+    let lastHash;
+    let hasCompiled = false;
+
+    compiler.watch(
+      {
+        ignored: [/node_modules/, pageGlob]
+      },
+      onCompilation
+    );
   };
 
   createWebpackConfigClient(batfishConfig, { devServer: true })
