@@ -15,3 +15,4 @@ module.ignore_non_literal_requires=true
 module.name_mapper='^@mapbox/batfish/modules/route-to$' -> '<PROJECT_ROOT>/src/webpack/public/route-to.js'
 module.name_mapper='^@mapbox/batfish/modules/prefix-url$' -> '<PROJECT_ROOT>/src/webpack/public/prefix-url.js'
 module.name_mapper='^@mapbox/batfish/modules/route-change-listeners$' -> '<PROJECT_ROOT>/src/webpack/public/route-change-listeners.js'
+module.name_mapper='^@mapbox/batfish/modules/focus-content-entry$' -> '<PROJECT_ROOT>/src/webpack/public/focus-content-entry.js'
