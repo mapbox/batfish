@@ -6,13 +6,13 @@ const meow = require('meow');
 const chalk = require('chalk');
 const path = require('path');
 const fs = require('fs');
-const batfishLog = require('../dist/batfish-log');
-const start = require('../dist/start');
-const build = require('../dist/build');
-const serveStatic = require('../dist/serve-static');
-const getLoggableErrorMessage = require('../dist/get-loggable-error-message');
-const renderPrettyErrorStack = require('../dist/render-pretty-error-stack');
-const constants = require('../dist/constants');
+const batfishLog = require('../dist/node/batfish-log');
+const start = require('../dist/node/start');
+const build = require('../dist/node/build');
+const serveStatic = require('../dist/node/serve-static');
+const getLoggableErrorMessage = require('../dist/node/get-loggable-error-message');
+const renderPrettyErrorStack = require('../dist/node/render-pretty-error-stack');
+const constants = require('../dist/node/constants');
 
 const commands = {
   start,

@@ -107,7 +107,7 @@ function createWebpackConfigClient(
         appEntry.push(jsData.filename);
       });
     }
-    appEntry.push(path.join(__dirname, '../src-webpack/batfish-app.js'));
+    appEntry.push(path.join(__dirname, '../webpack/batfish-app.js'));
 
     const clientConfig: webpack$Configuration = {
       entry: {

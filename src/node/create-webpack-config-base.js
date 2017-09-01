@@ -19,7 +19,7 @@ function createWebpackConfigBase(
   if (cachedConfig) return Promise.resolve(cachedConfig);
   const isExample = path
     .dirname(batfishConfig.pagesDirectory)
-    .startsWith(path.join(__dirname, '../examples'));
+    .startsWith(path.join(__dirname, '../../examples'));
 
   return writeContextModule(batfishConfig).then(batfishContextPath => {
     // Plugins
@@ -67,7 +67,7 @@ function createWebpackConfigBase(
       loader: 'babel-loader',
       options: {
         cacheDirectory: !batfishConfig.production
-          ? path.join(__dirname, '../babel-cache')
+          ? path.join(__dirname, '../../babel-cache')
           : false,
         presets: babelPresets,
         plugins: babelPlugins,
@@ -88,7 +88,7 @@ function createWebpackConfigBase(
       // Not necessary for dependents, but necessary for examples
       aliases['@mapbox/batfish/modules'] = path.join(
         __dirname,
-        '../src-webpack/public'
+        '../webpack/public'
       );
     }
 
@@ -111,7 +111,7 @@ function createWebpackConfigBase(
         // Loader names need to be strings, and to allow them to be looked
         // up within batfish's module dependencies, not just the project's,
         // we need this.
-        modules: [path.join(__dirname, '../node_modules'), 'node_modules']
+        modules: [path.join(__dirname, '../../node_modules'), 'node_modules']
       },
       resolve: {
         alias: aliases

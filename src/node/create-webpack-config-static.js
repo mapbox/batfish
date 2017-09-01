@@ -15,7 +15,7 @@ function createWebpackConfigStatic(
   return createWebpackConfigBase(batfishConfig).then(baseConfig => {
     const staticConfig: webpack$Configuration = {
       entry: {
-        static: path.join(__dirname, '../src-webpack/static-render-pages.js')
+        static: path.join(__dirname, '../webpack/static-render-pages.js')
       },
       output: {
         filename: './static-render-pages.js',

@@ -1,6 +1,6 @@
 'use strict';
 
-const joinUrlParts = require('../src-node/join-url-parts');
+const joinUrlParts = require('../src/node/join-url-parts');
 
 describe('joinUrlParts', () => {
   test('with no arguments returns empty string', () => {

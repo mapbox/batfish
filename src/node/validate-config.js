@@ -77,7 +77,7 @@ function validateConfig(
     temporaryDirectory: path.join(projectDirectory, '_batfish_tmp'),
     applicationWrapperPath: path.join(
       __dirname,
-      '../src-webpack/empty-application-wrapper.js'
+      '../webpack/empty-application-wrapper.js'
     ),
     stylesheets: [],
     hijackLinks: true,

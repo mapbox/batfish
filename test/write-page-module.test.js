@@ -5,7 +5,7 @@ const pify = require('pify');
 const path = require('path');
 const mkdirp = require('mkdirp');
 const tempy = require('tempy');
-const writePageModule = require('../src-node/write-page-module');
+const writePageModule = require('../src/node/write-page-module');
 
 describe('writePageModule', () => {
   const tmp = tempy.directory();

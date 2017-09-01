@@ -49,7 +49,7 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
 
   const stylesheetsIsEmpty = _.isEmpty(batfishConfig.stylesheets);
   const htmlWebpackPluginOptions = {
-    template: path.join(__dirname, '../src-webpack/html-webpack-template.ejs'),
+    template: path.join(__dirname, '../webpack/html-webpack-template.ejs'),
     cssBasename: stylesheetsIsEmpty ? '' : constants.BATFISH_CSS_BASENAME
   };
   const statsFilename = path.join(
