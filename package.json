@@ -2,7 +2,7 @@
   "name": "@mapbox/batfish",
   "version": "0.10.3",
   "description": "The React-powered static-site generator you didn't know you wanted",
-  "main": "dist/index.js",
+  "main": "dist/node/index.js",
   "bin": {
     "batfish": "bin/batfish.js"
   },
@@ -10,9 +10,7 @@
     "bin",
     "docs",
     "modules",
-    "dist",
-    "src-webpack",
-    "src-node"
+    "dist"
   ],
   "scripts": {
     "precommit": "lint-staged",
@@ -25,9 +23,9 @@
     "lint": "run-p --aggregate-output lint-js lint-md lint-flow",
     "pretest": "npm run lint",
     "test": "jest",
-    "build-webpack-modules": "del modules && babel src-webpack/public --out-dir modules --quiet",
-    "build-node": "del dist && flow-remove-types src-node/ --out-dir dist/ --quiet --all && cpy src-node/index.js dist --rename index.js.flow",
-    "build": "run-p build-webpack-modules build-node",
+    "build-webpack-modules": "del modules && babel src/webpack/public --out-dir modules --quiet",
+    "build-dist": "del dist && cd src && cpy '**/*.*' ../dist --parents && cd - && flow-remove-types dist/ --out-dir dist/ --quiet && cpy src/node/index.js dist/node --rename index.js.flow",
+    "build": "run-p build-webpack-modules build-dist",
     "prepublishOnly": "npm run build"
   },
   "repository": {

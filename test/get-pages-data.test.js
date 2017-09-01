@@ -1,8 +1,8 @@
 'use strict';
 
 const path = require('path');
-const getPagesData = require('../src-node/get-pages-data');
-const validateConfig = require('../src-node/validate-config');
+const getPagesData = require('../src/node/get-pages-data');
+const validateConfig = require('../src/node/validate-config');
 
 describe('getPagesData', () => {
   const fixtureDir = path.join(__dirname, 'fixtures/get-pages-data');

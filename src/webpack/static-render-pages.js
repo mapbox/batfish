@@ -17,7 +17,7 @@ import { batfishContext } from 'batfish-internal/context';
 import ApplicationWrapper from 'batfish-internal/application-wrapper';
 import { StaticHtmlPage } from './static-html-page';
 import { Router } from './router';
-import constants from '../src-node/constants';
+import constants from '../node/constants';
 
 // Statically render pages as HTML.
 //
