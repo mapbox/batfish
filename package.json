@@ -19,7 +19,7 @@
     "lint-js": "eslint .",
     "format": "prettier --single-quote --write '{,src*/**/,bin/**/,test/**/,flow-typed/}*.js'",
     "test-jest": "jest",
-    "lint-md-partial": "remark --frail --quiet --no-stdout --use 'validate-links=repository:\"mapbox/batfish\"' --use remark-lint-no-dead-urls --use remark-toc=tight:true --output --",
+    "lint-md-partial": "remark --frail --quiet --no-stdout --output --",
     "lint-md": "npm run lint-md-partial -- docs/*.md *.md",
     "lint-flow": "flow check",
     "lint": "run-p --aggregate-output lint-js lint-md lint-flow",
@@ -49,6 +49,27 @@
     "{docs/*.md,README.md,CHANGELOG.md}": [
       "npm run lint-md-partial",
       "git add"
+    ]
+  },
+  "remarkConfig": {
+    "plugins": [
+      [
+        "lint-maximum-line-length",
+        false
+      ],
+      [
+        "validate-links",
+        {
+          "repository": "mapbox/batfish"
+        }
+      ],
+      "remark-lint-no-dead-urls",
+      [
+        "remark-toc",
+        {
+          "tight": true
+        }
+      ]
     ]
   },
   "babel": {

@@ -23,50 +23,50 @@ function normalizePathname(pathname: string): string {
 }
 
 function addListener(
-  pathnameOrHandler: string | Function,
-  maybeHandler?: Function,
+  pathnameOrListener: string | Function,
+  maybeListener?: Function,
   registry: Registry,
   remover: Remover
 ): Remover {
-  let handler;
+  let listener;
   let pathname;
-  if (typeof pathnameOrHandler === 'function') {
-    handler = pathnameOrHandler;
+  if (typeof pathnameOrListener === 'function') {
+    listener = pathnameOrListener;
     pathname = ALL_PATHS;
   } else {
-    handler = maybeHandler;
-    pathname = pathnameOrHandler;
+    listener = maybeListener;
+    pathname = pathnameOrListener;
   }
   pathname = normalizePathname(pathname);
   if (!registry[pathname]) {
     registry[pathname] = [];
   }
-  registry[pathname].push(handler || noop);
-  return () => remover(pathname, handler);
+  registry[pathname].push(listener || noop);
+  return () => remover(pathname, listener);
 }
 
 function removeListener(
-  pathnameOrHandler?: string | Function,
-  maybeHandler?: Function,
+  pathnameOrListener?: string | Function,
+  maybeListener?: Function,
   registry: Registry
 ) {
-  let handler;
+  let listener;
   let pathname;
-  if (typeof pathnameOrHandler === 'function' || !pathnameOrHandler) {
-    handler = pathnameOrHandler;
+  if (typeof pathnameOrListener === 'function' || !pathnameOrListener) {
+    listener = pathnameOrListener;
     pathname = ALL_PATHS;
   } else {
-    handler = maybeHandler;
-    pathname = pathnameOrHandler;
+    listener = maybeListener;
+    pathname = pathnameOrListener;
   }
   pathname = normalizePathname(pathname);
-  if (!handler) {
+  if (!listener) {
     registry[pathname] = [];
     return;
   }
   const listeners = registry[pathname];
   for (let i = 0, l = listeners.length; i < l; i++) {
-    if (listeners[i] === handler) {
+    if (listeners[i] === listener) {
       listeners.splice(i, 1);
       return;
     }
@@ -91,41 +91,41 @@ export function invokeCallbacks(
 }
 
 export function addRouteChangeStartListener(
-  pathnameOrHandler: string | Function,
-  maybeHandler?: Function
+  pathnameOrListener: string | Function,
+  maybeListener?: Function
 ): Remover {
   return addListener(
-    pathnameOrHandler,
-    maybeHandler,
+    pathnameOrListener,
+    maybeListener,
     startListeners,
     removeRouteChangeStartListener
   );
 }
 
 export function removeRouteChangeStartListener(
-  pathnameOrHandler?: string | Function,
-  maybeHandler?: Function
+  pathnameOrListener?: string | Function,
+  maybeListener?: Function
 ) {
-  removeListener(pathnameOrHandler, maybeHandler, startListeners);
+  removeListener(pathnameOrListener, maybeListener, startListeners);
 }
 
 export function addRouteChangeEndListener(
-  pathnameOrHandler: string | Function,
-  maybeHandler?: Function
+  pathnameOrListener: string | Function,
+  maybeListener?: Function
 ): Remover {
   return addListener(
-    pathnameOrHandler,
-    maybeHandler,
+    pathnameOrListener,
+    maybeListener,
     endListeners,
     removeRouteChangeEndListener
   );
 }
 
 export function removeRouteChangeEndListener(
-  pathnameOrHandler?: string | Function,
-  maybeHandler?: Function
+  pathnameOrListener?: string | Function,
+  maybeListener?: Function
 ) {
-  removeListener(pathnameOrHandler, maybeHandler, endListeners);
+  removeListener(pathnameOrListener, maybeListener, endListeners);
 }
 
 export function _invokeRouteChangeStartCallbacks(
