@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.2
+
+-   Include more files in npm package ...
+
 ## 0.10.1
 
 -   Include `dist/` in npm package. Oops.
