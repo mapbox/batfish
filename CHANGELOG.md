@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.4
+
+-   [Fix] Restructure directories to be more friendly for Flow-using consumers.
+
 ## 0.10.3
 
 -   [Fix] Don't hijack links that aren't to Batfish routes.
