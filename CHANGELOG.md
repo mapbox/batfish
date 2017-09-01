@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.1
+
+-   Include `dist/` in npm package. Oops.
+
 ## 0.10.0
 
 -   **[Breaking change]** Require Node 6. (Drop support for Node 4.)
