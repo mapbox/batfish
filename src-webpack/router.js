@@ -106,7 +106,7 @@ class Router extends React.PureComponent<Props, State> {
   // If it doesn't match a route, go there non-dynamically.
   routeTo = (input: string | HTMLAnchorElement) => {
     const targetLocation: BatfishLocation = linkToLocation(input);
-    if (findMatchingRoute(targetLocation.pathname) === undefined) {
+    if (findMatchingRoute(targetLocation.pathname).is404) {
       return window.location.assign(input);
     }
     this.changePage(targetLocation, {
