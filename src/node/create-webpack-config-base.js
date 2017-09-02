@@ -8,6 +8,7 @@ const WebpackChunkHash = require('webpack-chunk-hash');
 const writeContextModule = require('./write-context-module');
 const joinUrlParts = require('./join-url-parts');
 const constants = require('./constants');
+const getPostcssPlugins = require('./get-postcss-plugins');
 
 // Cache it to ensure we don't do unnecessary work within one process.
 let cachedConfig;
@@ -138,8 +139,8 @@ function createWebpackConfigBase(
         use: [
           babelLoaderConfig,
           {
-            loader: 'page-specific-style-loader',
-            options: { batfishConfig }
+            loader: 'react-helmet-postcss-loader',
+            options: { postcssPlugins: getPostcssPlugins(batfishConfig) }
           }
         ]
       });
@@ -165,9 +166,9 @@ function createWebpackConfigBase(
       resolveLoader: {
         // Register local loaders.
         alias: {
-          'page-specific-style-loader': path.join(
+          'react-helmet-postcss-loader': path.join(
             __dirname,
-            './page-specific-style-loader.js'
+            './react-helmet-postcss-loader.js'
           )
         },
         // Loader names need to be strings, and to allow them to be looked

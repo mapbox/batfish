@@ -8,6 +8,7 @@
 - [Markdown within JS](#markdown-within-js)
 - [Route change listeners](#route-change-listeners)
 - [Analyzing bundles](#analyzing-bundles)
+- [Page-specific CSS](#page-specific-css)
 
 ## Draft pages
 
@@ -138,5 +139,37 @@ Batfish's `start` and `end` commands output [Webpack's `stats.json`](https://web
 
 [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer) and [webpack.github.io/analyse](https://webpack.github.io/analyse/) are two great tools that you can feed your `stats.json` to.
 There are also others out there in the Webpack ecosystem.
+
+## Page-specific CSS
+
+Most of the time, you should add CSS to your site with the [`stylesheets`] configuration option.
+However, if you are adding a _lot_ of CSS that is _not widely used_, you might choose to add it to one page at a time, instead of adding it to the full site's stylesheet.
+Batfish includes a way to to this.
+
+If you `import` a `.css` file within your [`pagesDirectory`], you will get a React component (with no props) that you can render within the page.
+When the component mounts, the stylesheet's content (processed through PostCSS, using your [`postcssPlugins`]) will be inserted into a `<style>` tag in the `<head>` of the document.
+When the component unmounts, that `<style>` tag will be removed.
+
+Like other React components, this one will only be added to the JS bundle of the page that uses it (unless you use it in a number of pages); and it will be rendered into the page's HTML during static rendering.
+So that's how you can page-specific CSS, when the fancy strikes.
+
+Example:
+
+```js
+import React from 'react';
+import SpecialStyles from './special-styles.css';
+
+export default class SomePage extends React.Component {
+  render() {
+    return (
+      <div>
+        <SpecialStyles />
+        <h1>Some page</h1>
+        {/* ... */}
+      </div>
+    );
+  }
+}
+```
 
 [`route-change-listeners`]: ./batfish-modules.md#route-change-listeners

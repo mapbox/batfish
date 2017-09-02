@@ -1,5 +1,10 @@
 # Changelog
 
+## Head
+
+- [Add] Enable page-specific CSS.
+  See ["Page-specific CSS" documentation](docs/advanced-usage.md#page-specific-css).
+
 ## 0.10.4
 
 - [Fix] Restructure directories to be more friendly for Flow-using consumers.

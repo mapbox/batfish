@@ -4,7 +4,6 @@
 const postcss = require('postcss');
 const prettier = require('prettier');
 const loaderUtils = require('loader-utils');
-const getPostcssPlugins = require('./get-postcss-plugins');
 const rethrowPostcssError = require('./rethrow-postcss-error');
 
 function generateModule(css: string): string {
@@ -12,7 +11,7 @@ function generateModule(css: string): string {
     import React from 'react';
     import Helmet from 'react-helmet';
 
-    const css = \`${css}\` ;
+    const css = \`${css}\`;
 
     export default class HeadCss extends React.Component {
       shouldComponentUpdate() {
@@ -32,16 +31,13 @@ function generateModule(css: string): string {
 
 // Transform CSS into a simple JS module that writes the CSS to a <style>
 // tag in the <head> of the document.
-function pageSpecificStyleLoader(css: string) {
+function reactHelmetPostcssLoader(css: string) {
   const callback = this.async();
   const options: {
-    batfishConfig: BatfishConfiguration
+    postcssPlugins?: Array<Function>
   } = loaderUtils.getOptions(this);
-  if (!options.batfishConfig) {
-    return callback(new Error('batfishConfig option is required.'));
-  }
 
-  postcss(getPostcssPlugins(options.batfishConfig))
+  postcss(options.postcssPlugins)
     .process(css)
     .catch(rethrowPostcssError)
     .then(result => {
@@ -50,4 +46,4 @@ function pageSpecificStyleLoader(css: string) {
     .catch(callback);
 }
 
-module.exports = pageSpecificStyleLoader;
+module.exports = reactHelmetPostcssLoader;
