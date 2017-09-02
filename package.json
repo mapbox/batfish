@@ -50,6 +50,10 @@
     ]
   },
   "remarkConfig": {
+    "settings": {
+      "listItemIndent": 1,
+      "fences": true
+    },
     "plugins": [
       [
         "lint-maximum-line-length",

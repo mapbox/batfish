@@ -4,26 +4,26 @@ Batfish exposes a few public modules to hook into its routing system and other i
 
 ## Table of contents
 
--   [route-to](#route-to)
-    -   [API](#api)
-        -   [routeTo](#routeto)
-        -   [routeToPrefixed](#routetoprefixed)
-    -   [Examples](#examples)
--   [prefix-url](#prefix-url)
-    -   [API](#api-1)
-        -   [prefixUrl](#prefixurl)
-        -   [prefixUrlAbsolute](#prefixurlabsolute)
-    -   [Examples](#examples-1)
--   [route-change-listeners](#route-change-listeners)
-    -   [API](#api-2)
-        -   [addRouteChangeStartListener](#addroutechangestartlistener)
-        -   [removeRouteChangeStartListener](#removeroutechangestartlistener)
-        -   [addRouteChangeEndListener](#addroutechangeendlistener)
-        -   [removeRouteChangeEndListener](#removeroutechangeendlistener)
--   [with-location](#with-location)
-    -   [API](#api-3)
-        -   [withLocation](#withlocation)
-    -   [Example](#example)
+- [route-to](#route-to)
+  - [API](#api)
+    - [routeTo](#routeto)
+    - [routeToPrefixed](#routetoprefixed)
+  - [Examples](#examples)
+- [prefix-url](#prefix-url)
+  - [API](#api-1)
+    - [prefixUrl](#prefixurl)
+    - [prefixUrlAbsolute](#prefixurlabsolute)
+  - [Examples](#examples-1)
+- [route-change-listeners](#route-change-listeners)
+  - [API](#api-2)
+    - [addRouteChangeStartListener](#addroutechangestartlistener)
+    - [removeRouteChangeStartListener](#removeroutechangestartlistener)
+    - [addRouteChangeEndListener](#addroutechangeendlistener)
+    - [removeRouteChangeEndListener](#removeroutechangeendlistener)
+- [with-location](#with-location)
+  - [API](#api-3)
+    - [withLocation](#withlocation)
+  - [Example](#example)
 
 ## route-to
 
@@ -120,8 +120,10 @@ The following functions are named exports of `@mapbox/batfish/modules/route-chan
 
 #### `addRouteChangeStartListener`
 
-    addRouteChangeStartListener(pathname: string, listener: Function): Function;
-    addRouteChangeStartListener(listener: Function): Function;
+```
+addRouteChangeStartListener(pathname: string, listener: Function): Function;
+addRouteChangeStartListener(listener: Function): Function;
+```
 
 Returns a function that will remove the listener — the equivalent of calling `removeRouteChangeStartListener` with the same arguments.
 
@@ -136,8 +138,10 @@ After the page chunk finishes downloading, the next page will not be rendered un
 
 #### `removeRouteChangeStartListener`
 
-    removeRouteChangeStartListener(pathname?: string, listener?: Function): Function;
-    removeRouteChangeStartListener(listener?: Function): Function;
+```
+removeRouteChangeStartListener(pathname?: string, listener?: Function): Function;
+removeRouteChangeStartListener(listener?: Function): Function;
+```
 
 If `pathname` is provided (i.e. the first argument is a string), `listener` will only be removed for route changes to this pathname .
 Otherwise, `listener` will be removed for all route changes.
@@ -146,8 +150,10 @@ If no `listener` is provided, all listeners for the matched path (either `pathna
 
 #### `addRouteChangeEndListener`
 
-    addRouteChangeEndListener(pathname: string, listener: Function): Function;
-    addRouteChangeEndListener(listener: Function): Function;
+```
+addRouteChangeEndListener(pathname: string, listener: Function): Function;
+addRouteChangeEndListener(listener: Function): Function;
+```
 
 The parameters and return value are equivalent to those for [`addRouteChangeStartListener`].
 
@@ -159,8 +165,10 @@ What you return from your `callback` will have no affect on page rendering.
 
 #### `removeRouteChangeEndListener`
 
-    removeRouteChangeEndListener(pathname?: string, listener?: Function): Function;
-    removeRouteChangeEndListener(listener?: Function): Function;
+```
+removeRouteChangeEndListener(pathname?: string, listener?: Function): Function;
+removeRouteChangeEndListener(listener?: Function): Function;
+```
 
 The parameters and return value are equivalent to those for [`removeRouteChangeStartListener`].
 
@@ -176,15 +184,17 @@ The function functions are named exports from `'@mapbox/batfish/modules/with-loc
 
 #### withLocation
 
-    withLocation(Component: React.Component): React.Component
+```
+withLocation(Component: React.Component): React.Component
+```
 
 Wraps `Component` in a stateless function component that passes it a `location` prop.
 
 The value of `location` is an object with the following properties:
 
--   `pathname`: This is _always_ available (even at build time, during static rendering) because it is provided by Batfish's router.
--   `hash`: This will not be available during static rendering, so check for its existence before using it.
--   `search`: This will not be available during static rendering, so check for its existence before using it.
+- `pathname`: This is _always_ available (even at build time, during static rendering) because it is provided by Batfish's router.
+- `hash`: This will not be available during static rendering, so check for its existence before using it.
+- `search`: This will not be available during static rendering, so check for its existence before using it.
 
 Returns the wrapper component.
 The returned component exposes the original, wrapped component on the `WrappedComponent` static property.

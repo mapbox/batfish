@@ -2,12 +2,12 @@
 
 ## Table of contents
 
--   [Draft pages](#draft-pages)
--   [Injecting data](#injecting-data)
--   [Routing within a page](#routing-within-a-page)
--   [Markdown within JS](#markdown-within-js)
--   [Route change listeners](#route-change-listeners)
--   [Analyzing bundles](#analyzing-bundles)
+- [Draft pages](#draft-pages)
+- [Injecting data](#injecting-data)
+- [Routing within a page](#routing-within-a-page)
+- [Markdown within JS](#markdown-within-js)
+- [Route change listeners](#route-change-listeners)
+- [Analyzing bundles](#analyzing-bundles)
 
 ## Draft pages
 
