@@ -333,13 +333,11 @@ A good pattern is to create a `PageShell` React component that accepts props tha
 
 The development server (for `start` and `serve-static` commands) is a [Browsersync] server, which provides a nice experience for cross-device testing.
 
-Usually when you change a file, Webpack will recompile and the browser will automatically refresh.
-However, **the browser will not automatically refresh for the following changes**:
+When you change a file, Webpack will recompile and the browser will automatically refresh.
 
-- Adding or removing a page.
-- Changing a page's front matter.
-
-When you do one of these things, restart the server to see your change.
+(Why not hot module reloading?
+Seemed like more trouble than it's worth.
+But if you want to help add the feature, please open an issue.)
 
 ## Advanced usage
 
