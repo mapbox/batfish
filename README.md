@@ -10,77 +10,77 @@ A static-site generator powered by React and Webpack.
 
 ## Table of contents
 
--   [Other documentation to check out](#other-documentation-to-check-out)
--   [Goals](#goals)
--   [Usage](#usage)
--   [Requirements](#requirements)
--   [API](#api)
-    -   [Configuration](#configuration)
-    -   [CLI](#cli)
-    -   [Node API](#node-api)
--   [Pages](#pages)
-    -   [JS pages](#js-pages)
-    -   [Markdown pages](#markdown-pages)
-        -   [Markdown page wrapper components](#markdown-page-wrapper-components)
-        -   [Import JS modules into jsxtreme-markdown](#import-js-modules-into-jsxtreme-markdown)
-    -   [Non-page files within the pages directory](#non-page-files-within-the-pages-directory)
-    -   [Path not found: 404](#path-not-found-404)
--   [Routing](#routing)
-    -   [Links](#links)
-    -   [Prefixing URLs](#prefixing-urls)
-    -   [Programmatically changing pages](#programmatically-changing-pages)
--   [CSS](#css)
--   [Document &lt;head>](#document-head)
--   [Development server](#development-server)
--   [Advanced usage](#advanced-usage)
--   [Comparison to other React-powered static-site generators](#comparison-to-other-react-powered-static-site-generators)
+- [Other documentation to check out](#other-documentation-to-check-out)
+- [Goals](#goals)
+- [Usage](#usage)
+- [Requirements](#requirements)
+- [API](#api)
+  - [Configuration](#configuration)
+  - [CLI](#cli)
+  - [Node API](#node-api)
+- [Pages](#pages)
+  - [JS pages](#js-pages)
+  - [Markdown pages](#markdown-pages)
+    - [Markdown page wrapper components](#markdown-page-wrapper-components)
+    - [Import JS modules into jsxtreme-markdown](#import-js-modules-into-jsxtreme-markdown)
+  - [Non-page files within the pages directory](#non-page-files-within-the-pages-directory)
+  - [Path not found: 404](#path-not-found-404)
+- [Routing](#routing)
+  - [Links](#links)
+  - [Prefixing URLs](#prefixing-urls)
+  - [Programmatically changing pages](#programmatically-changing-pages)
+- [CSS](#css)
+- [Document &lt;head>](#document-head)
+- [Development server](#development-server)
+- [Advanced usage](#advanced-usage)
+- [Comparison to other React-powered static-site generators](#comparison-to-other-react-powered-static-site-generators)
 
 ## Other documentation to check out
 
--   [`docs/configuration.md`](docs/configuration.md)
--   [`docs/batfish-modules.md`](docs/batfish-modules.md)
--   [`docs/node-api.md`](docs/node-api.md)
--   [`docs/q-and-a.md`](docs/q-and-a.md)
+- [`docs/configuration.md`](docs/configuration.md)
+- [`docs/batfish-modules.md`](docs/batfish-modules.md)
+- [`docs/node-api.md`](docs/node-api.md)
+- [`docs/q-and-a.md`](docs/q-and-a.md)
 
 ## Goals
 
 Batfish aims to provide _the essentials_ for building excellent static websites with React and Webpack.
 
--   **(Universal) React.**
-    Use React components as your building blocks.
-    Your components are rendered into HTML pages at build time and then mounted in the browser for interactivity at run time.
--   **Super-powered Markdown pages.**
-    Batfish supports [jsxtreme-markdown] pages, which allow for interpolated JS expressions and JSX elements.
--   **Client-side routing with key features and minimal overhead.**
-    There is often no need for a big router library, but there _is_ a need for often-overlooked features like automatic link hijacking (via [link-hijacker]) and scroll restoration (via [scroll-restorer]).
--   **Essential optimizations.**
-    JS bundles split by page and loaded on demand.
-    Hashed asset filenames for long-term caching.
-    Essential CSS injected into static HTML (via [postcss-html-filter]).
-    And so on.
--   **Minimal configuration.**
-    Though almost every user will want to set a couple of configuration properties, you might not need more than that — and none are required.
--   **Minimal.**
-    Batfish does not aim to be an ecosystem unto itself.
-    Instead, we've kept the codebase focused on a finite set of problems, while allowing extensibility by providing clear access to the underlying tools (React, Webpack, and Babel).
-    We've also tried to abstract generalizable functionality into independent npm packages, like [jsxtreme-markdown], [link-hijacker], and [scroll-restorer].
-    You can use these packages outside of Batfish — they are not coupled to Batfish conventions or configuration.
+- **(Universal) React.**
+  Use React components as your building blocks.
+  Your components are rendered into HTML pages at build time and then mounted in the browser for interactivity at run time.
+- **Super-powered Markdown pages.**
+  Batfish supports [jsxtreme-markdown] pages, which allow for interpolated JS expressions and JSX elements.
+- **Client-side routing with key features and minimal overhead.**
+  There is often no need for a big router library, but there _is_ a need for often-overlooked features like automatic link hijacking (via [link-hijacker]) and scroll restoration (via [scroll-restorer]).
+- **Essential optimizations.**
+  JS bundles split by page and loaded on demand.
+  Hashed asset filenames for long-term caching.
+  Essential CSS injected into static HTML (via [postcss-html-filter]).
+  And so on.
+- **Minimal configuration.**
+  Though almost every user will want to set a couple of configuration properties, you might not need more than that — and none are required.
+- **Minimal.**
+  Batfish does not aim to be an ecosystem unto itself.
+  Instead, we've kept the codebase focused on a finite set of problems, while allowing extensibility by providing clear access to the underlying tools (React, Webpack, and Babel).
+  We've also tried to abstract generalizable functionality into independent npm packages, like [jsxtreme-markdown], [link-hijacker], and [scroll-restorer].
+  You can use these packages outside of Batfish — they are not coupled to Batfish conventions or configuration.
 
 ## Usage
 
-1.  Create a [configuration] module.
-2.  Create some [pages] as React components and/or Markdown documents.
-3.  Start the development server and work on your pages.
-4.  At some point, build your static site and deploy it.
+1. Create a [configuration] module.
+2. Create some [pages] as React components and/or Markdown documents.
+3. Start the development server and work on your pages.
+4. At some point, build your static site and deploy it.
 
 **Have a look at [`examples/basic/`](examples/basic) for a simple example project.**
 
 ## Requirements
 
--   You'll need Node >=6.
--   The client-side code has been tested down to IE11.
-    To support IE11, **a Promise polyfill is included by default.**
-    If you would like to provide your own Promise polyfill, set the [`includePromisePolyfill`] option to `false`.
+- You'll need Node >=6.
+- The client-side code has been tested down to IE11.
+  To support IE11, **a Promise polyfill is included by default.**
+  If you would like to provide your own Promise polyfill, set the [`includePromisePolyfill`] option to `false`.
 
 ## API
 
@@ -107,9 +107,9 @@ See [`docs/configuration.md`](docs/configuration.md) to learn about all the ways
 
 The CLI has three commands:
 
--   `start`: Start a development server and watch files for changes, rebuilding and refreshing as needed.
--   `build`: Build the static site.
--   `serve-static`: Serve the static site.
+- `start`: Start a development server and watch files for changes, rebuilding and refreshing as needed.
+- `build`: Build the static site.
+- `serve-static`: Serve the static site.
 
 All commands will look for your configuration module in the current working directory or where you point with the `--config` option.
 
@@ -132,9 +132,9 @@ and `src/pages/about/index.md` corresponds to the URL `/about/`.
 
 When a page is rendered, its component is passed the following props:
 
--   `location`: The browser's current [Location](https://developer.mozilla.org/en-US/docs/Web/API/Location).
-    (During the static build, this will only include the `pathname` property.)
--   `frontMatter`: The page's parsed front matter (parsed by [gray-matter]).
+- `location`: The browser's current [Location](https://developer.mozilla.org/en-US/docs/Web/API/Location).
+  (During the static build, this will only include the `pathname` property.)
+- `frontMatter`: The page's parsed front matter (parsed by [gray-matter]).
 
 ### JS pages
 
@@ -244,8 +244,8 @@ List lines of `import` or `require` statements that define variables you can use
 
 By default, the following lines are always specified:
 
--   `import prefixUrl from '@mapbox/batfish/modules/prefix-url'`: See [Prefixing URLs].
--   `import routeTo from '@mapbox/batfish/modules/route-to')`: See docs for the [`route-to`] module.
+- `import prefixUrl from '@mapbox/batfish/modules/prefix-url'`: See [Prefixing URLs].
+- `import routeTo from '@mapbox/batfish/modules/route-to')`: See docs for the [`route-to`] module.
 
 This means that those functions can be used with no additional configuration.
 Import your own modules and do more things.
@@ -336,8 +336,8 @@ The development server (for `start` and `serve-static` commands) is a [Browsersy
 Usually when you change a file, Webpack will recompile and the browser will automatically refresh.
 However, **the browser will not automatically refresh for the following changes**:
 
--   Adding or removing a page.
--   Changing a page's front matter.
+- Adding or removing a page.
+- Changing a page's front matter.
 
 When you do one of these things, restart the server to see your change.
 

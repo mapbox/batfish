@@ -15,44 +15,44 @@ You can specify an alternate location.
 
 **Below, "project directory" means either**:
 
--   the directory of your configuration module, if one is provided; or
--   the current working directory, if no configuration module is provided.
+- the directory of your configuration module, if one is provided; or
+- the current working directory, if no configuration module is provided.
 
 ## Table of contents
 
--   [Basic options](#basic-options)
-    -   [siteBasePath](#sitebasepath)
-    -   [siteOrigin](#siteorigin)
-    -   [applicationWrapperPath](#applicationwrapperpath)
-    -   [stylesheets](#stylesheets)
-    -   [browserslist](#browserslist)
-    -   [pagesDirectory](#pagesdirectory)
-    -   [outputDirectory](#outputdirectory)
-    -   [temporaryDirectory](#temporarydirectory)
--   [Advanced options](#advanced-options)
-    -   [dataSelectors](#dataselectors)
-    -   [vendorModules](#vendormodules)
-    -   [hijackLinks](#hijacklinks)
-    -   [webpackLoaders](#webpackloaders)
-    -   [webpackPlugins](#webpackplugins)
-    -   [webpackStaticIgnore](#webpackstaticignore)
-    -   [babelPlugins](#babelplugins)
-    -   [babelPresets](#babelpresets)
-    -   [babelExclude](#babelexclude)
-    -   [postcssPlugins](#postcssplugins)
-    -   [fileLoaderExtensions](#fileloaderextensions)
-    -   [jsxtremeMarkdownOptions](#jsxtrememarkdownoptions)
-    -   [includePromisePolyfill](#includepromisepolyfill)
-    -   [inlineJs](#inlinejs)
-    -   [production](#production)
-    -   [developmentDevtool](#developmentdevtool)
-    -   [productionDevtool](#productiondevtool)
-    -   [clearOutputDirectory](#clearoutputdirectory)
-    -   [unprocessedPageFiles](#unprocessedpagefiles)
-    -   [webpackConfigClientTransform](#webpackconfigclienttransform)
-    -   [webpackConfigStaticTransform](#webpackconfigstatictransform)
-    -   [port](#port)
-    -   [verbose](#verbose)
+- [Basic options](#basic-options)
+  - [siteBasePath](#sitebasepath)
+  - [siteOrigin](#siteorigin)
+  - [applicationWrapperPath](#applicationwrapperpath)
+  - [stylesheets](#stylesheets)
+  - [browserslist](#browserslist)
+  - [pagesDirectory](#pagesdirectory)
+  - [outputDirectory](#outputdirectory)
+  - [temporaryDirectory](#temporarydirectory)
+- [Advanced options](#advanced-options)
+  - [dataSelectors](#dataselectors)
+  - [vendorModules](#vendormodules)
+  - [hijackLinks](#hijacklinks)
+  - [webpackLoaders](#webpackloaders)
+  - [webpackPlugins](#webpackplugins)
+  - [webpackStaticIgnore](#webpackstaticignore)
+  - [babelPlugins](#babelplugins)
+  - [babelPresets](#babelpresets)
+  - [babelExclude](#babelexclude)
+  - [postcssPlugins](#postcssplugins)
+  - [fileLoaderExtensions](#fileloaderextensions)
+  - [jsxtremeMarkdownOptions](#jsxtrememarkdownoptions)
+  - [includePromisePolyfill](#includepromisepolyfill)
+  - [inlineJs](#inlinejs)
+  - [production](#production)
+  - [developmentDevtool](#developmentdevtool)
+  - [productionDevtool](#productiondevtool)
+  - [clearOutputDirectory](#clearoutputdirectory)
+  - [unprocessedPageFiles](#unprocessedpagefiles)
+  - [webpackConfigClientTransform](#webpackconfigclienttransform)
+  - [webpackConfigStaticTransform](#webpackconfigstatictransform)
+  - [port](#port)
+  - [verbose](#verbose)
 
 ## Basic options
 
@@ -145,11 +145,11 @@ Keys are selector names and values are functions that accept an object of build-
 
 The object received as an argument contains the following properties:
 
--   `pages`: An array of objects for pages.
-    Each page object includes the following:
-    -   `path`: The page's URL path.
-    -   `filePath`: Absolute path to the page's file.
-    -   `frontMatter`: Parsed front matter from the page's file.  
+- `pages`: An array of objects for pages.
+  Each page object includes the following:
+  - `path`: The page's URL path.
+  - `filePath`: Absolute path to the page's file.
+  - `frontMatter`: Parsed front matter from the page's file.  
 
 The return values of `dataSelectors` _must be stringifiable as JSON_.
 These values can be used in your components pages by `import`ing modules from `@mapbox/batfish/data/*`.
@@ -253,10 +253,10 @@ This option is passed directly to [`jsxtremeMarkdown.toComponentModule`].
 Please read the documentation for [`jsxtremeMarkdown.toComponentModule`'s `options`](https://github.com/mapbox/jsxtreme-markdown#options-1) for complete details.
 But here are some of the options you are more likely to want to use with Batfish:
 
--   `remarkPlugins` and `rehypePlugins` allow you provide [remark](https://github.com/wooorm/remark) and [rehype](https://github.com/wooorm/rehype) plugins, which get applied as your Markdown is converted to a React component.
-    There are a wide variety of plugins, from header slug insertions to Markdown syntax extensions to code block syntax highlighting and so on.
--   `prependJs` allows you to prepend JS to _every_ Markdown page in your site.
-    For example, if you have a utility function that you want to make available to every Markdown page, you can use this option to `import` it.
+- `remarkPlugins` and `rehypePlugins` allow you provide [remark](https://github.com/wooorm/remark) and [rehype](https://github.com/wooorm/rehype) plugins, which get applied as your Markdown is converted to a React component.
+  There are a wide variety of plugins, from header slug insertions to Markdown syntax extensions to code block syntax highlighting and so on.
+- `prependJs` allows you to prepend JS to _every_ Markdown page in your site.
+  For example, if you have a utility function that you want to make available to every Markdown page, you can use this option to `import` it.
 
 ### includePromisePolyfill
 
