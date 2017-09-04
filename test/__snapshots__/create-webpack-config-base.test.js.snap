@@ -40,7 +40,7 @@ Object {
         ],
       },
       Object {
-        "test": /\\\\/Users\\\\/davidclark\\\\/dev\\\\/mapbox\\\\/batfish\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\.md\\$/,
+        "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\.md\\$/,
         "use": Array [
           Object {
             "loader": "babel-loader",
@@ -170,7 +170,7 @@ Object {
         ],
       },
       Object {
-        "test": /\\\\/Users\\\\/davidclark\\\\/dev\\\\/mapbox\\\\/batfish\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\.md\\$/,
+        "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\.md\\$/,
         "use": Array [
           Object {
             "loader": "babel-loader",
@@ -307,7 +307,7 @@ Object {
         ],
       },
       Object {
-        "test": /\\\\/Users\\\\/davidclark\\\\/dev\\\\/mapbox\\\\/batfish\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\.md\\$/,
+        "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\.md\\$/,
         "use": Array [
           Object {
             "loader": "babel-loader",

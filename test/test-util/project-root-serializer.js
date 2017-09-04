@@ -1,10 +1,9 @@
 'use strict';
 
-const _ = require('lodash');
 const path = require('path');
 
 const absolutePathRegExp = new RegExp(
-  _.escapeRegExp(path.join(__dirname, '../..')),
+  path.join(__dirname, '../..').replace(/\//g, '\\\\{0,3}/'),
   'g'
 );
 
