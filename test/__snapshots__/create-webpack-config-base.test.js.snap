@@ -1,0 +1,420 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createWebpackConfigBase default Webpack config 1`] = `
+Object {
+  "bail": false,
+  "cache": true,
+  "devtool": "source-map",
+  "module": Object {
+    "rules": Array [
+      Object {
+        "exclude": /node_modules\\\\/!\\(@mapbox\\\\/batfish\\\\/\\)/,
+        "test": /\\\\\\.jsx\\?\\$/,
+        "use": Array [
+          Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
+              "compact": true,
+              "plugins": Array [
+                "syntax-dynamic-import",
+                "transform-class-properties",
+                Array [
+                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  Object {
+                    "packageName": "@mapbox/batfish/modules/md",
+                    "rehypePlugins": undefined,
+                    "remarkPlugins": undefined,
+                  },
+                ],
+                "transform-react-jsx-source",
+                "transform-react-jsx-self",
+              ],
+              "presets": Array [
+                "es2015",
+                "react",
+              ],
+            },
+          },
+        ],
+      },
+      Object {
+        "test": /\\\\/Users\\\\/davidclark\\\\/dev\\\\/mapbox\\\\/batfish\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\.md\\$/,
+        "use": Array [
+          Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
+              "compact": true,
+              "plugins": Array [
+                "syntax-dynamic-import",
+                "transform-class-properties",
+                Array [
+                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  Object {
+                    "packageName": "@mapbox/batfish/modules/md",
+                    "rehypePlugins": undefined,
+                    "remarkPlugins": undefined,
+                  },
+                ],
+                "transform-react-jsx-source",
+                "transform-react-jsx-self",
+              ],
+              "presets": Array [
+                "es2015",
+                "react",
+              ],
+            },
+          },
+          Object {
+            "loader": "@mapbox/jsxtreme-markdown-loader",
+            "options": Object {
+              "prependJs": Array [
+                "import { prefixUrl, prefixUrlAbsolute } from '@mapbox/batfish/modules/prefix-url';",
+                "import { routeTo, routeToPrefixed } from '@mapbox/batfish/modules/route-to';",
+              ],
+            },
+          },
+        ],
+      },
+      Object {
+        "loader": "file-loader",
+        "options": Object {
+          "digest": "hex",
+          "hash": "sha512",
+          "name": "[name].[ext]",
+        },
+        "test": /\\\\\\.\\(jpeg\\|jpg\\|png\\|gif\\|webp\\|mp4\\|webm\\|woff\\|woff2\\)\\$/,
+      },
+      Object {
+        "test": /\\\\\\.json\\$/,
+        "use": "json-loader",
+      },
+    ],
+  },
+  "output": Object {
+    "filename": "[name].js",
+    "path": "<PROJECT_ROOT>/_batfish_site",
+    "pathinfo": false,
+    "publicPath": "/assets/",
+  },
+  "performance": Object {
+    "hints": false,
+  },
+  "plugins": Array [
+    DefinePlugin {
+      "definitions": Object {
+        "process.env.NODE_ENV": "\\"development\\"",
+      },
+    },
+    WebpackChunkHash {
+      "additionalHashContent": [Function],
+      "algorithm": "md5",
+      "digest": "hex",
+    },
+  ],
+  "resolve": Object {
+    "alias": Object {
+      "@mapbox/batfish/data": "<PROJECT_ROOT>/_batfish_tmp/data",
+      "batfish-internal/application-wrapper": "<PROJECT_ROOT>/src/webpack/empty-application-wrapper.js",
+      "batfish-internal/context": "fake/batfish-context.js",
+    },
+  },
+  "resolveLoader": Object {
+    "modules": Array [
+      "<PROJECT_ROOT>/node_modules",
+      "node_modules",
+    ],
+  },
+}
+`;
+
+exports[`createWebpackConfigBase default production Webpack config 1`] = `
+Object {
+  "bail": true,
+  "cache": false,
+  "devtool": false,
+  "module": Object {
+    "rules": Array [
+      Object {
+        "exclude": /node_modules\\\\/!\\(@mapbox\\\\/batfish\\\\/\\)/,
+        "test": /\\\\\\.jsx\\?\\$/,
+        "use": Array [
+          Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": false,
+              "compact": true,
+              "plugins": Array [
+                "syntax-dynamic-import",
+                "transform-class-properties",
+                Array [
+                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  Object {
+                    "packageName": "@mapbox/batfish/modules/md",
+                    "rehypePlugins": undefined,
+                    "remarkPlugins": undefined,
+                  },
+                ],
+                "transform-react-remove-prop-types",
+              ],
+              "presets": Array [
+                "es2015",
+                "react",
+              ],
+            },
+          },
+        ],
+      },
+      Object {
+        "test": /\\\\/Users\\\\/davidclark\\\\/dev\\\\/mapbox\\\\/batfish\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\.md\\$/,
+        "use": Array [
+          Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": false,
+              "compact": true,
+              "plugins": Array [
+                "syntax-dynamic-import",
+                "transform-class-properties",
+                Array [
+                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  Object {
+                    "packageName": "@mapbox/batfish/modules/md",
+                    "rehypePlugins": undefined,
+                    "remarkPlugins": undefined,
+                  },
+                ],
+                "transform-react-remove-prop-types",
+              ],
+              "presets": Array [
+                "es2015",
+                "react",
+              ],
+            },
+          },
+          Object {
+            "loader": "@mapbox/jsxtreme-markdown-loader",
+            "options": Object {
+              "prependJs": Array [
+                "import { prefixUrl, prefixUrlAbsolute } from '@mapbox/batfish/modules/prefix-url';",
+                "import { routeTo, routeToPrefixed } from '@mapbox/batfish/modules/route-to';",
+              ],
+            },
+          },
+        ],
+      },
+      Object {
+        "loader": "file-loader",
+        "options": Object {
+          "digest": "hex",
+          "hash": "sha512",
+          "name": "[name]-[hash].[ext]",
+        },
+        "test": /\\\\\\.\\(jpeg\\|jpg\\|png\\|gif\\|webp\\|mp4\\|webm\\|woff\\|woff2\\)\\$/,
+      },
+      Object {
+        "test": /\\\\\\.json\\$/,
+        "use": "json-loader",
+      },
+    ],
+  },
+  "output": Object {
+    "filename": "[name].js",
+    "path": "<PROJECT_ROOT>/_batfish_site",
+    "pathinfo": false,
+    "publicPath": "/assets/",
+  },
+  "performance": Object {
+    "hints": false,
+  },
+  "plugins": Array [
+    DefinePlugin {
+      "definitions": Object {
+        "process.env.NODE_ENV": "\\"production\\"",
+      },
+    },
+    WebpackChunkHash {
+      "additionalHashContent": [Function],
+      "algorithm": "md5",
+      "digest": "hex",
+    },
+  ],
+  "resolve": Object {
+    "alias": Object {
+      "@mapbox/batfish/data": "<PROJECT_ROOT>/_batfish_tmp/data",
+      "batfish-internal/application-wrapper": "<PROJECT_ROOT>/src/webpack/empty-application-wrapper.js",
+      "batfish-internal/context": "fake/batfish-context.js",
+    },
+  },
+  "resolveLoader": Object {
+    "modules": Array [
+      "<PROJECT_ROOT>/node_modules",
+      "node_modules",
+    ],
+  },
+}
+`;
+
+exports[`createWebpackConfigBase with all Batfish config options that make a difference 1`] = `
+Object {
+  "bail": false,
+  "cache": true,
+  "devtool": "source-map",
+  "module": Object {
+    "rules": Array [
+      Object {
+        "exclude": /node_modules\\\\/nothing/,
+        "test": /\\\\\\.jsx\\?\\$/,
+        "use": Array [
+          Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
+              "compact": true,
+              "plugins": Array [
+                "syntax-dynamic-import",
+                "transform-class-properties",
+                Array [
+                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  Object {
+                    "packageName": "@mapbox/batfish/modules/md",
+                    "rehypePlugins": undefined,
+                    "remarkPlugins": Array [
+                      [Function],
+                      [Function],
+                    ],
+                  },
+                ],
+                [Function],
+                [Function],
+                "transform-react-jsx-source",
+                "transform-react-jsx-self",
+              ],
+              "presets": Array [
+                "es2015",
+                "react",
+                [Function],
+                [Function],
+              ],
+            },
+          },
+        ],
+      },
+      Object {
+        "test": /\\\\/Users\\\\/davidclark\\\\/dev\\\\/mapbox\\\\/batfish\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\.md\\$/,
+        "use": Array [
+          Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
+              "compact": true,
+              "plugins": Array [
+                "syntax-dynamic-import",
+                "transform-class-properties",
+                Array [
+                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  Object {
+                    "packageName": "@mapbox/batfish/modules/md",
+                    "rehypePlugins": undefined,
+                    "remarkPlugins": Array [
+                      [Function],
+                      [Function],
+                    ],
+                  },
+                ],
+                [Function],
+                [Function],
+                "transform-react-jsx-source",
+                "transform-react-jsx-self",
+              ],
+              "presets": Array [
+                "es2015",
+                "react",
+                [Function],
+                [Function],
+              ],
+            },
+          },
+          Object {
+            "loader": "@mapbox/jsxtreme-markdown-loader",
+            "options": Object {
+              "prependJs": Array [
+                "const add = (x, y) => x + y;",
+                "import egg from 'chicken';",
+                "import { prefixUrl, prefixUrlAbsolute } from '@mapbox/batfish/modules/prefix-url';",
+                "import { routeTo, routeToPrefixed } from '@mapbox/batfish/modules/route-to';",
+              ],
+              "remarkPlugins": Array [
+                [Function],
+                [Function],
+              ],
+            },
+          },
+        ],
+      },
+      Object {
+        "loader": "file-loader",
+        "options": Object {
+          "digest": "hex",
+          "hash": "sha512",
+          "name": "[name].[ext]",
+        },
+        "test": /\\\\\\.\\(\\.txt\\|\\.config\\)\\$/,
+      },
+      Object {
+        "test": /\\\\\\.json\\$/,
+        "use": "json-loader",
+      },
+      Object {
+        "test": /\\\\\\.jpg\\$/,
+        "use": "jpg-loader",
+      },
+      Object {
+        "test": /\\\\\\.png\\$/,
+        "use": "png-loader",
+      },
+    ],
+  },
+  "output": Object {
+    "filename": "[name].js",
+    "path": "<PROJECT_ROOT>/_batfish_site",
+    "pathinfo": true,
+    "publicPath": "/site/base/path/assets/",
+  },
+  "performance": Object {
+    "hints": "warning",
+  },
+  "plugins": Array [
+    DefinePlugin {
+      "definitions": Object {
+        "process.env.NODE_ENV": "\\"development\\"",
+      },
+    },
+    WebpackChunkHash {
+      "additionalHashContent": [Function],
+      "algorithm": "md5",
+      "digest": "hex",
+    },
+  ],
+  "resolve": Object {
+    "alias": Object {
+      "@mapbox/batfish/data": "<PROJECT_ROOT>/test/fake/tempoerary/directory/data",
+      "batfish-internal/application-wrapper": "<PROJECT_ROOT>/test/fixtures/empty-component.js",
+      "batfish-internal/context": "fake/batfish-context.js",
+    },
+  },
+  "resolveLoader": Object {
+    "modules": Array [
+      "<PROJECT_ROOT>/node_modules",
+      "node_modules",
+    ],
+  },
+}
+`;

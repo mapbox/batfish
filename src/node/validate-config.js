@@ -327,8 +327,8 @@ function validateConfig(
 
   // Throw config errors.
   if (configErrors.length) {
-    const error = new errorTypes.ConfigValidationErrors();
-    error.validationErrors = configErrors;
+    const error = new errorTypes.ConfigValidationError();
+    error.messages = configErrors;
     throw error;
   }
 

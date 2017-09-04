@@ -1,0 +1,281 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createWebpackConfigClient default Webpack config 1`] = `
+Object {
+  "createdWebpackConfigBase": true,
+  "entry": Object {
+    "app": Array [
+      "<PROJECT_ROOT>/src/webpack/batfish-app.js",
+    ],
+    "vendor": Array [
+      "<PROJECT_ROOT>/node_modules/es6-promise/auto.js",
+      "<PROJECT_ROOT>/node_modules/react",
+      "<PROJECT_ROOT>/node_modules/react-dom",
+      "<PROJECT_ROOT>/node_modules/react-helmet",
+      "<PROJECT_ROOT>/node_modules/@mapbox/scroll-restorer/index.js",
+      "<PROJECT_ROOT>/node_modules/@mapbox/link-hijacker/index.js",
+      "<PROJECT_ROOT>/node_modules/strip-color/index.js",
+    ],
+  },
+  "output": Object {
+    "chunkFilename": "[name].chunk.js",
+    "filename": "[name].js",
+  },
+  "plugins": Array [
+    AssetsWebpackPlugin {
+      "options": Object {
+        "filename": "assets.json",
+        "fullPath": true,
+        "path": "<PROJECT_ROOT>/_batfish_site",
+        "prettyPrint": false,
+        "processOutput": [Function],
+        "update": false,
+      },
+      "writer": [Function],
+    },
+    CommonsChunkPlugin {
+      "async": undefined,
+      "children": undefined,
+      "chunkNames": Array [
+        "vendor",
+      ],
+      "filenameTemplate": undefined,
+      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js3",
+      "minChunks": undefined,
+      "minSize": undefined,
+      "selectedChunks": undefined,
+    },
+    CommonsChunkPlugin {
+      "async": undefined,
+      "children": true,
+      "chunkNames": Array [
+        "app",
+      ],
+      "filenameTemplate": undefined,
+      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js4",
+      "minChunks": 4,
+      "minSize": undefined,
+      "selectedChunks": undefined,
+    },
+    CommonsChunkPlugin {
+      "async": undefined,
+      "children": undefined,
+      "chunkNames": Array [
+        "manifest",
+      ],
+      "filenameTemplate": undefined,
+      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js5",
+      "minChunks": undefined,
+      "minSize": undefined,
+      "selectedChunks": undefined,
+    },
+    DefinePlugin {
+      "definitions": Object {
+        "process.env.DEV_SERVER": false,
+      },
+    },
+  ],
+  "resolve": Object {
+    "alias": Object {
+      "react": "<PROJECT_ROOT>/node_modules/react",
+      "react-dom": "<PROJECT_ROOT>/node_modules/react-dom",
+      "react-helmet": "<PROJECT_ROOT>/node_modules/react-helmet",
+    },
+  },
+  "target": "web",
+}
+`;
+
+exports[`createWebpackConfigClient default production Webpack config 1`] = `
+Object {
+  "createdWebpackConfigBase": true,
+  "entry": Object {
+    "app": Array [
+      "<PROJECT_ROOT>/src/webpack/batfish-app.js",
+    ],
+    "vendor": Array [
+      "<PROJECT_ROOT>/node_modules/es6-promise/auto.js",
+      "<PROJECT_ROOT>/node_modules/react",
+      "<PROJECT_ROOT>/node_modules/react-dom",
+      "<PROJECT_ROOT>/node_modules/react-helmet",
+      "<PROJECT_ROOT>/node_modules/@mapbox/scroll-restorer/index.js",
+      "<PROJECT_ROOT>/node_modules/@mapbox/link-hijacker/index.js",
+      "<PROJECT_ROOT>/node_modules/strip-color/index.js",
+    ],
+  },
+  "output": Object {
+    "chunkFilename": "[name]-[chunkhash].chunk.js",
+    "filename": "[name]-[chunkhash].js",
+  },
+  "plugins": Array [
+    AssetsWebpackPlugin {
+      "options": Object {
+        "filename": "assets.json",
+        "fullPath": true,
+        "path": "<PROJECT_ROOT>/_batfish_site",
+        "prettyPrint": false,
+        "processOutput": [Function],
+        "update": false,
+      },
+      "writer": [Function],
+    },
+    CommonsChunkPlugin {
+      "async": undefined,
+      "children": undefined,
+      "chunkNames": Array [
+        "vendor",
+      ],
+      "filenameTemplate": undefined,
+      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js6",
+      "minChunks": undefined,
+      "minSize": undefined,
+      "selectedChunks": undefined,
+    },
+    CommonsChunkPlugin {
+      "async": undefined,
+      "children": true,
+      "chunkNames": Array [
+        "app",
+      ],
+      "filenameTemplate": undefined,
+      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js7",
+      "minChunks": 4,
+      "minSize": undefined,
+      "selectedChunks": undefined,
+    },
+    CommonsChunkPlugin {
+      "async": undefined,
+      "children": undefined,
+      "chunkNames": Array [
+        "manifest",
+      ],
+      "filenameTemplate": undefined,
+      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js8",
+      "minChunks": undefined,
+      "minSize": undefined,
+      "selectedChunks": undefined,
+    },
+    DefinePlugin {
+      "definitions": Object {
+        "process.env.DEV_SERVER": false,
+      },
+    },
+    FasterUglifyPlugin {
+      "options": Object {
+        "sourceMap": false,
+        "uglifyJS": Object {
+          "compress": Object {
+            "screw_ie8": true,
+            "warnings": false,
+          },
+          "mangle": Object {
+            "screw_ie8": true,
+          },
+          "output": Object {
+            "comments": false,
+            "screw_ie8": true,
+          },
+        },
+      },
+    },
+  ],
+  "resolve": Object {
+    "alias": Object {
+      "react": "<PROJECT_ROOT>/node_modules/react",
+      "react-dom": "<PROJECT_ROOT>/node_modules/react-dom",
+      "react-helmet": "<PROJECT_ROOT>/node_modules/react-helmet",
+    },
+  },
+  "target": "web",
+}
+`;
+
+exports[`createWebpackConfigClient with all Batfish config options that make a difference 1`] = `
+Object {
+  "createdWebpackConfigBase": true,
+  "entry": Object {
+    "app": Array [
+      "<PROJECT_ROOT>/test/sea-creatures.js",
+      "<PROJECT_ROOT>/test/land-creatures.js",
+      "<PROJECT_ROOT>/src/webpack/batfish-app.js",
+    ],
+    "vendor": Array [
+      "<PROJECT_ROOT>/node_modules/react",
+      "<PROJECT_ROOT>/node_modules/react-dom",
+      "<PROJECT_ROOT>/node_modules/react-helmet",
+      "<PROJECT_ROOT>/node_modules/@mapbox/scroll-restorer/index.js",
+      "<PROJECT_ROOT>/node_modules/@mapbox/link-hijacker/index.js",
+      "<PROJECT_ROOT>/node_modules/strip-color/index.js",
+      "pigman",
+      "revenge-of-pigman",
+    ],
+  },
+  "output": Object {
+    "chunkFilename": "[name].chunk.js",
+    "filename": "[name].js",
+  },
+  "plugins": Array [
+    AssetsWebpackPlugin {
+      "options": Object {
+        "filename": "assets.json",
+        "fullPath": true,
+        "path": "<PROJECT_ROOT>/test/fake/output/directory",
+        "prettyPrint": false,
+        "processOutput": [Function],
+        "update": false,
+      },
+      "writer": [Function],
+    },
+    CommonsChunkPlugin {
+      "async": undefined,
+      "children": undefined,
+      "chunkNames": Array [
+        "vendor",
+      ],
+      "filenameTemplate": undefined,
+      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js9",
+      "minChunks": undefined,
+      "minSize": undefined,
+      "selectedChunks": undefined,
+    },
+    CommonsChunkPlugin {
+      "async": undefined,
+      "children": true,
+      "chunkNames": Array [
+        "app",
+      ],
+      "filenameTemplate": undefined,
+      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js10",
+      "minChunks": 4,
+      "minSize": undefined,
+      "selectedChunks": undefined,
+    },
+    CommonsChunkPlugin {
+      "async": undefined,
+      "children": undefined,
+      "chunkNames": Array [
+        "manifest",
+      ],
+      "filenameTemplate": undefined,
+      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js11",
+      "minChunks": undefined,
+      "minSize": undefined,
+      "selectedChunks": undefined,
+    },
+    DefinePlugin {
+      "definitions": Object {
+        "process.env.DEV_SERVER": false,
+      },
+    },
+  ],
+  "resolve": Object {
+    "alias": Object {
+      "react": "<PROJECT_ROOT>/node_modules/react",
+      "react-dom": "<PROJECT_ROOT>/node_modules/react-dom",
+      "react-helmet": "<PROJECT_ROOT>/node_modules/react-helmet",
+    },
+  },
+  "target": "web",
+  "underwentClientTransform": true,
+}
+`;

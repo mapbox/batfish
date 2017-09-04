@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`postcssAbsoluteUrls works 1`] = `
+"
+      @font-face {
+        font-family: \\"Open Sans\\";
+        src: url(\\"https://www.fake-place.com/path/fonts/OpenSans-Regular-webfont.woff2\\") format(\\"woff2\\"),
+              url(\\"https://www.fake-place.com/fonts/OpenSans-Regular-webfont.woff\\") format(\\"woff\\");
+      }
+      body {
+        background: url('data:blergh');
+      }
+    "
+`;

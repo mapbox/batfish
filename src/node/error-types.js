@@ -4,14 +4,9 @@
 const fasterror = require('fasterror');
 
 const errorTypes = Object.freeze({
-  ConfigValidationErrors: (fasterror('ConfigValidationErrors'): Class<
-    ConfigValidationErrors
-  >),
   ConfigFatalError: (fasterror('ConfigFatalError'): Class<WrappedError>),
-  // Singular ConfigValidationError is just one. Plural is an array, with a
-  // validationErrors property.
-  ConfigValidationError: (fasterror('ConfigValidationError'): Class<
-    WrappedError
+  ConfigValidationError: (fasterror('ConfigValidationErrors'): Class<
+    ConfigValidationError
   >),
   WebpackFatalError: (fasterror('WebpackFatalError'): Class<WrappedError>),
   WebpackCompilationError: (fasterror('WebpackCompilationError'): Class<

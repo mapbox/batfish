@@ -24,10 +24,10 @@ function serveStatic(
   let batfishConfig;
   try {
     batfishConfig = validateConfig(rawConfig, projectDirectory);
-  } catch (ConfigValidationErrors) {
+  } catch (configError) {
     // setImmediate allows us to return the emitter before emitting the error.
     setImmediate(() => {
-      emitError(ConfigValidationErrors);
+      emitError(configError);
     });
     return emitter;
   }

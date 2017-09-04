@@ -49,7 +49,7 @@ describe('validateConfig', () => {
       fakePort: 1337
     };
     expect(() => validateConfig(invalidPropertyConfig)).toThrow(
-      errorTypes.ConfigValidationErrors
+      errorTypes.ConfigValidationError
     );
     const invalidPropertiesConfig = {
       fakeProduction: true,
@@ -57,7 +57,7 @@ describe('validateConfig', () => {
       fakeExternalStylesheets: null
     };
     expect(() => validateConfig(invalidPropertiesConfig)).toThrow(
-      errorTypes.ConfigValidationErrors
+      errorTypes.ConfigValidationError
     );
   });
 
@@ -77,7 +77,7 @@ describe('validateConfig', () => {
       pagesDirectory: '../some/directory'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      errorTypes.ConfigValidationErrors
+      errorTypes.ConfigValidationError
     );
   });
 
@@ -86,7 +86,7 @@ describe('validateConfig', () => {
       outputDirectory: '../some/directory'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      errorTypes.ConfigValidationErrors
+      errorTypes.ConfigValidationError
     );
   });
 
@@ -95,7 +95,7 @@ describe('validateConfig', () => {
       applicationWrapperPath: '../some/directory.wrapper.js'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      errorTypes.ConfigValidationErrors
+      errorTypes.ConfigValidationError
     );
   });
 
@@ -104,7 +104,7 @@ describe('validateConfig', () => {
       temporaryDirectory: '../some/directory'
     };
     expect(() => validateConfig(config, projectDirectory)).toThrow(
-      errorTypes.ConfigValidationErrors
+      errorTypes.ConfigValidationError
     );
   });
 

@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createWebpackConfigStatic default Webpack config 1`] = `
+Object {
+  "createdWebpackConfigBase": true,
+  "devtool": "source-map",
+  "entry": Object {
+    "static": "<PROJECT_ROOT>/src/webpack/static-render-pages.js",
+  },
+  "externals": Object {
+    "mkdirp": "mkdirp",
+    "react": "react",
+    "react-dom": "react-dom",
+    "uglify-js": "uglify-js",
+  },
+  "node": Object {
+    "Buffer": false,
+    "__dirname": false,
+    "__filename": false,
+    "console": false,
+    "global": false,
+    "process": false,
+    "setImmediate": false,
+  },
+  "output": Object {
+    "filename": "./static-render-pages.js",
+    "libraryTarget": "commonjs2",
+  },
+  "plugins": Array [
+    LimitChunkCountPlugin {
+      "options": Object {
+        "maxChunks": 1,
+      },
+    },
+  ],
+  "target": "node",
+}
+`;
+
+exports[`createWebpackConfigStatic with all Batfish config options that make a difference 1`] = `
+Object {
+  "createdWebpackConfigBase": true,
+  "devtool": "source-map",
+  "entry": Object {
+    "static": "<PROJECT_ROOT>/src/webpack/static-render-pages.js",
+  },
+  "externals": Object {
+    "mkdirp": "mkdirp",
+    "react": "react",
+    "react-dom": "react-dom",
+    "uglify-js": "uglify-js",
+  },
+  "module": Object {
+    "rules": Array [
+      Object {
+        "loader": "ignore-loader",
+        "test": /stuff\\\\/to\\\\/ignore/,
+      },
+    ],
+  },
+  "node": Object {
+    "Buffer": false,
+    "__dirname": false,
+    "__filename": false,
+    "console": false,
+    "global": false,
+    "process": false,
+    "setImmediate": false,
+  },
+  "output": Object {
+    "filename": "./static-render-pages.js",
+    "libraryTarget": "commonjs2",
+  },
+  "plugins": Array [
+    LimitChunkCountPlugin {
+      "options": Object {
+        "maxChunks": 1,
+      },
+    },
+  ],
+  "target": "node",
+  "underwentStaticTransform": true,
+}
+`;

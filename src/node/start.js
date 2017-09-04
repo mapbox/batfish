@@ -39,10 +39,10 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
   let batfishConfig;
   try {
     batfishConfig = validateConfig(rawConfig, projectDirectory);
-  } catch (configValidationErrors) {
+  } catch (configError) {
     // setImmediate allows us to return the emitter before emitting the error.
     setImmediate(() => {
-      emitError(configValidationErrors);
+      emitError(configError);
     });
     return emitter;
   }
