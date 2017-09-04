@@ -405,7 +405,7 @@ Object {
   ],
   "resolve": Object {
     "alias": Object {
-      "@mapbox/batfish/data": "<PROJECT_ROOT>/test/fake/tempoerary/directory/data",
+      "@mapbox/batfish/data": "<PROJECT_ROOT>/test/fake/temporary/directory/data",
       "batfish-internal/application-wrapper": "<PROJECT_ROOT>/test/fixtures/empty-component.js",
       "batfish-internal/context": "fake/batfish-context.js",
     },

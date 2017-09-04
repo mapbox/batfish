@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`writeContextModule with 404 and some config variation 1`] = `
+"export const batfishContext = {
+  selectedConfig: {
+    siteBasePath: \\"/different/base/path\\",
+    siteOrigin: \\"\\",
+    hijackLinks: false
+  },
+  routes: [
+    {
+      path: \\"/one/\\",
+      getPage: () =>
+        import(/* webpackChunkName: \\"one\\" */
+        \\"module/file/path/forfake/pages/directory/one.js\\")
+    },
+    {
+      path: \\"/three/four/\\",
+      getPage: () =>
+        import(/* webpackChunkName: \\"three-four\\" */
+        \\"module/file/path/forfake/pages/directory/three/four/index.js\\")
+    },
+    {
+      path: \\"/404/\\",
+      getPage: () =>
+        import(/* webpackChunkName: \\"not-found\\" */
+        \\"module/file/path/forfake/pages/directory/404.js\\"),
+
+      is404: true
+    }
+  ],
+  notFoundRoute: {
+    path: \\"/404/\\",
+    getPage: () =>
+      import(/* webpackChunkName: \\"not-found\\" */
+      \\"module/file/path/forfake/pages/directory/404.js\\"),
+
+    is404: true
+  }
+};
+"
+`;
+
+exports[`writeContextModule without 404 1`] = `
+"export const batfishContext = {
+  selectedConfig: {
+    siteBasePath: \\"/fake/site/base/path\\",
+    siteOrigin: \\"https://www.fake-origin.com\\",
+    hijackLinks: true
+  },
+  routes: [
+    {
+      path: \\"/one/\\",
+      getPage: () =>
+        import(/* webpackChunkName: \\"one\\" */
+        \\"module/file/path/forfake/pages/directory/one.js\\")
+    },
+    {
+      path: \\"/two/\\",
+      getPage: () =>
+        import(/* webpackChunkName: \\"two\\" */
+        \\"module/file/path/forfake/pages/directory/two/index.md\\")
+    },
+    {
+      path: \\"/three/four/\\",
+      getPage: () =>
+        import(/* webpackChunkName: \\"three-four\\" */
+        \\"module/file/path/forfake/pages/directory/three/four/index.js\\")
+    }
+  ],
+  notFoundRoute: {
+    path: \\"\\",
+    getPage: () => {
+      throw new Error(\\"No matching route.\\");
+    },
+    is404: true
+  }
+};
+"
+`;

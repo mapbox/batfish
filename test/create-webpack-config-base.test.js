@@ -11,6 +11,9 @@ jest.mock('../src/node/write-context-module', () => {
   return jest.fn(() => Promise.resolve('fake/batfish-context.js'));
 });
 
+// Mock mkdirp so validateConfig does not create a temporary directory.
+jest.mock('mkdirp', () => ({ sync: jest.fn() }));
+
 expect.addSnapshotSerializer(projectRootSerializer);
 
 function createBatfishConfig(options) {
@@ -94,7 +97,7 @@ describe('createWebpackConfigBase', () => {
         __dirname,
         './fixtures/empty-component.js'
       ),
-      temporaryDirectory: path.join(__dirname, './fake/tempoerary/directory')
+      temporaryDirectory: path.join(__dirname, './fake/temporary/directory')
     });
     return createWebpackConfigBase(batfishConfig).then(webpackConfig => {
       expect(webpackConfig).toMatchSnapshot();

@@ -8,26 +8,25 @@ const tempy = require('tempy');
 const writePageModule = require('../src/node/write-page-module');
 
 describe('writePageModule', () => {
-  const tmp = tempy.directory();
+  let tmp;
   const pageComponentPath = path.join(
     __dirname,
     './fixtures/write-page-module/page-component-module.js'
   );
 
   const createAndReadPageModule = (batfishConfig, pageData) => {
+    tmp = tempy.directory();
     return pify(mkdirp)(tmp)
-      .then(() => {
-        return writePageModule(batfishConfig, pageData);
-      })
-      .then(filePath => {
-        // Because this uses require, we need to avoid the require cache by
-        // creating files with different names for each test.
-        return require(filePath);
-      });
+      .then(() => writePageModule(batfishConfig, pageData))
+      .then(filePath => require(filePath));
   };
 
   afterEach(() => {
-    return del(tmp, { force: true });
+    if (tmp) {
+      return del(tmp, { force: true }).then(() => {
+        tmp = null;
+      });
+    }
   });
 
   test('home without any front matter', () => {

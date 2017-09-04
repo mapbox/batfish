@@ -10,6 +10,9 @@ jest.mock('../src/node/create-webpack-config-base', () => {
   return jest.fn(() => Promise.resolve({ createdWebpackConfigBase: true }));
 });
 
+// Mock mkdirp so validateConfig does not create a temporary directory.
+jest.mock('mkdirp', () => ({ sync: jest.fn() }));
+
 expect.addSnapshotSerializer(projectRootSerializer);
 
 function createBatfishConfig(options) {

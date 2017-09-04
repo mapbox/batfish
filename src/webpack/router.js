@@ -76,7 +76,7 @@ class Router extends React.PureComponent<Props, State> {
       scrollToFragment();
     }
 
-    routeTo._onRouteTo(this.routeTo);
+    routeTo._setRouteToHandler(this.routeTo);
     window.addEventListener('popstate', event => {
       event.preventDefault();
       this.changePage({
