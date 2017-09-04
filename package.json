@@ -192,7 +192,8 @@
     "react-dom": "^15.5.4",
     "react-helmet": "^5.2.0",
     "remark-cli": "^4.0.0",
-    "remark-validate-links": "^7.0.0"
+    "remark-validate-links": "^7.0.0",
+    "strip-ansi": "^4.0.0"
   },
   "optionalDependencies": {},
   "engines": {

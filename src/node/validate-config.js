@@ -15,41 +15,144 @@ const errorTypes = require('./error-types');
 
 // !!!
 // Whenever you add a new configuration property,
-// you'll need to add it to the following list.
-const validConfigProperties = new Set([
-  'siteBasePath',
-  'siteOrigin',
-  'applicationWrapperPath',
-  'stylesheets',
-  'browserslist',
-  'pagesDirectory',
-  'outputDirectory',
-  'temporaryDirectory',
-  'dataSelectors',
-  'vendorModules',
-  'hijackLinks',
-  'webpackLoaders',
-  'webpackPlugins',
-  'webpackStaticIgnore',
-  'babelPlugins',
-  'babelPresets',
-  'babelExclude',
-  'postcssPlugins',
-  'pageSpecificCss',
-  'fileLoaderExtensions',
-  'jsxtremeMarkdownOptions',
-  'includePromisePolyfill',
-  'inlineJs',
-  'production',
-  'developmentDevtool',
-  'productionDevtool',
-  'clearOutputDirectory',
-  'unprocessedPageFiles',
-  'webpackConfigClientTransform',
-  'webpackConfigStaticTransform',
-  'port',
-  'verbose'
-]);
+// you'll need to add it to this schema.
+const configSchema = {
+  siteBasePath: {
+    validator: _.isString,
+    description: 'string'
+  },
+  siteOrigin: {
+    validator: _.isString,
+    description: 'string'
+  },
+  applicationWrapperPath: {
+    validator: isAbsolutePath,
+    description: 'absolute path'
+  },
+  stylesheets: {
+    validator: isArrayOf(isValidStylesheetItem),
+    description:
+      'array of absolute file paths or globs, absolute URLs, or arrays of these things'
+  },
+  browserslist: {
+    validator: x => _.isString(x) || isArrayOf(_.isString)(x),
+    description: 'string or array of strings'
+  },
+  pagesDirectory: {
+    validator: isAbsolutePath,
+    description: 'absolute path'
+  },
+  outputDirectory: {
+    validator: isAbsolutePath,
+    description: 'absolute path'
+  },
+  temporaryDirectory: {
+    validator: isAbsolutePath,
+    description: 'absolute path'
+  },
+  dataSelectors: {
+    validator: x => _.isPlainObject(x) && _.every(x, _.isFunction),
+    description: 'object whose values are functions'
+  },
+  vendorModules: {
+    validator: isArrayOf(_.isString),
+    description: 'array of strings'
+  },
+  hijackLinks: {
+    validator: _.isBoolean,
+    description: 'boolean'
+  },
+  webpackLoaders: {
+    validator: isArrayOf(_.isPlainObject),
+    description: 'array of Webpack Rule objects'
+  },
+  webpackPlugins: {
+    validator: isArrayOf(_.isObject),
+    description: 'array of Webpack plugins'
+  },
+  // No good way to validate webpackStaticIgnore, which is a Webpack Condition
+  // so might be almost any type:
+  // https://webpack.js.org/configuration/module/#condition
+  webpackStaticIgnore: {
+    validator: () => true
+  },
+  babelPlugins: {
+    validator: isArrayOf(_.isFunction),
+    description:
+      'array of functions (require your plugins, do not reference them with a string)'
+  },
+  babelPresets: {
+    validator: isArrayOf(_.isFunction),
+    description:
+      'array of functions (require your presets, do not reference them with a string)'
+  },
+  // No good way to validate babelExclude, which is a Webpack Condition
+  // (see above).
+  babelExclude: {
+    validator: () => true
+  },
+  postcssPlugins: {
+    validator: x => _.isFunction(x) || isArrayOf(_.isFunction)(x),
+    description: 'function or array of functions'
+  },
+  fileLoaderExtensions: {
+    validator: x => isArrayOf(_.isString)(x) || _.isFunction(x),
+    description: 'array of strings or a function'
+  },
+  jsxtremeMarkdownOptions: {
+    validator: _.isPlainObject,
+    description: 'object'
+  },
+  pageSpecificCss: {
+    validator: _.isBoolean,
+    description: 'boolean'
+  },
+  includePromisePolyfill: {
+    validator: _.isBoolean,
+    description: 'boolean'
+  },
+  inlineJs: {
+    validator: isArrayOf(x => isAbsolutePath(x.filename) || _.isBoolean(x)),
+    description:
+      'array of objects with an absolute path for the "filename" prop, and an optional "boolean" uglify prop'
+  },
+  production: {
+    validator: _.isBoolean,
+    description: 'boolean'
+  },
+  developmentDevtool: {
+    validator: x => _.isString(x) || x === false,
+    description: 'string or the boolean value false'
+  },
+  productionDevtool: {
+    validator: x => _.isString(x) || x === false,
+    description: 'string or the boolean value false'
+  },
+  clearOutputDirectory: {
+    validator: _.isBoolean,
+    description: 'boolean'
+  },
+  unprocessedPageFiles: {
+    validator: isArrayOf(x => !isAbsolutePath(x)),
+    description: 'globs relative to the pagesDirectory, not absolute paths'
+  },
+  webpackConfigClientTransform: {
+    validator: _.isFunction,
+    description: 'function'
+  },
+  webpackConfigStaticTransform: {
+    validator: _.isFunction,
+    description: 'function'
+  },
+  port: {
+    validator: _.isNumber,
+    description: 'number'
+  },
+  verbose: {
+    validator: _.isBoolean,
+    description: 'boolean'
+  }
+};
 
 // Add defaults to a raw config object, and validate it.
 // All options and defaults are documented in the README.
@@ -124,14 +227,6 @@ function validateConfig(
     config.postcssPlugins = defaultPostcssPlugins;
   }
 
-  Object.keys(config).forEach(propertyName => {
-    if (!validConfigProperties.has(propertyName)) {
-      configErrors.push(
-        `${chalk.yellow(propertyName)} is not a valid configuration property.`
-      );
-    }
-  });
-
   const validatePropertyType = (
     propertyName: string,
     predicate: any => boolean,
@@ -148,30 +243,20 @@ function validateConfig(
     }
   };
 
-  // !!!
-  // Any changes to the acceptable values for a config property need to be
-  // accounted for in these validation functions.
-
-  validatePropertyType('siteBasePath', _.isString, 'string');
-
-  validatePropertyType('siteOrigin', _.isString, 'string');
-
-  validatePropertyType(
-    'applicationWrapperPath',
-    isAbsolutePath,
-    'absolute path'
-  );
-  validatePropertyType(
-    'applicationWrapperPath',
-    isExistingFile,
-    'file that exists'
-  );
-
-  validatePropertyType(
-    'stylesheets',
-    isArrayOf(isValidStylesheetItem),
-    'array of absolute file paths or globs, absolute URLs, or arrays of these things'
-  );
+  Object.keys(config).forEach(propertyName => {
+    const optionSchema = configSchema[propertyName];
+    if (!optionSchema) {
+      configErrors.push(
+        `${chalk.yellow(propertyName)} is not a valid configuration property.`
+      );
+      return;
+    }
+    validatePropertyType(
+      propertyName,
+      optionSchema.validator,
+      optionSchema.description
+    );
+  });
 
   // Validate every stylesheet entry. URLs will be checked when they actually
   // are called. And it's ok if globs don't point to existing files yet.
@@ -188,142 +273,6 @@ function validateConfig(
       );
     });
   }
-
-  validatePropertyType(
-    'browserslist',
-    x => {
-      return _.isString(x) || isArrayOf(_.isString)(x);
-    },
-    'string or array of strings'
-  );
-
-  validatePropertyType('pagesDirectory', isAbsolutePath, 'absolute path');
-  validatePropertyType(
-    'pagesDirectory',
-    isExistingFile,
-    'directory that exists'
-  );
-
-  validatePropertyType('outputDirectory', isAbsolutePath, 'absolute path');
-
-  validatePropertyType('temporaryDirectory', isAbsolutePath, 'absolute path');
-
-  validatePropertyType(
-    'dataSelectors',
-    x => {
-      return _.isPlainObject(x) && _.every(x, _.isFunction);
-    },
-    'object whose property values are functions.'
-  );
-
-  validatePropertyType(
-    'vendorModules',
-    isArrayOf(_.isString),
-    'array of strings'
-  );
-
-  validatePropertyType('hijackLinks', _.isBoolean, 'boolean');
-
-  validatePropertyType(
-    'webpackLoaders',
-    isArrayOf(_.isPlainObject),
-    'array of Webpack Rule objects'
-  );
-
-  validatePropertyType(
-    'webpackPlugins',
-    isArrayOf(_.isObject),
-    'array of Webpack plugins'
-  );
-  // No good way to validate webpackStaticIgnore, which is a Webpack Condition
-  // so might be almost any type:
-  // https://webpack.js.org/configuration/module/#condition
-
-  validatePropertyType(
-    'babelPlugins',
-    isArrayOf(_.isFunction),
-    'array of functions (require your plugins, do not reference them with a string)'
-  );
-
-  validatePropertyType(
-    'babelPresets',
-    isArrayOf(_.isFunction),
-    'array of functions (require your presets, do not reference them with a string)'
-  );
-  // No good way to validate babelExclude, which is a Webpack Condition
-  // (see above).
-
-  validatePropertyType(
-    'postcssPlugins',
-    x => {
-      return _.isFunction(x) || isArrayOf(_.isFunction)(x);
-    },
-    'function or array of functions'
-  );
-
-  validatePropertyType('pageSpecificCss', _.isBoolean, 'boolean');
-
-  validatePropertyType(
-    'fileLoaderExtensions',
-    x => {
-      return isArrayOf(_.isString)(x) || _.isFunction(x);
-    },
-    'array of strings or function'
-  );
-
-  validatePropertyType('jsxtremeMarkdownOptions', _.isPlainObject, 'object');
-
-  validatePropertyType('includePromisePolyfill', _.isBoolean, 'boolean');
-
-  validatePropertyType(
-    'inlineJs',
-    isArrayOf(x => {
-      return isAbsolutePath(x.filename) || _.isBoolean(x);
-    }),
-    'array of objects with an absolute path for the "filename" prop, and an optional "boolean" uglify prop'
-  );
-
-  validatePropertyType('production', _.isBoolean, 'boolean');
-
-  validatePropertyType(
-    'developmentDevtool',
-    x => {
-      return _.isString(x) || x === false;
-    },
-    'string or the boolean value false'
-  );
-
-  validatePropertyType(
-    'productionDevtool',
-    x => {
-      return _.isString(x) || x === false;
-    },
-    'string or the boolean value false'
-  );
-
-  validatePropertyType('clearOutputDirectory', _.isBoolean, 'boolean');
-
-  validatePropertyType(
-    'unprocessedPageFiles',
-    isArrayOf(x => !isAbsolutePath(x)),
-    'globs relative to the pagesDirectory, not absolute paths'
-  );
-
-  validatePropertyType(
-    'webpackConfigClientTransform',
-    _.isFunction,
-    'function'
-  );
-
-  validatePropertyType(
-    'webpackConfigStaticTransform',
-    _.isFunction,
-    'function'
-  );
-
-  validatePropertyType('port', _.isNumber, 'number');
-
-  validatePropertyType('verbose', _.isBoolean, 'boolean');
 
   // Throw config errors.
   if (configErrors.length) {
@@ -361,7 +310,7 @@ function isAbsolutePath(value: *): boolean {
 }
 
 function isArrayOf(itemCheck: (*) => boolean): (*) => boolean {
-  return (value: *) => _.isArray(value) && value.every(itemCheck);
+  return (value: *) => Array.isArray(value) && value.every(itemCheck);
 }
 
 function isExistingFile(value: *): boolean {

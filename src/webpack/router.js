@@ -133,6 +133,8 @@ class Router extends React.PureComponent<Props, State> {
       nextLocation.hash,
       nextLocation.search
     ].join('');
+    // Call the change-start callbacks immediately, not after the page chunk
+    // has already been fetched.
     const startChange = _invokeRouteChangeStartCallbacks(nextLocation.pathname);
     matchingRoute
       .getPage()

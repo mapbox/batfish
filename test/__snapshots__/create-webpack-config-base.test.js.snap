@@ -366,7 +366,7 @@ Object {
           "hash": "sha512",
           "name": "[name].[ext]",
         },
-        "test": /\\\\\\.\\(\\.txt\\|\\.config\\)\\$/,
+        "test": /\\\\\\.\\(txt\\|config\\)\\$/,
       },
       Object {
         "test": /\\\\\\.json\\$/,

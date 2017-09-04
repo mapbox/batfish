@@ -79,7 +79,7 @@ describe('createWebpackConfigBase', () => {
         function babelPluginOne() {},
         function babelPluginTwo() {}
       ],
-      fileLoaderExtensions: ['.txt', '.config'],
+      fileLoaderExtensions: ['txt', 'config'],
       siteBasePath: '/site/base/path/',
       verbose: true,
       babelExclude: /node_modules\/nothing/,
