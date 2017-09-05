@@ -316,7 +316,7 @@ This optimization ensures that the loading of an external stylesheet does not bl
 
 Assets referenced by `url()`s in your stylesheets will be hashed and copied to Batfish's [`outputDirectory`].
 
-You can also add page-specific CSS (processed through the same PostCSS pipeline), if you find yourself add lots of CSS rules that are not used on multiple pages.
+You can also add page-specific CSS (processed through the same PostCSS pipeline), if you find yourself adding lots of CSS rules that are not used on multiple pages.
 Read more about ["Page-specific CSS"].
 
 **If you want to bypass this CSS system and use your own, just do it.**
