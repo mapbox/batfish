@@ -40,11 +40,7 @@ class StaticHtmlPage extends React.Component<Props> {
       );
     }
 
-    let app = (
-      <div id="batfish-content">
-        {this.props.content}
-      </div>
-    );
+    let app = <div id="batfish-content">{this.props.content}</div>;
     if (this.props.rawAppHtml) {
       app = (
         <div
