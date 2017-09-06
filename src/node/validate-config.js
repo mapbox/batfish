@@ -35,6 +35,7 @@ const validConfigProperties = new Set([
   'babelPresets',
   'babelExclude',
   'postcssPlugins',
+  'pageSpecificCss',
   'fileLoaderExtensions',
   'jsxtremeMarkdownOptions',
   'includePromisePolyfill',
@@ -97,6 +98,7 @@ function validateConfig(
     ],
     jsxtremeMarkdownOptions: {},
     includePromisePolyfill: true,
+    pageSpecificCss: true,
     developmentDevtool: 'source-map',
     productionDevtool: false,
     clearOutputDirectory: true
@@ -258,6 +260,8 @@ function validateConfig(
     },
     'function or array of functions'
   );
+
+  validatePropertyType('pageSpecificCss', _.isBoolean, 'boolean');
 
   validatePropertyType(
     'fileLoaderExtensions',

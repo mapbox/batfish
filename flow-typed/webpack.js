@@ -38,7 +38,7 @@ declare type webpack$Rule = {
   exclude?: webpack$Condition,
   loader?: string,
   options?: Object,
-  use?: string | Array<{ loader: string, options: Object }>
+  use?: string | Array<{ loader: string, options?: Object }>
 };
 
 declare type webpack$Configuration = {|
@@ -57,6 +57,7 @@ declare type webpack$Configuration = {|
     [id: string]: string
   },
   resolveLoader?: {|
+    alias: { [id: string]: string },
     modules?: Array<string>
   |},
   resolve?: {|

@@ -6,12 +6,9 @@ const path = require('path');
 const chalk = require('chalk');
 const fs = require('fs');
 const _ = require('lodash');
-const url = require('url');
 const pify = require('pify');
 const globby = require('globby');
 const postcss = require('postcss');
-const postcssUrl = require('postcss-url');
-const postcssCsso = require('postcss-csso');
 const isAbsoluteUrl = require('is-absolute-url');
 const mkdirp = require('mkdirp');
 const pTry = require('p-try');
@@ -19,9 +16,9 @@ const hasha = require('hasha');
 const Concat = require('concat-with-sourcemaps');
 const constants = require('./constants');
 const postcssAbsoluteUrls = require('./postcss-absolute-urls');
-const joinUrlParts = require('./join-url-parts');
 const rethrowPostcssError = require('./rethrow-postcss-error');
 const errorTypes = require('./error-types');
+const getPostcssPlugins = require('./get-postcss-plugins');
 
 type StylesheetData = {|
   +locator: string,
@@ -89,39 +86,11 @@ function compileStylesheets(
         });
     };
 
-    const postcssPlugins = [
-      // Copy all url-referenced assets to the outputDirectory.
-      postcssUrl({
-        url: 'copy',
-        assetsPath: './',
-        useHash: true
-      }),
-      // Rewrite urls so they are root-relative. This way they'll work both from
-      // inlined CSS (in the static build) and the stylesheet itself.
-      postcssUrl({
-        url: asset => {
-          const parsedUrl = url.parse(asset.url);
-          if (parsedUrl.protocol) {
-            return asset.url;
-          }
-          return joinUrlParts(
-            batfishConfig.siteBasePath,
-            constants.PUBLIC_PATH_ASSETS,
-            asset.url
-          );
-        }
-      })
-    ].concat(batfishConfig.postcssPlugins);
-
-    if (batfishConfig.production) {
-      postcssPlugins.push(postcssCsso());
-    }
-
     const processSingleStylesheetFromFs = (
       filename: string
     ): Promise<StylesheetData> => {
       return pify(fs.readFile)(filename, 'utf8').then(css => {
-        return postcss(postcssPlugins)
+        return postcss(getPostcssPlugins(batfishConfig))
           .process(css, {
             from: filename,
             to: cssTarget,

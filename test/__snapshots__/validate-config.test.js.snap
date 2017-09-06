@@ -25,6 +25,7 @@ Object {
   "includePromisePolyfill": true,
   "jsxtremeMarkdownOptions": Object {},
   "outputDirectory": "/my-project/_batfish_site",
+  "pageSpecificCss": true,
   "pagesDirectory": "/my-project/src/pages",
   "port": 8080,
   "postcssPlugins": Array [

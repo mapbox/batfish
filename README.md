@@ -316,6 +316,9 @@ This optimization ensures that the loading of an external stylesheet does not bl
 
 Assets referenced by `url()`s in your stylesheets will be hashed and copied to Batfish's [`outputDirectory`].
 
+You can also add page-specific CSS (processed through the same PostCSS pipeline), if you find yourself adding lots of CSS rules that are not used on multiple pages.
+Read more about ["Page-specific CSS"].
+
 **If you want to bypass this CSS system and use your own, just do it.**
 You can use the [`webpackLoaders`] and [`webpackPlugins`] configuration options to do whatever you need.
 
@@ -412,3 +415,5 @@ Please let us know what you think!
 [`route-to`]: docs/batfish-modules.md#route-to
 
 [`prefix-url`]: docs/batfish-modules.md#prefix-url
+
+["page-specific css"]: docs/advanced-usage.md#page-specific-css

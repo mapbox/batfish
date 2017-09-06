@@ -8,6 +8,7 @@ const WebpackChunkHash = require('webpack-chunk-hash');
 const writeContextModule = require('./write-context-module');
 const joinUrlParts = require('./join-url-parts');
 const constants = require('./constants');
+const getPostcssPlugins = require('./get-postcss-plugins');
 
 // Cache it to ensure we don't do unnecessary work within one process.
 let cachedConfig;
@@ -92,6 +93,62 @@ function createWebpackConfigBase(
       );
     }
 
+    let moduleRules = [
+      {
+        test: /\.jsx?$/,
+        exclude: batfishConfig.babelExclude,
+        use: [babelLoaderConfig]
+      },
+      {
+        test: new RegExp(
+          _.escapeRegExp(batfishConfig.pagesDirectory) + '.*\\.md$'
+        ),
+        use: [
+          babelLoaderConfig,
+          {
+            loader: '@mapbox/jsxtreme-markdown-loader',
+            options: jsxtremeMarkdownOptions
+          }
+        ]
+      },
+      // Static assets are copied into assets/ with an added hash,
+      // and when you require() them you'll get the proper
+      // filename (with hash).
+      {
+        test: fileLoaderTest,
+        loader: 'file-loader',
+        options: {
+          hash: 'sha512',
+          digest: 'hex',
+          name: batfishConfig.production
+            ? '[name]-[hash].[ext]'
+            : '[name].[ext]'
+        }
+      },
+      // JSON!
+      {
+        test: /\.json$/,
+        use: 'json-loader'
+      }
+    ];
+    if (batfishConfig.pageSpecificCss) {
+      moduleRules.push({
+        test: new RegExp(
+          _.escapeRegExp(batfishConfig.pagesDirectory) + '.*\\.css$'
+        ),
+        use: [
+          babelLoaderConfig,
+          {
+            loader: 'react-helmet-postcss-loader',
+            options: { postcssPlugins: getPostcssPlugins(batfishConfig) }
+          }
+        ]
+      });
+    }
+    if (batfishConfig.webpackLoaders) {
+      moduleRules = moduleRules.concat(batfishConfig.webpackLoaders);
+    }
+
     const config: webpack$Configuration = {
       output: {
         path: batfishConfig.outputDirectory,
@@ -106,8 +163,14 @@ function createWebpackConfigBase(
       performance: {
         hints: batfishConfig.verbose ? 'warning' : false
       },
-      // Register local loaders
       resolveLoader: {
+        // Register local loaders.
+        alias: {
+          'react-helmet-postcss-loader': path.join(
+            __dirname,
+            './react-helmet-postcss-loader.js'
+          )
+        },
         // Loader names need to be strings, and to allow them to be looked
         // up within batfish's module dependencies, not just the project's,
         // we need this.
@@ -117,44 +180,7 @@ function createWebpackConfigBase(
         alias: aliases
       },
       module: {
-        rules: [
-          {
-            test: /\.jsx?$/,
-            exclude: batfishConfig.babelExclude,
-            use: [babelLoaderConfig]
-          },
-          {
-            test: new RegExp(
-              _.escapeRegExp(batfishConfig.pagesDirectory) + '.*.md$'
-            ),
-            use: [
-              babelLoaderConfig,
-              {
-                loader: '@mapbox/jsxtreme-markdown-loader',
-                options: jsxtremeMarkdownOptions
-              }
-            ]
-          },
-          // Static assets are copied into assets/ with an added hash,
-          // and when you require() them you'll get the proper
-          // filename (with hash).
-          {
-            test: fileLoaderTest,
-            loader: 'file-loader',
-            options: {
-              hash: 'sha512',
-              digest: 'hex',
-              name: batfishConfig.production
-                ? '[name]-[hash].[ext]'
-                : '[name].[ext]'
-            }
-          },
-          // JSON!
-          {
-            test: /\.json$/,
-            use: 'json-loader'
-          }
-        ].concat(batfishConfig.webpackLoaders || [])
+        rules: moduleRules
       },
       plugins: [
         // Define global variables available in source JS.
