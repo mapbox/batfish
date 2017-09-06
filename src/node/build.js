@@ -159,9 +159,7 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
         'utf8'
       );
 
-      const uglified = UglifyJs.minify(manifestJs, {
-        fromString: true
-      });
+      const uglified = UglifyJs.minify(manifestJs);
       if (uglified.error) throw uglified.error;
       const uglifiedManifestJs: string = uglified.code;
 

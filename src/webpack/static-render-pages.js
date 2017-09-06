@@ -38,7 +38,7 @@ function staticRenderPages(
         .map(jsData => {
           let code = fs.readFileSync(jsData.filename, 'utf8');
           if (jsData.uglify !== false) {
-            const uglified = UglifyJs.minify(code, { fromString: true });
+            const uglified = UglifyJs.minify(code);
             if (uglified.error) throw uglified.error;
             code = uglified.code;
           }

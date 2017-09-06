@@ -82,20 +82,7 @@ function createWebpackConfigClient(
       })
     ].concat(batfishConfig.webpackPlugins || []);
     const uglifyPlugin = new ParallelUglifyPlugin({
-      sourceMap: !!batfishConfig.productionDevtool,
-      uglifyJS: {
-        compress: {
-          screw_ie8: true,
-          warnings: false
-        },
-        mangle: {
-          screw_ie8: true
-        },
-        output: {
-          comments: false,
-          screw_ie8: true
-        }
-      }
+      sourceMap: !!batfishConfig.productionDevtool
     });
     if (batfishConfig.production) {
       clientPlugins.push(uglifyPlugin);
