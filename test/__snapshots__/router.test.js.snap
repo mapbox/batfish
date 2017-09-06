@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Router renders the initial page 1`] = `
+<StartingComponent
+  location={
+    Object {
+      "hash": "",
+      "pathname": "/magic/",
+      "search": "",
+    }
+  }
+/>
+`;

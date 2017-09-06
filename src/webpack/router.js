@@ -80,9 +80,9 @@ class Router extends React.PureComponent<Props, State> {
     window.addEventListener('popstate', event => {
       event.preventDefault();
       this.changePage({
-        pathname: document.location.pathname,
-        search: document.location.search,
-        hash: document.location.hash
+        pathname: window.location.pathname,
+        search: window.location.search,
+        hash: window.location.hash
       });
     });
 

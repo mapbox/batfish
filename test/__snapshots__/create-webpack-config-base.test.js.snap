@@ -40,7 +40,7 @@ Object {
         ],
       },
       Object {
-        "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\.md\\$/,
+        "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\\\\\.md\\$/,
         "use": Array [
           Object {
             "loader": "babel-loader",
@@ -92,6 +92,47 @@ Object {
         "test": /\\\\\\.json\\$/,
         "use": "json-loader",
       },
+      Object {
+        "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\\\\\.css\\$/,
+        "use": Array [
+          Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
+              "compact": true,
+              "plugins": Array [
+                "syntax-dynamic-import",
+                "transform-class-properties",
+                Array [
+                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  Object {
+                    "packageName": "@mapbox/batfish/modules/md",
+                    "rehypePlugins": undefined,
+                    "remarkPlugins": undefined,
+                  },
+                ],
+                "transform-react-jsx-source",
+                "transform-react-jsx-self",
+              ],
+              "presets": Array [
+                "es2015",
+                "react",
+              ],
+            },
+          },
+          Object {
+            "loader": "react-helmet-postcss-loader",
+            "options": Object {
+              "postcssPlugins": Array [
+                [Function],
+                [Function],
+                [Function],
+              ],
+            },
+          },
+        ],
+      },
     ],
   },
   "output": Object {
@@ -123,6 +164,9 @@ Object {
     },
   },
   "resolveLoader": Object {
+    "alias": Object {
+      "react-helmet-postcss-loader": "<PROJECT_ROOT>/src/node/react-helmet-postcss-loader.js",
+    },
     "modules": Array [
       "<PROJECT_ROOT>/node_modules",
       "node_modules",
@@ -170,7 +214,7 @@ Object {
         ],
       },
       Object {
-        "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\.md\\$/,
+        "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\\\\\.md\\$/,
         "use": Array [
           Object {
             "loader": "babel-loader",
@@ -221,6 +265,47 @@ Object {
         "test": /\\\\\\.json\\$/,
         "use": "json-loader",
       },
+      Object {
+        "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\\\\\.css\\$/,
+        "use": Array [
+          Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": false,
+              "compact": true,
+              "plugins": Array [
+                "syntax-dynamic-import",
+                "transform-class-properties",
+                Array [
+                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  Object {
+                    "packageName": "@mapbox/batfish/modules/md",
+                    "rehypePlugins": undefined,
+                    "remarkPlugins": undefined,
+                  },
+                ],
+                "transform-react-remove-prop-types",
+              ],
+              "presets": Array [
+                "es2015",
+                "react",
+              ],
+            },
+          },
+          Object {
+            "loader": "react-helmet-postcss-loader",
+            "options": Object {
+              "postcssPlugins": Array [
+                [Function],
+                [Function],
+                [Function],
+                [Function],
+              ],
+            },
+          },
+        ],
+      },
     ],
   },
   "output": Object {
@@ -252,6 +337,9 @@ Object {
     },
   },
   "resolveLoader": Object {
+    "alias": Object {
+      "react-helmet-postcss-loader": "<PROJECT_ROOT>/src/node/react-helmet-postcss-loader.js",
+    },
     "modules": Array [
       "<PROJECT_ROOT>/node_modules",
       "node_modules",
@@ -307,7 +395,7 @@ Object {
         ],
       },
       Object {
-        "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\.md\\$/,
+        "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\\\\\.md\\$/,
         "use": Array [
           Object {
             "loader": "babel-loader",
@@ -373,6 +461,54 @@ Object {
         "use": "json-loader",
       },
       Object {
+        "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\\\\\.css\\$/,
+        "use": Array [
+          Object {
+            "loader": "babel-loader",
+            "options": Object {
+              "babelrc": false,
+              "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
+              "compact": true,
+              "plugins": Array [
+                "syntax-dynamic-import",
+                "transform-class-properties",
+                Array [
+                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  Object {
+                    "packageName": "@mapbox/batfish/modules/md",
+                    "rehypePlugins": undefined,
+                    "remarkPlugins": Array [
+                      [Function],
+                      [Function],
+                    ],
+                  },
+                ],
+                [Function],
+                [Function],
+                "transform-react-jsx-source",
+                "transform-react-jsx-self",
+              ],
+              "presets": Array [
+                "es2015",
+                "react",
+                [Function],
+                [Function],
+              ],
+            },
+          },
+          Object {
+            "loader": "react-helmet-postcss-loader",
+            "options": Object {
+              "postcssPlugins": Array [
+                [Function],
+                [Function],
+                [Function],
+              ],
+            },
+          },
+        ],
+      },
+      Object {
         "test": /\\\\\\.jpg\\$/,
         "use": "jpg-loader",
       },
@@ -411,6 +547,9 @@ Object {
     },
   },
   "resolveLoader": Object {
+    "alias": Object {
+      "react-helmet-postcss-loader": "<PROJECT_ROOT>/src/node/react-helmet-postcss-loader.js",
+    },
     "modules": Array [
       "<PROJECT_ROOT>/node_modules",
       "node_modules",
