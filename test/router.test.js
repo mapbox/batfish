@@ -11,16 +11,15 @@ const mount = require('enzyme').mount;
 const toJson = require('enzyme-to-json').default;
 const Router = require('../src/webpack/router').Router;
 const routeTo = require('@mapbox/batfish/modules/route-to').routeTo;
-const prefixUrl = require('@mapbox/batfish/modules/prefix-url').prefixUrl;
 const _invokeRouteChangeStartCallbacks = require('@mapbox/batfish/modules/route-change-listeners')
   ._invokeRouteChangeStartCallbacks;
 const _invokeRouteChangeEndCallbacks = require('@mapbox/batfish/modules/route-change-listeners')
   ._invokeRouteChangeEndCallbacks;
-const batfishContext = require('batfish-internal/context').batfishContext;
 const scrollRestorer = require('@mapbox/scroll-restorer');
 const linkHijacker = require('@mapbox/link-hijacker');
 const linkToLocation = require('@mapbox/link-to-location');
-const findMatchingRoute = require ('../src/webpack/find-matching-route').findMatchingRoute;
+const findMatchingRoute = require('../src/webpack/find-matching-route')
+  .findMatchingRoute;
 
 jest.mock('../src/webpack/find-matching-route', () => {
   return {
@@ -52,8 +51,8 @@ jest.mock(
   '@mapbox/batfish/modules/route-change-listeners',
   () => {
     return {
-      _invokeRouteChangeStartCallbacks: jest.fn(),
-      _invokeRouteChangeEndCallbacks: jest.fn()
+      _invokeRouteChangeStartCallbacks: jest.fn(() => Promise.resolve()),
+      _invokeRouteChangeEndCallbacks: jest.fn(() => Promise.resolve())
     };
   },
   { virtual: true }
@@ -120,22 +119,22 @@ describe('Router', () => {
 
   test('renders the initial page', () => {
     const wrapper = shallow(
-      <Router
-        startingPath="/magic/"
-        startingComponent={StartingComponent}
-        pageProps={pageProps}
-      />
+      React.createElement(Router, {
+        startingPath: '/magic/',
+        startingComponent: StartingComponent,
+        pageProps: pageProps
+      })
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   test('on mount, starts the scroll restorer and tries to restore prior scroll', () => {
     mount(
-      <Router
-        startingPath="/magic/"
-        startingComponent={StartingComponent}
-        pageProps={pageProps}
-      />
+      React.createElement(Router, {
+        startingPath: '/magic/',
+        startingComponent: StartingComponent,
+        pageProps: pageProps
+      })
     );
     expect(scrollRestorer.start).toHaveBeenCalledTimes(1);
     expect(scrollRestorer.start).toHaveBeenCalledWith({ autoRestore: false });
@@ -144,11 +143,11 @@ describe('Router', () => {
 
   test('on mount, sets the route handler for routeTo', () => {
     const wrapper = mount(
-      <Router
-        startingPath="/magic/"
-        startingComponent={StartingComponent}
-        pageProps={pageProps}
-      />
+      React.createElement(Router, {
+        startingPath: '/magic/',
+        startingComponent: StartingComponent,
+        pageProps: pageProps
+      })
     );
     expect(routeTo._setRouteToHandler).toHaveBeenCalledTimes(1);
     expect(routeTo._setRouteToHandler).toHaveBeenCalledWith(
@@ -158,11 +157,11 @@ describe('Router', () => {
 
   test('on mount, initializes link hijacking', () => {
     const wrapper = mount(
-      <Router
-        startingPath="/magic/"
-        startingComponent={StartingComponent}
-        pageProps={pageProps}
-      />
+      React.createElement(Router, {
+        startingPath: '/magic/',
+        startingComponent: StartingComponent,
+        pageProps: pageProps
+      })
     );
     expect(linkHijacker.hijack).toHaveBeenCalledTimes(1);
     expect(linkHijacker.hijack.mock.calls[0][0]).toHaveProperty('skipFilter');
@@ -177,11 +176,11 @@ describe('Router', () => {
       value: jest.fn()
     });
     const wrapper = mount(
-      <Router
-        startingPath="/magic/"
-        startingComponent={StartingComponent}
-        pageProps={pageProps}
-      />
+      React.createElement(Router, {
+        startingPath: '/magic/',
+        startingComponent: StartingComponent,
+        pageProps: pageProps
+      })
     );
     expect(window.addEventListener).toHaveBeenCalledTimes(1);
     expect(window.addEventListener.mock.calls[0][0]).toBe('popstate');
@@ -217,11 +216,11 @@ describe('Router', () => {
 
   test('on mount, resets the location state to capture hash and search', () => {
     const wrapper = shallow(
-      <Router
-        startingPath="/magic/"
-        startingComponent={StartingComponent}
-        pageProps={pageProps}
-      />
+      React.createElement(Router, {
+        startingPath: '/magic/',
+        startingComponent: StartingComponent,
+        pageProps: pageProps
+      })
     );
     expect(wrapper.find('StartingComponent').props().location).toEqual({
       pathname: '/magic/',
@@ -252,11 +251,11 @@ describe('Router', () => {
 
   test('instance.routeTo changes pages programmatically for Batfish-matching routes', () => {
     const wrapper = mount(
-      <Router
-        startingPath="/magic/"
-        startingComponent={StartingComponent}
-        pageProps={pageProps}
-      />
+      React.createElement(Router, {
+        startingPath: '/magic/',
+        startingComponent: StartingComponent,
+        pageProps: pageProps
+      })
     );
     linkToLocation.mockReturnValue({ pathname: '/horse/' });
     findMatchingRoute.mockReturnValue({});
@@ -264,19 +263,22 @@ describe('Router', () => {
     instance.changePage = jest.fn();
     instance.routeTo('foo');
     expect(instance.changePage).toHaveBeenCalledTimes(1);
-    expect(instance.changePage).toHaveBeenCalledWith({ pathname: '/horse/' }, {
-      pushState: true,
-      scrollToTop: true
-    });
+    expect(instance.changePage).toHaveBeenCalledWith(
+      { pathname: '/horse/' },
+      {
+        pushState: true,
+        scrollToTop: true
+      }
+    );
   });
 
   test('instance.routeTo does not reset scroll after changing pages if pathname has not changed and there is a hash in the next URL', () => {
     const wrapper = mount(
-      <Router
-        startingPath="/magic/"
-        startingComponent={StartingComponent}
-        pageProps={pageProps}
-      />
+      React.createElement(Router, {
+        startingPath: '/magic/',
+        startingComponent: StartingComponent,
+        pageProps: pageProps
+      })
     );
     linkToLocation.mockReturnValue({ pathname: '/magic/', hash: '#dog' });
     findMatchingRoute.mockReturnValue({});
@@ -284,19 +286,22 @@ describe('Router', () => {
     instance.changePage = jest.fn();
     instance.routeTo('foo');
     expect(instance.changePage).toHaveBeenCalledTimes(1);
-    expect(instance.changePage).toHaveBeenCalledWith({ pathname: '/magic/', hash: '#dog' }, {
-      pushState: true,
-      scrollToTop: false
-    });
+    expect(instance.changePage).toHaveBeenCalledWith(
+      { pathname: '/magic/', hash: '#dog' },
+      {
+        pushState: true,
+        scrollToTop: false
+      }
+    );
   });
 
   test('instance.routeTo redirects for non-Batfish-matching pages', () => {
     const wrapper = mount(
-      <Router
-        startingPath="/magic/"
-        startingComponent={StartingComponent}
-        pageProps={pageProps}
-      />
+      React.createElement(Router, {
+        startingPath: '/magic/',
+        startingComponent: StartingComponent,
+        pageProps: pageProps
+      })
     );
     linkToLocation.mockReturnValue({ pathname: '/not/known/page' });
     findMatchingRoute.mockReturnValue({ is404: true });
@@ -307,4 +312,55 @@ describe('Router', () => {
     expect(window.location.assign).toHaveBeenCalledTimes(1);
     expect(window.location.assign).toHaveBeenCalledWith('/not/known/page');
   });
+
+  test.only(
+    'instance.changePage invokes change-start and change-end callbacks',
+    () => {
+      const wrapper = shallow(
+        React.createElement(Router, {
+          startingPath: '/magic/',
+          startingComponent: StartingComponent,
+          pageProps: pageProps
+        })
+      );
+      const instance = wrapper.instance();
+      const mockPageModule = {
+        component: function Mockery() {
+          return <div>mockery</div>;
+        },
+        props: {}
+      };
+      const mockRoute = {
+        getPage: () => Promise.resolve(mockPageModule),
+        path: '/mock/route/'
+      };
+      const mockNextLocation = {
+        pathname: '/mock/route/',
+        hash: '#foo'
+      };
+      findMatchingRoute.mockImplementation(pathname => {
+        if (pathname === mockNextLocation.pathname) {
+          return mockRoute;
+        } else {
+          throw new Error(`Oops. Unknown pathname ${pathname}`);
+        }
+      });
+      const changer = instance.changePage(mockNextLocation);
+      expect(findMatchingRoute).toHaveBeenCalledTimes(1);
+      expect(findMatchingRoute).toHaveBeenCalledWith(mockNextLocation.pathname);
+      expect(_invokeRouteChangeStartCallbacks).toHaveBeenCalledTimes(1);
+      expect(_invokeRouteChangeStartCallbacks).toHaveBeenCalledWith(
+        mockNextLocation.pathname
+      );
+      expect(_invokeRouteChangeEndCallbacks).toHaveBeenCalledTimes(0);
+      wrapper.update();
+      return changer.then(() => {
+        expect(toJson(wrapper)).toMatchSnapshot();
+        expect(_invokeRouteChangeEndCallbacks).toHaveBeenCalledTimes(1);
+        expect(_invokeRouteChangeEndCallbacks).toHaveBeenCalledWith(
+          mockNextLocation.pathname
+        );
+      });
+    }
+  );
 });
