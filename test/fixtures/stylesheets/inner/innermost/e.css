@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'e';
+  src: url('../../fonts/e.woff2') format('woff2');
+}
+
+.e { color: grey; }

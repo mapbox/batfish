@@ -4,8 +4,12 @@ const mkdirp = require('mkdirp');
 const del = require('del');
 const path = require('path');
 const fs = require('fs');
+const stripAnsi = require('strip-ansi');
 const validateConfig = require('../src/node/validate-config');
 const errorTypes = require('../src/node/error-types');
+const projectRootSerializer = require('./test-util/project-root-serializer');
+
+expect.addSnapshotSerializer(projectRootSerializer);
 
 jest.mock('mkdirp', () => {
   return {
@@ -22,43 +26,68 @@ jest.mock('del', () => {
 describe('validateConfig', () => {
   const projectDirectory = '/my-project';
 
-  beforeAll(() => {
-    // Allow for the test projectDirectory to work when checking if files exist.
+  beforeEach(() => {
     const realFsExistsSync = fs.existsSync;
-    fs.existsSync = input => {
+    // Allow for the test projectDirectory to work when checking if files exist.
+    jest.spyOn(fs, 'existsSync').mockImplementation(input => {
       if (input === `${projectDirectory}/src/pages`) {
         return true;
       }
       return realFsExistsSync(input);
-    };
+    });
+  });
+
+  afterEach(() => {
+    fs.existsSync.mockRestore();
   });
 
   test('defaults', () => {
     const config = validateConfig(undefined, projectDirectory);
-    // Make applicationWrapperPath a relative path, not absolute
-    config.applicationWrapperPath = path.relative(
-      path.dirname(path.join(__dirname, '../src/node/validate-config')),
-      config.applicationWrapperPath
-    );
     expect(config).toMatchSnapshot();
   });
 
-  test('invalid configuration properties fails', () => {
-    const invalidPropertyConfig = {
-      port: 8080,
-      fakePort: 1337
-    };
-    expect(() => validateConfig(invalidPropertyConfig)).toThrow(
-      errorTypes.ConfigValidationErrors
-    );
+  test('non-existent configuration properties fails', () => {
     const invalidPropertiesConfig = {
       fakeProduction: true,
       fakePort: 1337,
       fakeExternalStylesheets: null
     };
-    expect(() => validateConfig(invalidPropertiesConfig)).toThrow(
-      errorTypes.ConfigValidationErrors
-    );
+    expect.hasAssertions();
+    try {
+      validateConfig(invalidPropertiesConfig);
+    } catch (error) {
+      expect(error instanceof errorTypes.ConfigValidationError).toBe(true);
+      expect(error.messages.map(stripAnsi).sort()).toEqual([
+        'fakeExternalStylesheets is not a valid configuration property.',
+        'fakePort is not a valid configuration property.',
+        'fakeProduction is not a valid configuration property.'
+      ]);
+    }
+  });
+
+  test('invalid configuration values fail', () => {
+    // This is not a comprehensive test of all possible failures.
+    // It tests enough of configSchema to verify that it is working as expected.
+    const invalidValuesConfig = {
+      siteBasePath: 7,
+      browserslist: ['foo', ['bar', 'baz']],
+      dataSelectors: {
+        high: 'up'
+      },
+      production: 'please'
+    };
+    expect.hasAssertions();
+    try {
+      validateConfig(invalidValuesConfig);
+    } catch (error) {
+      expect(error instanceof errorTypes.ConfigValidationError).toBe(true);
+      expect(error.messages.map(stripAnsi).sort()).toEqual([
+        'browserslist must be a string or array of strings.',
+        'dataSelectors must be an object whose values are functions.',
+        'production must be a boolean.',
+        'siteBasePath must be a string.'
+      ]);
+    }
   });
 
   test('temporaryDirectory is created and cleared', () => {
@@ -72,42 +101,6 @@ describe('validateConfig', () => {
     );
   });
 
-  test('non-absolute pagesDirectory fails', () => {
-    const config = {
-      pagesDirectory: '../some/directory'
-    };
-    expect(() => validateConfig(config, projectDirectory)).toThrow(
-      errorTypes.ConfigValidationErrors
-    );
-  });
-
-  test('non-absolute outputDirectory fails', () => {
-    const config = {
-      outputDirectory: '../some/directory'
-    };
-    expect(() => validateConfig(config, projectDirectory)).toThrow(
-      errorTypes.ConfigValidationErrors
-    );
-  });
-
-  test('non-absolute applicationWrapperPath fails', () => {
-    const config = {
-      applicationWrapperPath: '../some/directory.wrapper.js'
-    };
-    expect(() => validateConfig(config, projectDirectory)).toThrow(
-      errorTypes.ConfigValidationErrors
-    );
-  });
-
-  test('non-absolute temporary fails', () => {
-    const config = {
-      temporaryDirectory: '../some/directory'
-    };
-    expect(() => validateConfig(config, projectDirectory)).toThrow(
-      errorTypes.ConfigValidationErrors
-    );
-  });
-
   test('processed siteOrigin does not end with a slash', () => {
     expect(
       validateConfig(
@@ -115,8 +108,8 @@ describe('validateConfig', () => {
           siteOrigin: 'https://www.mapbox.com/'
         },
         projectDirectory
-      ).siteOrigin
-    ).toBe('https://www.mapbox.com');
+      )
+    ).toHaveProperty('siteOrigin', 'https://www.mapbox.com');
 
     expect(
       validateConfig(
@@ -124,8 +117,8 @@ describe('validateConfig', () => {
           siteOrigin: 'https://www.mapbox.com'
         },
         projectDirectory
-      ).siteOrigin
-    ).toBe('https://www.mapbox.com');
+      )
+    ).toHaveProperty('siteOrigin', 'https://www.mapbox.com');
   });
 
   test('processed siteBasePath does not end with a slash unless it is only a slash', () => {
@@ -135,8 +128,8 @@ describe('validateConfig', () => {
           siteBasePath: 'about/team/'
         },
         projectDirectory
-      ).siteBasePath
-    ).toBe('/about/team');
+      )
+    ).toHaveProperty('siteBasePath', '/about/team');
 
     expect(
       validateConfig(
@@ -144,8 +137,8 @@ describe('validateConfig', () => {
           siteBasePath: 'about/team'
         },
         projectDirectory
-      ).siteBasePath
-    ).toBe('/about/team');
+      )
+    ).toHaveProperty('siteBasePath', '/about/team');
 
     expect(
       validateConfig(
@@ -153,8 +146,8 @@ describe('validateConfig', () => {
           siteBasePath: '/'
         },
         projectDirectory
-      ).siteBasePath
-    ).toBe('/');
+      )
+    ).toHaveProperty('siteBasePath', '/');
   });
 
   test('processed siteBasePath always starts with a slash', () => {
@@ -164,8 +157,8 @@ describe('validateConfig', () => {
           siteBasePath: 'about/team/'
         },
         projectDirectory
-      ).siteBasePath
-    ).toBe('/about/team');
+      )
+    ).toHaveProperty('siteBasePath', '/about/team');
 
     expect(
       validateConfig(
@@ -173,8 +166,8 @@ describe('validateConfig', () => {
           siteBasePath: '/about/team'
         },
         projectDirectory
-      ).siteBasePath
-    ).toBe('/about/team');
+      )
+    ).toHaveProperty('siteBasePath', '/about/team');
 
     expect(
       validateConfig(
@@ -182,8 +175,8 @@ describe('validateConfig', () => {
           siteBasePath: '/'
         },
         projectDirectory
-      ).siteBasePath
-    ).toBe('/');
+      )
+    ).toHaveProperty('siteBasePath', '/');
   });
 
   test('fileLoaderExtensions transform function', () => {
@@ -193,7 +186,37 @@ describe('validateConfig', () => {
           fileLoaderExtensions: defaults => defaults.concat('svg')
         },
         projectDirectory
-      ).fileLoaderExtensions
-    ).toMatchSnapshot();
+      )
+    ).toHaveProperty('fileLoaderExtensions', [
+      'jpeg',
+      'jpg',
+      'png',
+      'gif',
+      'webp',
+      'mp4',
+      'webm',
+      'woff',
+      'woff2',
+      'svg'
+    ]);
+  });
+
+  test('stylesheets file paths must exist', () => {
+    expect.hasAssertions();
+    try {
+      validateConfig({
+        stylesheets: [
+          'https://www.mapbox.com/chunk-lite.css',
+          path.join(__dirname, 'src/pages/**/*.css'),
+          path.join(__dirname, 'does-not-exist.css')
+        ]
+      });
+    } catch (error) {
+      expect(error instanceof errorTypes.ConfigValidationError).toBe(true);
+      expect(error.messages.length).toBe(1);
+      expect(stripAnsi(error.messages[0])).toMatch(
+        'does-not-exist.css does not point to an existing file'
+      );
+    }
   });
 });

@@ -2,7 +2,7 @@
 
 exports[`validateConfig defaults 1`] = `
 Object {
-  "applicationWrapperPath": "../webpack/empty-application-wrapper.js",
+  "applicationWrapperPath": "<PROJECT_ROOT>/src/webpack/empty-application-wrapper.js",
   "babelExclude": /node_modules\\\\/!\\(@mapbox\\\\/batfish\\\\/\\)/,
   "browserslist": Array [
     "> 5%",
@@ -38,19 +38,4 @@ Object {
   "temporaryDirectory": "/my-project/_batfish_tmp",
   "verbose": false,
 }
-`;
-
-exports[`validateConfig fileLoaderExtensions transform function 1`] = `
-Array [
-  "jpeg",
-  "jpg",
-  "png",
-  "gif",
-  "webp",
-  "mp4",
-  "webm",
-  "woff",
-  "woff2",
-  "svg",
-]
 `;

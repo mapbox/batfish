@@ -78,6 +78,9 @@
     "presets": [
       "es2015",
       "react"
+    ],
+    "plugins": [
+      "transform-class-properties"
     ]
   },
   "jest": {
@@ -172,7 +175,7 @@
     "babel-cli": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "cpy-cli": "^1.0.1",
-    "enzyme": "^2.8.2",
+    "enzyme": "^2.9.1",
     "enzyme-to-json": "^1.5.1",
     "eslint": "^4.6.1",
     "eslint-plugin-filenames": "^1.2.0",
@@ -191,8 +194,10 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-helmet": "^5.2.0",
+    "react-test-renderer": "^15.6.1",
     "remark-cli": "^4.0.0",
-    "remark-validate-links": "^7.0.0"
+    "remark-validate-links": "^7.0.0",
+    "strip-ansi": "^4.0.0"
   },
   "optionalDependencies": {},
   "engines": {

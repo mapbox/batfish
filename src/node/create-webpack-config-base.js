@@ -209,4 +209,9 @@ function createWebpackConfigBase(
   });
 }
 
+// For tests.
+createWebpackConfigBase._clearCache = () => {
+  cachedConfig = null;
+};
+
 module.exports = createWebpackConfigBase;

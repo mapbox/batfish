@@ -52,27 +52,25 @@ function getPagesData(
 
     let pagesData = {};
     const registerPage = (filePath: string): Promise<void> => {
-      return pTry(() => {
-        if (isUnprocessed(filePath)) {
-          return;
-        }
-        return pify(fs.readFile)(filePath, 'utf8').then((content: string) => {
-          const isMarkdown = path.extname(filePath) === '.md';
-          const grayMatterOptions = isMarkdown
-            ? { delims: ['---', '---'] }
-            : { delims: ['/*---', '---*/'] };
-          const parsedFrontMatter = grayMatter(content, grayMatterOptions);
-          const published = parsedFrontMatter.data.published !== false;
-          if (!published && batfishConfig.production) return;
+      if (isUnprocessed(filePath)) {
+        return Promise.resolve();
+      }
+      return pify(fs.readFile)(filePath, 'utf8').then((content: string) => {
+        const isMarkdown = path.extname(filePath) === '.md';
+        const grayMatterOptions = isMarkdown
+          ? { delims: ['---', '---'] }
+          : { delims: ['/*---', '---*/'] };
+        const parsedFrontMatter = grayMatter(content, grayMatterOptions);
+        const published = parsedFrontMatter.data.published !== false;
+        if (!published && batfishConfig.production) return;
 
-          const pagePath = pageFilePathToUrlPath(filePath);
-          const pageData = {
-            filePath,
-            path: pagePath,
-            frontMatter: parsedFrontMatter.data
-          };
-          pagesData[pagePath] = pageData;
-        });
+        const pagePath = pageFilePathToUrlPath(filePath);
+        const pageData = {
+          filePath,
+          path: pagePath,
+          frontMatter: parsedFrontMatter.data
+        };
+        pagesData[pagePath] = pageData;
       });
     };
 

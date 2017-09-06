@@ -33,10 +33,10 @@ const urlCache: Map<string, StylesheetData> = new Map();
 function compileStylesheets(
   batfishConfig: BatfishConfiguration,
   // Defaults to batfishConfig.outputDirectory.
-  inputCssOutputDirectory?: string
+  specialCssOutputDirectory?: string
 ): Promise<string | void> {
   const cssOutputDirectory: string =
-    inputCssOutputDirectory || batfishConfig.outputDirectory;
+    specialCssOutputDirectory || batfishConfig.outputDirectory;
 
   return pTry(() => {
     if (_.isEmpty(batfishConfig.stylesheets)) return;
@@ -136,7 +136,8 @@ function compileStylesheets(
         path.join(cssOutputDirectory, constants.BATFISH_CSS_BASENAME),
         '\n'
       );
-      // Since items in stylesheets can be an array, we need to be recursive here.
+      // Since items in stylesheets can be an array (fancy glob),
+      // we need to be recursive here.
       const addItems = list => {
         list.forEach(item => {
           if (Array.isArray(item)) return addItems(item);

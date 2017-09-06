@@ -8,7 +8,7 @@ const pify = require('pify');
 const slugg = require('slugg');
 const prettier = require('prettier');
 const getPagesData = require('./get-pages-data');
-const createModuleBatfishPage = require('./write-page-module');
+const writePageModule = require('./write-page-module');
 const writeDataModules = require('./write-data-modules');
 
 // Create a JS module that can be used during Webpack compilation,
@@ -51,7 +51,7 @@ function writeContextModule(
     const stringifiedRoutes = [];
     const stringifyPageRoute = (pagePath: string): Promise<void> => {
       const pageData = pagesData[pagePath];
-      return createModuleBatfishPage(
+      return writePageModule(
         batfishConfig,
         pageData
       ).then(pageModuleFilePath => {
@@ -86,8 +86,6 @@ function writeContextModule(
         // Webpack fills it with ansi colors so it's hard
         // to read in the devtools console. Strip those colors.
         const content = `
-          import stripColor from 'strip-color';
-
           export const batfishContext = {
             selectedConfig: {
               siteBasePath: '${String(batfishConfig.siteBasePath)}',

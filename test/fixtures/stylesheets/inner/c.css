@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'c';
+  src: url('../fonts/c.woff2') format('woff2');
+}
+
+.c { color: purple; }

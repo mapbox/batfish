@@ -76,13 +76,13 @@ class Router extends React.PureComponent<Props, State> {
       scrollToFragment();
     }
 
-    routeTo._onRouteTo(this.routeTo);
+    routeTo._setRouteToHandler(this.routeTo);
     window.addEventListener('popstate', event => {
       event.preventDefault();
       this.changePage({
-        pathname: document.location.pathname,
-        search: document.location.search,
-        hash: document.location.hash
+        pathname: window.location.pathname,
+        search: window.location.search,
+        hash: window.location.hash
       });
     });
 
@@ -124,7 +124,7 @@ class Router extends React.PureComponent<Props, State> {
   // - Adjust scroll position on the new page.
   changePage = (
     nextLocation: BatfishLocation,
-    options: Object = {},
+    options: { pushState?: boolean, scrollToTop?: boolean } = {},
     callback?: () => mixed
   ) => {
     const matchingRoute = findMatchingRoute(nextLocation.pathname);
@@ -133,8 +133,10 @@ class Router extends React.PureComponent<Props, State> {
       nextLocation.hash,
       nextLocation.search
     ].join('');
+    // Call the change-start callbacks immediately, not after the page chunk
+    // has already been fetched.
     const startChange = _invokeRouteChangeStartCallbacks(nextLocation.pathname);
-    matchingRoute
+    return matchingRoute
       .getPage()
       .then(pageModule => {
         return startChange.then(() => pageModule);

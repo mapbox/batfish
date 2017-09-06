@@ -78,7 +78,7 @@ function createWebpackConfigClient(
       new webpack.optimize.CommonsChunkPlugin('manifest'),
       // Define an environment variable for special cases
       new webpack.DefinePlugin({
-        'process.env.DEV_SERVER': options && options.devServer
+        'process.env.DEV_SERVER': (options && options.devServer) || false
       })
     ].concat(batfishConfig.webpackPlugins || []);
     const uglifyPlugin = new ParallelUglifyPlugin({
