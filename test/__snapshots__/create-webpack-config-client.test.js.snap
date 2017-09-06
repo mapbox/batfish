@@ -163,19 +163,7 @@ Object {
     FasterUglifyPlugin {
       "options": Object {
         "sourceMap": false,
-        "uglifyJS": Object {
-          "compress": Object {
-            "screw_ie8": true,
-            "warnings": false,
-          },
-          "mangle": Object {
-            "screw_ie8": true,
-          },
-          "output": Object {
-            "comments": false,
-            "screw_ie8": true,
-          },
-        },
+        "uglifyJS": Object {},
       },
     },
   ],
