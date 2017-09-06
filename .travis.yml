@@ -4,7 +4,5 @@ node_js:
 cache:
   directories:
     - node_modules
-before_install:
-  - npm i -g npm@5.3
 before_script:
   - npm run build
