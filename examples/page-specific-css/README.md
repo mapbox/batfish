@@ -1,3 +1,3 @@
 # Page-specific CSS
 
-- ddd
+- Shows how you can import and mount [page-specific CSS](../../docs/advanced-usage.md#page-specific-css).
