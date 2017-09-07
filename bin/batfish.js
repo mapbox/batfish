@@ -133,7 +133,9 @@ if (cli.flags.clear === false) {
 
 const executeCommand = commands[command];
 const emitter = executeCommand(config, path.dirname(configPath));
-emitter.on(constants.EVENT_NOTIFICATION, batfishLog.log);
+emitter.on(constants.EVENT_NOTIFICATION, message => {
+  batfishLog.log(message);
+});
 emitter.on(constants.EVENT_ERROR, error => {
   const niceMessage = getLoggableErrorMessage(error);
   if (niceMessage) {

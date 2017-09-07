@@ -313,54 +313,51 @@ describe('Router', () => {
     expect(window.location.assign).toHaveBeenCalledWith('/not/known/page');
   });
 
-  test.only(
-    'instance.changePage invokes change-start and change-end callbacks',
-    () => {
-      const wrapper = shallow(
-        React.createElement(Router, {
-          startingPath: '/magic/',
-          startingComponent: StartingComponent,
-          pageProps: pageProps
-        })
-      );
-      const instance = wrapper.instance();
-      const mockPageModule = {
-        component: function Mockery() {
-          return <div>mockery</div>;
-        },
-        props: {}
-      };
-      const mockRoute = {
-        getPage: () => Promise.resolve(mockPageModule),
-        path: '/mock/route/'
-      };
-      const mockNextLocation = {
-        pathname: '/mock/route/',
-        hash: '#foo'
-      };
-      findMatchingRoute.mockImplementation(pathname => {
-        if (pathname === mockNextLocation.pathname) {
-          return mockRoute;
-        } else {
-          throw new Error(`Oops. Unknown pathname ${pathname}`);
-        }
-      });
-      const changer = instance.changePage(mockNextLocation);
-      expect(findMatchingRoute).toHaveBeenCalledTimes(1);
-      expect(findMatchingRoute).toHaveBeenCalledWith(mockNextLocation.pathname);
-      expect(_invokeRouteChangeStartCallbacks).toHaveBeenCalledTimes(1);
-      expect(_invokeRouteChangeStartCallbacks).toHaveBeenCalledWith(
+  test('instance.changePage invokes change-start and change-end callbacks', () => {
+    const wrapper = shallow(
+      React.createElement(Router, {
+        startingPath: '/magic/',
+        startingComponent: StartingComponent,
+        pageProps: pageProps
+      })
+    );
+    const instance = wrapper.instance();
+    const mockPageModule = {
+      component: function Mockery() {
+        return <div>mockery</div>;
+      },
+      props: {}
+    };
+    const mockRoute = {
+      getPage: () => Promise.resolve(mockPageModule),
+      path: '/mock/route/'
+    };
+    const mockNextLocation = {
+      pathname: '/mock/route/',
+      hash: '#foo'
+    };
+    findMatchingRoute.mockImplementation(pathname => {
+      if (pathname === mockNextLocation.pathname) {
+        return mockRoute;
+      } else {
+        throw new Error(`Oops. Unknown pathname ${pathname}`);
+      }
+    });
+    const changer = instance.changePage(mockNextLocation);
+    expect(findMatchingRoute).toHaveBeenCalledTimes(1);
+    expect(findMatchingRoute).toHaveBeenCalledWith(mockNextLocation.pathname);
+    expect(_invokeRouteChangeStartCallbacks).toHaveBeenCalledTimes(1);
+    expect(_invokeRouteChangeStartCallbacks).toHaveBeenCalledWith(
+      mockNextLocation.pathname
+    );
+    expect(_invokeRouteChangeEndCallbacks).toHaveBeenCalledTimes(0);
+    wrapper.update();
+    return changer.then(() => {
+      expect(toJson(wrapper)).toMatchSnapshot();
+      expect(_invokeRouteChangeEndCallbacks).toHaveBeenCalledTimes(1);
+      expect(_invokeRouteChangeEndCallbacks).toHaveBeenCalledWith(
         mockNextLocation.pathname
       );
-      expect(_invokeRouteChangeEndCallbacks).toHaveBeenCalledTimes(0);
-      wrapper.update();
-      return changer.then(() => {
-        expect(toJson(wrapper)).toMatchSnapshot();
-        expect(_invokeRouteChangeEndCallbacks).toHaveBeenCalledTimes(1);
-        expect(_invokeRouteChangeEndCallbacks).toHaveBeenCalledWith(
-          mockNextLocation.pathname
-        );
-      });
-    }
-  );
+    });
+  });
 });

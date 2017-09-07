@@ -14,9 +14,9 @@ function serverInitMessage(
   const relativeOutputDirectory =
     path.relative(
       process.cwd(),
-      serverInstance.options.get('server').get('baseDir')
+      serverInstance.instance.options.get('server').get('baseDir')
     ) + '/';
-  const urls = serverInstance.options.get('urls');
+  const urls = serverInstance.instance.options.get('urls');
   const localUrl =
     urls.get('local') + batfishConfig.siteBasePath.replace(/([^/])$/, '$1/');
   const externalUrl =

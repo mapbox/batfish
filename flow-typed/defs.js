@@ -88,6 +88,12 @@ declare type BatfishLocation = {
   hash?: string
 };
 
+declare type BatfishServer = {
+  start: () => void,
+  reload: (filename?: string) => void,
+  browserSyncInstance: browserSync$server
+};
+
 declare module 'batfish-internal/context' {
   declare export var batfishContext: BatfishContext;
 }

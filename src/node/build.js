@@ -6,7 +6,6 @@ const webpack = require('webpack');
 const path = require('path');
 const pify = require('pify');
 const fs = require('fs');
-const del = require('del');
 const cpy = require('cpy');
 const pTry = require('p-try');
 const EventEmitter = require('events');
@@ -22,6 +21,7 @@ const constants = require('./constants');
 const errorTypes = require('./error-types');
 const wrapError = require('./wrap-error');
 const createWebpackStatsError = require('./create-webpack-stats-error');
+const maybeClearOutputDirectory = require('./maybe-clear-output-directory');
 
 // We need to define this type because Flow can't understand the non-literal
 // require that pulls in static-render-pages.js below.
@@ -191,12 +191,7 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     });
   };
 
-  Promise.resolve()
-    .then(() => {
-      if (batfishConfig.clearOutputDirectory) {
-        return del(outputDirectory, { force: true });
-      }
-    })
+  maybeClearOutputDirectory(batfishConfig)
     .then(() => {
       if (stylesheetsIsEmpty) return;
       emitNotification('Compiling CSS.');
