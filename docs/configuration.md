@@ -38,6 +38,7 @@ You can specify an alternate location.
   - [webpackStaticIgnore](#webpackstaticignore)
   - [babelPlugins](#babelplugins)
   - [babelPresets](#babelpresets)
+  - [babelPresetEnvOptions](#babelpresetenvoptions)
   - [babelExclude](#babelexclude)
   - [postcssPlugins](#postcssplugins)
   - [fileLoaderExtensions](#fileloaderextensions)
@@ -213,6 +214,18 @@ Additional presets to pass to Babel during both Webpack builds (client bundling 
 **You should `require()` your presets instead of referencing them as strings.**
 Otherwise, Babel might end up looking in the wrong place for the npm package.
 
+The two presets [babel-preset-react] and [babel-preset-env] are automatically applied.
+You can pass options to [babel-preset-env] with the option [`babelPresetEnvOptions`].
+
+### babelPresetEnvOptions
+
+Type: `Object`. [Options for babel-preset-env].
+
+[babel-preset-env] is always used.
+By default, it is passed no options.
+That means the latest standard syntax will be available (not `stage-x`): `es2015`, `es2016`, etc..
+Use this option to further customize your build by passing any of the other many [options for babel-preset-env](https://babeljs.io/docs/plugins/preset-env/#options).
+
 ### babelExclude
 
 Type: [Webpack `Condition`].
@@ -374,3 +387,11 @@ If `true`, more information will be logged to the console.
 [link-hijacker]: https://github.com/mapbox/link-hijacker
 
 [webpack `condition`]: https://webpack.js.org/configuration/module/#condition
+
+[babel-preset-react]: https://babeljs.io/docs/plugins/preset-react/
+
+[babel-preset-env]: https://babeljs.io/docs/plugins/preset-env/
+
+[`babelpresetenvoptions`]: #babelpresetenvoptions
+
+[options for babel-preset-env]: https://babeljs.io/docs/plugins/preset-env/#options

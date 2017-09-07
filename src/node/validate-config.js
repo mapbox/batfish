@@ -86,6 +86,10 @@ const configSchema = {
     description:
       'array of functions (require your presets, do not reference them with a string)'
   },
+  babelPresetEnvOptions: {
+    validator: _.isPlainObject,
+    description: 'object'
+  },
   // No good way to validate babelExclude, which is a Webpack Condition
   // (see above).
   babelExclude: {
