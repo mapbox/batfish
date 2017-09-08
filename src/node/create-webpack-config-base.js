@@ -36,9 +36,10 @@ function createWebpackConfigBase(
     );
     jsxtremeMarkdownOptions.prependJs = prependJs;
 
-    const babelPresets = ['es2015', 'react'].concat(
-      batfishConfig.babelPresets || []
-    );
+    const babelPresets = [
+      ['env', batfishConfig.babelPresetEnvOptions],
+      'react'
+    ].concat(batfishConfig.babelPresets || []);
 
     const babelPlugins = [
       'syntax-dynamic-import',

@@ -26,6 +26,7 @@ declare type BatfishConfiguration = {
   webpackStaticIgnore?: webpack$Condition,
   babelPlugins?: Array<Function>,
   babelPresets?: Array<Function>,
+  babelPresetEnvOptions?: Object,
   babelExclude: webpack$Condition,
   postcssPlugins?: Array<Function>,
   fileLoaderExtensions: Array<string>,

@@ -2,6 +2,7 @@
 
 ## Head
 
+- [Add] Add `babelPresetEnvOptions` option.
 - [Add] Enable page-specific CSS.
   See ["Page-specific CSS" documentation](docs/advanced-usage.md#page-specific-css).
 
