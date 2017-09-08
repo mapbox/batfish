@@ -6,11 +6,11 @@ const watchCss = require('../src/node/watch-css');
 const watchWebpack = require('../src/node/watch-webpack');
 const createServer = require('../src/node/create-server');
 const maybeClearOutputDirectory = require('../src/node/maybe-clear-output-directory');
-const errorTypes = require('../src/node/error-types');
 const constants = require('../src/node/constants');
+const validateConfig = require('../src/node/validate-config');
 
 jest.mock('../src/node/create-webpack-config-client', () => {
-  return jest.fn(() => Promise.resolve({ mockClientClient: true }));
+  return jest.fn(() => Promise.resolve({ mockConfigClient: true }));
 });
 
 jest.mock('../src/node/compile-stylesheets', () => {
@@ -44,22 +44,48 @@ jest.mock('../src/node/maybe-clear-output-directory', () => {
   return jest.fn(() => Promise.resolve());
 });
 
+jest.mock('../src/node/validate-config', () => {
+  const fn = jest.fn(() => fn.mockValidatedConfig);
+  fn.mockValidatedConfig = {};
+  return fn;
+});
+
 describe('start', () => {
+  beforeEach(() => {
+    validateConfig.mockValidatedConfig = {
+      port: 6666,
+      outputDirectory: '/mock/output',
+      pagesDirectory: '/mock/pages'
+    };
+  });
+
+  test('validates the config', () => {
+    const rawConfig = {
+      foo: 'bar'
+    };
+    const emitter = start(rawConfig, 'project-directory');
+    emitter.on(constants.EVENT_ERROR, logEmitterError);
+    expect(validateConfig).toHaveBeenCalledWith(
+      { foo: 'bar' },
+      'project-directory'
+    );
+  });
+
   test('catches errors while validating config', done => {
+    const expectedError = new Error();
+    validateConfig.mockImplementationOnce(() => {
+      throw expectedError;
+    });
     const emitter = start({ badProperty: true });
     emitter.on(constants.EVENT_ERROR, error => {
-      expect(error).toBeInstanceOf(errorTypes.ConfigValidationError);
+      expect(error).toBe(expectedError);
       done();
     });
   });
 
   test('creates a server', () => {
-    const emitter = start({
-      port: 6666,
-      outputDirectory: '/mock/output/directory/',
-      pagesDirectory: '/mock/pages/directory/',
-      siteBasePath: '/walk/'
-    });
+    validateConfig.mockValidatedConfig.siteBasePath = '/walk/';
+    const emitter = start();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     expect(createServer).toHaveBeenCalledTimes(1);
     const createServerOptions = createServer.mock.calls[0][0];
@@ -68,29 +94,24 @@ describe('start', () => {
     expect(createServerOptions.browserSyncOptions).toHaveProperty('server');
     expect(createServerOptions.browserSyncOptions.server).toHaveProperty(
       'baseDir',
-      '/mock/output/directory/'
+      '/mock/output'
     );
     expect(createServerOptions.browserSyncOptions.server).toHaveProperty(
       'routes'
     );
     expect(createServerOptions.browserSyncOptions.server.routes).toHaveProperty(
       '/walk/assets',
-      '/mock/output/directory/'
+      '/mock/output'
     );
     expect(createServerOptions.browserSyncOptions.server.routes).toHaveProperty(
-      '/walk',
-      '/mock/pages/directory/'
+      '/walk/',
+      '/mock/pages'
     );
   });
 
   test('handles errors when creating a server', done => {
     const expectedError = new Error();
-    const emitter = start({
-      port: 6666,
-      outputDirectory: '/mock/output/directory/',
-      pagesDirectory: '/mock/pages/directory/',
-      siteBasePath: '/walk/'
-    });
+    const emitter = start();
     emitter.on(constants.EVENT_ERROR, error => {
       expect(error).toBe(expectedError);
       done();
@@ -100,27 +121,23 @@ describe('start', () => {
   });
 
   test('maybe clears the output directory', () => {
-    const emitter = start({
-      outputDirectory: '/mock/output/directory/'
-    });
+    const emitter = start();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     expect(maybeClearOutputDirectory).toHaveBeenCalledTimes(1);
     expect(maybeClearOutputDirectory.mock.calls[0][0]).toHaveProperty(
       'outputDirectory',
-      '/mock/output/directory/'
+      '/mock/output'
     );
   });
 
   test('compiles stylesheets', done => {
-    const emitter = start({
-      outputDirectory: '/mock/output/directory/'
-    });
+    const emitter = start();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
       expect(compileStylesheets).toHaveBeenCalledTimes(1);
       expect(compileStylesheets.mock.calls[0][0]).toHaveProperty(
         'outputDirectory',
-        '/mock/output/directory/'
+        '/mock/output'
       );
       done();
     });
@@ -129,9 +146,7 @@ describe('start', () => {
   test('handles errors in stylesheet compilation', done => {
     const expectedError = new Error();
     compileStylesheets.mockReturnValueOnce(Promise.reject(expectedError));
-    const emitter = start({
-      outputDirectory: '/mock/output/directory/'
-    });
+    const emitter = start();
     emitter.on(constants.EVENT_ERROR, error => {
       expect(error).toBe(expectedError);
       done();
@@ -139,9 +154,7 @@ describe('start', () => {
   });
 
   test('starts the server it creates', done => {
-    const emitter = start({
-      outputDirectory: '/mock/output/directory/'
-    });
+    const emitter = start();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
       expect(createServer.mockServer.start).toHaveBeenCalledTimes(1);
@@ -150,15 +163,13 @@ describe('start', () => {
   });
 
   test('starts the css watcher', done => {
-    const emitter = start({
-      outputDirectory: '/mock/output/directory/'
-    });
+    const emitter = start();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
       expect(watchCss).toHaveBeenCalledTimes(1);
       expect(watchCss.mock.calls[0][0]).toHaveProperty(
         'outputDirectory',
-        '/mock/output/directory/'
+        '/mock/output'
       );
       expect(watchCss.mock.calls[0][1].onError).toBeInstanceOf(Function);
       expect(watchCss.mock.calls[0][1].afterCompilation).toBeInstanceOf(
@@ -191,15 +202,13 @@ describe('start', () => {
   });
 
   test('starts the webpack watcher', done => {
-    const emitter = start({
-      outputDirectory: '/mock/output/directory/'
-    });
+    const emitter = start();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
       expect(watchWebpack).toHaveBeenCalledTimes(1);
       expect(watchWebpack.mock.calls[0][0]).toHaveProperty(
         'outputDirectory',
-        '/mock/output/directory/'
+        '/mock/output'
       );
       expect(watchWebpack.mock.calls[0][1]).toBe(createServer.mockServer);
       done();

@@ -6,6 +6,7 @@ const validateConfig = require('./validate-config');
 const serverInitMessage = require('./server-init-message');
 const constants = require('./constants');
 const createServer = require('./create-server');
+const staticServerMiddlewares = require('./static-server-middlewares');
 
 function serveStatic(
   rawConfig?: Object,
@@ -31,20 +32,14 @@ function serveStatic(
     return emitter;
   }
 
-  const realUrlMiddleware = (req: { url: string }, res, next: Function) => {
-    if (req.url.startsWith(batfishConfig.siteBasePath)) {
-      req.url = req.url.replace(batfishConfig.siteBasePath, '') || '/';
-    }
-    next();
-  };
-
+  const middleWares = staticServerMiddlewares.init(batfishConfig);
   const server = createServer({
     onError: emitError,
     browserSyncOptions: {
       port: batfishConfig.port,
       server: {
         baseDir: batfishConfig.outputDirectory,
-        middleware: [realUrlMiddleware]
+        middleware: [middleWares.stripSiteBasePath]
       },
       notify: false,
       open: false,
