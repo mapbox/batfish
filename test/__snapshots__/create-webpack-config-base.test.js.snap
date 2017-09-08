@@ -32,7 +32,10 @@ Object {
                 "transform-react-jsx-self",
               ],
               "presets": Array [
-                "es2015",
+                Array [
+                  "env",
+                  undefined,
+                ],
                 "react",
               ],
             },
@@ -63,7 +66,10 @@ Object {
                 "transform-react-jsx-self",
               ],
               "presets": Array [
-                "es2015",
+                Array [
+                  "env",
+                  undefined,
+                ],
                 "react",
               ],
             },
@@ -116,7 +122,10 @@ Object {
                 "transform-react-jsx-self",
               ],
               "presets": Array [
-                "es2015",
+                Array [
+                  "env",
+                  undefined,
+                ],
                 "react",
               ],
             },
@@ -206,7 +215,10 @@ Object {
                 "transform-react-remove-prop-types",
               ],
               "presets": Array [
-                "es2015",
+                Array [
+                  "env",
+                  undefined,
+                ],
                 "react",
               ],
             },
@@ -236,7 +248,10 @@ Object {
                 "transform-react-remove-prop-types",
               ],
               "presets": Array [
-                "es2015",
+                Array [
+                  "env",
+                  undefined,
+                ],
                 "react",
               ],
             },
@@ -288,7 +303,10 @@ Object {
                 "transform-react-remove-prop-types",
               ],
               "presets": Array [
-                "es2015",
+                Array [
+                  "env",
+                  undefined,
+                ],
                 "react",
               ],
             },
@@ -385,7 +403,10 @@ Object {
                 "transform-react-jsx-self",
               ],
               "presets": Array [
-                "es2015",
+                Array [
+                  "env",
+                  undefined,
+                ],
                 "react",
                 [Function],
                 [Function],
@@ -423,7 +444,10 @@ Object {
                 "transform-react-jsx-self",
               ],
               "presets": Array [
-                "es2015",
+                Array [
+                  "env",
+                  undefined,
+                ],
                 "react",
                 [Function],
                 [Function],
@@ -489,7 +513,10 @@ Object {
                 "transform-react-jsx-self",
               ],
               "presets": Array [
-                "es2015",
+                Array [
+                  "env",
+                  undefined,
+                ],
                 "react",
                 [Function],
                 [Function],
