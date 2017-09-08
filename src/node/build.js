@@ -14,7 +14,7 @@ const constants = require('./constants');
 const maybeClearOutputDirectory = require('./maybe-clear-output-directory');
 const copyNonPageFiles = require('./copy-non-page-files');
 const writeWebpackStats = require('./write-webpack-stats');
-const renderHtml = require('./render-html');
+const buildHtml = require('./build-html');
 const webpackCompilePromise = require('./webpack-compile-promise');
 
 function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
@@ -94,7 +94,7 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     })
     .then(() => {
       emitNotification('Building HTML.');
-      return renderHtml(batfishConfig, cssFilename);
+      return buildHtml(batfishConfig, cssFilename);
     })
     .then(() => {
       if (!batfishConfig.production) return;

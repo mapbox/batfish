@@ -36,7 +36,7 @@ declare type BatfishConfiguration = {
     rehypePlugins?: Array<Function>
   },
   includePromisePolyfill: boolean,
-  inlineJs?: Array<{ filename: string, uglify?: boolean }>,
+  inlineJs?: Array<InlineJsEntry>,
   production?: boolean,
   developmentDevtool: string | false,
   productionDevtool: string | false,
@@ -47,6 +47,8 @@ declare type BatfishConfiguration = {
   port: number,
   verbose: boolean
 };
+
+declare type InlineJsEntry = { filename: string, uglify?: boolean };
 
 declare type BatfishPageData = {
   +filePath: string,

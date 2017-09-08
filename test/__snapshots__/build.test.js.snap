@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`build order of notifications, *with* CSS inlining and sitemap 1`] = `
+Array [
+  "Compiling CSS.",
+  "Starting the Webpack bundling.",
+  "Creating the client bundle.",
+  "Creating the static-page-rendering Node bundle.",
+  "Copying unprocessed files.",
+  "Building HTML.",
+  "CSS inlining message 1",
+  "CSS inlining message 2",
+  "Building the sitemap.",
+]
+`;
+
+exports[`build order of notifications, without CSS inlining or sitemap 1`] = `
+Array [
+  "Starting the Webpack bundling.",
+  "Creating the client bundle.",
+  "Creating the static-page-rendering Node bundle.",
+  "Copying unprocessed files.",
+  "Building HTML.",
+  "siteOrigin is not specified; unable to generate sitemap.",
+]
+`;

@@ -24,7 +24,7 @@ declare type StaticRenderPagesFunction = (
   cssUrl?: string
 ) => Promise<void>;
 
-function renderHtml(
+function buildHtml(
   batfishConfig: BatfishConfiguration,
   cssFilename?: string
 ): Promise<void> {
@@ -82,4 +82,4 @@ function renderHtml(
   });
 }
 
-module.exports = renderHtml;
+module.exports = buildHtml;

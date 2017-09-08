@@ -1,5 +1,6 @@
 'use strict';
 
+const stripAnsi = require('strip-ansi');
 const build = require('../src/node/build');
 const constants = require('../src/node/constants');
 const inlineCss = require('../src/node/inline-css');
@@ -10,7 +11,7 @@ const createWebpackConfigStatic = require('../src/node/create-webpack-config-sta
 const maybeClearOutputDirectory = require('../src/node/maybe-clear-output-directory');
 const copyNonPageFiles = require('../src/node/copy-non-page-files');
 const writeWebpackStats = require('../src/node/write-webpack-stats');
-const renderHtml = require('../src/node/render-html');
+const buildHtml = require('../src/node/build-html');
 const webpackCompilePromise = require('../src/node/webpack-compile-promise');
 const validateConfig = require('../src/node/validate-config');
 
@@ -51,7 +52,7 @@ jest.mock('../src/node/write-webpack-stats', () => {
   return jest.fn(() => Promise.resolve());
 });
 
-jest.mock('../src/node/render-html', () => {
+jest.mock('../src/node/build-html', () => {
   return jest.fn(() => Promise.resolve());
 });
 
@@ -308,8 +309,8 @@ describe('build', () => {
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
-      expect(renderHtml).toHaveBeenCalledTimes(1);
-      expect(renderHtml).toHaveBeenCalledWith(
+      expect(buildHtml).toHaveBeenCalledTimes(1);
+      expect(buildHtml).toHaveBeenCalledWith(
         validateConfig.mockValidatedConfig,
         undefined
       );
@@ -322,8 +323,8 @@ describe('build', () => {
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
-      expect(renderHtml).toHaveBeenCalledTimes(1);
-      expect(renderHtml).toHaveBeenCalledWith(
+      expect(buildHtml).toHaveBeenCalledTimes(1);
+      expect(buildHtml).toHaveBeenCalledWith(
         validateConfig.mockValidatedConfig,
         'mock-stylesheet.css'
       );
@@ -333,7 +334,7 @@ describe('build', () => {
 
   test('catches errors when rendering HTML', done => {
     const expectedError = new Error();
-    renderHtml.mockReturnValueOnce(Promise.reject(expectedError));
+    buildHtml.mockReturnValueOnce(Promise.reject(expectedError));
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, error => {
       expect(error).toBe(expectedError);
@@ -463,6 +464,45 @@ describe('build', () => {
       if (/unable to generate sitemap/.test(message)) {
         done();
       }
+    });
+  });
+
+  test('order of notifications, without CSS inlining or sitemap', done => {
+    delete validateConfig.mockValidatedConfig.siteOrigin;
+    const notifications = [];
+    const emitter = build();
+    emitter.on(constants.EVENT_ERROR, logEmitterError);
+    emitter.on(constants.EVENT_NOTIFICATION, message => {
+      notifications.push(stripAnsi(message));
+    });
+    emitter.on(constants.EVENT_DONE, () => {
+      expect(notifications).toMatchSnapshot();
+      done();
+    });
+  });
+
+  test('order of notifications, *with* CSS inlining and sitemap', done => {
+    validateConfig.mockValidatedConfig.stylesheets = ['one.css', 'two.css'];
+    const notifications = [];
+    const emitter = build();
+    emitter.on(constants.EVENT_ERROR, logEmitterError);
+    emitter.on(constants.EVENT_NOTIFICATION, message => {
+      notifications.push(stripAnsi(message));
+    });
+    emitter.on(constants.EVENT_DONE, () => {
+      expect(notifications).toMatchSnapshot();
+      done();
+    });
+    process.nextTick(() => {
+      const cssInliningNotificationHandler = inlineCss.mockEmitter.on.mock.calls.find(
+        call => call[0] === constants.EVENT_NOTIFICATION
+      )[1];
+      cssInliningNotificationHandler('CSS inlining message 1');
+      cssInliningNotificationHandler('CSS inlining message 2');
+      const cssInliningDoneHandler = inlineCss.mockEmitter.on.mock.calls.find(
+        call => call[0] === constants.EVENT_DONE
+      )[1];
+      cssInliningDoneHandler();
     });
   });
 });

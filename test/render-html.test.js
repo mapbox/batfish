@@ -1,175 +1,145 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const UglifyJs = require('uglify-js');
-const renderHtml = require('../src/node/render-html');
-const errorTypes = require('../src/node/error-types');
+const _ = require('lodash');
+const ReactDOMServer = require('react-dom/server');
+const renderHtmlPage = require('../src/webpack/render-html-page')
+  .renderHtmlPage;
 
-const MOCK_ASSETS_DIRECTORY = '/mock/output/assets';
-const MOCK_MANIFEST_JS_PATH = 'mock-asset-manifest-js-path';
-const MOCK_MANIFEST_JS = 'mock-asset-manifest-js-content';
+jest.mock('react-helmet', () => {
+  const mockHelmetHead = {
+    htmlAttributes: {
+      toComponent: jest.fn(() => 'htmlAttributes.mockToComponent')
+    },
+    bodyAttributes: {
+      toComponent: jest.fn(() => 'bodyAttributes.mockToComponent')
+    },
+    title: { toString: jest.fn(() => 'title.mockToString') },
+    base: { toString: jest.fn(() => 'base.mockToString') },
+    meta: { toString: jest.fn(() => 'meta.mockToString') },
+    link: { toString: jest.fn(() => 'link.mockToString') },
+    script: { toString: jest.fn(() => 'script.mockToString') },
+    style: { toString: jest.fn(() => 'style.mockToString') }
+  };
 
-jest.mock('uglify-js', () => {
   return {
-    minify: jest.fn(() => ({
-      code: 'minified-js',
-      error: null
-    }))
+    rewind: jest.fn(() => mockHelmetHead)
   };
 });
 
-jest.mock('../src/node/get-webpack-asset-absolute-path', () => {
-  return jest.fn(() => 'mock-asset-manifest-js-path');
-});
-
 jest.mock(
-  '/mock/output/assets/static-render-pages.js',
+  'batfish-internal/application-wrapper',
   () => {
-    return {
-      default: jest.fn(() => Promise.resolve())
+    const _ = require('lodash');
+    const React = require('react');
+    return function ApplicationWrapper(props) {
+      return React.createElement(
+        'div',
+        { id: 'application-wrapper' },
+        JSON.stringify(_.omit(props, ['children']), null, 2),
+        props.children
+      );
     };
   },
   { virtual: true }
 );
 
-describe('renderHtml', () => {
-  let batfishConfig;
+jest.mock('../src/webpack/router', () => {
+  const _ = require('lodash');
+  const React = require('react');
+  return {
+    Router: function Router(props) {
+      return React.createElement(
+        'div',
+        {
+          id: 'router',
+          'data-props': JSON.stringify(_.omit(props, ['children']), null, 2)
+        },
+        props.children
+      );
+    }
+  };
+});
+
+jest.mock('../src/webpack/static-html-page', () => {
+  const _ = require('lodash');
+  const React = require('react');
+  return {
+    StaticHtmlPage: function StaticHtmlPage(props) {
+      return React.createElement(
+        'div',
+        {
+          id: 'static-html-page',
+          'data-props': JSON.stringify(_.omit(props, ['children']), null, 2)
+        },
+        props.children
+      );
+    }
+  };
+});
+
+describe('renderHtmlPage', () => {
+  let mockRoute;
+  let mockPageModule;
 
   beforeEach(() => {
-    batfishConfig = {
-      outputDirectory: '/mock/output',
-      siteBasePath: '/base',
-      stylesheets: ['one.css', 'two.css']
+    mockPageModule = {
+      component: 'mockPageModule.component',
+      props: 'mockPageModule.props'
     };
-    jest.spyOn(fs, 'readFileSync').mockImplementation(filename => {
-      if (filename === path.join(MOCK_ASSETS_DIRECTORY, 'assets.json')) {
-        return JSON.stringify({
-          manifest: { js: 'mock-manifest.js' },
-          app: { js: 'mock-app.js' },
-          vendor: { js: 'mock-app.js' }
-        });
-      } else if (filename === MOCK_MANIFEST_JS_PATH) {
-        return MOCK_MANIFEST_JS;
-      }
+    mockRoute = {
+      path: '/mock/route/path/',
+      getPage: jest.fn(() => Promise.resolve(mockPageModule))
+    };
+  });
+
+  test('gives us what we want', () => {
+    return renderHtmlPage(mockRoute, 'inline-js-scripts', 'load-css-script', [
+      'append',
+      'to',
+      'body'
+    ]).then(html => {
+      expect(_.unescape(html)).toMatchSnapshot();
     });
   });
 
-  afterEach(() => {
-    fs.readFileSync.mockRestore();
-  });
-
-  test('reads assets.json', () => {
-    return renderHtml(batfishConfig, 'mock-stylesheet.css').then(() => {
-      expect(fs.readFileSync).toHaveBeenCalledWith(
-        path.join(MOCK_ASSETS_DIRECTORY, 'assets.json'),
-        'utf8'
-      );
-    });
-  });
-
-  test('reads manifest', () => {
-    return renderHtml(batfishConfig, 'mock-stylesheet.css').then(() => {
-      expect(fs.readFileSync).toHaveBeenCalledWith(
-        MOCK_MANIFEST_JS_PATH,
-        'utf8'
-      );
-    });
-  });
-
-  test('uglifies manifest', () => {
-    return renderHtml(batfishConfig, 'mock-stylesheet.css').then(() => {
-      expect(UglifyJs.minify).toHaveBeenCalledWith(MOCK_MANIFEST_JS);
-    });
-  });
-
-  test('runs the compiled static-render-pages.js', () => {
-    // eslint-disable-next-line node/no-missing-require
-    const mockStaticRenderPages = require('/mock/output/assets/static-render-pages.js')
-      .default;
-    return renderHtml(batfishConfig, 'mock-stylesheet.css').then(() => {
-      expect(mockStaticRenderPages).toHaveBeenCalledTimes(1);
-      expect(mockStaticRenderPages).toHaveBeenCalledWith(
-        batfishConfig,
-        {
-          manifest: { js: 'mock-manifest.js' },
-          app: { js: 'mock-app.js' },
-          vendor: { js: 'mock-app.js' }
-        },
-        'minified-js',
-        '/base/assets/mock-stylesheet.css'
-      );
-    });
-  });
-
-  test('handles errors when reading assets.json', () => {
+  test('registers errors from React.renderToString errors', () => {
     const expectedError = new Error();
-    fs.readFileSync.mockImplementation(filename => {
-      if (filename === path.join(MOCK_ASSETS_DIRECTORY, 'assets.json')) {
-        throw expectedError;
-      } else {
-        return '';
-      }
-    });
-    expect(renderHtml(batfishConfig)).rejects.toBe(expectedError);
-  });
-
-  test('handles errors when reading man', () => {
-    const expectedError = new Error();
-    fs.readFileSync.mockImplementation(filename => {
-      if (filename === path.join(MOCK_ASSETS_DIRECTORY, 'assets.json')) {
-        return JSON.stringify({ manifest: { js: 'mock-manifest.js' } });
-      } else if (filename === MOCK_MANIFEST_JS_PATH) {
-        throw expectedError;
-      }
-    });
-    expect(renderHtml(batfishConfig)).rejects.toBe(expectedError);
-  });
-
-  test('if there are no stylesheets, no cssUrl argument is passed to staticRenderPages', () => {
-    // eslint-disable-next-line node/no-missing-require
-    const mockStaticRenderPages = require('/mock/output/assets/static-render-pages.js')
-      .default;
-    batfishConfig.stylesheets = [];
-    return renderHtml(batfishConfig).then(() => {
-      expect(mockStaticRenderPages.mock.calls[0][3]).toBeUndefined();
-    });
-  });
-
-  test('catches errors parsing compiled static-render-pages.js', () => {
-    const expectedError = new Error();
-    // eslint-disable-next-line node/no-missing-require
-    const mockStaticRenderPages = require('/mock/output/assets/static-render-pages.js')
-      .default;
-    mockStaticRenderPages.mockImplementation(() => {
+    jest.spyOn(ReactDOMServer, 'renderToString').mockImplementation(() => {
       throw expectedError;
     });
-    return renderHtml(batfishConfig).then(
+    return renderHtmlPage(mockRoute, 'inline-js-scripts', 'load-css-script', [
+      'append',
+      'to',
+      'body'
+    ]).then(
       () => {
         throw new Error('should have errored');
       },
       error => {
-        expect(error).toBeInstanceOf(errorTypes.WebpackNodeParseError);
-        expect(error.originalError).toBe(expectedError);
+        expect(error).toBe(expectedError);
+        ReactDOMServer.renderToString.mockRestore();
       }
     );
   });
 
-  test('catches errors executing compiled static-render-pages.js', () => {
+  test('registers errors from React.renderToStaticMarkup errors', () => {
     const expectedError = new Error();
-    // eslint-disable-next-line node/no-missing-require
-    const mockStaticRenderPages = require('/mock/output/assets/static-render-pages.js')
-      .default;
-    mockStaticRenderPages.mockImplementation(() =>
-      Promise.reject(expectedError)
-    );
-    return renderHtml(batfishConfig).then(
+    jest
+      .spyOn(ReactDOMServer, 'renderToStaticMarkup')
+      .mockImplementation(() => {
+        throw expectedError;
+      });
+    return renderHtmlPage(mockRoute, 'inline-js-scripts', 'load-css-script', [
+      'append',
+      'to',
+      'body'
+    ]).then(
       () => {
         throw new Error('should have errored');
       },
       error => {
-        expect(error).toBeInstanceOf(errorTypes.WebpackNodeExecutionError);
-        expect(error.originalError).toBe(expectedError);
+        expect(error).toBe(expectedError);
+        ReactDOMServer.renderToStaticMarkup.mockRestore();
       }
     );
   });

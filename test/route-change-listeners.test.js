@@ -2,6 +2,23 @@
 
 const RouteChangeListeners = require('../src/webpack/public/route-change-listeners');
 
+// This mock indirectly supports route-change-listeners by
+// supporting prefix-url.
+jest.mock(
+  'batfish-internal/context',
+  () => {
+    return {
+      batfishContext: {
+        selectedConfig: {
+          siteBasePath: '',
+          siteOrigin: ''
+        }
+      }
+    };
+  },
+  { virtual: true }
+);
+
 describe('start change listeners', () => {
   test('no listeners', () => {
     expect(() =>

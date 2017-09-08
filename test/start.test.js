@@ -1,5 +1,6 @@
 'use strict';
 
+const stripAnsi = require('strip-ansi');
 const start = require('../src/node/start');
 const compileStylesheets = require('../src/node/compile-stylesheets');
 const watchCss = require('../src/node/watch-css');
@@ -241,6 +242,29 @@ describe('start', () => {
       watchWebpack.mockWebpackEmitter.on.mock.calls.find(
         call => call[0] === constants.EVENT_NOTIFICATION
       )[1]('foo');
+    });
+  });
+
+  test('order of notifications', done => {
+    const notifications = [];
+    const emitter = start();
+    emitter.on(constants.EVENT_ERROR, logEmitterError);
+    emitter.on(constants.EVENT_NOTIFICATION, message => {
+      notifications.push(stripAnsi(message));
+    });
+    process.nextTick(() => {
+      const cssAfterCompilation = watchCss.mock.calls[0][1].afterCompilation;
+      const webpackWatcherNotificationHandler = watchWebpack.mockWebpackEmitter.on.mock.calls.find(
+        call => call[0] === constants.EVENT_NOTIFICATION
+      )[1];
+      cssAfterCompilation('a-file.txt');
+      webpackWatcherNotificationHandler('Webpack notification 1');
+      cssAfterCompilation('b-file.txt');
+      webpackWatcherNotificationHandler('Webpack notification 2');
+      process.nextTick(() => {
+        expect(notifications).toMatchSnapshot();
+        done();
+      });
     });
   });
 });
