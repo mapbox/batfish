@@ -24,6 +24,9 @@ Batfish exposes a few public modules to hook into its routing system and other i
   - [API](#api-3)
     - [withLocation](#withlocation)
   - [Example](#example)
+- [focus-content-entry](#focus-content-entry)
+  - [API](#api-4)
+    - [focusContentEntry](#focuscontententry)
 
 ## route-to
 
@@ -218,6 +221,20 @@ class MyPage extends React.Component {
 
 module.exports = withLocation(MyPage);
 ```
+
+## focus-content-entry
+
+To improve the experience of screen-reader users, this utility sets focus on your content's most meaningful entry point. It runs after each page transition and can be invoked manually as you see fit.
+
+Import from `'@mapbox/batfish/modules/focus-content-entry'`.
+
+### API
+
+The following functions are named exports of `'@mapbox/batfish/modules/focus-content-entry'`.
+
+#### focusContentEntry
+
+Sets focus on the first node matching the selector `h1, h2, h3, h4, h5, h6, main`.
 
 [`sitebasepath`]: ./configuration.md#sitebasepath
 
