@@ -17,8 +17,8 @@ const getWebpackAssetAbsolutePath = require('./get-webpack-asset-absolute-path')
 declare type StaticRenderPagesFunction = (
   BatfishConfiguration,
   {
-    +vendor: { +js: string },
-    +app: { +js: string }
+    vendor: { js: string },
+    app: { js: string }
   },
   string,
   cssUrl?: string

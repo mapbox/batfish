@@ -27,7 +27,7 @@ function inlineCssWorker(
         .use(postcssCsso())
         .process(css, { from: cssPath, to: cssPath })
         .catch(rethrowPostcssError)
-        .then((result: { +css: string }) => {
+        .then((result: { css: string }) => {
           return html.replace(
             constants.INLINE_CSS_MARKER,
             `<style>${result.css}</style>`

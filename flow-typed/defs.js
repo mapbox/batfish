@@ -51,37 +51,37 @@ declare type BatfishConfiguration = {
 declare type InlineJsEntry = { filename: string, uglify?: boolean };
 
 declare type BatfishPageData = {
-  +filePath: string,
-  +path: string,
-  +frontMatter: { [string]: JsonValue }
+  filePath: string,
+  path: string,
+  frontMatter: { [string]: JsonValue }
 };
 
 declare type BatfishSiteData = {
-  +pages: Array<BatfishPageData>
+  pages: Array<BatfishPageData>
 };
 
 declare type BatfishPageModule = {
-  +component: React.Component<*, *>,
-  +props: {
-    +frontMatter: { [string]: JsonValue }
+  component: React.Component<*, *>,
+  props: {
+    frontMatter: { [string]: JsonValue }
   }
 };
 
 declare type BatfishRouteData = {
-  +path: string,
-  +getPage: () => Promise<BatfishPageModule>,
-  +internalRouting?: boolean,
-  +is404?: true
+  path: string,
+  getPage: () => Promise<BatfishPageModule>,
+  internalRouting?: boolean,
+  is404?: true
 };
 
 declare type BatfishContext = {
-  +selectedConfig: {
-    +siteBasePath: string,
-    +siteOrigin: string,
-    +hijackLinks: boolean
+  selectedConfig: {
+    siteBasePath: string,
+    siteOrigin: string,
+    hijackLinks: boolean
   },
-  +routes: Array<BatfishRouteData>,
-  +notFoundRoute: BatfishRouteData
+  routes: Array<BatfishRouteData>,
+  notFoundRoute: BatfishRouteData
 };
 
 declare type BatfishLocation = {
