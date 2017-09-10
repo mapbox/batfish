@@ -16,7 +16,7 @@ export function changePage(
   setRouterState: (state: RouterState, callback: () => void) => void,
   options: { pushState?: boolean, scrollToTop?: boolean } = {},
   onFinish?: () => mixed
-) {
+): Promise<void> {
   const win = getWindow();
   const matchingRoute = findMatchingRoute(nextLocation.pathname);
   const nextUrl = [

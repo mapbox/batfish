@@ -158,7 +158,7 @@ function createWebpackConfigBase(
           constants.PUBLIC_PATH_ASSETS,
           ''
         ),
-        pathinfo: batfishConfig.verbose,
+        pathinfo: !batfishConfig.production,
         filename: '[name].js'
       },
       performance: {
@@ -173,7 +173,7 @@ function createWebpackConfigBase(
           )
         },
         // Loader names need to be strings, and to allow them to be looked
-        // up within batfish's module dependencies, not just the project's,
+        // up within Batfish's module dependencies, not just the project's,
         // we need this.
         modules: [path.join(__dirname, '../../node_modules'), 'node_modules']
       },
@@ -192,7 +192,8 @@ function createWebpackConfigBase(
             ? '"development"'
             : '"production"'
         }),
-        // Determine hashes with file content, not random strings. This allows for long-term caching.
+        // Determine hashes with file content, not random strings. This allows
+        // for long-term caching.
         new WebpackChunkHash()
       ],
       // Designate sourcemap type.

@@ -14,10 +14,11 @@ export function renderHtmlPage(
   appendToBody: Array<string>
 ): Promise<string> {
   return route.getPage().then(pageModule => {
-    // We render the page content separately from the StaticHtmlPage, because the page
-    // content is what will be re-rendered when the bundled JS loads so it must
-    // match exactly what batfish-app.js renders (or you get React checksum errors).
-    // The rest of StaticHtmlPage will never be re-rendered by React.
+    // We render the page content separately from the StaticHtmlPage, because
+    // the page content is what will be re-rendered when the bundled JS loads
+    // so it must match exactly what batfish-app.js renders (or you get React
+    // checksum errors). The rest of StaticHtmlPage will never be re-rendered
+    // by React.
     const pageContent = ReactDOMServer.renderToString(
       <ApplicationWrapper>
         <Router

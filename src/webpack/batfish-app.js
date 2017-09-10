@@ -5,7 +5,7 @@ import { Router } from './router';
 import { findMatchingRoute } from './find-matching-route';
 import ApplicationWrapper from 'batfish-internal/application-wrapper';
 
-// The initialization of any Batfish.
+// The initialization of any Batfish app.
 // Get the current page and render it, wrapped in the user's ApplicationWrapper
 // component.
 

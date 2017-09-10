@@ -100,6 +100,7 @@ function watchWebpack(
         {
           ignored: [
             /node_modules/,
+            // Ignore page files because they are watched by watchContext.
             path.join(batfishConfig.pagesDirectory, './**/*.{js,md}')
           ]
         },

@@ -5,8 +5,7 @@ const path = require('path');
 const chokidar = require('chokidar');
 const writeContextModule = require('./write-context-module');
 
-// Rebuild the context module when there are changes that
-// would require that.
+// Rebuild the context module when there are changes that would require that.
 function watchContext(
   batfishConfig: BatfishConfiguration,
   options: {

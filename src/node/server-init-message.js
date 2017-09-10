@@ -4,7 +4,7 @@
 const chalk = require('chalk');
 const path = require('path');
 
-// Log some things when a BrowserSync starts.
+// Log some things when BrowserSync starts.
 // Using this to replace BrowserSync's regular logging to ensure the
 // siteBasePath is included and users know where to go.g
 function serverInitMessage(

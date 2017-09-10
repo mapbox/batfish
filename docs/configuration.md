@@ -206,6 +206,18 @@ Additional plugins to pass to Babel during both Webpack builds (client bundling 
 **You should `require()` your plugins instead of referencing them as strings.**
 Otherwise, Babel might end up looking in the wrong place for the npm package.
 
+Plugins you provide are concatenated to the following default plugins:
+
+- Always
+  - [babel-plugin-syntax-dynamic-import](https://babeljs.io/docs/plugins/syntax-dynamic-import/)
+  - [babel-plugin-transform-class-properties](https://babeljs.io/docs/plugins/transform-class-properties/)
+  - [@mapbox/babel-plugin-transform-jsxtreme-markdown](https://github.com/mapbox/jsxtreme-markdown/tree/master/packages/babel-plugin-transform-jsxtreme-markdown): See [`jsxtremeMarkdownOptions`].
+- Development only
+  - [babel-plugin-transform-react-jsx-source](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-jsx-source)
+  - [babel-plugin-transform-react-jsx-self](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-jsx-self)
+- Production only
+  - [babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types)
+
 ### babelPresets
 
 Type: `Array`.

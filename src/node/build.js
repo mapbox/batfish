@@ -99,6 +99,8 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     .then(() => {
       if (!batfishConfig.production) return;
       return new Promise((resolve, reject) => {
+        // This line within the callback function scope to please Flow about
+        // the cssFilename variable.
         if (stylesheetsIsEmpty || !cssFilename) return resolve();
         const inlineCssEmitter = inlineCss(outputDirectory, cssFilename, {
           verbose: batfishConfig.verbose
