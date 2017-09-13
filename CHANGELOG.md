@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 0.11.1
 
 - [Fix] Remove imports of `batfish-internal/context` from public modules.
   These break unit tests, or any other reference to the file outside of Batfish's builds.
