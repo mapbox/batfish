@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Router instance.changePage invokes change-start and change-end callbacks 1`] = `
+exports[`Router renders the initial page with a window passes current location details 1`] = `
 <StartingComponent
   location={
     Object {
-      "hash": "",
+      "hash": "#grr",
       "pathname": "/magic/",
-      "search": "",
+      "search": "?foo=bar",
     }
   }
 />
 `;
 
-exports[`Router renders the initial page 1`] = `
+exports[`Router renders the initial page without a window 1`] = `
 <StartingComponent
   location={
     Object {

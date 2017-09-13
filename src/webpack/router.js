@@ -7,28 +7,11 @@ import linkToLocation from '@mapbox/link-to-location';
 import querySelectorContainsNode from '@mapbox/query-selector-contains-node';
 import { batfishContext } from 'batfish-internal/context';
 import { routeTo } from '@mapbox/batfish/modules/route-to';
-import { prefixUrl } from '@mapbox/batfish/modules/prefix-url';
 import { findMatchingRoute } from './find-matching-route';
 import { scrollToFragment } from './scroll-to-fragment';
-import {
-  _invokeRouteChangeStartCallbacks,
-  _invokeRouteChangeEndCallbacks
-} from '@mapbox/batfish/modules/route-change-listeners';
-
-prefixUrl._configure(
-  batfishContext.selectedConfig.siteBasePath,
-  batfishContext.selectedConfig.siteOrigin
-);
-
-function getContextLocation(): BatfishLocation {
-  let tidyPath = window.location.pathname;
-  if (!/\/$/.test(tidyPath)) tidyPath += '/';
-  return {
-    pathname: tidyPath,
-    hash: window.location.hash,
-    search: window.location.search
-  };
-}
+import { getWindow } from './get-window';
+import { changePage } from './change-page';
+import { getCurrentLocation } from './get-current-location';
 
 type Props = {
   startingPath: string,
@@ -36,22 +19,23 @@ type Props = {
   startingProps: Object
 };
 
-type State = {
+export type RouterState = {
   path: string,
   PageComponent: React$ComponentType<*>,
   pageProps: Object,
   location: BatfishLocation
 };
 
-class Router extends React.PureComponent<Props, State> {
+class Router extends React.PureComponent<Props, RouterState> {
   constructor(props: Props) {
     super(props);
     const location: BatfishLocation = {
       pathname: this.props.startingPath
     };
     if (typeof window !== 'undefined') {
-      location.search = window.location.search;
-      location.hash = window.location.hash;
+      const win = getWindow();
+      location.search = win.location.search;
+      location.hash = win.location.hash;
     }
     this.state = {
       path: this.props.startingPath,
@@ -77,13 +61,17 @@ class Router extends React.PureComponent<Props, State> {
     }
 
     routeTo._setRouteToHandler(this.routeTo);
-    window.addEventListener('popstate', event => {
+    const win = getWindow();
+    win.addEventListener('popstate', event => {
       event.preventDefault();
-      this.changePage({
-        pathname: window.location.pathname,
-        search: window.location.search,
-        hash: window.location.hash
-      });
+      changePage(
+        {
+          pathname: win.location.pathname,
+          search: win.location.search,
+          hash: win.location.hash
+        },
+        this.setState.bind(this)
+      );
     });
 
     if (batfishContext.selectedConfig.hijackLinks) {
@@ -97,7 +85,7 @@ class Router extends React.PureComponent<Props, State> {
     }
 
     this.setState({
-      location: getContextLocation()
+      location: getCurrentLocation()
     });
   }
 
@@ -105,64 +93,17 @@ class Router extends React.PureComponent<Props, State> {
   // If it matches a route, go there dynamically and scroll to the top of the viewport.
   // If it doesn't match a route, go there non-dynamically.
   routeTo = (input: string | HTMLAnchorElement) => {
+    const win = getWindow();
     const targetLocation: BatfishLocation = linkToLocation(input);
     if (findMatchingRoute(targetLocation.pathname).is404) {
-      return window.location.assign(input);
+      return win.location.assign(input);
     }
-    this.changePage(targetLocation, {
+    changePage(targetLocation, this.setState.bind(this), {
       pushState: true,
       scrollToTop:
-        window.location.pathname !== targetLocation.pathname ||
+        win.location.pathname !== targetLocation.pathname ||
         !targetLocation.hash
     });
-  };
-
-  // To change the page, we need to
-  // - Get the matching page module, which is an async Webpack bundle.
-  // - Use pushState to change the URL and add a new history entry.
-  // - Change the state of this component to render the new page.
-  // - Adjust scroll position on the new page.
-  changePage = (
-    nextLocation: BatfishLocation,
-    options: { pushState?: boolean, scrollToTop?: boolean } = {},
-    callback?: () => mixed
-  ) => {
-    const matchingRoute = findMatchingRoute(nextLocation.pathname);
-    const nextUrl = [
-      nextLocation.pathname,
-      nextLocation.hash,
-      nextLocation.search
-    ].join('');
-    // Call the change-start callbacks immediately, not after the page chunk
-    // has already been fetched.
-    const startChange = _invokeRouteChangeStartCallbacks(nextLocation.pathname);
-    return matchingRoute
-      .getPage()
-      .then(pageModule => {
-        return startChange.then(() => pageModule);
-      })
-      .then(pageModule => {
-        if (options.pushState) {
-          window.history.pushState({}, null, nextUrl);
-        }
-        const nextState = {
-          path: matchingRoute.path,
-          PageComponent: pageModule.component,
-          pageProps: pageModule.props,
-          location: getContextLocation()
-        };
-        this.setState(nextState, () => {
-          if (options.scrollToTop) {
-            window.scrollTo(0, 0);
-          } else if (scrollRestorer.getSavedScroll()) {
-            scrollRestorer.restoreScroll();
-          } else {
-            scrollToFragment();
-          }
-          if (callback) callback();
-          _invokeRouteChangeEndCallbacks(nextLocation.pathname);
-        });
-      });
   };
 
   render() {

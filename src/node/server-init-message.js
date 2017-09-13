@@ -4,7 +4,7 @@
 const chalk = require('chalk');
 const path = require('path');
 
-// Log some things when a BrowserSync starts.
+// Log some things when BrowserSync starts.
 // Using this to replace BrowserSync's regular logging to ensure the
 // siteBasePath is included and users know where to go.g
 function serverInitMessage(
@@ -14,9 +14,9 @@ function serverInitMessage(
   const relativeOutputDirectory =
     path.relative(
       process.cwd(),
-      serverInstance.options.get('server').get('baseDir')
+      serverInstance.instance.options.get('server').get('baseDir')
     ) + '/';
-  const urls = serverInstance.options.get('urls');
+  const urls = serverInstance.instance.options.get('urls');
   const localUrl =
     urls.get('local') + batfishConfig.siteBasePath.replace(/([^/])$/, '$1/');
   const externalUrl =

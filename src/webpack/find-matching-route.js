@@ -1,8 +1,8 @@
 // @flow
 import { batfishContext } from 'batfish-internal/context';
 
-// Returns an array of regular expressions that are used to check whether a URL path
-// matches one of the routes.
+// Returns an array of regular expressions that are used to check whether a URL
+// path matches one of the routes.
 function createPathRegExps(
   routes: Array<BatfishRouteData>
 ): { [string]: RegExp } {

@@ -21,9 +21,9 @@ const errorTypes = require('./error-types');
 const getPostcssPlugins = require('./get-postcss-plugins');
 
 type StylesheetData = {|
-  +locator: string,
-  +css: string,
-  +map?: string
+  locator: string,
+  css: string,
+  map?: string
 |};
 
 const urlCache: Map<string, StylesheetData> = new Map();
@@ -65,7 +65,7 @@ function compileStylesheets(
             `Stylesheet at ${chalk.yellow(url)} could not be downloaded.`
           );
         })
-        .then((response: { +body: string }) => {
+        .then((response: { body: string }) => {
           return (
             postcss()
               // Make all the URLs in the stylesheet absolute so the new local
@@ -75,7 +75,7 @@ function compileStylesheets(
               .catch(rethrowPostcssError)
           );
         })
-        .then((result: { +css: string }) => {
+        .then((result: { css: string }) => {
           const contentsItem = {
             locator: url,
             css: result.css,

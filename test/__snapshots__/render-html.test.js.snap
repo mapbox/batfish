@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderHtmlPage gives us what we want 1`] = `
+"<!doctype html><div id=\\"static-html-page\\" data-props=\\"{
+  \\"rawAppHtml\\": \\"<div id=\\\\\\"application-wrapper\\\\\\" data-reactroot=\\\\\\"\\\\\\" data-reactid=\\\\\\"1\\\\\\" data-react-checksum=\\\\\\"-1663992387\\\\\\"><!-- react-text: 2 -->{}<!-- /react-text --><div id=\\\\\\"router\\\\\\" data-props=\\\\\\"{\\\\n  &quot;startingPath&quot;: &quot;/mock/route/path/&quot;,\\\\n  &quot;startingComponent&quot;: &quot;mockPageModule.component&quot;,\\\\n  &quot;startingProps&quot;: &quot;mockPageModule.props&quot;\\\\n}\\\\\\" data-reactid=\\\\\\"3\\\\\\"></div></div>\\",
+  \\"htmlAttributes\\": \\"htmlAttributes.mockToComponent\\",
+  \\"bodyAttributes\\": \\"bodyAttributes.mockToComponent\\",
+  \\"appendToHead\\": [
+    \\"title.mockToString\\",
+    \\"base.mockToString\\",
+    \\"meta.mockToString\\",
+    \\"link.mockToString\\",
+    \\"inline-js-scripts\\",
+    \\"script.mockToString\\",
+    \\"<!-- INLINE CSS HERE, BATFISH -->\\",
+    \\"load-css-script\\",
+    \\"style.mockToString\\"
+  ],
+  \\"appendToBody\\": [
+    \\"append\\",
+    \\"to\\",
+    \\"body\\"
+  ]
+}\\"></div>"
+`;

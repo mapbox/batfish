@@ -36,7 +36,7 @@ declare type BatfishConfiguration = {
     rehypePlugins?: Array<Function>
   },
   includePromisePolyfill: boolean,
-  inlineJs?: Array<{ filename: string, uglify?: boolean }>,
+  inlineJs?: Array<InlineJsEntry>,
   production?: boolean,
   developmentDevtool: string | false,
   productionDevtool: string | false,
@@ -48,44 +48,52 @@ declare type BatfishConfiguration = {
   verbose: boolean
 };
 
+declare type InlineJsEntry = { filename: string, uglify?: boolean };
+
 declare type BatfishPageData = {
-  +filePath: string,
-  +path: string,
-  +frontMatter: { [string]: JsonValue }
+  filePath: string,
+  path: string,
+  frontMatter: { [string]: JsonValue }
 };
 
 declare type BatfishSiteData = {
-  +pages: Array<BatfishPageData>
+  pages: Array<BatfishPageData>
 };
 
 declare type BatfishPageModule = {
-  +component: React.Component<*, *>,
-  +props: {
-    +frontMatter: { [string]: JsonValue }
+  component: React.Component<*, *>,
+  props: {
+    frontMatter: { [string]: JsonValue }
   }
 };
 
 declare type BatfishRouteData = {
-  +path: string,
-  +getPage: () => Promise<BatfishPageModule>,
-  +internalRouting?: boolean,
-  +is404?: true
+  path: string,
+  getPage: () => Promise<BatfishPageModule>,
+  internalRouting?: boolean,
+  is404?: true
 };
 
 declare type BatfishContext = {
-  +selectedConfig: {
-    +siteBasePath: string,
-    +siteOrigin: string,
-    +hijackLinks: boolean
+  selectedConfig: {
+    siteBasePath: string,
+    siteOrigin: string,
+    hijackLinks: boolean
   },
-  +routes: Array<BatfishRouteData>,
-  +notFoundRoute: BatfishRouteData
+  routes: Array<BatfishRouteData>,
+  notFoundRoute: BatfishRouteData
 };
 
 declare type BatfishLocation = {
   pathname: string,
   search?: string,
   hash?: string
+};
+
+declare type BatfishServer = {
+  start: () => void,
+  reload: (filename?: string) => void,
+  browserSyncInstance: browserSync$server
 };
 
 declare module 'batfish-internal/context' {

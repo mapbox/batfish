@@ -125,15 +125,16 @@ declare module 'time-stamp' {
   declare module.exports: string => string;
 }
 
-declare module 'browser-sync' {
-  declare class browserSync$server {
-    emitter: events$EventEmitter,
-    init(config?: Object, callback?: Function): void,
-    reload(filename?: string | Array<string>): void
-  }
+declare class browserSync$server {
+  emitter: events$EventEmitter,
+  init(config?: Object, callback?: Function): void,
+  reload(filename?: string | Array<string>): void
+}
 
+declare module 'browser-sync' {
   declare module.exports: {
-    create(): browserSync$server
+    create(name?: string): browserSync$server,
+    get(name: string): browserSync$server
   };
 }
 

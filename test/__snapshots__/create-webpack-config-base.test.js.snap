@@ -147,7 +147,7 @@ Object {
   "output": Object {
     "filename": "[name].js",
     "path": "<PROJECT_ROOT>/_batfish_site",
-    "pathinfo": false,
+    "pathinfo": true,
     "publicPath": "/assets/",
   },
   "performance": Object {
