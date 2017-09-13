@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 0.11.0
 
 - [Add] Add `babelPresetEnvOptions` option.
 - [Add] Enable page-specific CSS.
