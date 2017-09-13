@@ -3,5 +3,7 @@
   "scripts": {
     "batfish": "../../bin/example-batfish"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react-router-dom": "^4.2.2"
+  }
 }
