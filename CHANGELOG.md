@@ -1,5 +1,10 @@
 # Changelog
 
+## Head
+
+- [Fix] Remove imports of `batfish-internal/context` from public modules.
+  These break unit tests, or any other reference to the file outside of Batfish's builds.
+
 ## 0.11.0
 
 - [Add] Add `babelPresetEnvOptions` option.

@@ -1,29 +1,16 @@
 'use strict';
 
-// eslint-disable-next-line node/no-missing-require
-const batfishContextModule = require('batfish-internal/context');
 const prefixUrl = require('../src/webpack/public/prefix-url').prefixUrl;
 const prefixUrlAbsolute = require('../src/webpack/public/prefix-url')
   .prefixUrlAbsolute;
 
-jest.mock(
-  'batfish-internal/context',
-  () => {
-    return {
-      batfishContext: {}
-    };
-  },
-  { virtual: true }
-);
-
 describe('prefixUrl', () => {
   beforeEach(() => {
-    batfishContextModule.batfishContext = {
-      selectedConfig: {
-        siteBasePath: '',
-        siteOrigin: ''
-      }
-    };
+    prefixUrl._configure();
+  });
+
+  afterEach(() => {
+    prefixUrl._configure();
   });
 
   test('prefixUrl without starting slash', () => {
@@ -39,14 +26,13 @@ describe('prefixUrl', () => {
   });
 });
 
-describe('createPrefixUrl generated module with siteBasePath and siteOrigin', () => {
+describe('_configure provides prefixUrl with siteBasePath and siteOrigin', () => {
   beforeEach(() => {
-    batfishContextModule.batfishContext = {
-      selectedConfig: {
-        siteBasePath: '/foo/bar',
-        siteOrigin: 'https://www.test.com'
-      }
-    };
+    prefixUrl._configure('/foo/bar', 'https://www.test.com');
+  });
+
+  afterEach(() => {
+    prefixUrl._configure();
   });
 
   test('prefixUrl without starting slash', () => {
