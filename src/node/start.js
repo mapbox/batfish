@@ -180,7 +180,11 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
 
     compiler.watch(
       {
-        ignored: [/node_modules/, pageGlob]
+        ignored: [
+          /node_modules/,
+          pageGlob,
+          path.join(batfishConfig.temporaryDirectory, './**/*')
+        ]
       },
       onCompilation
     );
