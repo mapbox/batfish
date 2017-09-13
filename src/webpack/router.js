@@ -7,11 +7,20 @@ import linkToLocation from '@mapbox/link-to-location';
 import querySelectorContainsNode from '@mapbox/query-selector-contains-node';
 import { batfishContext } from 'batfish-internal/context';
 import { routeTo } from '@mapbox/batfish/modules/route-to';
+import { prefixUrl } from '@mapbox/batfish/modules/prefix-url';
 import { findMatchingRoute } from './find-matching-route';
 import { scrollToFragment } from './scroll-to-fragment';
 import { getWindow } from './get-window';
 import { changePage } from './change-page';
 import { getCurrentLocation } from './get-current-location';
+
+// See explanation for this weirdness in prefix-url.js.
+// This happens outside the component lifecycle so it can be used during
+// rendering of HTML.
+prefixUrl._configure(
+  batfishContext.selectedConfig.siteBasePath,
+  batfishContext.selectedConfig.siteOrigin
+);
 
 type Props = {
   startingPath: string,
