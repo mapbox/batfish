@@ -49,6 +49,7 @@ describe('watchWebpack', () => {
     batfishConfig = {
       outputDirectory: '/mock/output/directory/',
       pagesDirectory: '/mock/pages/directory/',
+      temporaryDirectory: '/mock/temporary/directory/',
       stylesheets: ['one.css', 'two.css'],
       verbose: false
     };
@@ -84,7 +85,11 @@ describe('watchWebpack', () => {
     process.nextTick(() => {
       expect(webpack.compiler.watch).toHaveBeenCalledTimes(1);
       expect(webpack.compiler.watch.mock.calls[0][0]).toEqual({
-        ignored: [/node_modules/, '/mock/pages/directory/**/*.{js,md}']
+        ignored: [
+          /node_modules/,
+          '/mock/pages/directory/**/*.{js,md}',
+          '/mock/temporary/directory/**/*'
+        ]
       });
       expect(webpack.compiler.watch.mock.calls[0][1]).toBeInstanceOf(Function);
       done();

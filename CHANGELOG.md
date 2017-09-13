@@ -5,6 +5,7 @@
 - [Add] Add `babelPresetEnvOptions` option.
 - [Add] Enable page-specific CSS.
   See ["Page-specific CSS" documentation](docs/advanced-usage.md#page-specific-css).
+- [Fix] Prevent two simultaneous Webpack compilations from messing with each other when a page file changes.
 
 ## 0.10.4
 
