@@ -68,12 +68,17 @@ Batfish aims to provide _the essentials_ for building excellent static websites 
 
 ## Usage
 
+Here are the basic steps:
+
 1. Create a [configuration] module.
 2. Create some [pages] as React components and/or Markdown documents.
 3. Start the development server and work on your pages.
 4. At some point, build your static site and deploy it.
 
-**Have a look at [`examples/basic/`](examples/basic) for a simple example project.**
+The ["Hello world guide"] can help you get started.
+
+Look at [`examples/basic/`](examples/basic) for a simple example project.
+For a more advanced example project, check out [`examples/miscellany/`](examples/miscellany).
 
 ## Requirements
 
@@ -417,3 +422,5 @@ Please let us know what you think!
 [`prefix-url`]: docs/batfish-modules.md#prefix-url
 
 ["page-specific css"]: docs/advanced-usage.md#page-specific-css
+
+["hello world guide"]: docs/hello-world.md
