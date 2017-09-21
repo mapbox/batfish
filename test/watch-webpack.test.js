@@ -146,7 +146,7 @@ describe('watchWebpack', () => {
     const watcher = watchWebpack(batfishConfig, server);
     expect.hasAssertions();
     watcher.on('error', error => {
-      expect(error).toBeInstanceOf(errorTypes.WebpackFatalError);
+      expect(error).toBeInstanceOf(errorTypes.WebpackCompilationError);
       expect(error.originalError).toBe(expectedError);
       done();
     });

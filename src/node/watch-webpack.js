@@ -58,7 +58,7 @@ function watchWebpack(
         return;
       }
 
-      const onCompilation = (fatalError, stats) => {
+      const onCompilation = (compilationError, stats) => {
         // Don't do anything if the compilation is just repetition.
         // There's often a series of many compilations with the same output.
         if (stats.hash === lastHash) return;
@@ -72,8 +72,10 @@ function watchWebpack(
           );
         }
 
-        if (fatalError) {
-          emitError(wrapError(fatalError, errorTypes.WebpackFatalError));
+        if (compilationError) {
+          emitError(
+            wrapError(compilationError, errorTypes.WebpackCompilationError)
+          );
           return;
         }
 
