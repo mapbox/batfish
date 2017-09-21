@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.11.2
+
+- [Fix] Development server does not quit the process when there are Webpack compilation errors.
+  Instead, you can just fix them and rebuild.
+
 ## 0.11.1
 
 - [Fix] Remove imports of `batfish-internal/context` from public modules.
