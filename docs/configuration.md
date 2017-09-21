@@ -75,9 +75,9 @@ Type: `string`.
 
 Origin where the site will be deployed.
 
-_Required if you want to use `prefixUrl.absolute`_ (see ["Prefixing URLs"]).
+*Required if you want to use `prefixUrl.absolute`* (see ["Prefixing URLs"]).
 
-Also, _required if you want a sitemap_.
+Also, *required if you want a sitemap*.
 
 ### applicationWrapperPath
 
@@ -97,7 +97,7 @@ An array of **URLs, filenames, or globs** pointing to stylesheets that you want 
 If an item is a URL, it must start with `http(s)` and must be publicly available, so Batfish can download it and work it into the CSS optimizations.
 If using filenames and globs, provide absolute paths.
 
-_If you need to control the order of your stylesheets, avoid globs._
+*If you need to control the order of your stylesheets, avoid globs.*
 Batfish cannot guarantee the order in which files matching your glob will be concatenated.
 
 `url()`s referenced in your stylesheets will be hashed and copied to Batfish's [`outputDirectory`].
@@ -152,7 +152,7 @@ The object received as an argument contains the following properties:
   - `filePath`: Absolute path to the page's file.
   - `frontMatter`: Parsed front matter from the page's file.  
 
-The return values of `dataSelectors` _must be stringifiable as JSON_.
+The return values of `dataSelectors` *must be stringifiable as JSON*.
 These values can be used in your components pages by `import`ing modules from `@mapbox/batfish/data/*`.
 See ["Injecting data"].
 
@@ -280,7 +280,7 @@ But here are some of the options you are more likely to want to use with Batfish
 
 - `remarkPlugins` and `rehypePlugins` allow you provide [remark](https://github.com/wooorm/remark) and [rehype](https://github.com/wooorm/rehype) plugins, which get applied as your Markdown is converted to a React component.
   There are a wide variety of plugins, from header slug insertions to Markdown syntax extensions to code block syntax highlighting and so on.
-- `prependJs` allows you to prepend JS to _every_ Markdown page in your site.
+- `prependJs` allows you to prepend JS to *every* Markdown page in your site.
   For example, if you have a utility function that you want to make available to every Markdown page, you can use this option to `import` it.
 
 ### includePromisePolyfill
@@ -347,7 +347,7 @@ An array of globs **relative to the [`pagesDirectory`]**.
 By default, all `.js` and `.md` files within the [`pagesDirectory`] are processed as pages, producing HTML files at their paths.
 If you would like instead to copy `.js` or `.md` files as static files, without creating corresponding HTML files, use this option.
 
-For example, if you have a `scripts/` directory and all the `.js` files within it are _not_ pages, but are static JavaScript files that you want to expose at `/scripts/*.js` URLs, you could set `unprocessedPageFiles` to `['scripts/**/*.js']`.
+For example, if you have a `scripts/` directory and all the `.js` files within it are *not* pages, but are static JavaScript files that you want to expose at `/scripts/*.js` URLs, you could set `unprocessedPageFiles` to `['scripts/**/*.js']`.
 
 ### webpackConfigClientTransform
 

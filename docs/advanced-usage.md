@@ -22,7 +22,7 @@ However, in [`production`] builds these pages are **not** included and should be
 Most of the time, you should store data as JSON or JS and `import` or `require` it as needed.
 Nothing special.
 
-If, however, you are dealing with _lots_ of data; that data is used across a number of pages; and each of those pages does not need _all_ of the data — then you may not want to write _all_ that data into your JS bundles.
+If, however, you are dealing with *lots* of data; that data is used across a number of pages; and each of those pages does not need *all* of the data — then you may not want to write *all* that data into your JS bundles.
 You may want to control which parts of it get written to which bundles.
 
 You can do this with the [`dataSelectors`] configuration option.
@@ -85,10 +85,10 @@ export default class MyPage extends React.PureComponent {
 
 ## Routing within a page
 
-If you'd like to use a client-side routing library _within a Batfish page_, like [React Router](https://reacttraining.com/react-router/) or [nanorouter](https://github.com/yoshuawuyts/nanorouter), add `internalRoutes: true` to the page's front matter.
+If you'd like to use a client-side routing library *within a Batfish page*, like [React Router](https://reacttraining.com/react-router/) or [nanorouter](https://github.com/yoshuawuyts/nanorouter), add `internalRoutes: true` to the page's front matter.
 
-By specifying that the page has internal routes, any URLs that _start with_ the page's path will be considered matches.
-If the page is `pages/animals.js`, for example, then `/animals/` will match as usual, but `/animals/tiger/` and `/animals/zebra/` will _also_ match.
+By specifying that the page has internal routes, any URLs that *start with* the page's path will be considered matches.
+If the page is `pages/animals.js`, for example, then `/animals/` will match as usual, but `/animals/tiger/` and `/animals/zebra/` will *also* match.
 The client-side router you use within the page can determine what to do with the rest of the URL.
 
 Look at [`examples/internal-routing`](../examples/internal-routing) to see how this works.
@@ -143,7 +143,7 @@ There are also others out there in the Webpack ecosystem.
 ## Page-specific CSS
 
 Most of the time, you should add CSS to your site with the [`stylesheets`] configuration option.
-However, if you are adding a _lot_ of CSS that is _not widely used_, you might choose to add it to one page at a time, instead of adding it to the full site's stylesheet.
+However, if you are adding a *lot* of CSS that is *not widely used*, you might choose to add it to one page at a time, instead of adding it to the full site's stylesheet.
 Batfish includes a way to to this.
 
 If you `import` a `.css` file within your [`pagesDirectory`], you will get a React component (with no props) that you can render within the page.
