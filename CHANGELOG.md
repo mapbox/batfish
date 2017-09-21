@@ -36,7 +36,7 @@
   The same effect can be accomplished by putting static files in the pages directory.
 - **[Breaking change]** `with-location` now provides the original component at WrappedComponent instead of WrapperComponent.
 - **[Breaking change]** change `data-no-hijack` attribute name to `data-batfish-no-hijack`.
-  Also, this attribute now blocks link hijacking on the element itself _and all its children_.
+  Also, this attribute now blocks link hijacking on the element itself *and all its children*.
 - **[Breaking change]** (maybe, maybe not) Links with fragment URLs (e.g. `href="#foo"`) are not hijacked, just left to their default behavior.  
 - [Add] Much improved logging!  
 - [Add] Much improved configuration validation!  

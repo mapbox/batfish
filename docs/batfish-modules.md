@@ -5,31 +5,22 @@ Batfish exposes a few public modules to hook into its routing system and other i
 ## Table of contents
 
 - [route-to](#route-to)
-  - [API](#api)
-    - [routeTo](#routeto)
-    - [routeToPrefixed](#routetoprefixed)
-  - [Examples](#examples)
+  - [route-to API](#route-to-api)
+  - [route-to examples](#route-to-examples)
 - [prefix-url](#prefix-url)
-  - [API](#api-1)
-    - [prefixUrl](#prefixurl)
-    - [prefixUrlAbsolute](#prefixurlabsolute)
-  - [Examples](#examples-1)
+  - [prefix-url API](#prefix-url-api)
+  - [prefix-url examples](#prefix-url-examples)
 - [route-change-listeners](#route-change-listeners)
-  - [API](#api-2)
-    - [addRouteChangeStartListener](#addroutechangestartlistener)
-    - [removeRouteChangeStartListener](#removeroutechangestartlistener)
-    - [addRouteChangeEndListener](#addroutechangeendlistener)
-    - [removeRouteChangeEndListener](#removeroutechangeendlistener)
+  - [route-change-listeners API](#route-change-listeners-api)
 - [with-location](#with-location)
-  - [API](#api-3)
-    - [withLocation](#withlocation)
-  - [Example](#example)
+  - [with-location API](#with-location-api)
+  - [with-location example](#with-location-example)
 
 ## route-to
 
 Import from `'@mapbox/batfish/modules/route-to'`.
 
-### API
+### route-to API
 
 The following functions are named exports of `'@mapbox/batfish/modules/route-to'`.
 
@@ -46,7 +37,7 @@ If it's not, go there with a regular page load.
 
 Like `routeTo` but automatically prefixes client-side routes with your [`siteOrigin`] configuration option.
 
-### Examples
+### route-to examples
 
 ```js
 // Let's imagine:
@@ -70,7 +61,7 @@ Use this module to prefix URLs on your site according to the [`siteBasePath`] an
 
 Import from `'@mapbox/batfish/modules/prefix-url'`.
 
-### API
+### prefix-url API
 
 The following functions are named exports of `'@mapbox/batfish/modules/prefix-url'`.
 
@@ -93,7 +84,7 @@ If `url` is already an absolute URL, it is returned unmodified.
 
 **If you have not set [`siteOrigin`] in your configuration, this function with throw an error.**
 
-### Examples
+### prefix-url examples
 
 ```js
 // Let's imagine:
@@ -114,11 +105,11 @@ Batfish exposes a few functions that allow you to do things when client-side rou
 
 Import from `'@mapbox/batfish/modules/route-change-listeners'`.
 
-### API
+### route-change-listeners API
 
 The following functions are named exports of `@mapbox/batfish/modules/route-change-listeners`.
 
-#### `addRouteChangeStartListener`
+#### addRouteChangeStartListener
 
 ```
 addRouteChangeStartListener(pathname: string, listener: Function): Function;
@@ -132,11 +123,11 @@ Otherwise, all route changes will invoke the `listener`.
 
 The `listener` function receives the incoming pathname as an argument.
 
-**The `listener` will be invoked immediately _before_ the incoming page chunk starts downloading.**
+**The `listener` will be invoked immediately *before* the incoming page chunk starts downloading.**
 If you return a `Promise` from your callback, **you can use this to delay rendering of the next page** (if, for example, you want to show a loading spinner for some period of time, or load some data before switching pages).
 After the page chunk finishes downloading, the next page will not be rendered until your retured `Promise` has resolved.
 
-#### `removeRouteChangeStartListener`
+#### removeRouteChangeStartListener
 
 ```
 removeRouteChangeStartListener(pathname?: string, listener?: Function): Function;
@@ -148,7 +139,7 @@ Otherwise, `listener` will be removed for all route changes.
 
 If no `listener` is provided, all listeners for the matched path (either `pathname` or all paths) will be removed.
 
-#### `addRouteChangeEndListener`
+#### addRouteChangeEndListener
 
 ```
 addRouteChangeEndListener(pathname: string, listener: Function): Function;
@@ -157,13 +148,13 @@ addRouteChangeEndListener(listener: Function): Function;
 
 The parameters and return value are equivalent to those for [`addRouteChangeStartListener`].
 
-The difference is that **this function will be invoked immediately _after_ the incoming page renders.**
+The difference is that **this function will be invoked immediately *after* the incoming page renders.**
 The page chunk will have downloaded, your start-listener callbacks will have been invoked, the URL will have been changed, and the page will have rendered.
 What you return from your `callback` will have no affect on page rendering.
 
 `addRouteChangeEndListener` returns a function that will remove this particular listener.
 
-#### `removeRouteChangeEndListener`
+#### removeRouteChangeEndListener
 
 ```
 removeRouteChangeEndListener(pathname?: string, listener?: Function): Function;
@@ -178,7 +169,7 @@ Import from `'@mapbox/batfish/modules/with-location'`.
 
 This module exports a higher-order component that you can use to inject an abbreviated [Location](https://developer.mozilla.org/en-US/docs/Web/API/Location) object into the props of your own component.
 
-### API
+### with-location API
 
 The function functions are named exports from `'@mapbox/batfish/modules/with-location'`.
 
@@ -192,14 +183,14 @@ Wraps `Component` in a stateless function component that passes it a `location` 
 
 The value of `location` is an object with the following properties:
 
-- `pathname`: This is _always_ available (even at build time, during static rendering) because it is provided by Batfish's router.
+- `pathname`: This is *always* available (even at build time, during static rendering) because it is provided by Batfish's router.
 - `hash`: This will not be available during static rendering, so check for its existence before using it.
 - `search`: This will not be available during static rendering, so check for its existence before using it.
 
 Returns the wrapper component.
 The returned component exposes the original, wrapped component on the `WrappedComponent` static property.
 
-### Example
+### with-location example
 
 ```js
 const withLocation = require('@mapbox/batfish/modules/with-location');

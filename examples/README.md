@@ -4,9 +4,9 @@ Each subdirectory in `examples/` is an example site, illustrating some subset of
 
 ### Running examples
 
--   `cd` into the example's directory.
--   npm install`(or`yarn install\`) to get any dependencies of that example.
--   `npm run batfish -- start` (or `build` or `serve-static`).
+- `cd` into the example's directory.
+- npm install`(or`yarn install\`) to get any dependencies of that example.
+- `npm run batfish -- start` (or `build` or `serve-static`).
 
 `npm run batfish` is just a shortcut script that examples should include.
 You can also use the Batfish CLI directly to run the examples: it lives in `bin/batfish.js`.
@@ -14,11 +14,13 @@ You'll need to make sure you either run the command from the example's directory
 
 Examples:
 
-    # From project root directory
-    bin/batfish.js --config examples/initial-experiments/batfish.config.js start
+```
+# From project root directory
+bin/batfish.js --config examples/initial-experiments/batfish.config.js start
 
-    # From examples/initial-experiments/
-    ../../bin/batfish.js build && ../../bin/batfish.js serve-static
+# From examples/initial-experiments/
+../../bin/batfish.js build && ../../bin/batfish.js serve-static
+```
 
 ## Creating a new example
 

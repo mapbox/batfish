@@ -1,9 +1,9 @@
 # Custom Webpack and Babel stuff
 
--   Uses [image-webpack-loader] to optimize images.
-    To accomplish this, takes advantage of the [`fileLoaderExtensions`] and [`webpackLoaders`] configuration options.
--   Uses a minimal bundle of Lodash, enabled by [babel-plugin-lodash] and [lodash-webpack-plugin].
-    To accomplish this, takes advantage of the [`webpackPlugins`] and [`babelPlugins`] configuration options.
+- Uses [image-webpack-loader] to optimize images.
+  To accomplish this, takes advantage of the [`fileLoaderExtensions`] and [`webpackLoaders`] configuration options.
+- Uses a minimal bundle of Lodash, enabled by [babel-plugin-lodash] and [lodash-webpack-plugin].
+  To accomplish this, takes advantage of the [`webpackPlugins`] and [`babelPlugins`] configuration options.
 
 [image-webpack-loader]: https://github.com/tcoopman/image-webpack-loader
 

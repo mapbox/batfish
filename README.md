@@ -21,8 +21,6 @@ A static-site generator powered by React and Webpack.
 - [Pages](#pages)
   - [JS pages](#js-pages)
   - [Markdown pages](#markdown-pages)
-    - [Markdown page wrapper components](#markdown-page-wrapper-components)
-    - [Import JS modules into jsxtreme-markdown](#import-js-modules-into-jsxtreme-markdown)
   - [Non-page files within the pages directory](#non-page-files-within-the-pages-directory)
   - [Path not found: 404](#path-not-found-404)
 - [Routing](#routing)
@@ -44,7 +42,7 @@ A static-site generator powered by React and Webpack.
 
 ## Goals
 
-Batfish aims to provide _the essentials_ for building excellent static websites with React and Webpack.
+Batfish aims to provide *the essentials* for building excellent static websites with React and Webpack.
 
 - **(Universal) React.**
   Use React components as your building blocks.
@@ -52,7 +50,7 @@ Batfish aims to provide _the essentials_ for building excellent static websites 
 - **Super-powered Markdown pages.**
   Batfish supports [jsxtreme-markdown] pages, which allow for interpolated JS expressions and JSX elements.
 - **Client-side routing with key features and minimal overhead.**
-  There is often no need for a big router library, but there _is_ a need for often-overlooked features like automatic link hijacking (via [link-hijacker]) and scroll restoration (via [scroll-restorer]).
+  There is often no need for a big router library, but there *is* a need for often-overlooked features like automatic link hijacking (via [link-hijacker]) and scroll restoration (via [scroll-restorer]).
 - **Essential optimizations.**
   JS bundles split by page and loaded on demand.
   Hashed asset filenames for long-term caching.
@@ -274,7 +272,7 @@ Sometimes you need to put an asset at a specific URL.
 You may want a `favicon.ico` in the root directory, for example; or a special image for social media `<meta>` tags on a page.
 For this reason, **any non-page files within the [`pagesDirectory`] are copied directly into the same location during the static build.**
 
-_When you access these files from pages, though, you need to use root-relative or absolute URLs._
+*When you access these files from pages, though, you need to use root-relative or absolute URLs.*
 That is, within `src/pages/foo/bar.js` you cannot access `src/pages/foo/bar.jpg` as `bar.jpg`: you need to use `/foo/bar.jpg`.
 You may want to [prefix the URLs](#prefixing-urls), also.
 
