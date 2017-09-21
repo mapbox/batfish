@@ -22,7 +22,7 @@
     "lint-flow": "flow check",
     "lint": "run-p --aggregate-output lint-js lint-md lint-flow",
     "pretest": "npm run lint",
-    "test": "jest",
+    "test": "jest --maxWorkers=4",
     "build-webpack-modules": "del modules && babel src/webpack/public --out-dir modules --quiet",
     "build-dist": "del dist && cd src && cpy '**/*.*' ../dist --parents && cd .. && flow-remove-types dist/ --out-dir dist/ --quiet && cpy src/node/index.js dist/node --rename index.js.flow",
     "build": "run-p build-webpack-modules build-dist",
