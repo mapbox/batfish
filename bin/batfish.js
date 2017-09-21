@@ -143,5 +143,7 @@ emitter.on(constants.EVENT_ERROR, error => {
   } else {
     batfishLog.error(renderPrettyErrorStack(error));
   }
-  process.exit(1);
+  if (command !== 'start') {
+    process.exit(1);
+  }
 });
