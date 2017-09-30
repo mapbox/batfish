@@ -166,8 +166,8 @@
     "worker-farm": "^1.5.0"
   },
   "peerDependencies": {
-    "react": "^15.5.0",
-    "react-dom": "^15.5.0",
+    "react": "^15.5.0 || ^16.0.0",
+    "react-dom": "^15.5.0 || ^16.0.0",
     "react-helmet": "^5.2.0"
   },
   "devDependencies": {
@@ -191,8 +191,8 @@
     "npm-run-all": "^4.1.1",
     "path-type": "^3.0.0",
     "prettier": "^1.7.0",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-helmet": "^5.2.0",
     "react-test-renderer": "^15.6.1",
     "remark-cli": "^4.0.0",

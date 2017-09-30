@@ -12,7 +12,7 @@ import ApplicationWrapper from 'batfish-internal/application-wrapper';
 const startingPath = window.location.pathname;
 const matchingRoute = findMatchingRoute(startingPath);
 matchingRoute.getPage().then(pageModule => {
-  class App extends React.PureComponent<{}> {
+  class App extends React.Component<{}> {
     shouldComponentUpdate() {
       return false;
     }
@@ -30,5 +30,10 @@ matchingRoute.getPage().then(pageModule => {
     }
   }
 
-  ReactDOM.render(<App />, document.getElementById('batfish-content'));
+  // React 16 has ReactDOM.hydrate for hydrating server-rendered markdup.
+  const render =
+    process.env.DEV_SERVER || !ReactDOM.hydrate
+      ? ReactDOM.render
+      : ReactDOM.hydrate;
+  render(<App />, document.getElementById('batfish-content'));
 });
