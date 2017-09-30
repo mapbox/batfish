@@ -49,31 +49,6 @@
       "git add"
     ]
   },
-  "remarkConfig": {
-    "settings": {
-      "listItemIndent": 1,
-      "fences": true
-    },
-    "plugins": [
-      [
-        "lint-maximum-line-length",
-        false
-      ],
-      [
-        "validate-links",
-        {
-          "repository": "mapbox/batfish"
-        }
-      ],
-      "remark-lint-no-dead-urls",
-      [
-        "remark-toc",
-        {
-          "tight": true
-        }
-      ]
-    ]
-  },
   "babel": {
     "presets": [
       "env",
@@ -92,7 +67,10 @@
       "./test"
     ],
     "testEnvironment": "node",
-    "clearMocks": true
+    "clearMocks": true,
+    "setupFiles": [
+      "<rootDir>/test/test-util/jest-setup.js"
+    ]
   },
   "dependencies": {
     "@mapbox/babel-plugin-transform-jsxtreme-markdown": "^0.4.0",
@@ -109,7 +87,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-react-jsx-self": "^6.22.0",
     "babel-plugin-transform-react-jsx-source": "^6.22.0",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.8",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.9",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
@@ -119,16 +97,16 @@
     "chokidar": "^1.7.0",
     "concat-with-sourcemaps": "^1.0.4",
     "connect-history-api-fallback": "^1.3.0",
-    "cpy": "^5.0.0",
+    "cpy": "^6.0.0",
     "del": "^3.0.0",
     "del-cli": "^1.1.0",
     "es6-promise": "^4.1.0",
     "fasterror": "^1.1.0",
-    "file-loader": "^0.11.2",
+    "file-loader": "^1.1.3",
     "get-port": "^3.2.0",
     "globby": "^6.1.0",
     "got": "^7.0.0",
-    "gray-matter": "^3.0.6",
+    "gray-matter": "^3.0.7",
     "hasha": "^3.0.0",
     "html-webpack-plugin": "^2.30.1",
     "ignore-loader": "^0.1.2",
@@ -142,22 +120,22 @@
     "mkdirp": "^0.5.1",
     "p-try": "^1.0.0",
     "pify": "^3.0.0",
-    "postcss": "^6.0.11",
+    "postcss": "^6.0.12",
     "postcss-csso": "^2.0.0",
     "postcss-url": "^7.1.2",
-    "postcss-values-parser": "^1.2.2",
+    "postcss-values-parser": "^1.3.1",
     "pretty-error": "^2.1.1",
-    "prop-types": "^15.5.10",
+    "prop-types": "^15.6.0",
     "remark-lint-no-dead-urls": "^0.3.0",
     "remark-toc": "^4.0.1",
-    "resolve-from": "^3.0.0",
+    "resolve-from": "^4.0.0",
     "sitemap-static": "^0.4.2",
     "slugg": "^1.2.1",
     "source-map-support": "^0.4.18",
     "strip-color": "^0.1.0",
-    "tempy": "^0.2.0",
+    "tempy": "^0.2.1",
     "time-stamp": "^2.0.0",
-    "uglify-js": "^3.1.0",
+    "uglify-js": "^3.1.2",
     "webpack": "^3.6.0",
     "webpack-chunk-hash": "^0.4.0",
     "webpack-format-messages": "^1.0.1",
@@ -173,28 +151,29 @@
   "devDependencies": {
     "@mapbox/vnu-validate-html": "^0.1.0",
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.0.0",
+    "babel-eslint": "^8.0.1",
     "cpy-cli": "^1.0.1",
-    "enzyme": "^2.9.1",
-    "enzyme-to-json": "^1.6.0",
-    "eslint": "^4.7.0",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.0.0",
+    "enzyme-to-json": "^3.0.1",
+    "eslint": "^4.8.0",
     "eslint-plugin-filenames": "^1.2.0",
-    "eslint-plugin-flowtype": "^2.35.1",
-    "eslint-plugin-node": "^5.0.0",
-    "eslint-plugin-react": "^7.3.0",
-    "flow-bin": "^0.54.1",
+    "eslint-plugin-flowtype": "^2.37.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-react": "^7.4.0",
+    "flow-bin": "^0.56.0",
     "flow-coverage-report": "^0.3.0",
     "flow-remove-types": "^1.2.1",
     "husky": "^0.14.1",
-    "jest": "^21.1.0",
-    "lint-staged": "^4.2.1",
+    "jest": "^21.2.1",
+    "lint-staged": "^4.2.3",
     "npm-run-all": "^4.1.1",
     "path-type": "^3.0.0",
-    "prettier": "^1.7.0",
+    "prettier": "^1.7.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-helmet": "^5.2.0",
-    "react-test-renderer": "^15.6.1",
+    "react-test-renderer": "^16.0.0",
     "remark-cli": "^4.0.0",
     "remark-preset-davidtheclark": "^0.6.0",
     "remark-validate-links": "^7.0.0",
