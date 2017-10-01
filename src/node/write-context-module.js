@@ -49,7 +49,11 @@ function writeContextModule(
     // join the items to create the fully stringified list, ready
     // to be written.
     const stringifiedRoutes = [];
-    const stringifyPageRoute = (pagePath: string): Promise<void> => {
+    // index is used to keep these routes in the original order
+    const stringifyPageRoute = (
+      pagePath: string,
+      index: number
+    ): Promise<void> => {
       const pageData = pagesData[pagePath];
       return writePageModule(
         batfishConfig,
@@ -73,13 +77,20 @@ function writeContextModule(
         if (is404) {
           notFoundStringifiedRouteData = stringifiedRouteData;
         }
-        stringifiedRoutes.push(stringifiedRouteData);
+        stringifiedRoutes[index] = stringifiedRouteData;
       });
     };
 
     return writeDataModules(batfishConfig, siteData)
       .then(() => {
-        return Promise.all(Object.keys(pagesData).map(stringifyPageRoute));
+        // Sort before mapping to get the paths in a deterministic order.
+        // (There cannot be duplicate paths, so no need to worry about unstable
+        // sorts.)
+        return Promise.all(
+          Object.keys(pagesData)
+            .sort()
+            .map(stringifyPageRoute)
+        );
       })
       .then(() => {
         const stringifiedRoutesArray = `[${stringifiedRoutes.join(',')}]`;

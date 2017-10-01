@@ -9,6 +9,14 @@ exports[`writeContextModule with 404 and some config variation 1`] = `
   },
   routes: [
     {
+      path: \\"/404/\\",
+      getPage: () =>
+        import(/* webpackChunkName: \\"not-found\\" */
+        \\"module/file/path/forfake/pages/directory/404.js\\"),
+
+      is404: true
+    },
+    {
       path: \\"/one/\\",
       getPage: () =>
         import(/* webpackChunkName: \\"one\\" */
@@ -19,14 +27,6 @@ exports[`writeContextModule with 404 and some config variation 1`] = `
       getPage: () =>
         import(/* webpackChunkName: \\"three-four\\" */
         \\"module/file/path/forfake/pages/directory/three/four/index.js\\")
-    },
-    {
-      path: \\"/404/\\",
-      getPage: () =>
-        import(/* webpackChunkName: \\"not-found\\" */
-        \\"module/file/path/forfake/pages/directory/404.js\\"),
-
-      is404: true
     }
   ],
   notFoundRoute: {
@@ -56,16 +56,16 @@ exports[`writeContextModule without 404 1`] = `
         \\"module/file/path/forfake/pages/directory/one.js\\")
     },
     {
-      path: \\"/two/\\",
-      getPage: () =>
-        import(/* webpackChunkName: \\"two\\" */
-        \\"module/file/path/forfake/pages/directory/two/index.md\\")
-    },
-    {
       path: \\"/three/four/\\",
       getPage: () =>
         import(/* webpackChunkName: \\"three-four\\" */
         \\"module/file/path/forfake/pages/directory/three/four/index.js\\")
+    },
+    {
+      path: \\"/two/\\",
+      getPage: () =>
+        import(/* webpackChunkName: \\"two\\" */
+        \\"module/file/path/forfake/pages/directory/two/index.md\\")
     }
   ],
   notFoundRoute: {
