@@ -115,6 +115,10 @@ const configSchema = {
     validator: _.isBoolean,
     description: 'boolean'
   },
+  createModernBuild: {
+    validator: _.isBoolean,
+    description: 'boolean'
+  },
   inlineJs: {
     validator: isArrayOf(x => isAbsolutePath(x.filename) || _.isBoolean(x)),
     description:
@@ -205,6 +209,7 @@ function validateConfig(
     ],
     jsxtremeMarkdownOptions: {},
     includePromisePolyfill: true,
+    createModernBuild: true,
     pageSpecificCss: true,
     developmentDevtool: 'source-map',
     productionDevtool: false,
@@ -229,6 +234,18 @@ function validateConfig(
     config.postcssPlugins = config.postcssPlugins(defaultPostcssPlugins);
   } else if (!config.postcssPlugins) {
     config.postcssPlugins = defaultPostcssPlugins;
+  }
+
+  if (config.createModernBuild) {
+    if (config.babelPresetEnvOptions) {
+      configErrors.push(
+        `The option ${chalk.yellow(
+          'createModernBuild'
+        )} will override your ${chalk.yellow(
+          'babelPresetEnvOptions'
+        )} setting. You should pick one option or the other.`
+      );
+    }
   }
 
   const validatePropertyType = (

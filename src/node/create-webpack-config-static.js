@@ -12,7 +12,16 @@ const createWebpackConfigBase = require('./create-webpack-config-base');
 function createWebpackConfigStatic(
   batfishConfig: BatfishConfiguration
 ): Promise<webpack$Configuration> {
-  return createWebpackConfigBase(batfishConfig).then(baseConfig => {
+  // For the static build always set up Babel to compile only what's necessary
+  // for the current version of Node.
+  return createWebpackConfigBase(
+    Object.assign({}, batfishConfig, {
+      babelPresetEnvOptions: {
+        useBuiltIns: true,
+        targets: { node: 'current' }
+      }
+    })
+  ).then(baseConfig => {
     const staticConfig: webpack$Configuration = {
       entry: {
         static: path.join(__dirname, '../webpack/static-render-pages.js')

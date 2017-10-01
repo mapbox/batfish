@@ -9,19 +9,16 @@ const joinUrlParts = require('./join-url-parts');
 const constants = require('./constants');
 const errorTypes = require('./error-types');
 const wrapError = require('./wrap-error');
-const UglifyJs = require('uglify-js');
-const getWebpackAssetAbsolutePath = require('./get-webpack-asset-absolute-path');
 
 // We need to define this type because Flow can't understand the non-literal
 // require that pulls in static-render-pages.js below.
 declare type StaticRenderPagesFunction = (
   BatfishConfiguration,
-  {
-    vendor: { js: string },
-    app: { js: string }
-  },
-  string,
-  cssUrl?: string
+  options: {
+    assets: AssetsJson,
+    modernAssets?: AssetsJson,
+    cssUrl?: string
+  }
 ) => Promise<void>;
 
 function buildHtml(
@@ -40,20 +37,15 @@ function buildHtml(
       path.join(assetsDirectory, 'assets.json'),
       'utf8'
     );
-    const assets: {
-      manifest: { js: string },
-      app: { js: string },
-      vendor: { js: string }
-    } = Object.freeze(JSON.parse(rawAssets));
-    const manifestJs = fs.readFileSync(
-      getWebpackAssetAbsolutePath(batfishConfig, assets.manifest.js),
-      'utf8'
-    );
-
-    const uglified = UglifyJs.minify(manifestJs);
-    if (uglified.error) throw uglified.error;
-    const uglifiedManifestJs: string = uglified.code;
-
+    const assets: AssetsJson = Object.freeze(JSON.parse(rawAssets));
+    let modernAssets: AssetsJson | void;
+    if (batfishConfig.createModernBuild) {
+      const modernRawAssets = fs.readFileSync(
+        path.join(assetsDirectory, 'm-assets.json'),
+        'utf8'
+      );
+      modernAssets = Object.freeze(JSON.parse(modernRawAssets));
+    }
     let cssUrl;
     if (!_.isEmpty(batfishConfig.stylesheets) && cssFilename) {
       cssUrl = joinUrlParts(
@@ -68,12 +60,11 @@ function buildHtml(
         assetsDirectory,
         'static-render-pages.js'
       )).default;
-      return staticRenderPages(
-        batfishConfig,
+      return staticRenderPages(batfishConfig, {
         assets,
-        uglifiedManifestJs,
+        modernAssets,
         cssUrl
-      ).catch(error => {
+      }).catch(error => {
         throw wrapError(error, errorTypes.WebpackNodeExecutionError);
       });
     } catch (requireError) {

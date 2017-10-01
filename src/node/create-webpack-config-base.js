@@ -10,14 +10,10 @@ const joinUrlParts = require('./join-url-parts');
 const constants = require('./constants');
 const getPostcssPlugins = require('./get-postcss-plugins');
 
-// Cache it to ensure we don't do unnecessary work within one process.
-let cachedConfig;
-
 // Create the base Webpack configuration, shared by both client and static builds.
 function createWebpackConfigBase(
   batfishConfig: BatfishConfiguration
 ): Promise<webpack$Configuration> {
-  if (cachedConfig) return Promise.resolve(cachedConfig);
   const isExample = path
     .dirname(batfishConfig.pagesDirectory)
     .startsWith(path.join(__dirname, '../../examples'));
@@ -74,7 +70,7 @@ function createWebpackConfigBase(
         presets: babelPresets,
         plugins: babelPlugins,
         babelrc: false,
-        compact: true
+        compact: false
       }
     };
 
@@ -206,14 +202,8 @@ function createWebpackConfigBase(
       bail: batfishConfig.production
     };
 
-    cachedConfig = config;
     return config;
   });
 }
-
-// For tests.
-createWebpackConfigBase._clearCache = () => {
-  cachedConfig = null;
-};
 
 module.exports = createWebpackConfigBase;
