@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.4
+
+- [Fix] Fragments in the URL take precedence over scrolling to the top of pages on dynamic route changes.
+
 ## 0.11.3
 
 - [Fix] Fragments in the URL take precedence over saved scroll positions in the history.

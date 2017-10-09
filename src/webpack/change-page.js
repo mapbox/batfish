@@ -43,10 +43,10 @@ export function changePage(
         location: getCurrentLocation()
       };
       setRouterState(nextState, () => {
-        if (options.scrollToTop) {
-          win.scrollTo(0, 0);
-        } else if (nextLocation.hash) {
+        if (nextLocation.hash) {
           scrollToFragment();
+        } else if (options.scrollToTop) {
+          win.scrollTo(0, 0);
         } else if (scrollRestorer.getSavedScroll()) {
           scrollRestorer.restoreScroll();
         }
