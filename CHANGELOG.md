@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 0.11.3
 
 - [Fix] Fragments in the URL take precedence over saved scroll positions in the history.
 

@@ -116,7 +116,7 @@ describe('changePage', () => {
     const wait = new Promise(resolve => {
       setTimeout(resolve, 500);
     });
-    _invokeRouteChangeStartCallbacks.mockReturnValueOnce(wait);
+    _invokeRouteChangeStartCallbacks.mockReturnValue(wait);
     changePage(nextLocation, setRouterState);
     jest.runTimersToTime(400);
     expect(setRouterState).not.toHaveBeenCalled();
@@ -187,7 +187,7 @@ describe('changePage', () => {
   });
 
   test('setRouterState callback restores saved scroll', () => {
-    scrollRestorer.getSavedScroll.mockReturnValueOnce({});
+    scrollRestorer.getSavedScroll.mockReturnValue({});
     return changePage(nextLocation, setRouterState).then(() => {
       expect(scrollRestorer.restoreScroll).not.toHaveBeenCalled();
       const callback = setRouterState.mock.calls[0][1];
@@ -197,8 +197,13 @@ describe('changePage', () => {
     });
   });
 
-  test('setRouterState callback does not restore scroll if none is saved', () => {
+  test('setRouterState scrolls to fragment if there is a hash', () => {
+    nextLocation = {
+      hash: '#foo'
+    };
+    scrollRestorer.getSavedScroll.mockReturnValue({});
     return changePage(nextLocation, setRouterState).then(() => {
+      expect(scrollRestorer.restoreScroll).not.toHaveBeenCalled();
       const callback = setRouterState.mock.calls[0][1];
       callback();
       expect(mockWindow.scrollTo).not.toHaveBeenCalled();
@@ -206,14 +211,14 @@ describe('changePage', () => {
     });
   });
 
-  test('setRouterState callback tries scrolling to fragment if no other scrolling happens', () => {
+  test('setRouterState callback does not restore scroll if none is saved', () => {
+    scrollRestorer.getSavedScroll.mockReturnValue(null);
     return changePage(nextLocation, setRouterState).then(() => {
-      expect(scrollToFragment).not.toHaveBeenCalled();
       const callback = setRouterState.mock.calls[0][1];
       callback();
       expect(mockWindow.scrollTo).not.toHaveBeenCalled();
       expect(scrollRestorer.restoreScroll).not.toHaveBeenCalled();
-      expect(scrollToFragment).toHaveBeenCalled();
+      expect(scrollToFragment).not.toHaveBeenCalled();
     });
   });
 
