@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.3
+
+- [Fix] Fragments in the URL take precedence over saved scroll positions in the history.
+
 ## 0.11.2
 
 - [Fix] Development server does not quit the process when there are Webpack compilation errors.
