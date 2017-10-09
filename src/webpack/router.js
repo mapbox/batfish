@@ -60,17 +60,15 @@ class Router extends React.PureComponent<Props, RouterState> {
 
   componentDidMount() {
     scrollRestorer.start({ autoRestore: false });
-    scrollRestorer.restoreScroll();
 
-    // Only on the dev server do we need to scroll to fragments on the initial
-    // load. With static HTML pages, the browser should take care of this
-    // for us.
-    if (process.env.DEV_SERVER) {
+    const win = getWindow();
+    if (!win.location.hash) {
+      scrollRestorer.restoreScroll();
+    } else {
       scrollToFragment();
     }
 
     routeTo._setRouteToHandler(this.routeTo);
-    const win = getWindow();
     win.addEventListener('popstate', event => {
       event.preventDefault();
       changePage(

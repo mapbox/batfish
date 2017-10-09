@@ -45,10 +45,10 @@ export function changePage(
       setRouterState(nextState, () => {
         if (options.scrollToTop) {
           win.scrollTo(0, 0);
+        } else if (nextLocation.hash) {
+          scrollToFragment();
         } else if (scrollRestorer.getSavedScroll()) {
           scrollRestorer.restoreScroll();
-        } else {
-          scrollToFragment();
         }
         if (onFinish) onFinish();
         _invokeRouteChangeEndCallbacks(nextLocation.pathname);
