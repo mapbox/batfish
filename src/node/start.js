@@ -36,7 +36,7 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
 
   const serveAssetsDir = joinUrlParts(
     batfishConfig.siteBasePath,
-    constants.PUBLIC_PATH_ASSETS
+    batfishConfig.publicAssetsPath
   );
   // This allows us to serve static files within the pages directory.
   const servePagesDir = batfishConfig.siteBasePath;

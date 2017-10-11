@@ -121,6 +121,22 @@ describe('validateConfig', () => {
     ).toHaveProperty('siteOrigin', 'https://www.mapbox.com');
   });
 
+  test('publicAssetsPath should be configurable', () => {
+    expect(validateConfig(undefined, projectDirectory)).toHaveProperty(
+      'publicAssetsPath',
+      'assets'
+    );
+
+    expect(
+      validateConfig(
+        {
+          publicAssetsPath: 'site_assets'
+        },
+        projectDirectory
+      )
+    ).toHaveProperty('publicAssetsPath', 'site_assets');
+  });
+
   test('processed siteBasePath does not end with a slash unless it is only a slash', () => {
     expect(
       validateConfig(

@@ -43,7 +43,7 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
   const outputDirectory = batfishConfig.outputDirectory;
   const assetsDirectory = path.join(
     outputDirectory,
-    constants.PUBLIC_PATH_ASSETS
+    batfishConfig.publicAssetsPath
   );
 
   // For the static build, put everything Webpack makes in an assets/ subdirectory.

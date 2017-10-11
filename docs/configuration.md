@@ -23,6 +23,7 @@ You can specify an alternate location.
 - [Basic options](#basic-options)
   - [siteBasePath](#sitebasepath)
   - [siteOrigin](#siteorigin)
+  - [publicAssetsPath](#publicassetspath)
   - [applicationWrapperPath](#applicationwrapperpath)
   - [stylesheets](#stylesheets)
   - [browserslist](#browserslist)
@@ -78,6 +79,13 @@ Origin where the site will be deployed.
 *Required if you want to use `prefixUrl.absolute`* (see ["Prefixing URLs"]).
 
 Also, *required if you want a sitemap*.
+
+### publicAssetsPath
+
+Type: `string`.
+Default: `'assets'`
+
+Default folder where batfish assets will be placed for static webpack build (aka `npm run build`)
 
 ### applicationWrapperPath
 

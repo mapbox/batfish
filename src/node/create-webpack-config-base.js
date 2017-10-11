@@ -155,7 +155,7 @@ function createWebpackConfigBase(
         path: batfishConfig.outputDirectory,
         publicPath: joinUrlParts(
           batfishConfig.siteBasePath,
-          constants.PUBLIC_PATH_ASSETS,
+          batfishConfig.publicAssetsPath,
           ''
         ),
         pathinfo: !batfishConfig.production,

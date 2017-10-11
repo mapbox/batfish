@@ -5,7 +5,6 @@ const postcssUrl = require('postcss-url');
 const postcssCsso = require('postcss-csso');
 const url = require('url');
 const joinUrlParts = require('./join-url-parts');
-const constants = require('./constants');
 
 function getPostcssPlugins(
   batfishConfig: BatfishConfiguration
@@ -27,7 +26,7 @@ function getPostcssPlugins(
         }
         return joinUrlParts(
           batfishConfig.siteBasePath,
-          constants.PUBLIC_PATH_ASSETS,
+          batfishConfig.publicAssetsPath,
           asset.url
         );
       }

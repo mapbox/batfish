@@ -55,6 +55,7 @@ describe('start', () => {
   beforeEach(() => {
     validateConfig.mockValidatedConfig = {
       port: 6666,
+      publicAssetsPath: 'assets',
       outputDirectory: '/mock/output',
       pagesDirectory: '/mock/pages'
     };

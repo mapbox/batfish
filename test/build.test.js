@@ -70,6 +70,7 @@ describe('build', () => {
   beforeEach(() => {
     validateConfig.mockValidatedConfig = {
       outputDirectory: '/mock/output',
+      publicAssetsPath: 'assets',
       production: true,
       siteOrigin: 'https://www.mapbox.com',
       verbose: false
@@ -169,6 +170,7 @@ describe('build', () => {
       expect(createWebpackConfigClient).toHaveBeenCalledTimes(1);
       expect(createWebpackConfigClient).toHaveBeenCalledWith({
         outputDirectory: '/mock/output/assets',
+        publicAssetsPath: 'assets',
         production: true,
         siteOrigin: 'https://www.mapbox.com',
         verbose: false
@@ -240,6 +242,7 @@ describe('build', () => {
       expect(createWebpackConfigStatic).toHaveBeenCalledTimes(1);
       expect(createWebpackConfigStatic).toHaveBeenCalledWith({
         outputDirectory: '/mock/output/assets',
+        publicAssetsPath: 'assets',
         production: true,
         siteOrigin: 'https://www.mapbox.com',
         verbose: false
