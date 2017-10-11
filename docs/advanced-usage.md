@@ -173,3 +173,11 @@ export default class SomePage extends React.Component {
 ```
 
 [`route-change-listeners`]: ./batfish-modules.md#route-change-listeners
+
+[babel-plugin-transform-jsxtreme-markdown]: https://github.com/mapbox/babel-plugin-transform-jsxtreme-markdown
+
+[`stylesheets`]: ./configuration.md#stylesheets
+
+[`pagesdirectory`]: ./configuration.md#pagesdirectory
+
+[`postcssplugins`]: ./configuration.md#postcssplugins

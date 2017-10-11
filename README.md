@@ -399,8 +399,6 @@ Please let us know what you think!
 
 [scroll-restorer]: https://github.com/mapbox/scroll-restorer
 
-[babel-plugin-transform-jsxtreme-markdown]: https://github.com/mapbox/babel-plugin-transform-jsxtreme-markdown
-
 [react-helmet]: https://github.com/nfl/react-helmet
 
 [browsersync]: https://www.browsersync.io/

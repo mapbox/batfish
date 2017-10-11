@@ -215,3 +215,7 @@ module.exports = withLocation(MyPage);
 [`siteorigin`]: ./configuration.md#siteorigin
 
 [`addroutechangestartlistener`]: #addroutechangestartlistener
+
+[`removeroutechangestartlistener`]: #removeroutechangestartlistener
+
+[`removeroutechangeendlistener`]: #removeroutechangeendlistener
