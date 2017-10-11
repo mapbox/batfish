@@ -41,7 +41,7 @@ Object {
       ],
       "filenameTemplate": undefined,
       "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js3",
-      "minChunks": undefined,
+      "minChunks": Infinity,
       "minSize": undefined,
       "selectedChunks": undefined,
     },
@@ -68,6 +68,13 @@ Object {
       "minChunks": undefined,
       "minSize": undefined,
       "selectedChunks": undefined,
+    },
+    HashedModuleIdsPlugin {
+      "options": Object {
+        "hashDigest": "base64",
+        "hashDigestLength": 4,
+        "hashFunction": "md5",
+      },
     },
     DefinePlugin {
       "definitions": Object {
@@ -127,7 +134,7 @@ Object {
       ],
       "filenameTemplate": undefined,
       "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js6",
-      "minChunks": undefined,
+      "minChunks": Infinity,
       "minSize": undefined,
       "selectedChunks": undefined,
     },
@@ -154,6 +161,13 @@ Object {
       "minChunks": undefined,
       "minSize": undefined,
       "selectedChunks": undefined,
+    },
+    HashedModuleIdsPlugin {
+      "options": Object {
+        "hashDigest": "base64",
+        "hashDigestLength": 4,
+        "hashFunction": "md5",
+      },
     },
     DefinePlugin {
       "definitions": Object {
@@ -222,7 +236,7 @@ Object {
       ],
       "filenameTemplate": undefined,
       "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js9",
-      "minChunks": undefined,
+      "minChunks": Infinity,
       "minSize": undefined,
       "selectedChunks": undefined,
     },
@@ -249,6 +263,13 @@ Object {
       "minChunks": undefined,
       "minSize": undefined,
       "selectedChunks": undefined,
+    },
+    HashedModuleIdsPlugin {
+      "options": Object {
+        "hashDigest": "base64",
+        "hashDigestLength": 4,
+        "hashFunction": "md5",
+      },
     },
     DefinePlugin {
       "definitions": Object {
