@@ -2,6 +2,8 @@
 
 ## Head
 
+- [Add] Add `publicAssetsPath` option.
+- [Fix] Slight improvement to filename hashing for long-term caching.
 - [Chore] Allow for React 16 as peer dependency.
 - [Chore] Update all other dependencies.
 
