@@ -12,6 +12,7 @@ declare type JsonValue =
 declare type BatfishConfiguration = {
   siteBasePath: string,
   siteOrigin?: string,
+  publicAssetsPath: string,
   applicationWrapperPath: string,
   stylesheets: Array<string | Array<string>>,
   browserslist: string | Array<string>,

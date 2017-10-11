@@ -35,6 +35,7 @@ describe('compileStylesheets', () => {
 
     batfishConfig = {
       outputDirectory: tmp,
+      publicAssetsPath: 'assets',
       // Test URLs, globs, and absolute filenames.
       stylesheets: [
         'https://www.mapbox.com/mock-style.css',

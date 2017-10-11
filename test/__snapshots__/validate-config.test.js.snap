@@ -33,6 +33,7 @@ Object {
   ],
   "production": false,
   "productionDevtool": false,
+  "publicAssetsPath": "assets",
   "siteBasePath": "",
   "stylesheets": Array [],
   "temporaryDirectory": "/my-project/_batfish_tmp",

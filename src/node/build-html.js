@@ -6,7 +6,6 @@ const path = require('path');
 const fs = require('fs');
 const pTry = require('p-try');
 const joinUrlParts = require('./join-url-parts');
-const constants = require('./constants');
 const errorTypes = require('./error-types');
 const wrapError = require('./wrap-error');
 const UglifyJs = require('uglify-js');
@@ -31,7 +30,7 @@ function buildHtml(
   return pTry(() => {
     const assetsDirectory = path.join(
       batfishConfig.outputDirectory,
-      constants.PUBLIC_PATH_ASSETS
+      batfishConfig.publicAssetsPath
     );
 
     // This file reading is synced to make scoping easier, and with so few
@@ -58,7 +57,7 @@ function buildHtml(
     if (!_.isEmpty(batfishConfig.stylesheets) && cssFilename) {
       cssUrl = joinUrlParts(
         batfishConfig.siteBasePath,
-        constants.PUBLIC_PATH_ASSETS,
+        batfishConfig.publicAssetsPath,
         path.basename(cssFilename)
       );
     }

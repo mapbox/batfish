@@ -39,6 +39,7 @@ describe('buildHtml', () => {
   beforeEach(() => {
     batfishConfig = {
       outputDirectory: '/mock/output',
+      publicAssetsPath: 'assets',
       siteBasePath: '/base',
       stylesheets: ['one.css', 'two.css']
     };

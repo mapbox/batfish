@@ -25,6 +25,10 @@ const configSchema = {
     validator: _.isString,
     description: 'string'
   },
+  publicAssetsPath: {
+    validator: _.isString,
+    description: 'string'
+  },
   applicationWrapperPath: {
     validator: isAbsolutePath,
     description: 'absolute path'
@@ -180,6 +184,7 @@ function validateConfig(
     production: false,
     verbose: false,
     port: 8080,
+    publicAssetsPath: 'assets',
     pagesDirectory: path.join(projectDirectory, 'src/pages'),
     outputDirectory: path.join(projectDirectory, '_batfish_site'),
     temporaryDirectory: path.join(projectDirectory, '_batfish_tmp'),

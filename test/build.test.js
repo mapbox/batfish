@@ -70,6 +70,7 @@ describe('build', () => {
   beforeEach(() => {
     validateConfig.mockValidatedConfig = {
       outputDirectory: '/mock/output',
+      publicAssetsPath: 'assets',
       production: true,
       siteOrigin: 'https://www.mapbox.com',
       verbose: false
@@ -105,6 +106,40 @@ describe('build', () => {
       },
       'project-directory'
     );
+  });
+
+  test('creates client webpack config with custom publicAssetsPath', done => {
+    validateConfig.mockValidatedConfig = {
+      outputDirectory: '/mock/output',
+      publicAssetsPath: 'site_assets'
+    };
+    const emitter = build();
+    emitter.on(constants.EVENT_ERROR, logEmitterError);
+    process.nextTick(() => {
+      expect(createWebpackConfigClient).toHaveBeenCalledTimes(1);
+      expect(createWebpackConfigClient).toHaveBeenCalledWith({
+        outputDirectory: '/mock/output/site_assets',
+        publicAssetsPath: 'site_assets'
+      });
+      done();
+    });
+  });
+
+  test('creates static webpack config with custom publicAssetsPath', done => {
+    validateConfig.mockValidatedConfig = {
+      outputDirectory: '/mock/output',
+      publicAssetsPath: 'site_assets'
+    };
+    const emitter = build();
+    emitter.on(constants.EVENT_ERROR, logEmitterError);
+    process.nextTick(() => {
+      expect(createWebpackConfigStatic).toHaveBeenCalledTimes(1);
+      expect(createWebpackConfigStatic).toHaveBeenCalledWith({
+        outputDirectory: '/mock/output/site_assets',
+        publicAssetsPath: 'site_assets'
+      });
+      done();
+    });
   });
 
   test('catches errors while validating config', done => {
@@ -169,6 +204,7 @@ describe('build', () => {
       expect(createWebpackConfigClient).toHaveBeenCalledTimes(1);
       expect(createWebpackConfigClient).toHaveBeenCalledWith({
         outputDirectory: '/mock/output/assets',
+        publicAssetsPath: 'assets',
         production: true,
         siteOrigin: 'https://www.mapbox.com',
         verbose: false
@@ -240,6 +276,7 @@ describe('build', () => {
       expect(createWebpackConfigStatic).toHaveBeenCalledTimes(1);
       expect(createWebpackConfigStatic).toHaveBeenCalledWith({
         outputDirectory: '/mock/output/assets',
+        publicAssetsPath: 'assets',
         production: true,
         siteOrigin: 'https://www.mapbox.com',
         verbose: false
