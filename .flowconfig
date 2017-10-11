@@ -2,6 +2,7 @@
 .*/node_modules/fbjs/.*
 .*/node_modules/babel-plugin-transform-react-remove-prop-types/.*
 .*/node_modules/flow-coverage-report/.*
+.*/node_modules/immutable/.*
 <PROJECT_ROOT>/examples/.*/node_modules/.*
 
 [include]

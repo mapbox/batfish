@@ -1,5 +1,10 @@
 # Changelog
 
+## Head
+
+- [Chore] Allow for React 16 as peer dependency.
+- [Chore] Update all other dependencies.
+
 ## 0.11.4
 
 - [Fix] Fragments in the URL take precedence over scrolling to the top of pages on dynamic route changes.
