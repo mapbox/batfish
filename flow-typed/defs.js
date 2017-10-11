@@ -37,6 +37,7 @@ declare type BatfishConfiguration = {
     rehypePlugins?: Array<Function>
   },
   includePromisePolyfill: boolean,
+  createModernBuild: boolean,
   inlineJs?: Array<InlineJsEntry>,
   production?: boolean,
   developmentDevtool: string | false,
@@ -104,3 +105,9 @@ declare module 'batfish-internal/context' {
 declare module 'batfish-internal/application-wrapper' {
   declare export default React.Element<*>
 }
+
+declare type AssetsJson = {
+  runtime: { js: string },
+  app: { js: string },
+  vendor: { js: string }
+};

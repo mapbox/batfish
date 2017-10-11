@@ -19,29 +19,58 @@ import { renderHtmlPage } from './render-html-page';
 // Returned Promise resolves when all HTML pages have been rendered and written.
 function staticRenderPages(
   batfishConfig: BatfishConfiguration,
-  assets: {
-    vendor: { js: string },
-    app: { js: string }
-  },
-  manifestJs: string,
-  cssUrl?: string
+  options: {
+    assets: AssetsJson,
+    modernAssets?: AssetsJson,
+    cssUrl?: string
+  }
 ): Promise<Array<void>> {
   const inlineJsScripts = renderInlineJsScripts(batfishConfig.inlineJs);
 
   // Load the full stylesheet lazily, after DOMContentLoaded. The page will
   // still render quickly because it will have its own CSS injected inline.
   let loadCssScript = '';
-  if (cssUrl) {
-    const loadCssJs = `document.addEventListener('DOMContentLoaded',function(){var s=document.createElement('link');s.rel='stylesheet';s.href='${cssUrl}';document.head.insertBefore(s, document.getElementById('loadCss'));});`;
+  if (options.cssUrl) {
+    const loadCssJs = `document.addEventListener('DOMContentLoaded',function(){var s=document.createElement('link');s.rel='stylesheet';s.href='${options.cssUrl}';document.head.insertBefore(s, document.getElementById('loadCss'));});`;
     loadCssScript = `<script id="loadCss">${loadCssJs}</script>`;
   }
 
-  const appendToBody = [
-    // The Webpack manifest is inlined because it is very small.
-    `<script>${manifestJs.replace(/\/\/#.*?map$/, '')}</script>`,
-    `<script src="${assets.vendor.js}"></script>`,
-    `<script src="${assets.app.js}"></script>`
-  ];
+  let appendToBody;
+  if (!options.modernAssets) {
+    appendToBody = [
+      `<script src="${options.assets.runtime.js}"></script>`,
+      `<script src="${options.assets.vendor.js}"></script>`,
+      `<script src="${options.assets.app.js}"></script>`
+    ];
+  } else {
+    // Scripts are loaded simultaneously but executed in the order of the
+    // array.
+    // cf. https://www.html5rocks.com/en/tutorials/speed/script-loading/
+    appendToBody = [
+      `<script>
+        var supportsModern = false;
+        try {
+          eval('const a = x => 2; class Foo {}');
+          supportsModern = true;
+        } catch (e) {}
+        var runtimeSrc = supportsModern
+          ? "${options.modernAssets.runtime.js}"
+          : "${options.assets.runtime.js}";
+        var vendorSrc = supportsModern
+          ? "${options.modernAssets.vendor.js}"
+          : "${options.assets.vendor.js}";
+        var appSrc = supportsModern
+          ? "${options.modernAssets.app.js}"
+          : "${options.assets.app.js}";
+        [runtimeSrc, vendorSrc, appSrc].forEach(function(src) {
+          var s = document.createElement('script');
+          s.src = src;
+          s.async = false;
+          document.head.appendChild(s);
+        });
+      </script>`
+    ];
+  }
 
   const writePage = (route: BatfishRouteData): Promise<void> => {
     return renderHtmlPage(

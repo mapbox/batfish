@@ -40,7 +40,8 @@ function watchWebpack(
   let hasCompiled = false;
 
   createWebpackConfigClient(batfishConfig, {
-    devServer: true
+    devServer: true,
+    modern: batfishConfig.createModernBuild
   })
     .then(clientConfig => {
       // Create an HTML file to load the assets in the browser.

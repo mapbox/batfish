@@ -55,6 +55,19 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     return createWebpackConfigClient(tailoredBatfishConfig)
       .then(webpackCompilePromise)
       .then(stats => {
+        // If we're doing a modern build, let the modern build write the stats.
+        if (!batfishConfig.createModernBuild) {
+          return writeWebpackStats(outputDirectory, stats);
+        }
+      });
+  };
+
+  const buildModernClient = (): Promise<void> => {
+    // babelPresetEnvOptions will be overridden if user has also set
+    // includeModernBuild. User must pick one.
+    return createWebpackConfigClient(tailoredBatfishConfig, { modern: true })
+      .then(webpackCompilePromise)
+      .then(stats => {
         return writeWebpackStats(outputDirectory, stats);
       });
   };
@@ -81,8 +94,14 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     })
     .then(() => {
       emitNotification('Starting the Webpack bundling.');
-      emitNotification('Creating the client bundle.');
-      return buildClient();
+      const promisesToKeep = [buildClient()];
+      if (batfishConfig.createModernBuild) {
+        emitNotification('Creating both modern and legacy client bundles.');
+        promisesToKeep.push(buildModernClient());
+      } else {
+        emitNotification('Creating the client bundles.');
+      }
+      return Promise.all(promisesToKeep);
     })
     .then(() => {
       emitNotification('Creating the static-page-rendering Node bundle.');
