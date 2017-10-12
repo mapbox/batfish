@@ -1,5 +1,7 @@
 # Advanced Usage
 
+![](.,/batfish-ultra.png)
+
 ## Table of contents
 
 - [Draft pages](#draft-pages)
