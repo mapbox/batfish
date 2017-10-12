@@ -14,7 +14,6 @@ Object {
       "<PROJECT_ROOT>/node_modules/react-helmet",
       "<PROJECT_ROOT>/node_modules/@mapbox/scroll-restorer/index.js",
       "<PROJECT_ROOT>/node_modules/@mapbox/link-hijacker/index.js",
-      "<PROJECT_ROOT>/node_modules/strip-color/index.js",
     ],
   },
   "output": Object {
@@ -107,7 +106,6 @@ Object {
       "<PROJECT_ROOT>/node_modules/react-helmet",
       "<PROJECT_ROOT>/node_modules/@mapbox/scroll-restorer/index.js",
       "<PROJECT_ROOT>/node_modules/@mapbox/link-hijacker/index.js",
-      "<PROJECT_ROOT>/node_modules/strip-color/index.js",
     ],
   },
   "output": Object {
@@ -207,7 +205,6 @@ Object {
       "<PROJECT_ROOT>/node_modules/react-helmet",
       "<PROJECT_ROOT>/node_modules/@mapbox/scroll-restorer/index.js",
       "<PROJECT_ROOT>/node_modules/@mapbox/link-hijacker/index.js",
-      "<PROJECT_ROOT>/node_modules/strip-color/index.js",
       "pigman",
       "revenge-of-pigman",
     ],

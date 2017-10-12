@@ -44,8 +44,7 @@ function createWebpackConfigClient(
       reactDomPath,
       reactHelmetPath,
       require.resolve('@mapbox/scroll-restorer'),
-      require.resolve('@mapbox/link-hijacker'),
-      require.resolve('strip-color')
+      require.resolve('@mapbox/link-hijacker')
     ];
     if (batfishConfig.includePromisePolyfill) {
       vendorModules.unshift(require.resolve('es6-promise/auto'));

@@ -4,6 +4,7 @@
 
 - [Add] Add `publicAssetsPath` option.
 - [Fix] Slight improvement to filename hashing for long-term caching.
+- [Fix] Remove `strip-color` from `vendorModules`, as it's no longer being used.
 - [Chore] Allow for React 16 as peer dependency.
 - [Chore] Update all other dependencies.
 
