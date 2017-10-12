@@ -12,8 +12,24 @@ Just include whatever tools and plugins you need.
 
 We've found that we can accomplish what we need to implement better optimizations by sticking with old fashioned CSS, so Batfish includes a system to optimize that use case.
 
+## How can I use global constants in Markdown files?
+
+In every Markdown file you can use the front matter array `prependJs` to specify lines of code to prepend to the compiled JS file.
+Here you can `import` constants and they will be available to interpolated JS expressions within the Markdown.
+
+```markdown
+---
+prependJs:
+  - "import constants from '../constants'"
+---
+
+Favorite color: {{ constants.FAVORITE_COLOR }}.
+```
+
 **Have unanswered questions? Please file an issue!**
 
 [`webpackloaders`]: ./configuration.md#webpackloaders
 
 [`webpackplugins`]: ./configuration.md#webpackplugins
+
+[`jsxtrememarkdownoptions`]: ./configuration.md#jsxtrememarkdownoptions
