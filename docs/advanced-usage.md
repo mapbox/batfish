@@ -1,6 +1,6 @@
 # Advanced Usage
 
-![](.,/batfish-ultra.png)
+![](../batfish-ultra.png)
 
 ## Table of contents
 
