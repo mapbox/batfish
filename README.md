@@ -4,9 +4,9 @@
 
 A static-site generator powered by React and Webpack.
 
-🚧🚧  **WORK IN PROGRESS!** 🚧🚧
+![](./batfish-dark.png)
 
-![The batfish](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Longnose_batfish.jpg/320px-Longnose_batfish.jpg)
+🚧🚧  **WORK IN PROGRESS!** 🚧🚧
 
 ## Table of contents
 
@@ -366,6 +366,8 @@ Batfish also includes some features that we considered important but are overloo
 Since we use Batfish for vital projects, we prioritize the needs of end-users (website visitors) and the stability, simplicity, and clarity of the system.
 
 Please let us know what you think!
+
+![The batfish](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Longnose_batfish.jpg/320px-Longnose_batfish.jpg)
 
 [configuration]: #configuration
 
