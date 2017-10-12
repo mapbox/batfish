@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 0.12.0
 
 - [Add] Add `publicAssetsPath` option.
 - [Fix] Slight improvement to filename hashing for long-term caching.
