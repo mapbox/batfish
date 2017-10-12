@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.1
+
+- [Fix] Update jsxtreme-markdown dependencies to get bug fix.
+
 ## 0.12.0
 
 - [Add] Add `publicAssetsPath` option.
