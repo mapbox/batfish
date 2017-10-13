@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- [Fix] Add Prettier to `dependencies`, not just `devDependencies`.
+
 ## 0.13.0
 
 - [Add] Add `ignoreWithinPagesDirectory` option.
