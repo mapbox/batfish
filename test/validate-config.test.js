@@ -5,6 +5,7 @@ const del = require('del');
 const path = require('path');
 const fs = require('fs');
 const stripAnsi = require('strip-ansi');
+const pathType = require('path-type');
 const validateConfig = require('../src/node/validate-config');
 const errorTypes = require('../src/node/error-types');
 const projectRootSerializer = require('./test-util/project-root-serializer');
@@ -219,6 +220,9 @@ describe('validateConfig', () => {
 
   test('stylesheets file paths must exist', () => {
     expect.hasAssertions();
+    pathType.fileSync.mockImplementation(input => {
+      return !/does-not-exist/.test(input);
+    });
     try {
       validateConfig({
         stylesheets: [
