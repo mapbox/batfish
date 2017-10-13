@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 0.13.0
 
 - [Add] Add `ignoreWithinPagesDirectory` option.
 
