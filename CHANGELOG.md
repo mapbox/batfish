@@ -3,6 +3,8 @@
 ## Head
 
 - [Fix] Add Prettier to `dependencies`, not just `devDependencies`.
+- [Fix] Provide more clear error messages by checking for the existing of files or directories while validating configuration for the following options: `applicationWrapperPath`, `pagesDirectory`, `outputDirectory`, `temporaryDirectory`, `inlineJs`.
+- [Fix] Fix buggy validation of `inlineJs` configuration property.
 
 ## 0.13.0
 
