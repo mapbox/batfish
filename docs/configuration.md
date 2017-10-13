@@ -51,6 +51,7 @@ You can specify an alternate location.
   - [productionDevtool](#productiondevtool)
   - [clearOutputDirectory](#clearoutputdirectory)
   - [unprocessedPageFiles](#unprocessedpagefiles)
+  - [ignoreWithinPagesDirectory](#ignorewithinpagesdirectory)
   - [webpackConfigClientTransform](#webpackconfigclienttransform)
   - [webpackConfigStaticTransform](#webpackconfigstatictransform)
   - [port](#port)
@@ -357,6 +358,20 @@ If you would like instead to copy `.js` or `.md` files as static files, without 
 
 For example, if you have a `scripts/` directory and all the `.js` files within it are *not* pages, but are static JavaScript files that you want to expose at `/scripts/*.js` URLs, you could set `unprocessedPageFiles` to `['scripts/**/*.js']`.
 
+### ignoreWithinPagesDirectory
+
+Type: `Array<string>`.
+
+An array of globs **relative to the [`pagesDirectory`]**.
+
+By default, all files within the [`pagesDirectory`] that are *not* `.js` and `.md` files are copied to corresponding paths in the [`outputDirectory`].
+(See ["Non-page files within the pages directory"] for why you might use this feature.)
+Sometimes, however, you want to colocate files with your pages and *do not* want those files to be copied into the [`outputDirectory`], because you don't want them to available at public URLs when you deploy your site.
+
+This option allows you to provide globs specifying files in the [`pagesDirectory`] that should *not* be copied.
+
+For example, if you have HTML files in your [`pagesDirectory`] that your JS pages will import with [Webpack's raw-loader], you could prevent them from being copied to the [`outputDirectory`] with `ignoreWithinPagesDirectory: ['**/*.html']`.
+
 ### webpackConfigClientTransform
 
 Type: `Function`.
@@ -415,3 +430,7 @@ If `true`, more information will be logged to the console.
 [`babelpresetenvoptions`]: #babelpresetenvoptions
 
 [options for babel-preset-env]: https://babeljs.io/docs/plugins/preset-env/#options
+
+["non-page files within the pages directory"]: ../README.md#non-page-files-within-the-pages-directory
+
+[webpack's raw loader]: https://github.com/webpack-contrib/raw-loader

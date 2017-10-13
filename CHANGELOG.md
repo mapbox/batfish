@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- [Add] Add `ignoreWithinPagesDirectory` option.
+
 ## 0.12.1
 
 - [Fix] Update jsxtreme-markdown dependencies to get bug fix.
