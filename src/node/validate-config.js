@@ -144,6 +144,10 @@ const configSchema = {
     validator: isArrayOf(x => !isAbsolutePath(x)),
     description: 'globs relative to the pagesDirectory, not absolute paths'
   },
+  ignoreWithinPagesDirectory: {
+    validator: isArrayOf(x => !isAbsolutePath(x)),
+    description: 'globs relative to the pagesDirectory, not absolute paths'
+  },
   webpackConfigClientTransform: {
     validator: _.isFunction,
     description: 'function'
