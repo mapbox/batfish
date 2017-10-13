@@ -6,10 +6,10 @@ const del = require('del');
 const path = require('path');
 const mkdirp = require('mkdirp');
 const chalk = require('chalk');
-const fs = require('fs');
 const a = require('indefinite');
 const isGlob = require('is-glob');
 const isAbsoluteUrl = require('is-absolute-url');
+const pathType = require('path-type');
 const autoprefixer = require('autoprefixer');
 const errorTypes = require('./error-types');
 
@@ -30,8 +30,8 @@ const configSchema = {
     description: 'string'
   },
   applicationWrapperPath: {
-    validator: isAbsolutePath,
-    description: 'absolute path'
+    validator: isAbsolutePathToExistingFile,
+    description: 'absolute path to an existing file'
   },
   stylesheets: {
     validator: isArrayOf(isValidStylesheetItem),
@@ -43,16 +43,16 @@ const configSchema = {
     description: 'string or array of strings'
   },
   pagesDirectory: {
-    validator: isAbsolutePath,
-    description: 'absolute path'
+    validator: isAbsolutePathToExistingDirectory,
+    description: 'absolute path to an existing directory'
   },
   outputDirectory: {
-    validator: isAbsolutePath,
-    description: 'absolute path'
+    validator: isAbsolutePathToExistingDirectory,
+    description: 'absolute path to an existing directory'
   },
   temporaryDirectory: {
-    validator: isAbsolutePath,
-    description: 'absolute path'
+    validator: isAbsolutePathToExistingDirectory,
+    description: 'absolute path to an existing directory'
   },
   dataSelectors: {
     validator: x => _.isPlainObject(x) && _.every(x, _.isFunction),
@@ -120,7 +120,12 @@ const configSchema = {
     description: 'boolean'
   },
   inlineJs: {
-    validator: isArrayOf(x => isAbsolutePath(x.filename) || _.isBoolean(x)),
+    validator: isArrayOf(x => {
+      return (
+        isAbsolutePathToExistingFile(x.filename) &&
+        (x.uglify === undefined || _.isBoolean(x))
+      );
+    }),
     description:
       'array of objects with an absolute path for the "filename" prop, and an optional "boolean" uglify prop'
   },
@@ -330,7 +335,14 @@ function isExistingFile(value: *): boolean {
   if (!_.isString(value)) {
     return false;
   }
-  return fs.existsSync(value);
+  return pathType.fileSync(value);
+}
+
+function isExistingDirectory(value: *): boolean {
+  if (!_.isString(value)) {
+    return false;
+  }
+  return pathType.dirSync(value);
 }
 
 function isValidStylesheetItem(value: *): boolean {
@@ -339,4 +351,12 @@ function isValidStylesheetItem(value: *): boolean {
   }
   if (!_.isString(value)) return false;
   return isAbsoluteUrl(value) || isAbsolutePath(value);
+}
+
+function isAbsolutePathToExistingFile(value: *): boolean {
+  return isAbsolutePath(value) && isExistingFile(value);
+}
+
+function isAbsolutePathToExistingDirectory(value: *): boolean {
+  return isAbsolutePath(value) && isExistingDirectory(value);
 }

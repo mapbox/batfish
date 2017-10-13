@@ -5,6 +5,10 @@ module.exports = () => {
   return {
     siteBasePath: '/miscellany',
     siteOrigin: 'https://www.your-batfish-site.com',
+    applicationWrapperPath: path.join(
+      __dirname,
+      './src/components/application-wrapper.js'
+    ),
     stylesheets: [
       'https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.min.css'
     ],
