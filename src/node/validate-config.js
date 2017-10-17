@@ -47,12 +47,12 @@ const configSchema = {
     description: 'absolute path to an existing directory'
   },
   outputDirectory: {
-    validator: isAbsolutePathToExistingDirectory,
-    description: 'absolute path to an existing directory'
+    validator: isAbsolutePath,
+    description: 'absolute path'
   },
   temporaryDirectory: {
-    validator: isAbsolutePathToExistingDirectory,
-    description: 'absolute path to an existing directory'
+    validator: isAbsolutePath,
+    description: 'absolute path'
   },
   dataSelectors: {
     validator: x => _.isPlainObject(x) && _.every(x, _.isFunction),

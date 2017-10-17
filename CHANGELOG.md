@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.2
+
+- [Fix] `outputDirectory` and `temporaryDirectory` do not have to exist as part of config validation.
+
 ## 0.13.1
 
 - [Fix] Add Prettier to `dependencies`, not just `devDependencies`.
