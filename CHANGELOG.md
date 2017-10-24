@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 0.13.3
 
 - [Fix] Do not copy files specified by `unprocessedPageFiles` option if they are also ignored by `ignoreWithinPagesDirectory`.
 - [Fix] Fix bug that caused the static build's Webpack config to look for certain dependencies, like `uglify-js`, in the wrong place.
