@@ -2,6 +2,7 @@
 
 ## Head
 
+- [Fix] Do not copy files specified by `unprocessedPageFiles` option if they are also ignored by `ignoreWithinPagesDirectory`.
 - [Fix] Fix bug that caused the static build's Webpack config to look for certain dependencies, like `uglify-js`, in the wrong place.
 - [Fix] Better errors for obscure parse errors from compiled `static-render-pages.js`.
 

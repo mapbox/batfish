@@ -60,4 +60,29 @@ describe('copyNonPageFiles', () => {
       );
     });
   });
+
+  test('ignores unprocessedPageFiles files designated by ignoreWithinPagesDirectory option', () => {
+    copyNonPageFiles({
+      outputDirectory: 'mockOutputDirectory',
+      pagesDirectory: 'mockPagesDirectory',
+      unprocessedPageFiles: ['**/home.js', '**/horse.md'],
+      ignoreWithinPagesDirectory: ['**/*.js', '*.xyz']
+    }).then(() => {
+      expect(cpy).toHaveBeenCalledTimes(1);
+      expect(cpy).toHaveBeenCalledWith(
+        [
+          '**/*.!(js|md|css)',
+          '**/home.js',
+          '**/horse.md',
+          '!**/*.js',
+          '!*.xyz'
+        ],
+        'mockOutputDirectory',
+        {
+          cwd: 'mockPagesDirectory',
+          parents: true
+        }
+      );
+    });
+  });
 });
