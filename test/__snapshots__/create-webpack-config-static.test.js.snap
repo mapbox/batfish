@@ -8,10 +8,10 @@ Object {
     "static": "<PROJECT_ROOT>/src/webpack/static-render-pages.js",
   },
   "externals": Object {
-    "mkdirp": "mkdirp",
+    "mkdirp": "<PROJECT_ROOT>/node_modules/mkdirp/index.js",
     "react": "react",
     "react-dom": "react-dom",
-    "uglify-js": "uglify-js",
+    "uglify-js": "<PROJECT_ROOT>/node_modules/uglify-js/tools/node.js",
   },
   "node": Object {
     "Buffer": false,
@@ -45,10 +45,10 @@ Object {
     "static": "<PROJECT_ROOT>/src/webpack/static-render-pages.js",
   },
   "externals": Object {
-    "mkdirp": "mkdirp",
+    "mkdirp": "<PROJECT_ROOT>/node_modules/mkdirp/index.js",
     "react": "react",
     "react-dom": "react-dom",
-    "uglify-js": "uglify-js",
+    "uglify-js": "<PROJECT_ROOT>/node_modules/uglify-js/tools/node.js",
   },
   "module": Object {
     "rules": Array [

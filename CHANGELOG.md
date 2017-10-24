@@ -2,6 +2,7 @@
 
 ## Head
 
+- [Fix] Fix bug that caused the static build's Webpack config to look for certain dependencies, like `uglify-js`, in the wrong place.
 - [Fix] Better errors for obscure parse errors from compiled `static-render-pages.js`.
 
 ## 0.13.2

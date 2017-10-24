@@ -26,8 +26,8 @@ function createWebpackConfigStatic(
         // These modules are required by static-render-pages and don't play
         // nice when Webpack tries to compile them, or we know they can be
         // loaded in Node.
-        'uglify-js': 'uglify-js',
-        mkdirp: 'mkdirp',
+        'uglify-js': require.resolve('uglify-js'),
+        mkdirp: require.resolve('mkdirp'),
         react: 'react',
         'react-dom': 'react-dom'
       },
