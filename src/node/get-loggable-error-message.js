@@ -60,7 +60,8 @@ function getLoggableErrorMessage(error: Error): string | void {
 
   if (error instanceof errorTypes.WebpackNodeParseError) {
     result += `Failed to parse Webpack-compiled version of static-render-pages.js\n\n`;
-    result += `Error message: ${error.originalError.message}\n`;
+    result += `Error message: ${error.originalError.message}\n\n`;
+    result += renderPrettyErrorStack(error.originalError);
     return result;
   }
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- [Fix] Better errors for obscure parse errors from compiled `static-render-pages.js`.
+
 ## 0.13.2
 
 - [Fix] `outputDirectory` and `temporaryDirectory` do not have to exist as part of config validation.
