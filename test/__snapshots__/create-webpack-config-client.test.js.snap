@@ -172,10 +172,22 @@ Object {
         "process.env.DEV_SERVER": false,
       },
     },
-    FasterUglifyPlugin {
+    UglifyJsPlugin {
       "options": Object {
-        "sourceMap": false,
-        "uglifyJS": Object {},
+        "cache": true,
+        "extractComments": false,
+        "parallel": true,
+        "sourceMap": true,
+        "test": /\\\\\\.js\\$/i,
+        "uglifyOptions": Object {
+          "compress": Object {
+            "comparisons": false,
+          },
+          "output": Object {
+            "ascii_only": true,
+          },
+        },
+        "warningsFilter": [Function],
       },
     },
   ],

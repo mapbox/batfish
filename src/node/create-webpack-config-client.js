@@ -6,7 +6,7 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const AssetsPlugin = require('assets-webpack-plugin');
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const UglifyPlugin = require('uglifyjs-webpack-plugin');
 const resolveFrom = require('resolve-from');
 const createWebpackConfigBase = require('./create-webpack-config-base');
 
@@ -89,10 +89,27 @@ function createWebpackConfigClient(
         'process.env.DEV_SERVER': (options && options.devServer) || false
       })
     ].concat(batfishConfig.webpackPlugins || []);
-    const uglifyPlugin = new ParallelUglifyPlugin({
-      sourceMap: !!batfishConfig.productionDevtool
-    });
+
     if (batfishConfig.production) {
+      const uglifyPlugin = new UglifyPlugin({
+        sourceMap: true,
+        cache: true,
+        parallel: true,
+        uglifyOptions: {
+          compress: {
+            // Disabled because of an issue with Uglify breaking seemingly valid code:
+            // https://github.com/facebookincubator/create-react-app/issues/2376
+            // Pending further investigation:
+            // https://github.com/mishoo/UglifyJS2/issues/2011
+            comparisons: false
+          },
+          output: {
+            // Turned on because emoji and regex is not minified properly using default
+            // https://github.com/facebookincubator/create-react-app/issues/2488
+            ascii_only: true
+          }
+        }
+      });
       clientPlugins.push(uglifyPlugin);
     }
 

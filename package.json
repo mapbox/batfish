@@ -136,11 +136,11 @@
     "tempy": "^0.2.1",
     "time-stamp": "^2.0.0",
     "uglify-js": "^3.1.2",
+    "uglifyjs-webpack-plugin": "^1.0.1",
     "webpack": "^3.6.0",
     "webpack-chunk-hash": "^0.5.0",
     "webpack-format-messages": "^1.0.1",
     "webpack-merge": "^4.1.0",
-    "webpack-parallel-uglify-plugin": "^1.0.0",
     "worker-farm": "^1.5.0"
   },
   "peerDependencies": {
