@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.4
+
+- [Fix] Use `NamedChunksPlugin` to improve long-term caching.
+
 ## 0.13.3
 
 - [Fix] Do not copy files specified by `unprocessedPageFiles` option if they are also ignored by `ignoreWithinPagesDirectory`.
