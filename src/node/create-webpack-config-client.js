@@ -4,6 +4,7 @@
 const _ = require('lodash');
 const path = require('path');
 const webpack = require('webpack');
+const crypto = require('crypto');
 const webpackMerge = require('webpack-merge');
 const AssetsPlugin = require('assets-webpack-plugin');
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
@@ -84,6 +85,22 @@ function createWebpackConfigClient(
       // Recommended at https://webpack.js.org/guides/caching/#module-identifiers
       // as a way to make module IDs more deterministic.
       new webpack.HashedModuleIdsPlugin(),
+      new webpack.NamedChunksPlugin(chunk => {
+        if (chunk.name) return chunk.name;
+        return chunk.modules
+          .map(module => {
+            const hashSeed = path.relative(
+              batfishConfig.pagesDirectory,
+              module.resource
+            );
+            const requestHash = crypto
+              .createHash('md5')
+              .update(hashSeed)
+              .digest('hex');
+            return requestHash;
+          })
+          .join('_');
+      }),
       // Define an environment variable for special cases
       new webpack.DefinePlugin({
         'process.env.DEV_SERVER': (options && options.devServer) || false
