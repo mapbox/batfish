@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0
+
+- No changes. Releasing 1.0 because the library has been stable enough that 1.0 will be good for semver.
+
 ## 0.13.4
 
 - [Fix] Use `NamedChunksPlugin` to improve long-term caching.

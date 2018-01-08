@@ -6,8 +6,6 @@ A static-site generator powered by React and Webpack.
 
 ![](./batfish-dark.png)
 
-🚧🚧  **WORK IN PROGRESS!** 🚧🚧
-
 ## Table of contents
 
 - [Other documentation to check out](#other-documentation-to-check-out)
