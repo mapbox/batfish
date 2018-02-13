@@ -11,11 +11,6 @@ function serverInitMessage(
   serverInstance: Object,
   batfishConfig: BatfishConfiguration
 ): string {
-  const relativeOutputDirectory =
-    path.relative(
-      process.cwd(),
-      serverInstance.instance.options.get('server').get('baseDir')
-    ) + '/';
   const urls = serverInstance.instance.options.get('urls');
   const localUrl =
     urls.get('local') + batfishConfig.siteBasePath.replace(/([^/])$/, '$1/');
@@ -29,9 +24,25 @@ function serverInitMessage(
   result += `\n  ${chevron} Available externally at ${chalk.magenta(
     externalUrl
   )}`;
-  result += `\n  ${chevron} Compiled files are in ${chalk.cyan(
-    relativeOutputDirectory
-  )}`;
+
+  // Since this code relies heavily on the internal details of the BrowserSync
+  // instance -- which seem to be only *partly* public (?), so subject to
+  // breaking changes -- we need to have a safe exit if it doesn't work.
+  try {
+    const relativeOutputDirectory =
+      path.relative(
+        process.cwd(),
+        serverInstance.instance.options
+          .get('server')
+          .get('baseDir')
+          .get(0)
+      ) + '/';
+    result += `\n  ${chevron} Compiled files are in ${chalk.cyan(
+      relativeOutputDirectory
+    )}`;
+  } catch (e) {
+    /**/
+  }
   return result;
 }
 

@@ -92,7 +92,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
-    "browser-sync": "^2.18.12",
+    "browser-sync": "^2.23.6",
     "chalk": "^2.1.0",
     "chokidar": "^1.7.0",
     "concat-with-sourcemaps": "^1.0.4",
