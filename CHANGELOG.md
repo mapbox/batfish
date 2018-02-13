@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Fix bug where changes to recent versions of BrowserSync broke server initialization logging.
+
 ## 1.0.1
 
 - Upgrade `@mapbox/jsxtreme-markdown-loader` to get bug fix related to determining Markdown wrappers with a `getWrapper` function.
