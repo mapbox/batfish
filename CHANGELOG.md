@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Upgrade `@mapbox/jsxtreme-markdown-loader` to get bug fix related to determining Markdown wrappers with a `getWrapper` function.
+
 ## 1.0.0
 
 - No changes. Releasing 1.0 because the library has been stable enough that 1.0 will be good for semver.

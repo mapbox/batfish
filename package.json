@@ -74,7 +74,7 @@
   },
   "dependencies": {
     "@mapbox/babel-plugin-transform-jsxtreme-markdown": "^0.4.1",
-    "@mapbox/jsxtreme-markdown-loader": "^0.5.1",
+    "@mapbox/jsxtreme-markdown-loader": "^0.5.3",
     "@mapbox/link-hijacker": "^1.0.0",
     "@mapbox/link-to-location": "^1.0.0",
     "@mapbox/postcss-html-filter": "^1.0.0",
