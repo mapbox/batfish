@@ -24,6 +24,13 @@ jest.mock('del', () => {
   };
 });
 
+jest.mock('path-type', () => {
+  return {
+    dirSync: jest.fn(() => true),
+    fileSync: jest.fn(() => true)
+  };
+});
+
 describe('validateConfig', () => {
   const projectDirectory = '/my-project';
 
