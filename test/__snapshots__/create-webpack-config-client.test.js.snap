@@ -187,7 +187,9 @@ Object {
     UglifyJsPlugin {
       "options": Object {
         "cache": true,
+        "exclude": undefined,
         "extractComments": false,
+        "include": undefined,
         "parallel": true,
         "sourceMap": true,
         "test": /\\\\\\.js\\$/i,
