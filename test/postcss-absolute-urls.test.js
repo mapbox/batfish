@@ -22,7 +22,7 @@ describe('postcssAbsoluteUrls', () => {
           stylesheetUrl: 'https://www.fake-place.com/path/to/style.css'
         })
       )
-      .process(css)
+      .process(css, { from: undefined })
       .then(result => {
         expect(result.css).toMatchSnapshot();
       });
