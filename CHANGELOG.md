@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 1.0.3
 
 - Upgrade dependencies. There should not be any user-faces changes, just behind-the-scenes improvements.
 
