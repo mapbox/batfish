@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Upgrade dependencies. There should not be any user-faces changes, just behind-the-scenes improvements.
+
 ## 1.0.2
 
 - Fix bug where changes to recent versions of BrowserSync broke server initialization logging.
