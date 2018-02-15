@@ -6,8 +6,6 @@ const fs = require('fs');
 const path = require('path');
 const pathType = require('path-type');
 
-jest.unmock('path-type');
-
 const examplesDirectory = path.join(__dirname, '../examples');
 
 describe('examples', () => {

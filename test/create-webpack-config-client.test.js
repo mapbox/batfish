@@ -10,6 +10,13 @@ jest.mock('../src/node/create-webpack-config-base', () => {
   return jest.fn(() => Promise.resolve({ createdWebpackConfigBase: true }));
 });
 
+jest.mock('path-type', () => {
+  return {
+    dirSync: jest.fn(() => true),
+    fileSync: jest.fn(() => true)
+  };
+});
+
 expect.addSnapshotSerializer(projectRootSerializer);
 
 function createBatfishConfig(options) {
