@@ -1,11 +1,11 @@
 declare class WrappedError extends Error {
-  originalError: Error
+  originalError: Error;
 }
 
 declare class ConfigValidationError extends WrappedError {
-  messages?: Array<string>
+  messages?: Array<string>;
 }
 
 declare class WebpackCompilationError extends WrappedError {
-  stats: webpack$Stats
+  stats: webpack$Stats;
 }

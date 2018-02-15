@@ -404,11 +404,13 @@ describe('build', () => {
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
-      expect(
-        inlineCss
-      ).toHaveBeenCalledWith('/mock/output', 'mock-stylesheet.css', {
-        verbose: false
-      });
+      expect(inlineCss).toHaveBeenCalledWith(
+        '/mock/output',
+        'mock-stylesheet.css',
+        {
+          verbose: false
+        }
+      );
       done();
     });
   });

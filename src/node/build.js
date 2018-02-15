@@ -72,12 +72,11 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     .then(() => {
       if (stylesheetsIsEmpty) return;
       emitNotification('Compiling CSS.');
-      return compileStylesheets(
-        batfishConfig,
-        assetsDirectory
-      ).then(filename => {
-        cssFilename = filename;
-      });
+      return compileStylesheets(batfishConfig, assetsDirectory).then(
+        filename => {
+          cssFilename = filename;
+        }
+      );
     })
     .then(() => {
       emitNotification('Starting the Webpack bundling.');

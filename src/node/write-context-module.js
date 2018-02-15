@@ -55,30 +55,29 @@ function writeContextModule(
       index: number
     ): Promise<void> => {
       const pageData = pagesData[pagePath];
-      return writePageModule(
-        batfishConfig,
-        pageData
-      ).then(pageModuleFilePath => {
-        const is404 =
-          pageData.filePath.replace(/\.(js|md)$/, '') ===
-          path.join(batfishConfig.pagesDirectory, '404');
-        const chunkName = is404 ? 'not-found' : slugg(pagePath) || 'home';
-        const stringifiedRouteData = `{
+      return writePageModule(batfishConfig, pageData).then(
+        pageModuleFilePath => {
+          const is404 =
+            pageData.filePath.replace(/\.(js|md)$/, '') ===
+            path.join(batfishConfig.pagesDirectory, '404');
+          const chunkName = is404 ? 'not-found' : slugg(pagePath) || 'home';
+          const stringifiedRouteData = `{
           path: '${pagePath}',
           getPage: () => import(
             /* webpackChunkName: "${chunkName}" */
             '${pageModuleFilePath}'
           ),
-          ${pageData.frontMatter.internalRouting
-            ? 'internalRouting: true,'
-            : ''}
+          ${
+            pageData.frontMatter.internalRouting ? 'internalRouting: true,' : ''
+          }
           ${is404 ? 'is404: true,' : ''}
         }`;
-        if (is404) {
-          notFoundStringifiedRouteData = stringifiedRouteData;
+          if (is404) {
+            notFoundStringifiedRouteData = stringifiedRouteData;
+          }
+          stringifiedRoutes[index] = stringifiedRouteData;
         }
-        stringifiedRoutes[index] = stringifiedRouteData;
-      });
+      );
     };
 
     return writeDataModules(batfishConfig, siteData)

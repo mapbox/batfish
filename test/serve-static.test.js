@@ -89,9 +89,10 @@ describe('serveStatic', () => {
       'baseDir',
       '/mock/output'
     );
-    expect(
-      createServerOptions.browserSyncOptions.server
-    ).toHaveProperty('middleware', ['mockStripSiteBasePath']);
+    expect(createServerOptions.browserSyncOptions.server).toHaveProperty(
+      'middleware',
+      ['mockStripSiteBasePath']
+    );
   });
 
   test('catches errors when creating the server', done => {

@@ -37,11 +37,11 @@ describe('createWebpackConfigStatic', () => {
   });
 
   test('default Webpack config', () => {
-    return createWebpackConfigStatic(
-      createBatfishConfig()
-    ).then(webpackConfig => {
-      expect(webpackConfig).toMatchSnapshot();
-    });
+    return createWebpackConfigStatic(createBatfishConfig()).then(
+      webpackConfig => {
+        expect(webpackConfig).toMatchSnapshot();
+      }
+    );
   });
 
   test('with all Batfish config options that make a difference', () => {
