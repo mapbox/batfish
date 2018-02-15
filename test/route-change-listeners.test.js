@@ -214,13 +214,13 @@ describe('end change listeners', () => {
     RouteChangeListeners.addRouteChangeEndListener(listenerA);
     RouteChangeListeners.addRouteChangeEndListener(listenerB);
     RouteChangeListeners.removeRouteChangeEndListener(listenerA);
-    return RouteChangeListeners._invokeRouteChangeEndCallbacks(
-      '/foo/bar'
-    ).then(() => {
-      expect(listenerA).toHaveBeenCalledTimes(0);
-      expect(listenerB).toHaveBeenCalledTimes(1);
-      expect(listenerB).toHaveBeenCalledWith('/foo/bar');
-    });
+    return RouteChangeListeners._invokeRouteChangeEndCallbacks('/foo/bar').then(
+      () => {
+        expect(listenerA).toHaveBeenCalledTimes(0);
+        expect(listenerB).toHaveBeenCalledTimes(1);
+        expect(listenerB).toHaveBeenCalledWith('/foo/bar');
+      }
+    );
   });
 
   test('all paths, remove all listeners', () => {
@@ -229,12 +229,12 @@ describe('end change listeners', () => {
     RouteChangeListeners.addRouteChangeEndListener(listenerA);
     RouteChangeListeners.addRouteChangeEndListener(listenerB);
     RouteChangeListeners.removeRouteChangeEndListener();
-    return RouteChangeListeners._invokeRouteChangeEndCallbacks(
-      '/foo/bar'
-    ).then(() => {
-      expect(listenerA).toHaveBeenCalledTimes(0);
-      expect(listenerB).toHaveBeenCalledTimes(0);
-    });
+    return RouteChangeListeners._invokeRouteChangeEndCallbacks('/foo/bar').then(
+      () => {
+        expect(listenerA).toHaveBeenCalledTimes(0);
+        expect(listenerB).toHaveBeenCalledTimes(0);
+      }
+    );
   });
 
   test('specific path, one listener', () => {
@@ -259,13 +259,13 @@ describe('end change listeners', () => {
     RouteChangeListeners.addRouteChangeEndListener('/foo/bar', listenerA);
     RouteChangeListeners.addRouteChangeEndListener('/foo/bar', listenerB);
     RouteChangeListeners.removeRouteChangeEndListener('/foo/bar', listenerA);
-    return RouteChangeListeners._invokeRouteChangeEndCallbacks(
-      '/foo/bar'
-    ).then(() => {
-      expect(listenerA).toHaveBeenCalledTimes(0);
-      expect(listenerB).toHaveBeenCalledTimes(1);
-      expect(listenerB).toHaveBeenCalledWith('/foo/bar');
-    });
+    return RouteChangeListeners._invokeRouteChangeEndCallbacks('/foo/bar').then(
+      () => {
+        expect(listenerA).toHaveBeenCalledTimes(0);
+        expect(listenerB).toHaveBeenCalledTimes(1);
+        expect(listenerB).toHaveBeenCalledWith('/foo/bar');
+      }
+    );
   });
 
   test('specific path, normalized end slash', () => {

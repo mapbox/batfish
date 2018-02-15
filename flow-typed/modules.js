@@ -96,7 +96,7 @@ declare module 'webpack-merge' {
 
 declare module 'pretty-error' {
   declare class PrettyError {
-    render(Error): string
+    render(Error): string;
   }
   declare module.exports: Class<PrettyError>;
 }
@@ -126,9 +126,9 @@ declare module 'time-stamp' {
 }
 
 declare class browserSync$server {
-  emitter: events$EventEmitter,
-  init(config?: Object, callback?: Function): void,
-  reload(filename?: string | Array<string>): void
+  emitter: events$EventEmitter;
+  init(config?: Object, callback?: Function): void;
+  reload(filename?: string | Array<string>): void;
 }
 
 declare module 'browser-sync' {
@@ -174,7 +174,7 @@ declare module 'react-helmet' {
   };
 
   declare class Helmet extends React$Component<Props> {
-    rewind(): Instance
+    rewind(): Instance;
   }
 
   declare export default Helmet

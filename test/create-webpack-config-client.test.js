@@ -34,11 +34,11 @@ describe('createWebpackConfigClient', () => {
   });
 
   test('default Webpack config', () => {
-    return createWebpackConfigClient(
-      createBatfishConfig()
-    ).then(webpackConfig => {
-      expect(webpackConfig).toMatchSnapshot();
-    });
+    return createWebpackConfigClient(createBatfishConfig()).then(
+      webpackConfig => {
+        expect(webpackConfig).toMatchSnapshot();
+      }
+    );
   });
 
   test('default production Webpack config', () => {
