@@ -55,20 +55,28 @@ ${chalk.bold('Examples')}
   batfish serve-static -p 9966 -c conf/bf.js
 `;
 
-const cli = meow(
-  {
-    description,
-    help
-  },
-  {
-    alias: {
-      c: 'config',
-      V: 'verbose',
-      p: 'port',
-      d: 'debug'
+const cli = meow({
+  description,
+  help,
+  flags: {
+    config: {
+      type: 'string',
+      alias: 'c'
+    },
+    verbose: {
+      type: 'boolean',
+      alias: 'V'
+    },
+    port: {
+      type: 'number',
+      alias: 'p'
+    },
+    debug: {
+      type: 'boolean',
+      alias: 'd'
     }
   }
-);
+});
 
 const logCliError = message => {
   batfishLog.error(`${chalk.red.bold('CLI error:')} ${message}`);
