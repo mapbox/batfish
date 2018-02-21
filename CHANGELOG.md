@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 1.0.4
 
 - Fix bug causing build to fail if you used `npm link` (or `yarn link`), with a message about failing to find Babel plugins.
 
