@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Fix bug causing build to fail if you used `npm link` (or `yarn link`), with a message about failing to find Babel plugins.
+
 ## 1.0.3
 
 - Upgrade dependencies. There should not be any user-faces changes, just behind-the-scenes improvements.

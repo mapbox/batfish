@@ -18,25 +18,25 @@ Object {
               "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
               "compact": true,
               "plugins": Array [
-                "syntax-dynamic-import",
-                "transform-class-properties",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-class-properties/lib/index.js",
                 Array [
-                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  "<PROJECT_ROOT>/node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
                   Object {
                     "packageName": "@mapbox/batfish/modules/md",
                     "rehypePlugins": undefined,
                     "remarkPlugins": undefined,
                   },
                 ],
-                "transform-react-jsx-source",
-                "transform-react-jsx-self",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-react-jsx-source/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-react-jsx-self/lib/index.js",
               ],
               "presets": Array [
                 Array [
-                  "env",
+                  "<PROJECT_ROOT>/node_modules/babel-preset-env/lib/index.js",
                   undefined,
                 ],
-                "react",
+                "<PROJECT_ROOT>/node_modules/babel-preset-react/lib/index.js",
               ],
             },
           },
@@ -52,25 +52,25 @@ Object {
               "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
               "compact": true,
               "plugins": Array [
-                "syntax-dynamic-import",
-                "transform-class-properties",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-class-properties/lib/index.js",
                 Array [
-                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  "<PROJECT_ROOT>/node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
                   Object {
                     "packageName": "@mapbox/batfish/modules/md",
                     "rehypePlugins": undefined,
                     "remarkPlugins": undefined,
                   },
                 ],
-                "transform-react-jsx-source",
-                "transform-react-jsx-self",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-react-jsx-source/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-react-jsx-self/lib/index.js",
               ],
               "presets": Array [
                 Array [
-                  "env",
+                  "<PROJECT_ROOT>/node_modules/babel-preset-env/lib/index.js",
                   undefined,
                 ],
-                "react",
+                "<PROJECT_ROOT>/node_modules/babel-preset-react/lib/index.js",
               ],
             },
           },
@@ -108,25 +108,25 @@ Object {
               "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
               "compact": true,
               "plugins": Array [
-                "syntax-dynamic-import",
-                "transform-class-properties",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-class-properties/lib/index.js",
                 Array [
-                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  "<PROJECT_ROOT>/node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
                   Object {
                     "packageName": "@mapbox/batfish/modules/md",
                     "rehypePlugins": undefined,
                     "remarkPlugins": undefined,
                   },
                 ],
-                "transform-react-jsx-source",
-                "transform-react-jsx-self",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-react-jsx-source/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-react-jsx-self/lib/index.js",
               ],
               "presets": Array [
                 Array [
-                  "env",
+                  "<PROJECT_ROOT>/node_modules/babel-preset-env/lib/index.js",
                   undefined,
                 ],
-                "react",
+                "<PROJECT_ROOT>/node_modules/babel-preset-react/lib/index.js",
               ],
             },
           },
@@ -202,10 +202,10 @@ Object {
               "cacheDirectory": false,
               "compact": true,
               "plugins": Array [
-                "syntax-dynamic-import",
-                "transform-class-properties",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-class-properties/lib/index.js",
                 Array [
-                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  "<PROJECT_ROOT>/node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
                   Object {
                     "packageName": "@mapbox/batfish/modules/md",
                     "rehypePlugins": undefined,
@@ -216,10 +216,10 @@ Object {
               ],
               "presets": Array [
                 Array [
-                  "env",
+                  "<PROJECT_ROOT>/node_modules/babel-preset-env/lib/index.js",
                   undefined,
                 ],
-                "react",
+                "<PROJECT_ROOT>/node_modules/babel-preset-react/lib/index.js",
               ],
             },
           },
@@ -235,10 +235,10 @@ Object {
               "cacheDirectory": false,
               "compact": true,
               "plugins": Array [
-                "syntax-dynamic-import",
-                "transform-class-properties",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-class-properties/lib/index.js",
                 Array [
-                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  "<PROJECT_ROOT>/node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
                   Object {
                     "packageName": "@mapbox/batfish/modules/md",
                     "rehypePlugins": undefined,
@@ -249,10 +249,10 @@ Object {
               ],
               "presets": Array [
                 Array [
-                  "env",
+                  "<PROJECT_ROOT>/node_modules/babel-preset-env/lib/index.js",
                   undefined,
                 ],
-                "react",
+                "<PROJECT_ROOT>/node_modules/babel-preset-react/lib/index.js",
               ],
             },
           },
@@ -290,10 +290,10 @@ Object {
               "cacheDirectory": false,
               "compact": true,
               "plugins": Array [
-                "syntax-dynamic-import",
-                "transform-class-properties",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-class-properties/lib/index.js",
                 Array [
-                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  "<PROJECT_ROOT>/node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
                   Object {
                     "packageName": "@mapbox/batfish/modules/md",
                     "rehypePlugins": undefined,
@@ -304,10 +304,10 @@ Object {
               ],
               "presets": Array [
                 Array [
-                  "env",
+                  "<PROJECT_ROOT>/node_modules/babel-preset-env/lib/index.js",
                   undefined,
                 ],
-                "react",
+                "<PROJECT_ROOT>/node_modules/babel-preset-react/lib/index.js",
               ],
             },
           },
@@ -384,10 +384,10 @@ Object {
               "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
               "compact": true,
               "plugins": Array [
-                "syntax-dynamic-import",
-                "transform-class-properties",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-class-properties/lib/index.js",
                 Array [
-                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  "<PROJECT_ROOT>/node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
                   Object {
                     "packageName": "@mapbox/batfish/modules/md",
                     "rehypePlugins": undefined,
@@ -399,15 +399,15 @@ Object {
                 ],
                 [Function],
                 [Function],
-                "transform-react-jsx-source",
-                "transform-react-jsx-self",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-react-jsx-source/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-react-jsx-self/lib/index.js",
               ],
               "presets": Array [
                 Array [
-                  "env",
+                  "<PROJECT_ROOT>/node_modules/babel-preset-env/lib/index.js",
                   undefined,
                 ],
-                "react",
+                "<PROJECT_ROOT>/node_modules/babel-preset-react/lib/index.js",
                 [Function],
                 [Function],
               ],
@@ -425,10 +425,10 @@ Object {
               "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
               "compact": true,
               "plugins": Array [
-                "syntax-dynamic-import",
-                "transform-class-properties",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-class-properties/lib/index.js",
                 Array [
-                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  "<PROJECT_ROOT>/node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
                   Object {
                     "packageName": "@mapbox/batfish/modules/md",
                     "rehypePlugins": undefined,
@@ -440,15 +440,15 @@ Object {
                 ],
                 [Function],
                 [Function],
-                "transform-react-jsx-source",
-                "transform-react-jsx-self",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-react-jsx-source/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-react-jsx-self/lib/index.js",
               ],
               "presets": Array [
                 Array [
-                  "env",
+                  "<PROJECT_ROOT>/node_modules/babel-preset-env/lib/index.js",
                   undefined,
                 ],
-                "react",
+                "<PROJECT_ROOT>/node_modules/babel-preset-react/lib/index.js",
                 [Function],
                 [Function],
               ],
@@ -494,10 +494,10 @@ Object {
               "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
               "compact": true,
               "plugins": Array [
-                "syntax-dynamic-import",
-                "transform-class-properties",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-class-properties/lib/index.js",
                 Array [
-                  "@mapbox/babel-plugin-transform-jsxtreme-markdown",
+                  "<PROJECT_ROOT>/node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
                   Object {
                     "packageName": "@mapbox/batfish/modules/md",
                     "rehypePlugins": undefined,
@@ -509,15 +509,15 @@ Object {
                 ],
                 [Function],
                 [Function],
-                "transform-react-jsx-source",
-                "transform-react-jsx-self",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-react-jsx-source/lib/index.js",
+                "<PROJECT_ROOT>/node_modules/babel-plugin-transform-react-jsx-self/lib/index.js",
               ],
               "presets": Array [
                 Array [
-                  "env",
+                  "<PROJECT_ROOT>/node_modules/babel-preset-env/lib/index.js",
                   undefined,
                 ],
-                "react",
+                "<PROJECT_ROOT>/node_modules/babel-preset-react/lib/index.js",
                 [Function],
                 [Function],
               ],

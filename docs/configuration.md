@@ -212,7 +212,7 @@ But most of the time, this will help you use browser-only libraries without brea
 Type: `Array`.
 
 Additional plugins to pass to Babel during both Webpack builds (client bundling and HTML generating).
-**You should `require()` your plugins instead of referencing them as strings.**
+**You should `require()` or `require.resolve()` your plugins instead of referencing them as strings.**
 Otherwise, Babel might end up looking in the wrong place for the npm package.
 
 Plugins you provide are concatenated to the following default plugins:
