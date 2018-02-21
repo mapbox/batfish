@@ -37,15 +37,18 @@ function createWebpackConfigBase(
     jsxtremeMarkdownOptions.prependJs = prependJs;
 
     const babelPresets = [
-      ['env', batfishConfig.babelPresetEnvOptions],
-      'react'
+      [
+        require.resolve('babel-preset-env'),
+        batfishConfig.babelPresetEnvOptions
+      ],
+      require.resolve('babel-preset-react')
     ].concat(batfishConfig.babelPresets || []);
 
     const babelPlugins = [
-      'syntax-dynamic-import',
-      'transform-class-properties',
+      require.resolve('babel-plugin-syntax-dynamic-import'),
+      require.resolve('babel-plugin-transform-class-properties'),
       [
-        '@mapbox/babel-plugin-transform-jsxtreme-markdown',
+        require.resolve('@mapbox/babel-plugin-transform-jsxtreme-markdown'),
         {
           packageName: '@mapbox/batfish/modules/md',
           remarkPlugins: jsxtremeMarkdownOptions.remarkPlugins,
@@ -56,8 +59,12 @@ function createWebpackConfigBase(
     if (batfishConfig.production) {
       babelPlugins.push('transform-react-remove-prop-types');
     } else {
-      babelPlugins.push('transform-react-jsx-source');
-      babelPlugins.push('transform-react-jsx-self');
+      babelPlugins.push(
+        require.resolve('babel-plugin-transform-react-jsx-source')
+      );
+      babelPlugins.push(
+        require.resolve('babel-plugin-transform-react-jsx-self')
+      );
     }
 
     const fileLoaderTest = new RegExp(
