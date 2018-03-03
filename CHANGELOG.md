@@ -2,6 +2,7 @@
 
 ## Head
 
+- Remove json-loader, which Webpack no longer needs to import JSON.
 - Fix bug that could cause builds with unnamed dynamic imports to fail with a cryptic error about a hash-based filename that is too long.
 
 ## 1.0.4
