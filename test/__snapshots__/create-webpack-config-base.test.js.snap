@@ -95,10 +95,6 @@ Object {
         "test": /\\\\\\.\\(jpeg\\|jpg\\|png\\|gif\\|webp\\|mp4\\|webm\\|woff\\|woff2\\)\\$/,
       },
       Object {
-        "test": /\\\\\\.json\\$/,
-        "use": "json-loader",
-      },
-      Object {
         "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\\\\\.css\\$/,
         "use": Array [
           Object {
@@ -275,10 +271,6 @@ Object {
           "name": "[name]-[hash].[ext]",
         },
         "test": /\\\\\\.\\(jpeg\\|jpg\\|png\\|gif\\|webp\\|mp4\\|webm\\|woff\\|woff2\\)\\$/,
-      },
-      Object {
-        "test": /\\\\\\.json\\$/,
-        "use": "json-loader",
       },
       Object {
         "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\\\\\.css\\$/,
@@ -479,10 +471,6 @@ Object {
           "name": "[name].[ext]",
         },
         "test": /\\\\\\.\\(txt\\|config\\)\\$/,
-      },
-      Object {
-        "test": /\\\\\\.json\\$/,
-        "use": "json-loader",
       },
       Object {
         "test": /<PROJECT_ROOT>\\\\/test\\\\/fixtures\\\\/get-pages-data\\.\\*\\\\\\.css\\$/,

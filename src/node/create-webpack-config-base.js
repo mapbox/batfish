@@ -132,11 +132,6 @@ function createWebpackConfigBase(
             ? '[name]-[hash].[ext]'
             : '[name].[ext]'
         }
-      },
-      // JSON!
-      {
-        test: /\.json$/,
-        use: 'json-loader'
       }
     ];
     if (batfishConfig.pageSpecificCss) {
