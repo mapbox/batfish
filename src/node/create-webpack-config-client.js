@@ -87,21 +87,19 @@ function createWebpackConfigClient(
       new webpack.HashedModuleIdsPlugin(),
       new webpack.NamedChunksPlugin(chunk => {
         if (chunk.name) return chunk.name;
-        return chunk.modules
-          .map(module => {
-            const hashSeed = path.relative(
-              batfishConfig.pagesDirectory,
-              module.resource
-            );
-            const requestHash = crypto
-              .createHash('md5')
-              .update(hashSeed)
-              .digest('hex');
-            return requestHash;
+        const hashSeed = chunk.modules
+          .map(m => m.resource || '')
+          .sort()
+          .map(resource => {
+            return path.relative(batfishConfig.pagesDirectory, resource);
           })
           .join('_');
-      }),
-      // Define an environment variable for special cases
+        const chunkHash = crypto
+          .createHash('md5')
+          .update(hashSeed)
+          .digest('hex');
+        return chunkHash;
+      }), // Define an environment variable for special cases
       new webpack.DefinePlugin({
         'process.env.DEV_SERVER': (options && options.devServer) || false
       })

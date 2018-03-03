@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Fix bug that could cause builds with unnamed dynamic imports to fail with a cryptic error about a hash-based filename that is too long.
+
 ## 1.0.4
 
 - Fix bug causing build to fail if you used `npm link` (or `yarn link`), with a message about failing to find Babel plugins.
@@ -106,10 +110,10 @@
 - **[Breaking change]** `with-location` now provides the original component at WrappedComponent instead of WrapperComponent.
 - **[Breaking change]** change `data-no-hijack` attribute name to `data-batfish-no-hijack`.
   Also, this attribute now blocks link hijacking on the element itself *and all its children*.
-- **[Breaking change]** (maybe, maybe not) Links with fragment URLs (e.g. `href="#foo"`) are not hijacked, just left to their default behavior.  
-- [Add] Much improved logging!  
-- [Add] Much improved configuration validation!  
-- [Add] Much improved error handling!  
+- **[Breaking change]** (maybe, maybe not) Links with fragment URLs (e.g. `href="#foo"`) are not hijacked, just left to their default behavior.
+- [Add] Much improved logging!
+- [Add] Much improved configuration validation!
+- [Add] Much improved error handling!
 - [Add] `hijackLinks` configuration option, defaulting to `true`.
 - [Add] Improve `prefixUrl` to work with already-prefixed URLs and absolute URLs.
 - [Add] Add `unprocessedPageFiles` option.
