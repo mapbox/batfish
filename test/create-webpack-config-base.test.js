@@ -102,6 +102,7 @@ describe('createWebpackConfigBase', () => {
       siteBasePath: '/site/base/path/',
       verbose: true,
       babelExclude: /node_modules\/nothing/,
+      babelInclude: ['p-queue', { include: '/foo', exclude: '/foo/bar' }],
       webpackLoaders: [
         {
           test: /\.jpg$/,

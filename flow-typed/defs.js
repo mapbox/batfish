@@ -29,6 +29,7 @@ declare type BatfishConfiguration = {
   babelPresets: Array<string>,
   babelPresetEnvOptions?: Object,
   babelExclude: webpack$Condition,
+  babelInclude: Array<string | webpack$Condition>,
   postcssPlugins?: Array<Function>,
   fileLoaderExtensions: Array<string>,
   jsxtremeMarkdownOptions: {
