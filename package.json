@@ -17,7 +17,7 @@
     "lint-js": "eslint .",
     "format": "prettier --single-quote --write '{,src*/**/,bin/**/,test/**/,flow-typed/}*.js'",
     "test-jest": "jest",
-    "lint-md-partial": "remark -u remark-preset-davidtheclark --frail --quiet --no-stdout --output --",
+    "lint-md-partial": "remark -u remark-preset-davidtheclark -u remark-lint-no-undefined-references --frail --quiet --no-stdout --output --",
     "lint-md": "npm run lint-md-partial -- docs/*.md *.md",
     "lint-flow": "flow check",
     "lint": "run-p --aggregate-output lint-js lint-md lint-flow",
@@ -176,7 +176,7 @@
     "react-helmet": "^5.2.0",
     "react-test-renderer": "^16.2.0",
     "remark-cli": "^5.0.0",
-    "remark-preset-davidtheclark": "^0.6.0",
+    "remark-preset-davidtheclark": "^0.7.0",
     "remark-validate-links": "^7.0.0",
     "strip-ansi": "^4.0.0"
   },

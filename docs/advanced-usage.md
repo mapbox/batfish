@@ -183,3 +183,7 @@ export default class SomePage extends React.Component {
 [`pagesdirectory`]: ./configuration.md#pagesdirectory
 
 [`postcssplugins`]: ./configuration.md#postcssplugins
+
+[`production`]: ./configuration.md#production
+
+[`dataselectors`]: ./configuration.md#dataselectors
