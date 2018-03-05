@@ -15,7 +15,7 @@ Object {
             "loader": "babel-loader",
             "options": Object {
               "babelrc": false,
-              "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
+              "cacheDirectory": true,
               "compact": true,
               "plugins": "mock-babe-plugins",
               "presets": "mock-babel-presets",
@@ -30,7 +30,7 @@ Object {
             "loader": "babel-loader",
             "options": Object {
               "babelrc": false,
-              "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
+              "cacheDirectory": true,
               "compact": true,
               "plugins": "mock-babe-plugins",
               "presets": "mock-babel-presets",
@@ -63,7 +63,7 @@ Object {
             "loader": "babel-loader",
             "options": Object {
               "babelrc": false,
-              "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
+              "cacheDirectory": true,
               "compact": true,
               "plugins": "mock-babe-plugins",
               "presets": "mock-babel-presets",
@@ -262,7 +262,7 @@ Object {
             "loader": "babel-loader",
             "options": Object {
               "babelrc": false,
-              "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
+              "cacheDirectory": true,
               "compact": true,
               "plugins": "mock-babe-plugins",
               "presets": "mock-babel-presets",
@@ -277,7 +277,7 @@ Object {
             "loader": "babel-loader",
             "options": Object {
               "babelrc": false,
-              "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
+              "cacheDirectory": true,
               "compact": true,
               "plugins": "mock-babe-plugins",
               "presets": "mock-babel-presets",
@@ -316,7 +316,7 @@ Object {
             "loader": "babel-loader",
             "options": Object {
               "babelrc": false,
-              "cacheDirectory": "<PROJECT_ROOT>/babel-cache",
+              "cacheDirectory": true,
               "compact": true,
               "plugins": "mock-babe-plugins",
               "presets": "mock-babel-presets",

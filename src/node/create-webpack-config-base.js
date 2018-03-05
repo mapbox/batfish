@@ -48,9 +48,7 @@ function createWebpackConfigBase(
     const babelLoaderConfig = {
       loader: 'babel-loader',
       options: {
-        cacheDirectory: !batfishConfig.production
-          ? path.join(__dirname, '../../babel-cache')
-          : false,
+        cacheDirectory: !batfishConfig.production,
         presets: babelConfig.presets,
         plugins: babelConfig.plugins,
         babelrc: false,
