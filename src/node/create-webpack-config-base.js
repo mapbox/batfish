@@ -56,6 +56,31 @@ function createWebpackConfigBase(
       }
     };
 
+    // Create a `resource` to determine what gets compiled by Babel.
+    // See https://webpack.js.org/configuration/module/#condition.
+    const babelOrConditions = [
+      { include: /@mapbox\/batfish\/(?!\/node_modules).*/ }
+    ];
+    if (batfishConfig.babelInclude) {
+      batfishConfig.babelInclude.forEach(condition => {
+        if (typeof condition === 'string' && !path.isAbsolute(condition)) {
+          babelOrConditions.push({
+            include: new RegExp(`${condition}(?!/node_modules).*`)
+          });
+        } else {
+          // Any condition other than a node_module name should be a
+          // direct Webpack condition.
+          babelOrConditions.push({ include: condition });
+        }
+      });
+    }
+    const babelResource = {
+      or: [
+        { test: /\.jsx?$/, exclude: batfishConfig.babelExclude },
+        { and: [{ test: /\.jsx?$/ }, { or: babelOrConditions }] }
+      ]
+    };
+
     const aliases = {};
     aliases['batfish-internal/context'] = batfishContextPath;
     aliases['batfish-internal/application-wrapper'] =
@@ -74,8 +99,7 @@ function createWebpackConfigBase(
 
     let moduleRules = [
       {
-        test: /\.jsx?$/,
-        exclude: batfishConfig.babelExclude,
+        resource: babelResource,
         use: [babelLoaderConfig]
       },
       {

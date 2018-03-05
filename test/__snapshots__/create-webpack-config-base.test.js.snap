@@ -8,8 +8,28 @@ Object {
   "module": Object {
     "rules": Array [
       Object {
-        "exclude": /node_modules\\\\/!\\(@mapbox\\\\/batfish\\\\/\\)/,
-        "test": /\\\\\\.jsx\\?\\$/,
+        "resource": Object {
+          "or": Array [
+            Object {
+              "exclude": /\\[\\\\/\\\\\\\\\\\\\\\\\\]node_modules\\[\\\\/\\\\\\\\\\\\\\\\\\]/,
+              "test": /\\\\\\.jsx\\?\\$/,
+            },
+            Object {
+              "and": Array [
+                Object {
+                  "test": /\\\\\\.jsx\\?\\$/,
+                },
+                Object {
+                  "or": Array [
+                    Object {
+                      "include": /@mapbox\\\\/batfish\\\\/\\(\\?!\\\\/node_modules\\)\\.\\*/,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
         "use": Array [
           Object {
             "loader": "babel-loader",
@@ -131,8 +151,28 @@ Object {
   "module": Object {
     "rules": Array [
       Object {
-        "exclude": /node_modules\\\\/!\\(@mapbox\\\\/batfish\\\\/\\)/,
-        "test": /\\\\\\.jsx\\?\\$/,
+        "resource": Object {
+          "or": Array [
+            Object {
+              "exclude": /\\[\\\\/\\\\\\\\\\\\\\\\\\]node_modules\\[\\\\/\\\\\\\\\\\\\\\\\\]/,
+              "test": /\\\\\\.jsx\\?\\$/,
+            },
+            Object {
+              "and": Array [
+                Object {
+                  "test": /\\\\\\.jsx\\?\\$/,
+                },
+                Object {
+                  "or": Array [
+                    Object {
+                      "include": /@mapbox\\\\/batfish\\\\/\\(\\?!\\\\/node_modules\\)\\.\\*/,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
         "use": Array [
           Object {
             "loader": "babel-loader",
@@ -255,8 +295,37 @@ Object {
   "module": Object {
     "rules": Array [
       Object {
-        "exclude": /node_modules\\\\/nothing/,
-        "test": /\\\\\\.jsx\\?\\$/,
+        "resource": Object {
+          "or": Array [
+            Object {
+              "exclude": /node_modules\\\\/nothing/,
+              "test": /\\\\\\.jsx\\?\\$/,
+            },
+            Object {
+              "and": Array [
+                Object {
+                  "test": /\\\\\\.jsx\\?\\$/,
+                },
+                Object {
+                  "or": Array [
+                    Object {
+                      "include": /@mapbox\\\\/batfish\\\\/\\(\\?!\\\\/node_modules\\)\\.\\*/,
+                    },
+                    Object {
+                      "include": /p-queue\\(\\?!\\\\/node_modules\\)\\.\\*/,
+                    },
+                    Object {
+                      "include": Object {
+                        "exclude": "/foo/bar",
+                        "include": "/foo",
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
         "use": Array [
           Object {
             "loader": "babel-loader",

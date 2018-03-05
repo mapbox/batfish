@@ -97,6 +97,9 @@ const configSchema = {
   babelExclude: {
     validator: () => true
   },
+  babelInclude: {
+    validator: _.isArray
+  },
   postcssPlugins: {
     validator: x => _.isFunction(x) || isArrayOf(_.isFunction)(x),
     description: 'function or array of functions'
@@ -203,7 +206,9 @@ function validateConfig(
     babelPlugins: [],
     babelPresets: [],
     hijackLinks: true,
-    babelExclude: /node_modules\/!(@mapbox\/batfish\/)/,
+    // cf. https://github.com/facebook/create-react-app/pull/3741/files#r162787793
+    babelExclude: /[/\\\\]node_modules[/\\\\]/,
+    babelInclude: [],
     siteBasePath: '',
     browserslist: ['> 5%', 'last 2 versions'],
     fileLoaderExtensions: [

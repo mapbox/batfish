@@ -41,6 +41,7 @@ You can specify an alternate location.
   - [babelPresets](#babelpresets)
   - [babelPresetEnvOptions](#babelpresetenvoptions)
   - [babelExclude](#babelexclude)
+  - [babelInclude](#babelinclude)
   - [postcssPlugins](#postcssplugins)
   - [fileLoaderExtensions](#fileloaderextensions)
   - [jsxtremeMarkdownOptions](#jsxtrememarkdownoptions)
@@ -266,11 +267,55 @@ Use this option to further customize your build by passing any of the other many
 ### babelExclude
 
 Type: [Webpack `Condition`].
-Default: `/node_modules\/!(@mapbox\/batfish\/)/`.
+Default: `/[/\\\\]node_modules[/\\\\]/`. (A nasty regular expression that excludes all nested `node_modules`.)
 
-Any valid [Webpack `Condition`] will work here.
+By default, all packages installed by npm are excluded from Babel compilation (see [`babelExclude`]).
+If you'd like to change that (e.g. to exclude more files), provide a valid [Webpack `Condition`].
 
-You'll need to use this if, for example, you use a library that includes ES2015 but is not compiled for publication (e.g. any of the [promise-fun](https://github.com/sindresorhus/promise-fun) modules).
+Make sure your condition somehow excludes the majority of `node_modules` from compilation, or your builds could slow down dramatically.
+
+### babelInclude
+
+Type: `Array<string | Condition>`.
+Default: `[]`.
+
+By default, all packages installed by npm are excluded from Babel compilation (see [`babelExclude`]).
+If, however, you use a library that includes ES2015+ but does not get compiled for publication (e.g. any of the [promise-fun](https://github.com/sindresorhus/promise-fun) modules), then you'll need to pass that module through Babel.
+That's what this option is for.
+
+The easiest way to include an npm package in your compilation is to pass its name as a string.
+
+But if you have more complex needs, any valid [Webpack `Condition`] will work here.
+All conditions will be combined with `test: /\.jsx$/` so only `.js` or `.jsx` files are compiled.
+
+Some examples:
+
+To compile `p-queue`:
+
+```js
+[`p-queue`]
+```
+
+To compile both `p-queue` and `@mapbox/mapbox-gl-style-spec` *except for* its `dist/` directory and any nested `node_modules`:
+
+```js
+[
+  'p-queue',
+  {
+    include: path.resolve(__dirname, 'node_modules/@mapbox/mapbox-gl-style-spec'),
+    exclude: [
+      path.resolve(
+        __dirname,
+        'node_modules/@mapbox/mapbox-gl-style-spec/dist'
+      ),
+      path.resolve(
+        __dirname,
+        'node_modules/@mapbox/mapbox-gl-style-spec/node_modules'
+      )
+    ]
+  }
+]
+```
 
 ### postcssPlugins
 
@@ -430,6 +475,8 @@ If `true`, more information will be logged to the console.
 [`pagesdirectory`]: #pagesdirectory
 
 [`stylesheets`]: #stylesheets
+
+[`babelexclude`]: #babelexclude
 
 [`jsxtrememarkdownoptions`]: #jsxtrememarkdownoptions
 
