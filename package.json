@@ -17,7 +17,7 @@
     "lint-js": "eslint .",
     "format": "prettier --single-quote --write '{,src*/**/,bin/**/,test/**/,flow-typed/}*.js'",
     "test-jest": "jest",
-    "lint-md-partial": "remark -u remark-preset-davidtheclark -u remark-lint-no-undefined-references --frail --quiet --no-stdout --output --",
+    "lint-md-partial": "remark -u remark-preset-davidtheclark --frail --quiet --no-stdout --output --",
     "lint-md": "npm run lint-md-partial -- docs/*.md *.md",
     "lint-flow": "flow check",
     "lint": "run-p --aggregate-output lint-js lint-md lint-flow",
