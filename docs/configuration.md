@@ -159,7 +159,7 @@ The object received as an argument contains the following properties:
   Each page object includes the following:
   - `path`: The page's URL path.
   - `filePath`: Absolute path to the page's file.
-  - `frontMatter`: Parsed front matter from the page's file.  
+  - `frontMatter`: Parsed front matter from the page's file.
 
 The return values of `dataSelectors` *must be stringifiable as JSON*.
 These values can be used in your components pages by `import`ing modules from `@mapbox/batfish/data/*`.
@@ -415,6 +415,8 @@ If `true`, more information will be logged to the console.
 
 [`stylesheets`]: #stylesheets
 
+[`jsxtrememarkdownoptions`]: #jsxtrememarkdownoptions
+
 ["injecting data"]: ./advanced-usage.md#injecting-data
 
 [`jsxtrememarkdown.tocomponentmodule`]: https://github.com/mapbox/jsxtreme-markdown#tocomponentmodule
@@ -433,4 +435,4 @@ If `true`, more information will be logged to the console.
 
 ["non-page files within the pages directory"]: ../README.md#non-page-files-within-the-pages-directory
 
-[webpack's raw loader]: https://github.com/webpack-contrib/raw-loader
+[webpack's raw-loader]: https://github.com/webpack-contrib/raw-loader
