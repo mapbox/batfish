@@ -103,5 +103,5 @@ declare module 'batfish-internal/context' {
 }
 
 declare module 'batfish-internal/application-wrapper' {
-  declare export default React.Element<*>
+  declare export default React.Element<*>;
 }

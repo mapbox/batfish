@@ -177,5 +177,5 @@ declare module 'react-helmet' {
     rewind(): Instance;
   }
 
-  declare export default Helmet
+  declare export default Helmet;
 }
