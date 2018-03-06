@@ -2,6 +2,7 @@
 
 ## Head
 
+- **Add:** `batfish write-bablerc` command (`batfish.writeBabelrc` in Node API), which writes a `.babelrc` file that you can use to tell other process, like a test runner, how to interpret your source files.
 - **Chore:** Remove json-loader, which Webpack no longer needs to import JSON.
 - **Fix:** Fix bug that could cause builds with unnamed dynamic imports to fail with a cryptic error about a hash-based filename that is too long.
 
