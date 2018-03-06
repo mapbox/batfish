@@ -6,13 +6,16 @@ const _ = require('lodash');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const createWebpackConfigBase = require('./create-webpack-config-base');
+const constants = require('./constants');
 
 // Create a Webpack configuration that compiles static-render-pages.js,
 // a Node module that will build HTML pages.
 function createWebpackConfigStatic(
   batfishConfig: BatfishConfiguration
 ): Promise<webpack$Configuration> {
-  return createWebpackConfigBase(batfishConfig).then(baseConfig => {
+  return createWebpackConfigBase(batfishConfig, {
+    target: constants.TARGET_NODE
+  }).then(baseConfig => {
     const staticConfig: webpack$Configuration = {
       entry: {
         static: path.join(__dirname, '../webpack/static-render-pages.js')

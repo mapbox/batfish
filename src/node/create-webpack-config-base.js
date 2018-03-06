@@ -9,13 +9,15 @@ const writeContextModule = require('./write-context-module');
 const joinUrlParts = require('./join-url-parts');
 const constants = require('./constants');
 const getPostcssPlugins = require('./get-postcss-plugins');
+const createBabelConfig = require('./create-babel-config');
 
 // Cache it to ensure we don't do unnecessary work within one process.
 let cachedConfig;
 
 // Create the base Webpack configuration, shared by both client and static builds.
 function createWebpackConfigBase(
-  batfishConfig: BatfishConfiguration
+  batfishConfig: BatfishConfiguration,
+  options: { target?: 'browser' | 'node' } = {}
 ): Promise<webpack$Configuration> {
   if (cachedConfig) return Promise.resolve(cachedConfig);
   const isExample = path
@@ -23,7 +25,6 @@ function createWebpackConfigBase(
     .startsWith(path.join(__dirname, '../../examples'));
 
   return writeContextModule(batfishConfig).then(batfishContextPath => {
-    // Plugins
     const jsxtremeMarkdownOptions = _.clone(
       batfishConfig.jsxtremeMarkdownOptions
     );
@@ -36,50 +37,22 @@ function createWebpackConfigBase(
     );
     jsxtremeMarkdownOptions.prependJs = prependJs;
 
-    const babelPresets = [
-      [
-        require.resolve('babel-preset-env'),
-        batfishConfig.babelPresetEnvOptions
-      ],
-      require.resolve('babel-preset-react')
-    ].concat(batfishConfig.babelPresets || []);
-
-    const babelPlugins = [
-      require.resolve('babel-plugin-syntax-dynamic-import'),
-      require.resolve('babel-plugin-transform-class-properties'),
-      [
-        require.resolve('@mapbox/babel-plugin-transform-jsxtreme-markdown'),
-        {
-          packageName: '@mapbox/batfish/modules/md',
-          remarkPlugins: jsxtremeMarkdownOptions.remarkPlugins,
-          rehypePlugins: jsxtremeMarkdownOptions.rehypePlugins
-        }
-      ]
-    ].concat(batfishConfig.babelPlugins || []);
-    if (batfishConfig.production) {
-      babelPlugins.push('transform-react-remove-prop-types');
-    } else {
-      babelPlugins.push(
-        require.resolve('babel-plugin-transform-react-jsx-source')
-      );
-      babelPlugins.push(
-        require.resolve('babel-plugin-transform-react-jsx-self')
-      );
-    }
-
     const fileLoaderTest = new RegExp(
       `\\.(${batfishConfig.fileLoaderExtensions.join('|')})$`
     );
 
     // Configs
+    const babelConfig = createBabelConfig(batfishConfig, {
+      target: options.target
+    });
     const babelLoaderConfig = {
       loader: 'babel-loader',
       options: {
         cacheDirectory: !batfishConfig.production
           ? path.join(__dirname, '../../babel-cache')
           : false,
-        presets: babelPresets,
-        plugins: babelPlugins,
+        presets: babelConfig.presets,
+        plugins: babelConfig.plugins,
         babelrc: false,
         compact: true
       }

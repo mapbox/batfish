@@ -209,11 +209,19 @@ But most of the time, this will help you use browser-only libraries without brea
 
 ### babelPlugins
 
-Type: `Array`.
+Type: `Array<string>`. Default: `[]`.
 
 Additional plugins to pass to Babel during both Webpack builds (client bundling and HTML generating).
-**You should `require()` or `require.resolve()` your plugins instead of referencing them as strings.**
+**You should `require.resolve()` your plugins.**
 Otherwise, Babel might end up looking in the wrong place for the npm package.
+
+*(The prior recommendation to `require` plugins is deprecated. Instead of `require`ing plugins you should `require.resolve` them.)*
+
+For example:
+
+```js
+{ babelPlugins: [require.resolve('babel-plugin-transform-fancy-syntax')] }
+```
 
 Plugins you provide are concatenated to the following default plugins:
 
@@ -229,11 +237,19 @@ Plugins you provide are concatenated to the following default plugins:
 
 ### babelPresets
 
-Type: `Array`.
+Type: `Array<string>`. Default: `[]`.
 
 Additional presets to pass to Babel during both Webpack builds (client bundling and HTML generating).
-**You should `require()` your presets instead of referencing them as strings.**
+**You should `require.resolve()` your presets.**
 Otherwise, Babel might end up looking in the wrong place for the npm package.
+
+*(The prior recommendation to `require` presets is deprecated. Instead of `require`ing presets you should `require.resolve` them.)*
+
+For example:
+
+```js
+{ babelPresets: [require.resolve('babel-preset-magic')] }
+```
 
 The two presets [babel-preset-react] and [babel-preset-env] are automatically applied.
 You can pass options to [babel-preset-env] with the option [`babelPresetEnvOptions`].

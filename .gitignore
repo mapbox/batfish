@@ -9,3 +9,4 @@ coverage
 modules
 dist
 flow-coverage
+examples/**/.babelrc

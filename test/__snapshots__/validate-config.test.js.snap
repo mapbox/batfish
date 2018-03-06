@@ -4,6 +4,8 @@ exports[`validateConfig defaults 1`] = `
 Object {
   "applicationWrapperPath": "<PROJECT_ROOT>/src/webpack/empty-application-wrapper.js",
   "babelExclude": /node_modules\\\\/!\\(@mapbox\\\\/batfish\\\\/\\)/,
+  "babelPlugins": Array [],
+  "babelPresets": Array [],
   "browserslist": Array [
     "> 5%",
     "last 2 versions",

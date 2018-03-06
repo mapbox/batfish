@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createBabelConfig with Batfish config that affects Babel 1`] = `
+Array [
+  Array [
+    "./../node_modules/babel-preset-env/lib/index.js",
+    Object {},
+  ],
+  "./../node_modules/babel-preset-react/lib/index.js",
+  "./a/b",
+  "./c",
+]
+`;
+
+exports[`createBabelConfig with Batfish config that affects Babel 2`] = `
+Array [
+  "./../node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
+  "./../node_modules/babel-plugin-transform-class-properties/lib/index.js",
+  Array [
+    "./../node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
+    Object {
+      "packageName": "@mapbox/batfish/modules/md",
+      "rehypePlugins": Array [
+        "rehype-plugin-a",
+        "rehype-plugin-b",
+      ],
+      "remarkPlugins": Array [
+        "remark-plugin-a",
+      ],
+    },
+  ],
+  "./foo/bar",
+  "./baz",
+  "./../node_modules/babel-plugin-transform-react-jsx-source/lib/index.js",
+  "./../node_modules/babel-plugin-transform-react-jsx-self/lib/index.js",
+]
+`;
+
+exports[`createBabelConfig with Node target 1`] = `
+Array [
+  Array [
+    "./../node_modules/babel-preset-env/lib/index.js",
+    Object {
+      "targets": Object {
+        "node": "current",
+      },
+      "useBuiltIns": true,
+    },
+  ],
+  "./../node_modules/babel-preset-react/lib/index.js",
+]
+`;
+
+exports[`createBabelConfig with defaults 1`] = `
+Array [
+  Array [
+    "./../node_modules/babel-preset-env/lib/index.js",
+    Object {},
+  ],
+  "./../node_modules/babel-preset-react/lib/index.js",
+]
+`;
+
+exports[`createBabelConfig with defaults 2`] = `
+Array [
+  "./../node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
+  "./../node_modules/babel-plugin-transform-class-properties/lib/index.js",
+  Array [
+    "./../node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
+    Object {
+      "packageName": "@mapbox/batfish/modules/md",
+      "rehypePlugins": undefined,
+      "remarkPlugins": undefined,
+    },
+  ],
+  "./../node_modules/babel-plugin-transform-react-jsx-source/lib/index.js",
+  "./../node_modules/babel-plugin-transform-react-jsx-self/lib/index.js",
+]
+`;
