@@ -59,7 +59,7 @@ function createWebpackConfigBase(
     // Create a `resource` to determine what gets compiled by Babel.
     // See https://webpack.js.org/configuration/module/#condition.
     const babelOrConditions = [
-      { include: /@mapbox\/batfish\/(?!\/node_modules).*/ }
+      { include: /@mapbox(\\|\/)batfish(\\|\/)(?!(\\|\/)node_modules).*/ }
     ];
     if (batfishConfig.babelInclude) {
       batfishConfig.babelInclude.forEach(condition => {

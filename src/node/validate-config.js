@@ -207,7 +207,7 @@ function validateConfig(
     babelPresets: [],
     hijackLinks: true,
     // cf. https://github.com/facebook/create-react-app/pull/3741/files#r162787793
-    babelExclude: /[/\\\\]node_modules[/\\\\]/,
+    babelExclude: /(\\|\/)node_modules(\\|\/)/,
     babelInclude: [],
     siteBasePath: '',
     browserslist: ['> 5%', 'last 2 versions'],

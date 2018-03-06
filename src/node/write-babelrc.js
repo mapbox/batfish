@@ -41,9 +41,9 @@ function writeBabelrc(
     p: string | [string, ?Object]
   ): string | [string, ?Object] => {
     if (!Array.isArray(p)) {
-      return `./${path.relative(outputDirectory, p)}`;
+      return path.relative(outputDirectory, p);
     }
-    return [`./${path.relative(outputDirectory, p[0])}`, p[1]];
+    return [path.relative(outputDirectory, p[0]), p[1]];
   };
 
   const relativizedBabelConfig = {

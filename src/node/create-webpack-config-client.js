@@ -16,7 +16,7 @@ const constants = require('./constants');
 // file.
 function resolveModuleDirectoryFrom(src: string, name: string): string {
   return resolveFrom(src, name).replace(
-    /node_modules\/([^/]+).*$/,
+    /node_modules(\\|\/)([^/\\]+).*$/,
     'node_modules/$1'
   );
 }

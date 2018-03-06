@@ -18,10 +18,9 @@ function writePageModule(
   pageData: BatfishPageData
 ): Promise<string> {
   return pTry(() => {
-    const pageFileName =
-      pageData.path === '/'
-        ? '_.js'
-        : pageData.path.slice(0, -1).replace(/\//g, '_') + '.js';
+    const pageFileName = /^(\\|\/)$/.test(pageData.path)
+      ? '_.js'
+      : pageData.path.slice(0, -1).replace(/(\\|\/)/g, '_') + '.js';
     const filePath = path.join(batfishConfig.temporaryDirectory, pageFileName);
 
     const pageFrontMatter = pageData.frontMatter;
