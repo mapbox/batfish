@@ -8,5 +8,7 @@ module.exports = Object.freeze({
   DATA_DIRECTORY: 'data',
   EVENT_ERROR: 'error',
   EVENT_NOTIFICATION: 'notification',
-  EVENT_DONE: 'done'
+  EVENT_DONE: 'done',
+  TARGET_NODE: 'node',
+  TARGET_BROWSER: 'browser'
 });

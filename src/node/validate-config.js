@@ -81,14 +81,12 @@ const configSchema = {
     validator: () => true
   },
   babelPlugins: {
-    validator: isArrayOf(_.isFunction),
-    description:
-      'array of functions (require your plugins, do not reference them with a string)'
+    validator: isArrayOf(isBabelSetting),
+    description: 'array of absolute paths (require.resolve your plugins)'
   },
   babelPresets: {
-    validator: isArrayOf(_.isFunction),
-    description:
-      'array of functions (require your presets, do not reference them with a string)'
+    validator: isArrayOf(isBabelSetting),
+    description: 'array of absolute paths (require.resolve your presets)'
   },
   babelPresetEnvOptions: {
     validator: _.isPlainObject,
@@ -202,6 +200,8 @@ function validateConfig(
       '../webpack/empty-application-wrapper.js'
     ),
     stylesheets: [],
+    babelPlugins: [],
+    babelPresets: [],
     hijackLinks: true,
     babelExclude: /node_modules\/!(@mapbox\/batfish\/)/,
     siteBasePath: '',
@@ -359,4 +359,8 @@ function isAbsolutePathToExistingFile(value: *): boolean {
 
 function isAbsolutePathToExistingDirectory(value: *): boolean {
   return isAbsolutePath(value) && isExistingDirectory(value);
+}
+
+function isBabelSetting(value: *): boolean {
+  return isAbsolutePath(value) || _.isFunction(value);
 }

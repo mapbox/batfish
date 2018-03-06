@@ -9,6 +9,7 @@ const batfishLog = require('../dist/node/batfish-log');
 const start = require('../dist/node/start');
 const build = require('../dist/node/build');
 const serveStatic = require('../dist/node/serve-static');
+const writeBabelrc = require('../dist/node/write-babelrc');
 const getLoggableErrorMessage = require('../dist/node/get-loggable-error-message');
 const renderPrettyErrorStack = require('../dist/node/render-pretty-error-stack');
 const constants = require('../dist/node/constants');
@@ -16,7 +17,8 @@ const constants = require('../dist/node/constants');
 const commands = {
   start,
   build,
-  'serve-static': serveStatic
+  'serve-static': serveStatic,
+  'write-babelrc': writeBabelrc
 };
 
 const description = `Build websites with batfish.`;
@@ -31,6 +33,8 @@ ${chalk.bold('Commands')}
   start            Start a development server.
   build            Build the static site.
   serve-static     Serve the static site.
+  write-babelrc    Write a .babelrc file that other processes,
+                   like your test runner, can use.
 
 ${chalk.bold('Shared options')}
   -c, --config     Path to your configuration module.
@@ -49,10 +53,16 @@ ${chalk.bold(`${chalk.magenta('build')} options`)}
 ${chalk.bold(`${chalk.magenta('serve-static')} options`)}
   -p, --port       Server port. Default: 8080.
 
+${chalk.bold(`${chalk.magenta('write-babelrc')} options`)}
+  --target         "node" or "browser". Default: "node".
+  --dir            Directory where .babelrc should be written.
+                   Default: same directory as Batfish config.
+
 ${chalk.bold('Examples')}
   batfish start
   batfish build --production
   batfish serve-static -p 9966 -c conf/bf.js
+  batfish write-babelrc
 `;
 
 const cli = meow({
@@ -68,12 +78,18 @@ const cli = meow({
       alias: 'V'
     },
     port: {
-      type: 'number',
+      type: 'string',
       alias: 'p'
     },
     debug: {
       type: 'boolean',
       alias: 'd'
+    },
+    target: {
+      type: 'string'
+    },
+    dir: {
+      type: 'string'
     }
   }
 });
@@ -139,19 +155,32 @@ if (cli.flags.clear === false) {
   config.clearOutputDirectory = false;
 }
 
-const executeCommand = commands[command];
-const emitter = executeCommand(config, path.dirname(configPath));
-emitter.on(constants.EVENT_NOTIFICATION, message => {
-  batfishLog.log(message);
-});
-emitter.on(constants.EVENT_ERROR, error => {
-  const niceMessage = getLoggableErrorMessage(error);
-  if (niceMessage) {
-    batfishLog.error(niceMessage);
-  } else {
-    batfishLog.error(renderPrettyErrorStack(error));
+const projectDirectory = path.dirname(configPath);
+
+(() => {
+  if (command === 'write-babelrc') {
+    writeBabelrc(config, {
+      projectDirectory,
+      outputDirectory: cli.flags.dir,
+      target: cli.flags.target
+    });
+    return;
   }
-  if (command !== 'start') {
-    process.exit(1);
-  }
-});
+
+  const executeCommand = commands[command];
+  const emitter = executeCommand(config, projectDirectory);
+  emitter.on(constants.EVENT_NOTIFICATION, message => {
+    batfishLog.log(message);
+  });
+  emitter.on(constants.EVENT_ERROR, error => {
+    const niceMessage = getLoggableErrorMessage(error);
+    if (niceMessage) {
+      batfishLog.error(niceMessage);
+    } else {
+      batfishLog.error(renderPrettyErrorStack(error));
+    }
+    if (command !== 'start') {
+      process.exit(1);
+    }
+  });
+})();

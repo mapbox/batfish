@@ -31,7 +31,9 @@ describe('createWebpackConfigStatic', () => {
     const batfishConfig = createBatfishConfig();
     return createWebpackConfigStatic(batfishConfig).then(webpackConfig => {
       expect(createWebpackConfigBase).toHaveBeenCalledTimes(1);
-      expect(createWebpackConfigBase).toHaveBeenCalledWith(batfishConfig);
+      expect(createWebpackConfigBase).toHaveBeenCalledWith(batfishConfig, {
+        target: 'node'
+      });
       expect(webpackConfig.createdWebpackConfigBase).toBe(true);
     });
   });

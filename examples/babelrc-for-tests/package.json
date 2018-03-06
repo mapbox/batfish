@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "scripts": {
+    "batfish": "../../bin/example-batfish",
+    "test": "npm run batfish -- write-babelrc && jest"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-plugin-transform-function-composition": "^1.0.0",
+    "jest": "^22.4.2"
+  }
+}

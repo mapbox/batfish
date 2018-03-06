@@ -106,11 +106,12 @@ See [`docs/configuration.md`](docs/configuration.md) to learn about all the ways
 
 ### CLI
 
-The CLI has three commands:
+The CLI has the following commands:
 
 - `start`: Start a development server and watch files for changes, rebuilding and refreshing as needed.
 - `build`: Build the static site.
 - `serve-static`: Serve the static site.
+- `write-babelrc`: Write a `.babelrc` file that other processes, like your test runner, can use.
 
 All commands will look for your configuration module in the current working directory or where you point with the `--config` option.
 
@@ -205,10 +206,10 @@ export default class BlogPostWrapper extends React.PureComponent {
     const { frontMatter } = this.props;
     return (
       <MyPageShell>
-        <h1>{frontMatter.title}</h1>        
+        <h1>{frontMatter.title}</h1>
         <p>
           <strong>Summary:</strong> {frontMatter.summary}
-        </p>        
+        </p>
         <p>
           Posted on {frontMatter.date}
         </p>

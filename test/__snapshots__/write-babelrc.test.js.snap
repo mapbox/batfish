@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`writeBabelrc relativizes absolute paths in .babelrc content 1`] = `
+"{
+  \\"presets\\": [
+    \\"./preset/foo\\",
+    [
+      \\"./preset/bar/baz\\",
+      {
+        \\"one\\": 1
+      }
+    ]
+  ],
+  \\"plugins\\": [
+    \\"./plugins/foo\\",
+    [
+      \\"./plugins/bar/baz\\",
+      {
+        \\"one\\": 1
+      }
+    ]
+  ]
+}"
+`;
+
+exports[`writeBabelrc relativizes absolute paths in .babelrc content if options.outputDirectory is set 1`] = `
+"{
+  \\"presets\\": [
+    \\"./eggs/preset/foo\\",
+    [
+      \\"./eggs/preset/bar/baz\\",
+      {
+        \\"one\\": 1
+      }
+    ]
+  ],
+  \\"plugins\\": [
+    \\"./eggs/plugins/foo\\",
+    [
+      \\"./eggs/plugins/bar/baz\\",
+      {
+        \\"one\\": 1
+      }
+    ]
+  ]
+}"
+`;
+
+exports[`writeBabelrc relativizes absolute paths in .babelrc content if options.projectDirectory is set 1`] = `
+"{
+  \\"presets\\": [
+    \\"./eggs/preset/foo\\",
+    [
+      \\"./eggs/preset/bar/baz\\",
+      {
+        \\"one\\": 1
+      }
+    ]
+  ],
+  \\"plugins\\": [
+    \\"./eggs/plugins/foo\\",
+    [
+      \\"./eggs/plugins/bar/baz\\",
+      {
+        \\"one\\": 1
+      }
+    ]
+  ]
+}"
+`;

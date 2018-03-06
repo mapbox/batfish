@@ -10,6 +10,7 @@ const AssetsPlugin = require('assets-webpack-plugin');
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
 const resolveFrom = require('resolve-from');
 const createWebpackConfigBase = require('./create-webpack-config-base');
+const constants = require('./constants');
 
 // We need the directory for the module instead of the filename to its main
 // file.
@@ -39,7 +40,9 @@ function createWebpackConfigClient(
     batfishConfig.pagesDirectory,
     'react-helmet'
   );
-  return createWebpackConfigBase(batfishConfig).then(baseConfig => {
+  return createWebpackConfigBase(batfishConfig, {
+    target: constants.TARGET_BROWSER
+  }).then(baseConfig => {
     let vendorModules = [
       reactPath,
       reactDomPath,

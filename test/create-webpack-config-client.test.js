@@ -35,7 +35,9 @@ describe('createWebpackConfigClient', () => {
     const batfishConfig = createBatfishConfig();
     return createWebpackConfigClient(batfishConfig).then(webpackConfig => {
       expect(createWebpackConfigBase).toHaveBeenCalledTimes(1);
-      expect(createWebpackConfigBase).toHaveBeenCalledWith(batfishConfig);
+      expect(createWebpackConfigBase).toHaveBeenCalledWith(batfishConfig, {
+        target: 'browser'
+      });
       expect(webpackConfig.createdWebpackConfigBase).toBe(true);
     });
   });

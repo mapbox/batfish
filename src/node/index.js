@@ -15,9 +15,18 @@ type BatfishServeStatic = (
   rawConfig?: Object,
   projectDirectory?: string
 ) => events$EventEmitter;
+type BatfishWriteBabelrc = (
+  rawConfig?: Object,
+  options?: {
+    projectDirectory?: string,
+    outputDirectory?: string,
+    target?: 'browser' | 'node'
+  }
+) => string;
 
 module.exports = {
   start: (require('./start'): BatfishStart),
   build: (require('./build'): BatfishBuild),
-  serveStatic: (require('./serve-static'): BatfishServeStatic)
+  serveStatic: (require('./serve-static'): BatfishServeStatic),
+  writeBabelrc: (require('./write-babelrc'): BatfishWriteBabelrc)
 };

@@ -3,12 +3,20 @@
 const _ = require('lodash');
 const path = require('path');
 const createWebpackConfigBase = require('../src/node/create-webpack-config-base');
+const createBabelConfig = require('../src/node/create-babel-config');
 const writeContextModule = require('../src/node/write-context-module');
 const validateConfig = require('../src/node/validate-config');
 const projectRootSerializer = require('./test-util/project-root-serializer');
 
 jest.mock('../src/node/write-context-module', () => {
   return jest.fn(() => Promise.resolve('fake/batfish-context.js'));
+});
+
+jest.mock('../src/node/create-babel-config', () => {
+  return jest.fn(() => ({
+    presets: 'mock-babel-presets',
+    plugins: 'mock-babe-plugins'
+  }));
 });
 
 // Mock mkdirp so validateConfig does not create a temporary directory.
@@ -57,6 +65,17 @@ describe('createWebpackConfigBase', () => {
         _.get(webpackConfig, ['resolve', 'alias', 'batfish-internal/context'])
       ).toBe('fake/batfish-context.js');
     });
+  });
+
+  test('changes Babel config for targeting node', () => {
+    const batfishConfig = createBatfishConfig();
+    return createWebpackConfigBase(batfishConfig, { target: 'node' }).then(
+      () => {
+        expect(createBabelConfig).toHaveBeenCalledWith(batfishConfig, {
+          target: 'node'
+        });
+      }
+    );
   });
 
   test('with all Batfish config options that make a difference', () => {
