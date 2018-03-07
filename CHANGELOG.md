@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.0 (WIP)
+## 1.1.0
 
 - **Add:** `-i, --include` option to `batfish start` command, and corresponding `includePages` configuration option, which allows you to speed up your development build by only building the specified pages.
 - **Add:** `batfish write-bablerc` command (`batfish.writeBabelrc` in Node API), which writes a `.babelrc` file that you can use to tell other process, like a test runner, how to interpret your source files.
