@@ -43,6 +43,8 @@ ${chalk.bold('Shared options')}
 
 ${chalk.bold(`${chalk.magenta('start')} options`)}
   -p, --port       Server port. Default: 8080.
+  -i, --include    Build only the specified page(s). Value
+                   is a glob relative to the root of your site.
   --production     Build as though for production.
   --no-clear       Do not clear the destination directory.
 
@@ -59,10 +61,19 @@ ${chalk.bold(`${chalk.magenta('write-babelrc')} options`)}
                    Default: same directory as Batfish config.
 
 ${chalk.bold('Examples')}
-  batfish start
-  batfish build --production
-  batfish serve-static -p 9966 -c conf/bf.js
-  batfish write-babelrc
+  No options are required for any command.
+    ${chalk.cyan('batfish start')}
+    ${chalk.cyan('batfish build')}
+    ${chalk.cyan('batfish serve-static')}
+    ${chalk.cyan('batfish write-babelrc')}
+  Build with your Batfish config in a special place.
+    ${chalk.cyan('batfish build -c conf/bf.js')}
+  Start with an alternate port.
+    ${chalk.cyan('batfish start -p 9966')}
+  Start but only build the /about pages.
+    ${chalk.cyan('batfish start -i about/**')}
+  Start but only build the /about/history page.
+    ${chalk.cyan('batfish start --include about/history')}
 `;
 
 const cli = meow({
@@ -90,6 +101,10 @@ const cli = meow({
     },
     dir: {
       type: 'string'
+    },
+    include: {
+      type: 'string',
+      alias: 'i'
     }
   }
 });
@@ -150,6 +165,9 @@ if (cli.flags.port) {
 }
 if (cli.flags.verbose) {
   config.verbose = cli.flags.verbose;
+}
+if (command === 'start' && cli.flags.include) {
+  config.includePages = [].concat(cli.flags.include);
 }
 if (cli.flags.clear === false) {
   config.clearOutputDirectory = false;

@@ -68,7 +68,7 @@ Here are the basic steps:
 
 1. Create a [configuration] module.
 2. Create some [pages] as React components and/or Markdown documents.
-3. Start the development server and work on your pages.
+3. Start the development server with the Batfish CLI, then work on your pages.
 4. At some point, build your static site and deploy it.
 
 The ["Hello world guide"] can help you get started.
@@ -115,12 +115,15 @@ The CLI has the following commands:
 
 All commands will look for your configuration module in the current working directory or where you point with the `--config` option.
 
-For more details, run `batfish --help`.
+For more details, run `batfish --help` or see [`docs/cli.md`](docs/cli.md).
 
 **You should not install the Batfish CLI globally.**
 Install Batfish as an npm dependency and use the CLI via npm `"scripts"`, npx, or `node_modules/.bin/batfish`.
 
 ### Node API
+
+Usually you should use the Batfish CLI.
+But for those special cases when you want absolute control within a Node process, all the CLI's functionality is available in a Node API.
 
 See [`docs/node-api.md`](docs/node-api.md).
 

@@ -12,6 +12,7 @@ const isAbsoluteUrl = require('is-absolute-url');
 const pathType = require('path-type');
 const autoprefixer = require('autoprefixer');
 const errorTypes = require('./error-types');
+const joinUrlParts = require('./join-url-parts');
 
 // !!!
 // Whenever you add a new configuration property,
@@ -169,6 +170,10 @@ const configSchema = {
   verbose: {
     validator: _.isBoolean,
     description: 'boolean'
+  },
+  includePages: {
+    validator: isArrayOf(_.isString),
+    description: 'globs relative to the pagesDirectory, not absolute paths'
   }
 };
 
@@ -313,6 +318,25 @@ function validateConfig(
     if (config.siteBasePath[0] !== '/') {
       config.siteBasePath = '/' + config.siteBasePath;
     }
+  }
+
+  if (config.includePages) {
+    config.includePages = config.includePages
+      .map(p => {
+        // Ensure all includePages paths start with / or the siteBasePath.
+        if (config.siteBasePath && !p.startsWith(config.siteBasePath)) {
+          return joinUrlParts(config.siteBasePath, p);
+        }
+        if (p[0] === '/') return p;
+        return `/${p}`;
+      })
+      .map(p => {
+        // Ensure all includePages paths that do not end in wildcards
+        // or extensions end with /
+        if (path.extname(p)) return p;
+        if (/\*$/.test(p)) return p;
+        return `${p}/`;
+      });
   }
 
   mkdirp.sync(config.temporaryDirectory);

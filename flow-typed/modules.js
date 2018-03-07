@@ -57,9 +57,14 @@ declare module 'indefinite' {
   declare module.exports: string => string;
 }
 
-declare module 'minimatch' {
+declare module 'micromatch' {
   declare module.exports: {
-    (string, string, options?: Object): boolean
+    (
+      string | Array<string>,
+      string | Array<string>,
+      options?: Object
+    ): Array<string>,
+    any(string, string | Array<string>): boolean
   };
 }
 

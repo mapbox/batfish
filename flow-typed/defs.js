@@ -44,6 +44,7 @@ declare type BatfishConfiguration = {
   productionDevtool: string | false,
   clearOutputDirectory: boolean,
   unprocessedPageFiles?: Array<string>,
+  includePages?: Array<string>,
   ignoreWithinPagesDirectory?: Array<string>,
   webpackConfigClientTransform?: webpack$Configuration => webpack$Configuration,
   webpackConfigStaticTransform?: webpack$Configuration => webpack$Configuration,

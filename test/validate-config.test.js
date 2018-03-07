@@ -246,4 +246,31 @@ describe('validateConfig', () => {
       );
     }
   });
+
+  test('includePages globs ares normalized to match URL paths', () => {
+    const validated = validateConfig(
+      {
+        siteBasePath: '/basepath',
+        includePages: [
+          'foo',
+          '/bar',
+          'foo/bar/**',
+          'foo/**/baz/*',
+          'foo/baz',
+          'foo/ba*',
+          '/basepath/foo/bar'
+        ]
+      },
+      projectDirectory
+    );
+    expect(validated.includePages).toEqual([
+      '/basepath/foo/',
+      '/basepath/bar/',
+      '/basepath/foo/bar/**',
+      '/basepath/foo/**/baz/*',
+      '/basepath/foo/baz/',
+      '/basepath/foo/ba*',
+      '/basepath/foo/bar/'
+    ]);
+  });
 });

@@ -52,6 +52,7 @@ You can specify an alternate location.
   - [productionDevtool](#productiondevtool)
   - [clearOutputDirectory](#clearoutputdirectory)
   - [unprocessedPageFiles](#unprocessedpagefiles)
+  - [includePages](#includepages)
   - [ignoreWithinPagesDirectory](#ignorewithinpagesdirectory)
   - [webpackConfigClientTransform](#webpackconfigclienttransform)
   - [webpackConfigStaticTransform](#webpackconfigstatictransform)
@@ -418,6 +419,19 @@ By default, all `.js` and `.md` files within the [`pagesDirectory`] are processe
 If you would like instead to copy `.js` or `.md` files as static files, without creating corresponding HTML files, use this option.
 
 For example, if you have a `scripts/` directory and all the `.js` files within it are *not* pages, but are static JavaScript files that you want to expose at `/scripts/*.js` URLs, you could set `unprocessedPageFiles` to `['scripts/**/*.js']`.
+
+### includePages
+
+Type: `Array<string>`.
+
+An array of globs indicating the pages of your site that you want to build.
+
+You can use this option during development to speed up your builds by only building the specified pages.
+Fewer files will be fed into Webpack, which means the build will go faster.
+
+This is the option that `batfish start --include` manipulates; typically, you'll interface with this option that way, instead of setting it directly in your configuration.
+
+**You should only use this option during development.**
 
 ### ignoreWithinPagesDirectory
 
