@@ -4,7 +4,6 @@
 
 - **Add:** `-i, --include` option to `batfish start` command, and corresponding `includePages` configuration option, which allows you to speed up your development build by only building the specified pages.
 - **Add:** `batfish write-bablerc` command (`batfish.writeBabelrc` in Node API), which writes a `.babelrc` file that you can use to tell other process, like a test runner, how to interpret your source files.
-- **Chore:** Remove json-loader, which Webpack no longer needs to import JSON.
 - **Add:** Add `babelInclude` option.
 - **Fix:** Fix bug that could cause builds with unnamed dynamic imports to fail with a cryptic error about a hash-based filename that is too long.
 - **Fix:** Actually exclude `node_modules` from Babel compilation, as intended and documented.
