@@ -145,4 +145,65 @@ describe('writeContextModule', () => {
       expect(result).toMatchSnapshot();
     });
   });
+
+  describe('includePages, set by --include flag, reduces routes included in config module', () => {
+    beforeEach(() => {
+      getPagesData.mockReturnValue(
+        Promise.resolve({
+          '/one/': {
+            filePath: 'fake/pages/directory/one.js',
+            path: '/one/',
+            frontMatter: {}
+          },
+          '/two/': {
+            filePath: 'fake/pages/directory/two.md',
+            path: '/two/',
+            frontMatter: {}
+          },
+          '/three/four/': {
+            filePath: 'fake/pages/directory/three/four/index.js',
+            path: '/three/four/',
+            frontMatter: {
+              title: 'Another page',
+              horseNames: ['gerald', 'rose']
+            }
+          },
+          '/three/four/five/': {
+            filePath: 'fake/pages/directory/three/four/five.js',
+            path: '/three/four/five/',
+            frontMatter: {}
+          },
+          '/404/': {
+            filePath: 'fake/pages/directory/404.js',
+            path: '/404/',
+            frontMatter: {}
+          }
+        })
+      );
+    });
+
+    test('with a whitelisted directory', () => {
+      return createAndReadContextModule({
+        includePages: ['/three/**']
+      }).then(result => {
+        expect(result).toMatch('path: "/three/four/"');
+        expect(result).toMatch('path: "/three/four/five/"');
+        expect(result).not.toMatch('path: "/one/"');
+        expect(result).not.toMatch('path: "/two/"');
+        expect(result).not.toMatch('path: "/404/"');
+      });
+    });
+
+    test('with a whitelisted file', () => {
+      return createAndReadContextModule({
+        includePages: ['/two/']
+      }).then(result => {
+        expect(result).toMatch('path: "/two/"');
+        expect(result).not.toMatch('path: "/three/four/"');
+        expect(result).not.toMatch('path: "/three/four/five/"');
+        expect(result).not.toMatch('path: "/one/"');
+        expect(result).not.toMatch('path: "/404/"');
+      });
+    });
+  });
 });

@@ -47,6 +47,10 @@
     "{docs/*.md,README.md,CHANGELOG.md}": [
       "npm run lint-md-partial",
       "git add"
+    ],
+    "bin/batfish.js": [
+      "bin/write-cli-doc.js",
+      "git add docs/cli.md"
     ]
   },
   "prettier": {
@@ -118,7 +122,7 @@
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.5",
     "meow": "^4.0.0",
-    "minimatch": "^3.0.4",
+    "micromatch": "^3.1.9",
     "mkdirp": "^0.5.1",
     "p-try": "^1.0.0",
     "pify": "^3.0.0",

@@ -7,6 +7,7 @@ const path = require('path');
 const pify = require('pify');
 const slugg = require('slugg');
 const prettier = require('prettier');
+const micromatch = require('micromatch');
 const getPagesData = require('./get-pages-data');
 const writePageModule = require('./write-page-module');
 const writeDataModules = require('./write-data-modules');
@@ -55,6 +56,12 @@ function writeContextModule(
       index: number
     ): Promise<void> => {
       const pageData = pagesData[pagePath];
+
+      const pageWhitelist = batfishConfig.includePages;
+      if (pageWhitelist && !micromatch.any(pageData.path, pageWhitelist)) {
+        return Promise.resolve();
+      }
+
       return writePageModule(batfishConfig, pageData).then(
         pageModuleFilePath => {
           const is404 =
@@ -75,6 +82,7 @@ function writeContextModule(
           if (is404) {
             notFoundStringifiedRouteData = stringifiedRouteData;
           }
+          // Maintain order to avoid unnecessary cache busting.
           stringifiedRoutes[index] = stringifiedRouteData;
         }
       );
@@ -92,7 +100,9 @@ function writeContextModule(
         );
       })
       .then(() => {
-        const stringifiedRoutesArray = `[${stringifiedRoutes.join(',')}]`;
+        const stringifiedRoutesArray = `[${_.compact(stringifiedRoutes).join(
+          ','
+        )}]`;
         // Webpack fills it with ansi colors so it's hard
         // to read in the devtools console. Strip those colors.
         const content = `

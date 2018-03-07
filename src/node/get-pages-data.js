@@ -1,14 +1,16 @@
 // @flow
 'use strict';
 
+const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
 const pify = require('pify');
 const pTry = require('p-try');
 const globby = require('globby');
-const minimatch = require('minimatch');
+const micromatch = require('micromatch');
 const grayMatter = require('gray-matter');
 const joinUrlParts = require('./join-url-parts');
+const constants = require('./constants');
 
 // Get data about pages. Reads the pagesDirectory, figures out URL paths, parses
 // front matter.
@@ -19,20 +21,10 @@ function getPagesData(
   batfishConfig: BatfishConfiguration
 ): Promise<{ [string]: BatfishPageData }> {
   return pTry(() => {
-    const pagesGlob = [path.join(batfishConfig.pagesDirectory, '**/*.{js,md}')];
     const base = batfishConfig.siteBasePath;
-
-    const isUnprocessed = (filePath: string): boolean => {
-      if (batfishConfig.unprocessedPageFiles === undefined) {
-        return false;
-      }
-      return batfishConfig.unprocessedPageFiles.some(pattern => {
-        return minimatch(
-          filePath,
-          path.join(batfishConfig.pagesDirectory, pattern)
-        );
-      });
-    };
+    const pagesGlob = [
+      path.join(batfishConfig.pagesDirectory, `**/*.${constants.PAGE_EXT_GLOB}`)
+    ];
 
     // Convert a page's file path to its URL path.
     const pageFilePathToUrlPath = (filePath: string): string => {
@@ -52,9 +44,6 @@ function getPagesData(
 
     let pagesData = {};
     const registerPage = (filePath: string): Promise<void> => {
-      if (isUnprocessed(filePath)) {
-        return Promise.resolve();
-      }
       return pify(fs.readFile)(filePath, 'utf8').then((content: string) => {
         const isMarkdown = path.extname(filePath) === '.md';
         const grayMatterOptions = isMarkdown
@@ -75,6 +64,18 @@ function getPagesData(
     };
 
     return globby(pagesGlob)
+      .then(pageFilePaths => {
+        // Filter out any unprocessedPageFiles
+        if (batfishConfig.unprocessedPageFiles) {
+          const unprocessed = micromatch(
+            pageFilePaths,
+            batfishConfig.unprocessedPageFiles
+          );
+          return _.difference(pageFilePaths, unprocessed);
+        } else {
+          return pageFilePaths;
+        }
+      })
       .then(pageFilePaths => Promise.all(pageFilePaths.map(registerPage)))
       .then(() => pagesData);
   });

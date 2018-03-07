@@ -4,6 +4,7 @@
 const path = require('path');
 const chokidar = require('chokidar');
 const writeContextModule = require('./write-context-module');
+const constants = require('./constants');
 
 // Rebuild the context module when there are changes that would require that.
 function watchContext(
@@ -13,7 +14,10 @@ function watchContext(
     afterCompilation: () => any
   }
 ) {
-  const pageGlob = path.join(batfishConfig.pagesDirectory, './**/*.{js,md}');
+  const pageGlob = path.join(
+    batfishConfig.pagesDirectory,
+    `./**/*.${constants.PAGE_EXT_GLOB}`
+  );
   const pageWatcher = chokidar.watch(pageGlob);
   const rebuildPages = () => {
     writeContextModule(batfishConfig)
