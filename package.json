@@ -48,7 +48,7 @@
       "npm run lint-md-partial",
       "git add"
     ],
-    "bin/batfish.js": [
+    "{bin/batfish.js,bin/write-cli-doc.js}": [
       "bin/write-cli-doc.js",
       "git add docs/cli.md"
     ]
