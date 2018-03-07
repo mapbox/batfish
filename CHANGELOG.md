@@ -6,8 +6,11 @@
 - **Add:** `batfish write-bablerc` command (`batfish.writeBabelrc` in Node API), which writes a `.babelrc` file that you can use to tell other process, like a test runner, how to interpret your source files.
 - **Chore:** Remove json-loader, which Webpack no longer needs to import JSON.
 - **Add:** Add `babelInclude` option.
-- **Fix:** Tweak default `babelExclude` value to ensure it excludes nested `node_modules` directories.
 - **Fix:** Fix bug that could cause builds with unnamed dynamic imports to fail with a cryptic error about a hash-based filename that is too long.
+- **Fix:** `node_modules` were not being excluded from Babel compilation as intended.
+  **Warning:** this fix makes the functionality fit the documentation intention, but if you were accidentally relying on a `node_module` being accidentally compiled, this could break your build.
+  You'll want to use the new `babelInclude` option to indicate those `node_modules` that need to be compiled.
+- **Fix:** Tweak default `babelExclude` value to ensure it excludes nested `node_modules` directories.
 - **Chore:** Remove json-loader, which Webpack no longer needs to import JSON.
 - **Chore:** Allow babel-loader to use its default cache location (`node_modules/.cache/babel-loader`).
 
