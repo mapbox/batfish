@@ -27,6 +27,7 @@ Object {
   "hijackLinks": true,
   "includePromisePolyfill": true,
   "jsxtremeMarkdownOptions": Object {},
+  "manageScrollRestoration": true,
   "outputDirectory": "/my-project/_batfish_site",
   "pageSpecificCss": true,
   "pagesDirectory": "/my-project/src/pages",

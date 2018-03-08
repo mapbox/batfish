@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- **Add:** Add `manageScrollRestoration` option.
+
 ## 1.1.0
 
 - **Add:** `-i, --include` option to `batfish start` command, and corresponding `includePages` configuration option, which allows you to speed up your development build by only building the specified pages.

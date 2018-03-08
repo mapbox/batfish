@@ -46,7 +46,8 @@ jest.mock(
         selectedConfig: {
           siteBasePath: 'mockSiteBasePath',
           siteOrigin: 'mockSiteOrigin',
-          hijackLinks: true
+          hijackLinks: true,
+          manageScrollRestoration: true
         }
       }
     };
@@ -174,7 +175,7 @@ describe('Router', () => {
       wrapper.instance().routeTo
     );
   });
-  //
+
   test('on mount, adds a popstate listener that changes pages', () => {
     mount(
       React.createElement(Router, {

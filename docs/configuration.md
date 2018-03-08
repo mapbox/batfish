@@ -34,6 +34,7 @@ You can specify an alternate location.
   - [dataSelectors](#dataselectors)
   - [vendorModules](#vendormodules)
   - [hijackLinks](#hijacklinks)
+  - [manageScrollRestoration](#managescrollrestoration)
   - [webpackLoaders](#webpackloaders)
   - [webpackPlugins](#webpackplugins)
   - [webpackStaticIgnore](#webpackstaticignore)
@@ -179,11 +180,24 @@ The purpose of the vendor bundle is to deliberately group dependencies that chan
 Type: `boolean`.
 Default `true`.
 
+**Set this option to `true` if you are using your own client-side router, or otherwise do not need multiple Batfish pages.**
+
 By default, links are hijacked (with [link-hijacker]) and checked against your site's routes.
 If the link targets one of your routes, it will make a client-side change, instead of functioning as a regular link (with a regular page load).
 You can prevent this behavior by adding `data-batfish-no-hijack` to the link itself or to any of its descendents.
 
-If you want to disable this link-hijacking altogether, handling it all yourself, you can set this option to `false`.
+If you want to disable this link-hijacking altogether, handling it yourself, you can set this option to `false`.
+
+### manageScrollRestoration
+
+Type: `boolean`.
+Default `true`.
+
+**Set this option to `true` if you are using your own client-side router, or otherwise do not need multiple Batfish pages.**
+
+By default, restoration of scroll state during client-side browser navigation is managed by Batfish (with [scroll-restorer]).
+
+If you want to disable Batfish's scroll restoration altogether, handling it yourself or ignoring it, you can set this option to `false`.
 
 ### webpackLoaders
 
@@ -513,3 +527,5 @@ If `true`, more information will be logged to the console.
 ["non-page files within the pages directory"]: ../README.md#non-page-files-within-the-pages-directory
 
 [webpack's raw-loader]: https://github.com/webpack-contrib/raw-loader
+
+[scroll-restorer]: https://github.com/mapbox/scroll-restorer

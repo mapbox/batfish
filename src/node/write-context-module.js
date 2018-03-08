@@ -110,7 +110,10 @@ function writeContextModule(
             selectedConfig: {
               siteBasePath: '${String(batfishConfig.siteBasePath)}',
               siteOrigin: '${String(batfishConfig.siteOrigin)}',
-              hijackLinks: ${String(batfishConfig.hijackLinks)}
+              hijackLinks: ${String(batfishConfig.hijackLinks)},
+              manageScrollRestoration: ${String(
+                batfishConfig.manageScrollRestoration
+              )}
             },
             routes: ${stringifiedRoutesArray},
             notFoundRoute: ${notFoundStringifiedRouteData}
