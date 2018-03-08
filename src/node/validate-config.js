@@ -67,6 +67,10 @@ const configSchema = {
     validator: _.isBoolean,
     description: 'boolean'
   },
+  manageScrollRestoration: {
+    validator: _.isBoolean,
+    description: 'boolean'
+  },
   webpackLoaders: {
     validator: isArrayOf(_.isPlainObject),
     description: 'array of Webpack Rule objects'
@@ -211,6 +215,7 @@ function validateConfig(
     babelPlugins: [],
     babelPresets: [],
     hijackLinks: true,
+    manageScrollRestoration: true,
     // cf. https://github.com/facebook/create-react-app/pull/3741/files#r162787793
     babelExclude: /[/\\\\]node_modules[/\\\\]/,
     babelInclude: [],

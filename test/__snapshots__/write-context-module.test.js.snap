@@ -5,7 +5,8 @@ exports[`writeContextModule with 404 and some config variation 1`] = `
   selectedConfig: {
     siteBasePath: \\"/different/base/path\\",
     siteOrigin: \\"\\",
-    hijackLinks: false
+    hijackLinks: false,
+    manageScrollRestoration: undefined
   },
   routes: [
     {
@@ -46,7 +47,8 @@ exports[`writeContextModule without 404 1`] = `
   selectedConfig: {
     siteBasePath: \\"/fake/site/base/path\\",
     siteOrigin: \\"https://www.fake-origin.com\\",
-    hijackLinks: true
+    hijackLinks: true,
+    manageScrollRestoration: undefined
   },
   routes: [
     {

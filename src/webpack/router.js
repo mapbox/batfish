@@ -14,13 +14,17 @@ import { getWindow } from './get-window';
 import { changePage } from './change-page';
 import { getCurrentLocation } from './get-current-location';
 
+const {
+  siteBasePath,
+  siteOrigin,
+  manageScrollRestoration,
+  hijackLinks
+} = batfishContext.selectedConfig;
+
 // See explanation for this weirdness in prefix-url.js.
 // This happens outside the component lifecycle so it can be used during
 // rendering of HTML.
-prefixUrl._configure(
-  batfishContext.selectedConfig.siteBasePath,
-  batfishContext.selectedConfig.siteOrigin
-);
+prefixUrl._configure(siteBasePath, siteOrigin);
 
 type Props = {
   startingPath: string,
@@ -59,10 +63,12 @@ class Router extends React.PureComponent<Props, RouterState> {
   }
 
   componentDidMount() {
-    scrollRestorer.start({ autoRestore: false });
+    if (manageScrollRestoration) {
+      scrollRestorer.start({ autoRestore: false });
+    }
 
     const win = getWindow();
-    if (!win.location.hash) {
+    if (!win.location.hash && manageScrollRestoration) {
       scrollRestorer.restoreScroll();
     } else {
       scrollToFragment();
@@ -81,7 +87,7 @@ class Router extends React.PureComponent<Props, RouterState> {
       );
     });
 
-    if (batfishContext.selectedConfig.hijackLinks) {
+    if (hijackLinks) {
       linkHijacker.hijack(
         {
           skipFilter: link =>

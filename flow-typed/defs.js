@@ -22,6 +22,7 @@ declare type BatfishConfiguration = {
   dataSelectors?: { [string]: (BatfishSiteData) => JsonValue },
   vendorModules?: Array<string>,
   hijackLinks: boolean,
+  manageScrollRestoration: boolean,
   webpackLoaders?: Array<webpack$Rule>,
   webpackPlugins?: Array<Object>,
   webpackStaticIgnore?: webpack$Condition,
@@ -82,7 +83,8 @@ declare type BatfishContext = {
   selectedConfig: {
     siteBasePath: string,
     siteOrigin: string,
-    hijackLinks: boolean
+    hijackLinks: boolean,
+    manageScrollRestoration: boolean
   },
   routes: Array<BatfishRouteData>,
   notFoundRoute: BatfishRouteData
