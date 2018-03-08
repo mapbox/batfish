@@ -2,6 +2,7 @@
 
 ## Head
 
+- **Add:** Include `babel-plugin-transform-object-rest-spread` by default.
 - **Add:** Add `manageScrollRestoration` option.
 
 ## 1.1.0

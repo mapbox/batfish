@@ -244,6 +244,7 @@ Plugins you provide are concatenated to the following default plugins:
 - Always
   - [babel-plugin-syntax-dynamic-import](https://babeljs.io/docs/plugins/syntax-dynamic-import/)
   - [babel-plugin-transform-class-properties](https://babeljs.io/docs/plugins/transform-class-properties/)
+  - [babel-plugin-transform-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/)
   - [@mapbox/babel-plugin-transform-jsxtreme-markdown](https://github.com/mapbox/jsxtreme-markdown/tree/master/packages/babel-plugin-transform-jsxtreme-markdown): See [`jsxtremeMarkdownOptions`].
 - Development only
   - [babel-plugin-transform-react-jsx-source](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-jsx-source)

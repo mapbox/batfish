@@ -16,6 +16,7 @@ exports[`createBabelConfig with Batfish config that affects Babel 2`] = `
 Array [
   "./../node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
   "./../node_modules/babel-plugin-transform-class-properties/lib/index.js",
+  "./../node_modules/babel-plugin-transform-object-rest-spread/lib/index.js",
   Array [
     "./../node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
     Object {
@@ -65,6 +66,7 @@ exports[`createBabelConfig with defaults 2`] = `
 Array [
   "./../node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
   "./../node_modules/babel-plugin-transform-class-properties/lib/index.js",
+  "./../node_modules/babel-plugin-transform-object-rest-spread/lib/index.js",
   Array [
     "./../node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
     Object {
