@@ -390,8 +390,8 @@ For the static build, they will be injected directly into the `<head>`.
 
 Each item is an object with the following properties:
 
-Type: -   **filename** `string` path to the JS file.
-Type: -   **uglify** `boolean`: `true`. Whether or not to process the file with [UglifyJs] before inserting into the `<head>` during the static build.
+- **filename** (`string`): Path to the JS file.
+- **uglify** (`boolean`, default `true`): Whether or not to process the file with [UglifyJs] before inserting into the `<head>` during the static build.
 
 ### production
 
