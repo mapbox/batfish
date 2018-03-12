@@ -4,6 +4,8 @@
 
 - **Add:** Include `babel-plugin-transform-object-rest-spread` by default.
 - **Add:** Add `manageScrollRestoration` option.
+- **Add:** Add **experimental** `spa` option.
+  This option might suffer breaking changes on any release until it's no longer "experimental".
 
 ## 1.1.0
 

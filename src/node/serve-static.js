@@ -3,10 +3,11 @@
 
 const EventEmitter = require('events');
 const validateConfig = require('./validate-config');
+const getPagesData = require('./get-pages-data');
 const serverInitMessage = require('./server-init-message');
 const constants = require('./constants');
 const createServer = require('./create-server');
-const staticServerMiddlewares = require('./static-server-middlewares');
+const staticServerMiddleware = require('./static-server-middleware');
 
 function serveStatic(
   rawConfig?: Object,
@@ -32,27 +33,31 @@ function serveStatic(
     return emitter;
   }
 
-  const middleWares = staticServerMiddlewares.init(batfishConfig);
-  const server = createServer({
-    onError: emitError,
-    browserSyncOptions: {
-      port: batfishConfig.port,
-      server: {
-        baseDir: batfishConfig.outputDirectory,
-        middleware: [middleWares.stripSiteBasePath]
-      },
-      notify: false,
-      open: false,
-      logLevel: 'silent',
-      offline: true
-    }
-  });
-  server.browserSyncInstance.emitter.on('init', () => {
-    emitNotification(
-      serverInitMessage(server.browserSyncInstance, batfishConfig)
-    );
-  });
-  server.start();
+  getPagesData(batfishConfig)
+    .then(pagesData => {
+      const middleware = staticServerMiddleware(batfishConfig, pagesData);
+      const server = createServer({
+        onError: emitError,
+        browserSyncOptions: {
+          port: batfishConfig.port,
+          server: {
+            middleware,
+            baseDir: batfishConfig.outputDirectory
+          },
+          notify: false,
+          open: false,
+          logLevel: 'silent',
+          offline: true
+        }
+      });
+      server.browserSyncInstance.emitter.on('init', () => {
+        emitNotification(
+          serverInitMessage(server.browserSyncInstance, batfishConfig)
+        );
+      });
+      server.start();
+    })
+    .catch(emitError);
 
   return emitter;
 }
