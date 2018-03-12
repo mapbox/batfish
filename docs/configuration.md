@@ -188,7 +188,7 @@ You can prevent this behavior by adding `data-batfish-no-hijack` to the link its
 If you want to disable this link hijacking altogether, handling it yourself, you can set this option to `false`.
 
 Use this option if you are having trouble with link hijacking or simply don't want it.
-If you have a single-page app that handles routing on its own (e.g. with React Router), you should set the [`spa`] option to `true`, which turns off link hijacking in addition to other things.
+If you have a single-page app that completely handles routing on its own (e.g. with React Router), you should set the [`spa`] option to `true`, which turns off link hijacking in addition to other things.
 
 ### manageScrollRestoration
 
@@ -200,7 +200,7 @@ By default, restoration of scroll state during client-side browser navigation is
 If you want to disable Batfish's scroll restoration altogether, handling it yourself or ignoring it, you can set this option to `false`.
 
 Use this option if you are having trouble with scroll restoration or simply don't want it.
-If you have a single-page app that handles routing and scroll management on its own (e.g. with React Router), you should set the [`spa`] option to `true`, which turns off scroll restoration in addition to other things.
+If you have a single-page app that completely handles routing and scroll management on its own (e.g. with React Router), you should set the [`spa`] option to `true`, which turns off scroll restoration in addition to other things.
 
 ### spa
 

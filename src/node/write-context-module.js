@@ -73,7 +73,7 @@ function writeContextModule(
           // "eager" mode (as opposed to the default "lazy" mode) means the import
           // will not create a separate async chunk, but will be bundled up with
           // its parent.
-          const webpackMode = isSpa ? '/* webpackMode: "eager" */' : '';
+          const webpackMode = isSpa ? '/* webpackMode: "eager" */\n' : '';
           const internalRoutingProperty = pageData.frontMatter.internalRouting
             ? 'internalRouting: true,'
             : '';
@@ -82,8 +82,7 @@ function writeContextModule(
             path: '${pagePath}',
             getPage: () => import(
               /* webpackChunkName: "${chunkName}" */
-              ${webpackMode}
-              '${pageModuleFilePath}'
+              ${webpackMode}'${pageModuleFilePath}'
             ),
             ${internalRoutingProperty}
             ${is404Property}

@@ -101,6 +101,7 @@ Look at [`examples/internal-routing`](../examples/internal-routing) to see how t
 If your app includes only one page or else all the client-side routing is handled with some other client-side routing library, like [React Router] or [nanorouter], you can turn off all of Batfish's routing.
 
 To do this, set the [`spa`] configuration option to `true`.
+Read more about the effects of [`spa`] in the option's documentation.
 
 ## Markdown within JS
 
