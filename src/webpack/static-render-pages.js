@@ -44,12 +44,13 @@ function staticRenderPages(
   ];
 
   const writePage = (route: BatfishRouteData): Promise<void> => {
-    return renderHtmlPage(
+    return renderHtmlPage({
       route,
       inlineJsScripts,
       loadCssScript,
-      appendToBody
-    ).then(html => {
+      appendToBody,
+      spa: batfishConfig.spa
+    }).then(html => {
       // Write every page as an index.html file in the directory corresponding
       // to its route's path. Except the 404 page.
       if (route.is404) {

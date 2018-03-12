@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
+const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 const renderHtmlPage = require('../src/webpack/render-html-page')
   .renderHtmlPage;
@@ -83,7 +84,7 @@ describe('renderHtmlPage', () => {
 
   beforeEach(() => {
     mockPageModule = {
-      component: 'mockPageModule.component',
+      component: () => React.createElement('div', {}, 'Mock component'),
       props: 'mockPageModule.props'
     };
     mockRoute = {
@@ -93,11 +94,12 @@ describe('renderHtmlPage', () => {
   });
 
   test('gives us what we want', () => {
-    return renderHtmlPage(mockRoute, 'inline-js-scripts', 'load-css-script', [
-      'append',
-      'to',
-      'body'
-    ]).then(html => {
+    return renderHtmlPage({
+      route: mockRoute,
+      inlineJsScripts: 'inline-js-scripts',
+      loadCssScript: 'load-css-script',
+      appendToBody: ['append', 'to', 'body']
+    }).then(html => {
       expect(_.unescape(html)).toMatchSnapshot();
     });
   });
@@ -107,11 +109,12 @@ describe('renderHtmlPage', () => {
     jest.spyOn(ReactDOMServer, 'renderToString').mockImplementation(() => {
       throw expectedError;
     });
-    return renderHtmlPage(mockRoute, 'inline-js-scripts', 'load-css-script', [
-      'append',
-      'to',
-      'body'
-    ]).then(
+    return renderHtmlPage({
+      route: mockRoute,
+      inlineJsScripts: 'inline-js-scripts',
+      loadCssScript: 'load-css-script',
+      appendToBody: ['append', 'to', 'body']
+    }).then(
       () => {
         throw new Error('should have errored');
       },
@@ -129,11 +132,12 @@ describe('renderHtmlPage', () => {
       .mockImplementation(() => {
         throw expectedError;
       });
-    return renderHtmlPage(mockRoute, 'inline-js-scripts', 'load-css-script', [
-      'append',
-      'to',
-      'body'
-    ]).then(
+    return renderHtmlPage({
+      route: mockRoute,
+      inlineJsScripts: 'inline-js-scripts',
+      loadCssScript: 'load-css-script',
+      appendToBody: ['append', 'to', 'body']
+    }).then(
       () => {
         throw new Error('should have errored');
       },
@@ -142,5 +146,16 @@ describe('renderHtmlPage', () => {
         ReactDOMServer.renderToStaticMarkup.mockRestore();
       }
     );
+  });
+  test('SPA mode', () => {
+    return renderHtmlPage({
+      route: mockRoute,
+      inlineJsScripts: 'inline-js-scripts',
+      loadCssScript: 'load-css-script',
+      appendToBody: ['append', 'to', 'body'],
+      spa: true
+    }).then(html => {
+      expect(_.unescape(html)).toMatchSnapshot();
+    });
   });
 });

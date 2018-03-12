@@ -50,7 +50,8 @@ declare type BatfishConfiguration = {
   webpackConfigClientTransform?: webpack$Configuration => webpack$Configuration,
   webpackConfigStaticTransform?: webpack$Configuration => webpack$Configuration,
   port: number,
-  verbose: boolean
+  verbose: boolean,
+  spa: boolean
 };
 
 declare type InlineJsEntry = { filename: string, uglify?: boolean };

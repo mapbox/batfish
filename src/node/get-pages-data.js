@@ -11,6 +11,7 @@ const micromatch = require('micromatch');
 const grayMatter = require('gray-matter');
 const joinUrlParts = require('./join-url-parts');
 const constants = require('./constants');
+const errorTypes = require('./error-types');
 
 // Get data about pages. Reads the pagesDirectory, figures out URL paths, parses
 // front matter.
@@ -76,7 +77,14 @@ function getPagesData(
           return pageFilePaths;
         }
       })
-      .then(pageFilePaths => Promise.all(pageFilePaths.map(registerPage)))
+      .then(pageFilePaths => {
+        if (batfishConfig.spa && pageFilePaths.length > 1) {
+          throw new errorTypes.ConfigFatalError(
+            'In your Batfish config you set `spa: true`, but you have more than one page. SPA mode only allows one Batfish page.'
+          );
+        }
+        return Promise.all(pageFilePaths.map(registerPage));
+      })
       .then(() => pagesData);
   });
 }

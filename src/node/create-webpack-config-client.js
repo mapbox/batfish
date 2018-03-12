@@ -137,7 +137,14 @@ function createWebpackConfigClient(
         appEntry.push(jsData.filename);
       });
     }
-    appEntry.push(path.join(__dirname, '../webpack/batfish-app.js'));
+
+    if (batfishConfig.spa) {
+      appEntry.push(
+        path.join(__dirname, '../webpack/render-batfish-spa-app.js')
+      );
+    } else {
+      appEntry.push(path.join(__dirname, '../webpack/render-batfish-app.js'));
+    }
 
     const clientConfig: webpack$Configuration = {
       entry: {

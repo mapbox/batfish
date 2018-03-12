@@ -7,6 +7,7 @@
 - [Draft pages](#draft-pages)
 - [Injecting data](#injecting-data)
 - [Routing within a page](#routing-within-a-page)
+- [Single-page apps](#single-page-apps)
 - [Markdown within JS](#markdown-within-js)
 - [Route change listeners](#route-change-listeners)
 - [Analyzing bundles](#analyzing-bundles)
@@ -87,13 +88,20 @@ export default class MyPage extends React.PureComponent {
 
 ## Routing within a page
 
-If you'd like to use a client-side routing library *within a Batfish page*, like [React Router](https://reacttraining.com/react-router/) or [nanorouter](https://github.com/yoshuawuyts/nanorouter), add `internalRoutes: true` to the page's front matter.
+If you'd like to use a client-side routing library *within a Batfish page*, like [React Router] or [nanorouter], add `internalRouting: true` to the page's front matter.
 
 By specifying that the page has internal routes, any URLs that *start with* the page's path will be considered matches.
 If the page is `pages/animals.js`, for example, then `/animals/` will match as usual, but `/animals/tiger/` and `/animals/zebra/` will *also* match.
 The client-side router you use within the page can determine what to do with the rest of the URL.
 
 Look at [`examples/internal-routing`](../examples/internal-routing) to see how this works.
+
+## Single-page apps
+
+If your app includes only one page or else all the client-side routing is handled with some other client-side routing library, like [React Router] or [nanorouter], you can turn off all of Batfish's routing.
+
+To do this, set the [`spa`] configuration option to `true`.
+Read more about the effects of [`spa`] in the option's documentation.
 
 ## Markdown within JS
 
@@ -187,3 +195,9 @@ export default class SomePage extends React.Component {
 [`production`]: ./configuration.md#production
 
 [`dataselectors`]: ./configuration.md#dataselectors
+
+[`spa`]: ./configuration.md#spa
+
+[react router]: https://reacttraining.com/react-router/
+
+[nanorouter]: https://github.com/yoshuawuyts/nanorouter

@@ -36,6 +36,7 @@ function writeContextModule(
     const siteData: BatfishSiteData = {
       pages: _.values(pagesData)
     };
+    const isSpa = batfishConfig.spa || pagesData.length === 1;
 
     // This will be overridden if the user has defined a 404 file.
     let notFoundStringifiedRouteData = `{
@@ -68,20 +69,29 @@ function writeContextModule(
             pageData.filePath.replace(/\.(js|md)$/, '') ===
             path.join(batfishConfig.pagesDirectory, '404');
           const chunkName = is404 ? 'not-found' : slugg(pagePath) || 'home';
+          const is404Property = is404 ? 'is404: true,' : '';
+          // "eager" mode (as opposed to the default "lazy" mode) means the import
+          // will not create a separate async chunk, but will be bundled up with
+          // its parent.
+          const webpackMode = isSpa ? '/* webpackMode: "eager" */\n' : '';
+          const internalRoutingProperty = pageData.frontMatter.internalRouting
+            ? 'internalRouting: true,'
+            : '';
+
           const stringifiedRouteData = `{
-          path: '${pagePath}',
-          getPage: () => import(
-            /* webpackChunkName: "${chunkName}" */
-            '${pageModuleFilePath}'
-          ),
-          ${
-            pageData.frontMatter.internalRouting ? 'internalRouting: true,' : ''
-          }
-          ${is404 ? 'is404: true,' : ''}
-        }`;
+            path: '${pagePath}',
+            getPage: () => import(
+              /* webpackChunkName: "${chunkName}" */
+              ${webpackMode}'${pageModuleFilePath}'
+            ),
+            ${internalRoutingProperty}
+            ${is404Property}
+          }`;
+
           if (is404) {
             notFoundStringifiedRouteData = stringifiedRouteData;
           }
+
           // Maintain order to avoid unnecessary cache busting.
           stringifiedRoutes[index] = stringifiedRouteData;
         }
@@ -108,8 +118,8 @@ function writeContextModule(
         const content = `
           export const batfishContext = {
             selectedConfig: {
-              siteBasePath: '${String(batfishConfig.siteBasePath)}',
-              siteOrigin: '${String(batfishConfig.siteOrigin)}',
+              siteBasePath: '${batfishConfig.siteBasePath || ''}',
+              siteOrigin: '${batfishConfig.siteOrigin || ''}',
               hijackLinks: ${String(batfishConfig.hijackLinks)},
               manageScrollRestoration: ${String(
                 batfishConfig.manageScrollRestoration

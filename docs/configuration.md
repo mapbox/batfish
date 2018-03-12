@@ -35,6 +35,7 @@ You can specify an alternate location.
   - [vendorModules](#vendormodules)
   - [hijackLinks](#hijacklinks)
   - [manageScrollRestoration](#managescrollrestoration)
+  - [spa](#spa)
   - [webpackLoaders](#webpackloaders)
   - [webpackPlugins](#webpackplugins)
   - [webpackStaticIgnore](#webpackstaticignore)
@@ -180,24 +181,46 @@ The purpose of the vendor bundle is to deliberately group dependencies that chan
 Type: `boolean`.
 Default `true`.
 
-**Set this option to `true` if you are using your own client-side router, or otherwise do not need multiple Batfish pages.**
-
 By default, links are hijacked (with [link-hijacker]) and checked against your site's routes.
 If the link targets one of your routes, it will make a client-side change, instead of functioning as a regular link (with a regular page load).
 You can prevent this behavior by adding `data-batfish-no-hijack` to the link itself or to any of its descendents.
 
-If you want to disable this link-hijacking altogether, handling it yourself, you can set this option to `false`.
+If you want to disable this link hijacking altogether, handling it yourself, you can set this option to `false`.
+
+Use this option if you are having trouble with link hijacking or simply don't want it.
+If you have a single-page app that completely handles routing on its own (e.g. with React Router), you should set the [`spa`] option to `true`, which turns off link hijacking in addition to other things.
 
 ### manageScrollRestoration
 
 Type: `boolean`.
 Default `true`.
 
-**Set this option to `true` if you are using your own client-side router, or otherwise do not need multiple Batfish pages.**
-
 By default, restoration of scroll state during client-side browser navigation is managed by Batfish (with [scroll-restorer]).
 
 If you want to disable Batfish's scroll restoration altogether, handling it yourself or ignoring it, you can set this option to `false`.
+
+Use this option if you are having trouble with scroll restoration or simply don't want it.
+If you have a single-page app that completely handles routing and scroll management on its own (e.g. with React Router), you should set the [`spa`] option to `true`, which turns off scroll restoration in addition to other things.
+
+### spa
+
+Type: `boolean`.
+Default: `false`.
+
+**🚨 This option is EXPERIMENTAL, and may suffer breaking changes on any release.** ️
+
+**Set this option to `true` if you do not need multiple Batfish pages, so do not need Batfish's router.**
+
+If `true`, your app is in SPA mode (single-page app): Batfish expects your app to have only one Batfish page, the landing page, and to handle routing on its own.
+The following things happen:
+
+- Link hijacking is disabled (the same as if you set the [`hijackLinks`] option to `false`).
+- Scroll restoration is disabled (the same as if you set the [`manageScrollRestoration`] option to `false`).
+- Batfish's `Router` is not rendered into your app, which lightens your bundle a little bit.
+- [Batfish modules](./batfish-modules.md) that rely on the router, like `routeTo` and `routeChangeListeners`, will not work.
+- The chunk for your landing page is bundled up with the main app chunk, instead of separated from it and loaded asynchronously.
+- Internal routing is automatically allowed on your landing page (the same as if you set the front matter `internalRouting: true`).
+  cf. ["Routing within a page"](./advanced-usage.md#routing-within-a-page).
 
 ### webpackLoaders
 
@@ -506,6 +529,12 @@ If `true`, more information will be logged to the console.
 [`stylesheets`]: #stylesheets
 
 [`babelexclude`]: #babelexclude
+
+[`spa`]: #spa
+
+[`hijacklinks`]: #hijacklinks
+
+[`managescrollrestoration`]: #managescrollrestoration
 
 [`jsxtrememarkdownoptions`]: #jsxtrememarkdownoptions
 

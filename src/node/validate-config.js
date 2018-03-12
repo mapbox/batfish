@@ -175,6 +175,10 @@ const configSchema = {
     validator: _.isBoolean,
     description: 'boolean'
   },
+  spa: {
+    validator: _.isBoolean,
+    description: 'boolean'
+  },
   includePages: {
     validator: isArrayOf(_.isString),
     description: 'globs relative to the pagesDirectory, not absolute paths'
@@ -237,7 +241,8 @@ function validateConfig(
     pageSpecificCss: true,
     developmentDevtool: 'source-map',
     productionDevtool: false,
-    clearOutputDirectory: true
+    clearOutputDirectory: true,
+    spa: false
   };
 
   const config = Object.assign({}, defaults, rawConfig);
@@ -342,6 +347,11 @@ function validateConfig(
         if (/\*$/.test(p)) return p;
         return `${p}/`;
       });
+  }
+
+  if (config.spa) {
+    config.hijackLinks = false;
+    config.manageScrollRestoration = false;
   }
 
   mkdirp.sync(config.temporaryDirectory);
