@@ -10,8 +10,8 @@ A static-site generator powered by React and Webpack.
 
 - [Other documentation to check out](#other-documentation-to-check-out)
 - [Goals](#goals)
-- [Usage](#usage)
-- [Requirements](#requirements)
+- [Installation](#installation)
+- [Getting Started](#getting-started)
 - [API](#api)
   - [Configuration](#configuration)
   - [CLI](#cli)
@@ -62,26 +62,72 @@ Batfish aims to provide *the essentials* for building excellent static websites 
   We've also tried to abstract generalizable functionality into independent npm packages, like [jsxtreme-markdown], [link-hijacker], and [scroll-restorer].
   You can use these packages outside of Batfish — they are not coupled to Batfish conventions or configuration.
 
-## Usage
+## Installation
 
-Here are the basic steps:
+You will need:
 
-1. Create a [configuration] module.
-2. Create some [pages] as React components and/or Markdown documents.
-3. Start the development server with the Batfish CLI, then work on your pages.
-4. At some point, build your static site and deploy it.
+- Node v6+
+- npm, preferably v5+
 
-The ["Hello world guide"] can help you get started.
+Besides installing this package, you'll want to do a few things:
+
+- Install the peer dependencies:
+  ```
+  npm install --save react react-dom react-helmet
+  ```
+- Add `_batfish*` to your `.gitignore`, and maybe other ignore files (e.g. `.eslintignore`).
+  Batfish generates files and puts them in `_batfish_site` and `_batfish_tmp`.
+
+
+```
+npm install --save @mapbox/batfish
+```
+
+**You should not install the Batfish CLI globally.**
+Install Batfish as an npm dependency for your project, then use the CLI via npm `"scripts"`, npx, or `node_modules/.bin/batfish`.
+
+The easiest way to do this is to set up npm scripts in `package.json`, like so:
+
+```
+"scripts": {
+  "start": "batfish start",
+  "build": "batfish build",
+  "serve-static": "batfish serve-static"
+}
+```
+
+Then run `npm run start`, `npm run build`, and `npm run serve-static`, as needed.
+
+## Getting Started
+
+**The bare minimum to get started with Batfish.**
+
+- Run `npm install @mapbox/batfish --save`.
+- Create a new `script` in your `package.json` to start Batfish: `"start": "batfish start"`.
+- Create your first page file at `src/pages/index.js`.
+- Export from that page file a React component that renders something. Maybe something like this:
+
+  ```jsx
+  import React from 'react';
+
+  export default Home extends React.Component {
+    render() {
+      return (
+        <div>Hello world</div>
+      );
+    }
+  }
+  ```
+
+- Run `npm run start`.
+- Open the URL printed in your terminal.
+- Build your website.
+
+If you need to add configuration, create a `batfish.config.js` module in your project root.
+See ["Configuration"](#configuration).
 
 Look at [`examples/basic/`](examples/basic) for a simple example project.
 For a more advanced example project, check out [`examples/miscellany/`](examples/miscellany).
-
-## Requirements
-
-- You'll need Node >=6.
-- The client-side code has been tested down to IE11.
-  To support IE11, **a Promise polyfill is included by default.**
-  If you would like to provide your own Promise polyfill, set the [`includePromisePolyfill`] option to `false`.
 
 ## API
 
