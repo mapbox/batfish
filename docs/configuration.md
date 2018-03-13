@@ -222,6 +222,46 @@ The following things happen:
 - Internal routing is automatically allowed on your landing page (the same as if you set the front matter `internalRouting: true`).
   cf. ["Routing within a page"](./advanced-usage.md#routing-within-a-page).
 
+In SPA mode, you may be able to reduce your build time by using the [`webpackStaticIgnore`] option to reduce the quantity of modules that need to be parsed by Webpack during the build of static HTML files.
+For example, if there is loading spinner blocking much of the page until some data is fetched via HTTP, you could put all the content that will replace the spinner (after the data loads) in its own component, then ignore that component during the static build.
+That way, Webpack won't parse the component and all of its dependencies — which may even include *all* of your code, if that component includes your client-side router's route definitions and imports components for every route.
+
+To accomplish this, the component for your one page might look something like this:
+
+```jsx
+import React from 'react';
+import PageShell from '../component/page-shell';
+import Spinner from '../component/spinner';
+
+export default class HtmlPage extends React.Component {
+  constructor() {
+    super();
+    this.state = { App: null };
+  }
+
+  componentDidMount() {
+    // "eager" mode means that in the client-side bundling this import
+    // will not create a new async chunk: the code will be included in
+    // the main bundle, saving an HTTP request.
+    import(/* webpackMode: "eager" */ '../app').then(appModule => {
+      this.setState({ App: appModule.default });
+    });
+  }
+
+  render() {
+    const { App } = this.state;
+    const content = App ? <App /> : <Spinner />;
+    return <PageShell>{content}</PageShell>;
+  }
+}
+```
+
+And in your `batfish.config.js` file you'd use [`webpackStaticIgnore`] so the module at `'../app'` doesn't actually get parsed during the static HTML build:
+
+```js
+{ webpackStaticIgnore: [path.join(__dirname, './src/app')] }
+```
+
 ### webpackLoaders
 
 Type: `Array<Object>`.
@@ -559,3 +599,5 @@ If `true`, more information will be logged to the console.
 [webpack's raw-loader]: https://github.com/webpack-contrib/raw-loader
 
 [scroll-restorer]: https://github.com/mapbox/scroll-restorer
+
+[`webpackstaticignore`]: #webpackstaticignore
