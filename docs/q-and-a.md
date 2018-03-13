@@ -6,8 +6,8 @@
 - [Why not use a CSS-in-JS system?](#why-not-use-a-css-in-js-system)
 - [How can I use global constants in Markdown files?](#how-can-i-use-global-constants-in-markdown-files)
 - [How can I expose the Babel configuration that Batfish generates?](#how-can-i-expose-the-babel-configuration-that-batfish-generates)
-  - [How can I pass my dependencies through Babel, if they need to be compiled?](#how-can-i-pass-my-dependencies-through-babel-if-they-need-to-be-compiled)
-  - [What if I want to use React Router instead of Batfish's router.](#what-if-i-want-to-use-react-router-instead-of-batfishs-router)
+- [How can I pass my dependencies through Babel, if they need to be compiled?](#how-can-i-pass-my-dependencies-through-babel-if-they-need-to-be-compiled)
+- [What if I want to use React Router instead of Batfish's router.](#what-if-i-want-to-use-react-router-instead-of-batfishs-router)
 
 ## Why not use a Webpack loader and allow `import` or `require` for CSS?
 
@@ -49,7 +49,7 @@ Then Jest or Ava or whatever it is can readthe `.babelrc` file and interpret you
 
 For more information about options for `write-babelrc`, run `batfish --help`.
 
-### How can I pass my dependencies through Babel, if they need to be compiled?
+## How can I pass my dependencies through Babel, if they need to be compiled?
 
 Use the [`babelInclude`] option to point to the npm packages that need to be compiled.
 
@@ -59,7 +59,7 @@ For example, if you want to use the library p-queue (which includes ES2015 synta
 babelInclude: ['p-queue']
 ```
 
-### What if I want to use React Router instead of Batfish's router.
+## What if I want to use React Router instead of Batfish's router.
 
 If you want to *nest* a React Router instance within Batfish pages, you can do that!
 This might be useful if, for example, you have detail pages that should not be statically rendered but instead generated in the client after an API call (e.g. `/dogs` lists all docs, then `/dogs/paul`, `/docs/dave`, etc. are details for specific docs).
