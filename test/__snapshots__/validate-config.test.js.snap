@@ -12,6 +12,13 @@ Object {
     "last 2 versions",
   ],
   "clearOutputDirectory": true,
+  "devBrowserslist": Array [
+    "Edge >= 14",
+    "Firefox >= 52",
+    "Chrome >= 58",
+    "Safari >= 10",
+    "iOS >= 10.2",
+  ],
   "developmentDevtool": "source-map",
   "fileLoaderExtensions": Array [
     "jpeg",

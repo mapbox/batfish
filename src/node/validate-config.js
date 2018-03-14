@@ -13,6 +13,7 @@ const pathType = require('path-type');
 const autoprefixer = require('autoprefixer');
 const errorTypes = require('./error-types');
 const joinUrlParts = require('./join-url-parts');
+const getEnvBrowserslist = require('./get-env-browserslist');
 
 // !!!
 // Whenever you add a new configuration property,
@@ -42,6 +43,10 @@ const configSchema = {
   browserslist: {
     validator: x => _.isString(x) || isArrayOf(_.isString)(x),
     description: 'string or array of strings'
+  },
+  devBrowserslist: {
+    validator: x => _.isString(x) || isArrayOf(_.isString)(x) || x === false,
+    description: 'string, array of strings, or false'
   },
   pagesDirectory: {
     validator: isAbsolutePathToExistingDirectory,
@@ -225,6 +230,14 @@ function validateConfig(
     babelInclude: [],
     siteBasePath: '',
     browserslist: ['> 5%', 'last 2 versions'],
+    devBrowserslist: [
+      // Recent browsers supporting a lot of ES2015.
+      'Edge >= 14',
+      'Firefox >= 52',
+      'Chrome >= 58',
+      'Safari >= 10',
+      'iOS >= 10.2'
+    ],
     fileLoaderExtensions: [
       'jpeg',
       'jpg',
@@ -247,9 +260,12 @@ function validateConfig(
 
   const config = Object.assign({}, defaults, rawConfig);
 
-  const defaultPostcssPlugins = [
-    autoprefixer({ browsers: config.browserslist })
-  ];
+  const envBrowserslist = getEnvBrowserslist(
+    config.browserslist,
+    config.devBrowserslist,
+    config.production
+  );
+  const defaultPostcssPlugins = [autoprefixer({ browsers: envBrowserslist })];
 
   // Invoke transform function properties
   if (typeof config.fileLoaderExtensions === 'function') {

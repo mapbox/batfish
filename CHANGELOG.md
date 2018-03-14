@@ -1,5 +1,11 @@
 # Changelog
 
+## HEAD
+
+- **Add:** Add `devBrowserslist` option. **This will change the browser support of your development (not production) build.**
+- **Add:** Add `-b, --browsers` option for `batfish start`.
+- **Add:** `browserslist` and `devBrowserslist` affect babel-preset-env, not just Autoprefixer.
+
 ## 1.2.0
 
 - **Add:** Include `babel-plugin-transform-object-rest-spread` by default.

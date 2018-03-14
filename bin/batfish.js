@@ -47,6 +47,10 @@ ${chalk.bold(`${chalk.magenta('start')} options`)}
                    is a glob relative to the root of your site.
   --production     Build as though for production.
   --no-clear       Do not clear the destination directory.
+  -b, --browsers   A comma-separated browserslist string
+                   specifying the browsers you want to support
+                   during this dev build. Or "false" if you
+                   want to support all your production browsers.
 
 ${chalk.bold(`${chalk.magenta('build')} options`)}
   -d, --debug      Build for debugging, not for production.
@@ -74,6 +78,8 @@ ${chalk.bold('Examples')}
     ${chalk.cyan('batfish start -i about/**')}
   Start but only build the /about/history page.
     ${chalk.cyan('batfish start --include about/history')}
+  Start and build only for Chrome 60+.
+    ${chalk.cyan('batfish start --browsers "Chrome >= 60"')}
 `;
 
 const cli = meow({
@@ -105,6 +111,10 @@ const cli = meow({
     include: {
       type: 'string',
       alias: 'i'
+    },
+    browsers: {
+      type: 'string',
+      alias: 'b'
     }
   }
 });
@@ -156,6 +166,8 @@ if (configPath) {
 
 if (cli.flags.production) {
   config.production = cli.flags.production;
+} else if (command === 'build') {
+  config.production = true;
 }
 if (cli.flags.debug) {
   config.production = !cli.flags.debug;
@@ -171,6 +183,10 @@ if (command === 'start' && cli.flags.include) {
 }
 if (cli.flags.clear === false) {
   config.clearOutputDirectory = false;
+}
+if (command === 'start' && cli.flags.browsers) {
+  config.devBrowserslist =
+    cli.flags.browsers === 'false' ? false : cli.flags.browsers;
 }
 
 const projectDirectory = path.dirname(configPath);
