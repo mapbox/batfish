@@ -1,7 +1,9 @@
 // @flow
 'use strict';
 
+const _ = require('lodash');
 const constants = require('./constants');
+const getEnvBrowserslist = require('./get-env-browserslist');
 
 function createBabelConfig(
   batfishConfig: BatfishConfiguration,
@@ -14,10 +16,23 @@ function createBabelConfig(
 } {
   const target = options.target || constants.TARGET_BROWSER;
 
-  const presetEnvOptions =
-    target === constants.TARGET_NODE
-      ? { useBuiltIns: true, targets: { node: 'current' } }
-      : batfishConfig.babelPresetEnvOptions || {};
+  let presetEnvOptions;
+  if (target === constants.TARGET_NODE) {
+    presetEnvOptions = { useBuiltIns: true, targets: { node: 'current' } };
+  } else {
+    const envBrowserslist = getEnvBrowserslist(
+      batfishConfig.browserslist,
+      batfishConfig.devBrowserslist,
+      batfishConfig.production
+    );
+    presetEnvOptions = batfishConfig.babelPresetEnvOptions || {};
+    if (presetEnvOptions.useBuiltIns === undefined) {
+      presetEnvOptions.useBuiltIns = true;
+    }
+    if (_.get(presetEnvOptions, ['targets', 'browsers']) === undefined) {
+      _.set(presetEnvOptions, ['targets', 'browsers'], envBrowserslist);
+    }
+  }
 
   const presets = [
     [require.resolve('babel-preset-env'), presetEnvOptions],

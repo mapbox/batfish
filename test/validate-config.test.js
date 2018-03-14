@@ -6,6 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const stripAnsi = require('strip-ansi');
 const pathType = require('path-type');
+const autoprefixer = require('autoprefixer');
 const validateConfig = require('../src/node/validate-config');
 const errorTypes = require('../src/node/error-types');
 const projectRootSerializer = require('./test-util/project-root-serializer');
@@ -30,6 +31,9 @@ jest.mock('path-type', () => {
     fileSync: jest.fn(() => true)
   };
 });
+
+// Mock autoprefixer so we can check which arguments it is passed.
+jest.mock('autoprefixer', () => jest.fn(() => () => {}));
 
 describe('validateConfig', () => {
   const projectDirectory = '/my-project';
@@ -143,6 +147,34 @@ describe('validateConfig', () => {
         projectDirectory
       )
     ).toHaveProperty('publicAssetsPath', 'site_assets');
+  });
+
+  test('if devBrowserslist is false, even non-production build uses browserslist to configure autoprefixer', () => {
+    const config = validateConfig(
+      { devBrowserslist: false, production: false },
+      projectDirectory
+    );
+    expect(autoprefixer.mock.calls[0][0]).toEqual({
+      browsers: config.browserslist
+    });
+  });
+
+  test('if devBrowserslist is not false, it is still ignored in production build when configuring autoprefixer', () => {
+    const config = validateConfig(
+      { devBrowserslist: 'Chrome >= 60', production: true },
+      projectDirectory
+    );
+    expect(autoprefixer.mock.calls[0][0]).toEqual({
+      browsers: config.browserslist
+    });
+  });
+
+  test('if devBrowserslist is not false, it is used in non-production build to configure autoprefixer', () => {
+    validateConfig(
+      { devBrowserslist: 'Chrome >= 60', production: false },
+      projectDirectory
+    );
+    expect(autoprefixer.mock.calls[0][0]).toEqual({ browsers: 'Chrome >= 60' });
   });
 
   test('processed siteBasePath does not end with a slash unless it is only a slash', () => {

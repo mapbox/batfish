@@ -27,6 +27,7 @@ You can specify an alternate location.
   - [applicationWrapperPath](#applicationwrapperpath)
   - [stylesheets](#stylesheets)
   - [browserslist](#browserslist)
+  - [devBrowserslist](#devbrowserslist)
   - [pagesDirectory](#pagesdirectory)
   - [outputDirectory](#outputdirectory)
   - [temporaryDirectory](#temporarydirectory)
@@ -122,7 +123,27 @@ Default: `['> 5%', 'last 2 versions']`.
 
 A [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support.
 
-This option is used to process your CSS through [Autoprefixer].
+This option is used to process your CSS through [Autoprefixer] and determine which Babel transforms to apply through [babel-preset-env].
+
+**This option determines the browser support of your production build (`batfish build`).
+During development (`batfish start`), this will be overridden by [`devBrowserslist`]** (unless `devBrowserslist` is set to `false`).
+
+### devBrowserslist
+
+Type: `Array<string> | false`.
+Default: `['Edge >= 14', 'Firefox >= 52', 'Chrome >= 58', 'Safari >= 10', 'iOS >= 10.2'`].
+
+A [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support *with the development build* (`batfish start`).
+If this value is `false`, [`browserslist`] will be used for both production and development builds.
+
+This option is used to process your CSS through [Autoprefixer] and determine which Babel transforms to apply through [babel-preset-env].
+
+**This option determines the browser support of your development build only (`batfish start`).
+For production builds (`batfish build`), [`browserslist`] will be used**.
+
+You can also override this value from the CLI with the `--browsers` flag.
+If, for example, you spend *most* of your time developing in Chrome 60+, you can run `batfish start --browsers "Chrome >= 60"`, which would dramatically reduce the amount of transformation Babel performs.
+When you want to check all the browsers you support in production, you can run `batfish start --browsers false`.
 
 ### pagesDirectory
 
@@ -339,9 +360,13 @@ You can pass options to [babel-preset-env] with the option [`babelPresetEnvOptio
 Type: `Object`. [Options for babel-preset-env].
 
 [babel-preset-env] is always used.
-By default, it is passed no options.
-That means the latest standard syntax will be available (not `stage-x`): `es2015`, `es2016`, etc..
+By default, it receives the following options:
+
+- `useBuiltIns` is `true`.
+- `target.browsers` is your [`browserslist`] or [`devBrowserslist`] value (read more about those options to understand when each is used).
+
 Use this option to further customize your build by passing any of the other many [options for babel-preset-env](https://babeljs.io/docs/plugins/preset-env/#options).
+It your object will be merged with the defaults — so they will only be overridden if you deliberately do so.
 
 ### babelExclude
 
@@ -601,3 +626,7 @@ If `true`, more information will be logged to the console.
 [scroll-restorer]: https://github.com/mapbox/scroll-restorer
 
 [`webpackstaticignore`]: #webpackstaticignore
+
+[`devbrowserslist`]: #devbrowserslist
+
+[`browserslist`]: #browserslist

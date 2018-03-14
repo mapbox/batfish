@@ -8,7 +8,9 @@ const abs = x => path.join(__dirname, x);
 const defaultBatfishConfig = () => ({
   babelPlugins: [],
   babelPresets: [],
-  jsxtremeMarkdownOptions: {}
+  jsxtremeMarkdownOptions: {},
+  browserslist: 'mock-browserslist',
+  production: true
 });
 
 const relativizeBabelSetting = p => {
@@ -45,5 +47,35 @@ describe('createBabelConfig', () => {
     );
     expect(actual.presets.map(relativizeBabelSetting)).toMatchSnapshot();
     expect(actual.plugins.map(relativizeBabelSetting)).toMatchSnapshot();
+  });
+
+  test('non-false devBrowserslist is used in non-production', () => {
+    const actual = createBabelConfig(
+      Object.assign(defaultBatfishConfig(), {
+        production: false,
+        devBrowserslist: 'mock-dev-browserslist'
+      })
+    );
+    expect(actual.presets.map(relativizeBabelSetting)).toMatchSnapshot();
+  });
+
+  test('false devBrowserslist is not used in non-production', () => {
+    const actual = createBabelConfig(
+      Object.assign(defaultBatfishConfig(), {
+        production: false,
+        devBrowserslist: false
+      })
+    );
+    expect(actual.presets.map(relativizeBabelSetting)).toMatchSnapshot();
+  });
+
+  test('non-false devBrowserslist is not used in production', () => {
+    const actual = createBabelConfig(
+      Object.assign(defaultBatfishConfig(), {
+        production: true,
+        devBrowserslist: 'mock-dev-browserslist'
+      })
+    );
+    expect(actual.presets.map(relativizeBabelSetting)).toMatchSnapshot();
   });
 });
