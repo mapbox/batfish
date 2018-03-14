@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.3.0
 
 - **Add:** Add `devBrowserslist` option. **This will change the browser support of your development (not production) build.**
 - **Add:** Add `-b, --browsers` option for `batfish start`.
