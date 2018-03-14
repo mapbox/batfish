@@ -120,13 +120,13 @@
 
 ## 0.10.0
 
-- 🚨 **Breaking change** Require Node 6. (Drop support for Node 4.)
-- 🚨 **Breaking change** Remove `staticDirectory` option.
+- 🚨 **Breaking change:** Require Node 6. (Drop support for Node 4.)
+- 🚨 **Breaking change:** Remove `staticDirectory` option.
   The same effect can be accomplished by putting static files in the pages directory.
-- 🚨 **Breaking change** `with-location` now provides the original component at WrappedComponent instead of WrapperComponent.
-- 🚨 **Breaking change** change `data-no-hijack` attribute name to `data-batfish-no-hijack`.
+- 🚨 **Breaking change:** `with-location` now provides the original component at WrappedComponent instead of WrapperComponent.
+- 🚨 **Breaking change:** change `data-no-hijack` attribute name to `data-batfish-no-hijack`.
   Also, this attribute now blocks link hijacking on the element itself *and all its children*.
-- 🚨 **Breaking change** (maybe, maybe not) Links with fragment URLs (e.g. `href="#foo"`) are not hijacked, just left to their default behavior.
+- 🚨 **Breaking change:** (maybe, maybe not) Links with fragment URLs (e.g. `href="#foo"`) are not hijacked, just left to their default behavior.
 - **Add:** Much improved logging!
 - **Add:** Much improved configuration validation!
 - **Add:** Much improved error handling!
@@ -152,7 +152,7 @@
 
 ## 0.9.0
 
-- 🚨 **Breaking change** Revised `dataSelectors` system.
+- 🚨 **Breaking change:** Revised `dataSelectors` system.
   Values returned by `dataSelectors` can now be used by `import`ing modules from `@mapbox/batfish/data/[data-selector-name]`, instead of using the special `injectedData` front matter property.
   For example, the return value from the `dataSelectors.watchOutForBees` is available with `import beeData from '@mapbox/batfish/data/watch-out-for-bees';`.
 
@@ -163,17 +163,17 @@
 
 ## 0.7.0
 
-- 🚨 **Breaking change** Renamed `externalStylesheets` option to `stylesheets`.
-- 🚨 **Breaking change** CSS is no longer `import`ed or `require`d via Webpack.
+- 🚨 **Breaking change:** Renamed `externalStylesheets` option to `stylesheets`.
+- 🚨 **Breaking change:** CSS is no longer `import`ed or `require`d via Webpack.
   All stylesheets should be listed in the `stylesheets` configuration array.
-- 🚨 **Breaking change** Renamed `wrapperPath` option to `applicationWrapperPath`.
-- 🚨 **Breaking change** Removed `notFoundPath` option.
+- 🚨 **Breaking change:** Renamed `wrapperPath` option to `applicationWrapperPath`.
+- 🚨 **Breaking change:** Removed `notFoundPath` option.
   Instead, 404 pages always live as `404.(js|md)` in the `pagesDirectory`.
-- 🚨 **Breaking change** 404 pages are no longer `index.html` files inside directories, e.g. `404/index.html`.
+- 🚨 **Breaking change:** 404 pages are no longer `index.html` files inside directories, e.g. `404/index.html`.
   They are just HTML pages, e.g. `404.html`.
-- 🚨 **Breaking change** Changed default `outputDirectory` from `_site` to `_batfish_site`.
-- 🚨 **Breaking change** Changed default `temporaryDirectory` from `_tmp` to `_batfish_tmp`.
-- 🚨 **Breaking change** Upgrade jsxtreme-markdown, which changed `modules` front matter property in Markdown pages to `prependJs`.
+- 🚨 **Breaking change:** Changed default `outputDirectory` from `_site` to `_batfish_site`.
+- 🚨 **Breaking change:** Changed default `temporaryDirectory` from `_tmp` to `_batfish_tmp`.
+- 🚨 **Breaking change:** Upgrade jsxtreme-markdown, which changed `modules` front matter property in Markdown pages to `prependJs`.
 
 ## 0.6.0
 
