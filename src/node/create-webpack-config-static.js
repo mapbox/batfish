@@ -42,6 +42,7 @@ function createWebpackConfigStatic(
         new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 })
       ],
       devtool: 'source-map',
+      // Don't hijack Node's globals: this code will execute in Node.
       node: {
         console: false,
         global: false,

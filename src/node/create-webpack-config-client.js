@@ -167,7 +167,15 @@ function createWebpackConfigClient(
         })
       },
       target: 'web',
-      plugins: clientPlugins
+      plugins: clientPlugins,
+      // This helps us import more libraries with fewer errors.
+      node: {
+        dgram: 'empty',
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
+        child_process: 'empty'
+      }
     };
 
     let config = webpackMerge(baseConfig, clientConfig);

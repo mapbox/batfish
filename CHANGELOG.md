@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- **Add:** Use Webpack's `node` option in the client config to stub core Node libraries, resulting in fewer errors buried in users' dependencies.
+
 ## 1.3.0
 
 - **Add:** Add `devBrowserslist` option. **This will change the browser support of your development (not production) build.**
