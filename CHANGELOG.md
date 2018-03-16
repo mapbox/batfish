@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.5.1
 
 - Remove webpack-chunk-hash dependency. Recent versions of Webpack do not require this module for deterministic filename hashing.
 
