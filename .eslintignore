@@ -7,3 +7,4 @@ modules
 dist
 flow-typed
 flow-coverage
+src/node/static-stubs

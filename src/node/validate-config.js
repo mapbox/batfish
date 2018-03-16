@@ -84,11 +84,15 @@ const configSchema = {
     validator: isArrayOf(_.isObject),
     description: 'array of Webpack plugins'
   },
-  // No good way to validate webpackStaticIgnore, which is a Webpack Condition
+  // No good way to validate this, which is a Webpack Condition
   // so might be almost any type:
   // https://webpack.js.org/configuration/module/#condition
   webpackStaticIgnore: {
     validator: () => true
+  },
+  webpackStaticStubReactComponent: {
+    validator: isArrayOf(isAbsolutePath),
+    description: 'array of absolute paths'
   },
   babelPlugins: {
     validator: isArrayOf(isBabelSetting),
@@ -255,7 +259,8 @@ function validateConfig(
     developmentDevtool: 'source-map',
     productionDevtool: false,
     clearOutputDirectory: true,
-    spa: false
+    spa: false,
+    webpackStaticStubReactComponent: []
   };
 
   const config = Object.assign({}, defaults, rawConfig);

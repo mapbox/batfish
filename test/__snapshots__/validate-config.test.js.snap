@@ -50,5 +50,6 @@ Object {
   "stylesheets": Array [],
   "temporaryDirectory": "/my-project/_batfish_tmp",
   "verbose": false,
+  "webpackStaticStubReactComponent": Array [],
 }
 `;

@@ -8,6 +8,11 @@ const webpackMerge = require('webpack-merge');
 const createWebpackConfigBase = require('./create-webpack-config-base');
 const constants = require('./constants');
 
+const reactComponentStubPath = path.join(
+  __dirname,
+  './static-stubs/react-component.js'
+);
+
 // Create a Webpack configuration that compiles static-render-pages.js,
 // a Node module that will build HTML pages.
 function createWebpackConfigStatic(
@@ -60,6 +65,16 @@ function createWebpackConfigStatic(
         loader: 'ignore-loader'
       });
     }
+
+    batfishConfig.webpackStaticStubReactComponent.forEach(original => {
+      if (!staticConfig.plugins) staticConfig.plugins = [];
+      staticConfig.plugins.push(
+        new webpack.NormalModuleReplacementPlugin(
+          new RegExp(_.escapeRegExp(original)),
+          reactComponentStubPath
+        )
+      );
+    });
 
     let config = webpackMerge(baseConfig, staticConfig);
     if (batfishConfig.webpackConfigStaticTransform) {

@@ -2,6 +2,7 @@
 
 ## HEAD
 
+- **Add:** Add `webpackStaticStubReactComponent` option.
 - **Add:** Use Webpack's `node` option in the client config to stub core Node libraries, resulting in fewer errors buried in users' dependencies.
 
 ## 1.3.0
