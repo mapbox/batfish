@@ -121,8 +121,9 @@ For production apps, you probably want to think about what gets rendered *before
 - Dynamically `import(/* webpackMode: "eager" */ '../path/to/app')` your main app component in the page's `componentDidMount` hook.
   (`/* webpackMode: "eager" */` tells Webpack not to create a separate async chunk with this file, but to include it in the main client-side bundle.)
 - Use [`webpackStaticIgnore`] to block '../path/to/app' from being included in the static build.
+- Set [`staticHtmlInlineDeferCss`] to `false` to avoid a flash of unstyled content.
 
-Here's a simple example:
+For example:
 
 ```jsx
 // Page component, which will be statically rendered.
@@ -173,7 +174,12 @@ module.exports = () => {
 Sometimes you don't care *at all* about the static HTML that gets served, and just want an HTML shell with some things in the `<head>` and a completely empty `<body>` that will be populated when the JS downloads and executes.
 This is the kind of app you build with create-react-app, which you might use for prototyping, internal tooling, etc.
 
-To accomplish this, use [`webpackStaticStubReactComponent`] to stub your main app component. Like so:
+To accomplish this:
+
+- Use [`webpackStaticStubReactComponent`] to stub your main app component.
+- Set [`staticHtmlInlineDeferCss`] to `false` to avoid a flash of unstyled content.
+
+For example:
 
 ```jsx
 // Page component, which will be statically rendered.
@@ -315,5 +321,7 @@ Set the [`pageSpecificCss`] option to `false`.
 [`webpackstaticignore`]: ./configuration.md#webpackstaticignore
 
 [`webpackstaticstubreactcomponent`]: ./configuration.md#webpackstaticstubreactcomponent
+
+[`statichtmlinlinedefercss`]: ./configuration.md#statichtmlinlinedefercss
 
 [`pagespecificcss`]: ./configuration.md#pagespecificcss

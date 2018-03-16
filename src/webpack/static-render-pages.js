@@ -30,10 +30,14 @@ function staticRenderPages(
 
   // Load the full stylesheet lazily, after DOMContentLoaded. The page will
   // still render quickly because it will have its own CSS injected inline.
-  let loadCssScript = '';
+  let css = '';
   if (cssUrl) {
-    const loadCssJs = `document.addEventListener('DOMContentLoaded',function(){var s=document.createElement('link');s.rel='stylesheet';s.href='${cssUrl}';document.head.insertBefore(s, document.getElementById('loadCss'));});`;
-    loadCssScript = `<script id="loadCss">${loadCssJs}</script>`;
+    if (batfishConfig.staticHtmlInlineDeferCss) {
+      const loadCssJs = `document.addEventListener('DOMContentLoaded',function(){var s=document.createElement('link');s.rel='stylesheet';s.href='${cssUrl}';document.head.insertBefore(s, document.getElementById('loadCss'));});`;
+      css = `<script id="loadCss">${loadCssJs}</script>`;
+    } else {
+      css = `<link rel="stylesheet" href="${cssUrl}" />`;
+    }
   }
 
   const appendToBody = [
@@ -47,7 +51,7 @@ function staticRenderPages(
     return renderHtmlPage({
       route,
       inlineJsScripts,
-      loadCssScript,
+      css,
       appendToBody,
       spa: batfishConfig.spa
     }).then(html => {

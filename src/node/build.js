@@ -96,7 +96,8 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
       return buildHtml(batfishConfig, cssFilename);
     })
     .then(() => {
-      if (!batfishConfig.production) return;
+      if (!batfishConfig.production || !batfishConfig.staticHtmlInlineDeferCss)
+        return;
       return new Promise((resolve, reject) => {
         // This line within the callback function scope to please Flow about
         // the cssFilename variable.

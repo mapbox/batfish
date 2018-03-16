@@ -13,7 +13,7 @@ exports[`renderHtmlPage SPA mode 1`] = `
     \\"inline-js-scripts\\",
     \\"script.mockToString\\",
     \\"<!-- INLINE CSS HERE, BATFISH -->\\",
-    \\"load-css-script\\",
+    \\"css\\",
     \\"style.mockToString\\"
   ],
   \\"appendToBody\\": [
@@ -37,7 +37,7 @@ exports[`renderHtmlPage gives us what we want 1`] = `
     \\"inline-js-scripts\\",
     \\"script.mockToString\\",
     \\"<!-- INLINE CSS HERE, BATFISH -->\\",
-    \\"load-css-script\\",
+    \\"css\\",
     \\"style.mockToString\\"
   ],
   \\"appendToBody\\": [

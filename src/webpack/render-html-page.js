@@ -10,7 +10,7 @@ import constants from '../node/constants';
 export function renderHtmlPage(options: {
   route: BatfishRouteData,
   inlineJsScripts: string,
-  loadCssScript: string,
+  css: string,
   appendToBody: Array<string>,
   spa: boolean
 }): Promise<string> {
@@ -50,7 +50,7 @@ export function renderHtmlPage(options: {
           options.inlineJsScripts,
           helmetHead.script.toString(),
           constants.INLINE_CSS_MARKER,
-          options.loadCssScript,
+          options.css,
           // This comes after the inlined and dynamically loaded CSS
           // so it will override regular stylesheets
           helmetHead.style.toString()
