@@ -27,6 +27,7 @@ declare type BatfishConfiguration = {
   webpackLoaders?: Array<webpack$Rule>,
   webpackPlugins?: Array<Object>,
   webpackStaticIgnore?: webpack$Condition,
+  webpackStaticStubReactComponent: Array<string>,
   babelPlugins: Array<string>,
   babelPresets: Array<string>,
   babelPresetEnvOptions?: Object,

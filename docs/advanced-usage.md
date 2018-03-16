@@ -7,7 +7,9 @@
 - [Draft pages](#draft-pages)
 - [Injecting data](#injecting-data)
 - [Routing within a page](#routing-within-a-page)
-- [Single-page apps](#single-page-apps)
+- [Minimal builds for single-page apps](#minimal-builds-for-single-page-apps)
+  - [Turn off Batfish's routing](#turn-off-batfishs-routing)
+  - [Minimize the static HTML build](#minimize-the-static-html-build)
 - [Markdown within JS](#markdown-within-js)
 - [Route change listeners](#route-change-listeners)
 - [Analyzing bundles](#analyzing-bundles)
@@ -96,12 +98,117 @@ The client-side router you use within the page can determine what to do with the
 
 Look at [`examples/internal-routing`](../examples/internal-routing) to see how this works.
 
-## Single-page apps
+## Minimal builds for single-page apps
+
+### Turn off Batfish's routing
 
 If your app includes only one page or else all the client-side routing is handled with some other client-side routing library, like [React Router] or [nanorouter], you can turn off all of Batfish's routing.
 
 To do this, set the [`spa`] configuration option to `true`.
 Read more about the effects of [`spa`] in the option's documentation.
+
+### Minimize the static HTML build
+
+You may want to minimize the amount of code that gets parsed and executed doing the static build.
+
+One reason is so the static build runs as quickly as possible: instead of passing *all* of your code through Webpack, you can only pass the code that's needed to build your minimal static HTML.
+
+Another reason is to allow you to write code, or import dependencies, that will rely completely on a browser environment — that global `window` object — without bumping up against errors during the static build.
+
+For production apps, you probably want to think about what gets rendered *before* the JS downloads and executes; so you can do the following:
+
+- Include an app shell and loading state in your single page.
+- Dynamically `import(/* webpackMode: "eager" */ '../path/to/app')` your main app component in the page's `componentDidMount` hook.
+  (`/* webpackMode: "eager" */` tells Webpack not to create a separate async chunk with this file, but to include it in the main client-side bundle.)
+- Use [`webpackStaticIgnore`] to block '../path/to/app' from being included in the static build.
+
+Here's a simple example:
+
+```jsx
+// Page component, which will be statically rendered.
+import React from 'react';
+import Helmet from 'react-helmet';
+import InitialLoadingState from '../initial-loading-state';
+
+export default Page extends React.Component {
+  constructor() {
+    super();
+    this.state = { body: <InitialLoadingState /> };
+  }
+
+  componentDidMount() {
+    import(/* webpackMode: "eager" */ '../app').then(AppModule => {
+      this.setState({ body: <AppModule.default> });
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <Helmet>
+          <title>Your title</title>
+          <meta charset='utf-8' />
+          <meta name='viewport' content='width=device-width, initial-scale=1' />
+          {/* ... other <head> things ... */}
+        </Helmet>
+        {this.state.body}
+      </div>
+    );
+  }
+}
+```
+
+```js
+// batfish.config.js
+const path = require('path');
+
+module.exports = () => {
+  return {
+    webpackStaticIgnore: path.join(__dirname, 'src/app.js')
+    // ... other config
+  };
+}
+```
+
+Sometimes you don't care *at all* about the static HTML that gets served, and just want an HTML shell with some things in the `<head>` and a completely empty `<body>` that will be populated when the JS downloads and executes.
+This is the kind of app you build with create-react-app, which you might use for prototyping, internal tooling, etc.
+
+To accomplish this, use [`webpackStaticStubReactComponent`] to stub your main app component. Like so:
+
+```jsx
+// Page component, which will be statically rendered.
+import React from 'react';
+import Helmet from 'react-helmet';
+import App from '../app';
+
+export default Page extends React.Component {
+  render() {
+    return (
+      <div>
+        <Helmet>
+          <title>Your title</title>
+          <meta charset='utf-8' />
+          <meta name='viewport' content='width=device-width, initial-scale=1' />
+          {/* ... other <head> things ... */}
+        </Helmet>
+        <App />
+      </div>
+    );
+  }
+}
+```
+
+```js
+// batfish.config.js
+const path = require('path');
+
+module.exports = () => {
+  return {
+    webpackStaticStubReactComponent: [path.join(__dirname, 'src/app.js')]
+    // ... other config
+  };
+}
+```
 
 ## Markdown within JS
 
@@ -201,3 +308,7 @@ export default class SomePage extends React.Component {
 [react router]: https://reacttraining.com/react-router/
 
 [nanorouter]: https://github.com/yoshuawuyts/nanorouter
+
+[`webpackstaticignore`]: ./configuration.md#webpackstaticignore
+
+[`webpackstaticstubreactcomponent`]: ./configuration.md#webpackstaticstubreactcomponent

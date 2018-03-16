@@ -39,6 +39,7 @@ You can specify an alternate location.
   - [spa](#spa)
   - [webpackLoaders](#webpackloaders)
   - [webpackPlugins](#webpackplugins)
+  - [webpackStaticStubReactComponent](#webpackstaticstubreactcomponent)
   - [webpackStaticIgnore](#webpackstaticignore)
   - [babelPlugins](#babelplugins)
   - [babelPresets](#babelpresets)
@@ -297,6 +298,23 @@ Each object should be a [Webpack Rule](https://webpack.js.org/configuration/modu
 Type: `Array<Object>`.
 
 Additional plugin configuration to pass to Webpack during the client bundling task.
+
+### webpackStaticStubReactComponent
+
+Type: `Array<string>`.
+
+An array of absolute paths to React component modules that you would like to stub during the static Webpack build.
+When these files are `import`ed, what you'll get is a simple React component that renders `null`:
+
+```js
+module.exports = function StubbedComponent() {
+  return null;
+};
+```
+
+You might want to use this if you are working on a simple app and don't care at all how it initially renders — i.e. a create-react-app-style app where the static HTML that is served contains no content, just waits for the JS to download and execute.
+
+For more information about the options for this use case, see ["Minimal builds for single-page apps"].
 
 ### webpackStaticIgnore
 
@@ -630,3 +648,5 @@ If `true`, more information will be logged to the console.
 [`devbrowserslist`]: #devbrowserslist
 
 [`browserslist`]: #browserslist
+
+["minimal builds for single-page apps"]: ./advanced-usage.md#minimal-builds-for-single-page-apps

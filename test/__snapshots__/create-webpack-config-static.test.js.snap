@@ -77,6 +77,14 @@ Object {
         "maxChunks": 1,
       },
     },
+    NormalModuleReplacementPlugin {
+      "newResource": "<PROJECT_ROOT>/src/node/static-stubs/react-component.js",
+      "resourceRegExp": /\\\\/path\\\\/to\\\\/component\\\\/a/,
+    },
+    NormalModuleReplacementPlugin {
+      "newResource": "<PROJECT_ROOT>/src/node/static-stubs/react-component.js",
+      "resourceRegExp": /\\\\/path\\\\/to\\\\/component\\\\/b/,
+    },
   ],
   "target": "node",
   "underwentStaticTransform": true,

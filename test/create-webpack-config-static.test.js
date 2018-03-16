@@ -49,6 +49,10 @@ describe('createWebpackConfigStatic', () => {
   test('with all Batfish config options that make a difference', () => {
     const batfishConfig = createBatfishConfig({
       webpackStaticIgnore: /stuff\/to\/ignore/,
+      webpackStaticStubReactComponent: [
+        '/path/to/component/a',
+        '/path/to/component/b'
+      ],
       webpackConfigStaticTransform: x => {
         x.underwentStaticTransform = true;
         return x;
