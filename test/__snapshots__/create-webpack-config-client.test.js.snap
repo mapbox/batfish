@@ -206,7 +206,7 @@ Object {
         "include": undefined,
         "parallel": true,
         "sourceMap": true,
-        "test": /\\\\\\.\\(js\\?\\)\\(\\\\\\?\\.\\+\\)\\?\\$/i,
+        "test": /\\\\\\.js\\(\\\\\\?\\.\\*\\)\\?\\$/i,
         "uglifyOptions": Object {
           "compress": Object {
             "comparisons": false,
