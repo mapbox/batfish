@@ -60,6 +60,7 @@ You can specify an alternate location.
   - [ignoreWithinPagesDirectory](#ignorewithinpagesdirectory)
   - [webpackConfigClientTransform](#webpackconfigclienttransform)
   - [webpackConfigStaticTransform](#webpackconfigstatictransform)
+  - [pageSpecificCss](#pagespecificcss)
   - [port](#port)
   - [verbose](#verbose)
 
@@ -584,6 +585,16 @@ The Webpack config for static, server-side bundling will be passed through this 
 **Only use this option if you know what you're doing!**
 You need to be careful not to change configuration that Batfish relies on.
 
+### pageSpecificCss
+
+Type: 'boolean`.
+Default:`true\`.
+
+Set to `false` to disable Batfish's minimal loader for compiling `.css` with PostCSS and transforming them into React components that you can render as needed.
+Read more in ["Page-specific CSS"].
+
+Turning this off will allow you to use different Webpack loaders for `.css` files — whatever suits your preferences.
+
 ### port
 
 Type: `number`.
@@ -622,6 +633,8 @@ If `true`, more information will be logged to the console.
 [`jsxtrememarkdownoptions`]: #jsxtrememarkdownoptions
 
 ["injecting data"]: ./advanced-usage.md#injecting-data
+
+["page-specific css"]: ./advanced-usage.md#page-specific-css
 
 [`jsxtrememarkdown.tocomponentmodule`]: https://github.com/mapbox/jsxtreme-markdown#tocomponentmodule
 

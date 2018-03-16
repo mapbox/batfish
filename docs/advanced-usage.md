@@ -289,6 +289,9 @@ export default class SomePage extends React.Component {
 }
 ```
 
+**You can turn this behavior off if you have your own preferences about what to do with imported `.css` files.**
+Set the [`pageSpecificCss`] option to `false`.
+
 [`route-change-listeners`]: ./batfish-modules.md#route-change-listeners
 
 [babel-plugin-transform-jsxtreme-markdown]: https://github.com/mapbox/babel-plugin-transform-jsxtreme-markdown
@@ -312,3 +315,5 @@ export default class SomePage extends React.Component {
 [`webpackstaticignore`]: ./configuration.md#webpackstaticignore
 
 [`webpackstaticstubreactcomponent`]: ./configuration.md#webpackstaticstubreactcomponent
+
+[`pagespecificcss`]: ./configuration.md#pagespecificcss
