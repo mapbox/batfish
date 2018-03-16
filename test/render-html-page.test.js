@@ -97,7 +97,7 @@ describe('renderHtmlPage', () => {
     return renderHtmlPage({
       route: mockRoute,
       inlineJsScripts: 'inline-js-scripts',
-      loadCssScript: 'load-css-script',
+      css: 'css',
       appendToBody: ['append', 'to', 'body']
     }).then(html => {
       expect(_.unescape(html)).toMatchSnapshot();
@@ -112,7 +112,7 @@ describe('renderHtmlPage', () => {
     return renderHtmlPage({
       route: mockRoute,
       inlineJsScripts: 'inline-js-scripts',
-      loadCssScript: 'load-css-script',
+      css: 'css',
       appendToBody: ['append', 'to', 'body']
     }).then(
       () => {
@@ -135,7 +135,7 @@ describe('renderHtmlPage', () => {
     return renderHtmlPage({
       route: mockRoute,
       inlineJsScripts: 'inline-js-scripts',
-      loadCssScript: 'load-css-script',
+      css: 'css',
       appendToBody: ['append', 'to', 'body']
     }).then(
       () => {
@@ -151,7 +151,7 @@ describe('renderHtmlPage', () => {
     return renderHtmlPage({
       route: mockRoute,
       inlineJsScripts: 'inline-js-scripts',
-      loadCssScript: 'load-css-script',
+      css: 'css',
       appendToBody: ['append', 'to', 'body'],
       spa: true
     }).then(html => {

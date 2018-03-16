@@ -8,7 +8,7 @@ window.addEventListener('click', () => {
 export default class App extends React.Component {
   render() {
     return (
-      <p>
+      <p id="app">
         The presence of this text means the app has rendered. Click around and
         you'll see corresponding console logs.
       </p>

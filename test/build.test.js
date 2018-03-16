@@ -73,7 +73,8 @@ describe('build', () => {
       publicAssetsPath: 'assets',
       production: true,
       siteOrigin: 'https://www.mapbox.com',
-      verbose: false
+      verbose: false,
+      staticHtmlInlineDeferCss: true
     };
   });
 
@@ -207,7 +208,8 @@ describe('build', () => {
         publicAssetsPath: 'assets',
         production: true,
         siteOrigin: 'https://www.mapbox.com',
-        verbose: false
+        verbose: false,
+        staticHtmlInlineDeferCss: true
       });
       done();
     });
@@ -279,7 +281,8 @@ describe('build', () => {
         publicAssetsPath: 'assets',
         production: true,
         siteOrigin: 'https://www.mapbox.com',
-        verbose: false
+        verbose: false,
+        staticHtmlInlineDeferCss: true
       });
       done();
     });
@@ -380,6 +383,16 @@ describe('build', () => {
   });
 
   test('if there are no stylesheets, skip CSS inlining', done => {
+    const emitter = build();
+    emitter.on(constants.EVENT_ERROR, logEmitterError);
+    process.nextTick(() => {
+      expect(inlineCss).not.toHaveBeenCalled();
+      done();
+    });
+  });
+
+  test('if staticHtmlInlineDeferCss is false, skip CSS inlining', done => {
+    validateConfig.mockValidatedConfig.staticHtmlInlineDeferCss = false;
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {

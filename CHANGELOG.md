@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- **Add:** Add `staticHtmlInlineDeferCss` option.
+
 ## 1.4.0
 
 - **Add:** Add `webpackStaticStubReactComponent` option.
