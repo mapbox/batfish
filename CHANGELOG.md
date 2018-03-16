@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.4.0
 
 - **Add:** Add `webpackStaticStubReactComponent` option.
 - **Add:** Use Webpack's `node` option in the client config to stub core Node libraries, resulting in fewer errors buried in users' dependencies.
