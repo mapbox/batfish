@@ -118,11 +118,6 @@ Object {
         "process.env.NODE_ENV": "\\"development\\"",
       },
     },
-    WebpackChunkHash {
-      "additionalHashContent": [Function],
-      "algorithm": "md5",
-      "digest": "hex",
-    },
   ],
   "resolve": Object {
     "alias": Object {
@@ -261,11 +256,6 @@ Object {
       "definitions": Object {
         "process.env.NODE_ENV": "\\"production\\"",
       },
-    },
-    WebpackChunkHash {
-      "additionalHashContent": [Function],
-      "algorithm": "md5",
-      "digest": "hex",
     },
   ],
   "resolve": Object {
@@ -427,11 +417,6 @@ Object {
       "definitions": Object {
         "process.env.NODE_ENV": "\\"development\\"",
       },
-    },
-    WebpackChunkHash {
-      "additionalHashContent": [Function],
-      "algorithm": "md5",
-      "digest": "hex",
     },
   ],
   "resolve": Object {

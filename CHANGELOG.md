@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- Remove webpack-chunk-hash dependency. Recent versions of Webpack do not require this module for deterministic filename hashing.
+
 ## 1.5.0
 
 - **Add:** Add `staticHtmlInlineDeferCss` option.
