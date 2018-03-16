@@ -4,7 +4,6 @@
 const _ = require('lodash');
 const path = require('path');
 const webpack = require('webpack');
-const WebpackChunkHash = require('webpack-chunk-hash');
 const writeContextModule = require('./write-context-module');
 const joinUrlParts = require('./join-url-parts');
 const constants = require('./constants');
@@ -188,10 +187,7 @@ function createWebpackConfigBase(
           'process.env.NODE_ENV': !batfishConfig.production
             ? '"development"'
             : '"production"'
-        }),
-        // Determine hashes with file content, not random strings. This allows
-        // for long-term caching.
-        new WebpackChunkHash()
+        })
       ],
       // Designate sourcemap type.
       devtool: !batfishConfig.production
