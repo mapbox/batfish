@@ -16,6 +16,13 @@ Object {
       "<PROJECT_ROOT>/node_modules/@mapbox/link-hijacker/index.js",
     ],
   },
+  "node": Object {
+    "child_process": "empty",
+    "dgram": "empty",
+    "fs": "empty",
+    "net": "empty",
+    "tls": "empty",
+  },
   "output": Object {
     "chunkFilename": "[name].chunk.js",
     "filename": "[name].js",
@@ -113,6 +120,13 @@ Object {
       "<PROJECT_ROOT>/node_modules/@mapbox/scroll-restorer/index.js",
       "<PROJECT_ROOT>/node_modules/@mapbox/link-hijacker/index.js",
     ],
+  },
+  "node": Object {
+    "child_process": "empty",
+    "dgram": "empty",
+    "fs": "empty",
+    "net": "empty",
+    "tls": "empty",
   },
   "output": Object {
     "chunkFilename": "[name]-[chunkhash].chunk.js",
@@ -234,6 +248,13 @@ Object {
       "pigman",
       "revenge-of-pigman",
     ],
+  },
+  "node": Object {
+    "child_process": "empty",
+    "dgram": "empty",
+    "fs": "empty",
+    "net": "empty",
+    "tls": "empty",
   },
   "output": Object {
     "chunkFilename": "[name].chunk.js",
