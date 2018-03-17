@@ -52,6 +52,7 @@ You can specify an alternate location.
   - [jsxtremeMarkdownOptions](#jsxtrememarkdownoptions)
   - [includePromisePolyfill](#includepromisepolyfill)
   - [inlineJs](#inlinejs)
+  - [sitemap](#sitemap)
   - [production](#production)
   - [developmentDevtool](#developmentdevtool)
   - [productionDevtool](#productiondevtool)
@@ -87,7 +88,7 @@ Origin where the site will be deployed.
 
 *Required if you want to use `prefixUrl.absolute`* (see ["Prefixing URLs"]).
 
-Also, *required if you want a sitemap*.
+Also, *required if you want a sitemap* (see [`sitemap`] option).
 
 ### publicAssetsPath
 
@@ -518,6 +519,14 @@ Each item is an object with the following properties:
 - **filename** (`string`): Path to the JS file.
 - **uglify** (`boolean`, default `true`): Whether or not to process the file with [UglifyJs] before inserting into the `<head>` during the static build.
 
+### sitemap
+
+Type: `boolean`.
+Default: `true`.
+
+By default, if you have set [`siteOrigin`] a `sitemap.xml` file will be generated and placed in your [`outputDirectory`] during `batfish build`.
+Set this to `false` to skip this step if you do not want a sitemap.
+
 ### production
 
 Type: `boolean`.
@@ -683,5 +692,9 @@ If `true`, more information will be logged to the console.
 [`devbrowserslist`]: #devbrowserslist
 
 [`browserslist`]: #browserslist
+
+[`siteorigin`]: #siteorigin
+
+[`sitemap`]: #sitemap
 
 ["minimal builds for single-page apps"]: ./advanced-usage.md#minimal-builds-for-single-page-apps

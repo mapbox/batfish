@@ -192,6 +192,10 @@ const configSchema = {
     validator: _.isBoolean,
     description: 'boolean'
   },
+  sitemap: {
+    validator: _.isBoolean,
+    description: 'boolean'
+  },
   includePages: {
     validator: isArrayOf(_.isString),
     description: 'globs relative to the pagesDirectory, not absolute paths'
@@ -265,7 +269,8 @@ function validateConfig(
     productionDevtool: false,
     clearOutputDirectory: true,
     spa: false,
-    webpackStaticStubReactComponent: []
+    webpackStaticStubReactComponent: [],
+    sitemap: true
   };
 
   const config = Object.assign({}, defaults, rawConfig);
