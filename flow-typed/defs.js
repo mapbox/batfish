@@ -54,6 +54,7 @@ declare type BatfishConfiguration = {
   port: number,
   verbose: boolean,
   spa: boolean,
+  sitemap: boolean,
   pageSpecificCss: boolean,
   staticHtmlInlineDeferCss: boolean
 };

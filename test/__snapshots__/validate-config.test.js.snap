@@ -46,6 +46,7 @@ Object {
   "productionDevtool": false,
   "publicAssetsPath": "assets",
   "siteBasePath": "",
+  "sitemap": true,
   "spa": false,
   "staticHtmlInlineDeferCss": true,
   "stylesheets": Array [],

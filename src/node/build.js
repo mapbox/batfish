@@ -111,6 +111,7 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
       });
     })
     .then(() => {
+      if (!batfishConfig.sitemap) return;
       if (batfishConfig.siteOrigin) {
         emitNotification('Building the sitemap.');
         return generateSitemap(batfishConfig);

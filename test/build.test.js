@@ -74,7 +74,8 @@ describe('build', () => {
       production: true,
       siteOrigin: 'https://www.mapbox.com',
       verbose: false,
-      staticHtmlInlineDeferCss: true
+      staticHtmlInlineDeferCss: true,
+      sitemap: true
     };
   });
 
@@ -203,14 +204,12 @@ describe('build', () => {
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
       expect(createWebpackConfigClient).toHaveBeenCalledTimes(1);
-      expect(createWebpackConfigClient).toHaveBeenCalledWith({
-        outputDirectory: '/mock/output/assets',
-        publicAssetsPath: 'assets',
-        production: true,
-        siteOrigin: 'https://www.mapbox.com',
-        verbose: false,
-        staticHtmlInlineDeferCss: true
-      });
+      expect(createWebpackConfigClient).toHaveBeenCalledWith(
+        Object.assign({}, validateConfig.mockValidatedConfig, {
+          outputDirectory: '/mock/output/assets',
+          production: true
+        })
+      );
       done();
     });
   });
@@ -276,14 +275,12 @@ describe('build', () => {
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
       expect(createWebpackConfigStatic).toHaveBeenCalledTimes(1);
-      expect(createWebpackConfigStatic).toHaveBeenCalledWith({
-        outputDirectory: '/mock/output/assets',
-        publicAssetsPath: 'assets',
-        production: true,
-        siteOrigin: 'https://www.mapbox.com',
-        verbose: false,
-        staticHtmlInlineDeferCss: true
-      });
+      expect(createWebpackConfigStatic).toHaveBeenCalledWith(
+        Object.assign({}, validateConfig.mockValidatedConfig, {
+          outputDirectory: '/mock/output/assets',
+          production: true
+        })
+      );
       done();
     });
   });
@@ -516,6 +513,16 @@ describe('build', () => {
       if (/unable to generate sitemap/.test(message)) {
         done();
       }
+    });
+  });
+
+  test('if sitemap option is false, does not create a sitemap', done => {
+    validateConfig.mockValidatedConfig.sitemap = false;
+    const emitter = build();
+    emitter.on(constants.EVENT_ERROR, logEmitterError);
+    process.nextTick(() => {
+      expect(generateSitemap).not.toHaveBeenCalled();
+      done();
     });
   });
 

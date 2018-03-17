@@ -2,6 +2,7 @@
 
 ## HEAD
 
+- **Add:** Add `sitemap` option, allowing user to turn off sitemap generation.
 - **Fix:** Improve error messages when front matter parsing fails.
 
 ## 1.5.1
