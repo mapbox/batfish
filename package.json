@@ -80,6 +80,7 @@
     ]
   },
   "dependencies": {
+    "@babel/code-frame": "^7.0.0-beta.42",
     "@mapbox/babel-plugin-transform-jsxtreme-markdown": "^0.4.2",
     "@mapbox/jsxtreme-markdown-loader": "^0.5.3",
     "@mapbox/link-hijacker": "^1.1.0",

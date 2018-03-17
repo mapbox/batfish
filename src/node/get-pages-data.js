@@ -12,6 +12,7 @@ const grayMatter = require('gray-matter');
 const joinUrlParts = require('./join-url-parts');
 const constants = require('./constants');
 const errorTypes = require('./error-types');
+const wrapError = require('./wrap-error');
 
 // Get data about pages. Reads the pagesDirectory, figures out URL paths, parses
 // front matter.
@@ -50,7 +51,14 @@ function getPagesData(
         const grayMatterOptions = isMarkdown
           ? { delims: ['---', '---'] }
           : { delims: ['/*---', '---*/'] };
-        const parsedFrontMatter = grayMatter(content, grayMatterOptions);
+        let parsedFrontMatter;
+        try {
+          parsedFrontMatter = grayMatter(content, grayMatterOptions);
+        } catch (parseError) {
+          throw wrapError(parseError, errorTypes.FrontMatterError, {
+            filePath
+          });
+        }
         const published = parsedFrontMatter.data.published !== false;
         if (!published && batfishConfig.production) return;
 

@@ -2,6 +2,8 @@
 'use strict';
 
 const chalk = require('chalk');
+const path = require('path');
+const codeFrame = require('@babel/code-frame');
 const webpackFormatMessages = require('webpack-format-messages');
 const errorTypes = require('./error-types');
 const renderPrettyErrorStack = require('./render-pretty-error-stack');
@@ -66,10 +68,32 @@ function getLoggableErrorMessage(error: Error): string | void {
   }
 
   if (error instanceof errorTypes.WebpackNodeExecutionError) {
-    result += `Failed to execute Webpack-compiled version of static-render-pages.js.\n${chalk.bold(
+    result += `Failed to execute Webpack-compiled version of static-render-pages.js.\n\n${chalk.bold.yellow(
       'You may be importing a JS file that cannot run in Node.'
     )}\n\n`;
     result += renderPrettyErrorStack(error.originalError);
+    return result;
+  }
+
+  if (error instanceof errorTypes.FrontMatterError) {
+    result += `Failed to parse front matter in ${chalk.yellow(
+      path.relative(process.cwd(), error.filePath)
+    )}.\n\n`;
+    if (error.originalError.name === 'YAMLException') {
+      result += `YAML error: ${error.originalError.reason}\n\n`;
+      result += codeFrame.codeFrameColumns(
+        error.originalError.mark.buffer,
+        {
+          start: {
+            line: error.originalError.mark.line + 1,
+            column: error.originalError.mark.column
+          }
+        },
+        { highlightCode: true, linesAbove: 10, linesBelow: 10 }
+      );
+    } else {
+      result += renderPrettyErrorStack(error.originalError);
+    }
     return result;
   }
 
