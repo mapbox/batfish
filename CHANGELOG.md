@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.6.0
 
 - **Add:** Add `sitemap` option, allowing user to turn off sitemap generation.
 - **Fix:** Improve error messages when front matter parsing fails.
