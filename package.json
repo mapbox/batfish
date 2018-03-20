@@ -118,6 +118,7 @@
     "html-webpack-plugin": "^2.30.1",
     "ignore-loader": "^0.1.2",
     "indefinite": "^2.1.1",
+    "is-absolute-url": "^2.1.0",
     "is-glob": "^4.0.0",
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.5",
