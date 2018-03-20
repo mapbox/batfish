@@ -3,6 +3,7 @@
 .*/node_modules/babel-plugin-transform-react-remove-prop-types/.*
 .*/node_modules/flow-coverage-report/.*
 .*/node_modules/immutable/.*
+.*/node_modules/bcryptjs/.*
 <PROJECT_ROOT>/examples/.*/node_modules/.*
 
 [include]

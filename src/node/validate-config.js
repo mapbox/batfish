@@ -360,6 +360,9 @@ function validateConfig(
       config.siteBasePath = '/' + config.siteBasePath;
     }
   }
+  if (config.publicAssetsPath[0] !== '/') {
+    config.publicAssetsPath = '/' + config.publicAssetsPath;
+  }
 
   if (config.includePages) {
     config.includePages = config.includePages

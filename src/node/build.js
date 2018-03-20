@@ -12,7 +12,7 @@ const generateSitemap = require('./generate-sitemap');
 const compileStylesheets = require('./compile-stylesheets');
 const constants = require('./constants');
 const maybeClearOutputDirectory = require('./maybe-clear-output-directory');
-const copyNonPageFiles = require('./copy-non-page-files');
+const nonPageFiles = require('./non-page-files');
 const writeWebpackStats = require('./write-webpack-stats');
 const buildHtml = require('./build-html');
 const webpackCompilePromise = require('./webpack-compile-promise');
@@ -89,7 +89,7 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     })
     .then(() => {
       emitNotification('Copying unprocessed files.');
-      return copyNonPageFiles(batfishConfig);
+      return nonPageFiles.copy(batfishConfig);
     })
     .then(() => {
       emitNotification('Building HTML.');

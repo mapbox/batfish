@@ -33,7 +33,10 @@ describe('watchContext', () => {
       { pagesDirectory: 'src/pages/' },
       { onError, afterCompilation }
     );
-    expect(chokidar.watch).toHaveBeenCalledWith('src/pages/**/*.{js,md}');
+    expect(chokidar.watch).toHaveBeenCalledWith('**/*.{js,md}', {
+      ignoreInitial: true,
+      cwd: 'src/pages/'
+    });
   });
 
   test('handles errors', () => {
@@ -62,6 +65,18 @@ describe('watchContext', () => {
     expect(chokidar.watcher.on.mock.calls[1][0]).toBe('unlink');
     // Manually trigger a change event.
     chokidar.watcher.on.mock.calls[1][1]();
+    expect(writeContextModule).toHaveBeenCalledWith(batfishConfig);
+    return Promise.resolve().then(() => {
+      expect(afterCompilation).toHaveBeenCalled();
+    });
+  });
+
+  test('rebuilds the context module on add events', () => {
+    const batfishConfig = { pagesDirectory: 'src/pages/' };
+    watchContext(batfishConfig, { onError, afterCompilation });
+    expect(chokidar.watcher.on.mock.calls[2][0]).toBe('add');
+    // Manually trigger a change event.
+    chokidar.watcher.on.mock.calls[2][1]();
     expect(writeContextModule).toHaveBeenCalledWith(batfishConfig);
     return Promise.resolve().then(() => {
       expect(afterCompilation).toHaveBeenCalled();

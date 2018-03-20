@@ -5,30 +5,26 @@ const _ = require('lodash');
 const webpack = require('webpack');
 const path = require('path');
 const chalk = require('chalk');
-const EventEmitter = require('events');
 const webpackMerge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const prettyMs = require('pretty-ms');
 const errorTypes = require('./error-types');
 const wrapError = require('./wrap-error');
 const constants = require('./constants');
 const createWebpackConfigClient = require('./create-webpack-config-client');
 const createWebpackStatsError = require('./create-webpack-stats-error');
 const watchContext = require('./watch-context');
-const serverInitMessage = require('./server-init-message');
 const writeWebpackStats = require('./write-webpack-stats');
 
-// Returns an EventEmitter that fires notification and error events.
 function watchWebpack(
   batfishConfig: BatfishConfiguration,
-  server: BatfishServer
-): EventEmitter {
-  const emitter = new EventEmitter();
-  const emitError = (error: Error) => {
-    emitter.emit(constants.EVENT_ERROR, error);
-  };
-  const emitNotification = (message: string) => {
-    emitter.emit(constants.EVENT_NOTIFICATION, message);
-  };
+  options: {
+    onError: Error => void,
+    onNotification: string => void,
+    onFirstCompile: () => void
+  }
+): void {
+  const { onError, onNotification, onFirstCompile } = options;
 
   const htmlWebpackPluginOptions = {
     template: path.join(__dirname, '../webpack/html-webpack-template.ejs'),
@@ -52,7 +48,7 @@ function watchWebpack(
       try {
         compiler = webpack(config);
       } catch (compilerInitializationError) {
-        emitError(
+        onError(
           wrapError(compilerInitializationError, errorTypes.WebpackFatalError)
         );
         return;
@@ -66,36 +62,37 @@ function watchWebpack(
 
         if (!hasCompiled) {
           hasCompiled = true;
-          emitNotification(chalk.green.bold('Go!'));
-          emitNotification(
-            serverInitMessage(server.browserSyncInstance, batfishConfig)
-          );
+          onNotification(chalk.green.bold('Go!'));
+          if (onFirstCompile) {
+            onFirstCompile();
+          }
         }
 
         if (compilationError) {
-          emitError(
+          onError(
             wrapError(compilationError, errorTypes.WebpackCompilationError)
           );
           return;
         }
 
         if (stats.hasErrors()) {
-          emitError(createWebpackStatsError(stats));
+          onError(createWebpackStatsError(stats));
         }
 
-        writeWebpackStats(batfishConfig.outputDirectory, stats).catch(
-          emitError
-        );
+        writeWebpackStats(batfishConfig.outputDirectory, stats).catch(onError);
         if (batfishConfig.verbose) {
-          emitNotification(
+          onNotification(
             stats.toString({
               chunks: false,
               colors: true
             })
           );
         }
-        emitNotification('Webpack finished compiling.');
-        server.reload();
+        const timing =
+          stats.endTime && stats.startTime
+            ? ` in ${prettyMs(stats.endTime - stats.startTime)}`
+            : '';
+        onNotification(`Webpack compiled${timing}.`);
       };
 
       compiler.watch(
@@ -118,15 +115,13 @@ function watchWebpack(
       // Watch pages separately, so we can rewrite the context module, which
       // will capture changes to front matter, page additions and deletions.
       watchContext(batfishConfig, {
-        onError: emitError,
+        onError: onError,
         afterCompilation: () => {
           compiler.run(onCompilation);
         }
       });
     })
-    .catch(emitError);
-
-  return emitter;
+    .catch(onError);
 }
 
 module.exports = watchWebpack;
