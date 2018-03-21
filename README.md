@@ -110,7 +110,7 @@ Then run `npm run start`, `npm run build`, and `npm run serve-static`, as needed
   ```jsx
   import React from 'react';
 
-  export default Home extends React.Component {
+  export default class Home extends React.Component {
     render() {
       return (
         <div>Hello world</div>
