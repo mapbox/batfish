@@ -103,9 +103,8 @@ declare type BatfishLocation = {
 };
 
 declare type BatfishServer = {
-  start: () => void,
-  reload: (filename?: string) => void,
-  browserSyncInstance: browserSync$server
+  start: () => Promise<void>,
+  initMessage: () => string
 };
 
 declare module 'batfish-internal/context' {
@@ -115,3 +114,5 @@ declare module 'batfish-internal/context' {
 declare module 'batfish-internal/application-wrapper' {
   declare export default React.Element<*>;
 }
+
+type MiddlewareFn = (req: { url: string }, res: Object, next: Function) => void;

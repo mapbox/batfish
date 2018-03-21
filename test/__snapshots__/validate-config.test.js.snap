@@ -44,7 +44,7 @@ Object {
   ],
   "production": false,
   "productionDevtool": false,
-  "publicAssetsPath": "assets",
+  "publicAssetsPath": "/assets",
   "siteBasePath": "",
   "sitemap": true,
   "spa": false,

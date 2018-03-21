@@ -4,7 +4,7 @@ module.exports = () => {
   return {
     siteOrigin: 'https://www.batfish-basic.com',
     stylesheets: [
-      'https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.min.css',
+      'https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.css',
       path.join(__dirname, './src/style.css')
     ],
     jsxtremeMarkdownOptions: {

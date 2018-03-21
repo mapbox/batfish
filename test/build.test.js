@@ -9,7 +9,7 @@ const compileStylesheets = require('../src/node/compile-stylesheets');
 const createWebpackConfigClient = require('../src/node/create-webpack-config-client');
 const createWebpackConfigStatic = require('../src/node/create-webpack-config-static');
 const maybeClearOutputDirectory = require('../src/node/maybe-clear-output-directory');
-const copyNonPageFiles = require('../src/node/copy-non-page-files');
+const nonPageFiles = require('../src/node/non-page-files');
 const writeWebpackStats = require('../src/node/write-webpack-stats');
 const buildHtml = require('../src/node/build-html');
 const webpackCompilePromise = require('../src/node/webpack-compile-promise');
@@ -44,8 +44,10 @@ jest.mock('../src/node/maybe-clear-output-directory', () => {
   return jest.fn(() => Promise.resolve());
 });
 
-jest.mock('../src/node/copy-non-page-files', () => {
-  return jest.fn(() => Promise.resolve());
+jest.mock('../src/node/non-page-files', () => {
+  return {
+    copy: jest.fn(() => Promise.resolve())
+  };
 });
 
 jest.mock('../src/node/write-webpack-stats', () => {
@@ -324,8 +326,8 @@ describe('build', () => {
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
-      expect(copyNonPageFiles).toHaveBeenCalledTimes(1);
-      expect(copyNonPageFiles).toHaveBeenCalledWith(
+      expect(nonPageFiles.copy).toHaveBeenCalledTimes(1);
+      expect(nonPageFiles.copy).toHaveBeenCalledWith(
         validateConfig.mockValidatedConfig
       );
       done();
@@ -334,7 +336,7 @@ describe('build', () => {
 
   test('catches errors when copying non-page files', done => {
     const expectedError = new Error();
-    copyNonPageFiles.mockReturnValueOnce(Promise.reject(expectedError));
+    nonPageFiles.copy.mockReturnValueOnce(Promise.reject(expectedError));
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, error => {
       expect(error).toBe(expectedError);

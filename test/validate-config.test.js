@@ -136,17 +136,17 @@ describe('validateConfig', () => {
   test('publicAssetsPath should be configurable', () => {
     expect(validateConfig(undefined, projectDirectory)).toHaveProperty(
       'publicAssetsPath',
-      'assets'
+      '/assets'
     );
 
     expect(
       validateConfig(
         {
-          publicAssetsPath: 'site_assets'
+          publicAssetsPath: '/site_assets'
         },
         projectDirectory
       )
-    ).toHaveProperty('publicAssetsPath', 'site_assets');
+    ).toHaveProperty('publicAssetsPath', '/site_assets');
   });
 
   test('if devBrowserslist is false, even non-production build uses browserslist to configure autoprefixer', () => {

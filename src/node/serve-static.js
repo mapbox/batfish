@@ -2,12 +2,14 @@
 'use strict';
 
 const EventEmitter = require('events');
+const connect = require('connect');
+const http = require('http');
+const getPort = require('get-port');
 const validateConfig = require('./validate-config');
 const getPagesData = require('./get-pages-data');
-const serverInitMessage = require('./server-init-message');
 const constants = require('./constants');
-const createServer = require('./create-server');
-const staticServerMiddleware = require('./static-server-middleware');
+const staticServerMiddleware = require('./server-middleware/static-server-middleware');
+const serverInitMessage = require('./server-init-message');
 
 function serveStatic(
   rawConfig?: Object,
@@ -33,29 +35,14 @@ function serveStatic(
     return emitter;
   }
 
-  getPagesData(batfishConfig)
-    .then(pagesData => {
-      const middleware = staticServerMiddleware(batfishConfig, pagesData);
-      const server = createServer({
-        onError: emitError,
-        browserSyncOptions: {
-          port: batfishConfig.port,
-          server: {
-            middleware,
-            baseDir: batfishConfig.outputDirectory
-          },
-          notify: false,
-          open: false,
-          logLevel: 'silent',
-          offline: true
-        }
+  Promise.all([getPagesData(batfishConfig), getPort(batfishConfig.port)])
+    .then(([pagesData, actualPort]) => {
+      const app = connect();
+      staticServerMiddleware(batfishConfig, pagesData).forEach(middleware => {
+        app.use(middleware);
       });
-      server.browserSyncInstance.emitter.on('init', () => {
-        emitNotification(
-          serverInitMessage(server.browserSyncInstance, batfishConfig)
-        );
-      });
-      server.start();
+      http.createServer(app).listen(actualPort);
+      emitNotification(serverInitMessage(batfishConfig, actualPort));
     })
     .catch(emitError);
 

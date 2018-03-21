@@ -3,15 +3,16 @@
 
 const chalk = require('chalk');
 const EventEmitter = require('events');
-const historyApiFallback = require('connect-history-api-fallback');
+const getPort = require('get-port');
 const constants = require('./constants');
 const validateConfig = require('./validate-config');
 const compileStylesheets = require('./compile-stylesheets');
-const joinUrlParts = require('./join-url-parts');
 const watchCss = require('./watch-css');
 const watchWebpack = require('./watch-webpack');
-const createServer = require('./create-server');
 const maybeClearOutputDirectory = require('./maybe-clear-output-directory');
+const serverInitMessage = require('./server-init-message');
+const devServer = require('./dev-server');
+const nonPageFiles = require('./non-page-files');
 
 function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
   rawConfig = rawConfig || {};
@@ -34,52 +35,37 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     return emitter;
   }
 
-  const serveAssetsDir = joinUrlParts(
-    batfishConfig.siteBasePath,
-    batfishConfig.publicAssetsPath
-  );
-  // This allows us to serve static files within the pages directory.
-  const servePagesDir = batfishConfig.siteBasePath;
-
-  const server = createServer({
-    onError: emitError,
-    browserSyncOptions: {
-      port: batfishConfig.port,
-      server: {
-        baseDir: batfishConfig.outputDirectory,
-        routes: {
-          [serveAssetsDir]: batfishConfig.outputDirectory,
-          [servePagesDir]: batfishConfig.pagesDirectory
-        },
-        middleware: [historyApiFallback()]
-      },
-      notify: false,
-      open: false,
-      logLevel: 'silent',
-      reloadDebounce: 500,
-      offline: true,
-      injectChanges: true
-    }
-  });
-
   maybeClearOutputDirectory(batfishConfig)
     .then(() => {
       emitNotification('Starting the development server.');
       emitNotification(chalk.yellow.bold('Wait ...'));
+
+      return Promise.all([
+        getPort(batfishConfig.port),
+        compileStylesheets(batfishConfig).catch(emitError),
+        nonPageFiles.copy(batfishConfig)
+      ]);
     })
-    .then(() => compileStylesheets(batfishConfig).catch(emitError))
-    .then(() => {
-      server.start();
+    .then(([actualPort]) => {
+      devServer(batfishConfig, actualPort);
+
       watchCss(batfishConfig, {
         onError: emitError,
-        afterCompilation: compiledFilename => {
-          emitNotification('CSS finished compiling.');
-          server.reload(compiledFilename);
-        }
+        onNotification: emitNotification
       });
-      const webpackWatcher = watchWebpack(batfishConfig, server);
-      webpackWatcher.on(constants.EVENT_NOTIFICATION, emitNotification);
-      webpackWatcher.on(constants.EVENT_ERROR, emitError);
+
+      nonPageFiles.watch(batfishConfig, {
+        onError: emitError,
+        onNotification: emitNotification
+      });
+
+      watchWebpack(batfishConfig, {
+        onFirstCompile: () => {
+          emitNotification(serverInitMessage(batfishConfig, actualPort));
+        },
+        onNotification: emitNotification,
+        onError: emitError
+      });
     })
     .catch(emitError);
 

@@ -3,9 +3,10 @@
 
 const url = require('url');
 const path = require('path');
+const nocache = require('nocache');
 const historyApiFallback = require('connect-history-api-fallback');
-
-type MiddlewareFn = (req: { url: string }, res: Object, next: Function) => void;
+const serveStatic = require('serve-static');
+const stripSiteBasePath = require('./strip-site-base-path');
 
 function getPagesWithInternalRouting(pagesData: {
   [string]: BatfishPageData
@@ -46,33 +47,25 @@ function createInternalRoutingMiddleware(
   }
 }
 
-function createStripSiteBasePathMiddleware(siteBasePath: string): MiddlewareFn {
-  return function stripSiteBasePath(
-    req: { url: string },
-    res: Object,
-    next: Function
-  ) {
-    if (req.url.startsWith(siteBasePath)) {
-      req.url = req.url.replace(siteBasePath, '') || '/';
-    }
-    next();
-  };
-}
-
 function serverStaticMiddleware(
   batfishConfig: BatfishConfiguration,
   pagesData: { [string]: BatfishPageData }
 ): Array<MiddlewareFn> {
   let middleware = [
-    createStripSiteBasePathMiddleware(batfishConfig.siteBasePath)
+    stripSiteBasePath(batfishConfig.siteBasePath),
+    nocache()
   ];
+
   const internalRoutingMiddleware = createInternalRoutingMiddleware(
     batfishConfig,
     pagesData
   );
+
   if (internalRoutingMiddleware) {
     middleware = middleware.concat(internalRoutingMiddleware);
   }
+
+  middleware.push(serveStatic(batfishConfig.outputDirectory));
 
   return middleware;
 }
