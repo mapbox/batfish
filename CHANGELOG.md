@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 1.6.2
 
 - **Fix:** Add several packages to `dependencies` which were mistakingly added to `devDependencies`.
 
