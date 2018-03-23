@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- **Fix:** Add several packages to `dependencies` which were mistakingly added to `devDependencies`.
+
 ## 1.6.1
 
 - Chore: Swap out development servers. This should reduce dependency weight and complexity and fix an infrequent bug where `start` crashed when it tried to print the local URL.
