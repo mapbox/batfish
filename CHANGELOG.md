@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Chore: Swap out development servers. This should reduce dependency weight and complexity and fix an infrequent bug where `start` crashed when it tried to print the local URL.
+
 ## 1.6.0
 
 - **Add:** Add `sitemap` option, allowing user to turn off sitemap generation.
