@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- **Fix:** If you provide an `applicationWrapper` in `spa` mode, it will be included in the static HTML build.
+
 ## 1.6.2
 
 - **Fix:** Add several packages to `dependencies` which were mistakingly added to `devDependencies`.

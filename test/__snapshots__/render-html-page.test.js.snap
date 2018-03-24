@@ -2,7 +2,7 @@
 
 exports[`renderHtmlPage SPA mode 1`] = `
 "<!doctype html><div id=\\"static-html-page\\" data-props=\\"{
-  \\"rawAppHtml\\": \\"<div data-reactroot=\\\\\\"\\\\\\">Mock component</div>\\",
+  \\"rawAppHtml\\": \\"<div id=\\\\\\"application-wrapper\\\\\\" data-reactroot=\\\\\\"\\\\\\">{}<div>Mock component</div></div>\\",
   \\"htmlAttributes\\": \\"htmlAttributes.mockToComponent\\",
   \\"bodyAttributes\\": \\"bodyAttributes.mockToComponent\\",
   \\"appendToHead\\": [
