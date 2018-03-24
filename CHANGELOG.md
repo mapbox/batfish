@@ -2,8 +2,9 @@
 
 ## Head
 
-- **Fix:** If you provide an `applicationWrapper` in `spa` mode, it will be included in the static HTML build.
 - **Add:** Improve logging by adding approximate times for build phases.
+- **Add:** Helpful default 404 page (in development mode only).
+- **Fix:** If you provide an `applicationWrapper` in `spa` mode, it will be included in the static HTML build.
 
 ## 1.6.2
 

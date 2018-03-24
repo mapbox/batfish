@@ -64,7 +64,8 @@ declare type InlineJsEntry = { filename: string, uglify?: boolean };
 declare type BatfishPageData = {
   filePath: string,
   path: string,
-  frontMatter: { [string]: JsonValue }
+  frontMatter: { [string]: JsonValue },
+  is404?: boolean
 };
 
 declare type BatfishSiteData = {

@@ -65,11 +65,10 @@ function writeContextModule(
 
       return writePageModule(batfishConfig, pageData).then(
         pageModuleFilePath => {
-          const is404 =
-            pageData.filePath.replace(/\.(js|md)$/, '') ===
-            path.join(batfishConfig.pagesDirectory, '404');
-          const chunkName = is404 ? 'not-found' : slugg(pagePath) || 'home';
-          const is404Property = is404 ? 'is404: true,' : '';
+          const chunkName = pageData.is404
+            ? 'not-found'
+            : slugg(pagePath) || 'home';
+          const is404Property = pageData.is404 ? 'is404: true,' : '';
           // "eager" mode (as opposed to the default "lazy" mode) means the import
           // will not create a separate async chunk, but will be bundled up with
           // its parent.
@@ -88,7 +87,7 @@ function writeContextModule(
             ${is404Property}
           }`;
 
-          if (is404) {
+          if (pageData.is404) {
             notFoundStringifiedRouteData = stringifiedRouteData;
           }
 
