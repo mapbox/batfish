@@ -132,7 +132,8 @@ describe('writeContextModule', () => {
         '/404/': {
           filePath: 'fake/pages/directory/404.js',
           path: '/404/',
-          frontMatter: {}
+          frontMatter: {},
+          is404: true
         }
       })
     );

@@ -5,7 +5,6 @@ const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
 const pify = require('pify');
-const pTry = require('p-try');
 const globby = require('globby');
 const micromatch = require('micromatch');
 const grayMatter = require('gray-matter');
@@ -22,79 +21,93 @@ const wrapError = require('./wrap-error');
 function getPagesData(
   batfishConfig: BatfishConfiguration
 ): Promise<{ [string]: BatfishPageData }> {
-  return pTry(() => {
-    const base = batfishConfig.siteBasePath;
-    const pagesGlob = [
-      path.join(batfishConfig.pagesDirectory, `**/*.${constants.PAGE_EXT_GLOB}`)
-    ];
+  // Convert a page's file path to its URL path.
+  const pageFilePathToUrlPath = (filePath: string): string => {
+    const relativePath = path.relative(batfishConfig.pagesDirectory, filePath);
+    if (/^index\.(js|md)$/.test(relativePath)) {
+      if (base === '/') return base;
+      return base + '/';
+    }
+    if (/\/index\.(js|md)$/.test(relativePath)) {
+      return joinUrlParts(base, path.dirname(relativePath), '');
+    }
+    return joinUrlParts(base, relativePath.replace(/\.(js|md)$/, ''), '');
+  };
 
-    // Convert a page's file path to its URL path.
-    const pageFilePathToUrlPath = (filePath: string): string => {
-      const relativePath = path.relative(
-        batfishConfig.pagesDirectory,
-        filePath
-      );
-      if (/^index\.(js|md)$/.test(relativePath)) {
-        if (base === '/') return base;
-        return base + '/';
+  let pagesData = {};
+  const registerPage = (filePath: string): Promise<void> => {
+    const is404 =
+      filePath.replace(/\.(js|md)$/, '') ===
+      path.join(batfishConfig.pagesDirectory, '404');
+
+    return pify(fs.readFile)(filePath, 'utf8').then((content: string) => {
+      const isMarkdown = path.extname(filePath) === '.md';
+      const grayMatterOptions = isMarkdown
+        ? { delims: ['---', '---'] }
+        : { delims: ['/*---', '---*/'] };
+      let parsedFrontMatter;
+      try {
+        parsedFrontMatter = grayMatter(content, grayMatterOptions);
+      } catch (parseError) {
+        throw wrapError(parseError, errorTypes.FrontMatterError, {
+          filePath
+        });
       }
-      if (/\/index\.(js|md)$/.test(relativePath)) {
-        return joinUrlParts(base, path.dirname(relativePath), '');
+      const published = parsedFrontMatter.data.published !== false;
+      if (!published && batfishConfig.production) return;
+
+      const pagePath = pageFilePathToUrlPath(filePath);
+      const pageData: BatfishPageData = {
+        filePath,
+        path: pagePath,
+        frontMatter: parsedFrontMatter.data
+      };
+      if (is404) {
+        pageData.is404 = true;
+        pageData.path = '/404/';
       }
-      return joinUrlParts(base, relativePath.replace(/\.(js|md)$/, ''), '');
-    };
+      pagesData[pagePath] = pageData;
+    });
+  };
 
-    let pagesData = {};
-    const registerPage = (filePath: string): Promise<void> => {
-      return pify(fs.readFile)(filePath, 'utf8').then((content: string) => {
-        const isMarkdown = path.extname(filePath) === '.md';
-        const grayMatterOptions = isMarkdown
-          ? { delims: ['---', '---'] }
-          : { delims: ['/*---', '---*/'] };
-        let parsedFrontMatter;
-        try {
-          parsedFrontMatter = grayMatter(content, grayMatterOptions);
-        } catch (parseError) {
-          throw wrapError(parseError, errorTypes.FrontMatterError, {
-            filePath
-          });
-        }
-        const published = parsedFrontMatter.data.published !== false;
-        if (!published && batfishConfig.production) return;
+  const base = batfishConfig.siteBasePath;
+  const pagesGlob = [
+    path.join(batfishConfig.pagesDirectory, `**/*.${constants.PAGE_EXT_GLOB}`)
+  ];
 
-        const pagePath = pageFilePathToUrlPath(filePath);
-        const pageData = {
-          filePath,
-          path: pagePath,
-          frontMatter: parsedFrontMatter.data
+  return globby(pagesGlob)
+    .then(pageFilePaths => {
+      // Filter out any unprocessedPageFiles
+      if (batfishConfig.unprocessedPageFiles) {
+        const unprocessed = micromatch(
+          pageFilePaths,
+          batfishConfig.unprocessedPageFiles
+        );
+        return _.difference(pageFilePaths, unprocessed);
+      } else {
+        return pageFilePaths;
+      }
+    })
+    .then(pageFilePaths => {
+      if (batfishConfig.spa && pageFilePaths.length > 1) {
+        throw new errorTypes.ConfigFatalError(
+          'In your Batfish config you set `spa: true`, but you have more than one page. SPA mode only allows one Batfish page.'
+        );
+      }
+      return Promise.all(pageFilePaths.map(registerPage));
+    })
+    .then(() => {
+      if (!pagesData['/404/'] && !batfishConfig.production) {
+        pagesData['/404/'] = {
+          filePath: path.join(__dirname, '../webpack/default-not-found.js'),
+          path: '/404/',
+          is404: true,
+          frontMatter: {}
         };
-        pagesData[pagePath] = pageData;
-      });
-    };
+      }
 
-    return globby(pagesGlob)
-      .then(pageFilePaths => {
-        // Filter out any unprocessedPageFiles
-        if (batfishConfig.unprocessedPageFiles) {
-          const unprocessed = micromatch(
-            pageFilePaths,
-            batfishConfig.unprocessedPageFiles
-          );
-          return _.difference(pageFilePaths, unprocessed);
-        } else {
-          return pageFilePaths;
-        }
-      })
-      .then(pageFilePaths => {
-        if (batfishConfig.spa && pageFilePaths.length > 1) {
-          throw new errorTypes.ConfigFatalError(
-            'In your Batfish config you set `spa: true`, but you have more than one page. SPA mode only allows one Batfish page.'
-          );
-        }
-        return Promise.all(pageFilePaths.map(registerPage));
-      })
-      .then(() => pagesData);
-  });
+      return pagesData;
+    });
 }
 
 module.exports = getPagesData;

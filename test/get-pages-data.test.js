@@ -177,4 +177,59 @@ describe('getPagesData', () => {
       expect(result['/about/']).toBeUndefined();
     });
   });
+
+  test('includes the default 404 page in development mode', () => {
+    const config = validateConfig({
+      pagesDirectory: fixtureDir
+    });
+    return getPagesData(config).then(result => {
+      expect(result['/404/']).not.toBeUndefined();
+      expect(result['/404/'].is404).toBe(true);
+      expect(result['/404/'].filePath).toMatch(/default-not-found\.js$/);
+    });
+  });
+
+  test('does not include the default 404 page in production mode', () => {
+    const config = validateConfig({
+      pagesDirectory: fixtureDir,
+      production: true
+    });
+    return getPagesData(config).then(result => {
+      expect(result['/404/']).toBeUndefined();
+    });
+  });
+
+  test('does not include the default 404 page if there is a custom 404 JS page', () => {
+    const config = validateConfig({
+      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data-404-js')
+    });
+    return getPagesData(config).then(result => {
+      expect(result['/404/']).not.toBeUndefined();
+      expect(result['/404/'].is404).toBe(true);
+      expect(result['/404/'].filePath).not.toMatch(/default-not-found\.js$/);
+      expect(result['/404/'].filePath).toMatch(
+        /get-pages-data-404-js\/404\.js$/
+      );
+      expect(result['/404/'].frontMatter).toEqual({
+        title: 'Not found'
+      });
+    });
+  });
+
+  test('does not include the default 404 page if there is a custom 404 Markdown page', () => {
+    const config = validateConfig({
+      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data-404-md')
+    });
+    return getPagesData(config).then(result => {
+      expect(result['/404/']).not.toBeUndefined();
+      expect(result['/404/'].is404).toBe(true);
+      expect(result['/404/'].filePath).not.toMatch(/default-not-found\.js$/);
+      expect(result['/404/'].filePath).toMatch(
+        /get-pages-data-404-md\/404\.md$/
+      );
+      expect(result['/404/'].frontMatter).toEqual({
+        title: 'Not found'
+      });
+    });
+  });
 });
