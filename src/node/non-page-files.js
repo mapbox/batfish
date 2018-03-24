@@ -4,7 +4,8 @@
 const cpy = require('cpy');
 const del = require('del');
 const chokidar = require('chokidar');
-const prettyMs = require('pretty-ms');
+const appendTaskTime = require('./append-task-time');
+const now = require('./now');
 
 function getNonPageFileGlob(
   batfishConfig: BatfishConfiguration
@@ -48,26 +49,22 @@ function watch(
   });
 
   const handleChangeAdd = filename => {
-    let startTime = Date.now();
+    const startTime = now();
     cpy(filename, batfishConfig.outputDirectory, {
       parents: true,
       cwd: batfishConfig.pagesDirectory
     }).then(() => {
       if (onNotification !== undefined) {
-        onNotification(
-          `${filename} copied in ${prettyMs(Date.now() - startTime)}.`
-        );
+        onNotification(appendTaskTime(`${filename} copied`, startTime));
       }
     }, onError);
   };
 
   const handleUnlink = filename => {
-    let startTime = Date.now();
+    const startTime = now();
     del(filename, { cwd: batfishConfig.outputDirectory }).then(() => {
       if (onNotification !== undefined) {
-        onNotification(
-          `${filename} deleted in ${prettyMs(Date.now() - startTime)}.`
-        );
+        onNotification(appendTaskTime(`${filename} deleted`, startTime));
       }
     }, onError);
   };

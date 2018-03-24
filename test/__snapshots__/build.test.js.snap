@@ -2,25 +2,36 @@
 
 exports[`build order of notifications, *with* CSS inlining and sitemap 1`] = `
 Array [
-  "Compiling CSS.",
-  "Starting the Webpack bundling.",
-  "Creating the client bundle.",
-  "Creating the static-page-rendering Node bundle.",
-  "Copying unprocessed files.",
-  "Building HTML.",
+  "Compiling css ...",
+  "Finished compiling css in 0ms",
+  "Bundling files for the browser ...",
+  "Finished bundling files for the browser in 5ms",
+  "Processing files for static HTML ...",
+  "Finished processing files for static HTML in 5ms",
+  "Copying non-page files ...",
+  "Finished copying non-page files in 0ms",
+  "Writing static html ...",
+  "Finished writing static HTML in 0ms",
+  "Inlining css in static html ...",
   "CSS inlining message 1",
   "CSS inlining message 2",
-  "Building the sitemap.",
+  "Finished inlining CSS in static HTML in 0ms",
+  "Building sitemap ...",
+  "Finished building sitemap in 0ms",
+  "Finished build in 0ms",
 ]
 `;
 
 exports[`build order of notifications, without CSS inlining or sitemap 1`] = `
 Array [
-  "Starting the Webpack bundling.",
-  "Creating the client bundle.",
-  "Creating the static-page-rendering Node bundle.",
-  "Copying unprocessed files.",
-  "Building HTML.",
-  "siteOrigin is not specified; unable to generate sitemap.",
+  "Bundling files for the browser ...",
+  "Finished bundling files for the browser in 5ms",
+  "Processing files for static HTML ...",
+  "Finished processing files for static HTML in 5ms",
+  "Copying non-page files ...",
+  "Finished copying non-page files in 0ms",
+  "Writing static html ...",
+  "Finished writing static HTML in 0ms",
+  "Finished build in 0ms",
 ]
 `;

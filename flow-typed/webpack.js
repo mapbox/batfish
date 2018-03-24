@@ -9,7 +9,9 @@
 declare type webpack$Stats = {
   hash: string,
   hasErrors(): boolean,
-  toJson(): JsonValue
+  toJson(): JsonValue,
+  endTime: number,
+  startTime: number
 };
 
 declare type webpack$Condition =

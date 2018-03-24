@@ -15,13 +15,10 @@ const buildHtml = require('../src/node/build-html');
 const webpackCompilePromise = require('../src/node/webpack-compile-promise');
 const validateConfig = require('../src/node/validate-config');
 
+jest.useFakeTimers();
+
 jest.mock('../src/node/inline-css', () => {
-  const mockEmitter = {
-    on: jest.fn()
-  };
-  const fn = jest.fn(() => mockEmitter);
-  fn.mockEmitter = mockEmitter;
-  return fn;
+  return jest.fn(() => Promise.resolve());
 });
 
 jest.mock('../src/node/generate-sitemap', () => {
@@ -59,7 +56,12 @@ jest.mock('../src/node/build-html', () => {
 });
 
 jest.mock('../src/node/webpack-compile-promise', () => {
-  return jest.fn(() => Promise.resolve());
+  return jest.fn(() =>
+    Promise.resolve({
+      startTime: 10,
+      endTime: 15
+    })
+  );
 });
 
 jest.mock('../src/node/validate-config', () => {
@@ -67,6 +69,8 @@ jest.mock('../src/node/validate-config', () => {
   fn.mockValidatedConfig = {};
   return fn;
 });
+
+jest.mock('../src/node/now', () => jest.fn(() => 10));
 
 describe('build', () => {
   beforeEach(() => {
@@ -416,30 +420,25 @@ describe('build', () => {
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
-      expect(inlineCss).toHaveBeenCalledWith(
-        '/mock/output',
-        'mock-stylesheet.css',
-        {
-          verbose: false
-        }
+      expect(inlineCss).toHaveBeenCalledTimes(1);
+      expect(inlineCss.mock.calls[0][0]).toBe('/mock/output');
+      expect(inlineCss.mock.calls[0][1]).toBe('mock-stylesheet.css');
+      expect(inlineCss.mock.calls[0][2].verbose).toBe(false);
+      expect(inlineCss.mock.calls[0][2].onNotification).toBeInstanceOf(
+        Function
       );
       done();
     });
   });
 
   test('catches errors while inlining CSS', done => {
-    const expectedError = new Error();
     validateConfig.mockValidatedConfig.stylesheets = ['one.css', 'two.css'];
+    const expectedError = new Error();
+    inlineCss.mockReturnValueOnce(Promise.reject(expectedError));
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, error => {
       expect(error).toBe(expectedError);
       done();
-    });
-    process.nextTick(() => {
-      const errorHandler = inlineCss.mockEmitter.on.mock.calls.find(
-        call => call[0] === constants.EVENT_ERROR
-      )[1];
-      errorHandler(expectedError);
     });
   });
 
@@ -448,32 +447,12 @@ describe('build', () => {
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
-      const notificationHandler = inlineCss.mockEmitter.on.mock.calls.find(
-        call => call[0] === constants.EVENT_NOTIFICATION
-      )[1];
       emitter.on(constants.EVENT_NOTIFICATION, message => {
-        expect(message).toBe('xyz');
-        done();
+        if (message === 'xyz') {
+          done();
+        }
       });
-      notificationHandler('xyz');
-    });
-  });
-
-  test('does not finish until the inlining CSS fires its done event', done => {
-    validateConfig.mockValidatedConfig.stylesheets = ['one.css', 'two.css'];
-    const emitter = build();
-    emitter.on(constants.EVENT_ERROR, logEmitterError);
-    let buildDone = false;
-    emitter.on(constants.EVENT_DONE, () => {
-      buildDone = true;
-      done();
-    });
-    process.nextTick(() => {
-      const doneHandler = inlineCss.mockEmitter.on.mock.calls.find(
-        call => call[0] === constants.EVENT_DONE
-      )[1];
-      expect(buildDone).toBe(false);
-      doneHandler();
+      inlineCss.mock.calls[0][2].onNotification('xyz');
     });
   });
 
@@ -507,14 +486,13 @@ describe('build', () => {
     });
   });
 
-  test('if config does not include siteOrigin, does not create a sitemap and emits a notification', done => {
+  test('if config does not include siteOrigin, does not create a sitemap', done => {
     validateConfig.mockValidatedConfig.siteOrigin = undefined;
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
-    emitter.on(constants.EVENT_NOTIFICATION, message => {
-      if (/unable to generate sitemap/.test(message)) {
-        done();
-      }
+    process.nextTick(() => {
+      expect(generateSitemap).not.toHaveBeenCalled();
+      done();
     });
   });
 
@@ -544,6 +522,11 @@ describe('build', () => {
 
   test('order of notifications, *with* CSS inlining and sitemap', done => {
     validateConfig.mockValidatedConfig.stylesheets = ['one.css', 'two.css'];
+    inlineCss.mockImplementationOnce((a, b, { onNotification }) => {
+      onNotification('CSS inlining message 1');
+      onNotification('CSS inlining message 2');
+      return Promise.resolve();
+    });
     const notifications = [];
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
@@ -553,17 +536,6 @@ describe('build', () => {
     emitter.on(constants.EVENT_DONE, () => {
       expect(notifications).toMatchSnapshot();
       done();
-    });
-    process.nextTick(() => {
-      const cssInliningNotificationHandler = inlineCss.mockEmitter.on.mock.calls.find(
-        call => call[0] === constants.EVENT_NOTIFICATION
-      )[1];
-      cssInliningNotificationHandler('CSS inlining message 1');
-      cssInliningNotificationHandler('CSS inlining message 2');
-      const cssInliningDoneHandler = inlineCss.mockEmitter.on.mock.calls.find(
-        call => call[0] === constants.EVENT_DONE
-      )[1];
-      cssInliningDoneHandler();
     });
   });
 });

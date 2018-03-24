@@ -7,7 +7,7 @@ const path = require('path');
 const chalk = require('chalk');
 const webpackMerge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const prettyMs = require('pretty-ms');
+const appendTaskTime = require('./append-task-time');
 const errorTypes = require('./error-types');
 const wrapError = require('./wrap-error');
 const constants = require('./constants');
@@ -88,11 +88,9 @@ function watchWebpack(
             })
           );
         }
-        const timing =
-          stats.endTime && stats.startTime
-            ? ` in ${prettyMs(stats.endTime - stats.startTime)}`
-            : '';
-        onNotification(`Webpack compiled${timing}.`);
+        onNotification(
+          appendTaskTime('Webpack compiled', stats.startTime, stats.endTime)
+        );
       };
 
       compiler.watch(
