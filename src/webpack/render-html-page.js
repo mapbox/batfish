@@ -2,9 +2,9 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
-import ApplicationWrapper from 'batfish-internal/application-wrapper';
+import { BatfishApp } from './batfish-app';
+import { BatfishSpaApp } from './batfish-spa-app';
 import { StaticHtmlPage } from './static-html-page';
-import { Router } from './router';
 import constants from '../node/constants';
 
 export function renderHtmlPage(options: {
@@ -22,16 +22,10 @@ export function renderHtmlPage(options: {
     // by React.
     let pageContent;
     if (options.spa) {
-      pageContent = React.createElement(pageModule.component, pageModule.props);
+      pageContent = <BatfishSpaApp pageModule={pageModule} />;
     } else {
       pageContent = (
-        <ApplicationWrapper>
-          <Router
-            startingPath={options.route.path}
-            startingComponent={pageModule.component}
-            startingProps={pageModule.props}
-          />
-        </ApplicationWrapper>
+        <BatfishApp startingPath={options.route.path} pageModule={pageModule} />
       );
     }
     const rawAppHtml = ReactDOMServer.renderToString(pageContent);
