@@ -3,8 +3,9 @@
 
 const _ = require('lodash');
 const chokidar = require('chokidar');
-const prettyMs = require('pretty-ms');
+const appendTaskTime = require('./append-task-time');
 const compileStylesheets = require('./compile-stylesheets');
+const now = require('./now');
 
 function watchCss(
   batfishConfig: BatfishConfiguration,
@@ -18,10 +19,10 @@ function watchCss(
 
   const cssWatcher = chokidar.watch(batfishConfig.stylesheets);
   cssWatcher.on('change', () => {
-    let startTime = Date.now();
+    let startTime = now();
     compileStylesheets(batfishConfig).then(() => {
       if (onNotification !== undefined) {
-        onNotification(`CSS compiled in ${prettyMs(Date.now() - startTime)}.`);
+        onNotification(appendTaskTime('CSS compiled', startTime));
       }
     }, onError);
   });
