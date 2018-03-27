@@ -90,8 +90,10 @@ function createWebpackConfigClient(
       new webpack.HashedModuleIdsPlugin(),
       new webpack.NamedChunksPlugin(chunk => {
         if (chunk.name) return chunk.name;
-        const hashSeed = chunk.modules
-          .map(m => m.resource || '')
+        const hashSeed = Array.from(
+          chunk.modulesIterable,
+          m => m.resource || ''
+        )
           .sort()
           .map(resource => {
             return path.relative(batfishConfig.pagesDirectory, resource);
