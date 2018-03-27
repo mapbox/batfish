@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 1.7.0
 
 - **Add:** Improve logging by adding approximate times for build phases.
 - **Add:** Helpful default 404 page (in development mode only).
