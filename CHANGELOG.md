@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.7.4
 
 - **Fix:** Add `babel-core` to `dependencies`, since it's a peer dependency of `babel-loader`.
 
