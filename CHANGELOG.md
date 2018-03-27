@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- Chore: Unobtrusive dependency updates.
+
 ## 1.7.5
 
 - **Fix:** Prevent new default 404 page from breaking SPA mode.
