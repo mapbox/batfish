@@ -199,6 +199,17 @@ describe('getPagesData', () => {
     });
   });
 
+  test('does not include the default 404 page in SPA mode', () => {
+    const config = validateConfig({
+      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data-spa'),
+      spa: true,
+      production: false
+    });
+    return getPagesData(config).then(result => {
+      expect(result['/404/']).toBeUndefined();
+    });
+  });
+
   test('does not include the default 404 page if there is a custom 404 JS page', () => {
     const config = validateConfig({
       pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data-404-js')
