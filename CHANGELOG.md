@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 1.7.3
 
 - **Fix:** Replace code that caused Webpack warning about `Chunk.modules` being deprecated.
 
