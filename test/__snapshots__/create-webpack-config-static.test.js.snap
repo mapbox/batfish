@@ -8,9 +8,16 @@ Object {
     "static": "<PROJECT_ROOT>/src/webpack/static-render-pages.js",
   },
   "externals": Object {
+    "@mapbox/link-hijacker": "<PROJECT_ROOT>/node_modules/@mapbox/link-hijacker/index.js",
+    "@mapbox/link-to-location": "<PROJECT_ROOT>/node_modules/@mapbox/link-to-location/index.js",
+    "@mapbox/scroll-restorer": "<PROJECT_ROOT>/node_modules/@mapbox/scroll-restorer/index.js",
     "mkdirp": "<PROJECT_ROOT>/node_modules/mkdirp/index.js",
+    "pify": "<PROJECT_ROOT>/node_modules/pify/index.js",
     "react": "react",
     "react-dom": "react-dom",
+    "react-dom/server": "react-dom/server",
+    "react-helmet": "react-helmet",
+    "source-map-support/register": "<PROJECT_ROOT>/node_modules/source-map-support/register.js",
     "uglify-js": "<PROJECT_ROOT>/node_modules/uglify-js/tools/node.js",
   },
   "node": Object {
@@ -45,9 +52,16 @@ Object {
     "static": "<PROJECT_ROOT>/src/webpack/static-render-pages.js",
   },
   "externals": Object {
+    "@mapbox/link-hijacker": "<PROJECT_ROOT>/node_modules/@mapbox/link-hijacker/index.js",
+    "@mapbox/link-to-location": "<PROJECT_ROOT>/node_modules/@mapbox/link-to-location/index.js",
+    "@mapbox/scroll-restorer": "<PROJECT_ROOT>/node_modules/@mapbox/scroll-restorer/index.js",
     "mkdirp": "<PROJECT_ROOT>/node_modules/mkdirp/index.js",
+    "pify": "<PROJECT_ROOT>/node_modules/pify/index.js",
     "react": "react",
     "react-dom": "react-dom",
+    "react-dom/server": "react-dom/server",
+    "react-helmet": "react-helmet",
+    "source-map-support/register": "<PROJECT_ROOT>/node_modules/source-map-support/register.js",
     "uglify-js": "<PROJECT_ROOT>/node_modules/uglify-js/tools/node.js",
   },
   "module": Object {

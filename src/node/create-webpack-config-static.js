@@ -33,11 +33,21 @@ function createWebpackConfigStatic(
       externals: {
         // These modules are required by static-render-pages and don't play
         // nice when Webpack tries to compile them, or we know they can be
-        // loaded in Node.
+        // loaded in Node. They are require.resolved when they are direct
+        // dependencies of Batfish, and not when they are peer dependencies.
+        react: 'react',
+        'react-dom': 'react-dom',
+        'react-dom/server': 'react-dom/server',
+        'react-helmet': 'react-helmet',
         'uglify-js': require.resolve('uglify-js'),
         mkdirp: require.resolve('mkdirp'),
-        react: 'react',
-        'react-dom': 'react-dom'
+        'source-map-support/register': require.resolve(
+          'source-map-support/register'
+        ),
+        pify: require.resolve('pify'),
+        '@mapbox/link-hijacker': require.resolve('@mapbox/link-hijacker'),
+        '@mapbox/scroll-restorer': require.resolve('@mapbox/scroll-restorer'),
+        '@mapbox/link-to-location': require.resolve('@mapbox/link-to-location')
       },
       plugins: [
         // Ensure that all files will be grouped into one file,
