@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- **Fix:** Prevent new default 404 page from breaking SPA mode.
+
 ## 1.7.4
 
 - **Fix:** Add `babel-core` to `dependencies`, since it's a peer dependency of `babel-loader`.

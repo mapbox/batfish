@@ -97,7 +97,11 @@ function getPagesData(
       return Promise.all(pageFilePaths.map(registerPage));
     })
     .then(() => {
-      if (!pagesData['/404/'] && !batfishConfig.production) {
+      if (
+        !pagesData['/404/'] &&
+        !batfishConfig.production &&
+        !batfishConfig.spa
+      ) {
         pagesData['/404/'] = {
           filePath: path.join(__dirname, '../webpack/default-not-found.js'),
           path: '/404/',
