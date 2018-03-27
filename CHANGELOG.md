@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- **Fix:** Replace code that caused Webpack warning about `Chunk.modules` being deprecated.
+
 ## 1.7.2
 
 - **Add:** Improve logging by adding approximate times for build phases.
