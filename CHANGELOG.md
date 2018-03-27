@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- **Fix:** Add `babel-core` to `dependencies`, since it's a peer dependency of `babel-loader`.
+
 ## 1.7.3
 
 - **Fix:** Replace code that caused Webpack warning about `Chunk.modules` being deprecated.
