@@ -102,8 +102,8 @@ Then run `npm run start`, `npm run build`, and `npm run serve-static`, as needed
 
 **The bare minimum to get started with Batfish.**
 
-- Run `npm install @mapbox/batfish --save`.
-- Create a new `script` in your `package.json` to start Batfish: `"start": "batfish start"`.
+- Run `npm install --save @mapbox/batfish react react-dom react-helmet` (installing Batfish and its peer dependencies).
+- Create 3 new `script`s in your `package.json`: `"start": "batfish start"`, `"build": "batfish build"`, `"serve-static": "batfish serve-static"`.
 - Create your first page file at `src/pages/index.js`.
 - Export from that page file a React component that renders something. Maybe something like this:
 
@@ -122,12 +122,15 @@ Then run `npm run start`, `npm run build`, and `npm run serve-static`, as needed
 - Run `npm run start`.
 - Open the URL printed in your terminal.
 - Build your website.
+- When you're ready to deploy, run `npm run build` to build the site for production, then `npm run serve-static` to check out the production site, which was written to `_batfish_site/`.
+- Put your `_batfish_site/` directory on the Internet.
 
 If you need to add configuration, create a `batfish.config.js` module in your project root.
 See ["Configuration"](#configuration).
 
 Look at [`examples/basic/`](examples/basic) for a simple example project.
-For a more advanced example project, check out [`examples/miscellany/`](examples/miscellany).
+Look at [`examples/no-config/`](examples/no-config) for a project with no configuration.
+Or [`examples/miscellany/`](examples/miscellany), for a more advanced example project.
 
 ## API
 
