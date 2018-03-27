@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/batfish",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "The React-powered static-site generator you didn't know you wanted",
   "main": "dist/node/index.js",
   "bin": {
@@ -15,7 +15,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "lint-js": "eslint .",
-    "format": "prettier --single-quote --write '{,src*/**/,bin/**/,test/**/,flow-typed/}*.js'",
+    "format": "prettier --write '{,src*/**/,bin/**/,test/**/,flow-typed/}*.js'",
     "test-jest": "jest",
     "lint-md-partial": "remark -u remark-preset-davidtheclark --frail --quiet --no-stdout --output --",
     "lint-md": "npm run lint-md-partial -- docs/*.md *.md",
@@ -41,7 +41,7 @@
   "lint-staged": {
     "**/*.js": [
       "eslint",
-      "prettier --single-quote --write",
+      "prettier --write",
       "git add"
     ],
     "{docs/*.md,README.md,CHANGELOG.md}": [
