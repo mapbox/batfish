@@ -14,6 +14,7 @@
 - [Route change listeners](#route-change-listeners)
 - [Analyzing bundles](#analyzing-bundles)
 - [Page-specific CSS](#page-specific-css)
+- [Generating tables of contents for Markdown pages](#generating-tables-of-contents-for-markdown-pages)
 
 ## Draft pages
 
@@ -297,6 +298,22 @@ export default class SomePage extends React.Component {
 
 **You can turn this behavior off if you have your own preferences about what to do with imported `.css` files.**
 Set the [`pageSpecificCss`] option to `false`.
+
+## Generating tables of contents for Markdown pages
+
+The front matter of Markdown pages is automatically augmented with a `headings` property that includes data about the headings in the Markdown file.
+(This is [a feature of jsxtreme-markdown](https://github.com/mapbox/jsxtreme-markdown/tree/master/packages/jsxtreme-markdown#headings).)
+
+You can use this data in your Markdown wrapper to automatically generate a table of contents!
+The value `headings` is an an array of objects; each object has the following properties:
+
+- `text`: the text of the heading.
+- `slug`: the slugified heading text, which corresponds to an `id` attribute automatically added to the heading elements.
+  Use this to create hash fragment links, e.g. `<a href={`#${item.slug}`}>`.
+- `level`: the level of the heading (1-6).
+
+Use regular JS methods like `filter`, `map`, etc., to transform the provided data structure into the table of contents of your dreams.
+For example, [`examples/table-of-contents/`](../examples/table-of-contents) includes a Markdown wrapper that creates a table of contents that only displays headings of levels 2 and 3 and indents level 3 headings.
 
 [`route-change-listeners`]: ./batfish-modules.md#route-change-listeners
 
