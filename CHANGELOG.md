@@ -2,6 +2,9 @@
 
 ## HEAD
 
+- **Add:** Automatically add data about headings to front matter of Markdown pages and `id` attributes to the heading elements.
+  The headings data can be used to generate a table of contents in the Markdown page wrapper component, as illustrated in the table-of-contents example.
+  (This feature was added to jsxtreme-markdown.)
 - Chore: Unobtrusive dependency updates.
 
 ## 1.7.5

@@ -35,6 +35,9 @@ function createWebpackConfigBase(
       `import { routeTo, routeToPrefixed } from '@mapbox/batfish/modules/route-to';`
     );
     jsxtremeMarkdownOptions.prependJs = prependJs;
+    if (jsxtremeMarkdownOptions.headings === undefined) {
+      jsxtremeMarkdownOptions.headings = true;
+    }
 
     const fileLoaderTest = new RegExp(
       `\\.(${batfishConfig.fileLoaderExtensions.join('|')})$`

@@ -38,7 +38,8 @@ declare type BatfishConfiguration = {
   jsxtremeMarkdownOptions: {
     prependJs?: Array<string>,
     remarkPlugins?: Array<Function>,
-    rehypePlugins?: Array<Function>
+    rehypePlugins?: Array<Function>,
+    headings?: boolean
   },
   includePromisePolyfill: boolean,
   inlineJs?: Array<InlineJsEntry>,

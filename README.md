@@ -289,7 +289,11 @@ Things had started to smell ...
 I love shopping for cleaning supplies ...
 ```
 
-See [`examples/miscellany/`](examples/miscellany) to learn more about what's possible with Markdown wrappers.
+The front matter passed to Markdown wrapper components is augmented with a `headings` field, which contains an array of data about the headings in the Markdown.
+This data includes `slug`s that correspond to `id` attributes automatically added to the heading elements; so you can use this to generate a table of contents.
+(Read more in ["Generating tables of contents for Markdown pages"].)
+
+See [`examples/miscellany/`](examples/miscellany) and [`examples/table-of-contents/`](examples/table-of-contents) to learn more about what's possible with Markdown wrappers.
 
 #### Import JS modules into jsxtreme-markdown
 
@@ -473,3 +477,5 @@ Please let us know what you think!
 ["page-specific css"]: docs/advanced-usage.md#page-specific-css
 
 ["hello world guide"]: docs/hello-world.md
+
+["generating tables of contents for markdown pages"]: docs/advanced-usage.md#generating-tables-of-contents-for-markdown-pages

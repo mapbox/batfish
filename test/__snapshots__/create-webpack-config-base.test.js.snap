@@ -59,6 +59,7 @@ Object {
           Object {
             "loader": "@mapbox/jsxtreme-markdown-loader",
             "options": Object {
+              "headings": true,
               "prependJs": Array [
                 "import { prefixUrl, prefixUrlAbsolute } from '@mapbox/batfish/modules/prefix-url';",
                 "import { routeTo, routeToPrefixed } from '@mapbox/batfish/modules/route-to';",
@@ -197,6 +198,7 @@ Object {
           Object {
             "loader": "@mapbox/jsxtreme-markdown-loader",
             "options": Object {
+              "headings": true,
               "prependJs": Array [
                 "import { prefixUrl, prefixUrlAbsolute } from '@mapbox/batfish/modules/prefix-url';",
                 "import { routeTo, routeToPrefixed } from '@mapbox/batfish/modules/route-to';",
@@ -345,6 +347,7 @@ Object {
           Object {
             "loader": "@mapbox/jsxtreme-markdown-loader",
             "options": Object {
+              "headings": true,
               "prependJs": Array [
                 "const add = (x, y) => x + y;",
                 "import egg from 'chicken';",
