@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.8.0
 
 - **Add:** Automatically add data about headings to front matter of Markdown pages and `id` attributes to the heading elements.
   The headings data can be used to generate a table of contents in the Markdown page wrapper component, as illustrated in the table-of-contents example.
