@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- Update jsxtreme-markdown packages, which use a new processing pipeline.
+
 ## 1.8.0
 
 - **Add:** Automatically add data about headings to front matter of Markdown pages and `id` attributes to the heading elements.
