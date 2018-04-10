@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.8.1
 
 - Update jsxtreme-markdown packages, which use a new processing pipeline.
 
