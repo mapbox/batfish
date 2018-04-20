@@ -33,10 +33,12 @@ A static-site generator powered by React and Webpack.
 
 ## Other documentation to check out
 
-- [`docs/configuration.md`](docs/configuration.md)
-- [`docs/batfish-modules.md`](docs/batfish-modules.md)
-- [`docs/node-api.md`](docs/node-api.md)
 - [`docs/q-and-a.md`](docs/q-and-a.md)
+- [`docs/configuration.md`](docs/configuration.md)
+- [`docs/advanced-usage.md`](docs/advanced-usage.md)
+- [`docs/batfish-modules.md`](docs/batfish-modules.md)
+- [`docs/cli.md`](docs/cli.md)
+- [`docs/node-api.md`](docs/node-api.md)
 
 ## Goals
 
@@ -106,9 +108,9 @@ Then run `npm run start`, `npm run build`, and `npm run serve-static`, as needed
   ```
   npm install --save @mapbox/batfish react react-dom react-helmet
   ```
-- Create 3 new `script`s in your `package.json`: 
+- Create 3 new `script`s in your `package.json`:
   ```
-  "start": "batfish start", 
+  "start": "batfish start",
   "build": "batfish build",
   "serve-static": "batfish serve-static",
   ```
