@@ -95,7 +95,7 @@ const cli = meow({
       alias: 'V'
     },
     port: {
-      type: 'string',
+      type: 'number',
       alias: 'p'
     },
     debug: {
