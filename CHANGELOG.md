@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- **Fix** Change the  CLI parameter `-p/--port` to accept number data type.
+
 ## 1.8.1
 
 - Update jsxtreme-markdown packages, which use a new processing pipeline.
