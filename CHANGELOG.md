@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.8.2
 
 - **Fix** Change the  CLI parameter `-p/--port` to accept number data type.
 
