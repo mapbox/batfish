@@ -4,12 +4,12 @@
 const EventEmitter = require('events');
 const connect = require('connect');
 const http = require('http');
-const getPort = require('get-port');
 const validateConfig = require('./validate-config');
 const getPagesData = require('./get-pages-data');
 const constants = require('./constants');
 const staticServerMiddleware = require('./server-middleware/static-server-middleware');
 const serverInitMessage = require('./server-init-message');
+const { getPort, portInUsageMessages } = require('./get-port');
 
 function serveStatic(
   rawConfig?: Object,
@@ -20,8 +20,10 @@ function serveStatic(
   const emitError = error => {
     emitter.emit(constants.EVENT_ERROR, error);
   };
-  const emitNotification = message => {
-    emitter.emit(constants.EVENT_NOTIFICATION, message);
+  const emitNotification = (...messages: string[]) => {
+    messages.forEach(message =>
+      emitter.emit(constants.EVENT_NOTIFICATION, message)
+    );
   };
 
   let batfishConfig;
@@ -35,7 +37,17 @@ function serveStatic(
     return emitter;
   }
 
-  Promise.all([getPagesData(batfishConfig), getPort(batfishConfig.port)])
+  const checkPort = getPort(batfishConfig.port).then(actualPort => {
+    if (actualPort === batfishConfig.port) {
+      return actualPort;
+    }
+    return portInUsageMessages(batfishConfig.port).then(messages => {
+      emitNotification(...messages);
+      return actualPort;
+    });
+  });
+
+  Promise.all([getPagesData(batfishConfig), checkPort])
     .then(([pagesData, actualPort]) => {
       const app = connect();
       staticServerMiddleware(batfishConfig, pagesData).forEach(middleware => {

@@ -3,7 +3,6 @@
 
 const chalk = require('chalk');
 const EventEmitter = require('events');
-const getPort = require('get-port');
 const constants = require('./constants');
 const validateConfig = require('./validate-config');
 const compileStylesheets = require('./compile-stylesheets');
@@ -13,6 +12,7 @@ const maybeClearOutputDirectory = require('./maybe-clear-output-directory');
 const serverInitMessage = require('./server-init-message');
 const devServer = require('./dev-server');
 const nonPageFiles = require('./non-page-files');
+const { getPort, portInUsageMessages } = require('./get-port');
 
 function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
   rawConfig = rawConfig || {};
@@ -20,8 +20,10 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
   const emitError = (error: Error) => {
     emitter.emit(constants.EVENT_ERROR, error);
   };
-  const emitNotification = (message: string) => {
-    emitter.emit(constants.EVENT_NOTIFICATION, message);
+  const emitNotification = (...messages: string[]) => {
+    messages.forEach(message =>
+      emitter.emit(constants.EVENT_NOTIFICATION, message)
+    );
   };
 
   let batfishConfig;
@@ -35,13 +37,23 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     return emitter;
   }
 
+  const checkPort = getPort(batfishConfig.port).then(actualPort => {
+    if (actualPort === batfishConfig.port) {
+      return actualPort;
+    }
+    return portInUsageMessages(batfishConfig.port).then(messages => {
+      emitNotification(...messages);
+      return actualPort;
+    });
+  });
+
   maybeClearOutputDirectory(batfishConfig)
     .then(() => {
       emitNotification('Starting the development server.');
       emitNotification(chalk.yellow.bold('Wait ...'));
 
       return Promise.all([
-        getPort(batfishConfig.port),
+        checkPort,
         compileStylesheets(batfishConfig).catch(emitError),
         nonPageFiles.copy(batfishConfig)
       ]);
