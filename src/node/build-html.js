@@ -40,12 +40,12 @@ function buildHtml(
       'utf8'
     );
     const assets: {
-      manifest: { js: string },
+      runtime: { js: string },
       app: { js: string },
       vendor: { js: string }
     } = Object.freeze(JSON.parse(rawAssets));
     const manifestJs = fs.readFileSync(
-      getWebpackAssetAbsolutePath(batfishConfig, assets.manifest.js),
+      getWebpackAssetAbsolutePath(batfishConfig, assets.runtime.js),
       'utf8'
     );
 

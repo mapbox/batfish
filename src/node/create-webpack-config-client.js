@@ -4,7 +4,6 @@
 const _ = require('lodash');
 const path = require('path');
 const webpack = require('webpack');
-const crypto = require('crypto');
 const webpackMerge = require('webpack-merge');
 const AssetsPlugin = require('assets-webpack-plugin');
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
@@ -67,16 +66,16 @@ function createWebpackConfigClient(
         processOutput: x => JSON.stringify(x, null, 2)
       }),
       // Extract universal vendor files (defined above) from everything else.
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: Infinity
-      }),
-      // Bundle together any other modules from anywhere imported more than 3 times.
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'app',
-        children: true,
-        minChunks: 4
-      }),
+      // new webpack.optimize.CommonsChunkPlugin({
+      //   name: 'vendor',
+      //   minChunks: Infinity
+      // }),
+      // // Bundle together any other modules from anywhere imported more than 3 times.
+      // new webpack.optimize.CommonsChunkPlugin({
+      //   name: 'app',
+      //   children: true,
+      //   minChunks: 4
+      // }),
       // Trying to follow advice for long-term caching described here:
       // https://webpack.js.org/guides/caching/#extracting-boilerplate and
       // https://jeremygayed.com/dynamic-vendor-bundling-in-webpack-528993e48aab#.hjgai17ap
@@ -84,27 +83,27 @@ function createWebpackConfigClient(
       // will include Webpack's runtime boilerplate and manifest, which can
       // change with each build. During the static build we inject it directly
       // into the HTML, so those variations do not ruin caching on large chunks.
-      new webpack.optimize.CommonsChunkPlugin('manifest'),
+      // new webpack.optimize.CommonsChunkPlugin('manifest'),
       // Recommended at https://webpack.js.org/guides/caching/#module-identifiers
       // as a way to make module IDs more deterministic.
-      new webpack.HashedModuleIdsPlugin(),
-      new webpack.NamedChunksPlugin(chunk => {
-        if (chunk.name) return chunk.name;
-        const hashSeed = Array.from(
-          chunk.modulesIterable,
-          m => m.resource || ''
-        )
-          .sort()
-          .map(resource => {
-            return path.relative(batfishConfig.pagesDirectory, resource);
-          })
-          .join('_');
-        const chunkHash = crypto
-          .createHash('md5')
-          .update(hashSeed)
-          .digest('hex');
-        return chunkHash;
-      }), // Define an environment variable for special cases
+      // new webpack.HashedModuleIdsPlugin(),
+      // new webpack.NamedChunksPlugin(chunk => {
+      //   if (chunk.name) return chunk.name;
+      //   const hashSeed = Array.from(
+      //     chunk.modulesIterable,
+      //     m => m.resource || ''
+      //   )
+      //     .sort()
+      //     .map(resource => {
+      //       return path.relative(batfishConfig.pagesDirectory, resource);
+      //     })
+      //     .join('_');
+      //   const chunkHash = crypto
+      //     .createHash('md5')
+      //     .update(hashSeed)
+      //     .digest('hex');
+      //   return chunkHash;
+      // }), // Define an environment variable for special cases
       new webpack.DefinePlugin({
         'process.env.DEV_SERVER': (options && options.devServer) || false
       })
@@ -177,7 +176,22 @@ function createWebpackConfigClient(
         net: 'empty',
         tls: 'empty',
         child_process: 'empty'
+      },
+      optimization: {
+        runtimeChunk: 'single'
       }
+      //   cacheGroups: {
+      //     vendors: {
+      //       test: /[\\/]node_modules[\\/]/,
+      //       priority: -10
+      //     },
+      //     default: {
+      //       minChunks: 4,
+      //       priority: -20,
+      //       reuseExistingChunk: true
+      //     }
+      //   }
+      // }
     };
 
     let config = webpackMerge(baseConfig, clientConfig);
