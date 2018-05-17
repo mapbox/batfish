@@ -10,7 +10,10 @@ const validateConfig = require('../src/node/validate-config');
 const devServer = require('../src/node/dev-server');
 const nonPageFiles = require('../src/node/non-page-files');
 
-jest.mock('get-port', () => jest.fn(() => Promise.resolve('mock-port')));
+jest.mock('../src/node/get-port', () => ({
+  getPort: jest.fn(() => Promise.resolve('mock-port')),
+  portInUsageMessages: jest.fn(() => Promise.resolve('mock-port'))
+}));
 
 jest.mock('../src/node/create-webpack-config-client', () => {
   return jest.fn(() => Promise.resolve({ mockConfigClient: true }));

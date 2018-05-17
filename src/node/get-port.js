@@ -36,7 +36,7 @@ function getPort(port: number) {
 function portInUsageMessages(port: number): Promise<string[]> {
   return getProcessForPort(port).then(
     ({ processId, command }) => [
-      chalk.red(
+      chalk.yellow(
         `Something is already using port ${port}. Probably:` +
           '\n' +
           `  > pid ${processId}` +
