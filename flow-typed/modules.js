@@ -89,7 +89,7 @@ declare module 'worker-farm' {
 
 declare module 'get-port' {
   declare module.exports: {
-    (number): Promise<number>
+    ({ port: number, host?: string }): Promise<number>
   };
 }
 
