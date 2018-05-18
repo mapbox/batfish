@@ -1,3 +1,5 @@
+'use strict';
+
 const argv = require('argv');
 const fs = require('fs');
 const path = require('path');
@@ -5,18 +7,18 @@ const { promisify } = require('util');
 const loremIpsum = require('lorem-ipsum');
 const rimraf = require('rimraf');
 
-async function utileWriteFile(path, data, overwrite) {
+function utileWriteFile(path, data, overwrite) {
   const stat = promisify(fs.stat);
   const write = promisify(fs.writeFile);
-  const doesExists = await stat(path)
+  return stat(path)
     .then(() => true)
-    .catch(() => false);
-
-  if (doesExists && !overwrite) {
-    return;
-  }
-
-  return write(path, data, 'utf-8');
+    .catch(() => false)
+    .then(doesExists => {
+      if (doesExists && !overwrite) {
+        return;
+      }
+      return write(path, data, 'utf-8');
+    });
 }
 
 function utilMkdir(path, remove = false) {
@@ -266,7 +268,8 @@ function generatePageShell(allPages) {
 function main(numberOfPages = 2, maxPageSentences = 2) {
   let allPages = [];
 
-  utilMkdir(path.join('./src/pages'), true);
+  utilMkdir(path.resolve('./src'), true);
+  utilMkdir(path.resolve('./src/pages'), true);
 
   const p = t => path.join('./src/pages', t);
   for (let j = 0; j < numberOfPages; j++) {

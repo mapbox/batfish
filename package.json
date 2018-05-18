@@ -159,6 +159,7 @@
     "react-helmet": "^5.2.0"
   },
   "devDependencies": {
+    "argv": "0.0.2",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "cpy-cli": "^1.0.1",
@@ -176,13 +177,17 @@
     "husky": "^0.14.3",
     "jest": "^22.4.3",
     "lint-staged": "^7.0.0",
+    "lorem-ipsum": "^1.0.4",
+    "moment": "^2.22.1",
     "npm-run-all": "^4.1.2",
+    "ramda": "^0.25.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-helmet": "^5.2.0",
     "react-test-renderer": "^16.2.0",
     "remark-cli": "^5.0.0",
     "remark-preset-davidtheclark": "^0.7.0",
+    "rimraf": "^2.6.2",
     "strip-ansi": "^4.0.0"
   },
   "optionalDependencies": {},

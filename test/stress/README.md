@@ -1,15 +1,15 @@
 ## Heavy Site
 
-This example is used for stress testing `batfish`. Please look at other examples for a user land examples.
+For stress testing `batfish`.
 
 ### Usage
 
 ```bash
-node scripts/generate-pages --numberOfPages=100 --maxPageSentences=200
+node ./scripts/generate-pages --numberOfPages=100 --maxPageSentences=200
 
-npm run batfish start
+node ./index start
 # or
-npm run batfish build
+node ./index build
 ```
 
 `numberOfPages` is the number of static pages to produce. Note each page is a randomly generated with lorem ipsum content.
