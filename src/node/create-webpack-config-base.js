@@ -19,9 +19,11 @@ function createWebpackConfigBase(
   options: { target?: 'browser' | 'node' } = {}
 ): Promise<webpack$Configuration> {
   if (cachedConfig) return Promise.resolve(cachedConfig);
-  const isExample = path
-    .dirname(batfishConfig.pagesDirectory)
-    .startsWith(path.join(__dirname, '../../examples'));
+  const dirname = path.dirname(batfishConfig.pagesDirectory);
+
+  const isExample =
+    dirname.startsWith(path.join(__dirname, '../../examples')) ||
+    dirname.startsWith(path.join(__dirname, '../../test/stress'));
 
   return writeContextModule(batfishConfig).then(batfishContextPath => {
     const jsxtremeMarkdownOptions = _.clone(
