@@ -1,8 +1,13 @@
 # Changelog
 
+## HEAD
+
+- **Fix:** Prevent batfish from entering an unpredictable state if provided port is unavailable.
+- **Feature:** Added a helpful message if the provided port is not available.
+
 ## 1.8.2
 
-- **Fix** Change the  CLI parameter `-p/--port` to accept number data type.
+- **Fix** Change the CLI parameter `-p/--port` to accept number data type.
 
 ## 1.8.1
 
