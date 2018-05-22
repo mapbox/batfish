@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.9.0
 
 - **Feature:** Added a helpful message if the provided port is not available.
 - **Feature:** Files reference as URLs in CSS then copied into the output directory (via postcss-url) now include the file's original basename as well as the hash.
