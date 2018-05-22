@@ -28,7 +28,9 @@ describe('compileStylesheets', () => {
     `;
     got.mockImplementation(arg => {
       if (arg === 'https://www.mapbox.com/mock-style.css') {
-        return Promise.resolve({ body: mockUrlCss });
+        return Promise.resolve({
+          body: mockUrlCss
+        });
       }
       return Promise.reject(new Error('Unexpected URL.'));
     });
@@ -51,7 +53,9 @@ describe('compileStylesheets', () => {
   });
 
   afterEach(() => {
-    return del(tmp, { force: true });
+    return del(tmp, {
+      force: true
+    });
   });
 
   test('writes expected CSS file', () => {
@@ -73,11 +77,11 @@ describe('compileStylesheets', () => {
       expect(fs.readdirSync(tmp)).toEqual([
         // Hashes of these woff2 files are based on the text content, so
         // should stay constant between tests.
-        '24153b0b.woff2',
-        '675d172a.woff2',
-        '994d9585.woff2',
+        'a_994d9585.woff2',
         'batfish-styles.css',
-        'batfish-styles.css.map'
+        'batfish-styles.css.map',
+        'c_675d172a.woff2',
+        'e_24153b0b.woff2'
       ]);
     });
   });

@@ -8,10 +8,10 @@ exports[`compileStylesheets minimizes in production 1`] = `
       }
       .mock-style { color: brown; }
     
-@font-face{font-family:'a';src:url(/mock/base/path/assets/994d9585.woff2) format('woff2')}.a{color:pink}
+@font-face{font-family:'a';src:url(/mock/base/path/assets/a_994d9585.woff2) format('woff2')}.a{color:pink}
 .b{color:orange}
-@font-face{font-family:'c';src:url(/mock/base/path/assets/675d172a.woff2) format('woff2')}.c{color:purple}
-@font-face{font-family:'e';src:url(/mock/base/path/assets/24153b0b.woff2) format('woff2')}.e{color:gray}/*# sourceMappingURL=batfish-styles-66ad6657a4c292a4e6dae6e2afc5bebb.css.map */"
+@font-face{font-family:'c';src:url(/mock/base/path/assets/c_675d172a.woff2) format('woff2')}.c{color:purple}
+@font-face{font-family:'e';src:url(/mock/base/path/assets/e_24153b0b.woff2) format('woff2')}.e{color:gray}/*# sourceMappingURL=batfish-styles-8ca264391785d90b2c9c63b3c7833092.css.map */"
 `;
 
 exports[`compileStylesheets writes expected CSS file 1`] = `
@@ -24,7 +24,7 @@ exports[`compileStylesheets writes expected CSS file 1`] = `
     
 @font-face {
   font-family: 'a';
-  src: url('/mock/base/path/assets/994d9585.woff2') format('woff2');
+  src: url('/mock/base/path/assets/a_994d9585.woff2') format('woff2');
 }
 
 .a { color: pink; }
@@ -33,14 +33,14 @@ exports[`compileStylesheets writes expected CSS file 1`] = `
 
 @font-face {
   font-family: 'c';
-  src: url('/mock/base/path/assets/675d172a.woff2') format('woff2');
+  src: url('/mock/base/path/assets/c_675d172a.woff2') format('woff2');
 }
 
 .c { color: purple; }
 
 @font-face {
   font-family: 'e';
-  src: url('/mock/base/path/assets/24153b0b.woff2') format('woff2');
+  src: url('/mock/base/path/assets/e_24153b0b.woff2') format('woff2');
 }
 
 .e { color: grey; }

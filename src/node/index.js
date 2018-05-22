@@ -1,6 +1,8 @@
 // @flow
 'use strict';
 
+const webpack = require('webpack');
+
 // This file will be copied into dist/, so these types will serve as the type
 // definition of the public API for Flow-using users.
 type BatfishStart = (
@@ -28,5 +30,6 @@ module.exports = {
   start: (require('./start'): BatfishStart),
   build: (require('./build'): BatfishBuild),
   serveStatic: (require('./serve-static'): BatfishServeStatic),
-  writeBabelrc: (require('./write-babelrc'): BatfishWriteBabelrc)
+  writeBabelrc: (require('./write-babelrc'): BatfishWriteBabelrc),
+  webpack
 };
