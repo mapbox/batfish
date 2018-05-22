@@ -302,6 +302,22 @@ Type: `Array<Object>`.
 
 Additional plugin configuration to pass to Webpack during the client bundling task.
 
+For plugins exposed on the `webpack` module itself (e.g. `webpack.DefinePlugin`), **you should use Batfish's version of Webpack instead of installing your own.**
+That will prevent any version incompatibilities.
+**The Batfish package exposes its version of Webpack as the `webpack` property of its export.**
+
+Here, for example, is how you could use the `DefinePlugin` in your `batfish.config.js`:
+
+```js
+const batfish = require('@mapbox/batfish');
+
+module.exports = () => {
+  return {
+    webpackPlugins: new batfish.webpack.DefinePlugin(..)
+  };
+}
+```
+
 ### webpackStaticStubReactComponent
 
 Type: `Array<string>`.

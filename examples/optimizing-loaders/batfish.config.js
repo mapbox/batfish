@@ -1,3 +1,4 @@
+const batfish = require('../../dist/node');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = () => {
@@ -19,7 +20,12 @@ module.exports = () => {
         ]
       }
     ],
-    webpackPlugins: [new LodashModuleReplacementPlugin()],
+    webpackPlugins: [
+      new LodashModuleReplacementPlugin(),
+      new batfish.webpack.DefinePlugin({
+        DEFINED: '"yes"'
+      })
+    ],
     babelPlugins: [require('babel-plugin-lodash')]
   };
 };
