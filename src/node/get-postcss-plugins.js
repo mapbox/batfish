@@ -14,7 +14,10 @@ function getPostcssPlugins(
     postcssUrl({
       url: 'copy',
       assetsPath: './',
-      useHash: true
+      useHash: true,
+      hashOptions: {
+        append: true
+      }
     }),
     // Rewrite urls so they are root-relative. This way they'll work both from
     // inlined CSS (in the static build) and the stylesheet itself.
