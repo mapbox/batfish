@@ -189,6 +189,18 @@ describe('getPagesData', () => {
     });
   });
 
+  test('with siteBasePath, includes the default 404 page in development mode', () => {
+    const config = validateConfig({
+      pagesDirectory: fixtureDir,
+      siteBasePath: 'foo'
+    });
+    return getPagesData(config).then(result => {
+      expect(result['/foo/404/']).not.toBeUndefined();
+      expect(result['/foo/404/'].is404).toBe(true);
+      expect(result['/foo/404/'].filePath).toMatch(/default-not-found\.js$/);
+    });
+  });
+
   test('does not include the default 404 page in production mode', () => {
     const config = validateConfig({
       pagesDirectory: fixtureDir,
@@ -222,6 +234,26 @@ describe('getPagesData', () => {
         /get-pages-data-404-js\/404\.js$/
       );
       expect(result['/404/'].frontMatter).toEqual({
+        title: 'Not found'
+      });
+    });
+  });
+
+  test('with siteBasePath, does not include the default 404 page if there is a custom 404 JS page', () => {
+    const config = validateConfig({
+      pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data-404-js'),
+      siteBasePath: 'foo/bar'
+    });
+    return getPagesData(config).then(result => {
+      expect(result['/foo/bar/404/']).not.toBeUndefined();
+      expect(result['/foo/bar/404/'].is404).toBe(true);
+      expect(result['/foo/bar/404/'].filePath).not.toMatch(
+        /default-not-found\.js$/
+      );
+      expect(result['/foo/bar/404/'].filePath).toMatch(
+        /get-pages-data-404-js\/404\.js$/
+      );
+      expect(result['/foo/bar/404/'].frontMatter).toEqual({
         title: 'Not found'
       });
     });

@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- **Fix:** Fix custom 404 pages on sites with a `siteBasePath`.
+
 ## 1.9.0
 
 - **Feature:** Added a helpful message if the provided port is not available.
