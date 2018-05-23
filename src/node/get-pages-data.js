@@ -21,6 +21,9 @@ const wrapError = require('./wrap-error');
 function getPagesData(
   batfishConfig: BatfishConfiguration
 ): Promise<{ [string]: BatfishPageData }> {
+  const base = batfishConfig.siteBasePath;
+  const notFoundPath = joinUrlParts(base, '404', '');
+
   // Convert a page's file path to its URL path.
   const pageFilePathToUrlPath = (filePath: string): string => {
     const relativePath = path.relative(batfishConfig.pagesDirectory, filePath);
@@ -64,13 +67,12 @@ function getPagesData(
       };
       if (is404) {
         pageData.is404 = true;
-        pageData.path = '/404/';
+        pageData.path = notFoundPath;
       }
       pagesData[pagePath] = pageData;
     });
   };
 
-  const base = batfishConfig.siteBasePath;
   const pagesGlob = [
     path.join(batfishConfig.pagesDirectory, `**/*.${constants.PAGE_EXT_GLOB}`)
   ];
@@ -98,13 +100,13 @@ function getPagesData(
     })
     .then(() => {
       if (
-        !pagesData['/404/'] &&
+        !pagesData[notFoundPath] &&
         !batfishConfig.production &&
         !batfishConfig.spa
       ) {
-        pagesData['/404/'] = {
+        pagesData[notFoundPath] = {
           filePath: path.join(__dirname, '../webpack/default-not-found.js'),
-          path: '/404/',
+          path: notFoundPath,
           is404: true,
           frontMatter: {}
         };
