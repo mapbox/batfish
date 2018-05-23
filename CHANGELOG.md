@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.9.1
 
 - **Fix:** Fix custom 404 pages on sites with a `siteBasePath`.
 
