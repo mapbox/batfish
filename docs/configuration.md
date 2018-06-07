@@ -630,8 +630,8 @@ You need to be careful not to change configuration that Batfish relies on.
 
 ### pageSpecificCss
 
-Type: 'boolean`.
-Default:`true\`.
+Type: `boolean`.
+Default:`true`.
 
 Set to `false` to disable Batfish's minimal loader for compiling `.css` with PostCSS and transforming them into React components that you can render as needed.
 Read more in ["Page-specific CSS"].
