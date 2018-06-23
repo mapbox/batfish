@@ -5,7 +5,6 @@ import Helmet from 'react-helmet';
 import { BatfishApp } from './batfish-app';
 import { BatfishSpaApp } from './batfish-spa-app';
 import { StaticHtmlPage } from './static-html-page';
-import constants from '../node/constants';
 
 export function renderHtmlPage(options: {
   route: BatfishRouteData,
@@ -43,10 +42,7 @@ export function renderHtmlPage(options: {
           helmetHead.link.toString(),
           options.inlineJsScripts,
           helmetHead.script.toString(),
-          constants.INLINE_CSS_MARKER,
           options.css,
-          // This comes after the inlined and dynamically loaded CSS
-          // so it will override regular stylesheets
           helmetHead.style.toString()
         ]}
         appendToBody={options.appendToBody}

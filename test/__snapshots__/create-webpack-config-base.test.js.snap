@@ -96,7 +96,6 @@ Object {
               "postcssPlugins": Array [
                 [Function],
                 [Function],
-                [Function],
               ],
             },
           },
@@ -233,7 +232,6 @@ Object {
             "loader": "react-helmet-postcss-loader",
             "options": Object {
               "postcssPlugins": Array [
-                [Function],
                 [Function],
                 [Function],
                 [Function],
@@ -388,7 +386,6 @@ Object {
             "loader": "react-helmet-postcss-loader",
             "options": Object {
               "postcssPlugins": Array [
-                [Function],
                 [Function],
                 [Function],
               ],

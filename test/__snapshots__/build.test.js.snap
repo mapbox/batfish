@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`build order of notifications, *with* CSS inlining and sitemap 1`] = `
+exports[`build order of notifications, with sitemap 1`] = `
 Array [
   "Compiling css ...",
   "Finished compiling css in 0ms",
@@ -12,10 +12,6 @@ Array [
   "Finished copying non-page files in 0ms",
   "Writing static html ...",
   "Finished writing static HTML in 0ms",
-  "Inlining css in static html ...",
-  "CSS inlining message 1",
-  "CSS inlining message 2",
-  "Finished inlining CSS in static HTML in 0ms",
   "Building sitemap ...",
   "Finished building sitemap in 0ms",
   "Finished build in 0ms",

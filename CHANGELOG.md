@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- 🚨 **Breaking change:** CSS is no longer inlined into pages, and loading the full stylesheet is no longer deferred. The option `staticHtmlInlineDeferCss` is removed because obsolete.
+
 ## 1.9.1
 
 - **Fix:** Fix custom 404 pages on sites with a `siteBasePath`.

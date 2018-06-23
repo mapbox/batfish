@@ -3,8 +3,6 @@
 
 const postcssUrl = require('postcss-url');
 const postcssCsso = require('postcss-csso');
-const url = require('url');
-const joinUrlParts = require('./join-url-parts');
 
 function getPostcssPlugins(
   batfishConfig: BatfishConfiguration
@@ -17,21 +15,6 @@ function getPostcssPlugins(
       useHash: true,
       hashOptions: {
         append: true
-      }
-    }),
-    // Rewrite urls so they are root-relative. This way they'll work both from
-    // inlined CSS (in the static build) and the stylesheet itself.
-    postcssUrl({
-      url: asset => {
-        const parsedUrl = url.parse(asset.url);
-        if (parsedUrl.protocol) {
-          return asset.url;
-        }
-        return joinUrlParts(
-          batfishConfig.siteBasePath,
-          batfishConfig.publicAssetsPath,
-          asset.url
-        );
       }
     })
   ];
