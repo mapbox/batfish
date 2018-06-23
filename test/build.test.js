@@ -3,7 +3,6 @@
 const stripAnsi = require('strip-ansi');
 const build = require('../src/node/build');
 const constants = require('../src/node/constants');
-const inlineCss = require('../src/node/inline-css');
 const generateSitemap = require('../src/node/generate-sitemap');
 const compileStylesheets = require('../src/node/compile-stylesheets');
 const createWebpackConfigClient = require('../src/node/create-webpack-config-client');
@@ -16,10 +15,6 @@ const webpackCompilePromise = require('../src/node/webpack-compile-promise');
 const validateConfig = require('../src/node/validate-config');
 
 jest.useFakeTimers();
-
-jest.mock('../src/node/inline-css', () => {
-  return jest.fn(() => Promise.resolve());
-});
 
 jest.mock('../src/node/generate-sitemap', () => {
   return jest.fn(() => Promise.resolve());
@@ -80,7 +75,6 @@ describe('build', () => {
       production: true,
       siteOrigin: 'https://www.mapbox.com',
       verbose: false,
-      staticHtmlInlineDeferCss: true,
       sitemap: true
     };
   });
@@ -385,86 +379,6 @@ describe('build', () => {
     });
   });
 
-  test('if there are no stylesheets, skip CSS inlining', done => {
-    const emitter = build();
-    emitter.on(constants.EVENT_ERROR, logEmitterError);
-    process.nextTick(() => {
-      expect(inlineCss).not.toHaveBeenCalled();
-      done();
-    });
-  });
-
-  test('if staticHtmlInlineDeferCss is false, skip CSS inlining', done => {
-    validateConfig.mockValidatedConfig.staticHtmlInlineDeferCss = false;
-    const emitter = build();
-    emitter.on(constants.EVENT_ERROR, logEmitterError);
-    process.nextTick(() => {
-      expect(inlineCss).not.toHaveBeenCalled();
-      done();
-    });
-  });
-
-  test('if there are stylesheets but production option is not true, skip CSS inlining', done => {
-    validateConfig.mockValidatedConfig.stylesheets = ['one.css', 'two.css'];
-    validateConfig.mockValidatedConfig.production = false;
-    const emitter = build();
-    emitter.on(constants.EVENT_ERROR, logEmitterError);
-    process.nextTick(() => {
-      expect(inlineCss).not.toHaveBeenCalled();
-      done();
-    });
-  });
-
-  test('if there are stylesheets and production is true, inline CSS', done => {
-    validateConfig.mockValidatedConfig.stylesheets = ['one.css', 'two.css'];
-    const emitter = build();
-    emitter.on(constants.EVENT_ERROR, logEmitterError);
-    process.nextTick(() => {
-      expect(inlineCss).toHaveBeenCalledTimes(1);
-      expect(inlineCss.mock.calls[0][0]).toBe('/mock/output');
-      expect(inlineCss.mock.calls[0][1]).toBe('mock-stylesheet.css');
-      expect(inlineCss.mock.calls[0][2].verbose).toBe(false);
-      expect(inlineCss.mock.calls[0][2].onNotification).toBeInstanceOf(
-        Function
-      );
-      done();
-    });
-  });
-
-  test('catches errors while inlining CSS', done => {
-    validateConfig.mockValidatedConfig.stylesheets = ['one.css', 'two.css'];
-    const expectedError = new Error();
-    inlineCss.mockReturnValueOnce(Promise.reject(expectedError));
-    const emitter = build();
-    emitter.on(constants.EVENT_ERROR, error => {
-      expect(error).toBe(expectedError);
-      done();
-    });
-  });
-
-  test('handles notifications while inlining CSS', done => {
-    validateConfig.mockValidatedConfig.stylesheets = ['one.css', 'two.css'];
-    const emitter = build();
-    emitter.on(constants.EVENT_ERROR, logEmitterError);
-    process.nextTick(() => {
-      emitter.on(constants.EVENT_NOTIFICATION, message => {
-        if (message === 'xyz') {
-          done();
-        }
-      });
-      inlineCss.mock.calls[0][2].onNotification('xyz');
-    });
-  });
-
-  test('if no CSS is inlined, build can complete', done => {
-    validateConfig.mockValidatedConfig.stylesheets = [];
-    const emitter = build();
-    emitter.on(constants.EVENT_ERROR, logEmitterError);
-    emitter.on(constants.EVENT_DONE, () => {
-      done();
-    });
-  });
-
   test('if config includes siteOrigin, creates a sitemap', done => {
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
@@ -520,13 +434,8 @@ describe('build', () => {
     });
   });
 
-  test('order of notifications, *with* CSS inlining and sitemap', done => {
+  test('order of notifications, with sitemap', done => {
     validateConfig.mockValidatedConfig.stylesheets = ['one.css', 'two.css'];
-    inlineCss.mockImplementationOnce((a, b, { onNotification }) => {
-      onNotification('CSS inlining message 1');
-      onNotification('CSS inlining message 2');
-      return Promise.resolve();
-    });
     const notifications = [];
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, logEmitterError);

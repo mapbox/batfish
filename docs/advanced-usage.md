@@ -122,7 +122,6 @@ For production apps, you probably want to think about what gets rendered *before
 - Dynamically `import(/* webpackMode: "eager" */ '../path/to/app')` your main app component in the page's `componentDidMount` hook.
   (`/* webpackMode: "eager" */` tells Webpack not to create a separate async chunk with this file, but to include it in the main client-side bundle.)
 - Use [`webpackStaticIgnore`] to block '../path/to/app' from being included in the static build.
-- Set [`staticHtmlInlineDeferCss`] to `false` to avoid a flash of unstyled content.
 
 For example:
 
@@ -178,7 +177,6 @@ This is the kind of app you build with create-react-app, which you might use for
 To accomplish this:
 
 - Use [`webpackStaticStubReactComponent`] to stub your main app component.
-- Set [`staticHtmlInlineDeferCss`] to `false` to avoid a flash of unstyled content.
 
 For example:
 
@@ -338,7 +336,5 @@ For example, [`examples/table-of-contents/`](../examples/table-of-contents) incl
 [`webpackstaticignore`]: ./configuration.md#webpackstaticignore
 
 [`webpackstaticstubreactcomponent`]: ./configuration.md#webpackstaticstubreactcomponent
-
-[`statichtmlinlinedefercss`]: ./configuration.md#statichtmlinlinedefercss
 
 [`pagespecificcss`]: ./configuration.md#pagespecificcss

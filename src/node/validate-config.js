@@ -130,10 +130,6 @@ const configSchema = {
     validator: _.isBoolean,
     description: 'boolean'
   },
-  staticHtmlInlineDeferCss: {
-    validator: _.isBoolean,
-    description: 'boolean'
-  },
   includePromisePolyfill: {
     validator: _.isBoolean,
     description: 'boolean'
@@ -264,7 +260,6 @@ function validateConfig(
     jsxtremeMarkdownOptions: {},
     includePromisePolyfill: true,
     pageSpecificCss: true,
-    staticHtmlInlineDeferCss: true,
     developmentDevtool: 'source-map',
     productionDevtool: false,
     clearOutputDirectory: true,

@@ -56,8 +56,7 @@ declare type BatfishConfiguration = {
   verbose: boolean,
   spa: boolean,
   sitemap: boolean,
-  pageSpecificCss: boolean,
-  staticHtmlInlineDeferCss: boolean
+  pageSpecificCss: boolean
 };
 
 declare type InlineJsEntry = { filename: string, uglify?: boolean };

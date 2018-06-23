@@ -48,7 +48,6 @@ Object {
   "siteBasePath": "",
   "sitemap": true,
   "spa": false,
-  "staticHtmlInlineDeferCss": true,
   "stylesheets": Array [],
   "temporaryDirectory": "/my-project/_batfish_tmp",
   "verbose": false,

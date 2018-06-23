@@ -8,7 +8,6 @@ const createWebpackConfigClient = require('./create-webpack-config-client');
 const createWebpackConfigStatic = require('./create-webpack-config-static');
 const validateConfig = require('./validate-config');
 const appendTaskTime = require('./append-task-time');
-const inlineCss = require('./inline-css');
 const generateSitemap = require('./generate-sitemap');
 const compileStylesheets = require('./compile-stylesheets');
 const constants = require('./constants');
@@ -88,16 +87,6 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
   // production build or not. So it needs to be a variable.
   let cssFilename;
 
-  const inlineCssInHtml = (): Promise<void> => {
-    if (!cssFilename) {
-      return Promise.resolve();
-    }
-    return inlineCss(outputDirectory, cssFilename, {
-      verbose: batfishConfig.verbose,
-      onNotification: emitNotification
-    });
-  };
-
   const logTask = (
     description: string,
     task: () => Promise<void>
@@ -135,18 +124,6 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     .then(() => {
       return logTask('writing static HTML', () => {
         return buildHtml(batfishConfig, cssFilename);
-      });
-    })
-    .then(() => {
-      if (
-        !batfishConfig.production ||
-        !batfishConfig.staticHtmlInlineDeferCss ||
-        stylesheetsIsEmpty
-      ) {
-        return;
-      }
-      return logTask('inlining CSS in static HTML', () => {
-        return inlineCssInHtml();
       });
     })
     .then(() => {

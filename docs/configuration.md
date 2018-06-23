@@ -41,7 +41,6 @@ You can specify an alternate location.
   - [webpackPlugins](#webpackplugins)
   - [webpackStaticStubReactComponent](#webpackstaticstubreactcomponent)
   - [webpackStaticIgnore](#webpackstaticignore)
-  - [staticHtmlInlineDeferCss](#statichtmlinlinedefercss)
   - [babelPlugins](#babelplugins)
   - [babelPresets](#babelpresets)
   - [babelPresetEnvOptions](#babelpresetenvoptions)
@@ -333,8 +332,6 @@ module.exports = function StubbedComponent() {
 
 You might want to use this if you are working on a simple app and don't care at all how it initially renders — i.e. a create-react-app-style app where the static HTML that is served contains no content, just waits for the JS to download and execute.
 
-Depending on how you use this option, you may need to set [`staticHtmlInlineDeferCss`] to `false` to avoid a flash of unstyled content.
-
 For more information about the options for this use case, see ["Minimal builds for single-page apps"].
 
 ### webpackStaticIgnore
@@ -345,21 +342,6 @@ Any modules matching this description will be ignored (with the [ignore-loader](
 **Any dependencies that cannot execute in Node (e.g. because they reference `window` or `document`) should be targeted by this option.**
 You may need to other precautions, as well.
 But most of the time, this will help you use browser-only libraries without breaking your static build.
-
-### staticHtmlInlineDeferCss
-
-Type: `boolean`.
-Default: `true`.
-
-By default, Batfish reads your rendered HTML pages, inlines the CSS that they need, and defers loading the rest of your CSS until after the `DOMContentLoaded` event, so it does not block page rendering.
-
-Usually, this is exactly what you want, giving your users the fastest possible initial render.
-However, if you've used [`webpackStaticStubReactComponent`], [`webpackStaticIgnore`], or other means to reduce the amount of HTML that gets generated — so your static HTML does not in fact include all that you need for the page's initial rendering (see ["Minimal builds for single-page apps"])— then the CSS inlined on that HTML page will *not* cover all of its needs.
-When the JS downloads and executes and your actual app gets rendered, you might have a flash of unstyled content lasting until the complete CSS (whose loading was deferred) finishes downloading.
-
-To get around this, you can turn off Batfish's optimization by setting `staticHtmlInlineDeferCss: false`.
-Batfish will not inline CSS into your HTML pages (which also speeds up your build), and will not defer the loading of your full stylesheet.
-Instead, the full stylesheet will be added as a `<link>` to the HTML's `<head>`.
 
 ### babelPlugins
 
