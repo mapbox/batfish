@@ -187,11 +187,11 @@ describe('writeContextModule', () => {
       return createAndReadContextModule({
         includePages: ['/three/**']
       }).then(result => {
-        expect(result).toMatch('path: "/three/four/"');
-        expect(result).toMatch('path: "/three/four/five/"');
-        expect(result).not.toMatch('path: "/one/"');
-        expect(result).not.toMatch('path: "/two/"');
-        expect(result).not.toMatch('path: "/404/"');
+        expect(result).toMatch("path: '/three/four/'");
+        expect(result).toMatch("path: '/three/four/five/'");
+        expect(result).not.toMatch("path: '/one/'");
+        expect(result).not.toMatch("path: '/two/'");
+        expect(result).not.toMatch("path: '/404/'");
       });
     });
 
@@ -199,11 +199,11 @@ describe('writeContextModule', () => {
       return createAndReadContextModule({
         includePages: ['/two/']
       }).then(result => {
-        expect(result).toMatch('path: "/two/"');
-        expect(result).not.toMatch('path: "/three/four/"');
-        expect(result).not.toMatch('path: "/three/four/five/"');
-        expect(result).not.toMatch('path: "/one/"');
-        expect(result).not.toMatch('path: "/404/"');
+        expect(result).toMatch("path: '/two/'");
+        expect(result).not.toMatch("path: '/three/four/'");
+        expect(result).not.toMatch("path: '/three/four/five/'");
+        expect(result).not.toMatch("path: '/one/'");
+        expect(result).not.toMatch("path: '/404/'");
       });
     });
   });

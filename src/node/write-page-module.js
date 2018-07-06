@@ -5,7 +5,6 @@ const fs = require('fs');
 const path = require('path');
 const pify = require('pify');
 const pTry = require('p-try');
-const prettier = require('prettier');
 
 // Create a JS module for a page, which will be written to the file system.
 // It requires the page's component and includes the page's injected data.
@@ -37,10 +36,8 @@ function writePageModule(
         props: ${JSON.stringify(props, null, 2)}
       };
     `;
-    // Make it easier to read the files for debugging.
-    const prettyContent = prettier.format(content);
 
-    return pify(fs.writeFile)(filePath, prettyContent).then(() => filePath);
+    return pify(fs.writeFile)(filePath, content).then(() => filePath);
   });
 }
 

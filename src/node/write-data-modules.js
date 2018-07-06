@@ -8,7 +8,6 @@ const pify = require('pify');
 const mkdirp = require('mkdirp');
 const chalk = require('chalk');
 const pTry = require('p-try');
-const prettier = require('prettier');
 const constants = require('./constants');
 const errorTypes = require('./error-types');
 
@@ -47,9 +46,8 @@ function writeDataModules(
       }
 
       const code = `module.exports = ${dataString};`;
-      const prettyCode = prettier.format(code);
       const filename = path.join(dataOutputDirectory, `${_.kebabCase(id)}.js`);
-      return pify(fs.writeFile)(filename, prettyCode).then(() => filename);
+      return pify(fs.writeFile)(filename, code).then(() => filename);
     };
 
     if (!batfishConfig.dataSelectors) {

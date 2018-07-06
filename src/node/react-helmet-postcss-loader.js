@@ -2,7 +2,6 @@
 'use strict';
 
 const postcss = require('postcss');
-const prettier = require('prettier');
 const loaderUtils = require('loader-utils');
 const rethrowPostcssError = require('./rethrow-postcss-error');
 
@@ -26,7 +25,7 @@ function generateModule(css: string): string {
       }
     }
   `;
-  return prettier.format(js.trim());
+  return js.trim();
 }
 
 // Transform CSS into a simple JS module that writes the CSS to a <style>
