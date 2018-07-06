@@ -116,12 +116,6 @@ declare module 'sitemap-static' {
   };
 }
 
-declare module 'prettier' {
-  declare module.exports: {
-    format(string): string
-  };
-}
-
 declare module 'slugg' {
   declare module.exports: string => string;
 }

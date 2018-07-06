@@ -6,7 +6,6 @@ const fs = require('fs');
 const path = require('path');
 const pify = require('pify');
 const slugg = require('slugg');
-const prettier = require('prettier');
 const micromatch = require('micromatch');
 const getPagesData = require('./get-pages-data');
 const writePageModule = require('./write-page-module');
@@ -127,8 +126,7 @@ function writeContextModule(
             routes: ${stringifiedRoutesArray},
             notFoundRoute: ${notFoundStringifiedRouteData}
           };`;
-        const prettyContent = prettier.format(content);
-        return pify(fs.writeFile)(filePath, prettyContent);
+        return pify(fs.writeFile)(filePath, content);
       })
       .then(() => filePath);
   });

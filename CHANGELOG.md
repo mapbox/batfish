@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- **Fix:** Remove production usage of Prettier. Generated files will not be as pretty, but it's worth removing the large dependency and complications it can introduce.
+
 ## 1.9.1
 
 - **Fix:** Fix custom 404 pages on sites with a `siteBasePath`.
