@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- **Fix:** Add `electron` to list of libraries that Webpack should *not* try to bundle during the HTML build.
+
 ## 1.9.2
 
 - **Fix:** Remove production usage of Prettier. Generated files will not be as pretty, but it's worth removing the large dependency and complications it can introduce.

@@ -47,7 +47,10 @@ function createWebpackConfigStatic(
         pify: require.resolve('pify'),
         '@mapbox/link-hijacker': require.resolve('@mapbox/link-hijacker'),
         '@mapbox/scroll-restorer': require.resolve('@mapbox/scroll-restorer'),
-        '@mapbox/link-to-location': require.resolve('@mapbox/link-to-location')
+        '@mapbox/link-to-location': require.resolve('@mapbox/link-to-location'),
+        // Some libraries, like got, require('electron') within a conditional;
+        // Webpack can't evaluate that so tries to bundle electron and can't find it.
+        electron: 'electron'
       },
       plugins: [
         // Ensure that all files will be grouped into one file,
