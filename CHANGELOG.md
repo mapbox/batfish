@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.9.3
 
 - **Fix:** Add `electron` to list of libraries that Webpack should *not* try to bundle during the HTML build.
 
