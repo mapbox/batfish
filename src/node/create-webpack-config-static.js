@@ -58,7 +58,7 @@ function createWebpackConfigStatic(
         // Separate chunks serve no purpose in the static build: we need all
         // the information at once.
         new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 })
-      ],
+      ].concat(batfishConfig.webpackPlugins || []),
       devtool: 'source-map',
       // Don't hijack Node's globals: this code will execute in Node.
       node: {

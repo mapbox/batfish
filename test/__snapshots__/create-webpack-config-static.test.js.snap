@@ -93,6 +93,9 @@ Object {
         "maxChunks": 1,
       },
     },
+    Object {
+      "mockPlugin": true,
+    },
     NormalModuleReplacementPlugin {
       "newResource": "<PROJECT_ROOT>/src/node/static-stubs/react-component.js",
       "resourceRegExp": /\\\\/path\\\\/to\\\\/component\\\\/a/,
