@@ -300,7 +300,7 @@ Each object should be a [Webpack Rule](https://webpack.js.org/configuration/modu
 
 Type: `Array<Object>`.
 
-Additional plugin configuration to pass to Webpack during the client bundling task.
+Additional plugin configuration to pass to Webpack. These plugins will be included in both the client bundling task and the static HTML rendering task.
 
 For plugins exposed on the `webpack` module itself (e.g. `webpack.DefinePlugin`), **you should use Batfish's version of Webpack instead of installing your own.**
 That will prevent any version incompatibilities.

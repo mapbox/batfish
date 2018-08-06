@@ -1,8 +1,8 @@
 # Changelog
 
-## heading
+## 1.9.4
 
-- **Fix:** Use `webpackPlugins` in static HTML build as well as client-side bundle build, as plugins like `DefinePlugin` can provide information that is depended on for building the HTML.
+- **Fix:** Use `webpackPlugins` in static HTML build as well as client-side bundle build, as plugins like `DefinePlugin` can provide information that is depended on for building the HTML. *If this breaks a build for you, please open an issue about your use case.*
 
 ## 1.9.3
 
