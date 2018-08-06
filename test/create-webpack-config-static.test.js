@@ -56,7 +56,8 @@ describe('createWebpackConfigStatic', () => {
       webpackConfigStaticTransform: x => {
         x.underwentStaticTransform = true;
         return x;
-      }
+      },
+      webpackPlugins: [{ mockPlugin: true }]
     });
     return createWebpackConfigStatic(batfishConfig).then(webpackConfig => {
       expect(webpackConfig).toMatchSnapshot();
