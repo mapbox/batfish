@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.9.5
 
 - **Fix:** Remove `^` from `assets-webpack-plugin` dependency to avoid regression.
 
