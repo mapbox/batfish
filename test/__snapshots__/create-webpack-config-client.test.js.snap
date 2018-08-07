@@ -32,6 +32,7 @@ Object {
       "options": Object {
         "filename": "assets.json",
         "fullPath": true,
+        "manifestFirst": true,
         "path": "<PROJECT_ROOT>/_batfish_site",
         "prettyPrint": false,
         "processOutput": [Function],
@@ -137,6 +138,7 @@ Object {
       "options": Object {
         "filename": "assets.json",
         "fullPath": true,
+        "manifestFirst": true,
         "path": "<PROJECT_ROOT>/_batfish_site",
         "prettyPrint": false,
         "processOutput": [Function],
@@ -265,6 +267,7 @@ Object {
       "options": Object {
         "filename": "assets.json",
         "fullPath": true,
+        "manifestFirst": true,
         "path": "<PROJECT_ROOT>/test/fake/output/directory",
         "prettyPrint": false,
         "processOutput": [Function],
