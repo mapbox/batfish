@@ -232,7 +232,7 @@ If you have a single-page app that completely handles routing and scroll managem
 Type: `boolean`.
 Default: `false`.
 
-**🚨 This option is EXPERIMENTAL, and may suffer breaking changes on any release.** ️
+**🚨 This option is DEPRECATED, please use [Underreact](https://github.com/mapbox/underreact/).** ️
 
 **Set this option to `true` if you do not need multiple Batfish pages, so do not need Batfish's router.**
 
