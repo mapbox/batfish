@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.9.6
+
+- **Deprecate:** Add a deprecation warning when using the `spa` mode. 
+
 ## 1.9.5
 
 - **Fix:** Remove `^` from `assets-webpack-plugin` dependency to avoid regression.
