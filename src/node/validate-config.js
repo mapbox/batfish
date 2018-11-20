@@ -384,6 +384,10 @@ function validateConfig(
   }
 
   if (config.spa) {
+    // eslint-disable-next-line
+    console.warn(
+      'The SPA mode is being deprecated in favour of Underreact. Please visit https://github.com/mapbox/underreact for more information.'
+    );
     config.hijackLinks = false;
     config.manageScrollRestoration = false;
   }
