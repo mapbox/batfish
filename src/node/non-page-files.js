@@ -19,7 +19,7 @@ function getNonPageFileGlob(
   }
   const ignoreGlob = !batfishConfig.ignoreWithinPagesDirectory
     ? []
-    : batfishConfig.ignoreWithinPagesDirectory.map(g => `!${g}`);
+    : batfishConfig.ignoreWithinPagesDirectory.map((g) => `!${g}`);
   glob = glob.concat(ignoreGlob);
   return glob;
 }
@@ -35,8 +35,8 @@ function copy(batfishConfig: BatfishConfiguration): Promise<void> {
 function watch(
   batfishConfig: BatfishConfiguration,
   options: {
-    onError: Error => void,
-    onNotification?: string => void
+    onError: (Error) => void,
+    onNotification?: (string) => void
   }
 ): void {
   const { onError, onNotification } = options;
@@ -48,7 +48,7 @@ function watch(
     cwd: batfishConfig.pagesDirectory
   });
 
-  const handleChangeAdd = filename => {
+  const handleChangeAdd = (filename) => {
     const startTime = now();
     cpy(filename, batfishConfig.outputDirectory, {
       parents: true,
@@ -60,7 +60,7 @@ function watch(
     }, onError);
   };
 
-  const handleUnlink = filename => {
+  const handleUnlink = (filename) => {
     const startTime = now();
     del(filename, { cwd: batfishConfig.outputDirectory }).then(() => {
       if (onNotification !== undefined) {

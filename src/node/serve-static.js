@@ -17,11 +17,11 @@ function serveStatic(
 ): EventEmitter {
   rawConfig = rawConfig || {};
   const emitter = new EventEmitter();
-  const emitError = error => {
+  const emitError = (error) => {
     emitter.emit(constants.EVENT_ERROR, error);
   };
   const emitNotification = (...messages: string[]) => {
-    messages.forEach(message =>
+    messages.forEach((message) =>
       emitter.emit(constants.EVENT_NOTIFICATION, message)
     );
   };
@@ -37,11 +37,11 @@ function serveStatic(
     return emitter;
   }
 
-  const checkPort = getPort(batfishConfig.port).then(actualPort => {
+  const checkPort = getPort(batfishConfig.port).then((actualPort) => {
     if (actualPort === batfishConfig.port) {
       return actualPort;
     }
-    return portInUsageMessages(batfishConfig.port).then(messages => {
+    return portInUsageMessages(batfishConfig.port).then((messages) => {
       emitNotification(...messages);
       return actualPort;
     });
@@ -50,7 +50,7 @@ function serveStatic(
   Promise.all([getPagesData(batfishConfig), checkPort])
     .then(([pagesData, actualPort]) => {
       const app = connect();
-      staticServerMiddleware(batfishConfig, pagesData).forEach(middleware => {
+      staticServerMiddleware(batfishConfig, pagesData).forEach((middleware) => {
         app.use(middleware);
       });
       http.createServer(app).listen(actualPort);

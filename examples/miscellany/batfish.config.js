@@ -13,7 +13,7 @@ module.exports = () => {
       'https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.min.css'
     ],
     jsxtremeMarkdownOptions: {
-      getWrapper: resource => {
+      getWrapper: (resource) => {
         if (/\/stories\//.test(resource)) {
           return path.join(__dirname, './src/components/story-wrapper.js');
         }

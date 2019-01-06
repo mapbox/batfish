@@ -13,9 +13,7 @@ export default class PageShell extends React.Component {
           <html lang="en" />
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>
-            {title}
-          </title>
+          <title>{title}</title>
           <meta name="description" content={props.frontMatter.description} />
           {/* Facebook tags */}
           <meta name="og:title" content={props.frontMatter.title} />
@@ -23,8 +21,9 @@ export default class PageShell extends React.Component {
           <meta name="og:type" content="website" />
           <meta
             name="og:url"
-            content={`https://www.your-batfish-site.com/miscellany${props
-              .location.pathname}`}
+            content={`https://www.your-batfish-site.com/miscellany${
+              props.location.pathname
+            }`}
           />
         </Helmet>
         <div className="px24 py24 mx-auto" style={{ maxWidth: 960 }}>

@@ -29,7 +29,7 @@ function writeContextModule(
     'batfish-context.js'
   );
 
-  return getPagesData(batfishConfig).then(pagesData => {
+  return getPagesData(batfishConfig).then((pagesData) => {
     // Construct a data object for the entire site.
     // Pages can load this data with siteData front-matter
     const siteData: BatfishSiteData = {
@@ -63,7 +63,7 @@ function writeContextModule(
       }
 
       return writePageModule(batfishConfig, pageData).then(
-        pageModuleFilePath => {
+        (pageModuleFilePath) => {
           const chunkName = pageData.is404
             ? 'not-found'
             : slugg(pagePath) || 'home';

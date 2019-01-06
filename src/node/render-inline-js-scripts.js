@@ -10,7 +10,7 @@ function renderInlineJsScripts(inlineJsEntries?: Array<InlineJsEntry>): string {
   }
 
   return inlineJsEntries
-    .map(jsData => {
+    .map((jsData) => {
       let code = fs.readFileSync(jsData.filename, 'utf8');
       if (jsData.uglify !== false) {
         const uglified = UglifyJs.minify(code);

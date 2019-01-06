@@ -5,9 +5,7 @@ export default class MarkdownWrapper extends React.Component {
   render() {
     return (
       <PageShell frontMatter={this.props.frontMatter}>
-        <div className="prose">
-          {this.props.children}
-        </div>
+        <div className="prose">{this.props.children}</div>
       </PageShell>
     );
   }

@@ -10,7 +10,7 @@ import { BatfishApp } from './batfish-app';
 
 const startingPath = window.location.pathname;
 const matchingRoute = findMatchingRoute(startingPath);
-matchingRoute.getPage().then(pageModule => {
+matchingRoute.getPage().then((pageModule) => {
   renderAppIntoDom(
     <BatfishApp startingPath={startingPath} pageModule={pageModule} />
   );

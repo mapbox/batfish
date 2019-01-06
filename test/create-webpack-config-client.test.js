@@ -33,7 +33,7 @@ function createBatfishConfig(options) {
 describe('createWebpackConfigClient', () => {
   test('creates a base config', () => {
     const batfishConfig = createBatfishConfig();
-    return createWebpackConfigClient(batfishConfig).then(webpackConfig => {
+    return createWebpackConfigClient(batfishConfig).then((webpackConfig) => {
       expect(createWebpackConfigBase).toHaveBeenCalledTimes(1);
       expect(createWebpackConfigBase).toHaveBeenCalledWith(batfishConfig, {
         target: 'browser'
@@ -44,7 +44,7 @@ describe('createWebpackConfigClient', () => {
 
   test('default Webpack config', () => {
     return createWebpackConfigClient(createBatfishConfig()).then(
-      webpackConfig => {
+      (webpackConfig) => {
         expect(webpackConfig).toMatchSnapshot();
       }
     );
@@ -53,7 +53,7 @@ describe('createWebpackConfigClient', () => {
   test('default production Webpack config', () => {
     return createWebpackConfigClient(
       createBatfishConfig({ production: true })
-    ).then(webpackConfig => {
+    ).then((webpackConfig) => {
       expect(webpackConfig).toMatchSnapshot();
     });
   });
@@ -67,12 +67,12 @@ describe('createWebpackConfigClient', () => {
         { filename: path.join(__dirname, './sea-creatures.js') },
         { filename: path.join(__dirname, './land-creatures.js') }
       ],
-      webpackConfigClientTransform: x => {
+      webpackConfigClientTransform: (x) => {
         x.underwentClientTransform = true;
         return x;
       }
     });
-    return createWebpackConfigClient(batfishConfig).then(webpackConfig => {
+    return createWebpackConfigClient(batfishConfig).then((webpackConfig) => {
       expect(webpackConfig).toMatchSnapshot();
     });
   });

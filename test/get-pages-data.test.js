@@ -10,7 +10,7 @@ describe('getPagesData', () => {
     const config = validateConfig({
       pagesDirectory: fixtureDir
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/']).not.toBeUndefined();
       expect(result['/'].filePath).toMatch(/get-pages-data\/index\.js$/);
     });
@@ -20,7 +20,7 @@ describe('getPagesData', () => {
     const config = validateConfig({
       pagesDirectory: fixtureDir
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/about/']).not.toBeUndefined();
       expect(result['/about/'].filePath).toMatch(
         /get-pages-data\/about\/index\.js$/
@@ -32,7 +32,7 @@ describe('getPagesData', () => {
     const config = validateConfig({
       pagesDirectory: fixtureDir
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/work/animals/horses/ed/']).not.toBeUndefined();
       expect(result['/work/animals/horses/ed/'].filePath).toMatch(
         /get-pages-data\/work\/animals\/horses\/ed\.js$/
@@ -44,7 +44,7 @@ describe('getPagesData', () => {
     const config = validateConfig({
       pagesDirectory: fixtureDir
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/about/team/']).not.toBeUndefined();
       expect(result['/about/team/'].filePath).toMatch(
         /get-pages-data\/about\/team\/index\.md$/
@@ -56,7 +56,7 @@ describe('getPagesData', () => {
     const config = validateConfig({
       pagesDirectory: fixtureDir
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/about/security/']).not.toBeUndefined();
       expect(result['/about/security/'].filePath).toMatch(
         /get-pages-data\/about\/security\.md$/
@@ -69,7 +69,7 @@ describe('getPagesData', () => {
       pagesDirectory: fixtureDir,
       siteBasePath: 'foo'
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/foo/about/']).not.toBeUndefined();
       expect(result['/foo/about/'].filePath).toMatch(
         /get-pages-data\/about\/index\.js$/
@@ -82,7 +82,7 @@ describe('getPagesData', () => {
       pagesDirectory: fixtureDir,
       siteBasePath: '/foo'
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/foo/work/animals/horses/ed/']).not.toBeUndefined();
       expect(result['/foo/work/animals/horses/ed/'].filePath).toMatch(
         /get-pages-data\/work\/animals\/horses\/ed\.js$/
@@ -95,7 +95,7 @@ describe('getPagesData', () => {
       pagesDirectory: fixtureDir,
       siteBasePath: '/foo/'
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/foo/about/team/']).not.toBeUndefined();
       expect(result['/foo/about/team/'].filePath).toMatch(
         /get-pages-data\/about\/team\/index\.md$/
@@ -108,7 +108,7 @@ describe('getPagesData', () => {
       pagesDirectory: fixtureDir,
       siteBasePath: 'foo'
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/foo/about/security/']).not.toBeUndefined();
       expect(result['/foo/about/security/'].filePath).toMatch(
         /get-pages-data\/about\/security\.md$/
@@ -121,7 +121,7 @@ describe('getPagesData', () => {
       pagesDirectory: fixtureDir,
       siteBasePath: '/'
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/']).not.toBeUndefined();
       expect(result['/'].filePath).toMatch(/get-pages-data\/index\.js$/);
     });
@@ -131,7 +131,7 @@ describe('getPagesData', () => {
     const config = validateConfig({
       pagesDirectory: fixtureDir
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/about/style/']).toBeUndefined();
     });
   });
@@ -140,7 +140,7 @@ describe('getPagesData', () => {
     const config = validateConfig({
       pagesDirectory: fixtureDir
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/work/animals/horses/ed/'].frontMatter).toEqual({
         name: "Ed's page"
       });
@@ -151,7 +151,7 @@ describe('getPagesData', () => {
     const config = validateConfig({
       pagesDirectory: fixtureDir
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/about/team/'].frontMatter).toEqual({
         name: 'Team page'
       });
@@ -163,7 +163,7 @@ describe('getPagesData', () => {
       pagesDirectory: fixtureDir,
       production: false
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/about/']).not.toBeUndefined();
     });
   });
@@ -173,7 +173,7 @@ describe('getPagesData', () => {
       pagesDirectory: fixtureDir,
       production: true
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/about/']).toBeUndefined();
     });
   });
@@ -182,7 +182,7 @@ describe('getPagesData', () => {
     const config = validateConfig({
       pagesDirectory: fixtureDir
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/404/']).not.toBeUndefined();
       expect(result['/404/'].is404).toBe(true);
       expect(result['/404/'].filePath).toMatch(/default-not-found\.js$/);
@@ -194,7 +194,7 @@ describe('getPagesData', () => {
       pagesDirectory: fixtureDir,
       siteBasePath: 'foo'
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/foo/404/']).not.toBeUndefined();
       expect(result['/foo/404/'].is404).toBe(true);
       expect(result['/foo/404/'].filePath).toMatch(/default-not-found\.js$/);
@@ -206,7 +206,7 @@ describe('getPagesData', () => {
       pagesDirectory: fixtureDir,
       production: true
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/404/']).toBeUndefined();
     });
   });
@@ -217,7 +217,7 @@ describe('getPagesData', () => {
       spa: true,
       production: false
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/404/']).toBeUndefined();
     });
   });
@@ -226,7 +226,7 @@ describe('getPagesData', () => {
     const config = validateConfig({
       pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data-404-js')
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/404/']).not.toBeUndefined();
       expect(result['/404/'].is404).toBe(true);
       expect(result['/404/'].filePath).not.toMatch(/default-not-found\.js$/);
@@ -244,7 +244,7 @@ describe('getPagesData', () => {
       pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data-404-js'),
       siteBasePath: 'foo/bar'
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/foo/bar/404/']).not.toBeUndefined();
       expect(result['/foo/bar/404/'].is404).toBe(true);
       expect(result['/foo/bar/404/'].filePath).not.toMatch(
@@ -263,7 +263,7 @@ describe('getPagesData', () => {
     const config = validateConfig({
       pagesDirectory: path.join(__dirname, 'fixtures/get-pages-data-404-md')
     });
-    return getPagesData(config).then(result => {
+    return getPagesData(config).then((result) => {
       expect(result['/404/']).not.toBeUndefined();
       expect(result['/404/'].is404).toBe(true);
       expect(result['/404/'].filePath).not.toMatch(/default-not-found\.js$/);

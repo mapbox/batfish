@@ -93,7 +93,7 @@ describe('watchContext', () => {
     // Manually trigger a change event.
     chokidar.watcher.on.mock.calls[0][1]();
     expect(writeContextModule).toHaveBeenCalledWith(batfishConfig);
-    return new Promise(resolve => setTimeout(resolve, 100)).then(() => {
+    return new Promise((resolve) => setTimeout(resolve, 100)).then(() => {
       expect(afterCompilation).not.toHaveBeenCalled();
       expect(onError).toHaveBeenCalledWith(error);
     });

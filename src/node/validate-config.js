@@ -41,11 +41,11 @@ const configSchema = {
       'array of absolute file paths or globs, absolute URLs, or arrays of these things'
   },
   browserslist: {
-    validator: x => _.isString(x) || isArrayOf(_.isString)(x),
+    validator: (x) => _.isString(x) || isArrayOf(_.isString)(x),
     description: 'string or array of strings'
   },
   devBrowserslist: {
-    validator: x => _.isString(x) || isArrayOf(_.isString)(x) || x === false,
+    validator: (x) => _.isString(x) || isArrayOf(_.isString)(x) || x === false,
     description: 'string, array of strings, or false'
   },
   pagesDirectory: {
@@ -61,7 +61,7 @@ const configSchema = {
     description: 'absolute path'
   },
   dataSelectors: {
-    validator: x => _.isPlainObject(x) && _.every(x, _.isFunction),
+    validator: (x) => _.isPlainObject(x) && _.every(x, _.isFunction),
     description: 'object whose values are functions'
   },
   vendorModules: {
@@ -115,11 +115,11 @@ const configSchema = {
     validator: _.isArray
   },
   postcssPlugins: {
-    validator: x => _.isFunction(x) || isArrayOf(_.isFunction)(x),
+    validator: (x) => _.isFunction(x) || isArrayOf(_.isFunction)(x),
     description: 'function or array of functions'
   },
   fileLoaderExtensions: {
-    validator: x => isArrayOf(_.isString)(x) || _.isFunction(x),
+    validator: (x) => isArrayOf(_.isString)(x) || _.isFunction(x),
     description: 'array of strings or a function'
   },
   jsxtremeMarkdownOptions: {
@@ -139,7 +139,7 @@ const configSchema = {
     description: 'boolean'
   },
   inlineJs: {
-    validator: isArrayOf(x => {
+    validator: isArrayOf((x) => {
       return (
         isAbsolutePathToExistingFile(x.filename) &&
         (x.uglify === undefined || _.isBoolean(x))
@@ -153,11 +153,11 @@ const configSchema = {
     description: 'boolean'
   },
   developmentDevtool: {
-    validator: x => _.isString(x) || x === false,
+    validator: (x) => _.isString(x) || x === false,
     description: 'string or the boolean value false'
   },
   productionDevtool: {
-    validator: x => _.isString(x) || x === false,
+    validator: (x) => _.isString(x) || x === false,
     description: 'string or the boolean value false'
   },
   clearOutputDirectory: {
@@ -165,11 +165,11 @@ const configSchema = {
     description: 'boolean'
   },
   unprocessedPageFiles: {
-    validator: isArrayOf(x => !isAbsolutePath(x)),
+    validator: isArrayOf((x) => !isAbsolutePath(x)),
     description: 'globs relative to the pagesDirectory, not absolute paths'
   },
   ignoreWithinPagesDirectory: {
-    validator: isArrayOf(x => !isAbsolutePath(x)),
+    validator: isArrayOf((x) => !isAbsolutePath(x)),
     description: 'globs relative to the pagesDirectory, not absolute paths'
   },
   webpackConfigClientTransform: {
@@ -298,7 +298,7 @@ function validateConfig(
 
   const validatePropertyType = (
     propertyName: string,
-    predicate: any => boolean,
+    predicate: (any) => boolean,
     typeDescription: string
   ) => {
     const value = config[propertyName];
@@ -312,7 +312,7 @@ function validateConfig(
     }
   };
 
-  Object.keys(config).forEach(propertyName => {
+  Object.keys(config).forEach((propertyName) => {
     const optionSchema = configSchema[propertyName];
     if (!optionSchema) {
       configErrors.push(
@@ -331,7 +331,7 @@ function validateConfig(
   // are called. And it's ok if globs don't point to existing files yet.
   // So just check if absolute paths point to existing files.
   if (Array.isArray(config.stylesheets)) {
-    _.flatten(config.stylesheets).forEach(item => {
+    _.flatten(config.stylesheets).forEach((item) => {
       if (isAbsoluteUrl(item)) return;
       if (isGlob(item)) return;
       if (isExistingFile(item)) return;
@@ -366,7 +366,7 @@ function validateConfig(
 
   if (config.includePages) {
     config.includePages = config.includePages
-      .map(p => {
+      .map((p) => {
         // Ensure all includePages paths start with / or the siteBasePath.
         if (config.siteBasePath && !p.startsWith(config.siteBasePath)) {
           return joinUrlParts(config.siteBasePath, p);
@@ -374,7 +374,7 @@ function validateConfig(
         if (p[0] === '/') return p;
         return `/${p}`;
       })
-      .map(p => {
+      .map((p) => {
         // Ensure all includePages paths that do not end in wildcards
         // or extensions end with /
         if (path.extname(p)) return p;

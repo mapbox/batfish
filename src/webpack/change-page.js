@@ -29,10 +29,10 @@ export function changePage(
   const startChange = _invokeRouteChangeStartCallbacks(nextLocation.pathname);
   return matchingRoute
     .getPage()
-    .then(pageModule => {
+    .then((pageModule) => {
       return startChange.then(() => pageModule);
     })
-    .then(pageModule => {
+    .then((pageModule) => {
       if (options.pushState) {
         win.history.pushState({}, null, nextUrl);
       }

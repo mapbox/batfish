@@ -30,7 +30,7 @@ describe('webpackCompilePromise', () => {
       () => {
         throw new Error('should have errored');
       },
-      error => {
+      (error) => {
         expect(error).toBeInstanceOf(errorTypes.WebpackFatalError);
         expect(error.originalError).toBe(expectedError);
       }
@@ -50,7 +50,7 @@ describe('webpackCompilePromise', () => {
       hasErrors: jest.fn(() => false)
     };
     webpack.compiler.run.mock.calls[0][0](null, stats);
-    return result.then(resolution => {
+    return result.then((resolution) => {
       expect(resolution).toBe(stats);
     });
   });
@@ -67,7 +67,7 @@ describe('webpackCompilePromise', () => {
       () => {
         throw new Error('should have errored');
       },
-      error => {
+      (error) => {
         expect(error).toBeInstanceOf(errorTypes.WebpackFatalError);
         expect(error.originalError).toBe(expectedError);
       }
@@ -85,7 +85,7 @@ describe('webpackCompilePromise', () => {
       () => {
         throw new Error('should have errored');
       },
-      error => {
+      (error) => {
         expect(error).toBeInstanceOf(errorTypes.WebpackCompilationError);
         expect(error.stats).toBe(stats);
       }

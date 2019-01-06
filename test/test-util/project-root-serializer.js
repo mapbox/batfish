@@ -13,7 +13,7 @@ module.exports = {
   print: (value, serialize) => {
     return serialize(value).replace(absolutePathRegExp, '<PROJECT_ROOT>');
   },
-  test: value => {
+  test: (value) => {
     return absolutePathRegExp.test(value);
   }
 };

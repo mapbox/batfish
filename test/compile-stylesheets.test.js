@@ -26,7 +26,7 @@ describe('compileStylesheets', () => {
       }
       .mock-style { color: brown; }
     `;
-    got.mockImplementation(arg => {
+    got.mockImplementation((arg) => {
       if (arg === 'https://www.mapbox.com/mock-style.css') {
         return Promise.resolve({
           body: mockUrlCss
@@ -60,14 +60,14 @@ describe('compileStylesheets', () => {
 
   test('writes expected CSS file', () => {
     return compileStylesheets(batfishConfig)
-      .then(cssFilePath => pify(fs.readFile)(cssFilePath, 'utf8'))
-      .then(css => {
+      .then((cssFilePath) => pify(fs.readFile)(cssFilePath, 'utf8'))
+      .then((css) => {
         expect(css).toMatchSnapshot();
       });
   });
 
   test('creates a source map', () => {
-    return compileStylesheets(batfishConfig).then(cssFilePath => {
+    return compileStylesheets(batfishConfig).then((cssFilePath) => {
       expect(fs.existsSync(cssFilePath + '.map')).toBe(true);
     });
   });
@@ -92,14 +92,14 @@ describe('compileStylesheets', () => {
         production: true
       })
     )
-      .then(cssFilePath => {
+      .then((cssFilePath) => {
         // [a-f0-9]{32} matches md5 hash.
         expect(path.basename(cssFilePath)).toMatch(
           /batfish-styles-[a-f0-9]{32}\.css$/
         );
         return pify(fs.readFile)(cssFilePath, 'utf8');
       })
-      .then(css => {
+      .then((css) => {
         expect(css).toMatchSnapshot();
       });
   });

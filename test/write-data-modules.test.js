@@ -15,9 +15,9 @@ describe('writeDataModules', () => {
     batfishConfig.temporaryDirectory = tmp;
     return pify(mkdirp)(tmp)
       .then(() => writeDataModules(batfishConfig, siteData))
-      .then(filePaths => {
+      .then((filePaths) => {
         const result = new Map();
-        filePaths.forEach(p => {
+        filePaths.forEach((p) => {
           result.set(path.relative(tmp, p), require(p));
         });
         return result;
@@ -33,7 +33,7 @@ describe('writeDataModules', () => {
   });
 
   test('no data selectors', () => {
-    return createAndReadDataModules({}).then(result => {
+    return createAndReadDataModules({}).then((result) => {
       expect(result.size).toBe(0);
     });
   });
@@ -45,11 +45,11 @@ describe('writeDataModules', () => {
     return createAndReadDataModules(
       {
         dataSelectors: {
-          namesOfHorses: siteData => siteData.horseNames.sort()
+          namesOfHorses: (siteData) => siteData.horseNames.sort()
         }
       },
       siteData
-    ).then(result => {
+    ).then((result) => {
       expect(result.size).toBe(1);
       expect(result.get('data/names-of-horses.js')).toEqual([
         'biff',
@@ -67,14 +67,14 @@ describe('writeDataModules', () => {
     return createAndReadDataModules(
       {
         dataSelectors: {
-          namesOfHorses: siteData => siteData.horseNames.sort(),
+          namesOfHorses: (siteData) => siteData.horseNames.sort(),
           notFromSiteData: () => ({ one: 1, two: 2 }),
-          allNames: siteData =>
+          allNames: (siteData) =>
             siteData.horseNames.concat(siteData.pigNames).sort()
         }
       },
       siteData
-    ).then(result => {
+    ).then((result) => {
       expect(result.size).toBe(3);
       expect(result.get('data/names-of-horses.js')).toEqual([
         'biff',

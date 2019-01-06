@@ -12,14 +12,10 @@ export default class PageShell extends React.Component {
           <html lang="en" />
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>
-            {title}
-          </title>
+          <title>{title}</title>
           <meta name="description" content={props.frontMatter.description} />
         </Helmet>
-        <div className="px30 py30">
-          {props.children}
-        </div>
+        <div className="px30 py30">{props.children}</div>
       </div>
     );
   }

@@ -75,7 +75,7 @@ class Router extends React.PureComponent<Props, RouterState> {
     }
 
     routeTo._setRouteToHandler(this.routeTo);
-    win.addEventListener('popstate', event => {
+    win.addEventListener('popstate', (event) => {
       event.preventDefault();
       changePage(
         {
@@ -90,7 +90,7 @@ class Router extends React.PureComponent<Props, RouterState> {
     if (hijackLinks) {
       linkHijacker.hijack(
         {
-          skipFilter: link =>
+          skipFilter: (link) =>
             querySelectorContainsNode('[data-batfish-no-hijack]', link)
         },
         this.routeTo

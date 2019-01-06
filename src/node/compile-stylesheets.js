@@ -89,7 +89,7 @@ function compileStylesheets(
     const processSingleStylesheetFromFs = (
       filename: string
     ): Promise<StylesheetData> => {
-      return pify(fs.readFile)(filename, 'utf8').then(css => {
+      return pify(fs.readFile)(filename, 'utf8').then((css) => {
         return postcss(getPostcssPlugins(batfishConfig))
           .process(css, {
             from: filename,
@@ -101,7 +101,7 @@ function compileStylesheets(
             }
           })
           .catch(rethrowPostcssError)
-          .then(result => {
+          .then((result) => {
             return {
               locator: filename,
               css: result.css,
@@ -120,10 +120,10 @@ function compileStylesheets(
       index: number
     ): Promise<void> => {
       return globby(input, { absolute: true })
-        .then(filenames => {
+        .then((filenames) => {
           return Promise.all(filenames.map(processSingleStylesheetFromFs));
         })
-        .then(contents => {
+        .then((contents) => {
           stylesheetContents[index] = contents;
         });
     };
@@ -138,8 +138,8 @@ function compileStylesheets(
       );
       // Since items in stylesheets can be an array (fancy glob),
       // we need to be recursive here.
-      const addItems = list => {
-        list.forEach(item => {
+      const addItems = (list) => {
+        list.forEach((item) => {
           if (Array.isArray(item)) return addItems(item);
           concatenator.add(item.locator, item.css, item.map);
         });

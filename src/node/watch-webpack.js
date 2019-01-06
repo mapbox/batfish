@@ -19,8 +19,8 @@ const writeWebpackStats = require('./write-webpack-stats');
 function watchWebpack(
   batfishConfig: BatfishConfiguration,
   options: {
-    onError: Error => void,
-    onNotification: string => void,
+    onError: (Error) => void,
+    onNotification: (string) => void,
     onFirstCompile: () => void
   }
 ): void {
@@ -38,7 +38,7 @@ function watchWebpack(
   createWebpackConfigClient(batfishConfig, {
     devServer: true
   })
-    .then(clientConfig => {
+    .then((clientConfig) => {
       // Create an HTML file to load the assets in the browser.
       const config = webpackMerge(clientConfig, {
         plugins: [new HtmlWebpackPlugin(htmlWebpackPluginOptions)]

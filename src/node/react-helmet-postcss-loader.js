@@ -39,7 +39,7 @@ function reactHelmetPostcssLoader(css: string) {
   postcss(options.postcssPlugins)
     .process(css, { from: undefined })
     .catch(rethrowPostcssError)
-    .then(result => {
+    .then((result) => {
       callback(null, generateModule(result.css));
     })
     .catch(callback);

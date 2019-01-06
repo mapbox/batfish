@@ -5,10 +5,10 @@ export default class MarkdownWrapper extends React.Component {
     const { headings } = this.props.frontMatter;
     if (!headings) return null;
     const entries = headings
-      .filter(heading => {
+      .filter((heading) => {
         return heading.level > 1 && heading.level < 4;
       })
-      .map(heading => {
+      .map((heading) => {
         const linkStyle = { marginLeft: 20 * (heading.level - 2) };
         return (
           <li key={heading.slug}>

@@ -23,7 +23,7 @@ describe('postcssAbsoluteUrls', () => {
         })
       )
       .process(css, { from: undefined })
-      .then(result => {
+      .then((result) => {
         expect(result.css).toMatchSnapshot();
       });
   });

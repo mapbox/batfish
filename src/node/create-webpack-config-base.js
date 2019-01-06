@@ -25,7 +25,7 @@ function createWebpackConfigBase(
     dirname.startsWith(path.join(__dirname, '../../examples')) ||
     dirname.startsWith(path.join(__dirname, '../../test/stress'));
 
-  return writeContextModule(batfishConfig).then(batfishContextPath => {
+  return writeContextModule(batfishConfig).then((batfishContextPath) => {
     const jsxtremeMarkdownOptions = _.clone(
       batfishConfig.jsxtremeMarkdownOptions
     );
@@ -66,7 +66,7 @@ function createWebpackConfigBase(
       { include: /@mapbox\/batfish\/(?!\/node_modules).*/ }
     ];
     if (batfishConfig.babelInclude) {
-      batfishConfig.babelInclude.forEach(condition => {
+      batfishConfig.babelInclude.forEach((condition) => {
         if (typeof condition === 'string' && !path.isAbsolute(condition)) {
           babelOrConditions.push({
             include: new RegExp(`${condition}(?!/node_modules).*`)

@@ -5,7 +5,7 @@ export default class SidebarNavigation extends React.PureComponent {
   render() {
     const { props } = this;
 
-    const itemElements = props.items.map(item => {
+    const itemElements = props.items.map((item) => {
       let linkClasses = 'link block py6 border-b border--gray-light';
       return (
         <li key={item.url}>
@@ -18,12 +18,8 @@ export default class SidebarNavigation extends React.PureComponent {
 
     return (
       <div>
-        <div className="txt-h3 mb12">
-          {props.title}
-        </div>
-        <ul>
-          {itemElements}
-        </ul>
+        <div className="txt-h3 mb12">{props.title}</div>
+        <ul>{itemElements}</ul>
       </div>
     );
   }

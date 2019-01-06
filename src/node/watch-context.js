@@ -9,7 +9,7 @@ const constants = require('./constants');
 function watchContext(
   batfishConfig: BatfishConfiguration,
   options: {
-    onError: Error => any,
+    onError: (Error) => any,
     afterCompilation: () => any
   }
 ) {

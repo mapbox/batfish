@@ -13,7 +13,7 @@ function utileWriteFile(path, data, overwrite) {
   return stat(path)
     .then(() => true)
     .catch(() => false)
-    .then(doesExists => {
+    .then((doesExists) => {
       if (doesExists && !overwrite) {
         return;
       }
@@ -247,7 +247,7 @@ function generatePageShell(allPages) {
            </li>
           ${allPages
             .map(
-              page => `
+              (page) => `
               <li style={{display: 'flex',  padding: '3px 6px'}}>
                 <a href="/${path.parse(page).name}">Page-${
                 path.parse(page).name
@@ -271,7 +271,7 @@ function main(numberOfPages = 2, maxPageSentences = 2) {
   utilMkdir(path.resolve('./src'), true);
   utilMkdir(path.resolve('./src/pages'), true);
 
-  const p = t => path.join('./src/pages', t);
+  const p = (t) => path.join('./src/pages', t);
   for (let j = 0; j < numberOfPages; j++) {
     let i = j;
     if (j === 0) {
@@ -305,6 +305,8 @@ var args = argv
   ])
   .run();
 
-const { options: { numberOfPages, maxPageSentences } } = args;
+const {
+  options: { numberOfPages, maxPageSentences }
+} = args;
 
 main(numberOfPages, maxPageSentences);

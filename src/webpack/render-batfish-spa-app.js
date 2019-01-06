@@ -6,6 +6,6 @@ import { BatfishSpaApp } from './batfish-spa-app';
 
 const matchingRoute = batfishContext.routes[0];
 
-matchingRoute.getPage().then(pageModule => {
+matchingRoute.getPage().then((pageModule) => {
   renderAppIntoDom(<BatfishSpaApp pageModule={pageModule} />);
 });

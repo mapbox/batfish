@@ -29,7 +29,7 @@ function writeDataModules(
 
     // Returned Promise resolves with the filename of the data module.
     const createSingleDataModule = (
-      dataSelector: BatfishSiteData => JsonValue,
+      dataSelector: (BatfishSiteData) => JsonValue,
       id: string
     ): Promise<string> => {
       const data = dataSelector(siteData);

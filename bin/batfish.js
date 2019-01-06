@@ -119,7 +119,7 @@ const cli = meow({
   }
 });
 
-const logCliError = message => {
+const logCliError = (message) => {
   batfishLog.error(`${chalk.red.bold('CLI error:')} ${message}`);
 };
 
@@ -203,10 +203,10 @@ const projectDirectory = path.dirname(configPath);
 
   const executeCommand = commands[command];
   const emitter = executeCommand(config, projectDirectory);
-  emitter.on(constants.EVENT_NOTIFICATION, message => {
+  emitter.on(constants.EVENT_NOTIFICATION, (message) => {
     batfishLog.log(message);
   });
-  emitter.on(constants.EVENT_ERROR, error => {
+  emitter.on(constants.EVENT_ERROR, (error) => {
     const niceMessage = getLoggableErrorMessage(error);
     if (niceMessage) {
       batfishLog.error(niceMessage);

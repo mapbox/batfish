@@ -42,7 +42,7 @@ describe('createWebpackConfigBase', () => {
 
   test('default Webpack config', () => {
     return createWebpackConfigBase(createBatfishConfig()).then(
-      webpackConfig => {
+      (webpackConfig) => {
         expect(webpackConfig).toMatchSnapshot();
       }
     );
@@ -51,14 +51,14 @@ describe('createWebpackConfigBase', () => {
   test('default production Webpack config', () => {
     return createWebpackConfigBase(
       createBatfishConfig({ production: true })
-    ).then(webpackConfig => {
+    ).then((webpackConfig) => {
       expect(webpackConfig).toMatchSnapshot();
     });
   });
 
   test('writes a context module and adds it to the config', () => {
     const batfishConfig = createBatfishConfig();
-    return createWebpackConfigBase(batfishConfig).then(webpackConfig => {
+    return createWebpackConfigBase(batfishConfig).then((webpackConfig) => {
       expect(writeContextModule).toHaveBeenCalledTimes(1);
       expect(writeContextModule).toHaveBeenCalledWith(batfishConfig);
       expect(
@@ -119,7 +119,7 @@ describe('createWebpackConfigBase', () => {
       ),
       temporaryDirectory: path.join(__dirname, './fake/temporary/directory')
     });
-    return createWebpackConfigBase(batfishConfig).then(webpackConfig => {
+    return createWebpackConfigBase(batfishConfig).then((webpackConfig) => {
       expect(webpackConfig).toMatchSnapshot();
     });
   });

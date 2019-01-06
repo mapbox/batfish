@@ -15,7 +15,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "lint-js": "eslint .",
-    "format": "prettier --write '{,src*/**/,bin/**/,test/**/,flow-typed/}*.js'",
+    "format": "prettier --write '**/*.js'",
     "test-jest": "jest",
     "lint-md-partial": "remark -u remark-preset-davidtheclark --frail --quiet --no-stdout --output --",
     "lint-md": "npm run lint-md-partial -- docs/*.md *.md",
@@ -54,7 +54,8 @@
     ]
   },
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "arrowParens": "always"
   },
   "babel": {
     "presets": [
@@ -179,7 +180,7 @@
     "lorem-ipsum": "^1.0.4",
     "moment": "^2.22.1",
     "npm-run-all": "^4.1.2",
-    "prettier": "^1.11.1",
+    "prettier": "^1.15.3",
     "ramda": "^0.25.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

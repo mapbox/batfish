@@ -19,7 +19,7 @@ function inlineCssWorker(
     pify(fs.readFile)(cssPath, 'utf8'),
     pify(fs.readFile)(htmlPath, 'utf8')
   ])
-    .then(data => {
+    .then((data) => {
       const css = data[0];
       const html = data[1];
       return postcss()
@@ -34,12 +34,12 @@ function inlineCssWorker(
           );
         });
     })
-    .then(htmlWithCss => pify(fs.writeFile)(htmlPath, htmlWithCss))
+    .then((htmlWithCss) => pify(fs.writeFile)(htmlPath, htmlWithCss))
     .then(
       () => {
         callback();
       },
-      error => {
+      (error) => {
         callback(error);
       }
     );

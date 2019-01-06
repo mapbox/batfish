@@ -42,7 +42,7 @@ function createWebpackConfigClient(
   );
   return createWebpackConfigBase(batfishConfig, {
     target: constants.TARGET_BROWSER
-  }).then(baseConfig => {
+  }).then((baseConfig) => {
     let vendorModules = [
       reactPath,
       reactDomPath,
@@ -64,7 +64,7 @@ function createWebpackConfigClient(
       new AssetsPlugin({
         path: path.resolve(batfishConfig.outputDirectory),
         filename: 'assets.json',
-        processOutput: x => JSON.stringify(x, null, 2)
+        processOutput: (x) => JSON.stringify(x, null, 2)
       }),
       // Extract universal vendor files (defined above) from everything else.
       new webpack.optimize.CommonsChunkPlugin({
@@ -88,14 +88,14 @@ function createWebpackConfigClient(
       // Recommended at https://webpack.js.org/guides/caching/#module-identifiers
       // as a way to make module IDs more deterministic.
       new webpack.HashedModuleIdsPlugin(),
-      new webpack.NamedChunksPlugin(chunk => {
+      new webpack.NamedChunksPlugin((chunk) => {
         if (chunk.name) return chunk.name;
         const hashSeed = Array.from(
           chunk.modulesIterable,
-          m => m.resource || ''
+          (m) => m.resource || ''
         )
           .sort()
-          .map(resource => {
+          .map((resource) => {
             return path.relative(batfishConfig.pagesDirectory, resource);
           })
           .join('_');
@@ -135,7 +135,7 @@ function createWebpackConfigClient(
 
     const appEntry = [];
     if (!batfishConfig.production && batfishConfig.inlineJs) {
-      batfishConfig.inlineJs.forEach(jsData => {
+      batfishConfig.inlineJs.forEach((jsData) => {
         appEntry.push(jsData.filename);
       });
     }

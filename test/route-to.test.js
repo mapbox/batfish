@@ -6,7 +6,7 @@ const routeToPrefixed = require('../src/webpack/public/route-to')
 
 jest.mock('../src/webpack/public/prefix-url', () => {
   return {
-    prefixUrl: jest.fn(url => `prefixed/${url}`)
+    prefixUrl: jest.fn((url) => `prefixed/${url}`)
   };
 });
 

@@ -29,7 +29,7 @@ function inlineCss(
   htmlRoot: string,
   cssPath: string,
   options: {
-    onNotification: string => void,
+    onNotification: (string) => void,
     verbose?: boolean
   }
 ): Promise<void> {
@@ -63,13 +63,13 @@ function inlineCss(
   const pagesGlob = path.join(htmlRoot, '**/*.html');
 
   return globby(pagesGlob)
-    .then(htmlPaths => {
+    .then((htmlPaths) => {
       totalHtmlFiles = htmlPaths.length;
       return Promise.all(htmlPaths.map(processPage));
     })
     .then(
       () => {},
-      error => {
+      (error) => {
         throw reTypeError(error);
       }
     );

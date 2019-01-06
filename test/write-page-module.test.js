@@ -18,7 +18,7 @@ describe('writePageModule', () => {
     tmp = tempy.directory();
     return pify(mkdirp)(tmp)
       .then(() => writePageModule(batfishConfig, pageData))
-      .then(filePath => require(filePath));
+      .then((filePath) => require(filePath));
   };
 
   afterEach(() => {
@@ -38,7 +38,7 @@ describe('writePageModule', () => {
         path: '/',
         filePath: pageComponentPath
       }
-    ).then(result => {
+    ).then((result) => {
       expect(result).toEqual({
         component: {
           // Export of page-component-module.js
@@ -61,7 +61,7 @@ describe('writePageModule', () => {
           title: 'Pigman'
         }
       }
-    ).then(result => {
+    ).then((result) => {
       expect(result).toEqual({
         component: {
           // Export of page-component-module.js

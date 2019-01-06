@@ -21,7 +21,7 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     emitter.emit(constants.EVENT_ERROR, error);
   };
   const emitNotification = (...messages: string[]) => {
-    messages.forEach(message =>
+    messages.forEach((message) =>
       emitter.emit(constants.EVENT_NOTIFICATION, message)
     );
   };
@@ -37,11 +37,11 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     return emitter;
   }
 
-  const checkPort = getPort(batfishConfig.port).then(actualPort => {
+  const checkPort = getPort(batfishConfig.port).then((actualPort) => {
     if (actualPort === batfishConfig.port) {
       return actualPort;
     }
-    return portInUsageMessages(batfishConfig.port).then(messages => {
+    return portInUsageMessages(batfishConfig.port).then((messages) => {
       emitNotification(...messages);
       return actualPort;
     });
