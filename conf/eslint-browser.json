@@ -8,12 +8,10 @@
   },
   "rules": {
     "react/jsx-uses-vars": ["error"],
-    "react/display-name": ["error"],
     "react/jsx-no-duplicate-props": ["error"],
     "react/jsx-uses-react": ["error"],
     "react/jsx-no-undef": ["error"],
     "react/no-unknown-property": ["error"],
-    "react/prefer-es6-class": ["error", "always"],
     "react/react-in-jsx-scope": ["error"]
   }
 }
