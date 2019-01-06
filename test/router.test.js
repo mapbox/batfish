@@ -7,7 +7,6 @@
 const React = require('react');
 const shallow = require('enzyme').shallow;
 const mount = require('enzyme').mount;
-const toJson = require('enzyme-to-json').default;
 const Router = require('../src/webpack/router').Router;
 const routeTo = require('@mapbox/batfish/modules/route-to').routeTo;
 const scrollRestorer = require('@mapbox/scroll-restorer');
@@ -118,7 +117,7 @@ describe('Router', () => {
         pageProps: pageProps
       })
     );
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('renders the initial page with a window passes current location details', () => {
@@ -131,7 +130,7 @@ describe('Router', () => {
         pageProps: pageProps
       })
     );
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('on mount, starts the scroll restorer and tries to restore prior scroll', () => {
