@@ -1,8 +1,12 @@
 # Changelog
 
+## HEAD
+
+- **Fix:** Fix Node 10 compatibility by updating `cpy` dependency.
+
 ## 1.9.6
 
-- **Deprecate:** Add a deprecation warning when using the `spa` mode. 
+- **Deprecate:** Add a deprecation warning when using the `spa` mode.
 
 ## 1.9.5
 

@@ -27,7 +27,9 @@ jest.mock('../src/node/watch-css', () => jest.fn());
 
 jest.mock('../src/node/watch-webpack', () => jest.fn());
 
-jest.mock('../src/node/dev-server', () => jest.fn());
+jest.mock('../src/node/dev-server', () => {
+  return jest.fn(() => Promise.resolve());
+});
 
 jest.mock('../src/node/non-page-files', () => {
   return {
