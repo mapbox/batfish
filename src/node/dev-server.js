@@ -1,20 +1,38 @@
 // @flow
 'use strict';
 
-const liveServer = require('live-server');
+const path = require('path');
+const browserSync = require('browser-sync');
 const startMiddleware = require('./server-middleware/start-middleware');
 
 module.exports = function startServer(
   batfishConfig: BatfishConfiguration,
   actualPort: number
-): Object {
-  const server = liveServer.start({
-    port: actualPort,
-    root: batfishConfig.outputDirectory,
-    logLevel: 0,
-    open: false,
-    wait: 300,
-    middleware: startMiddleware(batfishConfig)
+): Promise<Object> {
+  return new Promise((resolve, reject) => {
+    const bs = browserSync.create();
+    const server = bs.init(
+      {
+        port: actualPort,
+        server: {
+          baseDir: batfishConfig.outputDirectory
+        },
+        files: [path.join(batfishConfig.outputDirectory, '**/*.*')],
+        middleware: startMiddleware(batfishConfig),
+        logLevel: 'silent',
+        open: false,
+        notify: false,
+        offline: true,
+        reloadDebounce: 500,
+        injectChanges: true
+      },
+      (error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(server);
+        }
+      }
+    );
   });
-  return server;
 };
