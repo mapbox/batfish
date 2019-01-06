@@ -59,24 +59,24 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
       ]);
     })
     .then(([actualPort]) => {
-      devServer(batfishConfig, actualPort);
+      return devServer(batfishConfig, actualPort).then(() => {
+        watchCss(batfishConfig, {
+          onError: emitError,
+          onNotification: emitNotification
+        });
 
-      watchCss(batfishConfig, {
-        onError: emitError,
-        onNotification: emitNotification
-      });
+        nonPageFiles.watch(batfishConfig, {
+          onError: emitError,
+          onNotification: emitNotification
+        });
 
-      nonPageFiles.watch(batfishConfig, {
-        onError: emitError,
-        onNotification: emitNotification
-      });
-
-      watchWebpack(batfishConfig, {
-        onFirstCompile: () => {
-          emitNotification(serverInitMessage(batfishConfig, actualPort));
-        },
-        onNotification: emitNotification,
-        onError: emitError
+        watchWebpack(batfishConfig, {
+          onFirstCompile: () => {
+            emitNotification(serverInitMessage(batfishConfig, actualPort));
+          },
+          onNotification: emitNotification,
+          onError: emitError
+        });
       });
     })
     .catch(emitError);
