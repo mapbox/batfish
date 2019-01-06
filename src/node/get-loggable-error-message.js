@@ -23,7 +23,7 @@ function getLoggableErrorMessage(error: Error): string | void {
   if (error instanceof errorTypes.ConfigValidationError) {
     result += 'Invalid configuration.\n\n';
     if (error.messages) {
-      error.messages.forEach(m => {
+      error.messages.forEach((m) => {
         result += `- ${m}\n`;
       });
     } else {
@@ -38,7 +38,7 @@ function getLoggableErrorMessage(error: Error): string | void {
       'webpackPlugins',
       'webpackStaticIgnore'
     ]
-      .map(x => chalk.yellow(x))
+      .map((x) => chalk.yellow(x))
       .join(', ');
     result += `Webpack fatal error. Please check any Batfish configuration options that pass directly into Webpack configuration (${webpackOptions}).\n\n`;
     result += `Error message: ${error.originalError.message}\n`;
@@ -48,7 +48,7 @@ function getLoggableErrorMessage(error: Error): string | void {
   if (error instanceof errorTypes.WebpackCompilationError) {
     result += `Webpack compilation error.\n\n`;
     const formattedMessages = webpackFormatMessages(error.stats);
-    formattedMessages.errors.forEach(errorMessage => {
+    formattedMessages.errors.forEach((errorMessage) => {
       result += `${errorMessage}\n`;
     });
     return result;

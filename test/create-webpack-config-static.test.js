@@ -29,7 +29,7 @@ function createBatfishConfig(options) {
 describe('createWebpackConfigStatic', () => {
   test('creates a base config', () => {
     const batfishConfig = createBatfishConfig();
-    return createWebpackConfigStatic(batfishConfig).then(webpackConfig => {
+    return createWebpackConfigStatic(batfishConfig).then((webpackConfig) => {
       expect(createWebpackConfigBase).toHaveBeenCalledTimes(1);
       expect(createWebpackConfigBase).toHaveBeenCalledWith(batfishConfig, {
         target: 'node'
@@ -40,7 +40,7 @@ describe('createWebpackConfigStatic', () => {
 
   test('default Webpack config', () => {
     return createWebpackConfigStatic(createBatfishConfig()).then(
-      webpackConfig => {
+      (webpackConfig) => {
         expect(webpackConfig).toMatchSnapshot();
       }
     );
@@ -53,13 +53,13 @@ describe('createWebpackConfigStatic', () => {
         '/path/to/component/a',
         '/path/to/component/b'
       ],
-      webpackConfigStaticTransform: x => {
+      webpackConfigStaticTransform: (x) => {
         x.underwentStaticTransform = true;
         return x;
       },
       webpackPlugins: [{ mockPlugin: true }]
     });
-    return createWebpackConfigStatic(batfishConfig).then(webpackConfig => {
+    return createWebpackConfigStatic(batfishConfig).then((webpackConfig) => {
       expect(webpackConfig).toMatchSnapshot();
     });
   });

@@ -22,7 +22,7 @@ function getPostcssPlugins(
     // Rewrite urls so they are root-relative. This way they'll work both from
     // inlined CSS (in the static build) and the stylesheet itself.
     postcssUrl({
-      url: asset => {
+      url: (asset) => {
         const parsedUrl = url.parse(asset.url);
         if (parsedUrl.protocol) {
           return asset.url;

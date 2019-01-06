@@ -12,13 +12,13 @@ describe('examples', () => {
   let exampleNames;
 
   beforeAll(() => {
-    return pify(fs.readdir)(examplesDirectory).then(items => {
+    return pify(fs.readdir)(examplesDirectory).then((items) => {
       const subDirectories = [];
       return Promise.all(
-        items.map(item => {
+        items.map((item) => {
           return pathType
             .dir(path.join(examplesDirectory, item))
-            .then(isDir => {
+            .then((isDir) => {
               if (isDir) subDirectories.push(item);
             });
         })
@@ -30,7 +30,7 @@ describe('examples', () => {
 
   test('every example contains a README', () => {
     return Promise.all(
-      exampleNames.map(example => {
+      exampleNames.map((example) => {
         const readmeFilename = path.join(
           examplesDirectory,
           example,
@@ -45,14 +45,14 @@ describe('examples', () => {
 
   test('every example contains a package.json that fits conventions', () => {
     return Promise.all(
-      exampleNames.map(example => {
+      exampleNames.map((example) => {
         const packageJsonFilename = path.join(
           examplesDirectory,
           example,
           'package.json'
         );
         return pify(fs.readFile)(packageJsonFilename, 'utf8').then(
-          contents => {
+          (contents) => {
             const pkg = JSON.parse(contents);
             if (pkg.private !== true) {
               throw new Error(

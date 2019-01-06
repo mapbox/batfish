@@ -80,11 +80,11 @@ export function invokeCallbacks(
   nextPathname = normalizePathname(nextPathname);
   let promisesToKeep = [Promise.resolve()];
   if (registery[nextPathname]) {
-    registery[nextPathname].forEach(callback => {
+    registery[nextPathname].forEach((callback) => {
       promisesToKeep.push(Promise.resolve(callback(nextPathname)));
     });
   }
-  registery[ALL_PATHS].forEach(callback => {
+  registery[ALL_PATHS].forEach((callback) => {
     promisesToKeep.push(Promise.resolve(callback(nextPathname)));
   });
   return Promise.all(promisesToKeep);

@@ -62,7 +62,7 @@ describe('watchWebpack', () => {
     });
   });
 
-  test('handles webpack configuration errors', done => {
+  test('handles webpack configuration errors', (done) => {
     const webpackError = new Error();
     webpack.mockImplementationOnce(() => {
       throw webpackError;
@@ -78,7 +78,7 @@ describe('watchWebpack', () => {
     });
   });
 
-  test("starts webpack's watch", done => {
+  test("starts webpack's watch", (done) => {
     watchWebpack(batfishConfig, { onError, onNotification, onFirstCompile });
     process.nextTick(() => {
       expect(webpack.compiler.watch).toHaveBeenCalledTimes(1);
@@ -94,7 +94,7 @@ describe('watchWebpack', () => {
     });
   });
 
-  test('starts the context watcher', done => {
+  test('starts the context watcher', (done) => {
     watchWebpack(batfishConfig, { onError, onNotification, onFirstCompile });
     process.nextTick(() => {
       expect(watchContext).toHaveBeenCalledTimes(1);
@@ -105,7 +105,7 @@ describe('watchWebpack', () => {
     });
   });
 
-  test('catches errors from context watcher', done => {
+  test('catches errors from context watcher', (done) => {
     const expectedError = new Error();
     watchWebpack(batfishConfig, { onError, onNotification, onFirstCompile });
     expect.hasAssertions();
@@ -116,7 +116,7 @@ describe('watchWebpack', () => {
     });
   });
 
-  test('on first compilation calls callbak', done => {
+  test('on first compilation calls callbak', (done) => {
     watchWebpack(batfishConfig, { onError, onNotification, onFirstCompile });
     expect.hasAssertions();
     process.nextTick(() => {
@@ -128,7 +128,7 @@ describe('watchWebpack', () => {
     });
   });
 
-  test('handles fatal errors', done => {
+  test('handles fatal errors', (done) => {
     const expectedError = new Error();
     watchWebpack(batfishConfig, { onError, onNotification, onFirstCompile });
     expect.hasAssertions();
@@ -146,7 +146,7 @@ describe('watchWebpack', () => {
     });
   });
 
-  test('handles errors in stats', done => {
+  test('handles errors in stats', (done) => {
     const erroneousStats = createMockStats('a');
     erroneousStats.hasErrors.mockReturnValue(true);
     watchWebpack(batfishConfig, { onError, onNotification, onFirstCompile });
@@ -162,7 +162,7 @@ describe('watchWebpack', () => {
     });
   });
 
-  test('on every new compilation, writes stats', done => {
+  test('on every new compilation, writes stats', (done) => {
     watchWebpack(batfishConfig, { onError, onNotification, onFirstCompile });
     process.nextTick(() => {
       const firstStats = createMockStats('a');

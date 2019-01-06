@@ -111,9 +111,9 @@ describe('changePage', () => {
     return result;
   });
 
-  test('allows change-start callbacks to delay resolution', done => {
+  test('allows change-start callbacks to delay resolution', (done) => {
     jest.useFakeTimers();
-    const wait = new Promise(resolve => {
+    const wait = new Promise((resolve) => {
       setTimeout(resolve, 500);
     });
     _invokeRouteChangeStartCallbacks.mockReturnValue(wait);

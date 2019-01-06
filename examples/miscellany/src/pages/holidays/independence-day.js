@@ -24,7 +24,7 @@ export default class IndependenceDay extends React.Component {
 
           **Independence Day** is commonly associated with fireworks, parades, barbecues, carnivals, fairs, picnics, concerts, baseball games, family reunions, and political speeches and ceremonies, in addition to various other public and private events celebrating the history, government, and traditions of the United States. **Independence Day** is the National Day of the United States.
 
-          **[Learn more about Independence Day.](https://en.wikipedia.org/wiki/Independence_Day_(United_States))**
+          **[Learn more about Independence Day.](<https://en.wikipedia.org/wiki/Independence_Day_(United_States)>)**
         `}
       </HolidayWrapper>
     );

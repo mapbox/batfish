@@ -10,8 +10,8 @@ const now = require('./now');
 function watchCss(
   batfishConfig: BatfishConfiguration,
   options: {
-    onError: Error => void,
-    onNotification?: string => void
+    onError: (Error) => void,
+    onNotification?: (string) => void
   }
 ) {
   const { onError, onNotification } = options;

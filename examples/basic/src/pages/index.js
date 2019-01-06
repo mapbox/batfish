@@ -11,9 +11,7 @@ export default class Home extends React.PureComponent {
     const { props } = this;
     return (
       <PageShell frontMatter={props.frontMatter}>
-        <h1 className="customHeading">
-          {props.frontMatter.title}
-        </h1>
+        <h1 className="customHeading">{props.frontMatter.title}</h1>
         <p className="my12">This is a basic Batfish JavaScript page.</p>
         <p>
           <a href="/markdown/" className="link txt-underline">

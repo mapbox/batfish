@@ -17,7 +17,8 @@ class DefaultNotFound extends React.Component {
           Batfish can't find a route for{' '}
           <span style={{ color: 'red', textDecoration: 'underline' }}>
             {this.props.location.pathname}
-          </span>.
+          </span>
+          .
         </p>
         <p>
           <a href={prefixUrl('/')} style={{ fontWeight: 'bold' }}>

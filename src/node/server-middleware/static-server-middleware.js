@@ -31,7 +31,7 @@ function createInternalRoutingMiddleware(
   }
 
   if (pagesWithInternalRouting.length !== 0) {
-    return pagesWithInternalRouting.map(pageData => {
+    return pagesWithInternalRouting.map((pageData) => {
       return (req: { url: string }, res: Object, next: Function) => {
         const parsedUrl = url.parse(req.url);
         if (
@@ -51,10 +51,7 @@ function serverStaticMiddleware(
   batfishConfig: BatfishConfiguration,
   pagesData: { [string]: BatfishPageData }
 ): Array<MiddlewareFn> {
-  let middleware = [
-    stripSiteBasePath(batfishConfig.siteBasePath),
-    nocache()
-  ];
+  let middleware = [stripSiteBasePath(batfishConfig.siteBasePath), nocache()];
 
   const internalRoutingMiddleware = createInternalRoutingMiddleware(
     batfishConfig,

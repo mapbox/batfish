@@ -11,19 +11,15 @@ export default class Stories extends React.Component {
   render() {
     const { props } = this;
 
-    const storyItems = storiesData.map(story => {
+    const storyItems = storiesData.map((story) => {
       return (
         <a
           key={story.path}
           className="block py24 border-b border--gray-light link link--purple"
           href={story.path}
         >
-          <div className="txt-h3 mr12">
-            {story.frontMatter.title}
-          </div>
-          <div className="txt-em">
-            {story.frontMatter.subtitle}
-          </div>
+          <div className="txt-h3 mr12">{story.frontMatter.title}</div>
+          <div className="txt-em">{story.frontMatter.subtitle}</div>
         </a>
       );
     });

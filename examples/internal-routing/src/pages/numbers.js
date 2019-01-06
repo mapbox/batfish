@@ -46,9 +46,7 @@ class Numbers extends React.PureComponent {
         <div>
           <p>There are many numbers to choose from.</p>
           <ReactRouter.Route path="/:id" component={ShownNumber} />
-          <ul>
-            {numberLinks}
-          </ul>
+          <ul>{numberLinks}</ul>
         </div>
       </ReactRouter.BrowserRouter>
     );

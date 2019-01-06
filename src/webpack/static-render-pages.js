@@ -54,7 +54,7 @@ function staticRenderPages(
       css,
       appendToBody,
       spa: batfishConfig.spa
-    }).then(html => {
+    }).then((html) => {
       // Write every page as an index.html file in the directory corresponding
       // to its route's path. Except the 404 page.
       if (route.is404) {

@@ -99,7 +99,7 @@ describe('renderHtmlPage', () => {
       inlineJsScripts: 'inline-js-scripts',
       css: 'css',
       appendToBody: ['append', 'to', 'body']
-    }).then(html => {
+    }).then((html) => {
       expect(_.unescape(html)).toMatchSnapshot();
     });
   });
@@ -118,7 +118,7 @@ describe('renderHtmlPage', () => {
       () => {
         throw new Error('should have errored');
       },
-      error => {
+      (error) => {
         expect(error).toBe(expectedError);
         ReactDOMServer.renderToString.mockRestore();
       }
@@ -141,7 +141,7 @@ describe('renderHtmlPage', () => {
       () => {
         throw new Error('should have errored');
       },
-      error => {
+      (error) => {
         expect(error).toBe(expectedError);
         ReactDOMServer.renderToStaticMarkup.mockRestore();
       }
@@ -154,7 +154,7 @@ describe('renderHtmlPage', () => {
       css: 'css',
       appendToBody: ['append', 'to', 'body'],
       spa: true
-    }).then(html => {
+    }).then((html) => {
       expect(_.unescape(html)).toMatchSnapshot();
     });
   });

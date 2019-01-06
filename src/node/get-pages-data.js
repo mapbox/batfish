@@ -78,7 +78,7 @@ function getPagesData(
   ];
 
   return globby(pagesGlob)
-    .then(pageFilePaths => {
+    .then((pageFilePaths) => {
       // Filter out any unprocessedPageFiles
       if (batfishConfig.unprocessedPageFiles) {
         const unprocessed = micromatch(
@@ -90,7 +90,7 @@ function getPagesData(
         return pageFilePaths;
       }
     })
-    .then(pageFilePaths => {
+    .then((pageFilePaths) => {
       if (batfishConfig.spa && pageFilePaths.length > 1) {
         throw new errorTypes.ConfigFatalError(
           'In your Batfish config you set `spa: true`, but you have more than one page. SPA mode only allows one Batfish page.'

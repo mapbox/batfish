@@ -11,7 +11,7 @@ export default class Holidays extends React.Component {
   render() {
     const { props } = this;
 
-    const holidayItems = holidaysData.map(holiday => {
+    const holidayItems = holidaysData.map((holiday) => {
       return (
         <a
           key={holiday.path}
@@ -21,9 +21,7 @@ export default class Holidays extends React.Component {
           <div className="inline-block txt-h3 mr12">
             {holiday.frontMatter.title}
           </div>
-          <div className="inline-block pl12">
-            ({holiday.frontMatter.date})
-          </div>
+          <div className="inline-block pl12">({holiday.frontMatter.date})</div>
         </a>
       );
     });

@@ -20,7 +20,7 @@ function createWebpackConfigStatic(
 ): Promise<webpack$Configuration> {
   return createWebpackConfigBase(batfishConfig, {
     target: constants.TARGET_NODE
-  }).then(baseConfig => {
+  }).then((baseConfig) => {
     const staticConfig: webpack$Configuration = {
       entry: {
         static: path.join(__dirname, '../webpack/static-render-pages.js')
@@ -79,7 +79,7 @@ function createWebpackConfigStatic(
       });
     }
 
-    batfishConfig.webpackStaticStubReactComponent.forEach(original => {
+    batfishConfig.webpackStaticStubReactComponent.forEach((original) => {
       if (!staticConfig.plugins) staticConfig.plugins = [];
       staticConfig.plugins.push(
         new webpack.NormalModuleReplacementPlugin(

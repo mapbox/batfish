@@ -28,7 +28,7 @@ jest.mock('../src/node/create-babel-config', () => {
   }));
 });
 
-const createMockBabelConfig = outputDirectory => {
+const createMockBabelConfig = (outputDirectory) => {
   return {
     presets: [
       path.join(outputDirectory, 'preset/foo'),

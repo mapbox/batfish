@@ -3,7 +3,7 @@
 const path = require('path');
 const createBabelConfig = require('../src/node/create-babel-config');
 
-const abs = x => path.join(__dirname, x);
+const abs = (x) => path.join(__dirname, x);
 
 const defaultBatfishConfig = () => ({
   babelPlugins: [],
@@ -13,7 +13,7 @@ const defaultBatfishConfig = () => ({
   production: true
 });
 
-const relativizeBabelSetting = p => {
+const relativizeBabelSetting = (p) => {
   if (!Array.isArray(p)) {
     return `./${path.relative(__dirname, p)}`;
   }

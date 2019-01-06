@@ -21,7 +21,7 @@ export default class LaborDay extends React.Component {
 
           Beginning in the late 19th century, as the trade union and labor movements grew, trade unionists proposed that a day be set aside to celebrate labor. "**Labor Day**" was promoted by the Central Labor Union and the Knights of Labor, which organized the first parade in New York City. In 1887, Oregon was the first state of the United States to make it an official public holiday. By the time it became an official federal holiday in 1894, thirty U.S. states officially celebrated **Labor Day**.
 
-          **[Learn more about Labor Day.](https://en.wikipedia.org/wiki/Labor_Day_(United_States))**
+          **[Learn more about Labor Day.](<https://en.wikipedia.org/wiki/Labor_Day_(United_States)>)**
         `}
       </HolidayWrapper>
     );

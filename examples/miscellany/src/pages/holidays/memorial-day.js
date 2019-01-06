@@ -20,7 +20,7 @@ export default class MemorialDay extends React.Component {
             <HolidayImage
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Graves_at_Arlington_on_Memorial_Day.JPG/1024px-Graves_at_Arlington_on_Memorial_Day.JPG"
               style={{ maxHeight: 400 }}
-            />
+          />
           }}
 
           **Memorial Day** is a federal holiday in the United States for remembering the people who died while serving in the [country's armed forces](https://en.wikipedia.org/wiki/United_States_Armed_Forces). The holiday, which is currently observed every year on the last Monday of May, was held on May 29, 2017. The holiday was held on May 30 from 1868-1970. It marks the start of the unofficial summer vacation season, while Labor Day marks its end.
@@ -35,7 +35,7 @@ export default class MemorialDay extends React.Component {
 
           **Memorial Day** is not to be confused with Veterans Day; **Memorial Day** is a day of remembering the men and women who died while serving, while Veterans Day celebrates the service of all U.S. military veterans.
 
-          **[Learn more about Memorial Day.](https://en.wikipedia.org/wiki/Memorial_Day_(United_States))**
+          **[Learn more about Memorial Day.](<https://en.wikipedia.org/wiki/Memorial_Day_(United_States)>)**
         `}
       </HolidayWrapper>
     );

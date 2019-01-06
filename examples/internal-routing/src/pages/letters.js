@@ -35,9 +35,7 @@ class Letters extends React.PureComponent {
       const letter = String.fromCharCode(i);
       letterLinks.push(
         <li key={i}>
-          <ReactRouter.Link to={`/${letter}`}>
-            Show {letter}
-          </ReactRouter.Link>
+          <ReactRouter.Link to={`/${letter}`}>Show {letter}</ReactRouter.Link>
         </li>
       );
     }
@@ -47,9 +45,7 @@ class Letters extends React.PureComponent {
         <div>
           <p>There are many numbers to choose from.</p>
           <ReactRouter.Route path="/:id" component={ShownLetter} />
-          <ul data-batfish-no-hijack>
-            {letterLinks}
-          </ul>
+          <ul data-batfish-no-hijack>{letterLinks}</ul>
         </div>
       </ReactRouter.BrowserRouter>
     );

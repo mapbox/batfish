@@ -57,7 +57,7 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     emitNotification('Bundling files for the browser ...');
     return createWebpackConfigClient(tailoredBatfishConfig)
       .then(webpackCompilePromise)
-      .then(stats => {
+      .then((stats) => {
         emitNotification(
           appendTaskTime(
             'Finished bundling files for the browser',
@@ -73,7 +73,7 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     emitNotification('Processing files for static HTML ...');
     return createWebpackConfigStatic(tailoredBatfishConfig)
       .then(webpackCompilePromise)
-      .then(stats => {
+      .then((stats) => {
         emitNotification(
           appendTaskTime(
             'Finished processing files for static HTML',
@@ -110,9 +110,11 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
   };
 
   const buildCss = (): Promise<void> => {
-    return compileStylesheets(batfishConfig, assetsDirectory).then(filename => {
-      cssFilename = filename;
-    });
+    return compileStylesheets(batfishConfig, assetsDirectory).then(
+      (filename) => {
+        cssFilename = filename;
+      }
+    );
   };
 
   const buildStartTime = now();

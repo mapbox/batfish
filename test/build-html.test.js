@@ -43,7 +43,7 @@ describe('buildHtml', () => {
       siteBasePath: '/base',
       stylesheets: ['one.css', 'two.css']
     };
-    jest.spyOn(fs, 'readFileSync').mockImplementation(filename => {
+    jest.spyOn(fs, 'readFileSync').mockImplementation((filename) => {
       if (filename === path.join(MOCK_ASSETS_DIRECTORY, 'assets.json')) {
         return JSON.stringify({
           manifest: { js: 'mock-manifest.js' },
@@ -105,7 +105,7 @@ describe('buildHtml', () => {
 
   test('handles errors when reading assets.json', () => {
     const expectedError = new Error();
-    fs.readFileSync.mockImplementation(filename => {
+    fs.readFileSync.mockImplementation((filename) => {
       if (filename === path.join(MOCK_ASSETS_DIRECTORY, 'assets.json')) {
         throw expectedError;
       } else {
@@ -117,7 +117,7 @@ describe('buildHtml', () => {
 
   test('handles errors when reading man', () => {
     const expectedError = new Error();
-    fs.readFileSync.mockImplementation(filename => {
+    fs.readFileSync.mockImplementation((filename) => {
       if (filename === path.join(MOCK_ASSETS_DIRECTORY, 'assets.json')) {
         return JSON.stringify({ manifest: { js: 'mock-manifest.js' } });
       } else if (filename === MOCK_MANIFEST_JS_PATH) {
@@ -149,7 +149,7 @@ describe('buildHtml', () => {
       () => {
         throw new Error('should have errored');
       },
-      error => {
+      (error) => {
         expect(error).toBeInstanceOf(errorTypes.WebpackNodeParseError);
         expect(error.originalError).toBe(expectedError);
       }
@@ -168,7 +168,7 @@ describe('buildHtml', () => {
       () => {
         throw new Error('should have errored');
       },
-      error => {
+      (error) => {
         expect(error).toBeInstanceOf(errorTypes.WebpackNodeExecutionError);
         expect(error.originalError).toBe(expectedError);
       }

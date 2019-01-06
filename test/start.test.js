@@ -70,20 +70,20 @@ describe('start', () => {
     );
   });
 
-  test('catches errors while validating config', done => {
+  test('catches errors while validating config', (done) => {
     const expectedError = new Error();
     validateConfig.mockImplementationOnce(() => {
       throw expectedError;
     });
     const emitter = start({ badProperty: true });
     expect.hasAssertions();
-    emitter.on(constants.EVENT_ERROR, error => {
+    emitter.on(constants.EVENT_ERROR, (error) => {
       expect(error).toBe(expectedError);
       done();
     });
   });
 
-  test('creates a server', done => {
+  test('creates a server', (done) => {
     validateConfig.mockValidatedConfig.siteBasePath = '/walk/';
     const emitter = start();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
@@ -97,14 +97,14 @@ describe('start', () => {
     });
   });
 
-  test('handles errors when creating a server', done => {
+  test('handles errors when creating a server', (done) => {
     const expectedError = new Error();
     devServer.mockImplementationOnce(() => {
       throw expectedError;
     });
     const emitter = start();
     expect.hasAssertions();
-    emitter.on(constants.EVENT_ERROR, error => {
+    emitter.on(constants.EVENT_ERROR, (error) => {
       expect(error).toBe(expectedError);
       done();
     });
@@ -120,7 +120,7 @@ describe('start', () => {
     );
   });
 
-  test('compiles stylesheets', done => {
+  test('compiles stylesheets', (done) => {
     const emitter = start();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
@@ -133,18 +133,18 @@ describe('start', () => {
     });
   });
 
-  test('handles errors in stylesheet compilation', done => {
+  test('handles errors in stylesheet compilation', (done) => {
     const expectedError = new Error();
     compileStylesheets.mockReturnValueOnce(Promise.reject(expectedError));
     const emitter = start();
     expect.hasAssertions();
-    emitter.on(constants.EVENT_ERROR, error => {
+    emitter.on(constants.EVENT_ERROR, (error) => {
       expect(error).toBe(expectedError);
       done();
     });
   });
 
-  test('starts the css watcher', done => {
+  test('starts the css watcher', (done) => {
     const emitter = start();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
@@ -159,11 +159,11 @@ describe('start', () => {
     });
   });
 
-  test('catches errors from the css watcher', done => {
+  test('catches errors from the css watcher', (done) => {
     const expectedError = new Error();
     const emitter = start();
     expect.hasAssertions();
-    emitter.on(constants.EVENT_ERROR, error => {
+    emitter.on(constants.EVENT_ERROR, (error) => {
       expect(error).toBe(expectedError);
     });
     process.nextTick(() => {
@@ -172,10 +172,10 @@ describe('start', () => {
     });
   });
 
-  test('handles notifications from the css watcher', done => {
+  test('handles notifications from the css watcher', (done) => {
     const expectedMessage = 'mock message';
     const emitter = start();
-    emitter.on(constants.EVENT_NOTIFICATION, message => {
+    emitter.on(constants.EVENT_NOTIFICATION, (message) => {
       if (message === expectedMessage) {
         done();
       }
@@ -185,7 +185,7 @@ describe('start', () => {
     });
   });
 
-  test('starts the webpack watcher', done => {
+  test('starts the webpack watcher', (done) => {
     const emitter = start();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
@@ -205,46 +205,46 @@ describe('start', () => {
     });
   });
 
-  test('catches webpack watcher unexpected errors', done => {
+  test('catches webpack watcher unexpected errors', (done) => {
     const expectedError = new Error();
     watchWebpack.mockImplementationOnce(() => {
       throw expectedError;
     });
     const emitter = start();
     expect.hasAssertions();
-    emitter.on(constants.EVENT_ERROR, error => {
+    emitter.on(constants.EVENT_ERROR, (error) => {
       expect(error).toBe(expectedError);
       done();
     });
   });
 
-  test('catches webpack watcher expected errors', done => {
+  test('catches webpack watcher expected errors', (done) => {
     const expectedError = new Error();
     watchWebpack.mockImplementationOnce((config, { onError }) => {
       onError(expectedError);
     });
     const emitter = start();
     expect.hasAssertions();
-    emitter.on(constants.EVENT_ERROR, error => {
+    emitter.on(constants.EVENT_ERROR, (error) => {
       expect(error).toBe(expectedError);
       done();
     });
   });
 
-  test('catches webpack watcher notifications', done => {
+  test('catches webpack watcher notifications', (done) => {
     watchWebpack.mockImplementationOnce((config, { onNotification }) => {
       onNotification('mock-notification');
     });
     const emitter = start();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
-    emitter.on(constants.EVENT_NOTIFICATION, message => {
+    emitter.on(constants.EVENT_NOTIFICATION, (message) => {
       if (message === 'mock-notification') {
         done();
       }
     });
   });
 
-  test('starts the non-page-file watcher', done => {
+  test('starts the non-page-file watcher', (done) => {
     const emitter = start();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     process.nextTick(() => {
@@ -263,39 +263,39 @@ describe('start', () => {
     });
   });
 
-  test('catches non-page-file watcher unexpected errors', done => {
+  test('catches non-page-file watcher unexpected errors', (done) => {
     const expectedError = new Error();
     nonPageFiles.watch.mockImplementationOnce(() => {
       throw expectedError;
     });
     const emitter = start();
     expect.hasAssertions();
-    emitter.on(constants.EVENT_ERROR, error => {
+    emitter.on(constants.EVENT_ERROR, (error) => {
       expect(error).toBe(expectedError);
       done();
     });
   });
 
-  test('catches non-page-file watcher expected errors', done => {
+  test('catches non-page-file watcher expected errors', (done) => {
     const expectedError = new Error();
     nonPageFiles.watch.mockImplementationOnce((config, { onError }) => {
       onError(expectedError);
     });
     const emitter = start();
     expect.hasAssertions();
-    emitter.on(constants.EVENT_ERROR, error => {
+    emitter.on(constants.EVENT_ERROR, (error) => {
       expect(error).toBe(expectedError);
       done();
     });
   });
 
-  test('catches non-page-file watcher notifications', done => {
+  test('catches non-page-file watcher notifications', (done) => {
     nonPageFiles.watch.mockImplementationOnce((config, { onNotification }) => {
       onNotification('mock-notification');
     });
     const emitter = start();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
-    emitter.on(constants.EVENT_NOTIFICATION, message => {
+    emitter.on(constants.EVENT_NOTIFICATION, (message) => {
       if (message === 'mock-notification') {
         done();
       }

@@ -41,7 +41,7 @@ describe('validateConfig', () => {
   beforeEach(() => {
     const realFsExistsSync = fs.existsSync;
     // Allow for the test projectDirectory to work when checking if files exist.
-    jest.spyOn(fs, 'existsSync').mockImplementation(input => {
+    jest.spyOn(fs, 'existsSync').mockImplementation((input) => {
       if (input === `${projectDirectory}/src/pages`) {
         return true;
       }
@@ -239,7 +239,7 @@ describe('validateConfig', () => {
     expect(
       validateConfig(
         {
-          fileLoaderExtensions: defaults => defaults.concat('svg')
+          fileLoaderExtensions: (defaults) => defaults.concat('svg')
         },
         projectDirectory
       )
@@ -259,7 +259,7 @@ describe('validateConfig', () => {
 
   test('stylesheets file paths must exist', () => {
     expect.hasAssertions();
-    pathType.fileSync.mockImplementation(input => {
+    pathType.fileSync.mockImplementation((input) => {
       return !/does-not-exist/.test(input);
     });
     try {

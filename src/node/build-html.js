@@ -72,7 +72,7 @@ function buildHtml(
         assets,
         uglifiedManifestJs,
         cssUrl
-      ).catch(error => {
+      ).catch((error) => {
         throw wrapError(error, errorTypes.WebpackNodeExecutionError);
       });
     } catch (requireError) {

@@ -43,7 +43,7 @@ describe('writeContextModule', () => {
       pify(mkdirp)(tmp)
         .then(() => writeContextModule(batfishConfig))
         // We cannot import this file because it includes imports
-        .then(filePath => pify(fs.readFile)(filePath, 'utf8'))
+        .then((filePath) => pify(fs.readFile)(filePath, 'utf8'))
     );
   };
 
@@ -82,7 +82,7 @@ describe('writeContextModule', () => {
     getPagesData.mockReturnValue(Promise.resolve(pagesData));
 
     const config = {};
-    return createAndReadContextModule(config).then(result => {
+    return createAndReadContextModule(config).then((result) => {
       expect(result).toMatchSnapshot();
       expect(writePageModule).toHaveBeenCalledTimes(3);
       expect(writePageModule).toHaveBeenCalledWith(config, {
@@ -142,7 +142,7 @@ describe('writeContextModule', () => {
       siteBasePath: '/different/base/path',
       siteOrigin: '',
       hijackLinks: false
-    }).then(result => {
+    }).then((result) => {
       expect(result).toMatchSnapshot();
     });
   });
@@ -186,7 +186,7 @@ describe('writeContextModule', () => {
     test('with a whitelisted directory', () => {
       return createAndReadContextModule({
         includePages: ['/three/**']
-      }).then(result => {
+      }).then((result) => {
         expect(result).toMatch("path: '/three/four/'");
         expect(result).toMatch("path: '/three/four/five/'");
         expect(result).not.toMatch("path: '/one/'");
@@ -198,7 +198,7 @@ describe('writeContextModule', () => {
     test('with a whitelisted file', () => {
       return createAndReadContextModule({
         includePages: ['/two/']
-      }).then(result => {
+      }).then((result) => {
         expect(result).toMatch("path: '/two/'");
         expect(result).not.toMatch("path: '/three/four/'");
         expect(result).not.toMatch("path: '/three/four/five/'");

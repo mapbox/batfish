@@ -14,7 +14,7 @@ export function renderHtmlPage(options: {
   appendToBody: Array<string>,
   spa: boolean
 }): Promise<string> {
-  return options.route.getPage().then(pageModule => {
+  return options.route.getPage().then((pageModule) => {
     // We render the page content separately from the StaticHtmlPage, because
     // the page content is what will be re-rendered when the bundled JS loads
     // so it must match exactly what batfish-app.js renders (or you get React
