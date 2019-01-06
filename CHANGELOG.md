@@ -3,6 +3,7 @@
 ## HEAD
 
 - **Fix:** Fix Node 10 compatibility by updating `cpy` dependency.
+- **Fix:** Update dependencies.
 
 ## 1.9.6
 
