@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.9.7
 
 - **Fix:** Fix Node 10 compatibility by updating `cpy` dependency.
 - **Fix:** Update dependencies.
