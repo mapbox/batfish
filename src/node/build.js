@@ -65,7 +65,9 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
             stats.endTime
           )
         );
-        return writeWebpackStats(outputDirectory, stats);
+        if (tailoredBatfishConfig.webpackStats) {
+          return writeWebpackStats(outputDirectory, stats);
+        }
       });
   };
 
