@@ -18,6 +18,9 @@ Array [
   "Finished inlining CSS in static HTML in 0ms",
   "Building sitemap ...",
   "Finished building sitemap in 0ms",
+  "Cleaning up temporary files ...",
+  "Starting build ...",
+  "Finished cleaning up temporary files in 0ms",
   "Finished build in 0ms",
 ]
 `;
@@ -32,6 +35,9 @@ Array [
   "Finished copying non-page files in 0ms",
   "Writing static html ...",
   "Finished writing static HTML in 0ms",
+  "Cleaning up temporary files ...",
+  "Starting build ...",
+  "Finished cleaning up temporary files in 0ms",
   "Finished build in 0ms",
 ]
 `;

@@ -5,7 +5,6 @@ const watchWebpack = require('../src/node/watch-webpack');
 const createWebpackConfigClient = require('../src/node/create-webpack-config-client');
 const errorTypes = require('../src/node/error-types');
 const watchContext = require('../src/node/watch-context');
-const writeWebpackStats = require('../src/node/write-webpack-stats');
 
 jest.mock('webpack', () => {
   const compiler = {
@@ -144,59 +143,5 @@ describe('watchWebpack', () => {
       expect(error.originalError).toBe(expectedError);
       done();
     });
-  });
-
-  test('handles errors in stats', (done) => {
-    const erroneousStats = createMockStats('a');
-    erroneousStats.hasErrors.mockReturnValue(true);
-    watchWebpack(batfishConfig, { onError, onNotification, onFirstCompile });
-    expect.hasAssertions();
-    process.nextTick(() => {
-      // Invoke the watcher callback with an error.
-      webpack.compiler.watch.mock.calls[0][1](null, erroneousStats);
-      expect(onError).toHaveBeenCalled();
-      const error = onError.mock.calls[0][0];
-      expect(error).toBeInstanceOf(errorTypes.WebpackCompilationError);
-      expect(error.stats).toBe(erroneousStats);
-      done();
-    });
-  });
-
-  test('on every new compilation, writes stats', (done) => {
-    watchWebpack(batfishConfig, { onError, onNotification, onFirstCompile });
-    process.nextTick(() => {
-      const firstStats = createMockStats('a');
-      webpack.compiler.watch.mock.calls[0][1](null, firstStats);
-      expect(writeWebpackStats).toHaveBeenCalledTimes(1);
-      expect(writeWebpackStats).toHaveBeenCalledWith(
-        batfishConfig.outputDirectory,
-        firstStats
-      );
-      const secondStats = createMockStats('b');
-      webpack.compiler.watch.mock.calls[0][1](null, secondStats);
-      expect(writeWebpackStats).toHaveBeenCalledTimes(2);
-      expect(writeWebpackStats).toHaveBeenCalledWith(
-        batfishConfig.outputDirectory,
-        secondStats
-      );
-      done();
-    });
-  });
-
-  test('handles errors writing stats', () => {
-    const expectedError = new Error();
-    const statsResult = Promise.reject(expectedError);
-    writeWebpackStats.mockReturnValueOnce(statsResult);
-    watchWebpack(batfishConfig, { onError, onNotification, onFirstCompile });
-    return statsResult
-      .catch(() => {
-        webpack.compiler.watch.mock.calls[0][1](null, createMockStats('a'));
-        expect(writeWebpackStats).toHaveBeenCalledTimes(1);
-      })
-      .then(() => {
-        expect(onError).toHaveBeenCalled();
-        const error = onError.mock.calls[0][0];
-        expect(error).toBe(expectedError);
-      });
   });
 });
