@@ -439,7 +439,7 @@ Default: `[]`.
 
 By default, all packages installed by npm are excluded from Babel compilation (see [`babelExclude`]).
 If, however, you use a library that includes ES2015+ but does not get compiled for publication (e.g. any of the [promise-fun](https://github.com/sindresorhus/promise-fun) modules), then you'll need to pass that module through Babel.
-That's what this option is for.
+That's what this option is for. If you want to use `await`/`async`, you will can use [babel-polyfill](https://www.npmjs.com/package/babel-polyfill) in [`babelPlugins`](#babelPlugins) or edit the [browser targets](https://stackoverflow.com/a/41331284) in [`babelPresetEnvOptions`](#babelPresetEnvOptions).
 
 The easiest way to include an npm package in your compilation is to pass its name as a string.
 
