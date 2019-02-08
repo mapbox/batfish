@@ -1,5 +1,10 @@
 # Changelog
 
+## HEAD
+
+- **Fix:** Fix bug that caused `.json` files in the `pagesDirectory` *not* to be copied to the `outputDirectory`.
+- **Fix:** Fix bug that caused *some* `unprocessedPageFiles` to *sometimes* be processed as pages.
+
 ## 1.9.7
 
 - **Fix:** Fix Node 10 compatibility by updating `cpy` dependency.

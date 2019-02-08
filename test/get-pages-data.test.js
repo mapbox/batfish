@@ -136,6 +136,22 @@ describe('getPagesData', () => {
     });
   });
 
+  test('does not register files that match unprocessedPageFiles', () => {
+    const config = validateConfig({
+      pagesDirectory: path.join(
+        __dirname,
+        'fixtures/get-pages-data-unprocessed'
+      ),
+      unprocessedPageFiles: ['is-not.js', 'maybe/**/*.md']
+    });
+    return getPagesData(config).then((result) => {
+      expect(result['/is/']).not.toBeUndefined();
+      expect(result['/maybe/yes/']).not.toBeUndefined();
+      expect(result['/is-not/']).toBeUndefined();
+      expect(result['/maybe/definitely-not/']).toBeUndefined();
+    });
+  });
+
   test('registers JS front matter', () => {
     const config = validateConfig({
       pagesDirectory: fixtureDir
