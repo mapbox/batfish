@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 1.9.8
 
 - **Fix:** Fix bug that caused `.json` files in the `pagesDirectory` *not* to be copied to the `outputDirectory`.
 - **Fix:** Fix bug that caused *some* `unprocessedPageFiles` to *sometimes* be processed as pages.
