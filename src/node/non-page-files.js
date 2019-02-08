@@ -12,7 +12,7 @@ function getNonPageFileGlob(
 ): Array<string> {
   // Don't copy .js, .md, and .css files, which are already incorporated into
   // the build in other ways.
-  let glob = ['**/*.!(js|md)'];
+  let glob = ['**/*.*', '!*.js', '!*.md'];
   // Copy unprocessed page files directly, unless they are ignored.
   if (batfishConfig.unprocessedPageFiles !== undefined) {
     glob = glob.concat(batfishConfig.unprocessedPageFiles);

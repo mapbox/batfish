@@ -1,12 +1,10 @@
 // @flow
 'use strict';
 
-const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
 const pify = require('pify');
 const globby = require('globby');
-const micromatch = require('micromatch');
 const grayMatter = require('gray-matter');
 const joinUrlParts = require('./join-url-parts');
 const constants = require('./constants');
@@ -73,23 +71,15 @@ function getPagesData(
     });
   };
 
-  const pagesGlob = [
-    path.join(batfishConfig.pagesDirectory, `**/*.${constants.PAGE_EXT_GLOB}`)
-  ];
+  const pagesGlob = [`**/*.${constants.PAGE_EXT_GLOB}`];
+  if (batfishConfig.unprocessedPageFiles) {
+    pagesGlob.push(...batfishConfig.unprocessedPageFiles.map((g) => `!${g}`));
+  }
 
-  return globby(pagesGlob)
-    .then((pageFilePaths) => {
-      // Filter out any unprocessedPageFiles
-      if (batfishConfig.unprocessedPageFiles) {
-        const unprocessed = micromatch(
-          pageFilePaths,
-          batfishConfig.unprocessedPageFiles
-        );
-        return _.difference(pageFilePaths, unprocessed);
-      } else {
-        return pageFilePaths;
-      }
-    })
+  return globby(pagesGlob, {
+    cwd: batfishConfig.pagesDirectory,
+    absolute: true
+  })
     .then((pageFilePaths) => {
       if (batfishConfig.spa && pageFilePaths.length > 1) {
         throw new errorTypes.ConfigFatalError(

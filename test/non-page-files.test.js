@@ -8,7 +8,7 @@ jest.mock('cpy', () => {
 });
 
 describe('nonPageFiles.copy', () => {
-  test('copies files that are not .js, .md, or .css', () => {
+  test('copies files that are not .js or .md', () => {
     return nonPageFiles
       .copy({
         outputDirectory: 'mockOutputDirectory',
@@ -17,7 +17,7 @@ describe('nonPageFiles.copy', () => {
       .then(() => {
         expect(cpy).toHaveBeenCalledTimes(1);
         expect(cpy).toHaveBeenCalledWith(
-          ['**/*.!(js|md)'],
+          ['**/*.*', '!*.js', '!*.md'],
           'mockOutputDirectory',
           {
             cwd: 'mockPagesDirectory',
@@ -37,7 +37,7 @@ describe('nonPageFiles.copy', () => {
       .then(() => {
         expect(cpy).toHaveBeenCalledTimes(1);
         expect(cpy).toHaveBeenCalledWith(
-          ['**/*.!(js|md)', '**/home.js', '**/horse.md'],
+          ['**/*.*', '!*.js', '!*.md', '**/home.js', '**/horse.md'],
           'mockOutputDirectory',
           {
             cwd: 'mockPagesDirectory',
@@ -57,7 +57,7 @@ describe('nonPageFiles.copy', () => {
       .then(() => {
         expect(cpy).toHaveBeenCalledTimes(1);
         expect(cpy).toHaveBeenCalledWith(
-          ['**/*.!(js|md)', '!**/*.txt', '!*.xyz'],
+          ['**/*.*', '!*.js', '!*.md', '!**/*.txt', '!*.xyz'],
           'mockOutputDirectory',
           {
             cwd: 'mockPagesDirectory',
@@ -78,7 +78,15 @@ describe('nonPageFiles.copy', () => {
       .then(() => {
         expect(cpy).toHaveBeenCalledTimes(1);
         expect(cpy).toHaveBeenCalledWith(
-          ['**/*.!(js|md)', '**/home.js', '**/horse.md', '!**/*.js', '!*.xyz'],
+          [
+            '**/*.*',
+            '!*.js',
+            '!*.md',
+            '**/home.js',
+            '**/horse.md',
+            '!**/*.js',
+            '!*.xyz'
+          ],
           'mockOutputDirectory',
           {
             cwd: 'mockPagesDirectory',
