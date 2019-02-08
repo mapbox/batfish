@@ -10,7 +10,7 @@ const now = require('./now');
 function getNonPageFileGlob(
   batfishConfig: BatfishConfiguration
 ): Array<string> {
-  // Don't copy .js, .md, and .css files, which are already incorporated into
+  // Don't copy pages files, which are already incorporated into
   // the build in other ways.
   let glob = ['**/*.*', '!*.js', '!*.md'];
   // Copy unprocessed page files directly, unless they are ignored.
