@@ -78,7 +78,8 @@ declare type webpack$Configuration = {|
     hints?: 'warning' | false
   |},
   bail?: boolean,
-  cache?: boolean
+  cache?: boolean,
+  optimization?: Object
 |};
 
 declare module 'webpack' {

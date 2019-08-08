@@ -66,25 +66,7 @@ function createWebpackConfigClient(
         filename: 'assets.json',
         processOutput: (x) => JSON.stringify(x, null, 2)
       }),
-      // Extract universal vendor files (defined above) from everything else.
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: Infinity
-      }),
-      // Bundle together any other modules from anywhere imported more than 3 times.
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'app',
-        children: true,
-        minChunks: 4
-      }),
-      // Trying to follow advice for long-term caching described here:
-      // https://webpack.js.org/guides/caching/#extracting-boilerplate and
-      // https://jeremygayed.com/dynamic-vendor-bundling-in-webpack-528993e48aab#.hjgai17ap
-      // Because 'manifest' does not correspond to an entry name, this chunk
-      // will include Webpack's runtime boilerplate and manifest, which can
-      // change with each build. During the static build we inject it directly
-      // into the HTML, so those variations do not ruin caching on large chunks.
-      new webpack.optimize.CommonsChunkPlugin('manifest'),
+
       // Recommended at https://webpack.js.org/guides/caching/#module-identifiers
       // as a way to make module IDs more deterministic.
       new webpack.HashedModuleIdsPlugin(),
@@ -177,6 +159,11 @@ function createWebpackConfigClient(
         net: 'empty',
         tls: 'empty',
         child_process: 'empty'
+      },
+      optimization: {
+        runtimeChunk: {
+          name: 'manifest'
+        }
       }
     };
 
