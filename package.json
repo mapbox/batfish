@@ -154,7 +154,8 @@
     "time-stamp": "^2.2.0",
     "uglify-js": "^3.4.9",
     "uglifyjs-webpack-plugin": "^1.2.4",
-    "webpack": "^3.11.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
     "webpack-format-messages": "^1.0.2",
     "webpack-merge": "^4.1.2",
     "worker-farm": "^1.6.0"
