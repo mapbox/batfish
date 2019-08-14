@@ -5,6 +5,7 @@ Object {
   "bail": false,
   "cache": true,
   "devtool": "source-map",
+  "mode": "development",
   "module": Object {
     "rules": Array [
       Object {
@@ -144,6 +145,7 @@ Object {
   "bail": true,
   "cache": false,
   "devtool": false,
+  "mode": "production",
   "module": Object {
     "rules": Array [
       Object {
@@ -284,6 +286,7 @@ Object {
   "bail": false,
   "cache": true,
   "devtool": "source-map",
+  "mode": "development",
   "module": Object {
     "rules": Array [
       Object {

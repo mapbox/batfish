@@ -152,6 +152,7 @@ function createWebpackConfigBase(
     }
 
     const config: webpack$Configuration = {
+      mode: batfishConfig.production ? 'production' : 'development',
       output: {
         path: batfishConfig.outputDirectory,
         publicPath: joinUrlParts(
