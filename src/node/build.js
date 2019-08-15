@@ -2,6 +2,7 @@
 'use strict';
 
 const _ = require('lodash');
+const fs = require('fs');
 const path = require('path');
 const EventEmitter = require('events');
 const createWebpackConfigClient = require('./create-webpack-config-client');
@@ -71,6 +72,11 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
 
   const buildStatic = (): Promise<void> => {
     emitNotification('Processing files for static HTML ...');
+    emitNotification('🌈  Writing webpack config to output directory...');
+    fs.writeFileSync(
+      path.resolve(outputDirectory, 'webpackConfig.json'),
+      JSON.stringify(tailoredBatfishConfig)
+    );
     return createWebpackConfigStatic(tailoredBatfishConfig)
       .then(webpackCompilePromise)
       .then((stats) => {

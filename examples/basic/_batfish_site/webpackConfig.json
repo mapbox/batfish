@@ -1,0 +1,59 @@
+{
+  "production": true,
+  "verbose": false,
+  "port": 8080,
+  "publicAssetsPath": "/assets",
+  "pagesDirectory": "/Users/dan/Documents/github/batfish/examples/basic/src/pages",
+  "outputDirectory": "/Users/dan/Documents/github/batfish/examples/basic/_batfish_site/assets",
+  "temporaryDirectory": "/Users/dan/Documents/github/batfish/examples/basic/_batfish_tmp",
+  "applicationWrapperPath": "/Users/dan/Documents/github/batfish/dist/webpack/empty-application-wrapper.js",
+  "stylesheets": [
+    "https://api.mapbox.com/mapbox-assembly/v0.17.0/assembly.css",
+    "/Users/dan/Documents/github/batfish/examples/basic/src/style.css"
+  ],
+  "babelPlugins": [],
+  "babelPresets": [],
+  "hijackLinks": true,
+  "manageScrollRestoration": true,
+  "babelExclude": {},
+  "babelInclude": [],
+  "siteBasePath": "",
+  "browserslist": [
+    "> 5%",
+    "last 2 versions"
+  ],
+  "devBrowserslist": [
+    "Edge >= 14",
+    "Firefox >= 52",
+    "Chrome >= 58",
+    "Safari >= 10",
+    "iOS >= 10.2"
+  ],
+  "fileLoaderExtensions": [
+    "jpeg",
+    "jpg",
+    "png",
+    "gif",
+    "webp",
+    "mp4",
+    "webm",
+    "woff",
+    "woff2"
+  ],
+  "jsxtremeMarkdownOptions": {
+    "wrapper": "/Users/dan/Documents/github/batfish/examples/basic/src/components/markdown-wrapper.js"
+  },
+  "includePromisePolyfill": true,
+  "pageSpecificCss": true,
+  "staticHtmlInlineDeferCss": true,
+  "developmentDevtool": "source-map",
+  "productionDevtool": false,
+  "clearOutputDirectory": true,
+  "spa": false,
+  "webpackStaticStubReactComponent": [],
+  "sitemap": true,
+  "siteOrigin": "https://www.batfish-basic.com",
+  "postcssPlugins": [
+    null
+  ]
+}
