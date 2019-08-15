@@ -88,19 +88,19 @@ function isAbsoluteUrl(url){return /^https?:/.test(url);}function prefixUrl(url)
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports,"__esModule",{value:true});exports.routeToPrefixed=exports.routeTo=undefined;var _prefixUrl=__webpack_require__(1);var delayed=void 0;//      
-var routeToHandler=void 0;function routeTo(url){if(delayed){return;}if(!routeToHandler){delayed=url;return;}routeToHandler(url);}function routeToPrefixed(url){routeTo((0,_prefixUrl.prefixUrl)(url));}// Used by the Router to provide the function that actually does the routing.
-// This slight awkwardness is just to enable the user to
-// `require('@mapbox/batfish/modules/route-to')`.
-routeTo._setRouteToHandler=function(handler){routeToHandler=handler;if(delayed){routeToHandler(delayed);delayed=null;}};// For tests.
-routeTo._clearRouteToHandler=function(){routeToHandler=null;};exports.routeTo=routeTo;exports.routeToPrefixed=routeToPrefixed;
+Object.defineProperty(exports,"__esModule",{value:true});var batfishContext=exports.batfishContext={selectedConfig:{siteBasePath:'',siteOrigin:'',hijackLinks:true,manageScrollRestoration:true},routes:[{path:'/',getPage:function getPage(){return new Promise(function(resolve) { resolve(); }).then(__webpack_require__.bind(null, 16));}},{path:'/star/',getPage:function getPage(){return new Promise(function(resolve) { resolve(); }).then(__webpack_require__.bind(null, 18));}}],notFoundRoute:{path:'',getPage:function getPage(){throw new Error('No matching route.');},is404:true}};
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports,"__esModule",{value:true});var batfishContext=exports.batfishContext={selectedConfig:{siteBasePath:'',siteOrigin:'',hijackLinks:true,manageScrollRestoration:true},routes:[{path:'/',getPage:function getPage(){return new Promise(function(resolve) { resolve(); }).then(__webpack_require__.bind(null, 16));}},{path:'/star/',getPage:function getPage(){return new Promise(function(resolve) { resolve(); }).then(__webpack_require__.bind(null, 18));}},{path:'/static/not-page/',getPage:function getPage(){return new Promise(function(resolve) { resolve(); }).then(__webpack_require__.bind(null, 20));}}],notFoundRoute:{path:'',getPage:function getPage(){throw new Error('No matching route.');},is404:true}};
+Object.defineProperty(exports,"__esModule",{value:true});exports.routeToPrefixed=exports.routeTo=undefined;var _prefixUrl=__webpack_require__(1);var delayed=void 0;//      
+var routeToHandler=void 0;function routeTo(url){if(delayed){return;}if(!routeToHandler){delayed=url;return;}routeToHandler(url);}function routeToPrefixed(url){routeTo((0,_prefixUrl.prefixUrl)(url));}// Used by the Router to provide the function that actually does the routing.
+// This slight awkwardness is just to enable the user to
+// `require('@mapbox/batfish/modules/route-to')`.
+routeTo._setRouteToHandler=function(handler){routeToHandler=handler;if(delayed){routeToHandler(delayed);delayed=null;}};// For tests.
+routeTo._clearRouteToHandler=function(){routeToHandler=null;};exports.routeTo=routeTo;exports.routeToPrefixed=routeToPrefixed;
 
 /***/ }),
 /* 4 */
@@ -127,7 +127,7 @@ module.exports = require("/Users/dan/Documents/github/batfish/node_modules/@mapb
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports,"__esModule",{value:true});exports.findMatchingRoute=findMatchingRoute;var _context=__webpack_require__(3);// Returns an array of regular expressions that are used to check whether a URL
+Object.defineProperty(exports,"__esModule",{value:true});exports.findMatchingRoute=findMatchingRoute;var _context=__webpack_require__(2);// Returns an array of regular expressions that are used to check whether a URL
 // path matches one of the routes.
 function createPathRegExps(routes){return routes.reduce(function(result,route){// Pages with internal routing aren't just exact matches.
 var ending=route.internalRouting?'(/.+)?$':'$';// ? because the last slash is optional
@@ -167,7 +167,7 @@ function EmptyApplicationWrapper(props){return props.children;}
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports,"__esModule",{value:true});__webpack_require__(12);var _fs=__webpack_require__(5);var _fs2=_interopRequireDefault(_fs);var _pify=__webpack_require__(13);var _pify2=_interopRequireDefault(_pify);var _mkdirp=__webpack_require__(14);var _mkdirp2=_interopRequireDefault(_mkdirp);var _path=__webpack_require__(15);var _path2=_interopRequireDefault(_path);var _context=__webpack_require__(3);var _renderInlineJsScripts=__webpack_require__(22);var _renderInlineJsScripts2=_interopRequireDefault(_renderInlineJsScripts);var _renderHtmlPage=__webpack_require__(24);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// Statically render pages as HTML.
+Object.defineProperty(exports,"__esModule",{value:true});__webpack_require__(12);var _fs=__webpack_require__(5);var _fs2=_interopRequireDefault(_fs);var _pify=__webpack_require__(13);var _pify2=_interopRequireDefault(_pify);var _mkdirp=__webpack_require__(14);var _mkdirp2=_interopRequireDefault(_mkdirp);var _path=__webpack_require__(15);var _path2=_interopRequireDefault(_path);var _context=__webpack_require__(2);var _renderInlineJsScripts=__webpack_require__(20);var _renderInlineJsScripts2=_interopRequireDefault(_renderInlineJsScripts);var _renderHtmlPage=__webpack_require__(22);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}// Statically render pages as HTML.
 //
 // Returned Promise resolves when all HTML pages have been rendered and written.
 //      
@@ -218,7 +218,7 @@ var Page=__webpack_require__(17);Page=Page.default||Page;module.exports={compone
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(0);var _react2=_interopRequireDefault(_react);var _prefixUrl=__webpack_require__(1);var _routeTo=__webpack_require__(2);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&((typeof call==="undefined"?"undefined":_typeof(call))==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+(typeof superClass==="undefined"?"undefined":_typeof(superClass)));}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var frontMatter={headings:[]};var MarkdownReact=function(_React$PureComponent){_inherits(MarkdownReact,_React$PureComponent);function MarkdownReact(){_classCallCheck(this,MarkdownReact);return _possibleConstructorReturn(this,(MarkdownReact.__proto__||Object.getPrototypeOf(MarkdownReact)).apply(this,arguments));}_createClass(MarkdownReact,[{key:'render',value:function render(){var props=this.props;return _react2.default.createElement('div',null,_react2.default.createElement('p',null,'Hippos:'),_react2.default.createElement('p',null,_react2.default.createElement('img',{src:''+(0,_prefixUrl.prefixUrl)('/static/hippos.jpg'),alt:'hippos'})),_react2.default.createElement('p',null,'Hippolyte:'),_react2.default.createElement('p',null,_react2.default.createElement('img',{src:'./hippolyte.jpg',alt:'hippolyte'})),_react2.default.createElement('p',null,_react2.default.createElement('a',{href:'/star'},'Look at stars, instead!')));}}]);return MarkdownReact;}(_react2.default.PureComponent);exports.default=MarkdownReact;
+var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(0);var _react2=_interopRequireDefault(_react);var _prefixUrl=__webpack_require__(1);var _routeTo=__webpack_require__(3);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&((typeof call==="undefined"?"undefined":_typeof(call))==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+(typeof superClass==="undefined"?"undefined":_typeof(superClass)));}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var frontMatter={headings:[]};var MarkdownReact=function(_React$PureComponent){_inherits(MarkdownReact,_React$PureComponent);function MarkdownReact(){_classCallCheck(this,MarkdownReact);return _possibleConstructorReturn(this,(MarkdownReact.__proto__||Object.getPrototypeOf(MarkdownReact)).apply(this,arguments));}_createClass(MarkdownReact,[{key:'render',value:function render(){var props=this.props;return _react2.default.createElement('div',null,_react2.default.createElement('p',null,'Hippos:'),_react2.default.createElement('p',null,_react2.default.createElement('img',{src:''+(0,_prefixUrl.prefixUrl)('/static/hippos.jpg'),alt:'hippos'})),_react2.default.createElement('p',null,'Hippolyte:'),_react2.default.createElement('p',null,_react2.default.createElement('img',{src:'./hippolyte.jpg',alt:'hippolyte'})),_react2.default.createElement('p',null,_react2.default.createElement('a',{href:'/star'},'Look at stars, instead!')));}}]);return MarkdownReact;}(_react2.default.PureComponent);exports.default=MarkdownReact;
 
 /***/ }),
 /* 18 */
@@ -232,42 +232,28 @@ var Page=__webpack_require__(19);Page=Page.default||Page;module.exports={compone
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(0);var _react2=_interopRequireDefault(_react);var _prefixUrl=__webpack_require__(1);var _routeTo=__webpack_require__(2);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&((typeof call==="undefined"?"undefined":_typeof(call))==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+(typeof superClass==="undefined"?"undefined":_typeof(superClass)));}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var frontMatter={headings:[]};var MarkdownReact=function(_React$PureComponent){_inherits(MarkdownReact,_React$PureComponent);function MarkdownReact(){_classCallCheck(this,MarkdownReact);return _possibleConstructorReturn(this,(MarkdownReact.__proto__||Object.getPrototypeOf(MarkdownReact)).apply(this,arguments));}_createClass(MarkdownReact,[{key:'render',value:function render(){var props=this.props;return _react2.default.createElement('div',null,_react2.default.createElement('p',null,'Stars:'),_react2.default.createElement('p',null,_react2.default.createElement('img',{src:''+(0,_prefixUrl.prefixUrl)('/star/star.jpg'),alt:'star'})),_react2.default.createElement('p',null,'Wild Star:'),_react2.default.createElement('p',null,_react2.default.createElement('img',{src:''+(0,_prefixUrl.prefixUrl)('/static/motorcycles/wild-star.jpg'),alt:'wild star'})),_react2.default.createElement('p',null,_react2.default.createElement('a',{href:'/'},'Look at hippos, instead!')));}}]);return MarkdownReact;}(_react2.default.PureComponent);exports.default=MarkdownReact;
+var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(0);var _react2=_interopRequireDefault(_react);var _prefixUrl=__webpack_require__(1);var _routeTo=__webpack_require__(3);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&((typeof call==="undefined"?"undefined":_typeof(call))==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+(typeof superClass==="undefined"?"undefined":_typeof(superClass)));}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var frontMatter={headings:[]};var MarkdownReact=function(_React$PureComponent){_inherits(MarkdownReact,_React$PureComponent);function MarkdownReact(){_classCallCheck(this,MarkdownReact);return _possibleConstructorReturn(this,(MarkdownReact.__proto__||Object.getPrototypeOf(MarkdownReact)).apply(this,arguments));}_createClass(MarkdownReact,[{key:'render',value:function render(){var props=this.props;return _react2.default.createElement('div',null,_react2.default.createElement('p',null,'Stars:'),_react2.default.createElement('p',null,_react2.default.createElement('img',{src:''+(0,_prefixUrl.prefixUrl)('/star/star.jpg'),alt:'star'})),_react2.default.createElement('p',null,'Wild Star:'),_react2.default.createElement('p',null,_react2.default.createElement('img',{src:''+(0,_prefixUrl.prefixUrl)('/static/motorcycles/wild-star.jpg'),alt:'wild star'})),_react2.default.createElement('p',null,_react2.default.createElement('a',{href:'/'},'Look at hippos, instead!')));}}]);return MarkdownReact;}(_react2.default.PureComponent);exports.default=MarkdownReact;
 
 /***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-var Page=__webpack_require__(21);Page=Page.default||Page;module.exports={component:Page,props:{"frontMatter":{}}};
+//      
+var fs=__webpack_require__(5);var UglifyJs=__webpack_require__(21);function renderInlineJsScripts(inlineJsEntries){if(!inlineJsEntries){return'';}return inlineJsEntries.map(function(jsData){var code=fs.readFileSync(jsData.filename,'utf8');if(jsData.uglify!==false){var uglified=UglifyJs.minify(code);if(uglified.error)throw uglified.error;code=uglified.code;}return'<script>'+code+'</script>';}).join('\n');}module.exports=renderInlineJsScripts;
 
 /***/ }),
 /* 21 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(0);var _react2=_interopRequireDefault(_react);var _prefixUrl=__webpack_require__(1);var _routeTo=__webpack_require__(2);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&((typeof call==="undefined"?"undefined":_typeof(call))==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+(typeof superClass==="undefined"?"undefined":_typeof(superClass)));}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var frontMatter={headings:[]};var MarkdownReact=function(_React$PureComponent){_inherits(MarkdownReact,_React$PureComponent);function MarkdownReact(){_classCallCheck(this,MarkdownReact);return _possibleConstructorReturn(this,(MarkdownReact.__proto__||Object.getPrototypeOf(MarkdownReact)).apply(this,arguments));}_createClass(MarkdownReact,[{key:'render',value:function render(){var props=this.props;return _react2.default.createElement('p',null,'Not a page!');}}]);return MarkdownReact;}(_react2.default.PureComponent);exports.default=MarkdownReact;
+module.exports = require("/Users/dan/Documents/github/batfish/node_modules/uglify-js/tools/node.js");
 
 /***/ }),
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-//      
-var fs=__webpack_require__(5);var UglifyJs=__webpack_require__(23);function renderInlineJsScripts(inlineJsEntries){if(!inlineJsEntries){return'';}return inlineJsEntries.map(function(jsData){var code=fs.readFileSync(jsData.filename,'utf8');if(jsData.uglify!==false){var uglified=UglifyJs.minify(code);if(uglified.error)throw uglified.error;code=uglified.code;}return'<script>'+code+'</script>';}).join('\n');}module.exports=renderInlineJsScripts;
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports) {
-
-module.exports = require("/Users/dan/Documents/github/batfish/node_modules/uglify-js/tools/node.js");
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports,"__esModule",{value:true});exports.renderHtmlPage=renderHtmlPage;var _react=__webpack_require__(0);var _react2=_interopRequireDefault(_react);var _server=__webpack_require__(25);var _server2=_interopRequireDefault(_server);var _reactHelmet=__webpack_require__(26);var _reactHelmet2=_interopRequireDefault(_reactHelmet);var _batfishApp=__webpack_require__(27);var _batfishSpaApp=__webpack_require__(39);var _staticHtmlPage=__webpack_require__(40);var _constants=__webpack_require__(41);var _constants2=_interopRequireDefault(_constants);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function renderHtmlPage(options){return options.route.getPage().then(function(pageModule){// We render the page content separately from the StaticHtmlPage, because
+Object.defineProperty(exports,"__esModule",{value:true});exports.renderHtmlPage=renderHtmlPage;var _react=__webpack_require__(0);var _react2=_interopRequireDefault(_react);var _server=__webpack_require__(23);var _server2=_interopRequireDefault(_server);var _reactHelmet=__webpack_require__(24);var _reactHelmet2=_interopRequireDefault(_reactHelmet);var _batfishApp=__webpack_require__(25);var _batfishSpaApp=__webpack_require__(37);var _staticHtmlPage=__webpack_require__(38);var _constants=__webpack_require__(39);var _constants2=_interopRequireDefault(_constants);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function renderHtmlPage(options){return options.route.getPage().then(function(pageModule){// We render the page content separately from the StaticHtmlPage, because
 // the page content is what will be re-rendered when the bundled JS loads
 // so it must match exactly what batfish-app.js renders (or you get React
 // checksum errors). The rest of StaticHtmlPage will never be re-rendered
@@ -277,31 +263,31 @@ var pageContent=void 0;if(options.spa){pageContent=_react2.default.createElement
 helmetHead.style.toString()],appendToBody:options.appendToBody});var html=_server2.default.renderToStaticMarkup(reactDocument);return'<!doctype html>'+html;});}//
 
 /***/ }),
-/* 25 */
+/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 26 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-helmet");
 
 /***/ }),
-/* 27 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports,"__esModule",{value:true});exports.BatfishApp=undefined;var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(0);var _react2=_interopRequireDefault(_react);var _router=__webpack_require__(28);var _applicationWrapper=__webpack_require__(10);var _applicationWrapper2=_interopRequireDefault(_applicationWrapper);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}//      
+Object.defineProperty(exports,"__esModule",{value:true});exports.BatfishApp=undefined;var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(0);var _react2=_interopRequireDefault(_react);var _router=__webpack_require__(26);var _applicationWrapper=__webpack_require__(10);var _applicationWrapper2=_interopRequireDefault(_applicationWrapper);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}//      
 var BatfishApp=exports.BatfishApp=function(_React$Component){_inherits(BatfishApp,_React$Component);function BatfishApp(){_classCallCheck(this,BatfishApp);return _possibleConstructorReturn(this,(BatfishApp.__proto__||Object.getPrototypeOf(BatfishApp)).apply(this,arguments));}_createClass(BatfishApp,[{key:'shouldComponentUpdate',value:function shouldComponentUpdate(){return false;}},{key:'render',value:function render(){return _react2.default.createElement(_applicationWrapper2.default,null,_react2.default.createElement(_router.Router,{startingPath:this.props.startingPath,startingComponent:this.props.pageModule.component,startingProps:this.props.pageModule.props}));}}]);return BatfishApp;}(_react2.default.Component);
 
 /***/ }),
-/* 28 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports,"__esModule",{value:true});exports.Router=undefined;var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(0);var _react2=_interopRequireDefault(_react);var _propTypes=__webpack_require__(29);var _propTypes2=_interopRequireDefault(_propTypes);var _linkHijacker=__webpack_require__(34);var _linkHijacker2=_interopRequireDefault(_linkHijacker);var _scrollRestorer=__webpack_require__(6);var _scrollRestorer2=_interopRequireDefault(_scrollRestorer);var _linkToLocation=__webpack_require__(35);var _linkToLocation2=_interopRequireDefault(_linkToLocation);var _querySelectorContainsNode=__webpack_require__(36);var _querySelectorContainsNode2=_interopRequireDefault(_querySelectorContainsNode);var _context=__webpack_require__(3);var _routeTo=__webpack_require__(2);var _prefixUrl=__webpack_require__(1);var _findMatchingRoute=__webpack_require__(7);var _scrollToFragment=__webpack_require__(8);var _getWindow=__webpack_require__(4);var _changePage=__webpack_require__(37);var _getCurrentLocation=__webpack_require__(9);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}//      
+Object.defineProperty(exports,"__esModule",{value:true});exports.Router=undefined;var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=__webpack_require__(0);var _react2=_interopRequireDefault(_react);var _propTypes=__webpack_require__(27);var _propTypes2=_interopRequireDefault(_propTypes);var _linkHijacker=__webpack_require__(32);var _linkHijacker2=_interopRequireDefault(_linkHijacker);var _scrollRestorer=__webpack_require__(6);var _scrollRestorer2=_interopRequireDefault(_scrollRestorer);var _linkToLocation=__webpack_require__(33);var _linkToLocation2=_interopRequireDefault(_linkToLocation);var _querySelectorContainsNode=__webpack_require__(34);var _querySelectorContainsNode2=_interopRequireDefault(_querySelectorContainsNode);var _context=__webpack_require__(2);var _routeTo=__webpack_require__(3);var _prefixUrl=__webpack_require__(1);var _findMatchingRoute=__webpack_require__(7);var _scrollToFragment=__webpack_require__(8);var _getWindow=__webpack_require__(4);var _changePage=__webpack_require__(35);var _getCurrentLocation=__webpack_require__(9);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}//      
 var _batfishContext$selec=_context.batfishContext.selectedConfig,siteBasePath=_batfishContext$selec.siteBasePath,siteOrigin=_batfishContext$selec.siteOrigin,manageScrollRestoration=_batfishContext$selec.manageScrollRestoration,hijackLinks=_batfishContext$selec.hijackLinks;// See explanation for this weirdness in prefix-url.js.
 // This happens outside the component lifecycle so it can be used during
 // rendering of HTML.
@@ -311,7 +297,7 @@ _prefixUrl.prefixUrl._configure(siteBasePath,siteOrigin);var Router=function(_Re
 },{key:'render',value:function render(){var PageComponent=this.state.PageComponent;if(!PageComponent)return null;return _react2.default.createElement(PageComponent,_extends({location:this.state.location},this.state.pageProps));}}]);return Router;}(_react2.default.PureComponent);Router.childContextTypes={location:_propTypes2.default.shape({pathname:_propTypes2.default.string.isRequired,hash:_propTypes2.default.string,search:_propTypes2.default.string}).isRequired};exports.Router=Router;
 
 /***/ }),
-/* 29 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -340,12 +326,12 @@ if (false) {
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(30)();
+  module.exports = __webpack_require__(28)();
 }
 
 
 /***/ }),
-/* 30 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -358,9 +344,9 @@ if (false) {
 
 
 
-var emptyFunction = __webpack_require__(31);
-var invariant = __webpack_require__(32);
-var ReactPropTypesSecret = __webpack_require__(33);
+var emptyFunction = __webpack_require__(29);
+var invariant = __webpack_require__(30);
+var ReactPropTypesSecret = __webpack_require__(31);
 
 module.exports = function() {
   function shim(props, propName, componentName, location, propFullName, secret) {
@@ -410,7 +396,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 31 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -452,7 +438,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 32 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -511,7 +497,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 /***/ }),
-/* 33 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -530,19 +516,19 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 34 */
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = require("/Users/dan/Documents/github/batfish/node_modules/@mapbox/link-hijacker/index.js");
 
 /***/ }),
-/* 35 */
+/* 33 */
 /***/ (function(module, exports) {
 
 module.exports = require("/Users/dan/Documents/github/batfish/node_modules/@mapbox/link-to-location/index.js");
 
 /***/ }),
-/* 36 */
+/* 34 */
 /***/ (function(module, exports) {
 
 module.exports = function querySelectorContainsNode(selector, node) {
@@ -559,17 +545,17 @@ module.exports = function querySelectorContainsNode(selector, node) {
 
 
 /***/ }),
-/* 37 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports,"__esModule",{value:true});exports.changePage=changePage;var _scrollRestorer=__webpack_require__(6);var _scrollRestorer2=_interopRequireDefault(_scrollRestorer);var _findMatchingRoute=__webpack_require__(7);var _scrollToFragment=__webpack_require__(8);var _routeChangeListeners=__webpack_require__(38);var _getCurrentLocation=__webpack_require__(9);var _getWindow=__webpack_require__(4);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}//      
+Object.defineProperty(exports,"__esModule",{value:true});exports.changePage=changePage;var _scrollRestorer=__webpack_require__(6);var _scrollRestorer2=_interopRequireDefault(_scrollRestorer);var _findMatchingRoute=__webpack_require__(7);var _scrollToFragment=__webpack_require__(8);var _routeChangeListeners=__webpack_require__(36);var _getCurrentLocation=__webpack_require__(9);var _getWindow=__webpack_require__(4);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}//      
 function changePage(nextLocation,setRouterState){var options=arguments.length>2&&arguments[2]!==undefined?arguments[2]:{};var onFinish=arguments[3];var win=(0,_getWindow.getWindow)();var matchingRoute=(0,_findMatchingRoute.findMatchingRoute)(nextLocation.pathname);var nextUrl=[nextLocation.pathname,nextLocation.hash,nextLocation.search].join('');// Call the change-start callbacks immediately, not after the page chunk
 // has already been fetched.
 var startChange=(0,_routeChangeListeners._invokeRouteChangeStartCallbacks)(nextLocation.pathname);return matchingRoute.getPage().then(function(pageModule){return startChange.then(function(){return pageModule;});}).then(function(pageModule){if(options.pushState){win.history.pushState({},null,nextUrl);}var nextState={path:matchingRoute.path,PageComponent:pageModule.component,pageProps:pageModule.props,location:(0,_getCurrentLocation.getCurrentLocation)()};setRouterState(nextState,function(){if(nextLocation.hash){(0,_scrollToFragment.scrollToFragment)();}else if(options.scrollToTop){win.scrollTo(0,0);}else if(_scrollRestorer2.default.getSavedScroll()){_scrollRestorer2.default.restoreScroll();}if(onFinish)onFinish();(0,_routeChangeListeners._invokeRouteChangeEndCallbacks)(nextLocation.pathname);});});}
 
 /***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -577,7 +563,7 @@ Object.defineProperty(exports,"__esModule",{value:true});exports.invokeCallbacks
 var ALL_PATHS='*';var startListeners=_defineProperty({},ALL_PATHS,[]);var endListeners=_defineProperty({},ALL_PATHS,[]);function normalizePathname(pathname){if(pathname!==ALL_PATHS&&!(0,_prefixUrl.isUrlPrefixed)(pathname)){pathname=(0,_prefixUrl.prefixUrl)(pathname);}return pathname.replace(/\/$/,'');}function addListener(pathnameOrListener,maybeListener,registry,remover){var listener=void 0;var pathname=void 0;if(typeof pathnameOrListener==='function'){listener=pathnameOrListener;pathname=ALL_PATHS;}else{listener=maybeListener;pathname=pathnameOrListener;}pathname=normalizePathname(pathname);if(!registry[pathname]){registry[pathname]=[];}registry[pathname].push(listener||noop);return function(){return remover(pathname,listener);};}function removeListener(pathnameOrListener,maybeListener,registry){var listener=void 0;var pathname=void 0;if(typeof pathnameOrListener==='function'||!pathnameOrListener){listener=pathnameOrListener;pathname=ALL_PATHS;}else{listener=maybeListener;pathname=pathnameOrListener;}pathname=normalizePathname(pathname);if(!listener){registry[pathname]=[];return;}var listeners=registry[pathname];for(var i=0,l=listeners.length;i<l;i++){if(listeners[i]===listener){listeners.splice(i,1);return;}}}function invokeCallbacks(nextPathname,registery){nextPathname=normalizePathname(nextPathname);var promisesToKeep=[Promise.resolve()];if(registery[nextPathname]){registery[nextPathname].forEach(function(callback){promisesToKeep.push(Promise.resolve(callback(nextPathname)));});}registery[ALL_PATHS].forEach(function(callback){promisesToKeep.push(Promise.resolve(callback(nextPathname)));});return Promise.all(promisesToKeep);}function addRouteChangeStartListener(pathnameOrListener,maybeListener){return addListener(pathnameOrListener,maybeListener,startListeners,removeRouteChangeStartListener);}function removeRouteChangeStartListener(pathnameOrListener,maybeListener){removeListener(pathnameOrListener,maybeListener,startListeners);}function addRouteChangeEndListener(pathnameOrListener,maybeListener){return addListener(pathnameOrListener,maybeListener,endListeners,removeRouteChangeEndListener);}function removeRouteChangeEndListener(pathnameOrListener,maybeListener){removeListener(pathnameOrListener,maybeListener,endListeners);}function _invokeRouteChangeStartCallbacks(nextPathname){return invokeCallbacks(nextPathname,startListeners);}function _invokeRouteChangeEndCallbacks(nextPathname){return invokeCallbacks(nextPathname,endListeners);}function noop(){}
 
 /***/ }),
-/* 39 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -585,7 +571,7 @@ Object.defineProperty(exports,"__esModule",{value:true});exports.BatfishSpaApp=u
 var BatfishSpaApp=exports.BatfishSpaApp=function(_React$Component){_inherits(BatfishSpaApp,_React$Component);function BatfishSpaApp(){_classCallCheck(this,BatfishSpaApp);return _possibleConstructorReturn(this,(BatfishSpaApp.__proto__||Object.getPrototypeOf(BatfishSpaApp)).apply(this,arguments));}_createClass(BatfishSpaApp,[{key:'shouldComponentUpdate',value:function shouldComponentUpdate(){return false;}},{key:'render',value:function render(){var body=_react2.default.createElement(this.props.pageModule.component,this.props.pageModule.props);return _react2.default.createElement(_applicationWrapper2.default,null,body);}}]);return BatfishSpaApp;}(_react2.default.Component);
 
 /***/ }),
-/* 40 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -595,7 +581,7 @@ var StaticHtmlPage=function(_React$Component){_inherits(StaticHtmlPage,_React$Co
 value:function shouldComponentUpdate(){return false;}},{key:'render',value:function render(){var head=null;if(this.props.appendToHead){head=_react2.default.createElement('head',{dangerouslySetInnerHTML:{__html:this.props.appendToHead.join('\n')}});}var appendToBody=null;if(this.props.appendToBody){appendToBody=_react2.default.createElement('div',{dangerouslySetInnerHTML:{__html:this.props.appendToBody.join('\n')}});}var app=_react2.default.createElement('div',{id:'batfish-content'},this.props.content);if(this.props.rawAppHtml){app=_react2.default.createElement('div',{id:'batfish-content',dangerouslySetInnerHTML:{__html:this.props.rawAppHtml}});}return _react2.default.createElement('html',_extends({lang:'en'},this.props.htmlAttributes),head,_react2.default.createElement('body',this.props.bodyAttributes,app,appendToBody));}}]);return StaticHtmlPage;}(_react2.default.Component);exports.StaticHtmlPage=StaticHtmlPage;
 
 /***/ }),
-/* 41 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

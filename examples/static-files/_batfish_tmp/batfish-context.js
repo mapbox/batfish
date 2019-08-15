@@ -22,14 +22,6 @@
             ),
             
             
-          },{
-            path: '/static/not-page/',
-            getPage: () => import(
-              /* webpackChunkName: "static-not-page" */
-              '/Users/dan/Documents/github/batfish/examples/static-files/_batfish_tmp/_static_not-page.js'
-            ),
-            
-            
           }],
             notFoundRoute: {
       path: '',
