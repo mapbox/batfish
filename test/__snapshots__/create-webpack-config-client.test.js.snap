@@ -47,9 +47,10 @@ Object {
     },
     HashedModuleIdsPlugin {
       "options": Object {
+        "context": null,
         "hashDigest": "base64",
         "hashDigestLength": 4,
-        "hashFunction": "md5",
+        "hashFunction": "md4",
       },
     },
     NamedChunksPlugin {
@@ -119,9 +120,10 @@ Object {
     },
     HashedModuleIdsPlugin {
       "options": Object {
+        "context": null,
         "hashDigest": "base64",
         "hashDigestLength": 4,
-        "hashFunction": "md5",
+        "hashFunction": "md4",
       },
     },
     NamedChunksPlugin {
@@ -214,9 +216,10 @@ Object {
     },
     HashedModuleIdsPlugin {
       "options": Object {
+        "context": null,
         "hashDigest": "base64",
         "hashDigestLength": 4,
-        "hashFunction": "md5",
+        "hashFunction": "md4",
       },
     },
     NamedChunksPlugin {
