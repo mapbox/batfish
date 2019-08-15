@@ -1,0 +1,17 @@
+{
+  "manifest": {
+    "js": "/assets/manifest-8c8f198feae3bbafde89.js"
+  },
+  "app": {
+    "js": "/assets/app-bcd5708ae0fadf652fcc.js"
+  },
+  "home": {
+    "js": "/assets/home-9d8bd92861c63d3900f7.chunk.js"
+  },
+  "vendor": {
+    "js": "/assets/vendor-e4cf1c4f448be0eb3460.js"
+  },
+  "": {
+    "jpg": "/assets/man-in-a-bottle-77dae675e78dfeaa1631dcd950f9bf78.jpg"
+  }
+}

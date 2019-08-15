@@ -1,0 +1,47 @@
+{
+  "manifest": {
+    "js": "/miscellany/assets/manifest-d07df6ab54e64ee6a523.js"
+  },
+  "miscellany-stories": {
+    "js": "/miscellany/assets/miscellany-stories-80ef29f1ac269e93709a.chunk.js"
+  },
+  "miscellany": {
+    "js": "/miscellany/assets/miscellany-f76ba66255cc91f3feef.chunk.js"
+  },
+  "miscellany-holidays": {
+    "js": "/miscellany/assets/miscellany-holidays-c2329161cff42c92ad22.chunk.js"
+  },
+  "miscellany-holidays-independence-day": {
+    "js": "/miscellany/assets/miscellany-holidays-independence-day-cd3c754e24569429cad5.chunk.js"
+  },
+  "miscellany-holidays-labor-day": {
+    "js": "/miscellany/assets/miscellany-holidays-labor-day-7db420b91e332f012b69.chunk.js"
+  },
+  "miscellany-holidays-memorial-day": {
+    "js": "/miscellany/assets/miscellany-holidays-memorial-day-a639951e4a4e7a6631cb.chunk.js"
+  },
+  "app": {
+    "js": "/miscellany/assets/app-8daecff94cc64af2297c.js"
+  },
+  "miscellany-stories-five-white-mice": {
+    "js": "/miscellany/assets/miscellany-stories-five-white-mice-6ef6544f7ef042ad5c0a.chunk.js"
+  },
+  "miscellany-stories-great-mistake": {
+    "js": "/miscellany/assets/miscellany-stories-great-mistake-f9d05e1719ef066a1daa.chunk.js"
+  },
+  "miscellany-stories-ominous-baby": {
+    "js": "/miscellany/assets/miscellany-stories-ominous-baby-bba9a71ba5b510b4f654.chunk.js"
+  },
+  "miscellany-stories-open-boat": {
+    "js": "/miscellany/assets/miscellany-stories-open-boat-c367c08431dd02991870.chunk.js"
+  },
+  "miscellany-stories-wise-men": {
+    "js": "/miscellany/assets/miscellany-stories-wise-men-763dadb74cc09943574d.chunk.js"
+  },
+  "not-found": {
+    "js": "/miscellany/assets/not-found-b7c61a5a143be1a737b3.chunk.js"
+  },
+  "vendor": {
+    "js": "/miscellany/assets/vendor-e4cf1c4f448be0eb3460.js"
+  }
+}

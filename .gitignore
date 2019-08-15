@@ -2,8 +2,6 @@ node_modules
 *.log
 .DS_Store
 babel-cache
-_batfish_site
-_batfish_tmp
 **/package-lock.json
 coverage
 modules

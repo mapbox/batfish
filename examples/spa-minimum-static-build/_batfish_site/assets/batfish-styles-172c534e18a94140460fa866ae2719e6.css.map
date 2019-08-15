@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/style.css"],"names":[],"mappings":"AAAA,KACE,qBAAuB,CACxB","file":"/Users/dan/Documents/github/batfish/examples/spa-minimum-static-build/_batfish_site/assets/batfish-styles.css","sourcesContent":["#app {\n  background-color: pink;\n}"]}

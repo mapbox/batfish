@@ -1,0 +1,11 @@
+{
+  "manifest": {
+    "js": "/spa/assets/manifest-2eab2ca3cbb62066b841.js"
+  },
+  "app": {
+    "js": "/spa/assets/app-fd1085317bf51388a980.js"
+  },
+  "vendor": {
+    "js": "/spa/assets/vendor-e4cf1c4f448be0eb3460.js"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "manifest": {
+    "js": "/assets/manifest-e0e42c8b5c1a7236d444.js"
+  },
+  "app": {
+    "js": "/assets/app-11f55b137ce0847f9197.js"
+  },
+  "home": {
+    "js": "/assets/home-c22e87059094be860970.chunk.js"
+  },
+  "vendor": {
+    "js": "/assets/vendor-e4cf1c4f448be0eb3460.js"
+  }
+}

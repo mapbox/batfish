@@ -1,0 +1,26 @@
+{
+  "manifest": {
+    "js": "/assets/manifest-6ea106241e06f01137be.js"
+  },
+  "app": {
+    "js": "/assets/app-34ac0edcb91fce369536.js"
+  },
+  "home": {
+    "js": "/assets/home-d913653cebf796eb3318.chunk.js"
+  },
+  "markdown-a": {
+    "js": "/assets/markdown-a-898453d7691601aaead4.chunk.js"
+  },
+  "markdown-b": {
+    "js": "/assets/markdown-b-5ba803078e67fb745cc9.chunk.js"
+  },
+  "markdown-c": {
+    "js": "/assets/markdown-c-d5628dca5e3fc820d6fb.chunk.js"
+  },
+  "markdown-fake-a": {
+    "js": "/assets/markdown-fake-a-0f3c8d428b2f4728e9e7.chunk.js"
+  },
+  "vendor": {
+    "js": "/assets/vendor-e4cf1c4f448be0eb3460.js"
+  }
+}

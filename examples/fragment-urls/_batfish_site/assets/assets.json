@@ -1,0 +1,17 @@
+{
+  "manifest": {
+    "js": "/assets/manifest-4be5bbc0a02db3834d37.js"
+  },
+  "app": {
+    "js": "/assets/app-0f0748ab9398d4df9924.js"
+  },
+  "home": {
+    "js": "/assets/home-692d9a556b1538c4f21a.chunk.js"
+  },
+  "two": {
+    "js": "/assets/two-05e206699c684f0e91c9.chunk.js"
+  },
+  "vendor": {
+    "js": "/assets/vendor-e4cf1c4f448be0eb3460.js"
+  }
+}
