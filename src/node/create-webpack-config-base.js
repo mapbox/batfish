@@ -3,7 +3,6 @@
 
 const _ = require('lodash');
 const path = require('path');
-const webpack = require('webpack');
 const writeContextModule = require('./write-context-module');
 const joinUrlParts = require('./join-url-parts');
 const constants = require('./constants');
@@ -185,16 +184,7 @@ function createWebpackConfigBase(
       module: {
         rules: moduleRules
       },
-      plugins: [
-        // Define global variables available in source JS.
-        new webpack.DefinePlugin({
-          // NODE_ENV is used by React (and maybe other libs) to conditionally
-          // eliminate helpful debugging code.
-          'process.env.NODE_ENV': !batfishConfig.production
-            ? '"development"'
-            : '"production"'
-        })
-      ],
+      plugins: [],
       // Designate sourcemap type.
       devtool: !batfishConfig.production
         ? batfishConfig.developmentDevtool
