@@ -72,11 +72,13 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
 
   const buildStatic = (): Promise<void> => {
     emitNotification('Processing files for static HTML ...');
-    emitNotification('🌈  Writing webpack config to output directory...');
-    fs.writeFileSync(
-      path.resolve(outputDirectory, 'webpackConfig.json'),
-      JSON.stringify(tailoredBatfishConfig)
-    );
+    createWebpackConfigStatic(tailoredBatfishConfig).then((config) => {
+      emitNotification('🌈  Writing webpack config to output directory...');
+      fs.writeFileSync(
+        path.resolve(outputDirectory, 'webpackConfig.json'),
+        JSON.stringify(config)
+      );
+    });
     return createWebpackConfigStatic(tailoredBatfishConfig)
       .then(webpackCompilePromise)
       .then((stats) => {
