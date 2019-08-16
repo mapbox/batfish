@@ -114,13 +114,7 @@ Object {
   "performance": Object {
     "hints": false,
   },
-  "plugins": Array [
-    DefinePlugin {
-      "definitions": Object {
-        "process.env.NODE_ENV": "\\"development\\"",
-      },
-    },
-  ],
+  "plugins": Array [],
   "resolve": Object {
     "alias": Object {
       "@mapbox/batfish/data": "<PROJECT_ROOT>/_batfish_tmp/data",
@@ -255,13 +249,7 @@ Object {
   "performance": Object {
     "hints": false,
   },
-  "plugins": Array [
-    DefinePlugin {
-      "definitions": Object {
-        "process.env.NODE_ENV": "\\"production\\"",
-      },
-    },
-  ],
+  "plugins": Array [],
   "resolve": Object {
     "alias": Object {
       "@mapbox/batfish/data": "<PROJECT_ROOT>/_batfish_tmp/data",
@@ -418,13 +406,7 @@ Object {
   "performance": Object {
     "hints": "warning",
   },
-  "plugins": Array [
-    DefinePlugin {
-      "definitions": Object {
-        "process.env.NODE_ENV": "\\"development\\"",
-      },
-    },
-  ],
+  "plugins": Array [],
   "resolve": Object {
     "alias": Object {
       "@mapbox/batfish/data": "<PROJECT_ROOT>/test/fake/temporary/directory/data",

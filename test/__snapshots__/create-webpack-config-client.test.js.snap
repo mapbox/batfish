@@ -134,26 +134,6 @@ Object {
         "process.env.DEV_SERVER": false,
       },
     },
-    UglifyJsPlugin {
-      "options": Object {
-        "cache": true,
-        "exclude": undefined,
-        "extractComments": false,
-        "include": undefined,
-        "parallel": true,
-        "sourceMap": true,
-        "test": /\\\\\\.js\\(\\\\\\?\\.\\*\\)\\?\\$/i,
-        "uglifyOptions": Object {
-          "compress": Object {
-            "comparisons": false,
-          },
-          "output": Object {
-            "ascii_only": true,
-          },
-        },
-        "warningsFilter": [Function],
-      },
-    },
   ],
   "resolve": Object {
     "alias": Object {
