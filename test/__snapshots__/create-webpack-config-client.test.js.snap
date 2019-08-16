@@ -24,6 +24,7 @@ Object {
     "tls": "empty",
   },
   "optimization": Object {
+    "moduleIds": "hashed",
     "runtimeChunk": Object {
       "name": "manifest",
     },
@@ -44,22 +45,6 @@ Object {
         "update": false,
       },
       "writer": [Function],
-    },
-    HashedModuleIdsPlugin {
-      "options": Object {
-        "context": null,
-        "hashDigest": "base64",
-        "hashDigestLength": 4,
-        "hashFunction": "md4",
-      },
-    },
-    NamedChunksPlugin {
-      "nameResolver": [Function],
-    },
-    DefinePlugin {
-      "definitions": Object {
-        "process.env.DEV_SERVER": false,
-      },
     },
   ],
   "resolve": Object {
@@ -97,6 +82,7 @@ Object {
     "tls": "empty",
   },
   "optimization": Object {
+    "moduleIds": "hashed",
     "runtimeChunk": Object {
       "name": "manifest",
     },
@@ -117,22 +103,6 @@ Object {
         "update": false,
       },
       "writer": [Function],
-    },
-    HashedModuleIdsPlugin {
-      "options": Object {
-        "context": null,
-        "hashDigest": "base64",
-        "hashDigestLength": 4,
-        "hashFunction": "md4",
-      },
-    },
-    NamedChunksPlugin {
-      "nameResolver": [Function],
-    },
-    DefinePlugin {
-      "definitions": Object {
-        "process.env.DEV_SERVER": false,
-      },
     },
   ],
   "resolve": Object {
@@ -173,6 +143,7 @@ Object {
     "tls": "empty",
   },
   "optimization": Object {
+    "moduleIds": "hashed",
     "runtimeChunk": Object {
       "name": "manifest",
     },
@@ -193,22 +164,6 @@ Object {
         "update": false,
       },
       "writer": [Function],
-    },
-    HashedModuleIdsPlugin {
-      "options": Object {
-        "context": null,
-        "hashDigest": "base64",
-        "hashDigestLength": 4,
-        "hashFunction": "md4",
-      },
-    },
-    NamedChunksPlugin {
-      "nameResolver": [Function],
-    },
-    DefinePlugin {
-      "definitions": Object {
-        "process.env.DEV_SERVER": false,
-      },
     },
   ],
   "resolve": Object {

@@ -3,8 +3,6 @@
 
 const _ = require('lodash');
 const path = require('path');
-const webpack = require('webpack');
-const crypto = require('crypto');
 const webpackMerge = require('webpack-merge');
 const AssetsPlugin = require('assets-webpack-plugin');
 const resolveFrom = require('resolve-from');
@@ -22,8 +20,7 @@ function resolveModuleDirectoryFrom(src: string, name: string): string {
 
 // Create a Webpack configuration for all the assets that will be loaded by the client.
 function createWebpackConfigClient(
-  batfishConfig: BatfishConfiguration,
-  options?: { devServer?: boolean }
+  batfishConfig: BatfishConfiguration
 ): Promise<webpack$Configuration> {
   // Resolve these peerDependencies from the pagesDirectory so we are sure
   // to get the same version that the pages are getting. Alias them below.
@@ -64,30 +61,6 @@ function createWebpackConfigClient(
         path: path.resolve(batfishConfig.outputDirectory),
         filename: 'assets.json',
         processOutput: (x) => JSON.stringify(x, null, 2)
-      }),
-
-      // Recommended at https://webpack.js.org/guides/caching/#module-identifiers
-      // as a way to make module IDs more deterministic.
-      new webpack.HashedModuleIdsPlugin(),
-      new webpack.NamedChunksPlugin((chunk) => {
-        if (chunk.name) return chunk.name;
-        const hashSeed = Array.from(
-          chunk.modulesIterable,
-          (m) => m.resource || ''
-        )
-          .sort()
-          .map((resource) => {
-            return path.relative(batfishConfig.pagesDirectory, resource);
-          })
-          .join('_');
-        const chunkHash = crypto
-          .createHash('md5')
-          .update(hashSeed)
-          .digest('hex');
-        return chunkHash;
-      }), // Define an environment variable for special cases
-      new webpack.DefinePlugin({
-        'process.env.DEV_SERVER': (options && options.devServer) || false
       })
     ].concat(batfishConfig.webpackPlugins || []);
 
@@ -137,6 +110,7 @@ function createWebpackConfigClient(
         child_process: 'empty'
       },
       optimization: {
+        moduleIds: 'hashed',
         runtimeChunk: {
           name: 'manifest'
         }
