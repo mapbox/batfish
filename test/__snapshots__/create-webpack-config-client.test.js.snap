@@ -28,6 +28,16 @@ Object {
     "runtimeChunk": Object {
       "name": "manifest",
     },
+    "splitChunks": Object {
+      "cacheGroups": Object {
+        "vendor": Object {
+          "chunks": "initial",
+          "enforce": true,
+          "name": "vendor",
+          "test": "vendor",
+        },
+      },
+    },
   },
   "output": Object {
     "chunkFilename": "[name].chunk.js",
@@ -85,6 +95,16 @@ Object {
     "moduleIds": "hashed",
     "runtimeChunk": Object {
       "name": "manifest",
+    },
+    "splitChunks": Object {
+      "cacheGroups": Object {
+        "vendor": Object {
+          "chunks": "initial",
+          "enforce": true,
+          "name": "vendor",
+          "test": "vendor",
+        },
+      },
     },
   },
   "output": Object {
@@ -146,6 +166,16 @@ Object {
     "moduleIds": "hashed",
     "runtimeChunk": Object {
       "name": "manifest",
+    },
+    "splitChunks": Object {
+      "cacheGroups": Object {
+        "vendor": Object {
+          "chunks": "initial",
+          "enforce": true,
+          "name": "vendor",
+          "test": "vendor",
+        },
+      },
     },
   },
   "output": Object {

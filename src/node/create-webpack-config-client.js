@@ -113,6 +113,16 @@ function createWebpackConfigClient(
         moduleIds: 'hashed',
         runtimeChunk: {
           name: 'manifest'
+        },
+        splitChunks: {
+          cacheGroups: {
+            vendor: {
+              chunks: 'initial',
+              name: 'vendor',
+              test: 'vendor',
+              enforce: true
+            }
+          }
         }
       }
     };
