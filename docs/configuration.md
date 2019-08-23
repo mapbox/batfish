@@ -418,6 +418,7 @@ By default, it receives the following options:
 
 - `useBuiltIns` is `true`.
 - `target.browsers` is your [`browserslist`] or [`devBrowserslist`] value (read more about those options to understand when each is used).
+- `modules` is `false`.
 
 Use this option to further customize your build by passing any of the other many [options for babel-preset-env](https://babeljs.io/docs/plugins/preset-env/#options).
 It your object will be merged with the defaults — so they will only be overridden if you deliberately do so.
