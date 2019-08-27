@@ -44,7 +44,7 @@ declare type webpack$Rule = {
 };
 
 declare type webpack$Configuration = {|
-  mode?: string,
+  mode?: 'development' | 'production',
   entry?: {
     [id: string]: string | Array<string>
   },
