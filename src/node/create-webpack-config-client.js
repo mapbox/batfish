@@ -3,6 +3,7 @@
 
 const _ = require('lodash');
 const path = require('path');
+const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const AssetsPlugin = require('assets-webpack-plugin');
 const resolveFrom = require('resolve-from');
@@ -20,7 +21,8 @@ function resolveModuleDirectoryFrom(src: string, name: string): string {
 
 // Create a Webpack configuration for all the assets that will be loaded by the client.
 function createWebpackConfigClient(
-  batfishConfig: BatfishConfiguration
+  batfishConfig: BatfishConfiguration,
+  options?: { devServer?: boolean }
 ): Promise<webpack$Configuration> {
   // Resolve these peerDependencies from the pagesDirectory so we are sure
   // to get the same version that the pages are getting. Alias them below.
@@ -61,6 +63,9 @@ function createWebpackConfigClient(
         path: path.resolve(batfishConfig.outputDirectory),
         filename: 'assets.json',
         processOutput: (x) => JSON.stringify(x, null, 2)
+      }),
+      new webpack.DefinePlugin({
+        'process.env.DEV_SERVER': (options && options.devServer) || false
       })
     ].concat(batfishConfig.webpackPlugins || []);
 

@@ -35,7 +35,7 @@ function watchWebpack(
   let lastHash;
   let hasCompiled = false;
 
-  createWebpackConfigClient(batfishConfig)
+  createWebpackConfigClient(batfishConfig, { devServer: true })
     .then((clientConfig) => {
       // Create an HTML file to load the assets in the browser.
       const config = webpackMerge(clientConfig, {

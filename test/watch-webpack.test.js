@@ -57,7 +57,9 @@ describe('watchWebpack', () => {
 
   test('creates a webpack client config', () => {
     watchWebpack(batfishConfig, { onError, onNotification, onFirstCompile });
-    expect(createWebpackConfigClient).toHaveBeenCalledWith(batfishConfig);
+    expect(createWebpackConfigClient).toHaveBeenCalledWith(batfishConfig, {
+      devServer: true
+    });
   });
 
   test('handles webpack configuration errors', (done) => {
