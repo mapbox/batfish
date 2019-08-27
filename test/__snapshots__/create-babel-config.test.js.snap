@@ -5,6 +5,7 @@ Array [
   Array [
     "./../node_modules/babel-preset-env/lib/index.js",
     Object {
+      "modules": false,
       "targets": Object {
         "browsers": "mock-browserslist",
       },
@@ -20,6 +21,7 @@ Array [
   Array [
     "./../node_modules/babel-preset-env/lib/index.js",
     Object {
+      "modules": false,
       "targets": Object {
         "browsers": "mock-browserslist",
       },
@@ -35,6 +37,7 @@ Array [
   Array [
     "./../node_modules/babel-preset-env/lib/index.js",
     Object {
+      "modules": false,
       "targets": Object {
         "browsers": "mock-dev-browserslist",
       },
@@ -50,6 +53,7 @@ Array [
   Array [
     "./../node_modules/babel-preset-env/lib/index.js",
     Object {
+      "modules": false,
       "targets": Object {
         "browsers": "mock-browserslist",
       },
@@ -91,6 +95,7 @@ Array [
   Array [
     "./../node_modules/babel-preset-env/lib/index.js",
     Object {
+      "modules": false,
       "targets": Object {
         "node": "current",
       },
@@ -106,6 +111,7 @@ Array [
   Array [
     "./../node_modules/babel-preset-env/lib/index.js",
     Object {
+      "modules": false,
       "targets": Object {
         "browsers": "mock-browserslist",
       },

@@ -1,5 +1,9 @@
 # Changelog
 
+## Head
+
+- Upgrade Webpack to v4.
+
 ## 1.9.8
 
 - **Fix:** Fix bug that caused `.json` files in the `pagesDirectory` *not* to be copied to the `outputDirectory`.

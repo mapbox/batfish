@@ -17,8 +17,13 @@ function createBabelConfig(
   const target = options.target || constants.TARGET_BROWSER;
 
   let presetEnvOptions;
+
   if (target === constants.TARGET_NODE) {
-    presetEnvOptions = { useBuiltIns: true, targets: { node: 'current' } };
+    presetEnvOptions = {
+      useBuiltIns: true,
+      targets: { node: 'current' },
+      modules: false
+    };
   } else {
     const envBrowserslist = getEnvBrowserslist(
       batfishConfig.browserslist,
@@ -29,6 +34,7 @@ function createBabelConfig(
     if (presetEnvOptions.useBuiltIns === undefined) {
       presetEnvOptions.useBuiltIns = true;
     }
+    presetEnvOptions.modules = false;
     if (_.get(presetEnvOptions, ['targets', 'browsers']) === undefined) {
       _.set(presetEnvOptions, ['targets', 'browsers'], envBrowserslist);
     }

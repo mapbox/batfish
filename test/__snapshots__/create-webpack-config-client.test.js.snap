@@ -23,6 +23,22 @@ Object {
     "net": "empty",
     "tls": "empty",
   },
+  "optimization": Object {
+    "moduleIds": "hashed",
+    "runtimeChunk": Object {
+      "name": "manifest",
+    },
+    "splitChunks": Object {
+      "cacheGroups": Object {
+        "vendor": Object {
+          "chunks": "initial",
+          "enforce": true,
+          "name": "vendor",
+          "test": "vendor",
+        },
+      },
+    },
+  },
   "output": Object {
     "chunkFilename": "[name].chunk.js",
     "filename": "[name].js",
@@ -39,55 +55,6 @@ Object {
         "update": false,
       },
       "writer": [Function],
-    },
-    CommonsChunkPlugin {
-      "async": undefined,
-      "children": undefined,
-      "chunkNames": Array [
-        "vendor",
-      ],
-      "deepChildren": undefined,
-      "filenameTemplate": undefined,
-      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js3",
-      "minChunks": Infinity,
-      "minSize": undefined,
-      "selectedChunks": undefined,
-    },
-    CommonsChunkPlugin {
-      "async": undefined,
-      "children": true,
-      "chunkNames": Array [
-        "app",
-      ],
-      "deepChildren": undefined,
-      "filenameTemplate": undefined,
-      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js4",
-      "minChunks": 4,
-      "minSize": undefined,
-      "selectedChunks": undefined,
-    },
-    CommonsChunkPlugin {
-      "async": undefined,
-      "children": undefined,
-      "chunkNames": Array [
-        "manifest",
-      ],
-      "deepChildren": undefined,
-      "filenameTemplate": undefined,
-      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js5",
-      "minChunks": undefined,
-      "minSize": undefined,
-      "selectedChunks": undefined,
-    },
-    HashedModuleIdsPlugin {
-      "options": Object {
-        "hashDigest": "base64",
-        "hashDigestLength": 4,
-        "hashFunction": "md5",
-      },
-    },
-    NamedChunksPlugin {
-      "nameResolver": [Function],
     },
     DefinePlugin {
       "definitions": Object {
@@ -129,6 +96,22 @@ Object {
     "net": "empty",
     "tls": "empty",
   },
+  "optimization": Object {
+    "moduleIds": "hashed",
+    "runtimeChunk": Object {
+      "name": "manifest",
+    },
+    "splitChunks": Object {
+      "cacheGroups": Object {
+        "vendor": Object {
+          "chunks": "initial",
+          "enforce": true,
+          "name": "vendor",
+          "test": "vendor",
+        },
+      },
+    },
+  },
   "output": Object {
     "chunkFilename": "[name]-[chunkhash].chunk.js",
     "filename": "[name]-[chunkhash].js",
@@ -146,78 +129,9 @@ Object {
       },
       "writer": [Function],
     },
-    CommonsChunkPlugin {
-      "async": undefined,
-      "children": undefined,
-      "chunkNames": Array [
-        "vendor",
-      ],
-      "deepChildren": undefined,
-      "filenameTemplate": undefined,
-      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js6",
-      "minChunks": Infinity,
-      "minSize": undefined,
-      "selectedChunks": undefined,
-    },
-    CommonsChunkPlugin {
-      "async": undefined,
-      "children": true,
-      "chunkNames": Array [
-        "app",
-      ],
-      "deepChildren": undefined,
-      "filenameTemplate": undefined,
-      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js7",
-      "minChunks": 4,
-      "minSize": undefined,
-      "selectedChunks": undefined,
-    },
-    CommonsChunkPlugin {
-      "async": undefined,
-      "children": undefined,
-      "chunkNames": Array [
-        "manifest",
-      ],
-      "deepChildren": undefined,
-      "filenameTemplate": undefined,
-      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js8",
-      "minChunks": undefined,
-      "minSize": undefined,
-      "selectedChunks": undefined,
-    },
-    HashedModuleIdsPlugin {
-      "options": Object {
-        "hashDigest": "base64",
-        "hashDigestLength": 4,
-        "hashFunction": "md5",
-      },
-    },
-    NamedChunksPlugin {
-      "nameResolver": [Function],
-    },
     DefinePlugin {
       "definitions": Object {
         "process.env.DEV_SERVER": false,
-      },
-    },
-    UglifyJsPlugin {
-      "options": Object {
-        "cache": true,
-        "exclude": undefined,
-        "extractComments": false,
-        "include": undefined,
-        "parallel": true,
-        "sourceMap": true,
-        "test": /\\\\\\.js\\(\\\\\\?\\.\\*\\)\\?\\$/i,
-        "uglifyOptions": Object {
-          "compress": Object {
-            "comparisons": false,
-          },
-          "output": Object {
-            "ascii_only": true,
-          },
-        },
-        "warningsFilter": [Function],
       },
     },
   ],
@@ -258,6 +172,22 @@ Object {
     "net": "empty",
     "tls": "empty",
   },
+  "optimization": Object {
+    "moduleIds": "hashed",
+    "runtimeChunk": Object {
+      "name": "manifest",
+    },
+    "splitChunks": Object {
+      "cacheGroups": Object {
+        "vendor": Object {
+          "chunks": "initial",
+          "enforce": true,
+          "name": "vendor",
+          "test": "vendor",
+        },
+      },
+    },
+  },
   "output": Object {
     "chunkFilename": "[name].chunk.js",
     "filename": "[name].js",
@@ -274,55 +204,6 @@ Object {
         "update": false,
       },
       "writer": [Function],
-    },
-    CommonsChunkPlugin {
-      "async": undefined,
-      "children": undefined,
-      "chunkNames": Array [
-        "vendor",
-      ],
-      "deepChildren": undefined,
-      "filenameTemplate": undefined,
-      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js9",
-      "minChunks": Infinity,
-      "minSize": undefined,
-      "selectedChunks": undefined,
-    },
-    CommonsChunkPlugin {
-      "async": undefined,
-      "children": true,
-      "chunkNames": Array [
-        "app",
-      ],
-      "deepChildren": undefined,
-      "filenameTemplate": undefined,
-      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js10",
-      "minChunks": 4,
-      "minSize": undefined,
-      "selectedChunks": undefined,
-    },
-    CommonsChunkPlugin {
-      "async": undefined,
-      "children": undefined,
-      "chunkNames": Array [
-        "manifest",
-      ],
-      "deepChildren": undefined,
-      "filenameTemplate": undefined,
-      "ident": "<PROJECT_ROOT>/node_modules/webpack/lib/optimize/CommonsChunkPlugin.js11",
-      "minChunks": undefined,
-      "minSize": undefined,
-      "selectedChunks": undefined,
-    },
-    HashedModuleIdsPlugin {
-      "options": Object {
-        "hashDigest": "base64",
-        "hashDigestLength": 4,
-        "hashFunction": "md5",
-      },
-    },
-    NamedChunksPlugin {
-      "nameResolver": [Function],
     },
     DefinePlugin {
       "definitions": Object {
