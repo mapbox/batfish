@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 1.10.0
 
 - Upgrade Webpack to v4.
 
