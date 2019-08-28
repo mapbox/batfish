@@ -1,6 +1,6 @@
 # Changelog
 
-## Head
+## 1.10.2
 
 - **Fix:** Use core-js@2 and fix core-js modules so that they are required.
 
