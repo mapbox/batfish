@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.10.1
+## Head
 
 - **Fix:** Fix undefined Promise in IE 11 by adding core-js (es.promise and es.array.iterator) to the Webpack config `entry`.
 
