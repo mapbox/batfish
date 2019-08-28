@@ -70,8 +70,8 @@ function createWebpackConfigClient(
     ].concat(batfishConfig.webpackPlugins || []);
 
     const appEntry = [
-      'core-js/modules/es.promise',
-      'core-js/modules/es.array.iterator'
+      require.resolve('core-js/modules/es6.promise'),
+      require.resolve('core-js/modules/es6.array.iterator')
     ];
     if (!batfishConfig.production && batfishConfig.inlineJs) {
       batfishConfig.inlineJs.forEach((jsData) => {

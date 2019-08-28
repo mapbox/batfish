@@ -114,7 +114,7 @@
     "concat-with-sourcemaps": "^1.1.0",
     "connect": "^3.6.6",
     "connect-history-api-fallback": "^1.5.0",
-    "core-js": "^3.2.1",
+    "core-js": "^2.6.9",
     "cpy": "^7.0.1",
     "del": "^3.0.0",
     "del-cli": "^1.1.0",
