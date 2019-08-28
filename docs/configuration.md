@@ -385,7 +385,6 @@ Plugins you provide are concatenated to the following default plugins:
   - [babel-plugin-transform-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/)
   - [@mapbox/babel-plugin-transform-jsxtreme-markdown](https://github.com/mapbox/jsxtreme-markdown/tree/master/packages/babel-plugin-transform-jsxtreme-markdown): See [`jsxtremeMarkdownOptions`].
 - Development only
-  - [babel-plugin-transform-react-jsx-source](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-jsx-source)
   - [babel-plugin-transform-react-jsx-self](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-jsx-self)
 - Production only
   - [babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types)

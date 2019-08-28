@@ -63,7 +63,6 @@ function createBabelConfig(
   if (batfishConfig.production) {
     plugins.push('babel-plugin-transform-react-remove-prop-types');
   } else {
-    // plugins.push(require.resolve('babel-plugin-transform-react-jsx-source'));
     plugins.push(require.resolve('babel-plugin-transform-react-jsx-self'));
   }
 
