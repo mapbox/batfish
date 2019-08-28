@@ -280,7 +280,9 @@ function validateConfig(
     config.devBrowserslist,
     config.production
   );
-  const defaultPostcssPlugins = [autoprefixer({ browsers: envBrowserslist })];
+  const defaultPostcssPlugins = [
+    autoprefixer({ overrideBrowserslist: envBrowserslist })
+  ];
 
   // Invoke transform function properties
   if (typeof config.fileLoaderExtensions === 'function') {
