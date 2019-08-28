@@ -155,7 +155,7 @@ describe('validateConfig', () => {
       projectDirectory
     );
     expect(autoprefixer.mock.calls[0][0]).toEqual({
-      browsers: config.browserslist
+      overrideBrowserslist: config.browserslist
     });
   });
 
@@ -165,7 +165,7 @@ describe('validateConfig', () => {
       projectDirectory
     );
     expect(autoprefixer.mock.calls[0][0]).toEqual({
-      browsers: config.browserslist
+      overrideBrowserslist: config.browserslist
     });
   });
 
@@ -174,7 +174,9 @@ describe('validateConfig', () => {
       { devBrowserslist: 'Chrome >= 60', production: false },
       projectDirectory
     );
-    expect(autoprefixer.mock.calls[0][0]).toEqual({ browsers: 'Chrome >= 60' });
+    expect(autoprefixer.mock.calls[0][0]).toEqual({
+      overrideBrowserslist: 'Chrome >= 60'
+    });
   });
 
   test('processed siteBasePath does not end with a slash unless it is only a slash', () => {
