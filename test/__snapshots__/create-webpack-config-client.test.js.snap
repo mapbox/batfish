@@ -5,6 +5,8 @@ Object {
   "createdWebpackConfigBase": true,
   "entry": Object {
     "app": Array [
+      "core-js/modules/es.promise",
+      "core-js/modules/es.array.iterator",
       "<PROJECT_ROOT>/src/webpack/render-batfish-app.js",
     ],
     "vendor": Array [
@@ -78,6 +80,8 @@ Object {
   "createdWebpackConfigBase": true,
   "entry": Object {
     "app": Array [
+      "core-js/modules/es.promise",
+      "core-js/modules/es.array.iterator",
       "<PROJECT_ROOT>/src/webpack/render-batfish-app.js",
     ],
     "vendor": Array [
@@ -151,6 +155,8 @@ Object {
   "createdWebpackConfigBase": true,
   "entry": Object {
     "app": Array [
+      "core-js/modules/es.promise",
+      "core-js/modules/es.array.iterator",
       "<PROJECT_ROOT>/test/sea-creatures.js",
       "<PROJECT_ROOT>/test/land-creatures.js",
       "<PROJECT_ROOT>/src/webpack/render-batfish-app.js",
