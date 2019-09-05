@@ -44,6 +44,7 @@ declare type webpack$Rule = {
 };
 
 declare type webpack$Configuration = {|
+  mode?: 'development' | 'production',
   entry?: {
     [id: string]: string | Array<string>
   },
@@ -78,7 +79,8 @@ declare type webpack$Configuration = {|
     hints?: 'warning' | false
   |},
   bail?: boolean,
-  cache?: boolean
+  cache?: boolean,
+  optimization?: Object
 |};
 
 declare module 'webpack' {

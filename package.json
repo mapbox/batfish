@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/batfish",
-  "version": "1.9.7",
+  "version": "1.10.2",
   "description": "The React-powered static-site generator you didn't know you wanted",
   "main": "dist/node/index.js",
   "bin": {
@@ -114,6 +114,7 @@
     "concat-with-sourcemaps": "^1.1.0",
     "connect": "^3.6.6",
     "connect-history-api-fallback": "^1.5.0",
+    "core-js": "^2.6.9",
     "cpy": "^7.0.1",
     "del": "^3.0.0",
     "del-cli": "^1.1.0",
@@ -153,8 +154,8 @@
     "tempy": "^0.2.1",
     "time-stamp": "^2.2.0",
     "uglify-js": "^3.4.9",
-    "uglifyjs-webpack-plugin": "^1.2.4",
-    "webpack": "^3.11.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
     "webpack-format-messages": "^1.0.2",
     "webpack-merge": "^4.1.2",
     "worker-farm": "^1.6.0"

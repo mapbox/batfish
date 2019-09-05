@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.10.2
+
+- **Fix:** Use core-js@2 and fix core-js modules so that they are required.
+
+## 1.10.1
+
+- **Fix:** Fix undefined Promise in IE 11 by adding core-js (es.promise and es.array.iterator) to the Webpack config `entry`.
+
+## 1.10.0
+
+- Upgrade Webpack to v4.
+
+## 1.9.8
+
+- **Fix:** Fix bug that caused `.json` files in the `pagesDirectory` *not* to be copied to the `outputDirectory`.
+- **Fix:** Fix bug that caused *some* `unprocessedPageFiles` to *sometimes* be processed as pages.
+
 ## 1.9.7
 
 - **Fix:** Fix Node 10 compatibility by updating `cpy` dependency.
