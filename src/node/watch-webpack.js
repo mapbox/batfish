@@ -14,7 +14,6 @@ const constants = require('./constants');
 const createWebpackConfigClient = require('./create-webpack-config-client');
 const createWebpackStatsError = require('./create-webpack-stats-error');
 const watchContext = require('./watch-context');
-const writeWebpackStats = require('./write-webpack-stats');
 
 function watchWebpack(
   batfishConfig: BatfishConfiguration,
@@ -77,7 +76,6 @@ function watchWebpack(
           onError(createWebpackStatsError(stats));
         }
 
-        writeWebpackStats(batfishConfig.outputDirectory, stats).catch(onError);
         if (batfishConfig.verbose) {
           onNotification(
             stats.toString({

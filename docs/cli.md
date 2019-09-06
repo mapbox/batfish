@@ -37,6 +37,7 @@ start options
 build options
   -d, --debug      Build for debugging, not for production.
   --no-clear       Do not clear the destination directory.
+  -s, --stats      Generate Webpack statistics.
 
 serve-static options
   -p, --port       Server port. Default: 8080.

@@ -259,7 +259,7 @@ To attach listeners to route change events (e.g. add a page-loading animation), 
 
 ## Analyzing bundles
 
-Batfish's `start` and `end` commands output [Webpack's `stats.json`](https://webpack.js.org/api/stats/) so you can use it to analyze the composition of your bundles.
+Batfish's `--stats` flag, when used with the `build` command, will output [Webpack's `stats.json`](https://webpack.js.org/api/stats/) so you can use it to analyze the composition of your bundles.
 
 [webpack-bundle-analyzer](https://github.com/th0r/webpack-bundle-analyzer) and [webpack.github.io/analyse](https://webpack.github.io/analyse/) are two great tools that you can feed your `stats.json` to.
 There are also others out there in the Webpack ecosystem.

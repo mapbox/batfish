@@ -81,7 +81,8 @@ describe('build', () => {
       siteOrigin: 'https://www.mapbox.com',
       verbose: false,
       staticHtmlInlineDeferCss: true,
-      sitemap: true
+      sitemap: true,
+      webpackStats: true
     };
   });
 

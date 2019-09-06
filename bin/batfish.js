@@ -55,6 +55,7 @@ ${chalk.bold(`${chalk.magenta('start')} options`)}
 ${chalk.bold(`${chalk.magenta('build')} options`)}
   -d, --debug      Build for debugging, not for production.
   --no-clear       Do not clear the destination directory.
+  -s, --stats      Generate Webpack statistics.
 
 ${chalk.bold(`${chalk.magenta('serve-static')} options`)}
   -p, --port       Server port. Default: 8080.
@@ -93,6 +94,10 @@ const cli = meow({
     verbose: {
       type: 'boolean',
       alias: 'V'
+    },
+    stats: {
+      type: 'boolean',
+      alias: 's'
     },
     port: {
       type: 'number',
@@ -177,6 +182,9 @@ if (cli.flags.port) {
 }
 if (cli.flags.verbose) {
   config.verbose = cli.flags.verbose;
+}
+if (cli.flags.stats) {
+  config.webpackStats = true;
 }
 if (command === 'start' && cli.flags.include) {
   config.includePages = [].concat(cli.flags.include);

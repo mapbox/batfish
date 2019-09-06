@@ -11,6 +11,7 @@ const appendTaskTime = require('./append-task-time');
 const inlineCss = require('./inline-css');
 const generateSitemap = require('./generate-sitemap');
 const compileStylesheets = require('./compile-stylesheets');
+const cleanUpTempFiles = require('./clean-up-temp-files');
 const constants = require('./constants');
 const maybeClearOutputDirectory = require('./maybe-clear-output-directory');
 const nonPageFiles = require('./non-page-files');
@@ -65,7 +66,9 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
             stats.endTime
           )
         );
-        return writeWebpackStats(outputDirectory, stats);
+        if (tailoredBatfishConfig.webpackStats) {
+          return writeWebpackStats(outputDirectory, stats);
+        }
       });
   };
 
@@ -155,6 +158,11 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
       if (!batfishConfig.sitemap || !batfishConfig.siteOrigin) return;
       return logTask('building sitemap', () => {
         return generateSitemap(batfishConfig);
+      });
+    })
+    .then(() => {
+      return logTask('cleaning up temporary files', () => {
+        return cleanUpTempFiles(batfishConfig);
       });
     })
     .then(() => {
