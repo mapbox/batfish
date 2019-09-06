@@ -1,5 +1,10 @@
 # Changelog
 
+## Master
+
+- **Fix:** Prevent temporary build files from being written to the output directory.
+- **Feature:** Batfish no longer generates a stats.json at build time. Pass the `--stats` flag with the `build` command to generate stats.json.
+
 ## 1.10.2
 
 - **Fix:** Use core-js@2 and fix core-js modules so that they are required.
