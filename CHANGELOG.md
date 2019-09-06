@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## 1.11.0
 
 - **Fix:** Prevent temporary build files from being written to the output directory.
 - **Feature:** Batfish no longer generates a stats.json at build time. Pass the `--stats` flag with the `build` command to generate stats.json.
