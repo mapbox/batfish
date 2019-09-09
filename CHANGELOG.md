@@ -1,5 +1,9 @@
 # Changelog
 
+## Master
+
+- **Fix:** Increase `maxAsyncRequests` and `maxInitialRequests` in `splitChunks` to prevent JavaScript from running out of memory.
+
 ## 1.11.0
 
 - **Fix:** Prevent temporary build files from being written to the output directory.
