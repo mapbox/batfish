@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## 1.11.1
 
 - **Fix:** Increase `maxAsyncRequests` and `maxInitialRequests` in `splitChunks` to prevent JavaScript from running out of memory.
 
