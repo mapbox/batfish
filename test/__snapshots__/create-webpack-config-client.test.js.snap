@@ -39,6 +39,8 @@ Object {
           "test": "vendor",
         },
       },
+      "maxAsyncRequests": 10,
+      "maxInitialRequests": 10,
     },
   },
   "output": Object {
@@ -114,6 +116,8 @@ Object {
           "test": "vendor",
         },
       },
+      "maxAsyncRequests": 10,
+      "maxInitialRequests": 10,
     },
   },
   "output": Object {
@@ -192,6 +196,8 @@ Object {
           "test": "vendor",
         },
       },
+      "maxAsyncRequests": 10,
+      "maxInitialRequests": 10,
     },
   },
   "output": Object {
