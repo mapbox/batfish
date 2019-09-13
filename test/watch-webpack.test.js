@@ -82,11 +82,7 @@ describe('watchWebpack', () => {
     process.nextTick(() => {
       expect(webpack.compiler.watch).toHaveBeenCalledTimes(1);
       expect(webpack.compiler.watch.mock.calls[0][0]).toEqual({
-        ignored: [
-          /node_modules/,
-          '/mock/pages/directory/**/*.{js,md}',
-          '/mock/temporary/directory/**/*'
-        ]
+        ignored: [/node_modules/, '/mock/temporary/directory/**/*']
       });
       expect(webpack.compiler.watch.mock.calls[0][1]).toBeInstanceOf(Function);
       done();
