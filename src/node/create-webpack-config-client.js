@@ -123,8 +123,6 @@ function createWebpackConfigClient(
           name: 'manifest'
         },
         splitChunks: {
-          maxInitialRequests: 10,
-          maxAsyncRequests: 10,
           cacheGroups: {
             vendor: {
               chunks: 'initial',
