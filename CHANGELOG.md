@@ -3,6 +3,8 @@
 ## Head
 
 - **Fix**: Revert increase `maxAsyncRequests` and `maxInitialRequests` in `splitChunks` to prevent JavaScript from running out of memory.
+- **Fix**: Fix issue where `.md` and `.js` files were not being compiled on `start`.
+- **Fix**: Prevent `.md` and `.js` files from being copied on `build` since they will be compiled.
 
 ## 1.11.1
 
