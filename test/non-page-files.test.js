@@ -17,7 +17,7 @@ describe('nonPageFiles.copy', () => {
       .then(() => {
         expect(cpy).toHaveBeenCalledTimes(1);
         expect(cpy).toHaveBeenCalledWith(
-          ['**/*.*', '!*.js', '!*.md'],
+          ['**/*.*', '!**/*.js', '!**/*.md'],
           'mockOutputDirectory',
           {
             cwd: 'mockPagesDirectory',
@@ -37,7 +37,7 @@ describe('nonPageFiles.copy', () => {
       .then(() => {
         expect(cpy).toHaveBeenCalledTimes(1);
         expect(cpy).toHaveBeenCalledWith(
-          ['**/*.*', '!*.js', '!*.md', '**/home.js', '**/horse.md'],
+          ['**/*.*', '!**/*.js', '!**/*.md', '**/home.js', '**/horse.md'],
           'mockOutputDirectory',
           {
             cwd: 'mockPagesDirectory',
@@ -57,7 +57,7 @@ describe('nonPageFiles.copy', () => {
       .then(() => {
         expect(cpy).toHaveBeenCalledTimes(1);
         expect(cpy).toHaveBeenCalledWith(
-          ['**/*.*', '!*.js', '!*.md', '!**/*.txt', '!*.xyz'],
+          ['**/*.*', '!**/*.js', '!**/*.md', '!**/*.txt', '!*.xyz'],
           'mockOutputDirectory',
           {
             cwd: 'mockPagesDirectory',
@@ -80,8 +80,8 @@ describe('nonPageFiles.copy', () => {
         expect(cpy).toHaveBeenCalledWith(
           [
             '**/*.*',
-            '!*.js',
-            '!*.md',
+            '!**/*.js',
+            '!**/*.md',
             '**/home.js',
             '**/horse.md',
             '!**/*.js',
