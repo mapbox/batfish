@@ -198,7 +198,7 @@
   },
   "optionalDependencies": {},
   "engines": {
-    "node": ">=6",
-    "npm": ">=5"
+    "node": ">=10",
+    "npm": ">=6"
   }
 }
