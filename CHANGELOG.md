@@ -1,5 +1,9 @@
 # Changelog
 
+## Master
+
+- Upgrade to Node 10 and npm 6.
+
 ## 1.11.2
 
 - **Fix**: Revert increase `maxAsyncRequests` and `maxInitialRequests` in `splitChunks` to prevent JavaScript from running out of memory.

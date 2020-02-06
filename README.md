@@ -68,8 +68,10 @@ Batfish aims to provide *the essentials* for building excellent static websites 
 
 You will need:
 
-- Node v6+
-- npm, preferably v5+
+- Node 10
+- npm 6
+
+If you're not sure if your Node and NPM versions are up to date, run `nvm use` before installing dependencies. If you don't have NVM installed, you can [find installation instructions here](https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating).
 
 Besides installing this package, you'll want to do a few things:
 
