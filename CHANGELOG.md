@@ -1,8 +1,9 @@
 # Changelog
 
-## Master
+## 1.12.0
 
 - Upgrade to Node 10 and npm 6.
+- Update dependencies with security updates.
 
 ## 1.11.2
 
