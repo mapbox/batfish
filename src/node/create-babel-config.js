@@ -21,6 +21,7 @@ function createBabelConfig(
   if (target === constants.TARGET_NODE) {
     presetEnvOptions = {
       useBuiltIns: 'entry',
+      corejs: 3,
       targets: { node: 'current' },
       modules: false,
     };
@@ -33,6 +34,7 @@ function createBabelConfig(
     presetEnvOptions = batfishConfig.babelPresetEnvOptions || {};
     if (presetEnvOptions.useBuiltIns === undefined) {
       presetEnvOptions.useBuiltIns = 'entry';
+      presetEnvOptions.corejs = 3;
     }
     presetEnvOptions.modules = false;
     if (_.get(presetEnvOptions, ['targets', 'browsers']) === undefined) {

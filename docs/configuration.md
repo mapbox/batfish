@@ -416,7 +416,7 @@ Type: `Object`. [Options for babel-preset-env].
 [babel-preset-env] is always used.
 By default, it receives the following options:
 
-- `useBuiltIns` is `true`.
+- `useBuiltIns` is `entry`.
 - `target.browsers` is your [`browserslist`] or [`devBrowserslist`] value (read more about those options to understand when each is used).
 - `modules` is `false`.
 

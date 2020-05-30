@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { BatfishApp } from './batfish-app';
 import { BatfishSpaApp } from './batfish-spa-app';
 import { StaticHtmlPage } from './static-html-page';
@@ -12,7 +12,7 @@ export function renderHtmlPage(options: {
   inlineJsScripts: string,
   css: string,
   appendToBody: Array<string>,
-  spa: boolean
+  spa: boolean,
 }): Promise<string> {
   return options.route.getPage().then((pageModule) => {
     // We render the page content separately from the StaticHtmlPage, because
@@ -30,7 +30,7 @@ export function renderHtmlPage(options: {
     }
     const rawAppHtml = ReactDOMServer.renderToString(pageContent);
 
-    const helmetHead = Helmet.rewind();
+    const helmetHead = Helmet.renderStatic();
     const reactDocument = (
       <StaticHtmlPage
         rawAppHtml={rawAppHtml}
@@ -47,7 +47,7 @@ export function renderHtmlPage(options: {
           options.css,
           // This comes after the inlined and dynamically loaded CSS
           // so it will override regular stylesheets
-          helmetHead.style.toString()
+          helmetHead.style.toString(),
         ]}
         appendToBody={options.appendToBody}
       />

@@ -129,7 +129,7 @@ For example:
 ```jsx
 // Page component, which will be statically rendered.
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import InitialLoadingState from '../initial-loading-state';
 
 export default Page extends React.Component {
@@ -185,7 +185,7 @@ For example:
 ```jsx
 // Page component, which will be statically rendered.
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import App from '../app';
 
 export default Page extends React.Component {

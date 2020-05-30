@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 
 export default class PageShell extends React.Component {
   render() {
@@ -24,7 +24,7 @@ export default class PageShell extends React.Component {
 PageShell.propTypes = {
   frontMatter: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired
+    description: PropTypes.string.isRequired,
   }).isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
