@@ -17,7 +17,7 @@ describe('examples', () => {
       return Promise.all(
         items.map((item) => {
           return pathType
-            .dir(path.join(examplesDirectory, item))
+            .isDirectory(path.join(examplesDirectory, item))
             .then((isDir) => {
               if (isDir) subDirectories.push(item);
             });

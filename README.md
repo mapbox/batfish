@@ -26,7 +26,7 @@ A static-site generator powered by React and Webpack.
   - [Prefixing URLs](#prefixing-urls)
   - [Programmatically changing pages](#programmatically-changing-pages)
 - [CSS](#css)
-- [Document &lt;head>](#document-head)
+- [Document `<head>`](#document-head)
 - [Development server](#development-server)
 - [Advanced usage](#advanced-usage)
 - [Comparison to other React-powered static-site generators](#comparison-to-other-react-powered-static-site-generators)
@@ -82,7 +82,6 @@ Besides installing this package, you'll want to do a few things:
 - Add `_batfish*` to your `.gitignore`, and maybe other ignore files (e.g. `.eslintignore`).
   Batfish generates files and puts them in `_batfish_site` and `_batfish_tmp`.
 
-
 ```
 npm install --save @mapbox/batfish
 ```
@@ -110,13 +109,16 @@ Then run `npm run start`, `npm run build`, and `npm run serve-static`, as needed
   ```
   npm install --save @mapbox/batfish react react-dom react-helmet
   ```
+
 - Create 3 new `script`s in your `package.json`:
   ```
   "start": "batfish start",
   "build": "batfish build",
   "serve-static": "batfish serve-static",
   ```
+
 - Create your first page file at `src/pages/index.js`.
+
 - Export from that page file a React component that renders something. Maybe something like this:
 
   ```jsx
@@ -132,9 +134,13 @@ Then run `npm run start`, `npm run build`, and `npm run serve-static`, as needed
   ```
 
 - Run `npm run start`.
+
 - Open the URL printed in your terminal.
+
 - Build your website.
+
 - When you're ready to deploy, run `npm run build` to build the site for production, then `npm run serve-static` to check out the production site, which was written to `_batfish_site/`.
+
 - Put your `_batfish_site/` directory on the Internet.
 
 If you need to add configuration, create a `batfish.config.js` module in your project root.
@@ -487,7 +493,5 @@ Please let us know what you think!
 [`prefix-url`]: docs/batfish-modules.md#prefix-url
 
 ["page-specific css"]: docs/advanced-usage.md#page-specific-css
-
-["hello world guide"]: docs/hello-world.md
 
 ["generating tables of contents for markdown pages"]: docs/advanced-usage.md#generating-tables-of-contents-for-markdown-pages

@@ -12,8 +12,8 @@ jest.mock('../src/node/create-webpack-config-base', () => {
 
 jest.mock('path-type', () => {
   return {
-    dirSync: jest.fn(() => true),
-    fileSync: jest.fn(() => true)
+    isDirectorySync: jest.fn(() => true),
+    isFileSync: jest.fn(() => true),
   };
 });
 
@@ -23,7 +23,7 @@ function createBatfishConfig(options) {
   return validateConfig(
     Object.assign(
       {
-        pagesDirectory: path.join(__dirname, './fixtures/get-pages-data')
+        pagesDirectory: path.join(__dirname, './fixtures/get-pages-data'),
       },
       options
     )
@@ -36,7 +36,7 @@ describe('createWebpackConfigClient', () => {
     return createWebpackConfigClient(batfishConfig).then((webpackConfig) => {
       expect(createWebpackConfigBase).toHaveBeenCalledTimes(1);
       expect(createWebpackConfigBase).toHaveBeenCalledWith(batfishConfig, {
-        target: 'browser'
+        target: 'browser',
       });
       expect(webpackConfig.createdWebpackConfigBase).toBe(true);
     });
@@ -65,12 +65,12 @@ describe('createWebpackConfigClient', () => {
       outputDirectory: path.join(__dirname, './fake/output/directory'),
       inlineJs: [
         { filename: path.join(__dirname, './sea-creatures.js') },
-        { filename: path.join(__dirname, './land-creatures.js') }
+        { filename: path.join(__dirname, './land-creatures.js') },
       ],
       webpackConfigClientTransform: (x) => {
         x.underwentClientTransform = true;
         return x;
-      }
+      },
     });
     return createWebpackConfigClient(batfishConfig).then((webpackConfig) => {
       expect(webpackConfig).toMatchSnapshot();
