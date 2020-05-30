@@ -12,7 +12,7 @@ Object {
         "resource": Object {
           "or": Array [
             Object {
-              "exclude": /\\[\\\\/\\\\\\\\\\\\\\\\\\]node_modules\\[\\\\/\\\\\\\\\\\\\\\\\\]/,
+              "exclude": /\\[/\\\\\\\\\\\\\\\\\\]node_modules\\[/\\\\\\\\\\\\\\\\\\]/,
               "test": /\\\\\\.jsx\\?\\$/,
             },
             Object {
@@ -146,7 +146,7 @@ Object {
         "resource": Object {
           "or": Array [
             Object {
-              "exclude": /\\[\\\\/\\\\\\\\\\\\\\\\\\]node_modules\\[\\\\/\\\\\\\\\\\\\\\\\\]/,
+              "exclude": /\\[/\\\\\\\\\\\\\\\\\\]node_modules\\[/\\\\\\\\\\\\\\\\\\]/,
               "test": /\\\\\\.jsx\\?\\$/,
             },
             Object {
