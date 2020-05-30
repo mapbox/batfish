@@ -48,13 +48,21 @@ Object {
   "plugins": Array [
     AssetsWebpackPlugin {
       "options": Object {
+        "fileTypes": Array [
+          "js",
+          "css",
+        ],
         "filename": "assets.json",
         "fullPath": true,
+        "includeAllFileTypes": true,
+        "integrity": false,
+        "keepInMemory": false,
         "manifestFirst": true,
         "path": "<PROJECT_ROOT>/_batfish_site",
         "prettyPrint": false,
         "processOutput": [Function],
         "update": false,
+        "useCompilerPath": false,
       },
       "writer": [Function],
     },
@@ -123,13 +131,21 @@ Object {
   "plugins": Array [
     AssetsWebpackPlugin {
       "options": Object {
+        "fileTypes": Array [
+          "js",
+          "css",
+        ],
         "filename": "assets.json",
         "fullPath": true,
+        "includeAllFileTypes": true,
+        "integrity": false,
+        "keepInMemory": false,
         "manifestFirst": true,
         "path": "<PROJECT_ROOT>/_batfish_site",
         "prettyPrint": false,
         "processOutput": [Function],
         "update": false,
+        "useCompilerPath": false,
       },
       "writer": [Function],
     },
@@ -201,13 +217,21 @@ Object {
   "plugins": Array [
     AssetsWebpackPlugin {
       "options": Object {
+        "fileTypes": Array [
+          "js",
+          "css",
+        ],
         "filename": "assets.json",
         "fullPath": true,
+        "includeAllFileTypes": true,
+        "integrity": false,
+        "keepInMemory": false,
         "manifestFirst": true,
         "path": "<PROJECT_ROOT>/test/fake/output/directory",
         "prettyPrint": false,
         "processOutput": [Function],
         "update": false,
+        "useCompilerPath": false,
       },
       "writer": [Function],
     },
