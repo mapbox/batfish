@@ -5,8 +5,8 @@ Object {
   "createdWebpackConfigBase": true,
   "entry": Object {
     "app": Array [
-      "<PROJECT_ROOT>/node_modules/core-js/modules/es6.promise.js",
-      "<PROJECT_ROOT>/node_modules/core-js/modules/es6.array.iterator.js",
+      "<PROJECT_ROOT>/node_modules/core-js/modules/es.promise.js",
+      "<PROJECT_ROOT>/node_modules/core-js/modules/es.array.iterator.js",
       "<PROJECT_ROOT>/src/webpack/render-batfish-app.js",
     ],
     "vendor": Array [
@@ -80,8 +80,8 @@ Object {
   "createdWebpackConfigBase": true,
   "entry": Object {
     "app": Array [
-      "<PROJECT_ROOT>/node_modules/core-js/modules/es6.promise.js",
-      "<PROJECT_ROOT>/node_modules/core-js/modules/es6.array.iterator.js",
+      "<PROJECT_ROOT>/node_modules/core-js/modules/es.promise.js",
+      "<PROJECT_ROOT>/node_modules/core-js/modules/es.array.iterator.js",
       "<PROJECT_ROOT>/src/webpack/render-batfish-app.js",
     ],
     "vendor": Array [
@@ -155,8 +155,8 @@ Object {
   "createdWebpackConfigBase": true,
   "entry": Object {
     "app": Array [
-      "<PROJECT_ROOT>/node_modules/core-js/modules/es6.promise.js",
-      "<PROJECT_ROOT>/node_modules/core-js/modules/es6.array.iterator.js",
+      "<PROJECT_ROOT>/node_modules/core-js/modules/es.promise.js",
+      "<PROJECT_ROOT>/node_modules/core-js/modules/es.array.iterator.js",
       "<PROJECT_ROOT>/test/sea-creatures.js",
       "<PROJECT_ROOT>/test/land-creatures.js",
       "<PROJECT_ROOT>/src/webpack/render-batfish-app.js",

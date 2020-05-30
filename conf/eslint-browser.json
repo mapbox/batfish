@@ -13,5 +13,10 @@
     "react/jsx-no-undef": ["error"],
     "react/no-unknown-property": ["error"],
     "react/react-in-jsx-scope": ["error"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

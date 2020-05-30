@@ -3,64 +3,64 @@
 exports[`createBabelConfig false devBrowserslist is not used in non-production 1`] = `
 Array [
   Array [
-    "./../node_modules/babel-preset-env/lib/index.js",
+    "./../node_modules/@babel/preset-env/lib/index.js",
     Object {
       "modules": false,
       "targets": Object {
         "browsers": "mock-browserslist",
       },
-      "useBuiltIns": true,
+      "useBuiltIns": "entry",
     },
   ],
-  "./../node_modules/babel-preset-react/lib/index.js",
+  "./../node_modules/@babel/preset-react/lib/index.js",
 ]
 `;
 
 exports[`createBabelConfig non-false devBrowserslist is not used in production 1`] = `
 Array [
   Array [
-    "./../node_modules/babel-preset-env/lib/index.js",
+    "./../node_modules/@babel/preset-env/lib/index.js",
     Object {
       "modules": false,
       "targets": Object {
         "browsers": "mock-browserslist",
       },
-      "useBuiltIns": true,
+      "useBuiltIns": "entry",
     },
   ],
-  "./../node_modules/babel-preset-react/lib/index.js",
+  "./../node_modules/@babel/preset-react/lib/index.js",
 ]
 `;
 
 exports[`createBabelConfig non-false devBrowserslist is used in non-production 1`] = `
 Array [
   Array [
-    "./../node_modules/babel-preset-env/lib/index.js",
+    "./../node_modules/@babel/preset-env/lib/index.js",
     Object {
       "modules": false,
       "targets": Object {
         "browsers": "mock-dev-browserslist",
       },
-      "useBuiltIns": true,
+      "useBuiltIns": "entry",
     },
   ],
-  "./../node_modules/babel-preset-react/lib/index.js",
+  "./../node_modules/@babel/preset-react/lib/index.js",
 ]
 `;
 
 exports[`createBabelConfig with Batfish config that affects Babel 1`] = `
 Array [
   Array [
-    "./../node_modules/babel-preset-env/lib/index.js",
+    "./../node_modules/@babel/preset-env/lib/index.js",
     Object {
       "modules": false,
       "targets": Object {
         "browsers": "mock-browserslist",
       },
-      "useBuiltIns": true,
+      "useBuiltIns": "entry",
     },
   ],
-  "./../node_modules/babel-preset-react/lib/index.js",
+  "./../node_modules/@babel/preset-react/lib/index.js",
   "./a/b",
   "./c",
 ]
@@ -68,9 +68,9 @@ Array [
 
 exports[`createBabelConfig with Batfish config that affects Babel 2`] = `
 Array [
-  "./../node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
-  "./../node_modules/babel-plugin-transform-class-properties/lib/index.js",
-  "./../node_modules/babel-plugin-transform-object-rest-spread/lib/index.js",
+  "./../node_modules/@babel/plugin-syntax-dynamic-import/lib/index.js",
+  "./../node_modules/@babel/plugin-proposal-class-properties/lib/index.js",
+  "./../node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js",
   Array [
     "./../node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
     Object {
@@ -93,40 +93,40 @@ Array [
 exports[`createBabelConfig with Node target 1`] = `
 Array [
   Array [
-    "./../node_modules/babel-preset-env/lib/index.js",
+    "./../node_modules/@babel/preset-env/lib/index.js",
     Object {
       "modules": false,
       "targets": Object {
         "node": "current",
       },
-      "useBuiltIns": true,
+      "useBuiltIns": "entry",
     },
   ],
-  "./../node_modules/babel-preset-react/lib/index.js",
+  "./../node_modules/@babel/preset-react/lib/index.js",
 ]
 `;
 
 exports[`createBabelConfig with defaults 1`] = `
 Array [
   Array [
-    "./../node_modules/babel-preset-env/lib/index.js",
+    "./../node_modules/@babel/preset-env/lib/index.js",
     Object {
       "modules": false,
       "targets": Object {
         "browsers": "mock-browserslist",
       },
-      "useBuiltIns": true,
+      "useBuiltIns": "entry",
     },
   ],
-  "./../node_modules/babel-preset-react/lib/index.js",
+  "./../node_modules/@babel/preset-react/lib/index.js",
 ]
 `;
 
 exports[`createBabelConfig with defaults 2`] = `
 Array [
-  "./../node_modules/babel-plugin-syntax-dynamic-import/lib/index.js",
-  "./../node_modules/babel-plugin-transform-class-properties/lib/index.js",
-  "./../node_modules/babel-plugin-transform-object-rest-spread/lib/index.js",
+  "./../node_modules/@babel/plugin-syntax-dynamic-import/lib/index.js",
+  "./../node_modules/@babel/plugin-proposal-class-properties/lib/index.js",
+  "./../node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js",
   Array [
     "./../node_modules/@mapbox/babel-plugin-transform-jsxtreme-markdown/index.js",
     Object {
