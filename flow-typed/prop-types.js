@@ -1,4 +1,3 @@
-// https://github.com/flowtype/flow-typed/blob/master/definitions/npm/prop-types_v15.x.x/flow_v0.41.x-/prop-types_v15.x.x.js
 type $npm$propTypes$ReactPropsCheckType = (
   props: any,
   propName: string,
@@ -6,30 +5,30 @@ type $npm$propTypes$ReactPropsCheckType = (
   href?: string
 ) => ?Error;
 
+// Copied from: https://github.com/facebook/flow/blob/0938da8d7293d0077fbe95c3a3e0eebadb57b012/lib/react.js#L433-L449
 declare module 'prop-types' {
+  declare var array: React$PropType$Primitive<Array<any>>;
+  declare var bool: React$PropType$Primitive<boolean>;
+  declare var func: React$PropType$Primitive<(...a: Array<any>) => mixed>;
+  declare var number: React$PropType$Primitive<number>;
+  declare var object: React$PropType$Primitive<{ +[string]: mixed, ... }>;
+  declare var string: React$PropType$Primitive<string>;
+  declare var symbol: React$PropType$Primitive<Symbol>;
+  declare var any: React$PropType$Primitive<any>;
+  declare var arrayOf: React$PropType$ArrayOf;
+  declare var element: React$PropType$Primitive<any>;
+  declare var instanceOf: React$PropType$InstanceOf;
+  declare var node: React$PropType$Primitive<any>;
+  declare var objectOf: React$PropType$ObjectOf;
+  declare var oneOf: React$PropType$OneOf;
+  declare var oneOfType: React$PropType$OneOfType;
+  declare var shape: React$PropType$Shape;
+
   declare function checkPropTypes<V>(
-    propTypes: $Subtype<{ [_: $Keys<V>]: $npm$propTypes$ReactPropsCheckType }>,
+    propTypes: { [key: $Keys<V>]: $npm$propTypes$ReactPropsCheckType, ... },
     values: V,
     location: string,
     componentName: string,
     getStack: ?() => ?string
   ): void;
-
-  declare module.exports: {
-    array: React$PropType$Primitive<Array<any>>,
-    bool: React$PropType$Primitive<boolean>,
-    func: React$PropType$Primitive<Function>,
-    number: React$PropType$Primitive<number>,
-    object: React$PropType$Primitive<Object>,
-    string: React$PropType$Primitive<string>,
-    any: React$PropType$Primitive<any>,
-    arrayOf: React$PropType$ArrayOf,
-    element: React$PropType$Primitive<any>,
-    instanceOf: React$PropType$InstanceOf,
-    node: React$PropType$Primitive<any>,
-    objectOf: React$PropType$ObjectOf,
-    oneOf: React$PropType$OneOf,
-    oneOfType: React$PropType$OneOfType,
-    shape: React$PropType$Shape
-  };
 }

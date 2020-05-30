@@ -83,6 +83,13 @@ declare type webpack$Configuration = {|
   optimization?: Object
 |};
 
+declare type webpack = {
+  (webpack$Configuration): webpack$Compiler,
+  DefinePlugin: Function,
+  NormalModuleReplacementPlugin: Function,
+  optimize: { LimitChunkCountPlugin: Function }
+}
+
 declare module 'webpack' {
-  declare module.exports: webpack$Configuration => webpack$Compiler;
+  declare module.exports: webpack
 }
