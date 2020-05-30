@@ -55,19 +55,19 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
       return Promise.all([
         checkPort,
         compileStylesheets(batfishConfig).catch(emitError),
-        nonPageFiles.copy(batfishConfig)
+        nonPageFiles.copy(batfishConfig),
       ]);
     })
     .then(([actualPort]) => {
       return devServer(batfishConfig, actualPort).then(() => {
         watchCss(batfishConfig, {
           onError: emitError,
-          onNotification: emitNotification
+          onNotification: emitNotification,
         });
 
         nonPageFiles.watch(batfishConfig, {
           onError: emitError,
-          onNotification: emitNotification
+          onNotification: emitNotification,
         });
 
         watchWebpack(batfishConfig, {
@@ -75,7 +75,7 @@ function start(rawConfig?: Object, projectDirectory?: string): EventEmitter {
             emitNotification(serverInitMessage(batfishConfig, actualPort));
           },
           onNotification: emitNotification,
-          onError: emitError
+          onError: emitError,
         });
       });
     })

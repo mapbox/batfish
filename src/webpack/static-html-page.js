@@ -7,7 +7,7 @@ type Props = {
   bodyAttributes?: Object,
   appendToHead?: Array<string>,
   appendToBody?: Array<string>,
-  rawAppHtml?: string
+  rawAppHtml?: string,
 };
 
 // This component is used by static-render-pages to create an HTML document.
@@ -23,7 +23,7 @@ class StaticHtmlPage extends React.Component<Props> {
       head = (
         <head
           dangerouslySetInnerHTML={{
-            __html: this.props.appendToHead.join('\n')
+            __html: this.props.appendToHead.join('\n'),
           }}
         />
       );
@@ -34,7 +34,7 @@ class StaticHtmlPage extends React.Component<Props> {
       appendToBody = (
         <div
           dangerouslySetInnerHTML={{
-            __html: this.props.appendToBody.join('\n')
+            __html: this.props.appendToBody.join('\n'),
           }}
         />
       );

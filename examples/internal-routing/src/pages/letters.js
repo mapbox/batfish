@@ -19,7 +19,7 @@ class Letters extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      mounted: false
+      mounted: false,
     };
   }
 

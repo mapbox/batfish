@@ -11,7 +11,7 @@ function watchCss(
   batfishConfig: BatfishConfiguration,
   options: {
     onError: (Error) => void,
-    onNotification?: (string) => void
+    onNotification?: (string) => void,
   }
 ) {
   const { onError, onNotification } = options;

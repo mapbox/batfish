@@ -96,7 +96,7 @@ function generateRandomReactComp(index, lastLorem = 100) {
             <p>
               ${loremIpsum({
                 count: lastLorem,
-                units: 'sentences'
+                units: 'sentences',
               })}
             </p>
             
@@ -296,17 +296,17 @@ var args = argv
   .option([
     {
       name: 'numberOfPages',
-      type: 'int'
+      type: 'int',
     },
     {
       name: 'maxPageSentences',
-      type: 'int'
-    }
+      type: 'int',
+    },
   ])
   .run();
 
 const {
-  options: { numberOfPages, maxPageSentences }
+  options: { numberOfPages, maxPageSentences },
 } = args;
 
 main(numberOfPages, maxPageSentences);

@@ -18,7 +18,7 @@ const {
   siteBasePath,
   siteOrigin,
   manageScrollRestoration,
-  hijackLinks
+  hijackLinks,
 } = batfishContext.selectedConfig;
 
 // See explanation for this weirdness in prefix-url.js.
@@ -29,21 +29,21 @@ prefixUrl._configure(siteBasePath, siteOrigin);
 type Props = {
   startingPath: string,
   startingComponent: React$ComponentType<*>,
-  startingProps: Object
+  startingProps: Object,
 };
 
 export type RouterState = {
   path: string,
   PageComponent: React$ComponentType<*>,
   pageProps: Object,
-  location: BatfishLocation
+  location: BatfishLocation,
 };
 
 class Router extends React.PureComponent<Props, RouterState> {
   constructor(props: Props) {
     super(props);
     const location: BatfishLocation = {
-      pathname: this.props.startingPath
+      pathname: this.props.startingPath,
     };
     if (typeof window !== 'undefined') {
       const win = getWindow();
@@ -54,7 +54,7 @@ class Router extends React.PureComponent<Props, RouterState> {
       path: this.props.startingPath,
       PageComponent: this.props.startingComponent,
       pageProps: this.props.startingProps,
-      location
+      location,
     };
   }
 
@@ -81,7 +81,7 @@ class Router extends React.PureComponent<Props, RouterState> {
         {
           pathname: win.location.pathname,
           search: win.location.search,
-          hash: win.location.hash
+          hash: win.location.hash,
         },
         this.setState.bind(this)
       );
@@ -91,14 +91,14 @@ class Router extends React.PureComponent<Props, RouterState> {
       linkHijacker.hijack(
         {
           skipFilter: (link) =>
-            querySelectorContainsNode('[data-batfish-no-hijack]', link)
+            querySelectorContainsNode('[data-batfish-no-hijack]', link),
         },
         this.routeTo
       );
     }
 
     this.setState({
-      location: getCurrentLocation()
+      location: getCurrentLocation(),
     });
   }
 
@@ -115,7 +115,7 @@ class Router extends React.PureComponent<Props, RouterState> {
       pushState: true,
       scrollToTop:
         win.location.pathname !== targetLocation.pathname ||
-        !targetLocation.hash
+        !targetLocation.hash,
     });
   };
 
@@ -133,8 +133,8 @@ Router.childContextTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
     hash: PropTypes.string,
-    search: PropTypes.string
-  }).isRequired
+    search: PropTypes.string,
+  }).isRequired,
 };
 
 export { Router };

@@ -18,7 +18,7 @@ const commands = {
   start,
   build,
   'serve-static': serveStatic,
-  'write-babelrc': writeBabelrc
+  'write-babelrc': writeBabelrc,
 };
 
 const description = `Build websites with batfish.`;
@@ -89,39 +89,39 @@ const cli = meow({
   flags: {
     config: {
       type: 'string',
-      alias: 'c'
+      alias: 'c',
     },
     verbose: {
       type: 'boolean',
-      alias: 'V'
+      alias: 'V',
     },
     stats: {
       type: 'boolean',
-      alias: 's'
+      alias: 's',
     },
     port: {
       type: 'number',
-      alias: 'p'
+      alias: 'p',
     },
     debug: {
       type: 'boolean',
-      alias: 'd'
+      alias: 'd',
     },
     target: {
-      type: 'string'
+      type: 'string',
     },
     dir: {
-      type: 'string'
+      type: 'string',
     },
     include: {
       type: 'string',
-      alias: 'i'
+      alias: 'i',
     },
     browsers: {
       type: 'string',
-      alias: 'b'
-    }
-  }
+      alias: 'b',
+    },
+  },
 });
 
 const logCliError = (message) => {
@@ -204,7 +204,7 @@ const projectDirectory = path.dirname(configPath);
     writeBabelrc(config, {
       projectDirectory,
       outputDirectory: cli.flags.dir,
-      target: cli.flags.target
+      target: cli.flags.target,
     });
     return;
   }

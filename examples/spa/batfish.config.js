@@ -1,5 +1,5 @@
 module.exports = () => {
   return {
-    spa: true
+    spa: true,
   };
 };

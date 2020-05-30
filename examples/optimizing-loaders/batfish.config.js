@@ -13,19 +13,19 @@ module.exports = () => {
             options: {
               hash: 'sha512',
               digest: 'hex',
-              name: '[name]-[hash].[ext]'
-            }
+              name: '[name]-[hash].[ext]',
+            },
           },
-          { loader: 'image-webpack-loader' }
-        ]
-      }
+          { loader: 'image-webpack-loader' },
+        ],
+      },
     ],
     webpackPlugins: [
       new LodashModuleReplacementPlugin(),
       new batfish.webpack.DefinePlugin({
-        DEFINED: '"yes"'
-      })
+        DEFINED: '"yes"',
+      }),
     ],
-    babelPlugins: [require('babel-plugin-lodash')]
+    babelPlugins: [require('babel-plugin-lodash')],
   };
 };

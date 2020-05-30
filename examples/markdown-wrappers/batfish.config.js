@@ -8,7 +8,7 @@ module.exports = () => {
           return path.join(__dirname, './src/components/markdown-wrapper-a.js');
         }
         return path.join(__dirname, './src/components/markdown-wrapper-b.js');
-      }
-    }
+      },
+    },
   };
 };

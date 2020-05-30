@@ -22,7 +22,7 @@ type BatfishWriteBabelrc = (
   options?: {
     projectDirectory?: string,
     outputDirectory?: string,
-    target?: 'browser' | 'node'
+    target?: 'browser' | 'node',
   }
 ) => string;
 
@@ -31,5 +31,5 @@ module.exports = {
   build: (require('./build'): BatfishBuild),
   serveStatic: (require('./serve-static'): BatfishServeStatic),
   writeBabelrc: (require('./write-babelrc'): BatfishWriteBabelrc),
-  webpack
+  webpack,
 };

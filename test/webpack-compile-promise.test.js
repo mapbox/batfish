@@ -6,7 +6,7 @@ const errorTypes = require('../src/node/error-types');
 
 jest.mock('webpack', () => {
   const compiler = {
-    run: jest.fn()
+    run: jest.fn(),
   };
   const mockWebpack = jest.fn(() => compiler);
   mockWebpack.compiler = compiler;
@@ -47,7 +47,7 @@ describe('webpackCompilePromise', () => {
     const result = webpackCompilePromise({});
     expect(webpack.compiler.run).toHaveBeenCalledTimes(1);
     const stats = {
-      hasErrors: jest.fn(() => false)
+      hasErrors: jest.fn(() => false),
     };
     webpack.compiler.run.mock.calls[0][0](null, stats);
     return result.then((resolution) => {
@@ -60,7 +60,7 @@ describe('webpackCompilePromise', () => {
     const result = webpackCompilePromise({});
     expect(webpack.compiler.run).toHaveBeenCalledTimes(1);
     const stats = {
-      hasErrors: jest.fn(() => false)
+      hasErrors: jest.fn(() => false),
     };
     webpack.compiler.run.mock.calls[0][0](expectedError, stats);
     return result.then(
@@ -78,7 +78,7 @@ describe('webpackCompilePromise', () => {
     const result = webpackCompilePromise({});
     expect(webpack.compiler.run).toHaveBeenCalledTimes(1);
     const stats = {
-      hasErrors: jest.fn(() => true)
+      hasErrors: jest.fn(() => true),
     };
     webpack.compiler.run.mock.calls[0][0](null, stats);
     return result.then(

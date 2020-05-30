@@ -15,7 +15,7 @@ module.exports = function startServer(
       {
         port: actualPort,
         server: {
-          baseDir: batfishConfig.outputDirectory
+          baseDir: batfishConfig.outputDirectory,
         },
         files: [path.join(batfishConfig.outputDirectory, '**/*.*')],
         middleware: startMiddleware(batfishConfig),
@@ -24,7 +24,7 @@ module.exports = function startServer(
         notify: false,
         offline: true,
         reloadDebounce: 500,
-        injectChanges: true
+        injectChanges: true,
       },
       (error) => {
         if (error) {

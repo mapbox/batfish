@@ -46,7 +46,7 @@ function createWebpackConfigBase(
 
     // Configs
     const babelConfig = createBabelConfig(batfishConfig, {
-      target: options.target
+      target: options.target,
     });
     const babelLoaderConfig = {
       loader: 'babel-loader',
@@ -55,20 +55,20 @@ function createWebpackConfigBase(
         presets: babelConfig.presets,
         plugins: babelConfig.plugins,
         babelrc: false,
-        compact: true
-      }
+        compact: true,
+      },
     };
 
     // Create a `resource` to determine what gets compiled by Babel.
     // See https://webpack.js.org/configuration/module/#condition.
     const babelOrConditions = [
-      { include: /@mapbox\/batfish\/(?!\/node_modules).*/ }
+      { include: /@mapbox\/batfish\/(?!\/node_modules).*/ },
     ];
     if (batfishConfig.babelInclude) {
       batfishConfig.babelInclude.forEach((condition) => {
         if (typeof condition === 'string' && !path.isAbsolute(condition)) {
           babelOrConditions.push({
-            include: new RegExp(`${condition}(?!/node_modules).*`)
+            include: new RegExp(`${condition}(?!/node_modules).*`),
           });
         } else {
           // Any condition other than a node_module name should be a
@@ -80,8 +80,8 @@ function createWebpackConfigBase(
     const babelResource = {
       or: [
         { test: /\.jsx?$/, exclude: batfishConfig.babelExclude },
-        { and: [{ test: /\.jsx?$/ }, { or: babelOrConditions }] }
-      ]
+        { and: [{ test: /\.jsx?$/ }, { or: babelOrConditions }] },
+      ],
     };
 
     const aliases = {};
@@ -103,7 +103,7 @@ function createWebpackConfigBase(
     let moduleRules = [
       {
         resource: babelResource,
-        use: [babelLoaderConfig]
+        use: [babelLoaderConfig],
       },
       {
         test: new RegExp(
@@ -113,9 +113,9 @@ function createWebpackConfigBase(
           babelLoaderConfig,
           {
             loader: '@mapbox/jsxtreme-markdown-loader',
-            options: jsxtremeMarkdownOptions
-          }
-        ]
+            options: jsxtremeMarkdownOptions,
+          },
+        ],
       },
       // Static assets are copied into assets/ with an added hash,
       // and when you require() them you'll get the proper
@@ -128,9 +128,9 @@ function createWebpackConfigBase(
           digest: 'hex',
           name: batfishConfig.production
             ? '[name]-[hash].[ext]'
-            : '[name].[ext]'
-        }
-      }
+            : '[name].[ext]',
+        },
+      },
     ];
     if (batfishConfig.pageSpecificCss) {
       moduleRules.push({
@@ -141,9 +141,9 @@ function createWebpackConfigBase(
           babelLoaderConfig,
           {
             loader: 'react-helmet-postcss-loader',
-            options: { postcssPlugins: getPostcssPlugins(batfishConfig) }
-          }
-        ]
+            options: { postcssPlugins: getPostcssPlugins(batfishConfig) },
+          },
+        ],
       });
     }
     if (batfishConfig.webpackLoaders) {
@@ -160,10 +160,10 @@ function createWebpackConfigBase(
           ''
         ),
         pathinfo: !batfishConfig.production,
-        filename: '[name].js'
+        filename: '[name].js',
       },
       performance: {
-        hints: batfishConfig.verbose ? 'warning' : false
+        hints: batfishConfig.verbose ? 'warning' : false,
       },
       resolveLoader: {
         // Register local loaders.
@@ -171,18 +171,18 @@ function createWebpackConfigBase(
           'react-helmet-postcss-loader': path.join(
             __dirname,
             './react-helmet-postcss-loader.js'
-          )
+          ),
         },
         // Loader names need to be strings, and to allow them to be looked
         // up within Batfish's module dependencies, not just the project's,
         // we need this.
-        modules: [path.join(__dirname, '../../node_modules'), 'node_modules']
+        modules: [path.join(__dirname, '../../node_modules'), 'node_modules'],
       },
       resolve: {
-        alias: aliases
+        alias: aliases,
       },
       module: {
-        rules: moduleRules
+        rules: moduleRules,
       },
       plugins: [],
       // Designate sourcemap type.
@@ -192,7 +192,7 @@ function createWebpackConfigBase(
       cache: !batfishConfig.production,
       // Don't attempt to continue if there are any errors during
       // production build.
-      bail: batfishConfig.production
+      bail: batfishConfig.production,
     };
 
     cachedConfig = config;

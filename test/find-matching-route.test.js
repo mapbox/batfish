@@ -15,31 +15,31 @@ jest.mock(
         routes: [
           {
             path: '/foo/',
-            getPage: () => Promise.resolve()
+            getPage: () => Promise.resolve(),
           },
           {
             path: '/foo/bar/',
-            getPage: () => Promise.resolve()
+            getPage: () => Promise.resolve(),
           },
           // Deals with internal routing.
           {
             path: '/foo/bar/baz/',
             getPage: () => Promise.resolve(),
-            internalRouting: true
+            internalRouting: true,
           },
           // Deals with 404.
           {
             path: '/404/',
             getPage: () => Promise.resolve(),
-            is404: true
-          }
+            is404: true,
+          },
         ],
         notFoundRoute: {
           path: '/404/',
           getPage: () => Promise.resolve(),
-          is404: true
-        }
-      }
+          is404: true,
+        },
+      },
     };
   },
   { virtual: true }

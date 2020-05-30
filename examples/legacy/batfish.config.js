@@ -5,6 +5,6 @@ module.exports = () => {
     applicationWrapperPath: path.join(
       __dirname,
       './src/components/application-wrapper.js'
-    )
+    ),
   };
 };

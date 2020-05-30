@@ -15,7 +15,7 @@ function writeBabelrc(
   options: {
     projectDirectory?: string,
     target?: 'browser' | 'node',
-    outputDirectory?: string
+    outputDirectory?: string,
   } = {}
 ): string {
   const target = options.target || constants.TARGET_NODE;
@@ -48,7 +48,7 @@ function writeBabelrc(
 
   const relativizedBabelConfig = {
     presets: rawBabelConfig.presets.map(relativizeBabelSetting),
-    plugins: rawBabelConfig.plugins.map(relativizeBabelSetting)
+    plugins: rawBabelConfig.plugins.map(relativizeBabelSetting),
   };
 
   mkdirp.sync(outputDirectory);

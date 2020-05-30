@@ -21,9 +21,7 @@ export default class PageShell extends React.Component {
           <meta name="og:type" content="website" />
           <meta
             name="og:url"
-            content={`https://www.your-batfish-site.com/miscellany${
-              props.location.pathname
-            }`}
+            content={`https://www.your-batfish-site.com/miscellany${props.location.pathname}`}
           />
         </Helmet>
         <div className="px24 py24 mx-auto" style={{ maxWidth: 960 }}>
@@ -56,11 +54,11 @@ export default class PageShell extends React.Component {
 
 PageShell.propTypes = {
   location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired
+    pathname: PropTypes.string.isRequired,
   }).isRequired,
   frontMatter: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired
+    description: PropTypes.string.isRequired,
   }).isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };

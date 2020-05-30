@@ -23,5 +23,5 @@ function error(message: string) {
 
 module.exports = {
   log,
-  error
+  error,
 };

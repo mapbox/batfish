@@ -7,9 +7,9 @@ export default class Home extends React.PureComponent {
       foo: {
         bar: {
           baz: 3,
-          bap: 4
-        }
-      }
+          bap: 4,
+        },
+      },
     };
 
     return (

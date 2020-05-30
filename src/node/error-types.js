@@ -19,7 +19,7 @@ const errorTypes = Object.freeze({
     'WebpackNodeExecutionError'
   ): Class<WrappedError>),
   CssCompilationError: (fasterror('CssCompilationError'): Class<WrappedError>),
-  FrontMatterError: (fasterror('FrontMatterError'): Class<WrappedError>)
+  FrontMatterError: (fasterror('FrontMatterError'): Class<WrappedError>),
 });
 
 module.exports = errorTypes;

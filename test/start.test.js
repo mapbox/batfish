@@ -12,7 +12,7 @@ const nonPageFiles = require('../src/node/non-page-files');
 
 jest.mock('../src/node/get-port', () => ({
   getPort: jest.fn(() => Promise.resolve('mock-port')),
-  portInUsageMessages: jest.fn(() => Promise.resolve('mock-port'))
+  portInUsageMessages: jest.fn(() => Promise.resolve('mock-port')),
 }));
 
 jest.mock('../src/node/create-webpack-config-client', () => {
@@ -34,7 +34,7 @@ jest.mock('../src/node/dev-server', () => {
 jest.mock('../src/node/non-page-files', () => {
   return {
     watch: jest.fn(),
-    copy: jest.fn(() => Promise.resolve())
+    copy: jest.fn(() => Promise.resolve()),
   };
 });
 
@@ -54,13 +54,13 @@ describe('start', () => {
       port: 6666,
       publicAssetsPath: 'assets',
       outputDirectory: '/mock/output',
-      pagesDirectory: '/mock/pages'
+      pagesDirectory: '/mock/pages',
     };
   });
 
   test('validates the config', () => {
     const rawConfig = {
-      foo: 'bar'
+      foo: 'bar',
     };
     const emitter = start(rawConfig, 'project-directory');
     emitter.on(constants.EVENT_ERROR, logEmitterError);

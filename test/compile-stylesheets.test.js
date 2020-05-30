@@ -29,7 +29,7 @@ describe('compileStylesheets', () => {
     got.mockImplementation((arg) => {
       if (arg === 'https://www.mapbox.com/mock-style.css') {
         return Promise.resolve({
-          body: mockUrlCss
+          body: mockUrlCss,
         });
       }
       return Promise.reject(new Error('Unexpected URL.'));
@@ -44,17 +44,17 @@ describe('compileStylesheets', () => {
         path.join(__dirname, './fixtures/stylesheets/*.css'),
         [
           path.join(__dirname, './fixtures/stylesheets/inner/*.css'),
-          '!**/d.css'
+          '!**/d.css',
         ],
-        path.join(__dirname, './fixtures/stylesheets/inner/innermost/e.css')
+        path.join(__dirname, './fixtures/stylesheets/inner/innermost/e.css'),
       ],
-      siteBasePath: '/mock/base/path'
+      siteBasePath: '/mock/base/path',
     };
   });
 
   afterEach(() => {
     return del(tmp, {
-      force: true
+      force: true,
     });
   });
 
@@ -81,7 +81,7 @@ describe('compileStylesheets', () => {
         'batfish-styles.css',
         'batfish-styles.css.map',
         'c_675d172a.woff2',
-        'e_24153b0b.woff2'
+        'e_24153b0b.woff2',
       ]);
     });
   });
@@ -89,7 +89,7 @@ describe('compileStylesheets', () => {
   test('minimizes in production', () => {
     return compileStylesheets(
       Object.assign({}, batfishConfig, {
-        production: true
+        production: true,
       })
     )
       .then((cssFilePath) => {

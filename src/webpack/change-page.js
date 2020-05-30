@@ -6,7 +6,7 @@ import { findMatchingRoute } from './find-matching-route';
 import { scrollToFragment } from './scroll-to-fragment';
 import {
   _invokeRouteChangeStartCallbacks,
-  _invokeRouteChangeEndCallbacks
+  _invokeRouteChangeEndCallbacks,
 } from '@mapbox/batfish/modules/route-change-listeners';
 import { getCurrentLocation } from './get-current-location';
 import { getWindow } from './get-window';
@@ -22,7 +22,7 @@ export function changePage(
   const nextUrl = [
     nextLocation.pathname,
     nextLocation.hash,
-    nextLocation.search
+    nextLocation.search,
   ].join('');
   // Call the change-start callbacks immediately, not after the page chunk
   // has already been fetched.
@@ -40,7 +40,7 @@ export function changePage(
         path: matchingRoute.path,
         PageComponent: pageModule.component,
         pageProps: pageModule.props,
-        location: getCurrentLocation()
+        location: getCurrentLocation(),
       };
       setRouterState(nextState, () => {
         if (nextLocation.hash) {

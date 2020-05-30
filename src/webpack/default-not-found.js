@@ -6,7 +6,7 @@ import { withLocation } from './public/with-location';
 class DefaultNotFound extends React.Component {
   static propTypes = {
     location: PropTypes.shape({ pathname: PropTypes.string.isRequired })
-      .isRequired
+      .isRequired,
   };
 
   render() {

@@ -14,7 +14,7 @@ const cleanUpTempFiles = (
       cwd: path.join(
         batfishConfig.outputDirectory,
         batfishConfig.publicAssetsPath
-      )
+      ),
     }
   );
 };

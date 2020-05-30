@@ -16,8 +16,8 @@ function getPostcssPlugins(
       assetsPath: './',
       useHash: true,
       hashOptions: {
-        append: true
-      }
+        append: true,
+      },
     }),
     // Rewrite urls so they are root-relative. This way they'll work both from
     // inlined CSS (in the static build) and the stylesheet itself.
@@ -32,8 +32,8 @@ function getPostcssPlugins(
           batfishConfig.publicAssetsPath,
           asset.url
         );
-      }
-    })
+      },
+    }),
   ];
 
   if (batfishConfig.postcssPlugins) {

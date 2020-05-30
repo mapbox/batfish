@@ -25,7 +25,7 @@ function writePageModule(
 
     const pageFrontMatter = pageData.frontMatter;
     const props = {
-      frontMatter: pageFrontMatter
+      frontMatter: pageFrontMatter,
     };
 
     const content = `

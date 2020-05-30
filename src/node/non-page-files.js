@@ -28,7 +28,7 @@ function copy(batfishConfig: BatfishConfiguration): Promise<void> {
   const nonPageFileGlob = getNonPageFileGlob(batfishConfig);
   return cpy(nonPageFileGlob, batfishConfig.outputDirectory, {
     cwd: batfishConfig.pagesDirectory,
-    parents: true
+    parents: true,
   });
 }
 
@@ -36,7 +36,7 @@ function watch(
   batfishConfig: BatfishConfiguration,
   options: {
     onError: (Error) => void,
-    onNotification?: (string) => void
+    onNotification?: (string) => void,
   }
 ): void {
   const { onError, onNotification } = options;
@@ -45,14 +45,14 @@ function watch(
 
   const watcher = chokidar.watch(nonPageFileGlob, {
     ignoreInitial: true,
-    cwd: batfishConfig.pagesDirectory
+    cwd: batfishConfig.pagesDirectory,
   });
 
   const handleChangeAdd = (filename) => {
     const startTime = now();
     cpy(filename, batfishConfig.outputDirectory, {
       parents: true,
-      cwd: batfishConfig.pagesDirectory
+      cwd: batfishConfig.pagesDirectory,
     }).then(() => {
       if (onNotification !== undefined) {
         onNotification(appendTaskTime(`${filename} copied`, startTime));

@@ -36,7 +36,7 @@ function getLoggableErrorMessage(error: Error): string | void {
     const webpackOptions = [
       'webpackLoaders',
       'webpackPlugins',
-      'webpackStaticIgnore'
+      'webpackStaticIgnore',
     ]
       .map((x) => chalk.yellow(x))
       .join(', ');
@@ -86,8 +86,8 @@ function getLoggableErrorMessage(error: Error): string | void {
         {
           start: {
             line: error.originalError.mark.line + 1,
-            column: error.originalError.mark.column
-          }
+            column: error.originalError.mark.column,
+          },
         },
         { highlightCode: true, linesAbove: 10, linesBelow: 10 }
       );

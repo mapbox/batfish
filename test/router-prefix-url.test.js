@@ -21,9 +21,9 @@ jest.mock(
         selectedConfig: {
           siteBasePath: 'mockSiteBasePath',
           siteOrigin: 'mockSiteOrigin',
-          hijackLinks: true
-        }
-      }
+          hijackLinks: true,
+        },
+      },
     };
   },
   { virtual: true }
@@ -31,7 +31,7 @@ jest.mock(
 
 jest.mock('@mapbox/batfish/modules/route-to', () => {}, { virtual: true });
 jest.mock('@mapbox/batfish/modules/route-change-listeners', () => {}, {
-  virtual: true
+  virtual: true,
 });
 
 test('when Router is required, it configures prefixUrl', () => {

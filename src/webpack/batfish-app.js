@@ -7,8 +7,8 @@ type Props = {
   startingPath: string,
   pageModule: {
     component: React$ComponentType<*>,
-    props: Object
-  }
+    props: Object,
+  },
 };
 
 export class BatfishApp extends React.Component<Props> {

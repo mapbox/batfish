@@ -13,7 +13,7 @@ function postcssAbsoluteUrls(options: { stylesheetUrl: string }): Function {
   };
 
   return postcssUrl({
-    url: (asset) => transformUrl(asset.url)
+    url: (asset) => transformUrl(asset.url),
   });
 }
 

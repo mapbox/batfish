@@ -5,8 +5,8 @@ import ApplicationWrapper from 'batfish-internal/application-wrapper';
 type Props = {
   pageModule: {
     component: React$ComponentType<*>,
-    props: Object
-  }
+    props: Object,
+  },
 };
 
 export class BatfishSpaApp extends React.Component<Props> {

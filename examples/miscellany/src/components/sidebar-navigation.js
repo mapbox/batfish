@@ -30,7 +30,7 @@ SidebarNavigation.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       content: PropTypes.node.isRequired,
-      url: PropTypes.string.isRequired
+      url: PropTypes.string.isRequired,
     })
-  ).isRequired
+  ).isRequired,
 };

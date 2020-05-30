@@ -5,16 +5,16 @@ var createClass = require('create-react-class');
 
 var ApplicationWrapper = createClass({
   propTypes: {
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
   },
-  render: function() {
+  render: function () {
     return (
       <div>
         <h1>CommonJS module syntax works</h1>
         {this.props.children}
       </div>
     );
-  }
+  },
 });
 
 module.exports = ApplicationWrapper;

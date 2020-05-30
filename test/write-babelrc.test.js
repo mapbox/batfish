@@ -8,11 +8,11 @@ const validateConfig = require('../src/node/validate-config');
 const createBabelConfig = require('../src/node/create-babel-config');
 
 jest.mock('fs', () => ({
-  writeFileSync: jest.fn()
+  writeFileSync: jest.fn(),
 }));
 
 jest.mock('mkdirp', () => ({
-  sync: jest.fn()
+  sync: jest.fn(),
 }));
 
 jest.mock('../src/node/validate-config', () => {
@@ -24,7 +24,7 @@ jest.mock('../src/node/validate-config', () => {
 jest.mock('../src/node/create-babel-config', () => {
   return jest.fn(() => ({
     plugins: [],
-    presets: []
+    presets: [],
   }));
 });
 
@@ -35,19 +35,19 @@ const createMockBabelConfig = (outputDirectory) => {
       [
         path.join(outputDirectory, 'preset/bar/baz'),
         {
-          one: 1
-        }
-      ]
+          one: 1,
+        },
+      ],
     ],
     plugins: [
       path.join(outputDirectory, 'plugins/foo'),
       [
         path.join(outputDirectory, 'plugins/bar/baz'),
         {
-          one: 1
-        }
-      ]
-    ]
+          one: 1,
+        },
+      ],
+    ],
   };
 };
 
@@ -56,7 +56,7 @@ describe('writeBabelrc', () => {
     validateConfig.mockValidatedConfig = {
       babelPresets: [],
       babelPlugins: [],
-      jsxtremeMarkdownOptions: {}
+      jsxtremeMarkdownOptions: {},
     };
   });
 

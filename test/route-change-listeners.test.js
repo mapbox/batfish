@@ -11,9 +11,9 @@ jest.mock(
       batfishContext: {
         selectedConfig: {
           siteBasePath: '',
-          siteOrigin: ''
-        }
-      }
+          siteOrigin: '',
+        },
+      },
     };
   },
   { virtual: true }

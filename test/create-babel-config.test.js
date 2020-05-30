@@ -10,7 +10,7 @@ const defaultBatfishConfig = () => ({
   babelPresets: [],
   jsxtremeMarkdownOptions: {},
   browserslist: 'mock-browserslist',
-  production: true
+  production: true,
 });
 
 const relativizeBabelSetting = (p) => {
@@ -29,7 +29,7 @@ describe('createBabelConfig', () => {
 
   test('with Node target', () => {
     const actual = createBabelConfig(defaultBatfishConfig(), {
-      target: 'node'
+      target: 'node',
     });
     expect(actual.presets.map(relativizeBabelSetting)).toMatchSnapshot();
   });
@@ -41,8 +41,8 @@ describe('createBabelConfig', () => {
         babelPresets: [abs('a/b'), abs('c')],
         jsxtremeMarkdownOptions: {
           remarkPlugins: ['remark-plugin-a'],
-          rehypePlugins: ['rehype-plugin-a', 'rehype-plugin-b']
-        }
+          rehypePlugins: ['rehype-plugin-a', 'rehype-plugin-b'],
+        },
       })
     );
     expect(actual.presets.map(relativizeBabelSetting)).toMatchSnapshot();
@@ -53,7 +53,7 @@ describe('createBabelConfig', () => {
     const actual = createBabelConfig(
       Object.assign(defaultBatfishConfig(), {
         production: false,
-        devBrowserslist: 'mock-dev-browserslist'
+        devBrowserslist: 'mock-dev-browserslist',
       })
     );
     expect(actual.presets.map(relativizeBabelSetting)).toMatchSnapshot();
@@ -63,7 +63,7 @@ describe('createBabelConfig', () => {
     const actual = createBabelConfig(
       Object.assign(defaultBatfishConfig(), {
         production: false,
-        devBrowserslist: false
+        devBrowserslist: false,
       })
     );
     expect(actual.presets.map(relativizeBabelSetting)).toMatchSnapshot();
@@ -73,7 +73,7 @@ describe('createBabelConfig', () => {
     const actual = createBabelConfig(
       Object.assign(defaultBatfishConfig(), {
         production: true,
-        devBrowserslist: 'mock-dev-browserslist'
+        devBrowserslist: 'mock-dev-browserslist',
       })
     );
     expect(actual.presets.map(relativizeBabelSetting)).toMatchSnapshot();

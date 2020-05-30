@@ -18,9 +18,9 @@ export default class HolidayImage extends React.PureComponent {
 
 HolidayImage.propTypes = {
   src: PropTypes.string.isRequired,
-  style: PropTypes.object
+  style: PropTypes.object,
 };
 
 HolidayImage.defaultProps = {
-  style: {}
+  style: {},
 };

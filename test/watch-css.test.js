@@ -6,12 +6,12 @@ const watchCss = require('../src/node/watch-css');
 
 jest.mock('chokidar', () => {
   const watcher = {
-    on: jest.fn()
+    on: jest.fn(),
   };
   return {
     watch: jest.fn(() => watcher),
     // Just for testing.
-    watcher
+    watcher,
   };
 });
 

@@ -12,7 +12,7 @@ describe('nonPageFiles.copy', () => {
     return nonPageFiles
       .copy({
         outputDirectory: 'mockOutputDirectory',
-        pagesDirectory: 'mockPagesDirectory'
+        pagesDirectory: 'mockPagesDirectory',
       })
       .then(() => {
         expect(cpy).toHaveBeenCalledTimes(1);
@@ -21,7 +21,7 @@ describe('nonPageFiles.copy', () => {
           'mockOutputDirectory',
           {
             cwd: 'mockPagesDirectory',
-            parents: true
+            parents: true,
           }
         );
       });
@@ -32,7 +32,7 @@ describe('nonPageFiles.copy', () => {
       .copy({
         outputDirectory: 'mockOutputDirectory',
         pagesDirectory: 'mockPagesDirectory',
-        unprocessedPageFiles: ['**/home.js', '**/horse.md']
+        unprocessedPageFiles: ['**/home.js', '**/horse.md'],
       })
       .then(() => {
         expect(cpy).toHaveBeenCalledTimes(1);
@@ -41,7 +41,7 @@ describe('nonPageFiles.copy', () => {
           'mockOutputDirectory',
           {
             cwd: 'mockPagesDirectory',
-            parents: true
+            parents: true,
           }
         );
       });
@@ -52,7 +52,7 @@ describe('nonPageFiles.copy', () => {
       .copy({
         outputDirectory: 'mockOutputDirectory',
         pagesDirectory: 'mockPagesDirectory',
-        ignoreWithinPagesDirectory: ['**/*.txt', '*.xyz']
+        ignoreWithinPagesDirectory: ['**/*.txt', '*.xyz'],
       })
       .then(() => {
         expect(cpy).toHaveBeenCalledTimes(1);
@@ -61,7 +61,7 @@ describe('nonPageFiles.copy', () => {
           'mockOutputDirectory',
           {
             cwd: 'mockPagesDirectory',
-            parents: true
+            parents: true,
           }
         );
       });
@@ -73,7 +73,7 @@ describe('nonPageFiles.copy', () => {
         outputDirectory: 'mockOutputDirectory',
         pagesDirectory: 'mockPagesDirectory',
         unprocessedPageFiles: ['**/home.js', '**/horse.md'],
-        ignoreWithinPagesDirectory: ['**/*.js', '*.xyz']
+        ignoreWithinPagesDirectory: ['**/*.js', '*.xyz'],
       })
       .then(() => {
         expect(cpy).toHaveBeenCalledTimes(1);
@@ -85,12 +85,12 @@ describe('nonPageFiles.copy', () => {
             '**/home.js',
             '**/horse.md',
             '!**/*.js',
-            '!*.xyz'
+            '!*.xyz',
           ],
           'mockOutputDirectory',
           {
             cwd: 'mockPagesDirectory',
-            parents: true
+            parents: true,
           }
         );
       });

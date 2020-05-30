@@ -17,7 +17,7 @@ function startMiddleware(
   return [
     historyApiFallback(),
     stripSiteBasePath(batfishConfig.siteBasePath),
-    stripAssets
+    stripAssets,
   ];
 }
 

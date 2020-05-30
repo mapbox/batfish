@@ -11,7 +11,7 @@ const sidebarItems = holidaysData.map((holiday) => {
         <div className="txt-s pl12">({holiday.frontMatter.date})</div>
       </div>
     ),
-    url: holiday.path
+    url: holiday.path,
   };
 });
 

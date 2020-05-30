@@ -8,6 +8,6 @@ export function getCurrentLocation(): BatfishLocation {
   return {
     pathname,
     hash: win.location.hash,
-    search: win.location.search
+    search: win.location.search,
   };
 }

@@ -15,7 +15,7 @@ const getWindowModule = require('../src/webpack/get-window');
 
 jest.mock('../src/webpack/scroll-to-fragment', () => {
   return {
-    scrollToFragment: jest.fn()
+    scrollToFragment: jest.fn(),
   };
 });
 
@@ -24,8 +24,8 @@ jest.mock('../src/webpack/get-current-location', () => {
     getCurrentLocation: jest.fn(() => ({
       pathname: '/current/location/',
       hash: '',
-      search: ''
-    }))
+      search: '',
+    })),
   };
 });
 
@@ -33,11 +33,11 @@ jest.mock('../src/webpack/find-matching-route', () => {
   const mock = {};
   mock.mockMatchinRoutePageModule = {
     component: {},
-    props: {}
+    props: {},
   };
   mock.mockMatchingRoute = {
     path: '/bar/baz/',
-    getPage: jest.fn(() => Promise.resolve(mock.mockMatchinRoutePageModule))
+    getPage: jest.fn(() => Promise.resolve(mock.mockMatchinRoutePageModule)),
   };
   mock.findMatchingRoute = jest.fn(() => mock.mockMatchingRoute);
   return mock;
@@ -48,7 +48,7 @@ jest.mock(
   () => {
     return {
       _invokeRouteChangeStartCallbacks: jest.fn(() => Promise.resolve()),
-      _invokeRouteChangeEndCallbacks: jest.fn(() => Promise.resolve())
+      _invokeRouteChangeEndCallbacks: jest.fn(() => Promise.resolve()),
     };
   },
   { virtual: true }
@@ -58,7 +58,7 @@ jest.mock('@mapbox/scroll-restorer', () => {
   return {
     start: jest.fn(),
     restoreScroll: jest.fn(),
-    getSavedScroll: jest.fn(() => null)
+    getSavedScroll: jest.fn(() => null),
   };
 });
 
@@ -72,18 +72,18 @@ describe('changePage', () => {
     nextLocation = {
       pathname: '/bar/baz/',
       hash: '',
-      search: ''
+      search: '',
     };
     mockWindow = {
       location: {
         pathname: '/foo/',
         hash: '',
-        search: ''
+        search: '',
       },
       history: {
-        pushState: jest.fn()
+        pushState: jest.fn(),
       },
-      scrollTo: jest.fn()
+      scrollTo: jest.fn(),
     };
     jest.spyOn(getWindowModule, 'getWindow').mockReturnValue(mockWindow);
   });
@@ -136,7 +136,7 @@ describe('changePage', () => {
 
   test('invokes pushState if instructed to', () => {
     return changePage(nextLocation, setRouterState, {
-      pushState: true
+      pushState: true,
     }).then(() => {
       expect(mockWindow.history.pushState).toHaveBeenCalledWith(
         {},
@@ -157,8 +157,8 @@ describe('changePage', () => {
           location: {
             pathname: '/current/location/',
             hash: '',
-            search: ''
-          }
+            search: '',
+          },
         },
         expect.any(Function)
       );
@@ -176,7 +176,7 @@ describe('changePage', () => {
 
   test('setRouterState callback does scroll to top if instructed to', () => {
     return changePage(nextLocation, setRouterState, {
-      scrollToTop: true
+      scrollToTop: true,
     }).then(() => {
       expect(mockWindow.scrollTo).not.toHaveBeenCalled();
       const callback = setRouterState.mock.calls[0][1];
@@ -199,7 +199,7 @@ describe('changePage', () => {
 
   test('setRouterState scrolls to fragment if there is a hash', () => {
     nextLocation = {
-      hash: '#foo'
+      hash: '#foo',
     };
     scrollRestorer.getSavedScroll.mockReturnValue({});
     return changePage(nextLocation, setRouterState).then(() => {

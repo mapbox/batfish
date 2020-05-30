@@ -14,8 +14,8 @@ jest.mock('uglify-js', () => {
   return {
     minify: jest.fn(() => ({
       code: 'minified-js',
-      error: null
-    }))
+      error: null,
+    })),
   };
 });
 
@@ -27,7 +27,7 @@ jest.mock(
   '/mock/output/assets/static-render-pages.js',
   () => {
     return {
-      default: jest.fn(() => Promise.resolve())
+      default: jest.fn(() => Promise.resolve()),
     };
   },
   { virtual: true }
@@ -41,14 +41,14 @@ describe('buildHtml', () => {
       outputDirectory: '/mock/output',
       publicAssetsPath: 'assets',
       siteBasePath: '/base',
-      stylesheets: ['one.css', 'two.css']
+      stylesheets: ['one.css', 'two.css'],
     };
     jest.spyOn(fs, 'readFileSync').mockImplementation((filename) => {
       if (filename === path.join(MOCK_ASSETS_DIRECTORY, 'assets.json')) {
         return JSON.stringify({
           manifest: { js: 'mock-manifest.js' },
           app: { js: 'mock-app.js' },
-          vendor: { js: 'mock-app.js' }
+          vendor: { js: 'mock-app.js' },
         });
       } else if (filename === MOCK_MANIFEST_JS_PATH) {
         return MOCK_MANIFEST_JS;
@@ -95,7 +95,7 @@ describe('buildHtml', () => {
         {
           manifest: { js: 'mock-manifest.js' },
           app: { js: 'mock-app.js' },
-          vendor: { js: 'mock-app.js' }
+          vendor: { js: 'mock-app.js' },
         },
         'minified-js',
         '/base/assets/mock-stylesheet.css'

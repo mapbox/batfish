@@ -8,7 +8,7 @@ const watchContext = require('../src/node/watch-context');
 
 jest.mock('webpack', () => {
   const compiler = {
-    watch: jest.fn()
+    watch: jest.fn(),
   };
   const mockWebpack = jest.fn(() => compiler);
   mockWebpack.compiler = compiler;
@@ -31,7 +31,7 @@ function createMockStats(hash) {
   return {
     hash,
     toJson: jest.fn(() => 'stats-to-json'),
-    hasErrors: jest.fn(() => false)
+    hasErrors: jest.fn(() => false),
   };
 }
 
@@ -50,14 +50,14 @@ describe('watchWebpack', () => {
       pagesDirectory: '/mock/pages/directory/',
       temporaryDirectory: '/mock/temporary/directory/',
       stylesheets: ['one.css', 'two.css'],
-      verbose: false
+      verbose: false,
     };
   });
 
   test('creates a webpack client config', () => {
     watchWebpack(batfishConfig, { onError, onNotification, onFirstCompile });
     expect(createWebpackConfigClient).toHaveBeenCalledWith(batfishConfig, {
-      devServer: true
+      devServer: true,
     });
   });
 
@@ -82,7 +82,7 @@ describe('watchWebpack', () => {
     process.nextTick(() => {
       expect(webpack.compiler.watch).toHaveBeenCalledTimes(1);
       expect(webpack.compiler.watch.mock.calls[0][0]).toEqual({
-        ignored: [/node_modules/, '/mock/temporary/directory/**/*']
+        ignored: [/node_modules/, '/mock/temporary/directory/**/*'],
       });
       expect(webpack.compiler.watch.mock.calls[0][1]).toBeInstanceOf(Function);
       done();
