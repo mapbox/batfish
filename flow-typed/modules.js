@@ -11,7 +11,7 @@ declare module 'p-try' {
 
 declare module 'mkdirp' {
   declare module.exports: {
-    (string, (error: ?Error) => void): void,
+    (string): Promise<void>,
     sync(string): void
   };
 }

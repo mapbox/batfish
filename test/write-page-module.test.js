@@ -1,7 +1,6 @@
 'use strict';
 
 const del = require('del');
-const pify = require('pify');
 const path = require('path');
 const mkdirp = require('mkdirp');
 const tempy = require('tempy');
@@ -16,7 +15,7 @@ describe('writePageModule', () => {
 
   const createAndReadPageModule = (batfishConfig, pageData) => {
     tmp = tempy.directory();
-    return pify(mkdirp)(tmp)
+    return mkdirp(tmp)
       .then(() => writePageModule(batfishConfig, pageData))
       .then((filePath) => require(filePath));
   };
@@ -32,19 +31,19 @@ describe('writePageModule', () => {
   test('home without any front matter', () => {
     return createAndReadPageModule(
       {
-        temporaryDirectory: '/tmp'
+        temporaryDirectory: '/tmp',
       },
       {
         path: '/',
-        filePath: pageComponentPath
+        filePath: pageComponentPath,
       }
     ).then((result) => {
       expect(result).toEqual({
         component: {
           // Export of page-component-module.js
-          pageComponent: true
+          pageComponent: true,
         },
-        props: {}
+        props: {},
       });
     });
   });
@@ -52,26 +51,26 @@ describe('writePageModule', () => {
   test('non-home with front matter', () => {
     return createAndReadPageModule(
       {
-        temporaryDirectory: '/tmp'
+        temporaryDirectory: '/tmp',
       },
       {
         path: '/foo',
         filePath: pageComponentPath,
         frontMatter: {
-          title: 'Pigman'
-        }
+          title: 'Pigman',
+        },
       }
     ).then((result) => {
       expect(result).toEqual({
         component: {
           // Export of page-component-module.js
-          pageComponent: true
+          pageComponent: true,
         },
         props: {
           frontMatter: {
-            title: 'Pigman'
-          }
-        }
+            title: 'Pigman',
+          },
+        },
       });
     });
   });

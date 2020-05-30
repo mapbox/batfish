@@ -1,7 +1,6 @@
 'use strict';
 
 const del = require('del');
-const pify = require('pify');
 const path = require('path');
 const mkdirp = require('mkdirp');
 const tempy = require('tempy');
@@ -13,7 +12,7 @@ describe('writeDataModules', () => {
   const createAndReadDataModules = (batfishConfig, siteData) => {
     tmp = tempy.directory();
     batfishConfig.temporaryDirectory = tmp;
-    return pify(mkdirp)(tmp)
+    return mkdirp(tmp)
       .then(() => writeDataModules(batfishConfig, siteData))
       .then((filePaths) => {
         const result = new Map();
@@ -40,13 +39,13 @@ describe('writeDataModules', () => {
 
   test('one data selector', () => {
     const siteData = {
-      horseNames: ['jack', 'jill', 'biff']
+      horseNames: ['jack', 'jill', 'biff'],
     };
     return createAndReadDataModules(
       {
         dataSelectors: {
-          namesOfHorses: (siteData) => siteData.horseNames.sort()
-        }
+          namesOfHorses: (siteData) => siteData.horseNames.sort(),
+        },
       },
       siteData
     ).then((result) => {
@@ -54,7 +53,7 @@ describe('writeDataModules', () => {
       expect(result.get('data/names-of-horses.js')).toEqual([
         'biff',
         'jack',
-        'jill'
+        'jill',
       ]);
     });
   });
@@ -62,7 +61,7 @@ describe('writeDataModules', () => {
   test('three data selectors', () => {
     const siteData = {
       horseNames: ['jack', 'jill', 'biff'],
-      pigNames: ['ed', 'ron']
+      pigNames: ['ed', 'ron'],
     };
     return createAndReadDataModules(
       {
@@ -70,8 +69,8 @@ describe('writeDataModules', () => {
           namesOfHorses: (siteData) => siteData.horseNames.sort(),
           notFromSiteData: () => ({ one: 1, two: 2 }),
           allNames: (siteData) =>
-            siteData.horseNames.concat(siteData.pigNames).sort()
-        }
+            siteData.horseNames.concat(siteData.pigNames).sort(),
+        },
       },
       siteData
     ).then((result) => {
@@ -79,18 +78,18 @@ describe('writeDataModules', () => {
       expect(result.get('data/names-of-horses.js')).toEqual([
         'biff',
         'jack',
-        'jill'
+        'jill',
       ]);
       expect(result.get('data/not-from-site-data.js')).toEqual({
         one: 1,
-        two: 2
+        two: 2,
       });
       expect(result.get('data/all-names.js')).toEqual([
         'biff',
         'ed',
         'jack',
         'jill',
-        'ron'
+        'ron',
       ]);
     });
   });

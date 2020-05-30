@@ -21,7 +21,7 @@ function staticRenderPages(
   batfishConfig: BatfishConfiguration,
   assets: {
     vendor: { js: string },
-    app: { js: string }
+    app: { js: string },
   },
   manifestJs: string,
   cssUrl?: string
@@ -44,7 +44,7 @@ function staticRenderPages(
     // The Webpack manifest is inlined because it is very small.
     `<script>${manifestJs.replace(/\/\/#.*?map$/, '')}</script>`,
     `<script src="${assets.vendor.js}"></script>`,
-    `<script src="${assets.app.js}"></script>`
+    `<script src="${assets.app.js}"></script>`,
   ];
 
   const writePage = (route: BatfishRouteData): Promise<void> => {
@@ -53,12 +53,12 @@ function staticRenderPages(
       inlineJsScripts,
       css,
       appendToBody,
-      spa: batfishConfig.spa
+      spa: batfishConfig.spa,
     }).then((html) => {
       // Write every page as an index.html file in the directory corresponding
       // to its route's path. Except the 404 page.
       if (route.is404) {
-        return pify(mkdirp)(batfishConfig.outputDirectory).then(() => {
+        return mkdirp(batfishConfig.outputDirectory).then(() => {
           return pify(fs.writeFile)(
             path.join(batfishConfig.outputDirectory, '404.html'),
             html
@@ -75,7 +75,7 @@ function staticRenderPages(
         baseRelativePath
       );
       const indexFile = path.join(directory, 'index.html');
-      return pify(mkdirp)(directory).then(() => {
+      return mkdirp(directory).then(() => {
         return pify(fs.writeFile)(indexFile, html);
       });
     });

@@ -53,7 +53,7 @@ function writeDataModules(
     if (!batfishConfig.dataSelectors) {
       return [];
     }
-    return pify(mkdirp)(dataOutputDirectory).then(() => {
+    return mkdirp(dataOutputDirectory).then(() => {
       return Promise.all(
         _.map(batfishConfig.dataSelectors, createSingleDataModule)
       );
