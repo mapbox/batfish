@@ -15,20 +15,20 @@ expect.addSnapshotSerializer(projectRootSerializer);
 
 jest.mock('mkdirp', () => {
   return {
-    sync: jest.fn(),
+    sync: jest.fn()
   };
 });
 
 jest.mock('del', () => {
   return {
-    sync: jest.fn(),
+    sync: jest.fn()
   };
 });
 
 jest.mock('path-type', () => {
   return {
     isDirectorySync: jest.fn(() => true),
-    isFileSync: jest.fn(() => true),
+    isFileSync: jest.fn(() => true)
   };
 });
 
@@ -62,7 +62,7 @@ describe('validateConfig', () => {
     const invalidPropertiesConfig = {
       fakeProduction: true,
       fakePort: 1337,
-      fakeExternalStylesheets: null,
+      fakeExternalStylesheets: null
     };
     expect.hasAssertions();
     try {
@@ -72,7 +72,7 @@ describe('validateConfig', () => {
       expect(error.messages.map(stripAnsi).sort()).toEqual([
         'fakeExternalStylesheets is not a valid configuration property.',
         'fakePort is not a valid configuration property.',
-        'fakeProduction is not a valid configuration property.',
+        'fakeProduction is not a valid configuration property.'
       ]);
     }
   });
@@ -84,9 +84,9 @@ describe('validateConfig', () => {
       siteBasePath: 7,
       browserslist: ['foo', ['bar', 'baz']],
       dataSelectors: {
-        high: 'up',
+        high: 'up'
       },
-      production: 'please',
+      production: 'please'
     };
     expect.hasAssertions();
     try {
@@ -97,7 +97,7 @@ describe('validateConfig', () => {
         'browserslist must be a string or array of strings.',
         'dataSelectors must be an object whose values are functions.',
         'production must be a boolean.',
-        'siteBasePath must be a string.',
+        'siteBasePath must be a string.'
       ]);
     }
   });
@@ -117,7 +117,7 @@ describe('validateConfig', () => {
     expect(
       validateConfig(
         {
-          siteOrigin: 'https://www.mapbox.com/',
+          siteOrigin: 'https://www.mapbox.com/'
         },
         projectDirectory
       )
@@ -126,7 +126,7 @@ describe('validateConfig', () => {
     expect(
       validateConfig(
         {
-          siteOrigin: 'https://www.mapbox.com',
+          siteOrigin: 'https://www.mapbox.com'
         },
         projectDirectory
       )
@@ -142,7 +142,7 @@ describe('validateConfig', () => {
     expect(
       validateConfig(
         {
-          publicAssetsPath: '/site_assets',
+          publicAssetsPath: '/site_assets'
         },
         projectDirectory
       )
@@ -155,7 +155,7 @@ describe('validateConfig', () => {
       projectDirectory
     );
     expect(autoprefixer.mock.calls[0][0]).toEqual({
-      overrideBrowserslist: config.browserslist,
+      overrideBrowserslist: config.browserslist
     });
   });
 
@@ -165,7 +165,7 @@ describe('validateConfig', () => {
       projectDirectory
     );
     expect(autoprefixer.mock.calls[0][0]).toEqual({
-      overrideBrowserslist: config.browserslist,
+      overrideBrowserslist: config.browserslist
     });
   });
 
@@ -175,7 +175,7 @@ describe('validateConfig', () => {
       projectDirectory
     );
     expect(autoprefixer.mock.calls[0][0]).toEqual({
-      overrideBrowserslist: 'Chrome >= 60',
+      overrideBrowserslist: 'Chrome >= 60'
     });
   });
 
@@ -183,7 +183,7 @@ describe('validateConfig', () => {
     expect(
       validateConfig(
         {
-          siteBasePath: 'about/team/',
+          siteBasePath: 'about/team/'
         },
         projectDirectory
       )
@@ -192,7 +192,7 @@ describe('validateConfig', () => {
     expect(
       validateConfig(
         {
-          siteBasePath: 'about/team',
+          siteBasePath: 'about/team'
         },
         projectDirectory
       )
@@ -201,7 +201,7 @@ describe('validateConfig', () => {
     expect(
       validateConfig(
         {
-          siteBasePath: '/',
+          siteBasePath: '/'
         },
         projectDirectory
       )
@@ -212,7 +212,7 @@ describe('validateConfig', () => {
     expect(
       validateConfig(
         {
-          siteBasePath: 'about/team/',
+          siteBasePath: 'about/team/'
         },
         projectDirectory
       )
@@ -221,7 +221,7 @@ describe('validateConfig', () => {
     expect(
       validateConfig(
         {
-          siteBasePath: '/about/team',
+          siteBasePath: '/about/team'
         },
         projectDirectory
       )
@@ -230,7 +230,7 @@ describe('validateConfig', () => {
     expect(
       validateConfig(
         {
-          siteBasePath: '/',
+          siteBasePath: '/'
         },
         projectDirectory
       )
@@ -241,7 +241,7 @@ describe('validateConfig', () => {
     expect(
       validateConfig(
         {
-          fileLoaderExtensions: (defaults) => defaults.concat('svg'),
+          fileLoaderExtensions: (defaults) => defaults.concat('svg')
         },
         projectDirectory
       )
@@ -255,7 +255,7 @@ describe('validateConfig', () => {
       'webm',
       'woff',
       'woff2',
-      'svg',
+      'svg'
     ]);
   });
 
@@ -269,8 +269,8 @@ describe('validateConfig', () => {
         stylesheets: [
           'https://www.mapbox.com/chunk-lite.css',
           path.join(__dirname, 'src/pages/**/*.css'),
-          path.join(__dirname, 'does-not-exist.css'),
-        ],
+          path.join(__dirname, 'does-not-exist.css')
+        ]
       });
     } catch (error) {
       expect(error instanceof errorTypes.ConfigValidationError).toBe(true);
@@ -292,8 +292,8 @@ describe('validateConfig', () => {
           'foo/**/baz/*',
           'foo/baz',
           'foo/ba*',
-          '/basepath/foo/bar',
-        ],
+          '/basepath/foo/bar'
+        ]
       },
       projectDirectory
     );
@@ -304,7 +304,7 @@ describe('validateConfig', () => {
       '/basepath/foo/**/baz/*',
       '/basepath/foo/baz/',
       '/basepath/foo/ba*',
-      '/basepath/foo/bar/',
+      '/basepath/foo/bar/'
     ]);
   });
 });

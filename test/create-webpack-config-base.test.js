@@ -15,7 +15,7 @@ jest.mock('../src/node/write-context-module', () => {
 jest.mock('../src/node/create-babel-config', () => {
   return jest.fn(() => ({
     presets: 'mock-babel-presets',
-    plugins: 'mock-babe-plugins',
+    plugins: 'mock-babe-plugins'
   }));
 });
 
@@ -28,7 +28,7 @@ function createBatfishConfig(options) {
   return validateConfig(
     Object.assign(
       {
-        pagesDirectory: path.join(__dirname, './fixtures/get-pages-data'),
+        pagesDirectory: path.join(__dirname, './fixtures/get-pages-data')
       },
       options
     )
@@ -72,7 +72,7 @@ describe('createWebpackConfigBase', () => {
     return createWebpackConfigBase(batfishConfig, { target: 'node' }).then(
       () => {
         expect(createBabelConfig).toHaveBeenCalledWith(batfishConfig, {
-          target: 'node',
+          target: 'node'
         });
       }
     );
@@ -83,20 +83,20 @@ describe('createWebpackConfigBase', () => {
       jsxtremeMarkdownOptions: {
         prependJs: [
           `const add = (x, y) => x + y;`,
-          `import egg from 'chicken';`,
+          `import egg from 'chicken';`
         ],
         remarkPlugins: [
           function remarkPluginOne() {},
-          function remarkPluginTwo() {},
-        ],
+          function remarkPluginTwo() {}
+        ]
       },
       babelPresets: [
         function babelPresetOne() {},
-        function babelPresetTwo() {},
+        function babelPresetTwo() {}
       ],
       babelPlugins: [
         function babelPluginOne() {},
-        function babelPluginTwo() {},
+        function babelPluginTwo() {}
       ],
       fileLoaderExtensions: ['txt', 'config'],
       siteBasePath: '/site/base/path/',
@@ -106,18 +106,18 @@ describe('createWebpackConfigBase', () => {
       webpackLoaders: [
         {
           test: /\.jpg$/,
-          use: 'jpg-loader',
+          use: 'jpg-loader'
         },
         {
           test: /\.png$/,
-          use: 'png-loader',
-        },
+          use: 'png-loader'
+        }
       ],
       applicationWrapperPath: path.join(
         __dirname,
         './fixtures/empty-component.js'
       ),
-      temporaryDirectory: path.join(__dirname, './fake/temporary/directory'),
+      temporaryDirectory: path.join(__dirname, './fake/temporary/directory')
     });
     return createWebpackConfigBase(batfishConfig).then((webpackConfig) => {
       expect(webpackConfig).toMatchSnapshot();

@@ -54,11 +54,11 @@ export default class PageShell extends React.Component {
 
 PageShell.propTypes = {
   location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
+    pathname: PropTypes.string.isRequired
   }).isRequired,
   frontMatter: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired
   }).isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };

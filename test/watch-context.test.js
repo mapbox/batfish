@@ -6,12 +6,12 @@ const watchContext = require('../src/node/watch-context');
 
 jest.mock('chokidar', () => {
   const watcher = {
-    on: jest.fn(),
+    on: jest.fn()
   };
   return {
     watch: jest.fn(() => watcher),
     // Just for testing.
-    watcher,
+    watcher
   };
 });
 
@@ -35,7 +35,7 @@ describe('watchContext', () => {
     );
     expect(chokidar.watch).toHaveBeenCalledWith('**/*.{js,md}', {
       ignoreInitial: true,
-      cwd: 'src/pages/',
+      cwd: 'src/pages/'
     });
   });
 

@@ -43,7 +43,7 @@ jest.mock('../src/node/maybe-clear-output-directory', () => {
 
 jest.mock('../src/node/non-page-files', () => {
   return {
-    copy: jest.fn(() => Promise.resolve()),
+    copy: jest.fn(() => Promise.resolve())
   };
 });
 
@@ -59,7 +59,7 @@ jest.mock('../src/node/webpack-compile-promise', () => {
   return jest.fn(() =>
     Promise.resolve({
       startTime: 10,
-      endTime: 15,
+      endTime: 15
     })
   );
 });
@@ -82,20 +82,20 @@ describe('build', () => {
       verbose: false,
       staticHtmlInlineDeferCss: true,
       sitemap: true,
-      webpackStats: true,
+      webpackStats: true
     };
   });
 
   test('validates the config after setting production: true', () => {
     const rawConfig = {
-      foo: 'bar',
+      foo: 'bar'
     };
     const emitter = build(rawConfig, 'project-directory');
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     expect(validateConfig).toHaveBeenCalledWith(
       {
         foo: 'bar',
-        production: true,
+        production: true
       },
       'project-directory'
     );
@@ -104,14 +104,14 @@ describe('build', () => {
   test('does not set production: true if production is not undefined', () => {
     const rawConfig = {
       foo: 'bar',
-      production: false,
+      production: false
     };
     const emitter = build(rawConfig, 'project-directory');
     emitter.on(constants.EVENT_ERROR, logEmitterError);
     expect(validateConfig).toHaveBeenCalledWith(
       {
         foo: 'bar',
-        production: false,
+        production: false
       },
       'project-directory'
     );
@@ -120,7 +120,7 @@ describe('build', () => {
   test('creates client webpack config with custom publicAssetsPath', (done) => {
     validateConfig.mockValidatedConfig = {
       outputDirectory: '/mock/output',
-      publicAssetsPath: 'site_assets',
+      publicAssetsPath: 'site_assets'
     };
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
@@ -128,7 +128,7 @@ describe('build', () => {
       expect(createWebpackConfigClient).toHaveBeenCalledTimes(1);
       expect(createWebpackConfigClient).toHaveBeenCalledWith({
         outputDirectory: '/mock/output/site_assets',
-        publicAssetsPath: 'site_assets',
+        publicAssetsPath: 'site_assets'
       });
       done();
     });
@@ -137,7 +137,7 @@ describe('build', () => {
   test('creates static webpack config with custom publicAssetsPath', (done) => {
     validateConfig.mockValidatedConfig = {
       outputDirectory: '/mock/output',
-      publicAssetsPath: 'site_assets',
+      publicAssetsPath: 'site_assets'
     };
     const emitter = build();
     emitter.on(constants.EVENT_ERROR, logEmitterError);
@@ -145,7 +145,7 @@ describe('build', () => {
       expect(createWebpackConfigStatic).toHaveBeenCalledTimes(1);
       expect(createWebpackConfigStatic).toHaveBeenCalledWith({
         outputDirectory: '/mock/output/site_assets',
-        publicAssetsPath: 'site_assets',
+        publicAssetsPath: 'site_assets'
       });
       done();
     });
@@ -214,7 +214,7 @@ describe('build', () => {
       expect(createWebpackConfigClient).toHaveBeenCalledWith(
         Object.assign({}, validateConfig.mockValidatedConfig, {
           outputDirectory: '/mock/output/assets',
-          production: true,
+          production: true
         })
       );
       done();
@@ -285,7 +285,7 @@ describe('build', () => {
       expect(createWebpackConfigStatic).toHaveBeenCalledWith(
         Object.assign({}, validateConfig.mockValidatedConfig, {
           outputDirectory: '/mock/output/assets',
-          production: true,
+          production: true
         })
       );
       done();

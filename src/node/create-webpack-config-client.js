@@ -39,14 +39,14 @@ function createWebpackConfigClient(
     'react-helmet'
   );
   return createWebpackConfigBase(batfishConfig, {
-    target: constants.TARGET_BROWSER,
+    target: constants.TARGET_BROWSER
   }).then((baseConfig) => {
     let vendorModules = [
       reactPath,
       reactDomPath,
       reactHelmetPath,
       require.resolve('@mapbox/scroll-restorer'),
-      require.resolve('@mapbox/link-hijacker'),
+      require.resolve('@mapbox/link-hijacker')
     ];
     if (batfishConfig.includePromisePolyfill) {
       vendorModules.unshift(require.resolve('es6-promise/auto'));
@@ -62,16 +62,16 @@ function createWebpackConfigClient(
       new AssetsPlugin({
         path: path.resolve(batfishConfig.outputDirectory),
         filename: 'assets.json',
-        processOutput: (x) => JSON.stringify(x, null, 2),
+        processOutput: (x) => JSON.stringify(x, null, 2)
       }),
       new webpack.DefinePlugin({
-        'process.env.DEV_SERVER': (options && options.devServer) || false,
-      }),
+        'process.env.DEV_SERVER': (options && options.devServer) || false
+      })
     ].concat(batfishConfig.webpackPlugins || []);
 
     const appEntry = [
       require.resolve('core-js/modules/es.promise'),
-      require.resolve('core-js/modules/es.array.iterator'),
+      require.resolve('core-js/modules/es.array.iterator')
     ];
     if (!batfishConfig.production && batfishConfig.inlineJs) {
       batfishConfig.inlineJs.forEach((jsData) => {
@@ -90,7 +90,7 @@ function createWebpackConfigClient(
     const clientConfig: webpack$Configuration = {
       entry: {
         app: appEntry,
-        vendor: vendorModules,
+        vendor: vendorModules
       },
       output: {
         filename: !batfishConfig.production
@@ -98,14 +98,14 @@ function createWebpackConfigClient(
           : '[name]-[chunkhash].js',
         chunkFilename: !batfishConfig.production
           ? '[name].chunk.js'
-          : '[name]-[chunkhash].chunk.js',
+          : '[name]-[chunkhash].chunk.js'
       },
       resolve: {
         alias: Object.assign({}, _.get(baseConfig, 'resolve.alias'), {
           react: reactPath,
           'react-dom': reactDomPath,
-          'react-helmet': reactHelmetPath,
-        }),
+          'react-helmet': reactHelmetPath
+        })
       },
       target: 'web',
       plugins: clientPlugins,
@@ -115,12 +115,12 @@ function createWebpackConfigClient(
         fs: 'empty',
         net: 'empty',
         tls: 'empty',
-        child_process: 'empty',
+        child_process: 'empty'
       },
       optimization: {
         moduleIds: 'hashed',
         runtimeChunk: {
-          name: 'manifest',
+          name: 'manifest'
         },
         splitChunks: {
           cacheGroups: {
@@ -128,11 +128,11 @@ function createWebpackConfigClient(
               chunks: 'initial',
               name: 'vendor',
               test: 'vendor',
-              enforce: true,
-            },
-          },
-        },
-      },
+              enforce: true
+            }
+          }
+        }
+      }
     };
 
     let config = webpackMerge(baseConfig, clientConfig);

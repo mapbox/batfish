@@ -19,7 +19,7 @@ describe('postcssAbsoluteUrls', () => {
     return postcss()
       .use(
         postcssAbsoluteUrls({
-          stylesheetUrl: 'https://www.fake-place.com/path/to/style.css',
+          stylesheetUrl: 'https://www.fake-place.com/path/to/style.css'
         })
       )
       .process(css, { from: undefined })

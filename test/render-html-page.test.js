@@ -9,21 +9,21 @@ const renderHtmlPage = require('../src/webpack/render-html-page')
 jest.mock('react-helmet', () => {
   const mockHelmetHead = {
     htmlAttributes: {
-      toComponent: jest.fn(() => 'htmlAttributes.mockToComponent'),
+      toComponent: jest.fn(() => 'htmlAttributes.mockToComponent')
     },
     bodyAttributes: {
-      toComponent: jest.fn(() => 'bodyAttributes.mockToComponent'),
+      toComponent: jest.fn(() => 'bodyAttributes.mockToComponent')
     },
     title: { toString: jest.fn(() => 'title.mockToString') },
     base: { toString: jest.fn(() => 'base.mockToString') },
     meta: { toString: jest.fn(() => 'meta.mockToString') },
     link: { toString: jest.fn(() => 'link.mockToString') },
     script: { toString: jest.fn(() => 'script.mockToString') },
-    style: { toString: jest.fn(() => 'style.mockToString') },
+    style: { toString: jest.fn(() => 'style.mockToString') }
   };
 
   return {
-    Helmet: { renderStatic: jest.fn(() => mockHelmetHead) },
+    Helmet: { renderStatic: jest.fn(() => mockHelmetHead) }
   };
 });
 
@@ -53,11 +53,11 @@ jest.mock('../src/webpack/router', () => {
         'div',
         {
           id: 'router',
-          'data-props': JSON.stringify(_.omit(props, ['children']), null, 2),
+          'data-props': JSON.stringify(_.omit(props, ['children']), null, 2)
         },
         props.children
       );
-    },
+    }
   };
 });
 
@@ -70,11 +70,11 @@ jest.mock('../src/webpack/static-html-page', () => {
         'div',
         {
           id: 'static-html-page',
-          'data-props': JSON.stringify(_.omit(props, ['children']), null, 2),
+          'data-props': JSON.stringify(_.omit(props, ['children']), null, 2)
         },
         props.children
       );
-    },
+    }
   };
 });
 
@@ -85,11 +85,11 @@ describe('renderHtmlPage', () => {
   beforeEach(() => {
     mockPageModule = {
       component: () => React.createElement('div', {}, 'Mock component'),
-      props: 'mockPageModule.props',
+      props: 'mockPageModule.props'
     };
     mockRoute = {
       path: '/mock/route/path/',
-      getPage: jest.fn(() => Promise.resolve(mockPageModule)),
+      getPage: jest.fn(() => Promise.resolve(mockPageModule))
     };
   });
 
@@ -98,7 +98,7 @@ describe('renderHtmlPage', () => {
       route: mockRoute,
       inlineJsScripts: 'inline-js-scripts',
       css: 'css',
-      appendToBody: ['append', 'to', 'body'],
+      appendToBody: ['append', 'to', 'body']
     }).then((html) => {
       expect(_.unescape(html)).toMatchSnapshot();
     });
@@ -113,7 +113,7 @@ describe('renderHtmlPage', () => {
       route: mockRoute,
       inlineJsScripts: 'inline-js-scripts',
       css: 'css',
-      appendToBody: ['append', 'to', 'body'],
+      appendToBody: ['append', 'to', 'body']
     }).then(
       () => {
         throw new Error('should have errored');
@@ -136,7 +136,7 @@ describe('renderHtmlPage', () => {
       route: mockRoute,
       inlineJsScripts: 'inline-js-scripts',
       css: 'css',
-      appendToBody: ['append', 'to', 'body'],
+      appendToBody: ['append', 'to', 'body']
     }).then(
       () => {
         throw new Error('should have errored');
@@ -153,7 +153,7 @@ describe('renderHtmlPage', () => {
       inlineJsScripts: 'inline-js-scripts',
       css: 'css',
       appendToBody: ['append', 'to', 'body'],
-      spa: true,
+      spa: true
     }).then((html) => {
       expect(_.unescape(html)).toMatchSnapshot();
     });

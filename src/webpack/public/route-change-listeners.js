@@ -2,17 +2,17 @@
 import { prefixUrl, isUrlPrefixed } from './prefix-url';
 
 type Registry = {
-  [path: string]: Array<Function>,
+  [path: string]: Array<Function>
 };
 
 type Remover = (pathname: string, callback?: Function) => void;
 
 const ALL_PATHS = '*';
 const startListeners: Registry = {
-  [ALL_PATHS]: [],
+  [ALL_PATHS]: []
 };
 const endListeners: Registry = {
-  [ALL_PATHS]: [],
+  [ALL_PATHS]: []
 };
 
 function normalizePathname(pathname: string): string {

@@ -11,5 +11,5 @@ module.exports = Object.freeze({
   EVENT_DONE: 'done',
   TARGET_NODE: 'node',
   TARGET_BROWSER: 'browser',
-  PAGE_EXT_GLOB: `{js,md}`,
+  PAGE_EXT_GLOB: `{js,md}`
 });

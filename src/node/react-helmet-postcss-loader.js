@@ -33,7 +33,7 @@ function generateModule(css: string): string {
 function reactHelmetPostcssLoader(css: string) {
   const callback = this.async();
   const options: {
-    postcssPlugins?: Array<Function>,
+    postcssPlugins?: Array<Function>
   } = loaderUtils.getOptions(this);
 
   postcss(options.postcssPlugins)

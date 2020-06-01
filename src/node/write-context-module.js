@@ -33,7 +33,7 @@ function writeContextModule(
     // Construct a data object for the entire site.
     // Pages can load this data with siteData front-matter
     const siteData: BatfishSiteData = {
-      pages: _.values(pagesData),
+      pages: _.values(pagesData)
     };
     const isSpa = batfishConfig.spa || pagesData.length === 1;
 

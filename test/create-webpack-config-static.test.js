@@ -19,7 +19,7 @@ function createBatfishConfig(options) {
   return validateConfig(
     Object.assign(
       {
-        pagesDirectory: path.join(__dirname, './fixtures/get-pages-data'),
+        pagesDirectory: path.join(__dirname, './fixtures/get-pages-data')
       },
       options
     )
@@ -32,7 +32,7 @@ describe('createWebpackConfigStatic', () => {
     return createWebpackConfigStatic(batfishConfig).then((webpackConfig) => {
       expect(createWebpackConfigBase).toHaveBeenCalledTimes(1);
       expect(createWebpackConfigBase).toHaveBeenCalledWith(batfishConfig, {
-        target: 'node',
+        target: 'node'
       });
       expect(webpackConfig.createdWebpackConfigBase).toBe(true);
     });
@@ -51,13 +51,13 @@ describe('createWebpackConfigStatic', () => {
       webpackStaticIgnore: /stuff\/to\/ignore/,
       webpackStaticStubReactComponent: [
         '/path/to/component/a',
-        '/path/to/component/b',
+        '/path/to/component/b'
       ],
       webpackConfigStaticTransform: (x) => {
         x.underwentStaticTransform = true;
         return x;
       },
-      webpackPlugins: [{ mockPlugin: true }],
+      webpackPlugins: [{ mockPlugin: true }]
     });
     return createWebpackConfigStatic(batfishConfig).then((webpackConfig) => {
       expect(webpackConfig).toMatchSnapshot();

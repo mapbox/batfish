@@ -51,7 +51,7 @@ function getPagesData(
         parsedFrontMatter = grayMatter(content, grayMatterOptions);
       } catch (parseError) {
         throw wrapError(parseError, errorTypes.FrontMatterError, {
-          filePath,
+          filePath
         });
       }
       const published = parsedFrontMatter.data.published !== false;
@@ -61,7 +61,7 @@ function getPagesData(
       const pageData: BatfishPageData = {
         filePath,
         path: pagePath,
-        frontMatter: parsedFrontMatter.data,
+        frontMatter: parsedFrontMatter.data
       };
       if (is404) {
         pageData.is404 = true;
@@ -78,7 +78,7 @@ function getPagesData(
 
   return globby(pagesGlob, {
     cwd: batfishConfig.pagesDirectory,
-    absolute: true,
+    absolute: true
   })
     .then((pageFilePaths) => {
       if (batfishConfig.spa && pageFilePaths.length > 1) {
@@ -98,7 +98,7 @@ function getPagesData(
           filePath: path.join(__dirname, '../webpack/default-not-found.js'),
           path: notFoundPath,
           is404: true,
-          frontMatter: {},
+          frontMatter: {}
         };
       }
 

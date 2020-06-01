@@ -19,15 +19,15 @@ function createWebpackConfigStatic(
   batfishConfig: BatfishConfiguration
 ): Promise<webpack$Configuration> {
   return createWebpackConfigBase(batfishConfig, {
-    target: constants.TARGET_NODE,
+    target: constants.TARGET_NODE
   }).then((baseConfig) => {
     const staticConfig: webpack$Configuration = {
       entry: {
-        static: path.join(__dirname, '../webpack/static-render-pages.js'),
+        static: path.join(__dirname, '../webpack/static-render-pages.js')
       },
       output: {
         filename: './static-render-pages.js',
-        libraryTarget: 'commonjs2',
+        libraryTarget: 'commonjs2'
       },
       target: 'node',
       externals: {
@@ -50,14 +50,14 @@ function createWebpackConfigStatic(
         '@mapbox/link-to-location': require.resolve('@mapbox/link-to-location'),
         // Some libraries, like got, require('electron') within a conditional;
         // Webpack can't evaluate that so tries to bundle electron and can't find it.
-        electron: 'electron',
+        electron: 'electron'
       },
       plugins: [
         // Ensure that all files will be grouped into one file,
         // even if they would otherwise be split into separate chunks.
         // Separate chunks serve no purpose in the static build: we need all
         // the information at once.
-        new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
+        new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 })
       ].concat(batfishConfig.webpackPlugins || []),
       devtool: 'source-map',
       // Don't hijack Node's globals: this code will execute in Node.
@@ -68,14 +68,14 @@ function createWebpackConfigStatic(
         __filename: false,
         __dirname: false,
         Buffer: false,
-        setImmediate: false,
-      },
+        setImmediate: false
+      }
     };
 
     if (batfishConfig.webpackStaticIgnore) {
       _.set(staticConfig, 'module.rules[0]', {
         test: batfishConfig.webpackStaticIgnore,
-        loader: 'ignore-loader',
+        loader: 'ignore-loader'
       });
     }
 

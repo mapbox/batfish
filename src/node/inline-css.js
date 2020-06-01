@@ -13,7 +13,7 @@ const errorTypes = require('./error-types');
 function reTypeError(error: *): Error {
   if (error.name === 'CssCompilationError') {
     return wrapError(error, errorTypes.CssCompilationError, {
-      originalError: error.originalError,
+      originalError: error.originalError
     });
   }
   return error;
@@ -30,7 +30,7 @@ function inlineCss(
   cssPath: string,
   options: {
     onNotification: (string) => void,
-    verbose?: boolean,
+    verbose?: boolean
   }
 ): Promise<void> {
   const { onNotification, verbose } = options;

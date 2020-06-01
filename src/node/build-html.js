@@ -17,7 +17,7 @@ declare type StaticRenderPagesFunction = (
   BatfishConfiguration,
   {
     vendor: { js: string },
-    app: { js: string },
+    app: { js: string }
   },
   string,
   cssUrl?: string
@@ -42,7 +42,7 @@ function buildHtml(
     const assets: {
       manifest: { js: string },
       app: { js: string },
-      vendor: { js: string },
+      vendor: { js: string }
     } = Object.freeze(JSON.parse(rawAssets));
     const manifestJs = fs.readFileSync(
       getWebpackAssetAbsolutePath(batfishConfig, assets.manifest.js),

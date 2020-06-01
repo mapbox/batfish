@@ -9,7 +9,7 @@ const serveStatic = require('serve-static');
 const stripSiteBasePath = require('./strip-site-base-path');
 
 function getPagesWithInternalRouting(pagesData: {
-  [string]: BatfishPageData,
+  [string]: BatfishPageData
 }): Array<BatfishPageData> {
   return Object.keys(pagesData).reduce((memo, pagePath) => {
     const data: BatfishPageData = pagesData[pagePath];

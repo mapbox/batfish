@@ -56,7 +56,8 @@
   },
   "prettier": {
     "singleQuote": true,
-    "arrowParens": "always"
+    "arrowParens": "always",
+    "trailingComma": "none"
   },
   "babel": {
     "presets": [

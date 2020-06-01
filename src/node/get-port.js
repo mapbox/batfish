@@ -43,12 +43,12 @@ function portInUsageMessages(port: number): Promise<string[]> {
           '\n' +
           `  > ${command}`
       ),
-      chalk.yellow.bold('Trying a different port ...'),
+      chalk.yellow.bold('Trying a different port ...')
     ],
     () => []
   );
 }
 module.exports = {
   getPort,
-  portInUsageMessages,
+  portInUsageMessages
 };

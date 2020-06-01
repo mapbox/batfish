@@ -46,9 +46,9 @@ jest.mock(
           siteBasePath: 'mockSiteBasePath',
           siteOrigin: 'mockSiteOrigin',
           hijackLinks: true,
-          manageScrollRestoration: true,
-        },
-      },
+          manageScrollRestoration: true
+        }
+      }
     };
   },
   { virtual: true }
@@ -58,13 +58,13 @@ jest.mock('@mapbox/scroll-restorer', () => {
   return {
     start: jest.fn(),
     restoreScroll: jest.fn(),
-    getSavedScroll: jest.fn(),
+    getSavedScroll: jest.fn()
   };
 });
 
 jest.mock('@mapbox/link-hijacker', () => {
   return {
-    hijack: jest.fn(),
+    hijack: jest.fn()
   };
 });
 
@@ -74,13 +74,13 @@ jest.mock('@mapbox/link-to-location', () => {
 
 jest.mock('../src/webpack/change-page', () => {
   return {
-    changePage: jest.fn(),
+    changePage: jest.fn()
   };
 });
 
 jest.mock('../src/webpack/find-matching-route', () => {
   return {
-    findMatchingRoute: jest.fn(),
+    findMatchingRoute: jest.fn()
   };
 });
 
@@ -98,9 +98,9 @@ describe('Router', () => {
         pathname: '/magic/',
         hash: '',
         search: '',
-        assign: jest.fn(),
+        assign: jest.fn()
       },
-      addEventListener: jest.fn(),
+      addEventListener: jest.fn()
     };
     jest.spyOn(getWindowModule, 'getWindow').mockReturnValue(mockWindow);
   });
@@ -114,7 +114,7 @@ describe('Router', () => {
       React.createElement(Router, {
         startingPath: '/magic/',
         startingComponent: StartingComponent,
-        pageProps: pageProps,
+        pageProps: pageProps
       })
     );
     expect(wrapper).toMatchSnapshot();
@@ -127,7 +127,7 @@ describe('Router', () => {
       React.createElement(Router, {
         startingPath: '/magic/',
         startingComponent: StartingComponent,
-        pageProps: pageProps,
+        pageProps: pageProps
       })
     );
     expect(wrapper).toMatchSnapshot();
@@ -138,7 +138,7 @@ describe('Router', () => {
       React.createElement(Router, {
         startingPath: '/magic/',
         startingComponent: StartingComponent,
-        pageProps: pageProps,
+        pageProps: pageProps
       })
     );
     expect(scrollRestorer.start).toHaveBeenCalledTimes(1);
@@ -151,7 +151,7 @@ describe('Router', () => {
       React.createElement(Router, {
         startingPath: '/magic/',
         startingComponent: StartingComponent,
-        pageProps: pageProps,
+        pageProps: pageProps
       })
     );
     expect(routeTo._setRouteToHandler).toHaveBeenCalledTimes(1);
@@ -165,7 +165,7 @@ describe('Router', () => {
       React.createElement(Router, {
         startingPath: '/magic/',
         startingComponent: StartingComponent,
-        pageProps: pageProps,
+        pageProps: pageProps
       })
     );
     expect(linkHijacker.hijack).toHaveBeenCalledTimes(1);
@@ -180,7 +180,7 @@ describe('Router', () => {
       React.createElement(Router, {
         startingPath: '/magic/',
         startingComponent: StartingComponent,
-        pageProps: pageProps,
+        pageProps: pageProps
       })
     );
     expect(mockWindow.addEventListener).toHaveBeenCalledTimes(1);
@@ -189,10 +189,10 @@ describe('Router', () => {
     mockWindow.location = {
       pathname: '/magic/',
       search: '?foo=bar',
-      hash: '#baz',
+      hash: '#baz'
     };
     const mockEvent = {
-      preventDefault: jest.fn(),
+      preventDefault: jest.fn()
     };
     expect(mockEvent.preventDefault).not.toHaveBeenCalled();
     expect(changePage).not.toHaveBeenCalled();
@@ -203,7 +203,7 @@ describe('Router', () => {
       {
         hash: '#baz',
         pathname: '/magic/',
-        search: '?foo=bar',
+        search: '?foo=bar'
       },
       expect.any(Function)
     );
@@ -214,26 +214,26 @@ describe('Router', () => {
       React.createElement(Router, {
         startingPath: '/magic/',
         startingComponent: StartingComponent,
-        pageProps: pageProps,
+        pageProps: pageProps
       })
     );
     expect(wrapper.find('StartingComponent').props().location).toEqual({
       pathname: '/magic/',
       search: '',
-      hash: '',
+      hash: ''
     });
 
     mockWindow.location = {
       pathname: '/magic/',
       search: '?foo=bar',
-      hash: '#baz',
+      hash: '#baz'
     };
     wrapper.instance().componentDidMount();
     wrapper.update();
     expect(wrapper.find('StartingComponent').props().location).toEqual({
       pathname: '/magic/',
       search: '?foo=bar',
-      hash: '#baz',
+      hash: '#baz'
     });
   });
 
@@ -242,7 +242,7 @@ describe('Router', () => {
       React.createElement(Router, {
         startingPath: '/magic/',
         startingComponent: StartingComponent,
-        pageProps: pageProps,
+        pageProps: pageProps
       })
     );
     linkToLocation.mockReturnValue({ pathname: '/horse/' });
@@ -255,7 +255,7 @@ describe('Router', () => {
       expect.any(Function),
       {
         pushState: true,
-        scrollToTop: true,
+        scrollToTop: true
       }
     );
   });
@@ -265,7 +265,7 @@ describe('Router', () => {
       React.createElement(Router, {
         startingPath: '/magic/',
         startingComponent: StartingComponent,
-        pageProps: pageProps,
+        pageProps: pageProps
       })
     );
     linkToLocation.mockReturnValue({ pathname: '/magic/', hash: '#dog' });
@@ -278,7 +278,7 @@ describe('Router', () => {
       expect.any(Function),
       {
         pushState: true,
-        scrollToTop: false,
+        scrollToTop: false
       }
     );
   });
@@ -288,7 +288,7 @@ describe('Router', () => {
       React.createElement(Router, {
         startingPath: '/magic/',
         startingComponent: StartingComponent,
-        pageProps: pageProps,
+        pageProps: pageProps
       })
     );
     linkToLocation.mockReturnValue({ pathname: '/not/known/page' });

@@ -17,7 +17,7 @@ function inlineCssWorker(
 ) {
   Promise.all([
     pify(fs.readFile)(cssPath, 'utf8'),
-    pify(fs.readFile)(htmlPath, 'utf8'),
+    pify(fs.readFile)(htmlPath, 'utf8')
   ])
     .then((data) => {
       const css = data[0];

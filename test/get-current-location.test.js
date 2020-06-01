@@ -11,8 +11,8 @@ describe('getCurrentLocation', () => {
       location: {
         pathname: '/foo/',
         hash: '',
-        search: '',
-      },
+        search: ''
+      }
     };
     jest.spyOn(getWindowModule, 'getWindow').mockReturnValue(mockWindow);
   });
@@ -25,7 +25,7 @@ describe('getCurrentLocation', () => {
     expect(getCurrentLocation()).toEqual({
       pathname: '/foo/',
       hash: '',
-      search: '',
+      search: ''
     });
   });
 
@@ -34,12 +34,12 @@ describe('getCurrentLocation', () => {
       pathname: '/bar/',
       hash: '#pig',
       search: '?horse=apocalypse',
-      extra: 8,
+      extra: 8
     };
     expect(getCurrentLocation()).toEqual({
       pathname: '/bar/',
       hash: '#pig',
-      search: '?horse=apocalypse',
+      search: '?horse=apocalypse'
     });
   });
 
@@ -48,7 +48,7 @@ describe('getCurrentLocation', () => {
     expect(getCurrentLocation()).toEqual({
       pathname: '/foo/bar/baz/',
       hash: '',
-      search: '',
+      search: ''
     });
   });
 });

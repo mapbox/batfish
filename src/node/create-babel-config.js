@@ -8,11 +8,11 @@ const getEnvBrowserslist = require('./get-env-browserslist');
 function createBabelConfig(
   batfishConfig: BatfishConfiguration,
   options: {
-    target?: 'browser' | 'node',
+    target?: 'browser' | 'node'
   } = {}
 ): {
   presets: Array<*>,
-  plugins: Array<*>,
+  plugins: Array<*>
 } {
   const target = options.target || constants.TARGET_BROWSER;
 
@@ -23,7 +23,7 @@ function createBabelConfig(
       useBuiltIns: 'entry',
       corejs: 3,
       targets: { node: 'current' },
-      modules: false,
+      modules: false
     };
   } else {
     const envBrowserslist = getEnvBrowserslist(
@@ -44,7 +44,7 @@ function createBabelConfig(
 
   const presets = [
     [require.resolve('@babel/preset-env'), presetEnvOptions],
-    require.resolve('@babel/preset-react'),
+    require.resolve('@babel/preset-react')
   ].concat(batfishConfig.babelPresets);
 
   const plugins = [
@@ -56,9 +56,9 @@ function createBabelConfig(
       {
         packageName: '@mapbox/batfish/modules/md',
         remarkPlugins: batfishConfig.jsxtremeMarkdownOptions.remarkPlugins,
-        rehypePlugins: batfishConfig.jsxtremeMarkdownOptions.rehypePlugins,
-      },
-    ],
+        rehypePlugins: batfishConfig.jsxtremeMarkdownOptions.rehypePlugins
+      }
+    ]
   ].concat(batfishConfig.babelPlugins);
 
   if (batfishConfig.production) {

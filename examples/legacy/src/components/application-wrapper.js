@@ -5,7 +5,7 @@ var createClass = require('create-react-class');
 
 var ApplicationWrapper = createClass({
   propTypes: {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired
   },
   render: function () {
     return (
@@ -14,7 +14,7 @@ var ApplicationWrapper = createClass({
         {this.props.children}
       </div>
     );
-  },
+  }
 });
 
 module.exports = ApplicationWrapper;

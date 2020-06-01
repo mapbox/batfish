@@ -1,3 +1,3 @@
 module.exports = {
-  extends: '../../conf/eslint-browser.json',
+  extends: '../../conf/eslint-browser.json'
 };

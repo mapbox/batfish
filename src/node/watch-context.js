@@ -10,12 +10,12 @@ function watchContext(
   batfishConfig: BatfishConfiguration,
   options: {
     onError: (Error) => any,
-    afterCompilation: () => any,
+    afterCompilation: () => any
   }
 ) {
   const pageWatcher = chokidar.watch(`**/*.${constants.PAGE_EXT_GLOB}`, {
     ignoreInitial: true,
-    cwd: batfishConfig.pagesDirectory,
+    cwd: batfishConfig.pagesDirectory
   });
   const rebuildPages = () => {
     writeContextModule(batfishConfig).then(() => {

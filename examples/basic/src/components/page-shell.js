@@ -24,7 +24,7 @@ export default class PageShell extends React.Component {
 PageShell.propTypes = {
   frontMatter: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired
   }).isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };

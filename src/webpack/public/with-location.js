@@ -16,8 +16,8 @@ export function withLocation<
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
       hash: PropTypes.string,
-      search: PropTypes.string,
-    }).isRequired,
+      search: PropTypes.string
+    }).isRequired
   };
 
   WithLocation.WrappedComponent = Component;

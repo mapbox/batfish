@@ -21,122 +21,122 @@ const getEnvBrowserslist = require('./get-env-browserslist');
 const configSchema = {
   siteBasePath: {
     validator: _.isString,
-    description: 'string',
+    description: 'string'
   },
   siteOrigin: {
     validator: _.isString,
-    description: 'string',
+    description: 'string'
   },
   publicAssetsPath: {
     validator: _.isString,
-    description: 'string',
+    description: 'string'
   },
   applicationWrapperPath: {
     validator: isAbsolutePathToExistingFile,
-    description: 'absolute path to an existing file',
+    description: 'absolute path to an existing file'
   },
   stylesheets: {
     validator: isArrayOf(isValidStylesheetItem),
     description:
-      'array of absolute file paths or globs, absolute URLs, or arrays of these things',
+      'array of absolute file paths or globs, absolute URLs, or arrays of these things'
   },
   browserslist: {
     validator: (x) => _.isString(x) || isArrayOf(_.isString)(x),
-    description: 'string or array of strings',
+    description: 'string or array of strings'
   },
   devBrowserslist: {
     validator: (x) => _.isString(x) || isArrayOf(_.isString)(x) || x === false,
-    description: 'string, array of strings, or false',
+    description: 'string, array of strings, or false'
   },
   pagesDirectory: {
     validator: isAbsolutePathToExistingDirectory,
-    description: 'absolute path to an existing directory',
+    description: 'absolute path to an existing directory'
   },
   outputDirectory: {
     validator: isAbsolutePath,
-    description: 'absolute path',
+    description: 'absolute path'
   },
   temporaryDirectory: {
     validator: isAbsolutePath,
-    description: 'absolute path',
+    description: 'absolute path'
   },
   dataSelectors: {
     validator: (x) => _.isPlainObject(x) && _.every(x, _.isFunction),
-    description: 'object whose values are functions',
+    description: 'object whose values are functions'
   },
   vendorModules: {
     validator: isArrayOf(_.isString),
-    description: 'array of strings',
+    description: 'array of strings'
   },
   hijackLinks: {
     validator: _.isBoolean,
-    description: 'boolean',
+    description: 'boolean'
   },
   manageScrollRestoration: {
     validator: _.isBoolean,
-    description: 'boolean',
+    description: 'boolean'
   },
   webpackLoaders: {
     validator: isArrayOf(_.isPlainObject),
-    description: 'array of Webpack Rule objects',
+    description: 'array of Webpack Rule objects'
   },
   webpackPlugins: {
     validator: isArrayOf(_.isObject),
-    description: 'array of Webpack plugins',
+    description: 'array of Webpack plugins'
   },
   // No good way to validate this, which is a Webpack Condition
   // so might be almost any type:
   // https://webpack.js.org/configuration/module/#condition
   webpackStaticIgnore: {
-    validator: () => true,
+    validator: () => true
   },
   webpackStaticStubReactComponent: {
     validator: isArrayOf(isAbsolutePath),
-    description: 'array of absolute paths',
+    description: 'array of absolute paths'
   },
   babelPlugins: {
     validator: isArrayOf(isBabelSetting),
-    description: 'array of absolute paths (require.resolve your plugins)',
+    description: 'array of absolute paths (require.resolve your plugins)'
   },
   babelPresets: {
     validator: isArrayOf(isBabelSetting),
-    description: 'array of absolute paths (require.resolve your presets)',
+    description: 'array of absolute paths (require.resolve your presets)'
   },
   babelPresetEnvOptions: {
     validator: _.isPlainObject,
-    description: 'object',
+    description: 'object'
   },
   // No good way to validate babelExclude, which is a Webpack Condition
   // (see above).
   babelExclude: {
-    validator: () => true,
+    validator: () => true
   },
   babelInclude: {
-    validator: _.isArray,
+    validator: _.isArray
   },
   postcssPlugins: {
     validator: (x) => _.isFunction(x) || isArrayOf(_.isFunction)(x),
-    description: 'function or array of functions',
+    description: 'function or array of functions'
   },
   fileLoaderExtensions: {
     validator: (x) => isArrayOf(_.isString)(x) || _.isFunction(x),
-    description: 'array of strings or a function',
+    description: 'array of strings or a function'
   },
   jsxtremeMarkdownOptions: {
     validator: _.isPlainObject,
-    description: 'object',
+    description: 'object'
   },
   pageSpecificCss: {
     validator: _.isBoolean,
-    description: 'boolean',
+    description: 'boolean'
   },
   staticHtmlInlineDeferCss: {
     validator: _.isBoolean,
-    description: 'boolean',
+    description: 'boolean'
   },
   includePromisePolyfill: {
     validator: _.isBoolean,
-    description: 'boolean',
+    description: 'boolean'
   },
   inlineJs: {
     validator: isArrayOf((x) => {
@@ -146,64 +146,64 @@ const configSchema = {
       );
     }),
     description:
-      'array of objects with an absolute path for the "filename" prop, and an optional "boolean" uglify prop',
+      'array of objects with an absolute path for the "filename" prop, and an optional "boolean" uglify prop'
   },
   production: {
     validator: _.isBoolean,
-    description: 'boolean',
+    description: 'boolean'
   },
   developmentDevtool: {
     validator: (x) => _.isString(x) || x === false,
-    description: 'string or the boolean value false',
+    description: 'string or the boolean value false'
   },
   productionDevtool: {
     validator: (x) => _.isString(x) || x === false,
-    description: 'string or the boolean value false',
+    description: 'string or the boolean value false'
   },
   clearOutputDirectory: {
     validator: _.isBoolean,
-    description: 'boolean',
+    description: 'boolean'
   },
   unprocessedPageFiles: {
     validator: isArrayOf((x) => !isAbsolutePath(x)),
-    description: 'globs relative to the pagesDirectory, not absolute paths',
+    description: 'globs relative to the pagesDirectory, not absolute paths'
   },
   ignoreWithinPagesDirectory: {
     validator: isArrayOf((x) => !isAbsolutePath(x)),
-    description: 'globs relative to the pagesDirectory, not absolute paths',
+    description: 'globs relative to the pagesDirectory, not absolute paths'
   },
   webpackConfigClientTransform: {
     validator: _.isFunction,
-    description: 'function',
+    description: 'function'
   },
   webpackConfigStaticTransform: {
     validator: _.isFunction,
-    description: 'function',
+    description: 'function'
   },
   port: {
     validator: _.isNumber,
-    description: 'number',
+    description: 'number'
   },
   verbose: {
     validator: _.isBoolean,
-    description: 'boolean',
+    description: 'boolean'
   },
   spa: {
     validator: _.isBoolean,
-    description: 'boolean',
+    description: 'boolean'
   },
   sitemap: {
     validator: _.isBoolean,
-    description: 'boolean',
+    description: 'boolean'
   },
   webpackStats: {
     validator: _.isBoolean,
-    description: 'boolean',
+    description: 'boolean'
   },
   includePages: {
     validator: isArrayOf(_.isString),
-    description: 'globs relative to the pagesDirectory, not absolute paths',
-  },
+    description: 'globs relative to the pagesDirectory, not absolute paths'
+  }
 };
 
 // Add defaults to a raw config object, and validate it.
@@ -252,7 +252,7 @@ function validateConfig(
       'Firefox >= 52',
       'Chrome >= 58',
       'Safari >= 10',
-      'iOS >= 10.2',
+      'iOS >= 10.2'
     ],
     fileLoaderExtensions: [
       'jpeg',
@@ -263,7 +263,7 @@ function validateConfig(
       'mp4',
       'webm',
       'woff',
-      'woff2',
+      'woff2'
     ],
     jsxtremeMarkdownOptions: {},
     includePromisePolyfill: true,
@@ -275,7 +275,7 @@ function validateConfig(
     spa: false,
     webpackStaticStubReactComponent: [],
     sitemap: true,
-    webpackStats: false,
+    webpackStats: false
   };
 
   const config = Object.assign({}, defaults, rawConfig);
@@ -286,7 +286,7 @@ function validateConfig(
     config.production
   );
   const defaultPostcssPlugins = [
-    autoprefixer({ overrideBrowserslist: envBrowserslist }),
+    autoprefixer({ overrideBrowserslist: envBrowserslist })
   ];
 
   // Invoke transform function properties
@@ -401,7 +401,7 @@ function validateConfig(
 
   mkdirp.sync(config.temporaryDirectory);
   del.sync(path.join(config.temporaryDirectory, '{*.*,.*}'), {
-    force: true,
+    force: true
   });
 
   return config;

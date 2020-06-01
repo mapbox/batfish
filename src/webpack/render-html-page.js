@@ -12,7 +12,7 @@ export function renderHtmlPage(options: {
   inlineJsScripts: string,
   css: string,
   appendToBody: Array<string>,
-  spa: boolean,
+  spa: boolean
 }): Promise<string> {
   return options.route.getPage().then((pageModule) => {
     // We render the page content separately from the StaticHtmlPage, because
@@ -47,7 +47,7 @@ export function renderHtmlPage(options: {
           options.css,
           // This comes after the inlined and dynamically loaded CSS
           // so it will override regular stylesheets
-          helmetHead.style.toString(),
+          helmetHead.style.toString()
         ]}
         appendToBody={options.appendToBody}
       />

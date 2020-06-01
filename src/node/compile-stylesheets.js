@@ -23,7 +23,7 @@ const getPostcssPlugins = require('./get-postcss-plugins');
 type StylesheetData = {|
   locator: string,
   css: string,
-  map?: string,
+  map?: string
 |};
 
 const urlCache: Map<string, StylesheetData> = new Map();
@@ -79,7 +79,7 @@ function compileStylesheets(
           const contentsItem = {
             locator: url,
             css: result.css,
-            map: undefined,
+            map: undefined
           };
           urlCache.set(url, contentsItem);
           stylesheetContents[index] = contentsItem;
@@ -97,15 +97,15 @@ function compileStylesheets(
             map: {
               inline: false,
               sourcesContent: true,
-              annotation: false,
-            },
+              annotation: false
+            }
           })
           .catch(rethrowPostcssError)
           .then((result) => {
             return {
               locator: filename,
               css: result.css,
-              map: result.map.toString(),
+              map: result.map.toString()
             };
           });
       });
@@ -147,7 +147,7 @@ function compileStylesheets(
       addItems(stylesheetContents);
       return {
         css: concatenator.content,
-        map: concatenator.sourceMap,
+        map: concatenator.sourceMap
       };
     };
 
@@ -179,7 +179,7 @@ function compileStylesheets(
         const mapFilePath = `${cssFilePath}.map`;
         return Promise.all([
           pify(fs.writeFile)(cssFilePath, finalCssWithSourcemapAnnotation),
-          pify(fs.writeFile)(mapFilePath, finalMap),
+          pify(fs.writeFile)(mapFilePath, finalMap)
         ]).then(() => cssFilePath);
       });
   });

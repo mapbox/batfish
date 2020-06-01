@@ -15,5 +15,5 @@ module.exports = {
   },
   test: (value) => {
     return absolutePathRegExp.test(value);
-  },
+  }
 };

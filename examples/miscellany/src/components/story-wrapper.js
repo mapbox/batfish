@@ -7,7 +7,7 @@ import getLegibleDate from '../utilities/get-legible-date';
 const sidebarItems = storiesData.map((story) => {
   return {
     content: story.frontMatter.title,
-    url: story.path,
+    url: story.path
   };
 });
 

@@ -37,7 +37,7 @@ describe('writeContextModule', () => {
       pagesDirectory: 'fake/pages/directory',
       siteBasePath: '/fake/site/base/path',
       siteOrigin: 'https://www.fake-origin.com',
-      hijackLinks: true,
+      hijackLinks: true
     });
     return (
       mkdirp(tmp)
@@ -60,24 +60,24 @@ describe('writeContextModule', () => {
       '/one/': {
         filePath: 'fake/pages/directory/one.js',
         path: '/one/',
-        frontMatter: {},
+        frontMatter: {}
       },
       '/two/': {
         filePath: 'fake/pages/directory/two/index.md',
         path: '/two/',
         frontMatter: {
           title: 'Page two',
-          isGreat: true,
-        },
+          isGreat: true
+        }
       },
       '/three/four/': {
         filePath: 'fake/pages/directory/three/four/index.js',
         path: '/three/four/',
         frontMatter: {
           title: 'Another page',
-          horseNames: ['gerald', 'rose'],
-        },
-      },
+          horseNames: ['gerald', 'rose']
+        }
+      }
     };
     getPagesData.mockReturnValue(Promise.resolve(pagesData));
 
@@ -88,27 +88,27 @@ describe('writeContextModule', () => {
       expect(writePageModule).toHaveBeenCalledWith(config, {
         filePath: 'fake/pages/directory/one.js',
         path: '/one/',
-        frontMatter: {},
+        frontMatter: {}
       });
       expect(writePageModule).toHaveBeenCalledWith(config, {
         filePath: 'fake/pages/directory/two/index.md',
         path: '/two/',
         frontMatter: {
           title: 'Page two',
-          isGreat: true,
-        },
+          isGreat: true
+        }
       });
       expect(writePageModule).toHaveBeenCalledWith(config, {
         filePath: 'fake/pages/directory/three/four/index.js',
         path: '/three/four/',
         frontMatter: {
           title: 'Another page',
-          horseNames: ['gerald', 'rose'],
-        },
+          horseNames: ['gerald', 'rose']
+        }
       });
       expect(writeDataModules).toHaveBeenCalledTimes(1);
       expect(writeDataModules).toHaveBeenCalledWith(config, {
-        pages: _.values(pagesData),
+        pages: _.values(pagesData)
       });
     });
   });
@@ -119,29 +119,29 @@ describe('writeContextModule', () => {
         '/one/': {
           filePath: 'fake/pages/directory/one.js',
           path: '/one/',
-          frontMatter: {},
+          frontMatter: {}
         },
         '/three/four/': {
           filePath: 'fake/pages/directory/three/four/index.js',
           path: '/three/four/',
           frontMatter: {
             title: 'Another page',
-            horseNames: ['gerald', 'rose'],
-          },
+            horseNames: ['gerald', 'rose']
+          }
         },
         '/404/': {
           filePath: 'fake/pages/directory/404.js',
           path: '/404/',
           frontMatter: {},
-          is404: true,
-        },
+          is404: true
+        }
       })
     );
 
     return createAndReadContextModule({
       siteBasePath: '/different/base/path',
       siteOrigin: '',
-      hijackLinks: false,
+      hijackLinks: false
     }).then((result) => {
       expect(result).toMatchSnapshot();
     });
@@ -154,38 +154,38 @@ describe('writeContextModule', () => {
           '/one/': {
             filePath: 'fake/pages/directory/one.js',
             path: '/one/',
-            frontMatter: {},
+            frontMatter: {}
           },
           '/two/': {
             filePath: 'fake/pages/directory/two.md',
             path: '/two/',
-            frontMatter: {},
+            frontMatter: {}
           },
           '/three/four/': {
             filePath: 'fake/pages/directory/three/four/index.js',
             path: '/three/four/',
             frontMatter: {
               title: 'Another page',
-              horseNames: ['gerald', 'rose'],
-            },
+              horseNames: ['gerald', 'rose']
+            }
           },
           '/three/four/five/': {
             filePath: 'fake/pages/directory/three/four/five.js',
             path: '/three/four/five/',
-            frontMatter: {},
+            frontMatter: {}
           },
           '/404/': {
             filePath: 'fake/pages/directory/404.js',
             path: '/404/',
-            frontMatter: {},
-          },
+            frontMatter: {}
+          }
         })
       );
     });
 
     test('with a whitelisted directory', () => {
       return createAndReadContextModule({
-        includePages: ['/three/**'],
+        includePages: ['/three/**']
       }).then((result) => {
         expect(result).toMatch("path: '/three/four/'");
         expect(result).toMatch("path: '/three/four/five/'");
@@ -197,7 +197,7 @@ describe('writeContextModule', () => {
 
     test('with a whitelisted file', () => {
       return createAndReadContextModule({
-        includePages: ['/two/'],
+        includePages: ['/two/']
       }).then((result) => {
         expect(result).toMatch("path: '/two/'");
         expect(result).not.toMatch("path: '/three/four/'");

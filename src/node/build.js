@@ -51,7 +51,7 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
 
   // For the static build, put everything Webpack makes in an assets/ subdirectory.
   const tailoredBatfishConfig = Object.assign({}, batfishConfig, {
-    outputDirectory: assetsDirectory,
+    outputDirectory: assetsDirectory
   });
 
   const buildClient = (): Promise<void> => {
@@ -97,7 +97,7 @@ function build(rawConfig?: Object, projectDirectory?: string): EventEmitter {
     }
     return inlineCss(outputDirectory, cssFilename, {
       verbose: batfishConfig.verbose,
-      onNotification: emitNotification,
+      onNotification: emitNotification
     });
   };
 
