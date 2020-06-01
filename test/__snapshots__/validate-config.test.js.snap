@@ -3,7 +3,7 @@
 exports[`validateConfig defaults 1`] = `
 Object {
   "applicationWrapperPath": "<PROJECT_ROOT>/src/webpack/empty-application-wrapper.js",
-  "babelExclude": /\\[/\\\\\\\\\\\\\\\\\\]node_modules\\[/\\\\\\\\\\\\\\\\\\]/,
+  "babelExclude": <NODE_MODULES>,
   "babelInclude": Array [],
   "babelPlugins": Array [],
   "babelPresets": Array [],

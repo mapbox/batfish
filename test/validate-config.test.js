@@ -10,8 +10,10 @@ const autoprefixer = require('autoprefixer');
 const validateConfig = require('../src/node/validate-config');
 const errorTypes = require('../src/node/error-types');
 const projectRootSerializer = require('./test-util/project-root-serializer');
+const nodeModulesPathSerializer = require('./test-util/node-modules-path-serializer');
 
 expect.addSnapshotSerializer(projectRootSerializer);
+expect.addSnapshotSerializer(nodeModulesPathSerializer);
 
 jest.mock('mkdirp', () => {
   return {
