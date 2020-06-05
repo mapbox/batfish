@@ -1,9 +1,0 @@
-{
-  "private": true,
-  "scripts": {
-    "batfish": "../../bin/example-batfish"
-  },
-  "dependencies": {
-    "@mapbox/appropriate-images-react": "^1.0.0"
-  }
-}
