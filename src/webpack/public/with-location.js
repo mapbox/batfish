@@ -2,7 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function withLocation<Props: {}, Context: { location: BatfishLocation }>(
+export function withLocation<
+  Props: Object,
+  Context: { location: BatfishLocation }
+>(
   Component: React$ComponentType<{ location: BatfishLocation } & Props>
 ): React$ComponentType<Props> {
   function WithLocation(props: Props, context: Context) {

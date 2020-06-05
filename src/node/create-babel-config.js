@@ -20,7 +20,8 @@ function createBabelConfig(
 
   if (target === constants.TARGET_NODE) {
     presetEnvOptions = {
-      useBuiltIns: true,
+      useBuiltIns: 'entry',
+      corejs: 3,
       targets: { node: 'current' },
       modules: false
     };
@@ -32,7 +33,8 @@ function createBabelConfig(
     );
     presetEnvOptions = batfishConfig.babelPresetEnvOptions || {};
     if (presetEnvOptions.useBuiltIns === undefined) {
-      presetEnvOptions.useBuiltIns = true;
+      presetEnvOptions.useBuiltIns = 'entry';
+      presetEnvOptions.corejs = 3;
     }
     presetEnvOptions.modules = false;
     if (_.get(presetEnvOptions, ['targets', 'browsers']) === undefined) {
@@ -41,14 +43,14 @@ function createBabelConfig(
   }
 
   const presets = [
-    [require.resolve('babel-preset-env'), presetEnvOptions],
-    require.resolve('babel-preset-react')
+    [require.resolve('@babel/preset-env'), presetEnvOptions],
+    require.resolve('@babel/preset-react')
   ].concat(batfishConfig.babelPresets);
 
   const plugins = [
-    require.resolve('babel-plugin-syntax-dynamic-import'),
-    require.resolve('babel-plugin-transform-class-properties'),
-    require.resolve('babel-plugin-transform-object-rest-spread'),
+    require.resolve('@babel/plugin-syntax-dynamic-import'),
+    require.resolve('@babel/plugin-proposal-class-properties'),
+    require.resolve('@babel/plugin-proposal-object-rest-spread'),
     [
       require.resolve('@mapbox/babel-plugin-transform-jsxtreme-markdown'),
       {
@@ -62,8 +64,8 @@ function createBabelConfig(
   if (batfishConfig.production) {
     plugins.push('babel-plugin-transform-react-remove-prop-types');
   } else {
-    plugins.push(require.resolve('babel-plugin-transform-react-jsx-source'));
-    plugins.push(require.resolve('babel-plugin-transform-react-jsx-self'));
+    plugins.push(require.resolve('@babel/plugin-transform-react-jsx-source'));
+    plugins.push(require.resolve('@babel/plugin-transform-react-jsx-self'));
   }
 
   return { presets, plugins };

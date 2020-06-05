@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { BatfishApp } from './batfish-app';
 import { BatfishSpaApp } from './batfish-spa-app';
 import { StaticHtmlPage } from './static-html-page';
@@ -30,7 +30,7 @@ export function renderHtmlPage(options: {
     }
     const rawAppHtml = ReactDOMServer.renderToString(pageContent);
 
-    const helmetHead = Helmet.rewind();
+    const helmetHead = Helmet.renderStatic();
     const reactDocument = (
       <StaticHtmlPage
         rawAppHtml={rawAppHtml}

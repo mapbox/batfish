@@ -21,9 +21,7 @@ export default class PageShell extends React.Component {
           <meta name="og:type" content="website" />
           <meta
             name="og:url"
-            content={`https://www.your-batfish-site.com/miscellany${
-              props.location.pathname
-            }`}
+            content={`https://www.your-batfish-site.com/miscellany${props.location.pathname}`}
           />
         </Helmet>
         <div className="px24 py24 mx-auto" style={{ maxWidth: 960 }}>

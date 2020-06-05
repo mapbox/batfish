@@ -58,7 +58,7 @@ function staticRenderPages(
       // Write every page as an index.html file in the directory corresponding
       // to its route's path. Except the 404 page.
       if (route.is404) {
-        return pify(mkdirp)(batfishConfig.outputDirectory).then(() => {
+        return mkdirp(batfishConfig.outputDirectory).then(() => {
           return pify(fs.writeFile)(
             path.join(batfishConfig.outputDirectory, '404.html'),
             html
@@ -75,7 +75,7 @@ function staticRenderPages(
         baseRelativePath
       );
       const indexFile = path.join(directory, 'index.html');
-      return pify(mkdirp)(directory).then(() => {
+      return mkdirp(directory).then(() => {
         return pify(fs.writeFile)(indexFile, html);
       });
     });

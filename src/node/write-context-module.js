@@ -102,9 +102,7 @@ function writeContextModule(
         // (There cannot be duplicate paths, so no need to worry about unstable
         // sorts.)
         return Promise.all(
-          Object.keys(pagesData)
-            .sort()
-            .map(stringifyPageRoute)
+          Object.keys(pagesData).sort().map(stringifyPageRoute)
         );
       })
       .then(() => {

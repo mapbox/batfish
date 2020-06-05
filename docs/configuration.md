@@ -127,7 +127,7 @@ Default: `['> 5%', 'last 2 versions']`.
 
 A [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support.
 
-This option is used to process your CSS through [Autoprefixer] and determine which Babel transforms to apply through [babel-preset-env].
+This option is used to process your CSS through [Autoprefixer] and determine which Babel transforms to apply through [@babel/preset-env].
 
 **This option determines the browser support of your production build (`batfish build`).
 During development (`batfish start`), this will be overridden by [`devBrowserslist`]** (unless `devBrowserslist` is set to `false`).
@@ -140,7 +140,7 @@ Default: `['Edge >= 14', 'Firefox >= 52', 'Chrome >= 58', 'Safari >= 10', 'iOS >
 A [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support *with the development build* (`batfish start`).
 If this value is `false`, [`browserslist`] will be used for both production and development builds.
 
-This option is used to process your CSS through [Autoprefixer] and determine which Babel transforms to apply through [babel-preset-env].
+This option is used to process your CSS through [Autoprefixer] and determine which Babel transforms to apply through [@babel/preset-env].
 
 **This option determines the browser support of your development build only (`batfish start`).
 For production builds (`batfish build`), [`browserslist`] will be used**.
@@ -380,13 +380,13 @@ For example:
 Plugins you provide are concatenated to the following default plugins:
 
 - Always
-  - [babel-plugin-syntax-dynamic-import](https://babeljs.io/docs/plugins/syntax-dynamic-import/)
-  - [babel-plugin-transform-class-properties](https://babeljs.io/docs/plugins/transform-class-properties/)
-  - [babel-plugin-transform-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/)
+  - [@babel/plugin-syntax-dynamic-import](https://babeljs.io/docs/plugins/syntax-dynamic-import/)
+  - [@babel/plugin-proposal-class-properties](https://babeljs.io/docs/plugins/transform-class-properties/)
+  - [@babel/plugin-proposal-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/)
   - [@mapbox/babel-plugin-transform-jsxtreme-markdown](https://github.com/mapbox/jsxtreme-markdown/tree/master/packages/babel-plugin-transform-jsxtreme-markdown): See [`jsxtremeMarkdownOptions`].
 - Development only
-  - [babel-plugin-transform-react-jsx-source](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-jsx-source)
-  - [babel-plugin-transform-react-jsx-self](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-jsx-self)
+  - [@babel/plugin-transform-react-jsx-source](https://github.com/babel/babel/tree/master/packages/@babel/plugin-transform-react-jsx-source)
+  - [@babel/plugin-transform-react-jsx-self](https://github.com/babel/babel/tree/master/packages/@babel/plugin-transform-react-jsx-self)
 - Production only
   - [babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types)
 
@@ -406,21 +406,21 @@ For example:
 { babelPresets: [require.resolve('babel-preset-magic')] }
 ```
 
-The two presets [babel-preset-react] and [babel-preset-env] are automatically applied.
-You can pass options to [babel-preset-env] with the option [`babelPresetEnvOptions`].
+The two presets [@babel/preset-react] and [@babel/preset-env] are automatically applied.
+You can pass options to [@babel/preset-env] with the option [`babelPresetEnvOptions`].
 
 ### babelPresetEnvOptions
 
-Type: `Object`. [Options for babel-preset-env].
+Type: `Object`. [Options for @babel/preset-env].
 
-[babel-preset-env] is always used.
+[@babel/preset-env] is always used.
 By default, it receives the following options:
 
-- `useBuiltIns` is `true`.
+- `useBuiltIns` is `entry`, with `corejs: 3`.
 - `target.browsers` is your [`browserslist`] or [`devBrowserslist`] value (read more about those options to understand when each is used).
 - `modules` is `false`.
 
-Use this option to further customize your build by passing any of the other many [options for babel-preset-env](https://babeljs.io/docs/plugins/preset-env/#options).
+Use this option to further customize your build by passing any of the other many [options for @babel/preset-env](https://babeljs.io/docs/plugins/preset-env/#options).
 It your object will be merged with the defaults — so they will only be overridden if you deliberately do so.
 
 ### babelExclude
@@ -686,13 +686,13 @@ If `true`, more information will be logged to the console.
 
 [webpack `condition`]: https://webpack.js.org/configuration/module/#condition
 
-[babel-preset-react]: https://babeljs.io/docs/plugins/preset-react/
+[@babel/preset-react]: https://babeljs.io/docs/plugins/preset-react/
 
-[babel-preset-env]: https://babeljs.io/docs/plugins/preset-env/
+[@babel/preset-env]: https://babeljs.io/docs/plugins/preset-env/
 
 [`babelpresetenvoptions`]: #babelpresetenvoptions
 
-[options for babel-preset-env]: https://babeljs.io/docs/plugins/preset-env/#options
+[options for @babel/preset-env]: https://babeljs.io/docs/plugins/preset-env/#options
 
 ["non-page files within the pages directory"]: ../README.md#non-page-files-within-the-pages-directory
 

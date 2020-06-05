@@ -7,7 +7,7 @@ var ApplicationWrapper = createClass({
   propTypes: {
     children: PropTypes.node.isRequired
   },
-  render: function() {
+  render: function () {
     return (
       <div>
         <h1>CommonJS module syntax works</h1>

@@ -13,9 +13,9 @@ function getProcessIdOnPort(port: number): Promise<string> {
 }
 
 function getProcessCommand(processId: string): Promise<string> {
-  return pify(exec)('ps -o command -p ' + processId + ' | sed -n 2p').then(
-    (r) => r.replace(/\n$/, '')
-  );
+  return pify(exec)(
+    'ps -o command -p ' + processId + ' | sed -n 2p'
+  ).then((r) => r.replace(/\n$/, ''));
 }
 
 function getProcessForPort(

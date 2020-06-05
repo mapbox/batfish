@@ -23,7 +23,7 @@ jest.mock('react-helmet', () => {
   };
 
   return {
-    rewind: jest.fn(() => mockHelmetHead)
+    Helmet: { renderStatic: jest.fn(() => mockHelmetHead) }
   };
 });
 

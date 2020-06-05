@@ -1,7 +1,6 @@
 'use strict';
 
 const del = require('del');
-const pify = require('pify');
 const path = require('path');
 const mkdirp = require('mkdirp');
 const tempy = require('tempy');
@@ -16,7 +15,7 @@ describe('writePageModule', () => {
 
   const createAndReadPageModule = (batfishConfig, pageData) => {
     tmp = tempy.directory();
-    return pify(mkdirp)(tmp)
+    return mkdirp(tmp)
       .then(() => writePageModule(batfishConfig, pageData))
       .then((filePath) => require(filePath));
   };

@@ -12,8 +12,8 @@ jest.mock('../src/node/create-webpack-config-base', () => {
 
 jest.mock('path-type', () => {
   return {
-    dirSync: jest.fn(() => true),
-    fileSync: jest.fn(() => true)
+    isDirectorySync: jest.fn(() => true),
+    isFileSync: jest.fn(() => true)
   };
 });
 

@@ -7,6 +7,7 @@ const createBabelConfig = require('../src/node/create-babel-config');
 const writeContextModule = require('../src/node/write-context-module');
 const validateConfig = require('../src/node/validate-config');
 const projectRootSerializer = require('./test-util/project-root-serializer');
+const nodeModulesPathSerializer = require('./test-util/node-modules-path-serializer');
 
 jest.mock('../src/node/write-context-module', () => {
   return jest.fn(() => Promise.resolve('fake/batfish-context.js'));
@@ -23,6 +24,7 @@ jest.mock('../src/node/create-babel-config', () => {
 jest.mock('mkdirp', () => ({ sync: jest.fn() }));
 
 expect.addSnapshotSerializer(projectRootSerializer);
+expect.addSnapshotSerializer(nodeModulesPathSerializer);
 
 function createBatfishConfig(options) {
   return validateConfig(

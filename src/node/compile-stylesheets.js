@@ -160,7 +160,7 @@ function compileStylesheets(
         return getStylesheetFromFs(locator, index);
       })
     )
-      .then(() => pify(mkdirp)(cssOutputDirectory))
+      .then(() => mkdirp(cssOutputDirectory))
       .then(() => {
         const concatenated = concatStylesheetContents();
 

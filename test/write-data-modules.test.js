@@ -1,7 +1,6 @@
 'use strict';
 
 const del = require('del');
-const pify = require('pify');
 const path = require('path');
 const mkdirp = require('mkdirp');
 const tempy = require('tempy');
@@ -13,7 +12,7 @@ describe('writeDataModules', () => {
   const createAndReadDataModules = (batfishConfig, siteData) => {
     tmp = tempy.directory();
     batfishConfig.temporaryDirectory = tmp;
-    return pify(mkdirp)(tmp)
+    return mkdirp(tmp)
       .then(() => writeDataModules(batfishConfig, siteData))
       .then((filePaths) => {
         const result = new Map();

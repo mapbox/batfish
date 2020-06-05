@@ -8,7 +8,7 @@ const rethrowPostcssError = require('./rethrow-postcss-error');
 function generateModule(css: string): string {
   const js = `
     import React from 'react';
-    import Helmet from 'react-helmet';
+    import { Helmet } from 'react-helmet';
 
     const css = \`${css}\`;
 

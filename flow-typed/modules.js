@@ -11,7 +11,7 @@ declare module 'p-try' {
 
 declare module 'mkdirp' {
   declare module.exports: {
-    (string, (error: ?Error) => void): void,
+    (string): Promise<void>,
     sync(string): void
   };
 }
@@ -159,9 +159,7 @@ declare module 'react-helmet' {
     title: Attribute
   };
 
-  declare class Helmet extends React$Component<Props> {
-    rewind(): Instance;
+  declare export class Helmet extends React$Component<Props> {
+    static renderStatic(): Instance;
   }
-
-  declare export default Helmet;
 }

@@ -10,8 +10,10 @@ const autoprefixer = require('autoprefixer');
 const validateConfig = require('../src/node/validate-config');
 const errorTypes = require('../src/node/error-types');
 const projectRootSerializer = require('./test-util/project-root-serializer');
+const nodeModulesPathSerializer = require('./test-util/node-modules-path-serializer');
 
 expect.addSnapshotSerializer(projectRootSerializer);
+expect.addSnapshotSerializer(nodeModulesPathSerializer);
 
 jest.mock('mkdirp', () => {
   return {
@@ -27,8 +29,8 @@ jest.mock('del', () => {
 
 jest.mock('path-type', () => {
   return {
-    dirSync: jest.fn(() => true),
-    fileSync: jest.fn(() => true)
+    isDirectorySync: jest.fn(() => true),
+    isFileSync: jest.fn(() => true)
   };
 });
 
@@ -155,7 +157,7 @@ describe('validateConfig', () => {
       projectDirectory
     );
     expect(autoprefixer.mock.calls[0][0]).toEqual({
-      browsers: config.browserslist
+      overrideBrowserslist: config.browserslist
     });
   });
 
@@ -165,7 +167,7 @@ describe('validateConfig', () => {
       projectDirectory
     );
     expect(autoprefixer.mock.calls[0][0]).toEqual({
-      browsers: config.browserslist
+      overrideBrowserslist: config.browserslist
     });
   });
 
@@ -174,7 +176,9 @@ describe('validateConfig', () => {
       { devBrowserslist: 'Chrome >= 60', production: false },
       projectDirectory
     );
-    expect(autoprefixer.mock.calls[0][0]).toEqual({ browsers: 'Chrome >= 60' });
+    expect(autoprefixer.mock.calls[0][0]).toEqual({
+      overrideBrowserslist: 'Chrome >= 60'
+    });
   });
 
   test('processed siteBasePath does not end with a slash unless it is only a slash', () => {
@@ -259,7 +263,7 @@ describe('validateConfig', () => {
 
   test('stylesheets file paths must exist', () => {
     expect.hasAssertions();
-    pathType.fileSync.mockImplementation((input) => {
+    pathType.isFileSync.mockImplementation((input) => {
       return !/does-not-exist/.test(input);
     });
     try {

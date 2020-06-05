@@ -40,7 +40,7 @@ describe('writeContextModule', () => {
       hijackLinks: true
     });
     return (
-      pify(mkdirp)(tmp)
+      mkdirp(tmp)
         .then(() => writeContextModule(batfishConfig))
         // We cannot import this file because it includes imports
         .then((filePath) => pify(fs.readFile)(filePath, 'utf8'))

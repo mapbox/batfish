@@ -285,7 +285,9 @@ function validateConfig(
     config.devBrowserslist,
     config.production
   );
-  const defaultPostcssPlugins = [autoprefixer({ browsers: envBrowserslist })];
+  const defaultPostcssPlugins = [
+    autoprefixer({ overrideBrowserslist: envBrowserslist })
+  ];
 
   // Invoke transform function properties
   if (typeof config.fileLoaderExtensions === 'function') {
@@ -422,14 +424,14 @@ function isExistingFile(value: *): boolean {
   if (!_.isString(value)) {
     return false;
   }
-  return pathType.fileSync(value);
+  return pathType.isFileSync(value);
 }
 
 function isExistingDirectory(value: *): boolean {
   if (!_.isString(value)) {
     return false;
   }
-  return pathType.dirSync(value);
+  return pathType.isDirectorySync(value);
 }
 
 function isValidStylesheetItem(value: *): boolean {

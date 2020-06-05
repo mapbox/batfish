@@ -4,8 +4,8 @@
     "batfish": "../../bin/example-batfish"
   },
   "dependencies": {
-    "babel-plugin-lodash": "^3.2.11",
-    "image-webpack-loader": "^3.3.1",
-    "lodash-webpack-plugin": "^0.11.4"
+    "babel-plugin-lodash": "^3.3.4",
+    "image-webpack-loader": "^6.0.0",
+    "lodash-webpack-plugin": "^0.11.5"
   }
 }

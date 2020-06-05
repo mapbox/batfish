@@ -20,7 +20,7 @@ export default class Home extends React.PureComponent {
           {DEFINED === 'yes' ? 'Yes!' : 'No!'}
         </span>
         <div style={{ marginTop: 30 }}>
-          <img src={require('../img/man-in-a-bottle.jpg')} />
+          <img src={require('../img/man-in-a-bottle.jpg').default} />
         </div>
         <div style={{ marginTop: 30 }}>
           The Lodash plugin works if the following does not say "3":{' '}
