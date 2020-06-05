@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.0
+
+- Upgrade all dependencies. This can affect you in a few ways:
+  - You will need to upgrade your `react-helmet` peer dependency to `^6.0.0`.
+  - Batfish now uses Babel v7. If you are adding your own Babel plugins, you need to check whether they are compatible with Babel v7, and upgrade them if not.
+  - Babel's `preset-env` has changed significantly, so when upgrading you should double-check that your website continues to work in all the browsers you support.
+
 ## 1.12.0
 
 - Upgrade to Node 10 and npm 6.
