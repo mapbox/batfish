@@ -82,7 +82,7 @@ describe('watchWebpack', () => {
     process.nextTick(() => {
       expect(webpack.compiler.watch).toHaveBeenCalledTimes(1);
       expect(webpack.compiler.watch.mock.calls[0][0]).toEqual({
-        ignored: [/node_modules/]
+        ignored: [/node_modules/, '/mock/temporary/directory/**/*']
       });
       expect(webpack.compiler.watch.mock.calls[0][1]).toBeInstanceOf(Function);
       done();
@@ -95,6 +95,7 @@ describe('watchWebpack', () => {
       expect(watchContext).toHaveBeenCalledTimes(1);
       expect(watchContext.mock.calls[0][0]).toBe(batfishConfig);
       expect(watchContext.mock.calls[0][1]).toHaveProperty('onError');
+      expect(watchContext.mock.calls[0][1]).toHaveProperty('afterCompilation');
       done();
     });
   });
