@@ -1,5 +1,9 @@
 # Changelog
 
+## HEAD
+
+- Fix crash when watching files with `batfish start`.
+
 ## 2.0.0
 
 - Upgrade all dependencies. This can affect you in a few ways:
