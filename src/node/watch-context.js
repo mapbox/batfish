@@ -9,8 +9,7 @@ const constants = require('./constants');
 function watchContext(
   batfishConfig: BatfishConfiguration,
   options: {
-    onError: (Error) => any,
-    afterCompilation: () => any
+    onError: (Error) => any
   }
 ) {
   const pageWatcher = chokidar.watch(`**/*.${constants.PAGE_EXT_GLOB}`, {
@@ -18,9 +17,7 @@ function watchContext(
     cwd: batfishConfig.pagesDirectory
   });
   const rebuildPages = () => {
-    writeContextModule(batfishConfig).then(() => {
-      options.afterCompilation();
-    }, options.onError);
+    writeContextModule(batfishConfig).catch(options.onError);
   };
   pageWatcher.on('change', rebuildPages);
   pageWatcher.on('unlink', rebuildPages);
