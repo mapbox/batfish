@@ -1,6 +1,6 @@
 # Changelog
 
-## HEAD
+## 2.0.1
 
 - Fix crash when watching files with `batfish start`.
 
