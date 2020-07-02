@@ -590,7 +590,7 @@ For example, if you have a `scripts/` directory and all the `.js` files within i
 
 Type: `Array<string>`.
 
-A whitelist flag which takes an array of globs indicating the pages of your site you want to build. Note, if left empty it will include all pages.
+An allow list flag which takes an array of globs indicating the pages of your site you want to build. Note, if left empty it will include all pages.
 
 You can use this option during development to speed up your builds by only building the specified pages.
 Fewer files will be fed into Webpack, which means the build will go faster.

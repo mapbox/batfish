@@ -57,8 +57,8 @@ function writeContextModule(
     ): Promise<void> => {
       const pageData = pagesData[pagePath];
 
-      const pageWhitelist = batfishConfig.includePages;
-      if (pageWhitelist && !micromatch.any(pageData.path, pageWhitelist)) {
+      const pageAllowlist = batfishConfig.includePages;
+      if (pageAllowlist && !micromatch.any(pageData.path, pageAllowlist)) {
         return Promise.resolve();
       }
 

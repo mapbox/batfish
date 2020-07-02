@@ -183,7 +183,7 @@ describe('writeContextModule', () => {
       );
     });
 
-    test('with a whitelisted directory', () => {
+    test('with an allow listed directory', () => {
       return createAndReadContextModule({
         includePages: ['/three/**']
       }).then((result) => {
@@ -195,7 +195,7 @@ describe('writeContextModule', () => {
       });
     });
 
-    test('with a whitelisted file', () => {
+    test('with an allow listed file', () => {
       return createAndReadContextModule({
         includePages: ['/two/']
       }).then((result) => {
