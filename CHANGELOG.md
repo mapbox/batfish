@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0
+
+- Update dependencies with security updates.
+
 ## 2.0.1
 
 - Fix crash when watching files with `batfish start`.
