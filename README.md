@@ -1,6 +1,6 @@
 # Batfish
 
-[![Build Status](https://travis-ci.org/mapbox/batfish.svg?branch=main)](https://travis-ci.org/mapbox/batfish)
+[![Build Status](https://travis-ci.com/mapbox/batfish.svg?branch=main)](https://travis-ci.com/mapbox/batfish)
 
 A static-site generator powered by React and Webpack.
 
