@@ -140,7 +140,7 @@ export default Page extends React.Component {
 
   componentDidMount() {
     import(/* webpackMode: "eager" */ '../app').then(AppModule => {
-      this.setState({ body: <AppModule.default> });
+      this.setState({ body: <AppModule.default /> });
     });
   }
 
