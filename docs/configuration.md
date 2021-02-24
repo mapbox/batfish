@@ -538,7 +538,7 @@ Each item is an object with the following properties:
 
 ### sitemap
 
-Type: `boolean` or `object`.
+Type: `boolean | Object`.
 Default: `true`.
 
 By default, if you have set [`siteOrigin`] a `sitemap.xml` file will be generated and placed in your [`outputDirectory`] during `batfish build`.
