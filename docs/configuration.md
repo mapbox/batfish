@@ -538,11 +538,30 @@ Each item is an object with the following properties:
 
 ### sitemap
 
-Type: `boolean`.
+Type: `boolean` or `object`.
 Default: `true`.
 
 By default, if you have set [`siteOrigin`] a `sitemap.xml` file will be generated and placed in your [`outputDirectory`] during `batfish build`.
-Set this to `false` to skip this step if you do not want a sitemap.
+
+- Set this to `false` to skip this step if you do not want a sitemap.
+- To exclude files or a directory from the sitemap, set `sitemap` to:
+
+```json
+sitemap: {
+  ignoreFile: 'path/to-ignore-file.js'
+}
+```
+
+The value of `ignoreFile` is the pathname to a JavaScript file. The JavaScript file must export an array of file paths or directories that you do not want Batfish to include in the sitemap. Each path must include the [`outputDirectory`]. 
+
+Example:
+
+```js
+module.exports = [
+  `${process.cwd()}/_batfish_site/assets/`,
+  `${process.cwd()}/_batfish_site/demo/simple-map.html`
+];
+```
 
 ### production
 
