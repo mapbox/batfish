@@ -193,8 +193,8 @@ const configSchema = {
     description: 'boolean'
   },
   sitemap: {
-    validator: _.isBoolean,
-    description: 'boolean'
+    validator: (x) => _.isBoolean(x) || _.isPlainObject(x),
+    description: 'boolean or object'
   },
   webpackStats: {
     validator: _.isBoolean,
