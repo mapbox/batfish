@@ -1,6 +1,6 @@
 # Customize the sitemap
 
-This example customizes the sitemap by using the `ignoreFile` option to remove files from appearing in the sitemap.
+This example customizes the sitemap by using the `ignoreFile` option to remove some files from the sitemap.
 
 Since Batfish only generates the sitemap on build, run:
 
