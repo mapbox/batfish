@@ -546,7 +546,7 @@ By default, if you have set [`siteOrigin`] a `sitemap.xml` file will be generate
 - Set this to `false` to skip this step if you do not want a sitemap.
 - To exclude files or a directory from the sitemap, set `sitemap` to:
 
-```json
+```js
 sitemap: {
   ignoreFile: 'path/to-ignore-file.js'
 }
