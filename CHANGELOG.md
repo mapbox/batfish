@@ -2,7 +2,8 @@
 
 ## Main
 
-- Update caniuse-lite.
+- Update caniuse-lite. 
+- Update `devBrowserslist` default list: `['Edge >= 88', 'Firefox >= 85', 'Chrome >= 88', 'Safari >= 14', 'iOS >= 14.4']`.
 
 ## 2.1.0
 
