@@ -135,7 +135,7 @@ During development (`batfish start`), this will be overridden by [`devBrowsersli
 ### devBrowserslist
 
 Type: `Array<string> | false`.
-Default: `['Edge >= 14', 'Firefox >= 52', 'Chrome >= 58', 'Safari >= 10', 'iOS >= 10.2'`].
+Default: `['Edge >= 88', 'Firefox >= 85', 'Chrome >= 88', 'Safari >= 14', 'iOS >= 14.4']`.
 
 A [Browserslist](https://github.com/ai/browserslist) value to specify which browsers you need to support *with the development build* (`batfish start`).
 If this value is `false`, [`browserslist`] will be used for both production and development builds.
