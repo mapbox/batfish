@@ -50,6 +50,10 @@ describe('findMatchingRoute', () => {
     expect(findMatchingRoute('/foo/')).toBe(batfishContext.routes[0]);
   });
 
+  test('input ends in index.html', () => {
+    expect(findMatchingRoute('/foo/index.html')).toBe(batfishContext.routes[0]);
+  });
+
   test('input lacks trailing slash', () => {
     expect(findMatchingRoute('/foo/bar')).toBe(batfishContext.routes[1]);
   });
