@@ -191,7 +191,7 @@
     "ramda": "^0.27.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-helmet": "^6.0.0",
+    "react-helmet": "^6.1.0",
     "react-test-renderer": "^16.13.1",
     "remark-preset-davidtheclark": "^0.12.0",
     "rimraf": "^3.0.2",
