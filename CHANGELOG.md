@@ -5,6 +5,7 @@
 - Update caniuse-lite. 
 - Update `devBrowserslist` default list: `['Edge >= 88', 'Firefox >= 85', 'Chrome >= 88', 'Safari >= 14', 'iOS >= 14.4']`.
 - Add `ignoreFile` option to `sitemap` Batfish configuration object. The value of `ignoreFile` is the pathname to a JavaScript file that exports an array of file paths or directories that you do not want Batfish to include in the sitemap.
+- Update some devDependencies: react-helmet, husky, lint-staged, prettier, react, react-dom, react-test-renderer.
 
 ## 2.1.0
 
