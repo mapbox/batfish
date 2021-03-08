@@ -10,8 +10,9 @@ function createPathRegExps(
     // Pages with internal routing aren't just exact matches.
     const ending = route.internalRouting ? '(/.+)?$' : '$';
     // ? because the last slash is optional
+    // and check if `index.html` has an extensionless route
     result[route.path] = new RegExp(
-      `^${route.path.replace(/\//g, '[/]')}?${ending}`
+      `^${route.path.replace(/\//g, '[/]')}?(index.html)?${ending}`
     );
     return result;
   }, {});
