@@ -22,7 +22,8 @@ function generateSitemap(batfishConfig: BatfishConfiguration): Promise<void> {
         String(batfishConfig.siteBasePath),
         ''
       ),
-      pretty: true
+      pretty: true,
+      ignoreFile: batfishConfig.sitemap.ignoreFile || ''
     });
   });
 }

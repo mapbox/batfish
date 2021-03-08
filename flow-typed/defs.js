@@ -55,7 +55,9 @@ declare type BatfishConfiguration = {
   port: number,
   verbose: boolean,
   spa: boolean,
-  sitemap: boolean,
+  sitemap: boolean | {
+    ignoreFile?: string
+  },
   pageSpecificCss: boolean,
   staticHtmlInlineDeferCss: boolean
 };
