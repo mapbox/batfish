@@ -248,11 +248,11 @@ function validateConfig(
     browserslist: ['> 5%', 'last 2 versions'],
     devBrowserslist: [
       // Recent browsers supporting a lot of ES2015.
-      'Edge >= 14',
-      'Firefox >= 52',
-      'Chrome >= 58',
-      'Safari >= 10',
-      'iOS >= 10.2'
+      'Edge >= 88',
+      'Firefox >= 85',
+      'Chrome >= 88',
+      'Safari >= 14',
+      'iOS >= 14.4'
     ],
     fileLoaderExtensions: [
       'jpeg',

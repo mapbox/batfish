@@ -13,11 +13,11 @@ Object {
   ],
   "clearOutputDirectory": true,
   "devBrowserslist": Array [
-    "Edge >= 14",
-    "Firefox >= 52",
-    "Chrome >= 58",
-    "Safari >= 10",
-    "iOS >= 10.2",
+    "Edge >= 88",
+    "Firefox >= 85",
+    "Chrome >= 88",
+    "Safari >= 14",
+    "iOS >= 14.4",
   ],
   "developmentDevtool": "source-map",
   "fileLoaderExtensions": Array [
