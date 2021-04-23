@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0
+
+- Update dependencies.
+
 ## 2.2.0
 
 - Update caniuse-lite. 
