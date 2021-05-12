@@ -140,7 +140,7 @@
     "p-try": "^2.2.0",
     "path-type": "^4.0.0",
     "pify": "^5.0.0",
-    "postcss": "^7.0.31",
+    "postcss": "^8.2.10",
     "postcss-csso": "^4.0.0",
     "postcss-url": "^8.0.0",
     "pretty-error": "^2.1.2",
