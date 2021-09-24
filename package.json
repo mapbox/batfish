@@ -40,8 +40,7 @@
   "lint-staged": {
     "*.js": [
       "eslint",
-      "prettier --write",
-      "eslint --cache --fix"
+      "prettier --write"
     ],
     "{docs/*.md,README.md,CHANGELOG.md}": [
       "remark-preset-davidtheclark --format"
@@ -51,11 +50,7 @@
       "git add docs/cli.md"
     ]
   },
-  "prettier": {
-    "singleQuote": true,
-    "arrowParens": "always",
-    "trailingComma": "none"
-  },
+  "prettier": "@mapbox/prettier-config-docs",
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -98,6 +93,7 @@
     "@mapbox/link-hijacker": "^1.1.0",
     "@mapbox/link-to-location": "^1.0.0",
     "@mapbox/postcss-html-filter": "^2.0.0",
+    "@mapbox/prettier-config-docs": "^0.2.1",
     "@mapbox/query-selector-contains-node": "^1.0.0",
     "@mapbox/scroll-restorer": "^1.0.0",
     "address": "^1.1.2",
