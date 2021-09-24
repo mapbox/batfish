@@ -1,8 +1,8 @@
 'use strict';
 
 const routeTo = require('../src/webpack/public/route-to').routeTo;
-const routeToPrefixed = require('../src/webpack/public/route-to')
-  .routeToPrefixed;
+const routeToPrefixed =
+  require('../src/webpack/public/route-to').routeToPrefixed;
 
 jest.mock('../src/webpack/public/prefix-url', () => {
   return {

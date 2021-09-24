@@ -14,8 +14,8 @@ const linkHijacker = require('@mapbox/link-hijacker');
 const linkToLocation = require('@mapbox/link-to-location');
 const getWindowModule = require('../src/webpack/get-window');
 const changePage = require('../src/webpack/change-page').changePage;
-const findMatchingRoute = require('../src/webpack/find-matching-route')
-  .findMatchingRoute;
+const findMatchingRoute =
+  require('../src/webpack/find-matching-route').findMatchingRoute;
 
 jest.mock(
   '@mapbox/batfish/modules/route-to',

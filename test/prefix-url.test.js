@@ -1,8 +1,8 @@
 'use strict';
 
 const prefixUrl = require('../src/webpack/public/prefix-url').prefixUrl;
-const prefixUrlAbsolute = require('../src/webpack/public/prefix-url')
-  .prefixUrlAbsolute;
+const prefixUrlAbsolute =
+  require('../src/webpack/public/prefix-url').prefixUrlAbsolute;
 
 describe('prefixUrl', () => {
   beforeEach(() => {

@@ -1,7 +1,7 @@
 'use strict';
 
-const getCurrentLocation = require('../src/webpack/get-current-location')
-  .getCurrentLocation;
+const getCurrentLocation =
+  require('../src/webpack/get-current-location').getCurrentLocation;
 const getWindowModule = require('../src/webpack/get-window');
 
 describe('getCurrentLocation', () => {

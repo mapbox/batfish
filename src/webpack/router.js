@@ -14,12 +14,8 @@ import { getWindow } from './get-window';
 import { changePage } from './change-page';
 import { getCurrentLocation } from './get-current-location';
 
-const {
-  siteBasePath,
-  siteOrigin,
-  manageScrollRestoration,
-  hijackLinks
-} = batfishContext.selectedConfig;
+const { siteBasePath, siteOrigin, manageScrollRestoration, hijackLinks } =
+  batfishContext.selectedConfig;
 
 // See explanation for this weirdness in prefix-url.js.
 // This happens outside the component lifecycle so it can be used during
