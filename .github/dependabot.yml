@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    reviewers:
+      - '@mapbox/docs'
+    allow:
+      - dependency-name: '@mapbox/prettier-config-docs'
