@@ -85,9 +85,8 @@ describe('buildHtml', () => {
   });
 
   test('runs the compiled static-render-pages.js', () => {
-    // eslint-disable-next-line node/no-missing-require
-    const mockStaticRenderPages = require('/mock/output/assets/static-render-pages.js')
-      .default;
+    const mockStaticRenderPages =
+      require('/mock/output/assets/static-render-pages.js').default; // eslint-disable-line node/no-missing-require
     return buildHtml(batfishConfig, 'mock-stylesheet.css').then(() => {
       expect(mockStaticRenderPages).toHaveBeenCalledTimes(1);
       expect(mockStaticRenderPages).toHaveBeenCalledWith(
@@ -128,9 +127,8 @@ describe('buildHtml', () => {
   });
 
   test('if there are no stylesheets, no cssUrl argument is passed to staticRenderPages', () => {
-    // eslint-disable-next-line node/no-missing-require
-    const mockStaticRenderPages = require('/mock/output/assets/static-render-pages.js')
-      .default;
+    const mockStaticRenderPages =
+      require('/mock/output/assets/static-render-pages.js').default; // eslint-disable-line node/no-missing-require
     batfishConfig.stylesheets = [];
     return buildHtml(batfishConfig).then(() => {
       expect(mockStaticRenderPages.mock.calls[0][3]).toBeUndefined();
@@ -139,9 +137,8 @@ describe('buildHtml', () => {
 
   test('catches errors parsing compiled static-render-pages.js', () => {
     const expectedError = new Error();
-    // eslint-disable-next-line node/no-missing-require
-    const mockStaticRenderPages = require('/mock/output/assets/static-render-pages.js')
-      .default;
+    const mockStaticRenderPages =
+      require('/mock/output/assets/static-render-pages.js').default; // eslint-disable-line node/no-missing-require
     mockStaticRenderPages.mockImplementation(() => {
       throw expectedError;
     });
@@ -158,9 +155,8 @@ describe('buildHtml', () => {
 
   test('catches errors executing compiled static-render-pages.js', () => {
     const expectedError = new Error();
-    // eslint-disable-next-line node/no-missing-require
-    const mockStaticRenderPages = require('/mock/output/assets/static-render-pages.js')
-      .default;
+    const mockStaticRenderPages =
+      require('/mock/output/assets/static-render-pages.js').default; // eslint-disable-line node/no-missing-require
     mockStaticRenderPages.mockImplementation(() =>
       Promise.reject(expectedError)
     );

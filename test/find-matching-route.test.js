@@ -1,7 +1,7 @@
 'use strict';
 
-const findMatchingRoute = require('../src/webpack/find-matching-route')
-  .findMatchingRoute;
+const findMatchingRoute =
+  require('../src/webpack/find-matching-route').findMatchingRoute;
 /* eslint-disable node/no-missing-require */
 // This gets the mock value defined below.
 const batfishContext = require('batfish-internal/context').batfishContext;

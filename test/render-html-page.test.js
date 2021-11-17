@@ -3,8 +3,8 @@
 const _ = require('lodash');
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
-const renderHtmlPage = require('../src/webpack/render-html-page')
-  .renderHtmlPage;
+const renderHtmlPage =
+  require('../src/webpack/render-html-page').renderHtmlPage;
 
 jest.mock('react-helmet', () => {
   const mockHelmetHead = {

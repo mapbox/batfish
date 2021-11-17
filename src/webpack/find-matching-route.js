@@ -3,9 +3,9 @@ import { batfishContext } from 'batfish-internal/context';
 
 // Returns an array of regular expressions that are used to check whether a URL
 // path matches one of the routes.
-function createPathRegExps(
-  routes: Array<BatfishRouteData>
-): { [string]: RegExp } {
+function createPathRegExps(routes: Array<BatfishRouteData>): {
+  [string]: RegExp
+} {
   return routes.reduce((result, route) => {
     // Pages with internal routing aren't just exact matches.
     const ending = route.internalRouting ? '(/.+)?$' : '$';

@@ -3,13 +3,13 @@
 const scrollRestorer = require('@mapbox/scroll-restorer');
 const changePage = require('../src/webpack/change-page').changePage;
 const findMatchingRouteModule = require('../src/webpack/find-matching-route');
-const scrollToFragment = require('../src/webpack/scroll-to-fragment')
-  .scrollToFragment;
+const scrollToFragment =
+  require('../src/webpack/scroll-to-fragment').scrollToFragment;
 /* eslint-disable node/no-missing-require */
-const _invokeRouteChangeStartCallbacks = require('@mapbox/batfish/modules/route-change-listeners')
-  ._invokeRouteChangeStartCallbacks;
-const _invokeRouteChangeEndCallbacks = require('@mapbox/batfish/modules/route-change-listeners')
-  ._invokeRouteChangeEndCallbacks;
+const _invokeRouteChangeStartCallbacks =
+  require('@mapbox/batfish/modules/route-change-listeners')._invokeRouteChangeStartCallbacks;
+const _invokeRouteChangeEndCallbacks =
+  require('@mapbox/batfish/modules/route-change-listeners')._invokeRouteChangeEndCallbacks;
 /* eslint-enable node/no-missing-require */
 const getWindowModule = require('../src/webpack/get-window');
 

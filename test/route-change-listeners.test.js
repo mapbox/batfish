@@ -176,9 +176,8 @@ describe('end change listeners', () => {
   test('all paths, one listener', () => {
     const listener = jest.fn();
     RouteChangeListeners.addRouteChangeEndListener(listener);
-    const result = RouteChangeListeners._invokeRouteChangeEndCallbacks(
-      '/foo/bar'
-    );
+    const result =
+      RouteChangeListeners._invokeRouteChangeEndCallbacks('/foo/bar');
     expect(result instanceof Promise).toBe(true);
     return result.then(() => {
       expect(listener).toHaveBeenCalledTimes(1);

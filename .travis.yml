@@ -1,11 +1,6 @@
 language: node_js
-node_js:
-  - 10
-  - 12
 cache: false
 before_install:
   - npm i -g npm@latest
-install:
-  - npm ci
 before_script:
   - npm run build

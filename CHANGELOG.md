@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.4.0
+
+- Uptade to Node 14 and npm 7.
+- Update dependencies with security updates.
+
 ## 2.3.0
 
 - Update dependencies.
