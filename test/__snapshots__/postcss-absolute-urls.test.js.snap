@@ -10,7 +10,7 @@ exports[`postcssAbsoluteUrls do not add absolute url to \`mask\` 1`] = `
       background-repeat: no-repeat;
       cursor: pointer;
       overflow: hidden;
-      background-image: url(\\"data:image/svg+xml;charset=utf-8,%3Csvg mask='url(/playground/assets/%23clip)'\\");
+      background-image: url(\\"data:image/svg+xml;charset=utf-8,%3Csvg mask='url(%23clip)'\\");
     }    
     "
 `;
