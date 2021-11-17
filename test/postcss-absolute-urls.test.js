@@ -27,4 +27,30 @@ describe('postcssAbsoluteUrls', () => {
         expect(result.css).toMatchSnapshot();
       });
   });
+
+  test('do not add absolute url to `mask`', () => {
+    const css = `
+    a.mapboxgl-ctrl-logo {
+      width: 88px;
+      height: 23px;
+      margin: 0 0 -4px -4px;
+      display: block;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      overflow: hidden;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg mask='url(%23clip)'");
+    }    
+    `;
+
+    return postcss()
+      .use(
+        postcssAbsoluteUrls({
+          stylesheetUrl: '/playground/assets/'
+        })
+      )
+      .process(css, { from: undefined })
+      .then((result) => {
+        expect(result.css).toMatchSnapshot();
+      });
+  });
 });
