@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.1
+
+- Skip urls that begin with `%23clip` in postcss-absolute-urls plugin.
+
 ## 2.3.0
 
 - Update dependencies.
