@@ -23,8 +23,9 @@ function getPostcssPlugins(
     // inlined CSS (in the static build) and the stylesheet itself.
     postcssUrl({
       url: (asset) => {
-        const parsedUrl = url.parse(asset.url);
-        if (parsedUrl.protocol) {
+        const parsedUrl = url.parse(decodeURIComponent(asset.url));
+        // skip absolute paths and hashes
+        if (parsedUrl.protocol || parsedUrl.hash === parsedUrl.href) {
           return asset.url;
         }
         return joinUrlParts(
