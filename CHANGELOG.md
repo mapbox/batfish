@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.3.2
+
+- Fix: Update postcss plugins to skip hashes when adding a relative path.
+- Revert: Skip urls that begin with `%23clip` in postcss-absolute-urls plugin.
+
 ## 2.3.1
 
 - Skip urls that begin with `%23clip` in postcss-absolute-urls plugin.
