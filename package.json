@@ -16,7 +16,7 @@
     "lint-js": "eslint .",
     "format": "prettier --write '**/*.js'",
     "test-jest": "jest",
-    "lint-md": "remark-preset-davidtheclark docs/*.md ./*.md",
+    "lint-md": "remark docs/*.md ./*.md",
     "lint-flow": "flow check",
     "lint": "run-p --aggregate-output lint-js lint-flow",
     "pretest": "npm run lint",
@@ -24,7 +24,8 @@
     "build-webpack-modules": "del modules && babel src/webpack/public --out-dir modules --quiet",
     "build-dist": "del dist && cd src && cpy '**/*.*' ../dist --parents && cd .. && flow-remove-types dist/ --out-dir dist/ --quiet && cpy src/node/index.js dist/node --rename index.js.flow",
     "build": "run-p build-webpack-modules build-dist",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "prepare": "npx husky install"
   },
   "repository": {
     "type": "git",
@@ -42,23 +43,14 @@
       "prettier --write"
     ],
     "{docs/*.md,README.md,CHANGELOG.md}": [
-      "remark-preset-davidtheclark --format"
+      "remark --format"
     ],
     "{bin/batfish.js,bin/write-cli-doc.js}": [
       "bin/write-cli-doc.js",
       "git add docs/cli.md"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "prettier": {
-    "singleQuote": true,
-    "arrowParens": "always",
-    "trailingComma": "none"
-  },
+  "prettier": "@mapbox/prettier-config-docs",
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -181,7 +173,6 @@
     "eslint-plugin-react": "^7.23.2",
     "flow-bin": "^0.125.1",
     "flow-remove-types": "^2.149.0",
-    "husky": "^4.3.8",
     "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
     "lorem-ipsum": "^2.0.3",
@@ -192,13 +183,24 @@
     "react-dom": "^16.14.0",
     "react-helmet": "^6.1.0",
     "react-test-renderer": "^16.14.0",
-    "remark-preset-davidtheclark": "^0.12.0",
+    "remark": "^11.0.2",
+    "remark-cli": "^7.0.1",
+    "remark-frontmatter": "^1.3.2",
+    "remark-lint": "^9.1.1",
+    "remark-lint-blockquote-indentation": "^1.0.3",
+    "remark-lint-file-extension": "^1.0.3",
+    "remark-lint-final-definition": "^1.0.3",
+    "remark-lint-no-duplicate-definitions": "^1.0.5",
+    "remark-lint-no-multiple-toplevel-headings": "^1.0.4",
+    "remark-lint-no-tabs": "^1.0.3",
+    "remark-lint-no-undefined-references": "^1.1.1",
+    "remark-toc": "^7.0.0",
+    "remark-validate-links": "^9.1.0",
     "rimraf": "^3.0.2",
     "strip-ansi": "^6.0.0"
   },
-  "optionalDependencies": {},
   "engines": {
-    "node": ">=10",
-    "npm": ">=6"
+    "node": ">=18",
+    "npm": "^9"
   }
 }

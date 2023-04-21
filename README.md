@@ -410,6 +410,11 @@ A good pattern is to create a `PageShell` React component that accepts props tha
 
 ## Development server
 
+Paragraph.
+
+[example]: http://example.com "Example Domain"
+
+Another paragraph.
 The development server (for `start` and `serve-static` commands) is a [Browsersync] server, which provides a nice experience for cross-device testing.
 
 When you change a file, Webpack will recompile and the browser will automatically refresh.
