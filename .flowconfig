@@ -5,6 +5,8 @@
 .*/node_modules/immutable/.*
 .*/node_modules/bcryptjs/.*
 <PROJECT_ROOT>/examples/.*/node_modules/.*
+.*/node_modules/resolve/.*
+<PROJECT_ROOT>/dist/.*
 
 [include]
 
