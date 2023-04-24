@@ -1,7 +1,8 @@
+dist: jammy
 language: node_js
+node_js:
+  - 18
 cache: false
-before_install:
-  - npm i -g npm@latest
 install:
   - npm ci
 before_script:

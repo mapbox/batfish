@@ -3,7 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const sitemapStatic = require('sitemap-static');
+const sitemapStatic = require('../../vendor/sitemap-static');
 const joinUrlParts = require('./join-url-parts');
 
 // Build a sitemap cataloging the HTML files in the outputDirectory.
