@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.4.0
+
+- use node 18/npm 9 (#376)
+- various dependency updates
+
 ## 2.3.2
 
 - Fix: Update postcss plugins to skip hashes when adding a relative path.
