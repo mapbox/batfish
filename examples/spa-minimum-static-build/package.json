@@ -1,6 +1,6 @@
 {
   "private": true,
   "scripts": {
-    "batfish": "../../bin/example-batfish"
+    "batfish": "NODE_OPTIONS=--openssl-legacy-provider ../../bin/example-batfish"
   }
 }
