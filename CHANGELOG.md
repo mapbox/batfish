@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.4.1
+
+- fix static-sitemap vendored package (#377)
+- update `jsxtreme-markdown` dependencies to 3.0.1
+
 ## 2.4.0
 
 - use node 18/npm 9 (#376)
