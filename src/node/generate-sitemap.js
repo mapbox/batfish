@@ -3,11 +3,12 @@
 
 const fs = require('fs');
 const path = require('path');
-const sitemapStatic = require('../../vendor/sitemap-static');
+const sitemapStatic = require('./sitemap-static');
 const joinUrlParts = require('./join-url-parts');
 
 // Build a sitemap cataloging the HTML files in the outputDirectory.
 function generateSitemap(batfishConfig: BatfishConfiguration): Promise<void> {
+  console.log('hello foo')
   const sitemapWriter = fs.createWriteStream(
     path.join(batfishConfig.outputDirectory, 'sitemap.xml')
   );

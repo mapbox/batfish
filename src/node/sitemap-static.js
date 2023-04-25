@@ -1,4 +1,6 @@
 // from https://github.com/tmcw/sitemap-static
+'use strict';
+
 const findit = require("findit");
 const path = require("path");
 
