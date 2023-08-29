@@ -27,7 +27,7 @@ ${chalk.bold('Usage')}
   batfish <command> [options]
 
   You must provide a batfish configuration module, either with
-  batish.config.js in process.cwd() or with the --config option.
+  batfish.config.js in process.cwd() or with the --config option.
 
 ${chalk.bold('Commands')}
   start            Start a development server.
