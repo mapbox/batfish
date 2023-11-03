@@ -96,8 +96,14 @@ Object {
             "options": Object {
               "postcssPlugins": Array [
                 [Function],
-                [Function],
-                [Function],
+                Object {
+                  "Once": [Function],
+                  "postcssPlugin": "postcss-url",
+                },
+                Object {
+                  "Once": [Function],
+                  "postcssPlugin": "postcss-url",
+                },
               ],
             },
           },
@@ -230,9 +236,18 @@ Object {
             "options": Object {
               "postcssPlugins": Array [
                 [Function],
-                [Function],
-                [Function],
-                [Function],
+                Object {
+                  "Once": [Function],
+                  "postcssPlugin": "postcss-url",
+                },
+                Object {
+                  "Once": [Function],
+                  "postcssPlugin": "postcss-url",
+                },
+                Object {
+                  "OnceExit": [Function],
+                  "postcssPlugin": "postcss-csso",
+                },
               ],
             },
           },
@@ -380,8 +395,14 @@ Object {
             "options": Object {
               "postcssPlugins": Array [
                 [Function],
-                [Function],
-                [Function],
+                Object {
+                  "Once": [Function],
+                  "postcssPlugin": "postcss-url",
+                },
+                Object {
+                  "Once": [Function],
+                  "postcssPlugin": "postcss-url",
+                },
               ],
             },
           },
