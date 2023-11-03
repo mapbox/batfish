@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.4.3
+
+- Update dependencies `postcss-html-filter`, `scroll-restorer`, `postcss`, `postcss-csso` and `postcss-url`
+- Update snapshot `create-webpack-config-base.test.js` to reflect new deps
+
 ## 2.4.2
 
 - update `jsxtreme-markdown` dependencies to 3.0.2
