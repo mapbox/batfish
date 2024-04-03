@@ -115,8 +115,8 @@ const configSchema = {
     validator: _.isArray
   },
   postcssPlugins: {
-    validator: (x) => _.isFunction(x) || isArrayOf(_.isFunction)(x),
-    description: 'function or array of functions'
+    validator: (x) => _.isFunction(x) || isArrayOf(_.isFunction)(x) || _.isPlainObject(x),
+    description: 'function or array of functions or object'
   },
   fileLoaderExtensions: {
     validator: (x) => isArrayOf(_.isString)(x) || _.isFunction(x),
