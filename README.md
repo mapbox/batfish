@@ -1,3 +1,5 @@
+## Note:  As of April 2024, Batfish is no longer maintained and docs.mapbox.com has transitioned to a custom Docusaurus based infrastructure.  Find our more at [https://hey.mapbox.com/documentation/](https://hey.mapbox.com/documentation/)
+
 # Batfish
 
 [![Build Status](https://travis-ci.com/mapbox/batfish.svg?branch=main)](https://travis-ci.com/mapbox/batfish)
